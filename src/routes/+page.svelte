@@ -22,17 +22,17 @@
   <title>Gästehaus Rader</title>
 </svelte:head>
 
-<div class="bg-[#faf9f6]">
+<div class="">
   <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
     <div class="space-y-16">
 
       <!-- HERO -->
-      <section class="relative">
+      <section class="relative pb-10 sm:pb-14">
         <div class="relative overflow-hidden rounded-3xl border border-slate-200 shadow-lg">
           <!-- Background image -->
           <div
             class="absolute inset-0 bg-cover bg-center"
-            style="background-image: url('/images/hero-mountains.jpg');"
+            style="background-image: url('/images/house-winter.jpg');"
             aria-hidden="true"
           />
           <!-- Overlay (stronger bottom like screenshot) -->
@@ -46,7 +46,7 @@
             aria-hidden="true"
           />
 
-          <div class="relative px-6 py-14 text-center sm:px-10 sm:py-16 lg:px-20 lg:py-20">
+          <div class="relative px-6 py-14 pb-24 text-center sm:px-10 sm:py-16 sm:pb-28 lg:px-20 lg:py-20">
             <h1 class="mx-auto max-w-3xl text-3xl font-semibold tracking-tight text-white sm:text-5xl">
               {$t('hero.title')}
             </h1>
@@ -72,7 +72,7 @@
         </div>
 
         <!-- BOOKING BAR (floating) -->
-        <div class="-mt-10 px-2 sm:px-6">
+        <div class="mt-6 px-2 sm:px-6">
           <div class="mx-auto max-w-5xl rounded-2xl bg-white p-4 shadow-xl ring-1 ring-slate-200 sm:p-5">
             <div class="grid gap-4 md:grid-cols-[1fr,1fr,1fr,auto] md:items-end">
               <!-- Checkin -->

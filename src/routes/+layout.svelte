@@ -4,120 +4,223 @@
 	import { lang, setLang, t } from '$lib/i18n';
 	import '../app.css';
 
+	// Svelte 5: children comes from $props()
 	let { children } = $props();
 
 	const navItems = [
 		{ href: '/', key: 'nav.home' },
-		{ href: '/ueber-uns', key: 'nav.about' },
-		{ href: '/unterkuenfte-preise', key: 'nav.rooms' },
-		{ href: '/buchen', key: 'nav.booking' },
-		{ href: '/kontakt', key: 'nav.contact' }
+		{ href: '/zimmer', key: 'nav.roomsShort' },
+		{ href: '/ueber-uns', key: 'nav.about' }
 	];
+
+	const bookingHref = '/buchen';
+	const contactHref = '/kontakt';
 </script>
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-<div class="min-h-screen bg-white text-slate-900">
-	<header class="sticky top-0 z-30 border-b border-slate-200 bg-white/90 backdrop-blur">
-		<div class="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-6 py-4">
-			<a href="/" class="flex items-center gap-3">
-				<div class="flex h-9 w-9 items-center justify-center rounded-lg bg-brand text-white">
+<!-- Warm page background like screenshot -->
+<div class="min-h-screen bg-[#faf9f6] text-slate-900">
+	<header class="sticky top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur">
+		<div class="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-4 py-3 sm:px-6">
+			<!-- Brand -->
+			<a
+				href="/"
+				class="flex items-center gap-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand/40"
+				aria-label="Gästehaus Rader – Startseite"
+			>
+				<div class="flex h-9 w-9 items-center justify-center rounded-lg bg-brand text-white shadow-sm">
 					<svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true">
 						<path d="M4 18h16" stroke="currentColor" stroke-width="1.5" fill="none" />
 						<path d="M12 6l4 6H8l4-6Z" fill="currentColor" />
 					</svg>
 				</div>
-				<span class="text-sm font-semibold text-slatecore">Gästehaus Rader</span>
+				<span class="text-sm font-semibold text-slate-900">Gästehaus Rader</span>
 			</a>
-			<nav class="hidden flex-1 items-center justify-center gap-6 text-sm font-medium text-slatecore lg:flex">
-				{#each navItems.slice(1, 5) as item}
+
+			<!-- Desktop nav centered -->
+			<nav class="hidden flex-1 items-center justify-center gap-8 text-sm font-medium text-slate-700 lg:flex">
+				{#each navItems as item}
 					<a
 						href={item.href}
 						class={`transition-colors hover:text-brand ${
-							$page.url.pathname === item.href ? 'text-brand' : 'text-slatecore'
+							$page.url.pathname === item.href ? 'text-brand' : 'text-slate-700'
 						}`}
 					>
 						{$t(item.key)}
 					</a>
 				{/each}
+				<a
+					href={contactHref}
+					class={`transition-colors hover:text-brand ${
+						$page.url.pathname === contactHref ? 'text-brand' : 'text-slate-700'
+					}`}
+				>
+					{$t('nav.contact')}
+				</a>
 			</nav>
+
+			<!-- Right actions -->
 			<div class="flex items-center gap-3">
-				<div class="hidden items-center gap-1 rounded-full border border-slate-200 p-1 text-xs font-semibold md:flex">
+				<!-- Language pill (like screenshot) -->
+				<div class="hidden items-center rounded-full border border-slate-200 bg-white p-1 text-xs font-semibold md:flex">
 					<button
-						class={`rounded-full px-3 py-1 transition ${
-							$lang === 'de' ? 'bg-brand text-white' : 'text-slate-600 hover:text-slate-900'
-						}`}
 						type="button"
+						class={`rounded-full px-3 py-1 transition ${
+							$lang === 'de' ? 'bg-brand text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'
+						}`}
 						on:click={() => setLang('de')}
 					>
 						DE
 					</button>
 					<button
-						class={`rounded-full px-3 py-1 transition ${
-							$lang === 'en' ? 'bg-brand text-white' : 'text-slate-600 hover:text-slate-900'
-						}`}
 						type="button"
+						class={`rounded-full px-3 py-1 transition ${
+							$lang === 'en' ? 'bg-brand text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'
+						}`}
 						on:click={() => setLang('en')}
 					>
 						EN
 					</button>
 				</div>
+
+				<!-- Primary CTA -->
 				<a
-					href="/buchen"
-					class="rounded-full bg-brand px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand/90"
+					href={bookingHref}
+					class="inline-flex items-center justify-center rounded-xl bg-brand px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90 focus:outline-none focus:ring-2 focus:ring-brand/40"
 				>
 					{$t('nav.booking')}
 				</a>
 			</div>
 		</div>
-		<nav class="flex items-center gap-4 overflow-x-auto border-t border-slate-100 px-6 py-3 text-sm font-medium lg:hidden">
-			{#each navItems as item}
+
+		<!-- Mobile nav row -->
+		<nav class="lg:hidden border-t border-slate-100 bg-white/70">
+			<div class="mx-auto flex max-w-6xl items-center gap-5 overflow-x-auto px-4 py-3 text-sm font-medium sm:px-6">
+				{#each navItems as item}
+					<a
+						href={item.href}
+						class={`whitespace-nowrap transition-colors hover:text-brand ${
+							$page.url.pathname === item.href ? 'text-brand' : 'text-slate-700'
+						}`}
+					>
+						{$t(item.key)}
+					</a>
+				{/each}
 				<a
-					href={item.href}
+					href={contactHref}
 					class={`whitespace-nowrap transition-colors hover:text-brand ${
-						$page.url.pathname === item.href ? 'text-brand' : 'text-slatecore'
+						$page.url.pathname === contactHref ? 'text-brand' : 'text-slate-700'
 					}`}
 				>
-					{$t(item.key)}
+					{$t('nav.contact')}
 				</a>
-			{/each}
+			</div>
 		</nav>
 	</header>
 
-	<main class="mx-auto w-full max-w-6xl px-6 py-10">{@render children()}</main>
+	<!-- IMPORTANT: main should NOT force white bg; homepage sections will handle their own backgrounds -->
+	<main class="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6">
+		{@render children()}
+	</main>
 
-	<footer class="border-t border-slate-200 bg-slate-50">
-		<div class="mx-auto w-full max-w-6xl px-6 py-10">
-			<div class="grid gap-8 md:grid-cols-[2fr,1fr,1fr]">
+	<!-- Footer like screenshot -->
+	<footer class="bg-[#0f172a] text-slate-100">
+		<div class="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6">
+			<div class="grid gap-10 lg:grid-cols-4">
+				<!-- Brand / description -->
 				<div>
-					<p class="text-lg font-heading">Gästehaus Rader</p>
-					<p class="mt-2 text-sm text-slate-600">Weißbriach, Gitschtal · Kärnten</p>
-					<p class="mt-4 text-sm text-slate-600">info@gaestehaus-rader.at · +43 000 0000</p>
-				</div>
-				<div>
-					<p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
-						{$t('footer.links')}
+					<div class="flex items-center gap-3">
+						<div class="flex h-9 w-9 items-center justify-center rounded-lg bg-brand text-white shadow-sm">
+							<svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true">
+								<path d="M4 18h16" stroke="currentColor" stroke-width="1.5" fill="none" />
+								<path d="M12 6l4 6H8l4-6Z" fill="currentColor" />
+							</svg>
+						</div>
+						<p class="text-base font-semibold text-white">Gästehaus Rader</p>
+					</div>
+
+					<p class="mt-4 max-w-sm text-sm leading-relaxed text-slate-300">
+						{$t('footer.tagline')}
 					</p>
-					<ul class="mt-3 space-y-2 text-sm text-slate-700">
-						<li><a href="/kontakt" class="hover:text-brand">{$t('nav.contact')}</a></li>
-						<li><a href="/buchen" class="hover:text-brand">{$t('nav.booking')}</a></li>
-						<li><a href="/unterkuenfte-preise" class="hover:text-brand">{$t('nav.rooms')}</a></li>
+
+					<!-- optional social icons like screenshot bottom-left -->
+					<div class="mt-6 flex gap-3">
+						<a href="#" class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-white/15" aria-label="Instagram">
+							<span class="text-sm">⌁</span>
+						</a>
+						<a href="#" class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-white/15" aria-label="Facebook">
+							<span class="text-sm">⌁</span>
+						</a>
+					</div>
+				</div>
+
+				<!-- Quick links -->
+				<div>
+					<p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand">
+						{$t('footer.quicklinks')}
+					</p>
+					<ul class="mt-4 space-y-3 text-sm text-slate-300">
+						<li><a class="hover:text-white" href="/zimmer">{$t('nav.roomsShort')}</a></li>
+						<li><a class="hover:text-white" href="/wellness">{$t('nav.wellness')}</a></li>
+						<li><a class="hover:text-white" href="/erlebnisse">{$t('nav.experiences')}</a></li>
+						<li><a class="hover:text-white" href="/winter">{$t('footer.winter')}</a></li>
 					</ul>
 				</div>
+
+				<!-- Contact -->
 				<div>
-					<p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">
-						{$t('footer.legal')}
+					<p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand">
+						{$t('footer.contact')}
 					</p>
-					<ul class="mt-3 space-y-2 text-sm text-slate-700">
-						<li><a href="/impressum" class="hover:text-brand">{$t('footer.imprint')}</a></li>
-						<li><a href="/datenschutz" class="hover:text-brand">{$t('footer.privacy')}</a></li>
-						<li><a href="/agb" class="hover:text-brand">{$t('footer.terms')}</a></li>
+					<ul class="mt-4 space-y-3 text-sm text-slate-300">
+						<li>{$t('footer.addressLine1')}</li>
+						<li>{$t('footer.addressLine2')}</li>
+						<li>
+							<a class="hover:text-white" href="tel:+430000000">+43 000 0000</a>
+						</li>
+						<li>
+							<a class="hover:text-white" href="mailto:info@gaestehaus-rader.at">info@gaestehaus-rader.at</a>
+						</li>
 					</ul>
+				</div>
+
+				<!-- Newsletter -->
+				<div>
+					<p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand">
+						{$t('footer.newsletter')}
+					</p>
+					<p class="mt-4 text-sm leading-relaxed text-slate-300">
+						{$t('footer.newsletterText')}
+					</p>
+
+					<form class="mt-4 flex gap-2">
+						<input
+							type="email"
+							placeholder="E-Mail"
+							class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-white placeholder:text-slate-400 outline-none focus:border-brand/40 focus:ring-2 focus:ring-brand/20"
+						/>
+						<button
+							type="button"
+							class="rounded-xl bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-brand/90"
+						>
+							OK
+						</button>
+					</form>
 				</div>
 			</div>
-			<p class="mt-8 text-xs text-slate-500">© {new Date().getFullYear()} Gästehaus Rader</p>
+
+			<!-- bottom bar -->
+			<div class="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 text-xs text-slate-400 sm:flex-row sm:items-center sm:justify-between">
+				<p>© {new Date().getFullYear()} Gästehaus Rader. {$t('footer.rights')}</p>
+				<div class="flex flex-wrap gap-x-6 gap-y-2">
+					<a href="/impressum" class="hover:text-white">{$t('footer.imprint')}</a>
+					<a href="/datenschutz" class="hover:text-white">{$t('footer.privacy')}</a>
+					<a href="/agb" class="hover:text-white">{$t('footer.terms')}</a>
+				</div>
+			</div>
 		</div>
 	</footer>
 </div>
