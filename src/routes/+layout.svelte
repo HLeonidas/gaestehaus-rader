@@ -20,23 +20,23 @@
 </svelte:head>
 
 <div class="min-h-screen bg-white text-slate-900">
-	<header class="sticky top-0 z-30 bg-white/80 backdrop-blur border-b border-slate-200">
-		<div class="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
+	<header class="sticky top-0 z-30 border-b border-slate-200 bg-white/90 backdrop-blur">
+		<div class="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-6 py-4">
 			<a href="/" class="flex items-center gap-3">
-				<div class="h-10 w-10 rounded-full bg-brand/10 text-brand flex items-center justify-center font-heading text-lg">
-					R
+				<div class="flex h-9 w-9 items-center justify-center rounded-lg bg-brand text-white">
+					<svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true">
+						<path d="M4 18h16" stroke="currentColor" stroke-width="1.5" fill="none" />
+						<path d="M12 6l4 6H8l4-6Z" fill="currentColor" />
+					</svg>
 				</div>
-				<div class="leading-tight">
-					<span class="block font-heading text-lg tracking-wide">Gästehaus Rader</span>
-					<span class="block text-xs uppercase tracking-[0.25em] text-slate-500">Kärnten</span>
-				</div>
+				<span class="text-sm font-semibold text-slatecore">Gästehaus Rader</span>
 			</a>
-			<nav class="hidden items-center gap-6 text-sm font-medium lg:flex">
-				{#each navItems as item}
+			<nav class="hidden flex-1 items-center justify-center gap-6 text-sm font-medium text-slatecore lg:flex">
+				{#each navItems.slice(1, 5) as item}
 					<a
 						href={item.href}
 						class={`transition-colors hover:text-brand ${
-							$page.url.pathname === item.href ? 'text-brand' : 'text-slate-700'
+							$page.url.pathname === item.href ? 'text-brand' : 'text-slatecore'
 						}`}
 					>
 						{$t(item.key)}
@@ -44,13 +44,7 @@
 				{/each}
 			</nav>
 			<div class="flex items-center gap-3">
-				<a
-					href="/buchen"
-					class="hidden rounded-full bg-brand px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand/90 md:inline-flex"
-				>
-					{$t('nav.booking')}
-				</a>
-				<div class="flex items-center gap-1 rounded-full border border-slate-200 p-1 text-xs font-semibold">
+				<div class="hidden items-center gap-1 rounded-full border border-slate-200 p-1 text-xs font-semibold md:flex">
 					<button
 						class={`rounded-full px-3 py-1 transition ${
 							$lang === 'de' ? 'bg-brand text-white' : 'text-slate-600 hover:text-slate-900'
@@ -70,6 +64,12 @@
 						EN
 					</button>
 				</div>
+				<a
+					href="/buchen"
+					class="rounded-full bg-brand px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand/90"
+				>
+					{$t('nav.booking')}
+				</a>
 			</div>
 		</div>
 		<nav class="flex items-center gap-4 overflow-x-auto border-t border-slate-100 px-6 py-3 text-sm font-medium lg:hidden">
@@ -77,7 +77,7 @@
 				<a
 					href={item.href}
 					class={`whitespace-nowrap transition-colors hover:text-brand ${
-						$page.url.pathname === item.href ? 'text-brand' : 'text-slate-700'
+						$page.url.pathname === item.href ? 'text-brand' : 'text-slatecore'
 					}`}
 				>
 					{$t(item.key)}

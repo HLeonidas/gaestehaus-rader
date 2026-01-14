@@ -6,10 +6,16 @@ export default {
 			colors: {
 				brand: {
 					DEFAULT: '#f29200'
+				},
+				alpine: {
+					DEFAULT: '#2D463E'
+				},
+				slatecore: {
+					DEFAULT: '#333333'
 				}
 			},
 			fontFamily: {
-				heading: ['"Playfair Display"', 'serif'],
+				heading: ['"Montserrat"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
 				sans: ['"Montserrat"', 'ui-sans-serif', 'system-ui', 'sans-serif']
 			}
 		}

@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+	html {
+		font-family: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+	}
+
 	body {
 		@apply font-sans text-slate-900 bg-white;
 	}
