@@ -8,13 +8,13 @@
 	let { children } = $props();
 
 	const navItems = [
-		{ href: '/', key: 'nav.home' },
 		{ href: '/zimmer', key: 'nav.roomsShort' },
+		{ href: '/erlebnisse', key: 'nav.experiences' },
+		{ href: '/wellness', key: 'nav.wellness' },
 		{ href: '/ueber-uns', key: 'nav.about' }
 	];
 
 	const bookingHref = '/buchen';
-	const contactHref = '/kontakt';
 </script>
 
 <svelte:head>
@@ -24,24 +24,26 @@
 <!-- Warm page background like screenshot -->
 <div class="min-h-screen bg-[#faf9f6] text-slate-900">
 	<header class="sticky top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur">
-		<div class="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-4 py-3 sm:px-6">
+		<div class="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-4 py-4 sm:px-6">
 			<!-- Brand -->
 			<a
 				href="/"
 				class="flex items-center gap-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand/40"
-				aria-label="Gästehaus Rader – Startseite"
+				aria-label="Gästehaus Rader - Startseite"
 			>
-				<div class="flex h-9 w-9 items-center justify-center rounded-lg bg-brand text-white shadow-sm">
-					<svg viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true">
-						<path d="M4 18h16" stroke="currentColor" stroke-width="1.5" fill="none" />
-						<path d="M12 6l4 6H8l4-6Z" fill="currentColor" />
-					</svg>
+				<div class="flex h-10 w-10 items-center justify-center rounded-lg text-white shadow-sm">
+					                  <img
+                    src="/images/logo.png"
+                    alt=""
+                    class=""
+                    loading="lazy"
+                  />
 				</div>
-				<span class="text-sm font-semibold text-slate-900">Gästehaus Rader</span>
+				<span class="text-base font-bold text-slate-900 sm:text-lg">Gästehaus Rader</span>
 			</a>
 
 			<!-- Desktop nav centered -->
-			<nav class="hidden flex-1 items-center justify-center gap-8 text-sm font-medium text-slate-700 lg:flex">
+			<nav class="hidden flex-1 items-center justify-center gap-8 text-sm font-semibold text-slate-700 lg:flex">
 				{#each navItems as item}
 					<a
 						href={item.href}
@@ -52,14 +54,6 @@
 						{$t(item.key)}
 					</a>
 				{/each}
-				<a
-					href={contactHref}
-					class={`transition-colors hover:text-brand ${
-						$page.url.pathname === contactHref ? 'text-brand' : 'text-slate-700'
-					}`}
-				>
-					{$t('nav.contact')}
-				</a>
 			</nav>
 
 			<!-- Right actions -->
@@ -109,14 +103,6 @@
 						{$t(item.key)}
 					</a>
 				{/each}
-				<a
-					href={contactHref}
-					class={`whitespace-nowrap transition-colors hover:text-brand ${
-						$page.url.pathname === contactHref ? 'text-brand' : 'text-slate-700'
-					}`}
-				>
-					{$t('nav.contact')}
-				</a>
 			</div>
 		</nav>
 	</header>
@@ -129,7 +115,7 @@
 	<!-- Footer like screenshot -->
 	<footer class="bg-[#0f172a] text-slate-100">
 		<div class="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6">
-			<div class="grid gap-10 lg:grid-cols-4">
+			<div class="grid gap-10 lg:grid-cols-3">
 				<!-- Brand / description -->
 				<div>
 					<div class="flex items-center gap-3">
@@ -187,29 +173,6 @@
 					</ul>
 				</div>
 
-				<!-- Newsletter -->
-				<div>
-					<p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand">
-						{$t('footer.newsletter')}
-					</p>
-					<p class="mt-4 text-sm leading-relaxed text-slate-300">
-						{$t('footer.newsletterText')}
-					</p>
-
-					<form class="mt-4 flex gap-2">
-						<input
-							type="email"
-							placeholder="E-Mail"
-							class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-white placeholder:text-slate-400 outline-none focus:border-brand/40 focus:ring-2 focus:ring-brand/20"
-						/>
-						<button
-							type="button"
-							class="rounded-xl bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-brand/90"
-						>
-							OK
-						</button>
-					</form>
-				</div>
 			</div>
 
 			<!-- bottom bar -->

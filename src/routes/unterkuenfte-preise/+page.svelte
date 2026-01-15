@@ -1,29 +1,157 @@
 <script lang="ts">
 	import { t } from '$lib/i18n';
+	import {
+		Wifi,
+		Mountain,
+		Coffee,
+		Sun,
+		Flame,
+		ShowerHead,
+		Bath,
+		ArrowRight
+	} from 'lucide-svelte';
+
+	const amenityIcons: Record<string, typeof Wifi> = {
+		wifi: Wifi,
+		balcony: Sun,
+		mountain: Mountain,
+		coffee: Coffee,
+		sauna: Flame,
+		fireplace: Flame,
+		shower: ShowerHead,
+		bath: Bath
+	};
+
+	const rooms = [
+		{
+			key: 1,
+			badge: 'badge.popular', // "Beliebt"
+			image: '/images/room-1.jpg',
+			amenities: ['wifi', 'balcony', 'mountain', 'coffee']
+		},
+		{
+			key: 2,
+			badge: 'badge.exclusive', // "Exklusiv"
+			image: '/images/room-2.jpg',
+			amenities: ['wifi', 'sauna', 'fireplace', 'shower']
+		},
+		{
+			key: 3,
+			badge: null,
+			image: '/images/room-3.jpg',
+			amenities: ['wifi', 'bath', 'balcony', 'mountain']
+		}
+	];
+
+	function badgeClasses(badgeKey: string) {
+		// Screenshot: "BELIEBT" dark/grey, "EXKLUSIV" orange
+		if (badgeKey === 'badge.exclusive') {
+			return 'bg-brand text-white';
+		}
+		return 'bg-slate-800/90 text-white';
+	}
 </script>
 
 <svelte:head>
-	<title>{$t('rooms.title')} · Gästehaus Rader</title>
+	<title>{$t('rooms.page.title')} · Gästehaus Rader</title>
 </svelte:head>
 
-<section class="rounded-3xl border border-slate-200 bg-white p-10 shadow-sm">
-	<p class="text-xs uppercase tracking-[0.3em] text-slate-500">Unterkünfte</p>
-	<h1 class="mt-4 text-4xl">{$t('rooms.title')}</h1>
-	<p class="mt-4 max-w-3xl text-base text-slate-600">{$t('rooms.body')}</p>
-</section>
+<div class="space-y-10 max-w-3xl mx-auto">
+	<!-- Header / breadcrumb -->
+	<section class="space-y-4">
+		<p class="text-xs text-slate-500">
+			{$t('rooms.page.breadcrumb')}
+		</p>
 
-<section class="mt-10 grid gap-6 lg:grid-cols-3">
-	{#each [1, 2, 3] as index}
-		<div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-			<div class="aspect-[4/3] rounded-xl bg-gradient-to-br from-slate-200 via-slate-100 to-white"></div>
-			<h2 class="mt-4 text-2xl">{$t(`rooms.card.${index}.title`)}</h2>
-			<p class="mt-2 text-sm text-slate-600">{$t(`rooms.card.${index}.body`)}</p>
-			<div class="mt-4 flex items-center justify-between text-sm">
-				<span class="font-semibold text-brand">{$t('price.from')}</span>
-				<a href="/buchen" class="font-semibold text-slate-700 hover:text-brand">
-					{$t('nav.booking')}
-				</a>
-			</div>
+		<div class="space-y-3">
+			<h1 class="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+				{$t('rooms.page.title')}
+			</h1>
+			<p class="max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">
+				{$t('rooms.page.subtitle')}
+			</p>
 		</div>
-	{/each}
-</section>
+	</section>
+
+	<!-- Content grid -->
+	<section>
+		<!-- Filter -->
+		<!-- removed -->
+
+		<!-- Room list -->
+		<div class="space-y-10">
+			{#each rooms as room}
+				<article class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+					<!-- Image -->
+					<div class="relative">
+						<img
+							src={room.image}
+							alt=""
+							class="h-auto w-full object-cover sm:h-72"
+							loading="lazy"
+						/>
+						{#if room.badge}
+							<span
+								class={`absolute right-4 top-4 rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] shadow-sm ${badgeClasses(
+									room.badge
+								)}`}
+							>
+								{$t(room.badge)}
+							</span>
+						{/if}
+					</div>
+
+					<!-- Content (split like screenshot) -->
+					<div class="grid gap-8 p-6 md:grid-cols-[1.6fr,0.9fr] md:gap-0">
+						<!-- Left -->
+						<div class="md:pr-10">
+							<h2 class="text-lg font-semibold text-slate-900 sm:text-xl">
+								{$t(`rooms.page.card.${room.key}.title`)}
+							</h2>
+							<p class="text-sm text-slate-700">{$t(`rooms.page.card.${room.key}.type`)}</p>
+
+							<div class="mt-2 text-xs text-slate-500">
+								{$t(`rooms.page.card.${room.key}.meta`)}
+							</div>
+
+							<p class="mt-4 max-w-xl text-sm leading-relaxed text-slate-600">
+								{$t(`rooms.page.card.${room.key}.body`)}
+							</p>
+
+							<!-- Amenities row -->
+							<div class="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3 text-xs text-slate-600">
+								{#each room.amenities as amenity}
+									<span class="inline-flex items-center gap-2">
+										<svelte:component this={amenityIcons[amenity]} class="h-4 w-4 text-brand" />
+										{$t(`amenity.${amenity}`)}
+									</span>
+								{/each}
+							</div>
+						</div>
+
+						<!-- Right (divider + price + button) -->
+						<div class="flex flex-col items-end justify-between md:border-l md:border-slate-200 md:pl-10">
+							<div class="text-right">
+								<p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">
+									{$t('rooms.page.from')}
+								</p>
+								<div class="mt-2 flex items-end justify-end gap-2">
+									<p class="text-2xl font-semibold text-brand">€{$t(`rooms.page.card.${room.key}.price`)}</p>
+									<span class="pb-1 text-xs text-slate-500">/ {$t('price.night')}</span>
+								</div>
+							</div>
+
+							<a
+								href="/buchen"
+								class="mt-6 inline-flex items-center gap-2 rounded-xl bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90 focus:outline-none focus:ring-2 focus:ring-brand/30"
+							>
+								{$t('rooms.page.cta')}
+								<ArrowRight class="h-4 w-4" />
+							</a>
+						</div>
+					</div>
+				</article>
+			{/each}
+		</div>
+	</section>
+</div>
