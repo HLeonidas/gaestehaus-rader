@@ -272,7 +272,7 @@
 				</div>
 
 				<!-- RIGHT BOOKING CARD (sticky) -->
-				<aside class="lg:sticky lg:top-8">
+				<aside class="lg:sticky booking-card">
 					<div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
 						<div class="flex items-start justify-between gap-3">
 							<div>
@@ -350,3 +350,9 @@
 		</section>
 	</div>
 </main>
+
+<style>
+	.booking-card {
+		top: 9rem;
+	}
+</style>

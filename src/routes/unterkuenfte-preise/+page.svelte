@@ -140,13 +140,21 @@
 									</div>
 								</div>
 
-								<a
-									href={resolve(`/buchen/${room.slug}`)}
-									class="mt-6 inline-flex items-center gap-2 rounded-xl bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90 focus:outline-none focus:ring-2 focus:ring-brand/30"
-								>
-									{$t('rooms.page.cta')}
-									<ArrowRight class="h-4 w-4" />
-								</a>
+								<div class="mt-6 flex flex-wrap items-center justify-end gap-3">
+									<a
+										href={`${accommodationsBase}/${room.slug}`}
+										class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-brand/30"
+									>
+										See details
+									</a>
+									<a
+										href={resolve('/buchen')}
+										class="inline-flex items-center gap-2 rounded-xl bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90 focus:outline-none focus:ring-2 focus:ring-brand/30"
+									>
+										{$t('rooms.page.cta')}
+										<ArrowRight class="h-4 w-4" />
+									</a>
+								</div>
 							</div>
 						</div>
 					</article>

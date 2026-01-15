@@ -19,6 +19,7 @@
 
 	// Keep ONLY for max-width control
 	const isHome = $derived(page.url.pathname === resolve('/'));
+	const isFullWidth = $derived(page.url.pathname.startsWith(resolve('/buchen')));
 </script>
 
 <svelte:head>
@@ -113,7 +114,11 @@
 	</header>
 
 	<!-- ONLY remaining isHome logic: max-width behavior -->
-	<main class={`w-full flex-1 ${isHome ? '' : 'mx-auto max-w-6xl px-4 py-10 sm:px-6'}`}>
+	<main
+		class={`w-full flex-1 ${
+			isHome ? '' : isFullWidth ? '' : 'mx-auto max-w-6xl px-4 py-10 sm:px-6'
+		}`}
+	>
 		{@render children()}
 	</main>
 
