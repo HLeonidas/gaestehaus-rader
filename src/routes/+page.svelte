@@ -85,7 +85,7 @@
 		<div
 			class="relative flex min-h-screen flex-col items-center justify-center px-6 pt-28 text-center text-white sm:px-10"
 		>
-			<h1 class="mx-auto max-w-3xl text-4xl font-semibold tracking-tight sm:text-6xl">
+			<h1 class="mx-auto max-w-3xl font-serif text-4xl font-semibold leading-[0.95] sm:text-6xl">
 				{$t('hero.title')}
 			</h1>
 			<p class="mx-auto mt-4 max-w-2xl text-sm text-white/85 sm:text-base">
