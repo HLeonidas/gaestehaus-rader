@@ -312,14 +312,16 @@
 
 							<!-- Right: content -->
 							<div class="space-y-5">
+
+
+
 								<div
 									class="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-700"
 								>
 									<Leaf class="h-4 w-4" />
 									ECO-FRIENDLY
 								</div>
-
-								<h2 class="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+								<h2 class="text-3xl font-serif font-semibold leading-[0.95] text-slate-900 sm:text-4xl">
 									Nachhaltigkeit aus<br />Leidenschaft
 								</h2>
 
@@ -385,10 +387,14 @@
 			<!-- SEASONS -->
 			<section class="rounded-3xl bg-[#f3efe6] px-6 py-12 sm:px-10 sm:py-14">
 				<div class="text-center">
-					<h2 class="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+					<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
+						Jahreszeiten
+					</p>
+					<h2 class="mt-3 text-3xl font-serif font-semibold leading-[0.95] text-slate-900 sm:text-4xl">
 						{$t('seasons.title')}
 					</h2>
-					<p class="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">
+					<div class="mx-auto mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
+					<p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">
 						{$t('seasons.subtitle')}
 					</p>
 				</div>
@@ -449,19 +455,19 @@
 			</section>
 
 			<!-- AUSSTATTUNG (unter den Jahreszeiten einfügen) -->
-			<section
-				class="rounded-3xl px-6 py-12 sm:px-10 sm:py-14"
-			>
+			<section class="rounded-3xl px-6 py-12 sm:px-10 sm:py-14">
 				<div class="flex items-center gap-3">
 					<div class="grid h-10 w-10 place-items-center rounded-xl bg-brand/10 text-brand">
 						<Sparkles class="h-5 w-5" />
 					</div>
-
 					<div>
-						<p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand">Ausstattung</p>
-						<h2 class="mt-1 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+						<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
+							Ausstattung
+						</p>
+						<h2 class="mt-2 text-3xl font-serif font-semibold leading-[0.95] text-slate-900 sm:text-4xl">
 							In allen Appartements inklusive
 						</h2>
+						<div class="mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
 					</div>
 				</div>
 
