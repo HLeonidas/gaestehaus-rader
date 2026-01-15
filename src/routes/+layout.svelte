@@ -26,7 +26,7 @@
 </svelte:head>
 
 <!-- No more isHome theme switching -->
-<div class="min-h-screen bg-[#faf9f6] text-slate-900">
+<div class="flex min-h-screen flex-col bg-[#faf9f6] text-slate-900">
 	<header class="sticky top-0 z-40 w-full border-b border-slate-200 bg-white/90 backdrop-blur">
 		<div class="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-4 py-4 sm:px-6">
 			<a
@@ -113,7 +113,7 @@
 	</header>
 
 	<!-- ONLY remaining isHome logic: max-width behavior -->
-	<main class={`w-full ${isHome ? '' : 'mx-auto max-w-6xl px-4 py-10 sm:px-6'}`}>
+	<main class={`w-full flex-1 ${isHome ? '' : 'mx-auto max-w-6xl px-4 py-10 sm:px-6'}`}>
 		{@render children()}
 	</main>
 
