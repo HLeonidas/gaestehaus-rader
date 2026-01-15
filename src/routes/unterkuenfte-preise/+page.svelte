@@ -70,18 +70,17 @@
 	<div class="space-y-10">
 		<!-- Header / breadcrumb -->
 		<section class="space-y-4">
-			<p class="text-xs text-slate-500">
+			<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
 				{$t('rooms.page.breadcrumb')}
 			</p>
 
-			<div class="space-y-3">
-				<h1 class="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
-					{$t('rooms.page.title')}
-				</h1>
-				<p class="max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">
-					{$t('rooms.page.subtitle')}
-				</p>
-			</div>
+			<h1 class="mt-4 font-serif text-4xl leading-[0.95] text-slate-900 sm:text-5xl">
+				{$t('rooms.page.title')}
+			</h1>
+			<div class="mt-4 h-[3px] w-14 rounded-full bg-brand"></div>
+			<p class="mt-4 max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">
+				{$t('rooms.page.subtitle')}
+			</p>
 		</section>
 
 		<!-- Content grid -->

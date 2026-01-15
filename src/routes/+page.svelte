@@ -193,11 +193,10 @@
             >
               {$t("rooms.section.kicker")}
             </p>
-            <h2
-              class="mt-2 text-3xl font-semibold tracking-tight text-slate-900"
-            >
+            <h2 class="mt-3 text-4xl font-serif font-medium leading-[0.95] text-slate-900">
               {$t("rooms.section.title")}
             </h2>
+            <div class="mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
           </div>
           <div class="flex items-center justify-between gap-4">
             <a
