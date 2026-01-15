@@ -35,22 +35,19 @@
     >
       <a
         href={withBase("/")}
-        class="flex items-center gap-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand/40"
+        class="flex items-center rounded-xl focus:outline-none focus:ring-2 focus:ring-brand/40"
         aria-label="Gästehaus Rader - Startseite"
       >
         <div
-          class="flex h-10 w-10 items-center justify-center rounded-lg text-white shadow-sm"
+          class="flex h-16 w-44 items-center justify-center rounded-xl bg-white shadow-sm ring-1 ring-slate-200 sm:h-20 sm:w-52"
         >
           <img
-            src={withBase("/images/logo.png")}
-            alt=""
-            class="h-8 w-8 object-contain"
+            src={withBase("/images/logo-rader-gitschtal.jpg")}
+            alt="Gästehaus Rader"
+            class="h-12 w-auto object-contain sm:h-14"
             loading="lazy"
           />
         </div>
-        <span class="text-base font-bold text-slate-900 sm:text-lg"
-          >Gästehaus Rader</span
-        >
       </a>
 
       <nav
