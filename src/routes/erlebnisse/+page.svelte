@@ -3,6 +3,9 @@
 	import { base } from '$app/paths';
 	import { Snowflake, Sun } from 'lucide-svelte';
 
+	import { fly, fade } from 'svelte/transition';
+	import { cubicOut } from 'svelte/easing';
+
 	type SeasonKey = 'summer' | 'winter';
 	type ExperienceEvent = {
 		id: string;
@@ -19,6 +22,11 @@
 
 	const withBase = (path: string) => `${base}${path}`;
 	let activeTab = $state<SeasonKey>('summer');
+
+	function setSeason(season: SeasonKey) {
+		if (activeTab === season) return;
+		activeTab = season;
+	}
 
 	const events: ExperienceEvent[] = [
 		{
@@ -147,26 +155,35 @@
 				<div class="inline-flex rounded-full border border-slate-200 bg-white p-1 shadow-sm">
 					<button
 						type="button"
-						class={`tab-btn inline-flex items-center gap-2 rounded-full px-6 py-2 text-sm font-semibold transition ${
-							activeTab == 'summer'
-								? 'bg-brand text-white shadow-sm'
-								: 'text-slate-700 hover:text-slate-900'
+						class={`tab-btn inline-flex items-center gap-2 rounded-full px-6 py-2 text-sm font-semibold transition-all duration-300 ${
+							activeTab === 'summer'
+								? 'is-active bg-brand text-white shadow-sm'
+								: 'text-slate-700 hover:text-slate-900 hover:bg-slate-50'
 						}`}
-						on:click={() => (activeTab = 'summer')}
+						on:click={() => setSeason('summer')}
 					>
-						<Sun class="h-4 w-4" />
+						<Sun
+							class={`h-4 w-4 transition-transform duration-300 ${
+								activeTab === 'summer' ? 'rotate-12 scale-110' : 'rotate-0 scale-100'
+							}`}
+						/>
 						Sommer
 					</button>
+
 					<button
 						type="button"
-						class={`tab-btn inline-flex items-center gap-2 rounded-full px-6 py-2 text-sm font-semibold transition ${
-							activeTab == 'winter'
-								? 'bg-brand text-white shadow-sm'
-								: 'text-slate-700 hover:text-slate-900'
+						class={`tab-btn inline-flex items-center gap-2 rounded-full px-6 py-2 text-sm font-semibold transition-all duration-300 ${
+							activeTab === 'winter'
+								? 'is-active bg-brand text-white shadow-sm'
+								: 'text-slate-700 hover:text-slate-900 hover:bg-slate-50'
 						}`}
-						on:click={() => (activeTab = 'winter')}
+						on:click={() => setSeason('winter')}
 					>
-						<Snowflake class="h-4 w-4" />
+						<Snowflake
+							class={`h-4 w-4 transition-transform duration-300 ${
+								activeTab === 'winter' ? '-rotate-12 scale-110' : 'rotate-0 scale-100'
+							}`}
+						/>
 						Winter
 					</button>
 				</div>
@@ -189,40 +206,43 @@
 					</p>
 				</div>
 
-				<div
-					class={`experience-grid mt-8 gap-6 ${activeTab === 'winter' ? 'experience-grid--winter' : ''}`}
-				>
-					{#each currentEvents as event}
-						<article
-							class={`experience-card group relative overflow-hidden rounded-3xl ${event.className ?? ''}`}
-						>
-							<img src={withBase(event.image)} alt="" class="h-full w-full object-cover" loading="lazy" />
-							<div
-								class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent"
-							></div>
+				{#key activeTab}
+					<div
+						class={`experience-grid mt-8 gap-6 ${activeTab === 'winter' ? 'experience-grid--winter' : ''}`}
+						in:fly={{ y: 26, duration: 520, easing: cubicOut }}
+					>
+						{#each currentEvents as event, i (event.id)}
+							<article
+								class={`experience-card group relative overflow-hidden rounded-3xl ${event.className ?? ''}`}
+							>
+								<img src={withBase(event.image)} alt="" class="h-full w-full object-cover" loading="lazy" />
+								<div
+									class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent"
+								></div>
 
-							{#if event.badge}
-								<span
-									class="absolute right-5 top-5 rounded-full bg-brand px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white shadow-sm"
-								>
-									{event.badge}
-								</span>
-							{/if}
-
-							<div class="absolute bottom-0 left-0 right-0 p-6">
-								<p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
-									{event.kicker}
-								</p>
-								<h3 class={`mt-2 font-semibold text-white ${event.titleSize ?? 'text-xl'}`}>
-									{event.title}
-								</h3>
-								{#if event.description}
-									<p class="mt-2 max-w-xl text-sm text-white/85">{event.description}</p>
+								{#if event.badge}
+									<span
+										class="absolute right-5 top-5 rounded-full bg-brand px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white shadow-sm"
+									>
+										{event.badge}
+									</span>
 								{/if}
-							</div>
-						</article>
-					{/each}
-				</div>
+
+								<div class="absolute bottom-0 left-0 right-0 p-6">
+									<p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
+										{event.kicker}
+									</p>
+									<h3 class={`mt-2 font-semibold text-white ${event.titleSize ?? 'text-xl'}`}>
+										{event.title}
+									</h3>
+									{#if event.description}
+										<p class="mt-2 max-w-xl text-sm text-white/85">{event.description}</p>
+									{/if}
+								</div>
+							</article>
+						{/each}
+					</div>
+				{/key}
 			</section>
 		</div>
 	</div>
@@ -287,5 +307,18 @@
 	/* cards fill their grid cell */
 	.experience-card {
 		height: 100%;
+	}
+
+	.tab-btn {
+		position: relative;
+	}
+	.tab-btn.is-active::after {
+		content: '';
+		position: absolute;
+		inset: -2px;
+		border-radius: 9999px;
+		filter: blur(10px);
+		opacity: 0.35;
+		background: radial-gradient(circle, rgba(255, 180, 0, 0.6), transparent 60%);
 	}
 </style>

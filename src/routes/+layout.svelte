@@ -143,16 +143,24 @@
 					</p>
 					<ul class="mt-4 space-y-3 text-sm text-slate-600">
 						<li>
-							<a class="hover:text-slate-900" href={withBase('/zimmer')}>{$t('nav.roomsShort')}</a>
+							<a class="hover:text-slate-900" href={withBase('/unterkuenfte-preise')}>
+								{$t('nav.roomsShort')}
+							</a>
 						</li>
 						<li>
-							<a class="hover:text-slate-900" href={withBase('/wellness')}>{$t('nav.wellness')}</a>
+							<a class="hover:text-slate-900" href={withBase('/erlebnisse')}>
+								{$t('nav.experiences')}
+							</a>
 						</li>
 						<li>
-							<a class="hover:text-slate-900" href={withBase('/erlebnisse')}>{$t('nav.experiences')}</a>
+							<a class="hover:text-slate-900" href={withBase('/ueber-uns')}>
+								{$t('nav.about')}
+							</a>
 						</li>
 						<li>
-							<a class="hover:text-slate-900" href={withBase('/winter')}>{$t('footer.winter')}</a>
+							<a class="hover:text-slate-900" href={withBase('/kontakt')}>
+								{$t('nav.contact')}
+							</a>
 						</li>
 					</ul>
 				</div>
@@ -162,14 +170,15 @@
 						{$t('footer.contact')}
 					</p>
 					<ul class="mt-4 space-y-3 text-sm text-slate-600">
-						<li>{$t('footer.addressLine1')}</li>
-						<li>{$t('footer.addressLine2')}</li>
+						<li class="font-semibold text-slate-800">Familie Herold-Hueber</li>
+						<li>Weißbriach 92</li>
+						<li>9622 Weißbriach, Österreich</li>
 						<li>
-							<a class="hover:text-slate-900" href="tel:+430000000">+43 000 0000</a>
+							<a class="hover:text-slate-900" href="tel:+436766246826">+43 676 6246826</a>
 						</li>
 						<li>
-							<a class="hover:text-slate-900" href="mailto:info@gaestehaus-rader.at">
-								info@gaestehaus-rader.at
+							<a class="hover:text-slate-900" href="mailto:info@rader-gitschtal.at">
+								info@rader-gitschtal.at
 							</a>
 						</li>
 					</ul>

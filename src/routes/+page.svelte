@@ -21,10 +21,11 @@
 		House,
 		Wifi,
 		SquareParking,
+		Home,
 	} from 'lucide-svelte';
 
 	const usps = [
-		{ key: 1, icon: Mountain },
+		{ key: 1, icon: Home },
 		{ key: 2, icon: Mountain },
 		{ key: 3, icon: HeartHandshake },
 		{ key: 4, icon: Snowflake },
@@ -69,7 +70,7 @@
 		<div class="absolute inset-0">
 			<div
 				class="h-full w-full bg-cover bg-center"
-				style={`background-image: url('${withBase('/images/house-winter.jpg')}');`}
+				style={`background-image: url('${withBase('/images/winter-balkon_ausblick-1.jpg')}');`}
 				aria-hidden="true"
 			></div>
 			<div
