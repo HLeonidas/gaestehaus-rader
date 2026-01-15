@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { t } from '$lib/i18n';
-	import { base } from '$app/paths';
+	import { asset, resolve } from '$app/paths';
 	import {
 		Mountain,
 		HeartHandshake,
@@ -20,24 +20,28 @@
 		Sandwich,
 		House,
 		Wifi,
-		SquareParking,
-		Home,
+		SquareParking
 	} from 'lucide-svelte';
 
 	const usps = [
-		{ key: 1, icon: Home },
+		{ key: 1, icon: House },
 		{ key: 2, icon: Mountain },
 		{ key: 3, icon: HeartHandshake },
 		{ key: 4, icon: Snowflake },
 	];
 
-	const withBase = (path: string) => `${base}${path}`;
+const withAsset = (path: string) => asset(path);
+	const currentMonth = new Date().getMonth();
+	const heroImage =
+	currentMonth >= 4 && currentMonth <= 8
+		? withAsset('/images/balkon-ausblick.jpg')
+		: withAsset('/images/winter-balkon_ausblick-1.jpg');
 
 	const rooms = [
 		{
 			key: 1,
 			badge: 'Beliebt',
-			img: withBase('/images/room-1.jpg'),
+			img: withAsset('/images/room-1.jpg'),
 			price: 150,
 			meta: '45 m² · 2–4 Gäste · Mountain View',
 			amenities: ['wifi', 'balcony', 'mountain'],
@@ -45,7 +49,7 @@
 		{
 			key: 2,
 			badge: null,
-			img: withBase('/images/room-2.jpg'),
+			img: withAsset('/images/room-2.jpg'),
 			price: 120,
 			meta: '32 m² · 2 Gäste · Valley View',
 			amenities: ['wifi', 'balcony'],
@@ -53,7 +57,7 @@
 		{
 			key: 3,
 			badge: null,
-			img: withBase('/images/room-3.jpg'),
+			img: withAsset('/images/room-3.jpg'),
 			price: 110,
 			meta: '28 m² · 1–2 Gäste · Forest View',
 			amenities: ['wifi', 'parking', 'pet'],
@@ -70,7 +74,7 @@
 		<div class="absolute inset-0">
 			<div
 				class="h-full w-full bg-cover bg-center"
-				style={`background-image: url('${withBase('/images/winter-balkon_ausblick-1.jpg')}');`}
+				style={`background-image: url('${heroImage}');`}
 				aria-hidden="true"
 			></div>
 			<div
@@ -95,13 +99,13 @@
 
 			<div class="mt-8 flex flex-wrap justify-center gap-3 sm:gap-4">
 				<a
-					href={withBase('/unterkuenfte-preise')}
+					href={resolve('/unterkuenfte-preise')}
 					class="inline-flex items-center justify-center rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90 focus:outline-none focus:ring-2 focus:ring-brand/60"
 				>
 					{$t('hero.cta.primary')}
 				</a>
 				<a
-					href={withBase('/erlebnisse')}
+					href={resolve('/erlebnisse')}
 					class="inline-flex items-center justify-center rounded-full bg-white/15 px-6 py-3 text-sm font-semibold text-white ring-1 ring-white/20 backdrop-blur-sm transition hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/40"
 				>
 					{$t('hero.cta.secondary')}
@@ -206,7 +210,7 @@
 					</div>
 					<div class="flex items-center justify-between gap-4">
 						<a
-							href={withBase('/unterkuenfte-preise')}
+							href={resolve('/unterkuenfte-preise')}
 							class="ml-auto inline-flex items-center gap-2 text-sm font-semibold text-brand hover:opacity-90"
 						>
 							{$t('rooms.section.cta')}
@@ -221,7 +225,7 @@
 					>
 						{#each rooms as r}
 							<a
-								href={withBase('/unterkuenfte-preise')}
+								href={resolve('/unterkuenfte-preise')}
 								class="group relative w-[280px] shrink-0 snap-start overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:shadow-md sm:w-[340px]"
 							>
 								<!-- Image -->
@@ -260,137 +264,126 @@
 											{#each r.amenities as a}
 												<!-- Use any icon you like; here are tiny placeholders as circles -->
 												<span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-slate-100">
-													<span class="h-3 w-3 rounded bg-slate-400/70" />
+													<span class="h-3 w-3 rounded bg-slate-400/70" ></span>
 												</span>
 											{/each}
 										</div>
 									{:else}
 										<!-- Keep spacing similar to screenshot even without amenities -->
-										<div class="mt-4 h-7" />
+										<div class="mt-4 h-7" ></div>
 									{/if}
 								</div>
 
 								<!-- Hover ring -->
 								<div
 									class="pointer-events-none absolute inset-0 ring-1 ring-transparent transition group-hover:ring-brand/20"
-								/>
+								></div>
 							</a>
 						{/each}
 					</div>
 				</div>
 			</section>
-
-			</div>
 		</div>
+	</div>
 
-		<!-- SUSTAINABILITY -->
-		<div class="w-full bg-[#f1eee7]">
-			<section class="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6">
-				<div class="rounded-3xl px-6 py-10 sm:px-10 sm:py-12">
-					<div class="grid items-center gap-10 lg:grid-cols-2">
-						<!-- Left: image card -->
-						<div class="relative">
-							<div class="relative overflow-hidden rounded-3xl">
-								<img
-									src={withBase("/images/solar.png")}
-									alt=""
-									class="h-[320px] w-full object-cover sm:h-[380px]"
-									loading="lazy"
-								/>
-								<div
-									class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/10 via-transparent to-transparent"
-								></div>
-							</div>
-
-							<!-- Floating icon tile (bottom-right) -->
-							<div class="absolute -bottom-6 right-6">
-								<div
-									class="grid h-20 w-20 place-items-center rounded-2xl bg-emerald-600 text-white shadow-lg ring-1 ring-black/5"
-								>
-									<Sun class="h-8 w-8" />
-								</div>
-							</div>
+	<!-- SUSTAINABILITY -->
+	<div class="w-full bg-[#f1eee7]">
+		<section class="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6">
+			<div class="rounded-3xl px-6 py-10 sm:px-10 sm:py-12">
+				<div class="grid items-center gap-10 lg:grid-cols-2">
+					<!-- Left: image card -->
+					<div class="relative">
+						<div class="relative overflow-hidden rounded-3xl">
+							<img
+								src={withAsset('/images/solar.png')}
+								alt=""
+								class="h-[320px] w-full object-cover sm:h-[380px]"
+								loading="lazy"
+							/>
+							<div
+								class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/10 via-transparent to-transparent"
+							></div>
 						</div>
 
-						<!-- Right: content -->
-						<div class="space-y-5">
+						<!-- Floating icon tile (bottom-right) -->
+						<div class="absolute -bottom-6 right-6">
 							<div
-								class="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-700"
+								class="grid h-20 w-20 place-items-center rounded-2xl bg-emerald-600 text-white shadow-lg ring-1 ring-black/5"
 							>
-								<Leaf class="h-4 w-4" />
-								ECO-FRIENDLY
+								<Sun class="h-8 w-8" />
 							</div>
-							<h2 class="text-3xl font-serif font-semibold leading-[0.95] text-slate-900 sm:text-4xl">
-								Nachhaltigkeit aus<br />Leidenschaft
-							</h2>
+						</div>
+					</div>
 
-							<div class="space-y-4 text-sm leading-relaxed text-slate-600 sm:text-base">
-								<p>
-									At Gästehaus Rader, our love for the mountains goes hand in hand
-									with our commitment to preserving them. We believe that true
-									hospitality means taking responsibility for the environment that
-									hosts us.
-								</p>
-								<p>
-									To protect the pristine alpine environment, we produce our own
-									green energy via high-efficiency on-site solar panels. By
-									harnessing the power of the Carinthian sun, we minimize our
-									carbon footprint while providing you with a modern, guilt-free
-									luxury experience.
-								</p>
-							</div>
+					<!-- Right: content -->
+					<div class="space-y-5">
+						<div
+							class="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-700"
+						>
+							<Leaf class="h-4 w-4" />
+							ECO-FRIENDLY
+						</div>
+						<h2 class="text-3xl font-serif font-semibold leading-[0.95] text-slate-900 sm:text-4xl">
+							Nachhaltigkeit aus<br />Leidenschaft
+						</h2>
 
-							<div class="mt-6 border-t border-slate-200 pt-6">
-								<div class="grid gap-5 sm:grid-cols-2">
-									<!-- Solar / Photovoltaik -->
-									<div class="flex items-start gap-3">
-										<div
-											class="mt-0.5 grid h-10 w-10 place-items-center rounded-xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100"
-										>
-											<Sun class="h-5 w-5" />
-										</div>
-										<div>
-											<p class="text-sm font-semibold text-slate-900">
-												Solar & Photovoltaik
-											</p>
-											<p class="text-xs text-slate-500">
-												Eigenstrom vom Dach - direkt vor Ort genutzt.
-											</p>
-										</div>
+						<div class="space-y-4 text-sm leading-relaxed text-slate-600 sm:text-base">
+							<p>
+								At Gästehaus Rader, our love for the mountains goes hand in hand with our commitment to
+								preserving them. We believe that true hospitality means taking responsibility for the
+								environment that hosts us.
+							</p>
+							<p>
+								To protect the pristine alpine environment, we produce our own green energy via
+								high-efficiency on-site solar panels. By harnessing the power of the Carinthian sun, we
+								minimize our carbon footprint while providing you with a modern, guilt-free luxury
+								experience.
+							</p>
+						</div>
+
+						<div class="mt-6 border-t border-slate-200 pt-6">
+							<div class="grid gap-5 sm:grid-cols-2">
+								<!-- Solar / Photovoltaik -->
+								<div class="flex items-start gap-3">
+									<div
+										class="mt-0.5 grid h-10 w-10 place-items-center rounded-xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100"
+									>
+										<Sun class="h-5 w-5" />
 									</div>
+									<div>
+										<p class="text-sm font-semibold text-slate-900">Solar & Photovoltaik</p>
+										<p class="text-xs text-slate-500">Eigenstrom vom Dach - direkt vor Ort genutzt.</p>
+									</div>
+								</div>
 
-									<!-- Fernw„rme -->
-									<div class="flex items-start gap-3">
-										<div
-											class="mt-0.5 grid h-10 w-10 place-items-center rounded-xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100"
-										>
-											<Flame class="h-5 w-5" />
-										</div>
-										<div>
-											<p class="text-sm font-semibold text-slate-900">
-												Heizung mit Fernw„rme
-											</p>
-											<p class="text-xs text-slate-500">
-												W„rmeversorgung aus dem Dorf - effizient und verl„sslich.
-											</p>
-										</div>
+								<!-- Fernw„rme -->
+								<div class="flex items-start gap-3">
+									<div
+										class="mt-0.5 grid h-10 w-10 place-items-center rounded-xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100"
+									>
+										<Flame class="h-5 w-5" />
+									</div>
+									<div>
+										<p class="text-sm font-semibold text-slate-900">Heizung mit Fernw„rme</p>
+										<p class="text-xs text-slate-500">
+											W„rmeversorgung aus dem Dorf - effizient und verl„sslich.
+										</p>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</section>
-		</div>
+			</div>
+		</section>
+	</div>
 
-		<div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-			<div class="space-y-16">
-				<!-- SEASONS -->
-				<section class="rounded-3xl bg-[#f3efe6] px-6 py-12 sm:px-10 sm:py-14">
+	<div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+		<div class="space-y-16">
+			<!-- SEASONS -->
+			<section class="rounded-3xl bg-[#f3efe6] px-6 py-12 sm:px-10 sm:py-14">
 				<div class="text-center">
-					<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
-						Jahreszeiten
-					</p>
+					<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">Jahreszeiten</p>
 					<h2 class="mt-3 text-3xl font-serif font-semibold leading-[0.95] text-slate-900 sm:text-4xl">
 						{$t('seasons.title')}
 					</h2>
@@ -402,16 +395,16 @@
 
 				<div class="mt-10 grid gap-6 lg:grid-cols-2">
 					<a
-						href={withBase('/erlebnisse/sommer')}
+						href={resolve('/erlebnisse/sommer')}
 						class="group relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-200 shadow-sm"
 					>
 						<img
-							src={withBase('/images/house-summer.jpg')}
+							src={withAsset('/images/house-summer.jpg')}
 							alt=""
 							class="h-64 w-full object-cover sm:h-72"
 							loading="lazy"
 						/>
-						<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+						<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" ></div>
 						<div class="absolute bottom-0 left-0 right-0 p-6">
 							<h3 class="text-xl font-semibold text-white">
 								{$t('seasons.summer.title')}
@@ -428,16 +421,16 @@
 					</a>
 
 					<a
-						href={withBase('/erlebnisse/winter')}
+						href={resolve('/erlebnisse/winter')}
 						class="group relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-200 shadow-sm"
 					>
 						<img
-							src={withBase('/images/house-winter.jpg')}
+							src={withAsset('/images/house-winter.jpg')}
 							alt=""
 							class="h-64 w-full object-cover sm:h-72"
 							loading="lazy"
 						/>
-						<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+						<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" ></div>
 						<div class="absolute bottom-0 left-0 right-0 p-6">
 							<h3 class="text-xl font-semibold text-white">
 								{$t('seasons.winter.title')}
@@ -462,9 +455,7 @@
 						<Sparkles class="h-5 w-5" />
 					</div>
 					<div>
-						<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
-							Ausstattung
-						</p>
+						<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">Ausstattung</p>
 						<h2 class="mt-2 text-3xl font-serif font-semibold leading-[0.95] text-slate-900 sm:text-4xl">
 							In allen Appartements inklusive
 						</h2>

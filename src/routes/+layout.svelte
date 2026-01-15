@@ -1,24 +1,24 @@
 <script lang="ts">
 	import favicon from '$lib/assets/favicon.svg';
-	import { base } from '$app/paths';
-	import { page } from '$app/stores';
+	import { asset, resolve } from '$app/paths';
+	import { page } from '$app/state';
 	import { lang, setLang, t } from '$lib/i18n';
 	import '../app.css';
 
 	let { children } = $props();
 
 	const navItems = [
-		{ href: '/unterkuenfte-preise', key: 'nav.roomsShort' },
-		{ href: '/erlebnisse', key: 'nav.experiences' },
-		{ href: '/ueber-uns', key: 'nav.about' },
-		{ href: '/kontakt', key: 'nav.contact' },
+		{ href: resolve('/unterkuenfte-preise'), key: 'nav.roomsShort' },
+		{ href: resolve('/erlebnisse'), key: 'nav.experiences' },
+		{ href: resolve('/ueber-uns'), key: 'nav.about' },
+		{ href: resolve('/kontakt'), key: 'nav.contact' },
 	];
 
-	const withBase = (path: string) => `${base}${path}`;
-	const bookingHref = withBase('/buchen');
+	const withAsset = (path: string) => asset(path);
+	const bookingHref = resolve('/buchen');
 
 	// Keep ONLY for max-width control
-	const isHome = $derived($page.url.pathname === withBase('/'));
+	const isHome = $derived(page.url.pathname === resolve('/'));
 </script>
 
 <svelte:head>
@@ -30,7 +30,7 @@
 	<header class="sticky top-0 z-40 w-full border-b border-slate-200 bg-white/90 backdrop-blur">
 		<div class="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-4 py-4 sm:px-6">
 			<a
-				href={withBase('/')}
+				href={resolve('/')}
 				class="flex items-center rounded-xl focus:outline-none focus:ring-2 focus:ring-brand/40"
 				aria-label="Gästehaus Rader - Startseite"
 			>
@@ -38,7 +38,7 @@
 					class="flex h-16 w-44 items-center justify-center rounded-xl bg-white shadow-sm ring-1 ring-slate-200 sm:h-20 sm:w-52"
 				>
 					<img
-						src={withBase('/images/logo-rader-gitschtal.jpg')}
+						src={withAsset('/images/logo-rader-gitschtal.jpg')}
 						alt="Gästehaus Rader"
 						class="h-12 w-auto object-contain sm:h-14"
 						loading="lazy"
@@ -51,9 +51,9 @@
 			>
 				{#each navItems as item}
 					<a
-						href={withBase(item.href)}
+						href={item.href}
 						class={`transition-colors hover:text-brand ${
-							$page.url.pathname === withBase(item.href) ? 'text-brand' : 'text-slate-700'
+							page.url.pathname === item.href ? 'text-brand' : 'text-slate-700'
 						}`}
 					>
 						{$t(item.key)}
@@ -70,7 +70,7 @@
 						class={`rounded-full px-3 py-1 transition ${
 							$lang === 'de' ? 'bg-brand text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'
 						}`}
-						on:click={() => setLang('de')}
+						onclick={() => setLang('de')}
 					>
 						DE
 					</button>
@@ -79,7 +79,7 @@
 						class={`rounded-full px-3 py-1 transition ${
 							$lang === 'en' ? 'bg-brand text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'
 						}`}
-						on:click={() => setLang('en')}
+						onclick={() => setLang('en')}
 					>
 						EN
 					</button>
@@ -100,9 +100,9 @@
 			>
 				{#each navItems as item}
 					<a
-						href={withBase(item.href)}
+						href={item.href}
 						class={`whitespace-nowrap transition-colors hover:text-brand ${
-							$page.url.pathname === withBase(item.href) ? 'text-brand' : 'text-slate-700'
+							page.url.pathname === item.href ? 'text-brand' : 'text-slate-700'
 						}`}
 					>
 						{$t(item.key)}
@@ -124,7 +124,7 @@
 					<div class="flex items-center gap-3">
 						<div class="flex items-center justify-center rounded-lg shadow-sm">
 							<img
-								src={withBase('/images/logo-rader-gitschtal.jpg')}
+								src={withAsset('/images/logo-rader-gitschtal.jpg')}
 								alt="Gästehaus Rader"
 								class="h-12 w-auto object-contain sm:h-14"
 								loading="lazy"
@@ -143,22 +143,22 @@
 					</p>
 					<ul class="mt-4 space-y-3 text-sm text-slate-600">
 						<li>
-							<a class="hover:text-slate-900" href={withBase('/unterkuenfte-preise')}>
+							<a class="hover:text-slate-900" href={resolve('/unterkuenfte-preise')}>
 								{$t('nav.roomsShort')}
 							</a>
 						</li>
 						<li>
-							<a class="hover:text-slate-900" href={withBase('/erlebnisse')}>
+							<a class="hover:text-slate-900" href={resolve('/erlebnisse')}>
 								{$t('nav.experiences')}
 							</a>
 						</li>
 						<li>
-							<a class="hover:text-slate-900" href={withBase('/ueber-uns')}>
+							<a class="hover:text-slate-900" href={resolve('/ueber-uns')}>
 								{$t('nav.about')}
 							</a>
 						</li>
 						<li>
-							<a class="hover:text-slate-900" href={withBase('/kontakt')}>
+							<a class="hover:text-slate-900" href={resolve('/kontakt')}>
 								{$t('nav.contact')}
 							</a>
 						</li>
@@ -192,9 +192,12 @@
 					© {new Date().getFullYear()} Gästehaus Rader. {$t('footer.rights')}
 				</p>
 				<div class="flex flex-wrap gap-x-6 gap-y-2">
-					<a href={withBase('/impressum')} class="hover:text-slate-900">{$t('footer.imprint')}</a>
-					<a href={withBase('/datenschutz')} class="hover:text-slate-900">{$t('footer.privacy')}</a>
-					<a href={withBase('/agb')} class="hover:text-slate-900">{$t('footer.terms')}</a>
+					<a href={resolve('/impressum')} class="hover:text-slate-900">{$t('footer.imprint')}</a>
+					<a href={resolve('/datenschutz')} class="hover:text-slate-900">{$t('footer.privacy')}</a>
+					<a href={resolve('/agb')} class="hover:text-slate-900">{$t('footer.terms')}</a>
+					<a href={resolve('/bildnachweise')} class="hover:text-slate-900">
+						{$t('footer.credits')}
+					</a>
 				</div>
 			</div>
 		</div>

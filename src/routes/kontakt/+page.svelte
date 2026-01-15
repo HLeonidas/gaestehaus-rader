@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { t } from '$lib/i18n';
-import { Check, Copy, MapPin, ArrowUpRight } from 'lucide-svelte';
+	import { Check, Copy } from 'lucide-svelte';
 
 	let ibanCopied = false;
 	let bicCopied = false;
@@ -26,6 +26,15 @@ import { Check, Copy, MapPin, ArrowUpRight } from 'lucide-svelte';
 			bicCopied = false;
 		}, 2000);
 	};
+
+	let mapEnabled = false;
+
+	const mapSrc =
+		'https://www.google.com/maps?q=Weissbriach%2092%2C%209622%20Weissbriach%2C%20Austria&output=embed';
+
+	// optional: externer Link (öffnet Maps in neuem Tab)
+	const mapLink =
+		'https://www.google.com/maps?q=Weissbriach%2092%2C%209622%20Weissbriach%2C%20Austria';
 </script>
 
 <svelte:head>
@@ -125,15 +134,64 @@ import { Check, Copy, MapPin, ArrowUpRight } from 'lucide-svelte';
 					</div>
 				</div>
 			</div>
-				
-			<div class="relative mt-8 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-				<iframe
-					title="Google Maps"
-					class="h-[320px] w-full border-0 sm:h-[360px]"
-					loading="lazy"
-					referrerpolicy="no-referrer-when-downgrade"
-					src="https://www.google.com/maps?q=Weissbriach%2092%2C%209622%20Weissbriach%2C%20Austria&output=embed"
-				></iframe>
+
+			<div
+				class="relative mt-8 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
+			>
+				{#if mapEnabled}
+					<iframe
+						title="Google Maps"
+						class="h-[320px] w-full border-0 sm:h-[360px]"
+						loading="lazy"
+						referrerpolicy="no-referrer-when-downgrade"
+						src={mapSrc}
+					></iframe>
+
+					<!-- small control to disable again (optional) -->
+					<div class="absolute left-4 top-4">
+						<button
+							type="button"
+							class="rounded-full bg-white/90 px-3 py-1 text-[11px] font-semibold text-slate-800 shadow-sm ring-1 ring-slate-200 backdrop-blur hover:bg-white"
+							onclick={() => (mapEnabled = false)}
+						>
+							Karte schließen
+						</button>
+					</div>
+				{:else}
+					<!-- Placeholder / consent card -->
+					<div class="grid h-[320px] place-items-center px-6 py-8 sm:h-[360px]">
+						<div class="max-w-sm text-center">
+							<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">Google Maps</p>
+							<h3 class="mt-3 text-lg font-semibold text-slate-900">Karte laden?</h3>
+							<p class="mt-2 text-sm leading-relaxed text-slate-600">
+								Beim Laden der Karte werden Daten (z.&nbsp;B. Ihre IP-Adresse) an Google übertragen.
+							</p>
+
+							<div class="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
+								<button
+									type="button"
+									class="inline-flex items-center justify-center rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:brightness-110"
+									onclick={() => (mapEnabled = true)}
+								>
+									Karte laden
+								</button>
+
+								<a
+									class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-800 shadow-sm transition hover:bg-slate-50"
+									href={mapLink}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									In Google Maps öffnen
+								</a>
+							</div>
+
+							<p class="mt-4 text-[12px] text-slate-500">
+								Tipp: Sie können die Karte jederzeit nachträglich laden.
+							</p>
+						</div>
+					</div>
+				{/if}
 			</div>
 		</div>
 		<div class="mt-10 grid gap-8 border-t border-slate-100 lg:grid-cols-[1.2fr,1fr]">
@@ -146,7 +204,7 @@ import { Check, Copy, MapPin, ArrowUpRight } from 'lucide-svelte';
 								<button
 									type="button"
 									class="inline-flex items-center gap-2 font-semibold text-slate-800 underline decoration-dotted decoration-slate-400 underline-offset-4 transition hover:text-brand"
-									on:click={() => copyToClipboard('AT86 3936 4001 0361 6109', 'iban')}
+									onclick={() => copyToClipboard('AT86 3936 4001 0361 6109', 'iban')}
 								>
 									AT86 3936 4001 0361 6109
 									{#if ibanCopied}
@@ -163,7 +221,7 @@ import { Check, Copy, MapPin, ArrowUpRight } from 'lucide-svelte';
 								<button
 									type="button"
 									class="inline-flex items-center gap-2 font-semibold text-slate-800 underline decoration-dotted decoration-slate-400 underline-offset-4 transition hover:text-brand"
-									on:click={() => copyToClipboard('RZKTAT2K364', 'bic')}
+									onclick={() => copyToClipboard('RZKTAT2K364', 'bic')}
 								>
 									RZKTAT2K364
 									{#if bicCopied}

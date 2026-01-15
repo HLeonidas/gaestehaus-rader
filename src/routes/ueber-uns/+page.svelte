@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { t } from '$lib/i18n';
-	import { base } from '$app/paths';
+	import { asset } from '$app/paths';
 
-	const withBase = (path: string) => `${base}${path}`;
+	const withAsset = (path: string) => asset(path);
 </script>
 
 <svelte:head>
@@ -28,7 +28,7 @@
 					>
 						<!-- Replace src with your image -->
 						<img
-							src={withBase('/images/familie.jpg')}
+							src={withAsset('/images/familie.jpg')}
 							alt="Gästehaus Rader"
 							class="h-full w-full object-cover"
 						/>

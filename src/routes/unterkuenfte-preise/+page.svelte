@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { t } from '$lib/i18n';
-	import { base } from '$app/paths';
+	import { asset, resolve } from '$app/paths';
 	import {
 		Lightbulb,
 		Wifi,
@@ -30,25 +30,25 @@
 		bath: Bath,
 	};
 
-	const withBase = (path: string) => `${base}${path}`;
+const withAsset = (path: string) => asset(path);
 
 	const rooms = [
 		{
 			key: 1,
 			badge: 'badge.popular', // "Beliebt"
-			image: withBase('/images/room-1.jpg'),
+			image: withAsset('/images/room-1.jpg'),
 			amenities: ['wifi', 'balcony', 'mountain', 'coffee'],
 		},
 		{
 			key: 2,
 			badge: 'badge.exclusive', // "Exklusiv"
-			image: withBase('/images/room-2.jpg'),
+			image: withAsset('/images/room-2.jpg'),
 			amenities: ['wifi', 'sauna', 'fireplace', 'shower'],
 		},
 		{
 			key: 3,
 			badge: null,
-			image: withBase('/images/room-3.jpg'),
+			image: withAsset('/images/room-3.jpg'),
 			amenities: ['wifi', 'bath', 'balcony', 'mountain'],
 		},
 	];
@@ -151,7 +151,7 @@
 								</div>
 
 								<a
-									href={withBase('/buchen')}
+									href={resolve('/buchen')}
 									class="mt-6 inline-flex items-center gap-2 rounded-xl bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90 focus:outline-none focus:ring-2 focus:ring-brand/30"
 								>
 									{$t('rooms.page.cta')}

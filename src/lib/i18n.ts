@@ -185,6 +185,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'footer.imprint': 'Impressum',
 		'footer.privacy': 'Datenschutz',
 		'footer.terms': 'AGB',
+		'footer.credits': 'Bild- & Lizenznachweise',
 		'about.title': 'Über Gästehaus Rader',
 		'about.body':
 			'Hier erzählen wir die Geschichte Ihres Hauses, Ihre Werte und was den Aufenthalt besonders macht.',
@@ -390,6 +391,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'footer.imprint': 'Imprint',
 		'footer.privacy': 'Privacy',
 		'footer.terms': 'Terms',
+		'footer.credits': 'Image & License Credits',
 		'about.title': 'About Gästehaus Rader',
 		'about.body':
 			'Here we share the story of your home, your values, and what makes each stay special.',

@@ -1,15 +1,19 @@
 <script lang="ts">
 	import { t } from '$lib/i18n';
-	import { base } from '$app/paths';
-	import { Snowflake, Sun } from 'lucide-svelte';
+	import { base, asset } from '$app/paths';
+	import { page } from '$app/state';
+	import { goto } from '$app/navigation';
+	import type { ComponentType } from 'svelte';
+	import { Bike, CableCar, Footprints, Mountain, Snowflake, Sun, Waves } from 'lucide-svelte';
 
-	import { fly, fade } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
 
 	type SeasonKey = 'summer' | 'winter';
 	type ExperienceEvent = {
 		id: string;
 		season: SeasonKey;
+		icon: ComponentType;
 		kicker: string;
 		title: string;
 		description?: string;
@@ -20,18 +24,40 @@
 		layout?: string;
 	};
 
-	const withBase = (path: string) => `${base}${path}`;
+	const withAsset = (path: string) => asset(path);
+
+	// get active tab from url param (default: summer)
+	const seasonFromUrl = $derived.by(() => {
+		const season = page.params.season;
+		if (season === 'winter') return 'winter';
+		if (season === 'sommer' || season === 'summer') return 'summer';
+		return 'summer';
+	});
+
+	const seasonToParam = (season: SeasonKey) => (season === 'winter' ? 'winter' : 'sommer');
+
 	let activeTab = $state<SeasonKey>('summer');
+
+	$effect(() => {
+		if (activeTab !== seasonFromUrl) {
+			activeTab = seasonFromUrl;
+		}
+	});
 
 	function setSeason(season: SeasonKey) {
 		if (activeTab === season) return;
 		activeTab = season;
+		void goto(`${base}/erlebnisse/${seasonToParam(season)}`, {
+			keepFocus: true,
+			noScroll: true,
+		});
 	}
 
 	const events: ExperienceEvent[] = [
 		{
 			id: 'summer-hike',
 			season: 'summer',
+			icon: Mountain,
 			kicker: 'Wanderlust',
 			title: 'Wandern im Gitschtal',
 			description: 'Entdecken Sie über 100km markierte Wanderwege direkt vor unserer Haustür.',
@@ -43,6 +69,7 @@
 		{
 			id: 'summer-lake',
 			season: 'summer',
+			icon: Waves,
 			kicker: 'Erfrischung',
 			title: 'Baden am Pressegger See',
 			image: '/images/summer-lake.png',
@@ -53,6 +80,7 @@
 		{
 			id: 'summer-bike',
 			season: 'summer',
+			icon: Bike,
 			kicker: 'Action',
 			title: 'Mountainbike & E-Bike',
 			image: '/images/summer-bike.jpg',
@@ -63,6 +91,7 @@
 		{
 			id: 'summer-lift',
 			season: 'summer',
+			icon: CableCar,
 			kicker: 'Highlight',
 			title: 'Sommerbergbahnen',
 			description: 'Mühelos auf den Gipfel: Kostenlose Nutzung der Bergbahnen in der Region Nassfeld.',
@@ -75,43 +104,47 @@
 		{
 			id: 'winter-ski',
 			season: 'winter',
+			icon: Snowflake,
 			kicker: 'Skigebiet',
 			title: 'Skifahren am Nassfeld',
 			description: 'Eines der größten Skigebiete Österreichs – perfekt für Familien und Genießer.',
 			image: '/images/winter-ski.jpg',
 			layout: 'winter',
-			className: 'lg:col-span-2',
+			className: 'c1',
 			titleSize: 'text-2xl',
 		},
 		{
 			id: 'winter-ice',
 			season: 'winter',
+			icon: Snowflake,
 			kicker: 'Natur-Eis',
 			title: 'Eislaufen am Weißensee',
 			image: '/images/winter-ice.jpg',
 			layout: 'winter',
-			className: '',
+			className: 'c2',
 			titleSize: 'text-xl',
 		},
 		{
 			id: 'winter-hike',
 			season: 'winter',
+			icon: Footprints,
 			kicker: 'Ruhe',
 			title: 'Winterwandern',
 			image: '/images/winter-hike.jpg',
 			layout: 'winter',
-			className: '',
+			className: 'c3',
 			titleSize: 'text-xl',
 		},
 		{
 			id: 'winter-crosscountry',
 			season: 'winter',
+			icon: Mountain,
 			kicker: 'Sport',
 			title: 'Langlaufen & Loipen',
 			description: 'Perfekt präparierte Loipen in der Region Nassfeld–Pressegger See.',
 			image: '/images/winter-crosscountry.jpg',
 			layout: 'winter',
-			className: 'lg:col-span-2',
+			className: 'c4',
 			badge: 'beliebt',
 			titleSize: 'text-2xl',
 		},
@@ -160,7 +193,7 @@
 								? 'is-active bg-brand text-white shadow-sm'
 								: 'text-slate-700 hover:text-slate-900 hover:bg-slate-50'
 						}`}
-						on:click={() => setSeason('summer')}
+						onclick={() => setSeason('summer')}
 					>
 						<Sun
 							class={`h-4 w-4 transition-transform duration-300 ${
@@ -177,7 +210,7 @@
 								? 'is-active bg-brand text-white shadow-sm'
 								: 'text-slate-700 hover:text-slate-900 hover:bg-slate-50'
 						}`}
-						on:click={() => setSeason('winter')}
+						onclick={() => setSeason('winter')}
 					>
 						<Snowflake
 							class={`h-4 w-4 transition-transform duration-300 ${
@@ -208,14 +241,19 @@
 
 				{#key activeTab}
 					<div
-						class={`experience-grid mt-8 gap-6 ${activeTab === 'winter' ? 'experience-grid--winter' : ''}`}
+						class="experience-grid mt-8 gap-6"
 						in:fly={{ y: 26, duration: 520, easing: cubicOut }}
 					>
 						{#each currentEvents as event, i (event.id)}
 							<article
 								class={`experience-card group relative overflow-hidden rounded-3xl ${event.className ?? ''}`}
 							>
-								<img src={withBase(event.image)} alt="" class="h-full w-full object-cover" loading="lazy" />
+								<img
+									src={withAsset(event.image)}
+									alt=""
+									class="h-full w-full object-cover"
+									loading="lazy"
+								/>
 								<div
 									class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent"
 								></div>
@@ -229,7 +267,8 @@
 								{/if}
 
 								<div class="absolute bottom-0 left-0 right-0 p-6">
-									<p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
+									<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
+										<svelte:component this={event.icon} class="h-4 w-4 text-brand" aria-hidden="true" />
 										{event.kicker}
 									</p>
 									<h3 class={`mt-2 font-semibold text-white ${event.titleSize ?? 'text-xl'}`}>
@@ -283,25 +322,6 @@
 			grid-row: 2;
 		}
 
-		/* Winter: ignore the custom summer positioning */
-		.experience-grid--winter {
-			grid-template-columns: repeat(2, minmax(0, 1fr));
-			grid-template-rows: auto;
-		}
-
-		.experience-grid--winter .c1,
-		.experience-grid--winter .c2,
-		.experience-grid--winter .c3,
-		.experience-grid--winter .c4 {
-			grid-column: auto;
-			grid-row: auto;
-		}
-	}
-
-	@media (min-width: 1024px) {
-		.experience-grid--winter {
-			grid-template-columns: repeat(3, minmax(0, 1fr));
-		}
 	}
 
 	/* cards fill their grid cell */
