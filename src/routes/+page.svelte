@@ -229,13 +229,13 @@
                   />
 
                   <!-- Price pill -->
-                  <span
+                  <!-- <span
                     class="absolute left-4 top-4 rounded-full bg-brand px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white shadow-sm"
                   >
                     {$t("price.from")} €{$t(`rooms.card.${r.key}.price`)} / {$t(
                       "price.night"
                     )}
-                  </span>
+                  </span> -->
                 </div>
 
                 <!-- Content -->
