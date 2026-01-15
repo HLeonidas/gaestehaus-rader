@@ -1,6 +1,11 @@
 import type { PageLoad } from './$types';
 import { error } from '@sveltejs/kit';
-import { accommodationBySlug } from '$lib/data/accommodations';
+import { accommodationBySlug, accommodations } from '$lib/data/accommodations';
+
+export const prerender = true;
+
+export const entries = () =>
+	accommodations.map((accommodation) => ({ slug: accommodation.slug }));
 
 export const load: PageLoad = ({ params }) => {
 	const accommodation = accommodationBySlug(params.slug);
