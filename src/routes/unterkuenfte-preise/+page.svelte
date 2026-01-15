@@ -56,8 +56,9 @@
 	<title>{$t('rooms.page.title')} · Gästehaus Rader</title>
 </svelte:head>
 
-<div class="space-y-10 max-w-3xl mx-auto">
-	<!-- Header / breadcrumb -->
+<div class="mx-auto w-full max-w-4xl px-4 py-10 sm:px-6">
+	<div class="space-y-10">
+		<!-- Header / breadcrumb -->
 	<section class="space-y-4">
 		<p class="text-xs text-slate-500">
 			{$t('rooms.page.breadcrumb')}
@@ -154,4 +155,5 @@
 			{/each}
 		</div>
 	</section>
+	</div>
 </div>

@@ -6,6 +6,8 @@
 	<title>{$t('booking.title')} · Gästehaus Rader</title>
 </svelte:head>
 
+<div class="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6">
+
 <section class="grid gap-8 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm lg:grid-cols-[1fr,1fr] lg:p-12">
 	<div class="flex flex-col justify-between">
 		<div>
@@ -60,3 +62,4 @@
 		</form>
 	</div>
 </section>
+</div>
