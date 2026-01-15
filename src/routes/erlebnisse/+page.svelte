@@ -113,21 +113,22 @@
 	const winterEvents = events.filter((event) => event.season === 'winter');
 	const currentEvents = $derived(activeTab === 'summer' ? summerEvents : winterEvents);
 
-	const content: Record<SeasonKey, { kicker: string; title: string; subtitle: string; bg: string }> = {
-		summer: {
-			kicker: 'Aktiv & Natur',
-			title: 'Sommer Erlebnisse im Gitschtal',
-			subtitle:
-				'Entdecken Sie unberührte Natur, kristallklare Seen und alpine Abenteuer für die ganze Familie.',
-			bg: '/images/house-summer.jpg',
-		},
-		winter: {
-			kicker: 'Schnee & Stille',
-			title: 'Winter Erlebnisse im Gitschtal',
-			subtitle: 'Pulverschnee, Panorama und gemütliche Hütten - erleben Sie die Alpen im Winter.',
-			bg: '/images/house-winter.jpg',
-		},
-	};
+	const content: Record<SeasonKey, { kicker: string; title: string; subtitle: string; bg: string }> =
+		{
+			summer: {
+				kicker: 'Aktiv & Natur',
+				title: 'Sommer Erlebnisse im Gitschtal',
+				subtitle:
+					'Entdecken Sie unberührte Natur, kristallklare Seen und alpine Abenteuer für die ganze Familie.',
+				bg: '/images/house-summer.jpg',
+			},
+			winter: {
+				kicker: 'Schnee & Stille',
+				title: 'Winter Erlebnisse im Gitschtal',
+				subtitle: 'Pulverschnee, Panorama und gemütliche Hütten - erleben Sie die Alpen im Winter.',
+				bg: '/images/house-winter.jpg',
+			},
+		};
 	const currentContent = $derived(content[activeTab]);
 </script>
 
@@ -228,45 +229,52 @@
 </main>
 
 <style>
-	/* Mobile: untereinander */
 	.experience-grid {
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: 1.5rem; /* entspricht gap-6 */
+		gap: 1.5rem; /* gap-6 */
 	}
 
-	.experience-grid--winter {
-		grid-template-columns: 1fr;
-		grid-template-areas: none;
-	}
-
-	/* Desktop (wie Screenshot): 2 Reihen / 2 Spalten (8/4 feeling) */
+	/* ---- SUMMER GRID (like screenshot) ---- */
 	@media (min-width: 768px) {
 		.experience-grid {
-			grid-template-columns: 2fr 1fr;
-			grid-template-rows: 320px 300px;
-			grid-template-areas:
-				'c1 c2'
-				'c3 c4';
+			/* 12-col grid for 8/4 + 4/8 layout */
+			grid-template-columns: repeat(12, minmax(0, 1fr));
+			grid-template-rows: 320px 300px; /* adjust if you want */
 		}
 
+		/* Row 1 */
 		.c1 {
-			grid-area: c1;
+			grid-column: 1 / span 8; /* 8/12 */
+			grid-row: 1;
 		}
 		.c2 {
-			grid-area: c2;
-		}
-		.c3 {
-			grid-area: c3;
-		}
-		.c4 {
-			grid-area: c4;
+			grid-column: 9 / span 4; /* 4/12 */
+			grid-row: 1;
 		}
 
+		/* Row 2 */
+		.c3 {
+			grid-column: 1 / span 4; /* 4/12 */
+			grid-row: 2;
+		}
+		.c4 {
+			grid-column: 5 / span 8; /* 8/12 */
+			grid-row: 2;
+		}
+
+		/* Winter: ignore the custom summer positioning */
 		.experience-grid--winter {
 			grid-template-columns: repeat(2, minmax(0, 1fr));
 			grid-template-rows: auto;
-			grid-template-areas: none;
+		}
+
+		.experience-grid--winter .c1,
+		.experience-grid--winter .c2,
+		.experience-grid--winter .c3,
+		.experience-grid--winter .c4 {
+			grid-column: auto;
+			grid-row: auto;
 		}
 	}
 
@@ -276,7 +284,7 @@
 		}
 	}
 
-	/* sorgt dafür, dass die Karten die festgelegte Höhe sauber füllen */
+	/* cards fill their grid cell */
 	.experience-card {
 		height: 100%;
 	}
