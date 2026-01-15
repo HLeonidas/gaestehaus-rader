@@ -1,12 +1,13 @@
 <script lang="ts">
   import { t } from "$lib/i18n";
   import {
-    Calendar,
-    Users,
     Mountain,
     HeartHandshake,
     Snowflake,
     ArrowRight,
+    Leaf,
+    Sun,
+    Flame,
   } from "lucide-svelte";
 
   const usps = [
@@ -179,6 +180,7 @@
         {/each}
       </section>
 
+      <!-- ROOMS -->
       <section>
         <div class="flex flex-wrap items-end justify-between gap-4">
           <div>
@@ -273,6 +275,110 @@
         </div>
       </section>
 
+      <!-- SUSTAINABILITY -->
+      <section
+        class="rounded-3xl bg-white px-6 py-10 shadow-sm ring-1 ring-slate-200 sm:px-10 sm:py-12"
+      >
+        <div class="grid items-center gap-10 lg:grid-cols-2">
+          <!-- Left: image card -->
+          <div class="relative">
+            <div class="relative overflow-hidden rounded-3xl">
+              <img
+                src="/images/solar.png"
+                alt=""
+                class="h-[320px] w-full object-cover sm:h-[380px]"
+                loading="lazy"
+              />
+              <div
+                class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/10 via-transparent to-transparent"
+              />
+            </div>
+
+            <!-- Floating icon tile (bottom-right) -->
+            <div class="absolute -bottom-6 right-6">
+              <div
+                class="grid h-20 w-20 place-items-center rounded-2xl bg-emerald-600 text-white shadow-lg ring-1 ring-black/5"
+              >
+                <Sun class="h-8 w-8" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: content -->
+          <div class="space-y-5">
+            <div
+              class="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-700"
+            >
+              <Leaf class="h-4 w-4" />
+              ECO-FRIENDLY
+            </div>
+
+            <h2
+              class="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl"
+            >
+              Nachhaltigkeit aus<br />Leidenschaft
+            </h2>
+
+            <div
+              class="space-y-4 text-sm leading-relaxed text-slate-600 sm:text-base"
+            >
+              <p>
+                At Gästehaus Rader, our love for the mountains goes hand in hand
+                with our commitment to preserving them. We believe that true
+                hospitality means taking responsibility for the environment that
+                hosts us.
+              </p>
+              <p>
+                To protect the pristine alpine environment, we produce our own
+                green energy via high-efficiency on-site solar panels. By
+                harnessing the power of the Carinthian sun, we minimize our
+                carbon footprint while providing you with a modern, guilt-free
+                luxury experience.
+              </p>
+            </div>
+
+            <div class="mt-6 border-t border-slate-200 pt-6">
+              <div class="grid gap-5 sm:grid-cols-2">
+                <!-- Solar / Photovoltaik -->
+                <div class="flex items-start gap-3">
+                  <div
+                    class="mt-0.5 grid h-10 w-10 place-items-center rounded-xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100"
+                  >
+                    <Sun class="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p class="text-sm font-semibold text-slate-900">
+                      Solar & Photovoltaik
+                    </p>
+                    <p class="text-xs text-slate-500">
+                      Eigenstrom vom Dach – direkt vor Ort genutzt.
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Fernwärme -->
+                <div class="flex items-start gap-3">
+                  <div
+                    class="mt-0.5 grid h-10 w-10 place-items-center rounded-xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100"
+                  >
+                    <Flame class="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p class="text-sm font-semibold text-slate-900">
+                      Heizung mit Fernwärme
+                    </p>
+                    <p class="text-xs text-slate-500">
+                      Wärmeversorgung aus dem Dorf – effizient und verlässlich.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SEASONS -->
       <section class="rounded-3xl bg-[#f3efe6] px-6 py-12 sm:px-10 sm:py-14">
         <div class="text-center">
           <h2
