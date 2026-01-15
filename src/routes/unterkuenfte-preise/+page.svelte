@@ -167,10 +167,14 @@
 
 		<!-- Bottom section -->
 		<section class="space-y-10">
-			<div class="text-center space-y-3">
-				<p class="text-xs font-semibold tracking-[0.35em] uppercase text-brand">Your Stay</p>
+			<div class="text-center space-y-3 pt-15">
+				<p class="text-xs font-semibold tracking-[0.35em] uppercase text-brand">
+					{$t('rooms.page.inclusive.kicker')}
+				</p>
 
-				<h2 class="font-serif text-3xl sm:text-4xl text-slate-900">Inclusive Services</h2>
+				<h2 class="font-serif text-3xl sm:text-4xl text-slate-900">
+					{$t('rooms.page.inclusive.title')}
+				</h2>
 
 				<div class="mx-auto h-[2px] w-10 rounded-full bg-brand"></div>
 			</div>
@@ -181,32 +185,48 @@
 					<div class="mx-auto grid h-12 w-12 place-items-center rounded-full bg-brand/10 text-brand">
 						<Lightbulb class="h-6 w-6" />
 					</div>
-					<p class="mt-4 text-sm font-semibold text-slate-900">Strom/Heizung</p>
-					<p class="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">FREE</p>
+					<p class="mt-4 text-sm font-semibold text-slate-900">
+						{$t('rooms.page.inclusive.power')}
+					</p>
+					<p class="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">
+						{$t('rooms.page.inclusive.free')}
+					</p>
 				</div>
 
 				<div class="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
 					<div class="mx-auto grid h-12 w-12 place-items-center rounded-full bg-brand/10 text-brand">
 						<Wifi class="h-6 w-6" />
 					</div>
-					<p class="mt-4 text-sm font-semibold text-slate-900">Highspeed Wifi</p>
-					<p class="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">FREE</p>
+					<p class="mt-4 text-sm font-semibold text-slate-900">
+						{$t('rooms.page.inclusive.wifi')}
+					</p>
+					<p class="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">
+						{$t('rooms.page.inclusive.free')}
+					</p>
 				</div>
 
 				<div class="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
 					<div class="mx-auto grid h-12 w-12 place-items-center rounded-full bg-brand/10 text-brand">
 						<Baby class="h-6 w-6" />
 					</div>
-					<p class="mt-4 text-sm font-semibold text-slate-900">Kinderbett &amp; Hochstuhl</p>
-					<p class="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">FREE</p>
+					<p class="mt-4 text-sm font-semibold text-slate-900">
+						{$t('rooms.page.inclusive.kids')}
+					</p>
+					<p class="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">
+						{$t('rooms.page.inclusive.free')}
+					</p>
 				</div>
 
 				<div class="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
 					<div class="mx-auto grid h-12 w-12 place-items-center rounded-full bg-brand/10 text-brand">
 						<SquareParking class="h-6 w-6" />
 					</div>
-					<p class="mt-4 text-sm font-semibold text-slate-900">Parken</p>
-					<p class="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">FREE</p>
+					<p class="mt-4 text-sm font-semibold text-slate-900">
+						{$t('rooms.page.inclusive.parking')}
+					</p>
+					<p class="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">
+						{$t('rooms.page.inclusive.free')}
+					</p>
 				</div>
 			</div>
 
@@ -215,45 +235,55 @@
 				<div class="flex flex-wrap items-start justify-between gap-4">
 					<div class="min-w-0">
 						<h2 class="text-2xl font-medium tracking-tight text-slate-900 sm:text-2xl">
-							Weitere Informationen zu den Preisen
+							{$t('rooms.page.pricing.title')}
 						</h2>
 						<p class="mt-2 text-sm text-slate-500">
-							Preise gelten für 2 Personen pro Ferienwohnung und Tag (ohne Verpflegung)
+							{$t('rooms.page.pricing.subtitle')}
 						</p>
 					</div>
 
 					<span
 						class="inline-flex items-center rounded-full border border-brand/15 bg-brand/10 px-4 py-2 text-xs font-semibold text-brand"
 					>
-						Kinder bis 8 Jahre übernachten kostenfrei
+						{$t('rooms.page.pricing.kids')}
 					</span>
 				</div>
 
 				<div class="mt-6 divide-y divide-slate-100">
 					<div class="flex items-center justify-between gap-6 py-5">
 						<p class="text-sm text-slate-700">
-							Aufschlag für <span class="font-semibold text-slate-900">jede weitere Person</span> pro Tag
+							{$t('rooms.page.pricing.extraPrefix')}
+							<span class="font-semibold text-slate-900">{$t('rooms.page.pricing.extraHighlight')}</span>
+							{$t('rooms.page.pricing.extraSuffix')}
 						</p>
-						<span class="whitespace-nowrap text-sm font-semibold text-slate-900">€ 10,-</span>
+						<span class="whitespace-nowrap text-sm font-semibold text-slate-900">
+							{$t('rooms.page.pricing.extraPrice')}
+						</span>
 					</div>
 
 					<div class="flex items-center justify-between gap-6 py-5">
 						<div>
-							<p class="text-sm text-slate-700">Kurtaxe pro Erwachsenen (ab 17 Jahre) und pro Tag</p>
-							<p class="mt-1 text-xs text-slate-400">Erhöhung ab 1. Mai auf € 2,70</p>
+							<p class="text-sm text-slate-700">{$t('rooms.page.pricing.tax')}</p>
+							<p class="mt-1 text-xs text-slate-400">
+								{$t('rooms.page.pricing.tax.note')}
+							</p>
 						</div>
-						<span class="whitespace-nowrap text-sm font-semibold text-slate-900">€ 2,10</span>
+						<span class="whitespace-nowrap text-sm font-semibold text-slate-900">
+							{$t('rooms.page.pricing.tax.price')}
+						</span>
 					</div>
 
 					<div class="flex items-center justify-between gap-6 py-5">
-						<p class="text-sm font-semibold text-slate-800">Endreinigung</p>
-						<span class="whitespace-nowrap text-sm font-semibold text-slate-900">€ 45,-</span>
+						<p class="text-sm font-semibold text-slate-800">{$t('rooms.page.pricing.cleaning')}</p>
+						<span class="whitespace-nowrap text-sm font-semibold text-slate-900">
+							{$t('rooms.page.pricing.cleaningPrice')}
+						</span>
 					</div>
 				</div>
 
 				<p class="mt-5 inline-flex items-center gap-2 text-xs italic text-slate-400">
 					<span aria-hidden="true">🐾</span>
-					Hinweis: Vierbeiner sind leider nicht erlaubt.
+					{$t('rooms.page.pricing.petsNote')}
 				</p>
 			</div>
 
@@ -264,11 +294,19 @@
 						<CreditCard class="h-5 w-5" />
 					</div>
 					<div>
-						<h3 class="text-lg font-semibold text-slate-900">Zahlung</h3>
+						<h3 class="text-lg font-semibold text-slate-900">
+							{$t('rooms.page.info.payment.title')}
+						</h3>
 						<p class="mt-2 text-sm leading-relaxed text-slate-600">
-							Betrag ist bitte <span class="font-semibold text-slate-900">vor Ort in bar</span> zu
-							bezahlen. Nach Rücksprache auch mit
-							<span class="font-semibold text-slate-900">Überweisung</span> möglich. Keine Anzahlung notwendig.
+							{$t('rooms.page.info.payment.prefix')}
+							<span class="font-semibold text-slate-900">
+								{$t('rooms.page.info.payment.highlightCash')}
+							</span>
+							{$t('rooms.page.info.payment.middle')}
+							<span class="font-semibold text-slate-900">
+								{$t('rooms.page.info.payment.highlightTransfer')}
+							</span>
+							{$t('rooms.page.info.payment.suffix')}
 						</p>
 					</div>
 				</div>
@@ -278,16 +316,22 @@
 						<Clock class="h-5 w-5" />
 					</div>
 					<div class="w-full">
-						<h3 class="text-lg font-semibold text-slate-900">Anreise &amp; Abreise</h3>
+						<h3 class="text-lg font-semibold text-slate-900">
+							{$t('rooms.page.info.arrival.title')}
+						</h3>
 
 						<div class="mt-3 divide-y divide-slate-100 rounded-xl border border-slate-200 bg-white">
 							<div class="flex items-center justify-between px-4 py-3 text-sm">
-								<span class="font-semibold text-slate-900">Check-in</span>
-								<span class="text-slate-600">ab 14:00 Uhr</span>
+								<span class="font-semibold text-slate-900">
+									{$t('rooms.page.info.arrival.checkin')}
+								</span>
+								<span class="text-slate-600">{$t('rooms.page.info.arrival.checkinTime')}</span>
 							</div>
 							<div class="flex items-center justify-between px-4 py-3 text-sm">
-								<span class="font-semibold text-slate-900">Check-out</span>
-								<span class="text-slate-600">bis 10:00 Uhr</span>
+								<span class="font-semibold text-slate-900">
+									{$t('rooms.page.info.arrival.checkout')}
+								</span>
+								<span class="text-slate-600">{$t('rooms.page.info.arrival.checkoutTime')}</span>
 							</div>
 						</div>
 					</div>
@@ -298,10 +342,18 @@
 						<SquareParking class="h-5 w-5" />
 					</div>
 					<div>
-						<h3 class="text-lg font-semibold text-slate-900">Parkplatz</h3>
+						<h3 class="text-lg font-semibold text-slate-900">
+							{$t('rooms.page.info.parking.title')}
+						</h3>
 						<p class="mt-2 text-sm leading-relaxed text-slate-600">
-							<span class="font-semibold text-slate-900">Kostenfrei</span> direkt vor unserem
-							<span class="font-semibold text-slate-900">Gästehaus</span>. Keine Reservierung erforderlich.
+							<span class="font-semibold text-slate-900">
+								{$t('rooms.page.info.parking.highlightFree')}
+							</span>
+							{$t('rooms.page.info.parking.middle')}
+							<span class="font-semibold text-slate-900">
+								{$t('rooms.page.info.parking.highlightGuesthouse')}
+							</span>
+							{$t('rooms.page.info.parking.suffix')}
 						</p>
 					</div>
 				</div>
@@ -311,11 +363,15 @@
 						<CigaretteOff class="h-5 w-5" />
 					</div>
 					<div>
-						<h3 class="text-lg font-semibold text-slate-900">Rauchen</h3>
+						<h3 class="text-lg font-semibold text-slate-900">
+							{$t('rooms.page.info.smoking.title')}
+						</h3>
 						<p class="mt-2 text-sm leading-relaxed text-slate-600">
-							In unseren Wohnungen ist <span class="font-semibold text-slate-900"
-								>rauchen grundsätzlich untersagt</span
-							>. Wir haben auf den Balkonen für Aschenbecher gesorgt.
+							{$t('rooms.page.info.smoking.prefix')}
+							<span class="font-semibold text-slate-900">
+								{$t('rooms.page.info.smoking.highlight')}
+							</span>
+							{$t('rooms.page.info.smoking.suffix')}
 						</p>
 					</div>
 				</div>
@@ -331,19 +387,22 @@
 					</div>
 
 					<div class="min-w-0">
-						<h3 class="text-lg font-semibold text-slate-900 sm:text-xl">Stornobedingungen</h3>
+						<h3 class="text-lg font-semibold text-slate-900 sm:text-xl">
+							{$t('rooms.page.info.cancellation.title')}
+						</h3>
 						<p class="mt-2 text-sm leading-relaxed text-slate-600">
-							Es gelten die <span class="font-semibold text-slate-900"
-								>österreichischen Hotelbedingungen</span
-							>. Wir empfehlen Ihnen eine Reiserücktrittsversicherung abzuschließen. Nähere Informationen
-							erhalten Sie unter
+							{$t('rooms.page.info.cancellation.prefix')}
+							<span class="font-semibold text-slate-900">
+								{$t('rooms.page.info.cancellation.highlight')}
+							</span>
+							{$t('rooms.page.info.cancellation.middle')}
 							<a
 								class="font-semibold text-brand hover:opacity-90"
 								href="https://www.europaeische.at"
 								target="_blank"
 								rel="noreferrer"
 							>
-								Europäische Reiseversicherung
+								{$t('rooms.page.info.cancellation.link')}
 							</a>.
 						</p>
 					</div>

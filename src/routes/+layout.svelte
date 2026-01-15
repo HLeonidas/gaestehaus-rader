@@ -7,12 +7,12 @@
 
   let { children } = $props();
 
-  const navItems = [
-    { href: "/unterkuenfte-preise", key: "nav.roomsShort" },
-    { href: "/erlebnisse", key: "nav.experiences" },
-    { href: "/wellness", key: "nav.wellness" },
-    { href: "/ueber-uns", key: "nav.about" },
-  ];
+	const navItems = [
+		{ href: "/unterkuenfte-preise", key: "nav.roomsShort" },
+		{ href: "/erlebnisse", key: "nav.experiences" },
+		{ href: "/ueber-uns", key: "nav.about" },
+		{ href: "/kontakt", key: "nav.contact" },
+	];
 
   const withBase = (path: string) => `${base}${path}`;
   const bookingHref = withBase("/buchen");
