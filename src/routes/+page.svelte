@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { t } from '$lib/i18n';
 	import { asset, resolve } from '$app/paths';
+	import { accommodations } from '$lib/data/accommodations';
 	import {
 		Mountain,
 		HeartHandshake,
@@ -30,39 +31,25 @@
 		{ key: 4, icon: Snowflake },
 	];
 
-const withAsset = (path: string) => asset(path);
+	const withAsset = (path: string) => asset(path);
 	const currentMonth = new Date().getMonth();
 	const heroImage =
-	currentMonth >= 4 && currentMonth <= 8
-		? withAsset('/images/balkon-ausblick.jpg')
-		: withAsset('/images/winter-balkon_ausblick-1.jpg');
+		currentMonth >= 4 && currentMonth <= 8
+			? withAsset('/images/balkon-ausblick.jpg')
+			: withAsset('/images/winter-balkon_ausblick-1.jpg');
 
-	const rooms = [
-		{
-			key: 1,
-			badge: 'Beliebt',
-			img: withAsset('/images/room-1.jpg'),
-			price: 150,
-			meta: '45 m² · 2–4 Gäste · Mountain View',
-			amenities: ['wifi', 'balcony', 'mountain'],
-		},
-		{
-			key: 2,
-			badge: null,
-			img: withAsset('/images/room-2.jpg'),
-			price: 120,
-			meta: '32 m² · 2 Gäste · Valley View',
-			amenities: ['wifi', 'balcony'],
-		},
-		{
-			key: 3,
-			badge: null,
-			img: withAsset('/images/room-3.jpg'),
-			price: 110,
-			meta: '28 m² · 1–2 Gäste · Forest View',
-			amenities: ['wifi', 'parking', 'pet'],
-		},
-	];
+	const rooms = accommodations;
+	const accommodationsBase = resolve('/unterkuenfte-preise');
+
+	const amenityIcons = {
+		wifi: Wifi,
+		balcony: Sun,
+		mountain: Mountain,
+		coffee: Coffee,
+		kitchen: Utensils,
+		parking: SquareParking,
+	} as const;
+	type AmenityKey = keyof typeof amenityIcons;
 </script>
 
 <svelte:head>
@@ -225,13 +212,13 @@ const withAsset = (path: string) => asset(path);
 					>
 						{#each rooms as r}
 							<a
-								href={resolve('/unterkuenfte-preise')}
+								href={`${accommodationsBase}/${r.slug}`}
 								class="group relative w-[280px] shrink-0 snap-start overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:shadow-md sm:w-[340px]"
 							>
 								<!-- Image -->
 								<div class="relative">
 									<img
-										src={r.img}
+										src={withAsset(r.images.main)}
 										alt=""
 										class="h-[260px] w-full object-cover sm:h-[280px]"
 										loading="lazy"
@@ -250,12 +237,12 @@ const withAsset = (path: string) => asset(path);
 								<!-- Content -->
 								<div class="px-5 pb-4 pt-4">
 									<h3 class="text-base font-semibold tracking-tight text-slate-900">
-										{$t(`rooms.card.${r.key}.title`)}
+										{r.title}
 									</h3>
 
 									<!-- Meta line (small, muted) -->
 									<p class="mt-2 text-xs text-slate-500">
-										{$t(`rooms.card.${r.key}.meta`)}
+										{r.cardMeta}
 									</p>
 
 									<!-- Amenities (optional) -->
@@ -263,14 +250,23 @@ const withAsset = (path: string) => asset(path);
 										<div class="mt-4 flex items-center gap-3 text-slate-500">
 											{#each r.amenities as a}
 												<!-- Use any icon you like; here are tiny placeholders as circles -->
-												<span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-slate-100">
-													<span class="h-3 w-3 rounded bg-slate-400/70" ></span>
-												</span>
+												{#if amenityIcons[a as AmenityKey]}
+													<span
+														class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-slate-100"
+														title={$t(`amenity.${a}`)}
+														aria-label={$t(`amenity.${a}`)}
+													>
+														<svelte:component
+															this={amenityIcons[a as AmenityKey]}
+															class="h-4 w-4 text-slate-500"
+														/>
+													</span>
+												{/if}
 											{/each}
 										</div>
 									{:else}
 										<!-- Keep spacing similar to screenshot even without amenities -->
-										<div class="mt-4 h-7" ></div>
+										<div class="mt-4 h-7"></div>
 									{/if}
 								</div>
 

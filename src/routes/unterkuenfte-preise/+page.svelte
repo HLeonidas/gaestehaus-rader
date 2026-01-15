@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { t } from '$lib/i18n';
 	import { asset, resolve } from '$app/paths';
+	import { accommodations } from '$lib/data/accommodations';
 	import {
 		Lightbulb,
 		Wifi,
@@ -12,6 +13,7 @@
 		Bath,
 		Baby,
 		SquareParking,
+		Utensils,
 		ArrowRight,
 		Gavel,
 		CreditCard,
@@ -28,34 +30,17 @@
 		fireplace: Flame,
 		shower: ShowerHead,
 		bath: Bath,
+		kitchen: Utensils,
+		parking: SquareParking,
 	};
 
-const withAsset = (path: string) => asset(path);
+	const withAsset = (path: string) => asset(path);
 
-	const rooms = [
-		{
-			key: 1,
-			badge: 'badge.popular', // "Beliebt"
-			image: withAsset('/images/room-1.jpg'),
-			amenities: ['wifi', 'balcony', 'mountain', 'coffee'],
-		},
-		{
-			key: 2,
-			badge: 'badge.exclusive', // "Exklusiv"
-			image: withAsset('/images/room-2.jpg'),
-			amenities: ['wifi', 'sauna', 'fireplace', 'shower'],
-		},
-		{
-			key: 3,
-			badge: null,
-			image: withAsset('/images/room-3.jpg'),
-			amenities: ['wifi', 'bath', 'balcony', 'mountain'],
-		},
-	];
+	const rooms = accommodations;
+	const accommodationsBase = resolve('/unterkuenfte-preise');
 
-	function badgeClasses(badgeKey: string) {
-		// Screenshot: "BELIEBT" dark/grey, "EXKLUSIV" orange
-		if (badgeKey === 'badge.exclusive') {
+	function badgeClasses(badgeLabel: string) {
+		if (badgeLabel === 'Exklusiv') {
 			return 'bg-brand text-white';
 		}
 		return 'bg-slate-800/90 text-white';
@@ -94,14 +79,21 @@ const withAsset = (path: string) => asset(path);
 					<article class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
 						<!-- Image -->
 						<div class="relative">
-							<img src={room.image} alt="" class="h-auto w-full object-cover sm:h-72" loading="lazy" />
-							{#if room.badge}
+							<a href={`${accommodationsBase}/${room.slug}`}>
+								<img
+									src={withAsset(room.images.main)}
+									alt=""
+									class="h-auto w-full object-cover sm:h-72"
+									loading="lazy"
+								/>
+							</a>
+							{#if room.badgeLabel}
 								<span
 									class={`absolute right-4 top-4 rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] shadow-sm ${badgeClasses(
-										room.badge
+										room.badgeLabel
 									)}`}
 								>
-									{$t(room.badge)}
+									{room.badgeLabel}
 								</span>
 							{/if}
 						</div>
@@ -111,16 +103,16 @@ const withAsset = (path: string) => asset(path);
 							<!-- Left -->
 							<div class="md:pr-10">
 								<h2 class="text-lg font-semibold text-slate-900 sm:text-xl">
-									{$t(`rooms.page.card.${room.key}.title`)}
+									<a href={`${accommodationsBase}/${room.slug}`} class="hover:opacity-90">
+										{room.title}
+									</a>
 								</h2>
-								<p class="text-sm text-slate-700">{$t(`rooms.page.card.${room.key}.type`)}</p>
+								<p class="text-sm text-slate-700">{room.typeLabel}</p>
 
-								<div class="mt-2 text-xs text-slate-500">
-									{$t(`rooms.page.card.${room.key}.meta`)}
-								</div>
+								<div class="mt-2 text-xs text-slate-500">{room.detailMeta}</div>
 
 								<p class="mt-4 max-w-xl text-sm leading-relaxed text-slate-600">
-									{$t(`rooms.page.card.${room.key}.body`)}
+									{room.detailBody}
 								</p>
 
 								<!-- Amenities row -->
@@ -143,15 +135,13 @@ const withAsset = (path: string) => asset(path);
 										{$t('rooms.page.from')}
 									</p>
 									<div class="mt-2 flex items-end justify-end gap-2">
-										<p class="text-2xl font-semibold text-brand">
-											€{$t(`rooms.page.card.${room.key}.price`)}
-										</p>
+										<p class="text-2xl font-semibold text-brand">€{room.pricePerNightBase}</p>
 										<span class="pb-1 text-xs text-slate-500">/ {$t('price.night')}</span>
 									</div>
 								</div>
 
 								<a
-									href={resolve('/buchen')}
+									href={resolve(`/buchen/${room.slug}`)}
 									class="mt-6 inline-flex items-center gap-2 rounded-xl bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90 focus:outline-none focus:ring-2 focus:ring-brand/30"
 								>
 									{$t('rooms.page.cta')}
