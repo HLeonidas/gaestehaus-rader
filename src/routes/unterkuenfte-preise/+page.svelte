@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { t } from '$lib/i18n';
+	import { base } from '$app/paths';
 	import {
+		Lightbulb,
 		Wifi,
 		Mountain,
 		Coffee,
@@ -8,6 +10,8 @@
 		Flame,
 		ShowerHead,
 		Bath,
+		Baby,
+		SquareParking,
 		ArrowRight
 	} from 'lucide-svelte';
 
@@ -22,23 +26,25 @@
 		bath: Bath
 	};
 
+	const withBase = (path: string) => `${base}${path}`;
+
 	const rooms = [
 		{
 			key: 1,
 			badge: 'badge.popular', // "Beliebt"
-			image: '/images/room-1.jpg',
+			image: withBase('/images/room-1.jpg'),
 			amenities: ['wifi', 'balcony', 'mountain', 'coffee']
 		},
 		{
 			key: 2,
 			badge: 'badge.exclusive', // "Exklusiv"
-			image: '/images/room-2.jpg',
+			image: withBase('/images/room-2.jpg'),
 			amenities: ['wifi', 'sauna', 'fireplace', 'shower']
 		},
 		{
 			key: 3,
 			badge: null,
-			image: '/images/room-3.jpg',
+			image: withBase('/images/room-3.jpg'),
 			amenities: ['wifi', 'bath', 'balcony', 'mountain']
 		}
 	];
@@ -143,7 +149,7 @@
 							</div>
 
 							<a
-								href="/buchen"
+							href={withBase("/buchen")}
 								class="mt-6 inline-flex items-center gap-2 rounded-xl bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90 focus:outline-none focus:ring-2 focus:ring-brand/30"
 							>
 								{$t('rooms.page.cta')}
@@ -153,6 +159,128 @@
 					</div>
 				</article>
 			{/each}
+		</div>
+	</section>
+
+	<section class="space-y-8">
+		<div>
+			<h2 class="text-2xl font-semibold tracking-tight text-slate-900">
+				Weitere Informationen zu den Preisen
+			</h2>
+
+			<div class="mt-4 space-y-3 text-sm leading-relaxed text-slate-600 sm:text-base">
+				<div class="flex flex-wrap items-start justify-between gap-4">
+					<p>Preise gelten für 2 Personen pro Ferienwohnung und Tag (ohne Verpflegung)</p>
+				</div>
+				<div class="flex flex-wrap items-start justify-between gap-4">
+					<p>
+						Kinder bis
+						<span class="font-semibold text-slate-900">einschließlich 8 Jahre</span>
+						übernachten
+						<span class="font-semibold text-slate-900">kostenfrei</span>
+					</p>
+				</div>
+				<div class="flex flex-wrap items-start justify-between gap-4">
+					<p>
+						Aufschlag für <span class="font-semibold text-slate-900">jede weitere Person</span> pro
+						Tag
+					</p>
+					<span class="whitespace-nowrap font-semibold text-slate-900">€ 10,-</span>
+				</div>
+				<div class="flex flex-wrap items-start justify-between gap-4">
+					<p>Kurtaxe pro Erwachsenen (ab 17 Jahre) und pro Tag</p>
+					<span class="whitespace-nowrap font-semibold text-slate-900">€ 2,10 (ab 1. Mai € 2,70)</span>
+				</div>
+				<div class="flex flex-wrap items-start justify-between gap-4">
+					<p class="font-semibold text-slate-700">Endreinigung</p>
+					<span class="whitespace-nowrap font-semibold text-slate-900">€ 45,-</span>
+				</div>
+				<p class="text-xs text-slate-500">Hinweis: Vierbeiner sind nicht erlaubt</p>
+			</div>
+		</div>
+
+		<div class="grid gap-6 pt-2 sm:grid-cols-2 lg:grid-cols-4">
+			<div class="flex flex-col items-center text-center">
+				<div class="flex h-12 w-12 items-center justify-center rounded-full bg-brand/10 text-brand">
+					<Lightbulb class="h-6 w-6" />
+				</div>
+				<p class="mt-3 text-sm font-semibold text-slate-800">Strom</p>
+				<p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">FREE</p>
+			</div>
+			<div class="flex flex-col items-center text-center">
+				<div class="flex h-12 w-12 items-center justify-center rounded-full bg-brand/10 text-brand">
+					<Wifi class="h-6 w-6" />
+				</div>
+				<p class="mt-3 text-sm font-semibold text-slate-800">Wifi</p>
+				<p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">FREE</p>
+			</div>
+			<div class="flex flex-col items-center text-center">
+				<div class="flex h-12 w-12 items-center justify-center rounded-full bg-brand/10 text-brand">
+					<Baby class="h-6 w-6" />
+				</div>
+				<p class="mt-3 text-sm font-semibold text-slate-800">Kinderbett und Hochstuhl</p>
+				<p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">FREE</p>
+			</div>
+			<div class="flex flex-col items-center text-center">
+				<div class="flex h-12 w-12 items-center justify-center rounded-full bg-brand/10 text-brand">
+					<SquareParking class="h-6 w-6" />
+				</div>
+				<p class="mt-3 text-sm font-semibold text-slate-800">Parken</p>
+				<p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">FREE</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="grid gap-10 md:grid-cols-2">
+		<div class="space-y-3">
+			<h3 class="text-xl font-semibold text-slate-900">Zahlung</h3>
+			<p class="text-sm leading-relaxed text-slate-600">
+				Betrag ist bitte <span class="font-semibold text-slate-900">vor Ort in bar</span> zu
+				bezahlen. Nach Rücksprache auch mit
+				<span class="font-semibold text-slate-900">Überweisung</span> möglich. Keine Anzahlung
+				notwendig.
+			</p>
+		</div>
+
+		<div class="space-y-3">
+			<h3 class="text-xl font-semibold text-slate-900">Anreise/Abreise</h3>
+			<p class="text-sm text-slate-600">
+				<span class="font-semibold text-slate-900">Check in</span> ab 14:00 Uhr
+			</p>
+			<p class="text-sm text-slate-600">
+				<span class="font-semibold text-slate-900">Check out</span> bis 10:00 Uhr
+			</p>
+		</div>
+
+		<div class="space-y-3">
+			<h3 class="text-xl font-semibold text-slate-900">Parkplatz</h3>
+			<p class="text-sm leading-relaxed text-slate-600">
+				<span class="font-semibold text-slate-900">Kostenfrei</span> direkt vor unserem
+				<span class="font-semibold text-slate-900">Gästehaus</span>.
+			</p>
+		</div>
+
+		<div class="space-y-3">
+			<h3 class="text-xl font-semibold text-slate-900">Raucher</h3>
+			<p class="text-sm leading-relaxed text-slate-600">
+				In unseren Wohnungen ist
+				<span class="font-semibold text-slate-900">rauchen grundsätzlich untersagt</span>. Wir
+				haben auf den Balkonen für Aschenbecher gesorgt.
+			</p>
+		</div>
+
+		<div class="space-y-3 md:col-span-2">
+			<h3 class="text-xl font-semibold text-slate-900">Storno</h3>
+			<p class="text-sm leading-relaxed text-slate-600">
+				Es gelten die
+				<span class="font-semibold text-slate-900">österreichischen Hotelbedingungen</span>. Wir
+				empfehlen Ihnen eine Reiserücktrittsversicherung abzuschließen. Nähere Informationen
+				erhalten Sie unter
+				<a class="font-semibold text-brand hover:opacity-90" href="https://www.europaeische.at">
+					Europäische Reiseversicherung
+				</a>
+				.
+			</p>
 		</div>
 	</section>
 	</div>

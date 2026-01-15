@@ -1,5 +1,6 @@
 <script lang="ts">
   import favicon from "$lib/assets/favicon.svg";
+  import { base } from "$app/paths";
   import { page } from "$app/stores";
   import { lang, setLang, t } from "$lib/i18n";
   import "../app.css";
@@ -13,10 +14,11 @@
     { href: "/ueber-uns", key: "nav.about" },
   ];
 
-  const bookingHref = "/buchen";
+  const withBase = (path: string) => `${base}${path}`;
+  const bookingHref = withBase("/buchen");
 
   // Keep ONLY for max-width control
-  const isHome = $derived($page.url.pathname === "/");
+  const isHome = $derived($page.url.pathname === withBase("/"));
 </script>
 
 <svelte:head>
@@ -32,7 +34,7 @@
       class="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-4 py-4 sm:px-6"
     >
       <a
-        href="/"
+        href={withBase("/")}
         class="flex items-center gap-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand/40"
         aria-label="Gästehaus Rader - Startseite"
       >
@@ -40,7 +42,7 @@
           class="flex h-10 w-10 items-center justify-center rounded-lg text-white shadow-sm"
         >
           <img
-            src="/images/logo.png"
+            src={withBase("/images/logo.png")}
             alt=""
             class="h-8 w-8 object-contain"
             loading="lazy"
@@ -56,9 +58,11 @@
       >
         {#each navItems as item}
           <a
-            href={item.href}
+            href={withBase(item.href)}
             class={`transition-colors hover:text-brand ${
-              $page.url.pathname === item.href ? "text-brand" : "text-slate-700"
+              $page.url.pathname === withBase(item.href)
+                ? "text-brand"
+                : "text-slate-700"
             }`}
           >
             {$t(item.key)}
@@ -109,9 +113,11 @@
       >
         {#each navItems as item}
           <a
-            href={item.href}
+            href={withBase(item.href)}
             class={`whitespace-nowrap transition-colors hover:text-brand ${
-              $page.url.pathname === item.href ? "text-brand" : "text-slate-700"
+              $page.url.pathname === withBase(item.href)
+                ? "text-brand"
+                : "text-slate-700"
             }`}
           >
             {$t(item.key)}
@@ -179,22 +185,22 @@
           </p>
           <ul class="mt-4 space-y-3 text-sm text-slate-300">
             <li>
-              <a class="hover:text-white" href="/zimmer"
+              <a class="hover:text-white" href={withBase("/zimmer")}
                 >{$t("nav.roomsShort")}</a
               >
             </li>
             <li>
-              <a class="hover:text-white" href="/wellness"
+              <a class="hover:text-white" href={withBase("/wellness")}
                 >{$t("nav.wellness")}</a
               >
             </li>
             <li>
-              <a class="hover:text-white" href="/erlebnisse"
+              <a class="hover:text-white" href={withBase("/erlebnisse")}
                 >{$t("nav.experiences")}</a
               >
             </li>
             <li>
-              <a class="hover:text-white" href="/winter"
+              <a class="hover:text-white" href={withBase("/winter")}
                 >{$t("footer.winter")}</a
               >
             </li>
@@ -232,13 +238,15 @@
           © {new Date().getFullYear()} Gästehaus Rader. {$t("footer.rights")}
         </p>
         <div class="flex flex-wrap gap-x-6 gap-y-2">
-          <a href="/impressum" class="hover:text-white"
+          <a href={withBase("/impressum")} class="hover:text-white"
             >{$t("footer.imprint")}</a
           >
-          <a href="/datenschutz" class="hover:text-white"
+          <a href={withBase("/datenschutz")} class="hover:text-white"
             >{$t("footer.privacy")}</a
           >
-          <a href="/agb" class="hover:text-white">{$t("footer.terms")}</a>
+          <a href={withBase("/agb")} class="hover:text-white"
+            >{$t("footer.terms")}</a
+          >
         </div>
       </div>
     </div>

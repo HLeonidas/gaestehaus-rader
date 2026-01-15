@@ -1,5 +1,6 @@
 <script lang="ts">
   import { t } from "$lib/i18n";
+  import { base } from "$app/paths";
   import {
     Mountain,
     HeartHandshake,
@@ -17,11 +18,13 @@
     { key: 4, icon: Snowflake },
   ];
 
+  const withBase = (path: string) => `${base}${path}`;
+
   const rooms = [
     {
       key: 1,
       badge: "Beliebt",
-      img: "/images/room-1.jpg",
+      img: withBase("/images/room-1.jpg"),
       price: 150,
       meta: "45 m² · 2–4 Gäste · Mountain View",
       amenities: ["wifi", "balcony", "mountain"],
@@ -29,7 +32,7 @@
     {
       key: 2,
       badge: null,
-      img: "/images/room-2.jpg",
+      img: withBase("/images/room-2.jpg"),
       price: 120,
       meta: "32 m² · 2 Gäste · Valley View",
       amenities: ["wifi", "balcony"],
@@ -37,12 +40,13 @@
     {
       key: 3,
       badge: null,
-      img: "/images/room-3.jpg",
+      img: withBase("/images/room-3.jpg"),
       price: 110,
       meta: "28 m² · 1–2 Gäste · Forest View",
       amenities: ["wifi", "parking", "pet"],
     },
   ];
+
 </script>
 
 <svelte:head>
@@ -54,7 +58,7 @@
     <div class="absolute inset-0">
       <div
         class="h-full w-full bg-cover bg-center"
-        style="background-image: url('/images/house-winter.jpg');"
+        style={`background-image: url('${withBase("/images/house-winter.jpg")}');`}
         aria-hidden="true"
       />
       <div
@@ -81,13 +85,13 @@
 
       <div class="mt-8 flex flex-wrap justify-center gap-3 sm:gap-4">
         <a
-          href="/unterkuenfte-preise"
+          href={withBase("/unterkuenfte-preise")}
           class="inline-flex items-center justify-center rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90 focus:outline-none focus:ring-2 focus:ring-brand/60"
         >
           {$t("hero.cta.primary")}
         </a>
         <a
-          href="/ueber-uns"
+          href={withBase("/ueber-uns")}
           class="inline-flex items-center justify-center rounded-full bg-white/15 px-6 py-3 text-sm font-semibold text-white ring-1 ring-white/20 backdrop-blur-sm transition hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/40"
         >
           {$t("hero.cta.secondary")}
@@ -197,7 +201,7 @@
           </div>
           <div class="flex items-center justify-between gap-4">
             <a
-              href="/unterkuenfte-preise"
+              href={withBase("/unterkuenfte-preise")}
               class="ml-auto inline-flex items-center gap-2 text-sm font-semibold text-brand hover:opacity-90"
             >
               {$t("rooms.section.cta")}
@@ -212,7 +216,7 @@
           >
             {#each rooms as r}
               <a
-                href="/unterkuenfte-preise"
+                href={withBase("/unterkuenfte-preise")}
                 class="group relative w-[280px] shrink-0 snap-start overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:shadow-md sm:w-[340px]"
               >
                 <!-- Image -->
@@ -284,7 +288,7 @@
           <div class="relative">
             <div class="relative overflow-hidden rounded-3xl">
               <img
-                src="/images/solar.png"
+                src={withBase("/images/solar.png")}
                 alt=""
                 class="h-[320px] w-full object-cover sm:h-[380px]"
                 loading="lazy"
@@ -395,11 +399,11 @@
 
         <div class="mt-10 grid gap-6 lg:grid-cols-2">
           <a
-            href="/erlebnisse/sommer"
+            href={withBase("/erlebnisse/sommer")}
             class="group relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-200 shadow-sm"
           >
             <img
-              src="/images/summer.jpg"
+              src={withBase("/images/house-summer.jpg")}
               alt=""
               class="h-64 w-full object-cover sm:h-72"
               loading="lazy"
@@ -423,11 +427,11 @@
           </a>
 
           <a
-            href="/erlebnisse/winter"
+            href={withBase("/erlebnisse/winter")}
             class="group relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-200 shadow-sm"
           >
             <img
-              src="/images/winter.jpg"
+              src={withBase("/images/house-winter.jpg")}
               alt=""
               class="h-64 w-full object-cover sm:h-72"
               loading="lazy"
