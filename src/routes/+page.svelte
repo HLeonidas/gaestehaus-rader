@@ -151,7 +151,7 @@
 	<meta property="og:url" content={siteUrl} />
 	<meta property="og:image" content={ogImage} />
 	<meta name="twitter:card" content="summary_large_image" />
-	<script type="application/ld+json">{homeJsonLd}</script>
+	{@html `<script type="application/ld+json">${homeJsonLd}</script>`}
 </svelte:head>
 
 <div class="space-y-16 pb-16">
