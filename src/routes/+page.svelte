@@ -147,7 +147,7 @@
 		</div>
 
 		<div
-			class="relative flex min-h-screen flex-col items-center justify-center px-6 pt-28 text-center text-white sm:px-10"
+			class="relative flex min-h-screen flex-col items-center justify-center px-6 pt-20 text-center text-white sm:px-10"
 		>
 			<h1 class="mx-auto max-w-3xl font-serif text-4xl font-semibold leading-[0.95] sm:text-6xl">
 				{$t('hero.title')}
