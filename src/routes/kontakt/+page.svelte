@@ -101,7 +101,9 @@
 				</div>
 			</div>
 
-			<div class="relative mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+			<div
+				class="relative mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
+			>
 				{#if mapEnabled}
 					<iframe
 						title="Google Maps"
@@ -165,7 +167,9 @@
 		<div class="mt-8 grid gap-8 border-t border-slate-100 lg:grid-cols-[1.2fr,1fr]">
 			<div class="mt-6 grid gap-8 sm:grid-cols-2">
 				<div class="sm:col-span-2">
-					<div class="grid gap-6 rounded-2xl bg-slate-50 p-4 text-xs text-slate-600 sm:p-6 sm:grid-cols-2">
+					<div
+						class="grid gap-6 rounded-2xl bg-slate-50 p-4 text-xs text-slate-600 sm:p-6 sm:grid-cols-2"
+					>
 						<div>
 							<p class="font-semibold uppercase tracking-[0.2em] text-slate-500">IBAN</p>
 							<div class="mt-2 flex flex-wrap items-center gap-3">
@@ -206,5 +210,3 @@
 		</div>
 	</section>
 </div>
-
-

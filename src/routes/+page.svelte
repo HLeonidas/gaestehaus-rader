@@ -260,7 +260,7 @@
 								<div class="relative">
 									<img
 										src={withAsset(r.images.main)}
-										alt={`Photo of ${r.title}`}
+										alt={`${$t('home.rooms.card.imageAltPrefix')} ${r.title}`}
 										class="h-[260px] w-full object-cover sm:h-[280px]"
 										loading="lazy"
 									/>
@@ -331,7 +331,7 @@
 						<div class="relative overflow-hidden rounded-3xl">
 							<img
 								src={withAsset('/images/solar.png')}
-								alt="Solar panels on the guesthouse roof"
+								alt={$t('home.sustainability.imageAlt')}
 								class="h-[320px] w-full object-cover sm:h-[380px]"
 								loading="lazy"
 							/>
@@ -356,24 +356,15 @@
 							class="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-700"
 						>
 							<Leaf class="h-4 w-4" aria-hidden="true" />
-							ECO-FRIENDLY
+							{$t('home.sustainability.badge')}
 						</div>
 						<h2 class="text-3xl font-serif font-semibold leading-[0.95] text-slate-900 sm:text-4xl">
-							Nachhaltigkeit aus<br />Leidenschaft
+							{$t('home.sustainability.title.line1')}<br />{$t('home.sustainability.title.line2')}
 						</h2>
 
 						<div class="space-y-4 text-sm leading-relaxed text-slate-600 sm:text-base">
-							<p>
-								At Gästehaus Rader, our love for the mountains goes hand in hand with our commitment to
-								preserving them. We believe that true hospitality means taking responsibility for the
-								environment that hosts us.
-							</p>
-							<p>
-								To protect the pristine alpine environment, we produce our own green energy via
-								high-efficiency on-site solar panels. By harnessing the power of the Carinthian sun, we
-								minimize our carbon footprint while providing you with a modern, guilt-free luxury
-								experience.
-							</p>
+							<p>{$t('home.sustainability.body1')}</p>
+							<p>{$t('home.sustainability.body2')}</p>
 						</div>
 
 						<div class="mt-6 border-t border-slate-200 pt-6">
@@ -386,8 +377,12 @@
 										<Sun class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
-										<p class="text-sm font-semibold text-slate-900">Solar & Photovoltaik</p>
-										<p class="text-xs text-slate-500">Eigenstrom vom Dach - direkt vor Ort genutzt.</p>
+										<p class="text-sm font-semibold text-slate-900">
+											{$t('home.sustainability.solar.title')}
+										</p>
+										<p class="text-xs text-slate-500">
+											{$t('home.sustainability.solar.body')}
+										</p>
 									</div>
 								</div>
 
@@ -399,9 +394,11 @@
 										<Flame class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
-										<p class="text-sm font-semibold text-slate-900">Heizung mit Fernw„rme</p>
+										<p class="text-sm font-semibold text-slate-900">
+											{$t('home.sustainability.heating.title')}
+										</p>
 										<p class="text-xs text-slate-500">
-											W„rmeversorgung aus dem Dorf - effizient und verl„sslich.
+											{$t('home.sustainability.heating.body')}
 										</p>
 									</div>
 								</div>
@@ -418,7 +415,9 @@
 			<!-- SEASONS -->
 			<section class="rounded-3xl bg-[#f3efe6] px-6 py-12 sm:px-10 sm:py-14">
 				<div class="text-center">
-					<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">Jahreszeiten</p>
+					<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
+						{$t('seasons.kicker')}
+					</p>
 					<h2 class="mt-3 text-3xl font-serif font-semibold leading-[0.95] text-slate-900 sm:text-4xl">
 						{$t('seasons.title')}
 					</h2>
@@ -435,7 +434,7 @@
 					>
 						<img
 							src={withAsset('/images/house-summer.jpg')}
-							alt="Guesthouse exterior in summer"
+							alt={$t('home.seasons.summer.imageAlt')}
 							class="h-64 w-full object-cover sm:h-72"
 							loading="lazy"
 						/>
@@ -463,7 +462,7 @@
 					>
 						<img
 							src={withAsset('/images/house-winter.jpg')}
-							alt="Guesthouse exterior in winter"
+							alt={$t('home.seasons.winter.imageAlt')}
 							class="h-64 w-full object-cover sm:h-72"
 							loading="lazy"
 						/>
@@ -494,17 +493,18 @@
 						<Sparkles class="h-5 w-5" aria-hidden="true" />
 					</div>
 					<div>
-						<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">Ausstattung</p>
+						<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
+							{$t('home.amenities.kicker')}
+						</p>
 						<h2 class="mt-2 text-3xl font-serif font-semibold leading-[0.95] text-slate-900 sm:text-4xl">
-							In allen Appartements inklusive
+							{$t('home.amenities.title')}
 						</h2>
 						<div class="mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
 					</div>
 				</div>
 
 				<p class="mt-4 max-w-3xl text-sm leading-relaxed text-slate-600 sm:text-base">
-					Alles, was Sie für einen entspannten Aufenthalt brauchen – von Basis-Komfort über Küche bis zur
-					Haus-Ausstattung. Ohne Aufpreis, in jedem Appartement.
+					{$t('home.amenities.subtitle')}
 				</p>
 
 				<div class="mt-10 space-y-12">
@@ -514,7 +514,9 @@
 							<div class="text-brand">
 								<BedDouble class="h-5 w-5" aria-hidden="true" />
 							</div>
-							<h3 class="text-base font-semibold text-slate-900">Basis-Komfort</h3>
+							<h3 class="text-base font-semibold text-slate-900">
+								{$t('home.amenities.basic.title')}
+							</h3>
 						</div>
 
 						<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -524,9 +526,11 @@
 										<Bed class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
-										<p class="text-sm font-semibold text-slate-900">Hochwertige Bettwäsche</p>
+										<p class="text-sm font-semibold text-slate-900">
+											{$t('home.amenities.basic.bedding.title')}
+										</p>
 										<p class="mt-1 text-xs leading-relaxed text-slate-500">
-											Feinste ägyptische Baumwolle für einen tiefen, erholsamen Schlaf.
+											{$t('home.amenities.basic.bedding.body')}
 										</p>
 									</div>
 								</div>
@@ -538,9 +542,11 @@
 										<ShowerHead class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
-										<p class="text-sm font-semibold text-slate-900">Frische Handtücher</p>
+										<p class="text-sm font-semibold text-slate-900">
+											{$t('home.amenities.basic.towels.title')}
+										</p>
 										<p class="mt-1 text-xs leading-relaxed text-slate-500">
-											Extra flauschige Handtücher und Bademäntel für Ihren Wellness-Moment.
+											{$t('home.amenities.basic.towels.body')}
 										</p>
 									</div>
 								</div>
@@ -552,9 +558,11 @@
 										<Leaf class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
-										<p class="text-sm font-semibold text-slate-900">Bio-Pflegeprodukte</p>
+										<p class="text-sm font-semibold text-slate-900">
+											{$t('home.amenities.basic.care.title')}
+										</p>
 										<p class="mt-1 text-xs leading-relaxed text-slate-500">
-											Nachhaltige Seifen und Shampoos mit alpinen Kräuterextrakten.
+											{$t('home.amenities.basic.care.body')}
 										</p>
 									</div>
 								</div>
@@ -568,7 +576,9 @@
 							<div class="text-brand">
 								<Microwave class="h-5 w-5" aria-hidden="true" />
 							</div>
-							<h3 class="text-base font-semibold text-slate-900">Küche</h3>
+							<h3 class="text-base font-semibold text-slate-900">
+								{$t('home.amenities.kitchen.title')}
+							</h3>
 						</div>
 
 						<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -578,9 +588,11 @@
 										<Microwave class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
-										<p class="text-sm font-semibold text-slate-900">Küchenzeile</p>
+										<p class="text-sm font-semibold text-slate-900">
+											{$t('home.amenities.kitchen.kitchenette.title')}
+										</p>
 										<p class="mt-1 text-xs leading-relaxed text-slate-500">
-											Voll ausgestattet mit Induktionsherd und Mikrowelle.
+											{$t('home.amenities.kitchen.kitchenette.body')}
 										</p>
 									</div>
 								</div>
@@ -592,9 +604,11 @@
 										<Coffee class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
-										<p class="text-sm font-semibold text-slate-900">Nespresso-Maschine</p>
+										<p class="text-sm font-semibold text-slate-900">
+											{$t('home.amenities.kitchen.espresso.title')}
+										</p>
 										<p class="mt-1 text-xs leading-relaxed text-slate-500">
-											Inklusive einer Auswahl an Premium-Kaffeekapseln.
+											{$t('home.amenities.kitchen.espresso.body')}
 										</p>
 									</div>
 								</div>
@@ -606,9 +620,11 @@
 										<CupSoda class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
-										<p class="text-sm font-semibold text-slate-900">Wasserkocher</p>
+										<p class="text-sm font-semibold text-slate-900">
+											{$t('home.amenities.kitchen.kettle.title')}
+										</p>
 										<p class="mt-1 text-xs leading-relaxed text-slate-500">
-											Sowie ein Teesortiment für gemütliche Abende.
+											{$t('home.amenities.kitchen.kettle.body')}
 										</p>
 									</div>
 								</div>
@@ -620,9 +636,11 @@
 										<Utensils class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
-										<p class="text-sm font-semibold text-slate-900">Geschirr-Set</p>
+										<p class="text-sm font-semibold text-slate-900">
+											{$t('home.amenities.kitchen.dishes.title')}
+										</p>
 										<p class="mt-1 text-xs leading-relaxed text-slate-500">
-											Vollständiges Set für 4 Personen inklusive Weingläsern.
+											{$t('home.amenities.kitchen.dishes.body')}
 										</p>
 									</div>
 								</div>
@@ -634,9 +652,11 @@
 										<Sandwich class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
-										<p class="text-sm font-semibold text-slate-900">Toaster</p>
+										<p class="text-sm font-semibold text-slate-900">
+											{$t('home.amenities.kitchen.toaster.title')}
+										</p>
 										<p class="mt-1 text-xs leading-relaxed text-slate-500">
-											Moderner Toaster für Ihr perfektes Berg-Frühstück.
+											{$t('home.amenities.kitchen.toaster.body')}
 										</p>
 									</div>
 								</div>
@@ -650,7 +670,9 @@
 							<div class="text-brand">
 								<House class="h-5 w-5" aria-hidden="true" />
 							</div>
-							<h3 class="text-base font-semibold text-slate-900">Haus-Ausstattung</h3>
+							<h3 class="text-base font-semibold text-slate-900">
+								{$t('home.amenities.house.title')}
+							</h3>
 						</div>
 
 						<div class="grid gap-4 sm:grid-cols-2">
@@ -660,9 +682,11 @@
 										<Wifi class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
-										<p class="text-sm font-semibold text-slate-900">High-Speed WLAN</p>
+										<p class="text-sm font-semibold text-slate-900">
+											{$t('home.amenities.house.wifi.title')}
+										</p>
 										<p class="mt-1 text-xs leading-relaxed text-slate-500">
-											Kostenloses Glasfaser-Internet im gesamten Resort für Ihre Verbindung zur Welt.
+											{$t('home.amenities.house.wifi.body')}
 										</p>
 									</div>
 								</div>
@@ -674,9 +698,11 @@
 										<SquareParking class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
-										<p class="text-sm font-semibold text-slate-900">Privater Parkplatz</p>
+										<p class="text-sm font-semibold text-slate-900">
+											{$t('home.amenities.house.parking.title')}
+										</p>
 										<p class="mt-1 text-xs leading-relaxed text-slate-500">
-											Sicherer, kameraüberwachter Parkplatz direkt vor dem Haupteingang.
+											{$t('home.amenities.house.parking.body')}
 										</p>
 									</div>
 								</div>
@@ -688,9 +714,11 @@
 										<Snowflake class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
-										<p class="text-sm font-semibold text-slate-900">Skiraum mit Trockner</p>
+										<p class="text-sm font-semibold text-slate-900">
+											{$t('home.amenities.house.ski.title')}
+										</p>
 										<p class="mt-1 text-xs leading-relaxed text-slate-500">
-											Beheizter Abstellraum für Ihre Skiausrüstung mit integriertem Schuhtrockner.
+											{$t('home.amenities.house.ski.body')}
 										</p>
 									</div>
 								</div>

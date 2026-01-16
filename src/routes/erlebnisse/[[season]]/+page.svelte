@@ -14,12 +14,12 @@
 		id: string;
 		season: SeasonKey;
 		icon: ComponentType;
-		kicker: string;
-		title: string;
-		description?: string;
+		kickerKey: string;
+		titleKey: string;
+		descriptionKey?: string;
 		image: string;
 		className?: string;
-		badge?: string;
+		badgeKey?: string;
 		titleSize?: string;
 		layout?: string;
 	};
@@ -58,9 +58,9 @@
 			id: 'summer-hike',
 			season: 'summer',
 			icon: Mountain,
-			kicker: 'Wanderlust',
-			title: 'Wandern im Gitschtal',
-			description: 'Entdecken Sie über 100km markierte Wanderwege direkt vor unserer Haustür.',
+			kickerKey: 'experiences.event.summer.hike.kicker',
+			titleKey: 'experiences.event.summer.hike.title',
+			descriptionKey: 'experiences.event.summer.hike.description',
 			image: '/images/summer-hike.jpg',
 			layout: 'summer',
 			className: 'c1',
@@ -70,8 +70,8 @@
 			id: 'summer-lake',
 			season: 'summer',
 			icon: Waves,
-			kicker: 'Erfrischung',
-			title: 'Baden am Pressegger See',
+			kickerKey: 'experiences.event.summer.lake.kicker',
+			titleKey: 'experiences.event.summer.lake.title',
 			image: '/images/summer-lake.png',
 			layout: 'summer',
 			className: 'c2',
@@ -81,8 +81,8 @@
 			id: 'summer-bike',
 			season: 'summer',
 			icon: Bike,
-			kicker: 'Action',
-			title: 'Mountainbike & E-Bike',
+			kickerKey: 'experiences.event.summer.bike.kicker',
+			titleKey: 'experiences.event.summer.bike.title',
 			image: '/images/summer-bike.jpg',
 			layout: 'summer',
 			className: 'c3',
@@ -92,22 +92,22 @@
 			id: 'summer-lift',
 			season: 'summer',
 			icon: CableCar,
-			kicker: 'Highlight',
-			title: 'Sommerbergbahnen',
-			description: 'Mühelos auf den Gipfel: Kostenlose Nutzung der Bergbahnen in der Region Nassfeld.',
+			kickerKey: 'experiences.event.summer.lift.kicker',
+			titleKey: 'experiences.event.summer.lift.title',
+			descriptionKey: 'experiences.event.summer.lift.description',
 			image: '/images/summer-lift.png',
 			layout: 'summer',
 			className: 'c4',
-			badge: 'Inklusive Card',
+			badgeKey: 'experiences.badge.includedCard',
 			titleSize: 'text-2xl',
 		},
 		{
 			id: 'winter-ski',
 			season: 'winter',
 			icon: Snowflake,
-			kicker: 'Skigebiet',
-			title: 'Skifahren am Nassfeld',
-			description: 'Eines der größten Skigebiete Österreichs – perfekt für Familien und Genießer.',
+			kickerKey: 'experiences.event.winter.ski.kicker',
+			titleKey: 'experiences.event.winter.ski.title',
+			descriptionKey: 'experiences.event.winter.ski.description',
 			image: '/images/winter-ski.jpg',
 			layout: 'winter',
 			className: 'c1',
@@ -117,20 +117,20 @@
 			id: 'winter-ice',
 			season: 'winter',
 			icon: Snowflake,
-			kicker: 'Natur-Eis',
-			title: 'Eislaufen am Weißensee',
+			kickerKey: 'experiences.event.winter.ice.kicker',
+			titleKey: 'experiences.event.winter.ice.title',
 			image: '/images/winter-ice.jpg',
 			layout: 'winter',
 			className: 'c2',
-			badge: 'beliebt',
+			badgeKey: 'experiences.badge.popular',
 			titleSize: 'text-xl',
 		},
 		{
 			id: 'winter-hike',
 			season: 'winter',
 			icon: Footprints,
-			kicker: 'Ruhe',
-			title: 'Winterwandern',
+			kickerKey: 'experiences.event.winter.hike.kicker',
+			titleKey: 'experiences.event.winter.hike.title',
 			image: '/images/winter-hike.jpg',
 			layout: 'winter',
 			className: 'c3',
@@ -140,9 +140,9 @@
 			id: 'winter-crosscountry',
 			season: 'winter',
 			icon: Mountain,
-			kicker: 'Sport',
-			title: 'Langlaufen & Loipen',
-			description: 'Perfekt präparierte Loipen in der Region Nassfeld–Pressegger See.',
+			kickerKey: 'experiences.event.winter.crosscountry.kicker',
+			titleKey: 'experiences.event.winter.crosscountry.title',
+			descriptionKey: 'experiences.event.winter.crosscountry.description',
 			image: '/images/winter-crosscountry.jpg',
 			layout: 'winter',
 			className: 'c4',
@@ -154,19 +154,21 @@
 	const winterEvents = events.filter((event) => event.season === 'winter');
 	const currentEvents = $derived(activeTab === 'summer' ? summerEvents : winterEvents);
 
-	const content: Record<SeasonKey, { kicker: string; title: string; subtitle: string; bg: string }> =
+	const content: Record<
+		SeasonKey,
+		{ kickerKey: string; titleKey: string; subtitleKey: string; bg: string }
+	> =
 		{
 			summer: {
-				kicker: 'Aktiv & Natur',
-				title: 'Sommer Erlebnisse im Gitschtal',
-				subtitle:
-					'Entdecken Sie unberührte Natur, kristallklare Seen und alpine Abenteuer für die ganze Familie.',
+				kickerKey: 'experiences.season.summer.kicker',
+				titleKey: 'experiences.season.summer.title',
+				subtitleKey: 'experiences.season.summer.subtitle',
 				bg: '/images/house-summer.jpg',
 			},
 			winter: {
-				kicker: 'Schnee & Stille',
-				title: 'Winter Erlebnisse im Gitschtal',
-				subtitle: 'Pulverschnee, Panorama und gemütliche Hütten - erleben Sie die Alpen im Winter.',
+				kickerKey: 'experiences.season.winter.kicker',
+				titleKey: 'experiences.season.winter.title',
+				subtitleKey: 'experiences.season.winter.subtitle',
 				bg: '/images/house-winter.jpg',
 			},
 		};
@@ -174,7 +176,7 @@
 </script>
 
 <svelte:head>
-	<title>{$t('experiences.title')} G„stehaus Rader</title>
+	<title>{$t('experiences.title')} - {$t('brand.name')}</title>
 </svelte:head>
 
 <!-- ERLEBNISSE PAGE (Tailwind) -->
@@ -200,7 +202,7 @@
 								activeTab === 'summer' ? 'rotate-12 scale-110' : 'rotate-0 scale-100'
 							}`}
 						/>
-						Sommer
+						{$t('experiences.tabs.summer')}
 					</button>
 
 					<button
@@ -217,7 +219,7 @@
 								activeTab === 'winter' ? '-rotate-12 scale-110' : 'rotate-0 scale-100'
 							}`}
 						/>
-						Winter
+						{$t('experiences.tabs.winter')}
 					</button>
 				</div>
 			</div>
@@ -228,14 +230,14 @@
 			<section class="sm:p-10">
 				<div class="space-y-4">
 					<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
-						{currentContent.kicker}
+						{$t(currentContent.kickerKey)}
 					</p>
 					<h1 class="font-serif text-4xl leading-[0.95] text-slate-900 sm:text-5xl">
-						{currentContent.title}
+						{$t(currentContent.titleKey)}
 					</h1>
 					<div class="h-[3px] w-14 rounded-full bg-brand"></div>
 					<p class="max-w-2xl text-base leading-relaxed text-slate-600">
-						{currentContent.subtitle}
+						{$t(currentContent.subtitleKey)}
 					</p>
 				</div>
 
@@ -255,11 +257,11 @@
 									class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent"
 								></div>
 
-								{#if event.badge}
+								{#if event.badgeKey}
 									<span
 										class="absolute right-5 top-5 rounded-full bg-brand px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white shadow-sm"
 									>
-										{event.badge}
+										{$t(event.badgeKey)}
 									</span>
 								{/if}
 
@@ -268,13 +270,15 @@
 										class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand"
 									>
 										<event.icon class="h-4 w-4 text-brand" aria-hidden="true" />
-										{event.kicker}
+										{$t(event.kickerKey)}
 									</p>
 									<h3 class={`mt-2 font-semibold text-white ${event.titleSize ?? 'text-xl'}`}>
-										{event.title}
+										{$t(event.titleKey)}
 									</h3>
-									{#if event.description}
-										<p class="mt-2 max-w-xl text-sm text-white/85">{event.description}</p>
+									{#if event.descriptionKey}
+										<p class="mt-2 max-w-xl text-sm text-white/85">
+											{$t(event.descriptionKey)}
+										</p>
 									{/if}
 								</div>
 							</article>

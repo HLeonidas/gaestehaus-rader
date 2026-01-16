@@ -200,10 +200,16 @@
 						<li>9622 Weißbriach, Österreich</li>
 						<li>
 							<a class="hover:text-slate-900" href="tel:+436766246826">+43 676 6246826</a>
-							<span class="ml-2 inline-flex items-center gap-1 text-xs font-semibold text-emerald-600">
+							<a
+								class="ml-2 inline-flex items-center gap-1 text-xs font-semibold text-emerald-600 hover:text-emerald-700"
+								href="https://wa.me/436766246826"
+								target="_blank"
+								rel="noopener noreferrer"
+								aria-label="WhatsApp: +43 676 6246826"
+							>
 								<MessageCircle class="h-3.5 w-3.5" aria-hidden="true" />
 								WhatsApp
-							</span>
+							</a>
 						</li>
 						<li>
 							<a class="hover:text-slate-900" href="mailto:info@rader-gitschtal.at">
