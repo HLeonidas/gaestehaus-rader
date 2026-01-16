@@ -3,21 +3,29 @@
 	import { t } from '$lib/i18n';
 	import {
 		ArrowLeft,
+		Bath,
 		Coffee,
 		Copy,
 		Heart,
 		MapPin,
 		Mountain,
 		Ruler,
+		Refrigerator,
 		Building2,
 		MountainSnow,
+		CookingPot,
+		Sofa,
+		Tv,
 		Users,
 		Share2,
 		SquareParking,
 		Star,
 		Sun,
 		Utensils,
-		Wifi
+		Wifi,
+
+		Microwave
+
 	} from 'lucide-svelte';
 
 	let { data } = $props();
@@ -28,9 +36,17 @@
 	const amenityIcons = {
 		wifi: Wifi,
 		balcony: Sun,
+		balkon: Sun,
 		mountain: Mountain,
 		coffee: Coffee,
 		kitchen: Utensils,
+		kueche: Utensils,
+		kuehlschrank: Refrigerator,
+		mikrowelle: Microwave,
+		herd: CookingPot,
+		fernseher: Tv,
+		ausziehcouch: Sofa,
+		badezimmer: Bath,
 		parking: SquareParking
 	} as const;
 
@@ -142,7 +158,7 @@
 			<!-- HEADER + SHARE -->
 			<div class="mt-7 flex items-start justify-between gap-6">
 				<div class="min-w-0">
-					<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">Gästehaus Rader</p>
+					<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand pb-3">Gästehaus Rader</p>
 					<h1 class="font-serif text-3xl leading-[0.95] text-slate-900 sm:text-5xl">
 						{accommodation.title}
 					</h1>

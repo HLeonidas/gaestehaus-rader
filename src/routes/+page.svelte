@@ -15,13 +15,18 @@
 		Bed,
 		ShowerHead,
 		Microwave,
+		Refrigerator,
+		CookingPot,
 		Coffee,
 		CupSoda,
 		Utensils,
 		Sandwich,
 		House,
 		Wifi,
-		SquareParking
+		SquareParking,
+		Tv,
+		Sofa,
+		Bath
 	} from 'lucide-svelte';
 
 	const usps = [
@@ -44,9 +49,17 @@
 	const amenityIcons = {
 		wifi: Wifi,
 		balcony: Sun,
+		balkon: Sun,
 		mountain: Mountain,
 		coffee: Coffee,
 		kitchen: Utensils,
+		kueche: Utensils,
+		kuehlschrank: Refrigerator,
+		mikrowelle: Microwave,
+		herd: CookingPot,
+		fernseher: Tv,
+		ausziehcouch: Sofa,
+		badezimmer: Bath,
 		parking: SquareParking,
 	} as const;
 	type AmenityKey = keyof typeof amenityIcons;
@@ -449,7 +462,7 @@
 			<!-- AUSSTATTUNG (unter den Jahreszeiten einfügen) -->
 			<section class="rounded-3xl px-0 py-0 sm:px-10 sm:py-14">
 				<div class="flex items-center gap-3">
-					<div class="grid h-10 w-10 place-items-center rounded-xl bg-brand/10 text-brand">
+					<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
 						<Sparkles class="h-5 w-5" aria-hidden="true" />
 					</div>
 					<div>
@@ -479,7 +492,7 @@
 						<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
 							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 								<div class="flex items-start gap-3">
-									<div class="grid h-9 w-9 place-items-center rounded-xl bg-brand/10 text-brand">
+									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
 										<Bed class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
@@ -493,7 +506,7 @@
 
 							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 								<div class="flex items-start gap-3">
-									<div class="grid h-9 w-9 place-items-center rounded-xl bg-brand/10 text-brand">
+									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
 										<ShowerHead class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
@@ -507,7 +520,7 @@
 
 							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 								<div class="flex items-start gap-3">
-									<div class="grid h-9 w-9 place-items-center rounded-xl bg-brand/10 text-brand">
+									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
 										<Leaf class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
@@ -533,7 +546,7 @@
 						<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
 							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 								<div class="flex items-start gap-3">
-									<div class="grid h-9 w-9 place-items-center rounded-xl bg-brand/10 text-brand">
+									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
 										<Microwave class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
@@ -547,7 +560,7 @@
 
 							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 								<div class="flex items-start gap-3">
-									<div class="grid h-9 w-9 place-items-center rounded-xl bg-brand/10 text-brand">
+									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
 										<Coffee class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
@@ -561,7 +574,7 @@
 
 							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 								<div class="flex items-start gap-3">
-									<div class="grid h-9 w-9 place-items-center rounded-xl bg-brand/10 text-brand">
+									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
 										<CupSoda class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
@@ -575,7 +588,7 @@
 
 							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 								<div class="flex items-start gap-3">
-									<div class="grid h-9 w-9 place-items-center rounded-xl bg-brand/10 text-brand">
+									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
 										<Utensils class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
@@ -589,7 +602,7 @@
 
 							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 								<div class="flex items-start gap-3">
-									<div class="grid h-9 w-9 place-items-center rounded-xl bg-brand/10 text-brand">
+									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
 										<Sandwich class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
@@ -615,7 +628,7 @@
 						<div class="grid gap-4 sm:grid-cols-2">
 							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 								<div class="flex items-start gap-3">
-									<div class="grid h-9 w-9 place-items-center rounded-xl bg-brand/10 text-brand">
+									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
 										<Wifi class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
@@ -629,7 +642,7 @@
 
 							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 								<div class="flex items-start gap-3">
-									<div class="grid h-9 w-9 place-items-center rounded-xl bg-brand/10 text-brand">
+									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
 										<SquareParking class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
@@ -643,7 +656,7 @@
 
 							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 								<div class="flex items-start gap-3">
-									<div class="grid h-9 w-9 place-items-center rounded-xl bg-brand/10 text-brand">
+									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
 										<Snowflake class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>

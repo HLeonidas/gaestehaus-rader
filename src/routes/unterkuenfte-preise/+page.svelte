@@ -5,6 +5,7 @@
 	import {
 		Lightbulb,
 		Wifi,
+		Tv,
 		Mountain,
 		Coffee,
 		Sun,
@@ -12,6 +13,7 @@
 		ShowerHead,
 		Bath,
 		Baby,
+		Sofa,
 		SquareParking,
 		Utensils,
 		ArrowRight,
@@ -24,6 +26,7 @@
 	const amenityIcons: Record<string, typeof Wifi> = {
 		wifi: Wifi,
 		balcony: Sun,
+		balkon: Sun,
 		mountain: Mountain,
 		coffee: Coffee,
 		sauna: Flame,
@@ -31,6 +34,10 @@
 		shower: ShowerHead,
 		bath: Bath,
 		kitchen: Utensils,
+		kueche: Utensils,
+		badezimmer: Bath,
+		fernseher: Tv,
+		ausziehcouch: Sofa,
 		parking: SquareParking,
 	};
 
@@ -111,9 +118,9 @@
 
 								<div class="mt-2 text-xs text-slate-500">{room.detailMeta}</div>
 
-								<p class="mt-4 max-w-xl text-sm leading-relaxed text-slate-600">
+								<!-- <p class="mt-4 max-w-xl text-sm leading-relaxed text-slate-600">
 									{room.detailBody}
-								</p>
+								</p> -->
 
 								<!-- Amenities row -->
 								<div class="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3 text-xs text-slate-600">
@@ -121,7 +128,7 @@
 										<span class="inline-flex items-center gap-2">
 											{#if amenityIcons[amenity]}
 												{@const Icon = amenityIcons[amenity]}
-												<Icon class="h-4 w-4 text-brand" />
+												<Icon class="h-4 w-4 text-slate-400" />
 											{/if}
 											{$t(`amenity.${amenity}`)}
 										</span>

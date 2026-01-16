@@ -7,8 +7,8 @@
 	<title>{$t('accessibility.title')} - {$t('brand.name')}</title>
 </svelte:head>
 
-<div class="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6">
-	<section class="rounded-3xl border border-slate-200 bg-white p-10 shadow-sm sm:p-12">
+<div class="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
+	<section class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10 lg:p-12">
 		<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
 			{$t('brand.name')}
 		</p>

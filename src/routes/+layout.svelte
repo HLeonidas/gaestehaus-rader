@@ -131,7 +131,7 @@
 	<main
 		id="main-content"
 		class={`w-full flex-1 ${
-			isHome ? '' : isFullWidth ? '' : 'mx-auto max-w-6xl px-4 py-10 sm:px-6'
+			isHome ? '' : isFullWidth ? '' : 'mx-auto max-w-6xl px-2 py-10 sm:px-6'
 		}`}
 	>
 		{@render children()}
