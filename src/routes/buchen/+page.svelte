@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
+	import { lang } from '$lib/i18n';
 
 	const ACCOUNT_ID = 'fa73de04-c8e1-4b05-b4a8-5697e2d52a1c';
 	const SCRIPT_ID = 'deskline-script';
@@ -28,7 +29,7 @@
 		// Queue settings before script loads
 		dwFn('settings', ACCOUNT_ID, {
 			context: { serviceIds: [], productIds: [] },
-			lang: 'de',
+			lang: $lang ?? 'de',
 		});
 
 		// Inject script into container (as required)
