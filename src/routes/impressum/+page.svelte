@@ -1,3 +1,10 @@
+<script lang="ts">
+	import { asset } from '$app/paths';
+	import { ArrowUpRight } from 'lucide-svelte';
+
+	const withAsset = (path: string) => asset(path);
+</script>
+
 <svelte:head>
 	<title>Impressum – Gästehaus Rader</title>
 </svelte:head>
@@ -41,7 +48,9 @@
 				<p>Staat der Verleihung: <span class="text-slate-500">&Ouml;sterreich</span></p>
 				<p>
 					Medieninhaber (&sect;25 MedienG):
-					<span class="text-slate-500">Familie Herold-Hueber, Wei&szlig;briach 92, 9622 Wei&szlig;briach</span>
+					<span class="text-slate-500"
+						>Familie Herold-Hueber, Wei&szlig;briach 92, 9622 Wei&szlig;briach</span
+					>
 				</p>
 				<p>Unternehmensgegenstand: <span class="text-slate-500">Beherbergung von G&auml;sten</span></p>
 			</div>
@@ -59,19 +68,46 @@
 			<div>
 				<p class="text-sm font-semibold text-slate-900">Haftung für Links</p>
 				<p class="mt-2">
-					Unsere Website enthält Links zu externen Websites, für deren Inhalte wir nicht verantwortlich sind.
-					Bei Kenntnis von Rechtsverletzungen werden wir derartige Links umgehend entfernen.
+					Unsere Website enthält Links zu externen Websites, für deren Inhalte wir nicht verantwortlich
+					sind. Bei Kenntnis von Rechtsverletzungen werden wir derartige Links umgehend entfernen.
 				</p>
 			</div>
 			<div>
 				<p class="text-sm font-semibold text-slate-900">Urheberrecht</p>
 				<p class="mt-2">
-					Die Inhalte dieser Website unterliegen dem Urheberrecht. Die Verwendung von Bildern und Texten ist
-					nur mit unserer ausdrücklichen Zustimmung gestattet.
+					Die Inhalte dieser Website unterliegen dem Urheberrecht. Die Verwendung von Bildern und Texten
+					ist nur mit unserer ausdrücklichen Zustimmung gestattet.
 				</p>
+			</div>
+		</div>
+
+		<div class="mt-12 border-t border-slate-100 pt-10">
+			<div
+				class="rounded-3xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 shadow-sm sm:p-8"
+			>
+				<div class="grid gap-6 sm:grid-cols-[auto,1fr,auto] sm:items-center">
+					<!-- Avatar -->
+					<div class="h-28 w-28 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+						<img
+							src={withAsset('/images/lh.jpg')}
+							alt="Webdesign Profil"
+							class="h-full w-full object-cover"
+							loading="lazy"
+						/>
+					</div>
+
+					<!-- Text -->
+					<div>
+						<p class="text-[11px] font-semibold uppercase tracking-[0.3em] text-brand">
+							Webdesign & Entwicklung
+						</p>
+						<p class="mt-2 text-xl font-semibold text-slate-900">Leon Hueber</p>
+						<p class="mt-1 text-sm text-slate-600 max-w-md">
+							Konzeption, Design und technische Umsetzung dieser Website.
+						</p>
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>
 </div>
-
-
