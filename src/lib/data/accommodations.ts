@@ -71,12 +71,12 @@ export const accommodations: Accommodation[] = [
 		pricePerNightBase: 75,
 		priceMatrix: [
 			{
-				season: 'Sommer', period: '01. Apr - 30. Sep', pricePerNight: '€ 85,-', minStay: '3 Nächte', extraPerson: '€ 10,- pro Nacht',
+				season: 'Sommer', period: '01. Apr - 30. Sep', pricePerNight: '€ 75,-', minStay: '3 Nächte', extraPerson: '€ 10,- pro Nacht',
 			},
 			{
 				season: 'Winter',
 				period: '20. Dez - 06. Jan',
-				pricePerNight: '€ 95,-',
+				pricePerNight: '€ 85,-',
 				minStay: '3 Nächte',
 				extraPerson: '€ 10,- pro Nacht',
 			},
@@ -130,11 +130,11 @@ export const accommodations: Accommodation[] = [
 		floorplanImage: '/images/2/Nr4-skizze.png',
 		pricePerNightBase: 75,
 		priceMatrix: [
-			{ season: 'Sommer', period: '01. Apr - 30. Sep', pricePerNight: '€ 85,-', minStay: '3 Nächte', extraPerson: '€ 10,- pro Nacht' },
+			{ season: 'Sommer', period: '01. Apr - 30. Sep', pricePerNight: '€ 75,-', minStay: '3 Nächte', extraPerson: '€ 10,- pro Nacht' },
 			{
 				season: 'Winter',
 				period: '20. Dez - 06. Jan',
-				pricePerNight: '€ 95,-',
+				pricePerNight: '€ 85,-',
 				minStay: '3 Nächte',
 				extraPerson: '€ 10,- pro Nacht',
 			},
@@ -191,11 +191,11 @@ export const accommodations: Accommodation[] = [
 		floorplanImage: '/images/3/Nr7-skizze.png',
 		pricePerNightBase: 65,
 		priceMatrix: [
-			{ season: 'Sommer', period: '01. Apr - 30. Sep', pricePerNight: '€ 75,-', minStay: '3 Nächte', extraPerson: '/' },
+			{ season: 'Sommer', period: '01. Apr - 30. Sep', pricePerNight: '€ 65,-', minStay: '3 Nächte', extraPerson: '/' },
 			{
 				season: 'Winter',
 				period: '20. Dez - 06. Jan',
-				pricePerNight: '€ 85,-',
+				pricePerNight: '€ 75,-',
 				minStay: '3 Nächte',
 				extraPerson: '/',
 			},

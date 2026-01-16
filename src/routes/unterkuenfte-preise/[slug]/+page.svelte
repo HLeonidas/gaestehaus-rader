@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import { asset, resolve } from '$app/paths';
 	import { t } from '$lib/i18n';
 	import {
@@ -23,9 +24,7 @@
 		Sun,
 		Utensils,
 		Wifi,
-
-		Microwave
-
+		Microwave,
 	} from 'lucide-svelte';
 
 	let { data } = $props();
@@ -48,7 +47,7 @@
 		fernseher: Tv,
 		ausziehcouch: Sofa,
 		badezimmer: Bath,
-		parking: SquareParking
+		parking: SquareParking,
 	} as const;
 
 	const galleryImages = $derived.by(() => [
@@ -58,7 +57,9 @@
 	const roomUrl = $derived.by(() =>
 		new URL(`${resolve('/unterkuenfte-preise')}/${accommodation.slug}`, siteUrl).toString()
 	);
-	const ogImage = $derived.by(() => new URL(withAsset(accommodation.images.main), siteUrl).toString());
+	const ogImage = $derived.by(() =>
+		new URL(withAsset(accommodation.images.main), siteUrl).toString()
+	);
 	const amenityLabels = $derived.by(() =>
 		accommodation.amenities.map((amenity) => $t(`amenity.${amenity}`))
 	);
@@ -75,13 +76,13 @@
 				price: accommodation.pricePerNightBase,
 				priceCurrency: 'EUR',
 				url: roomUrl,
-				availability: 'https://schema.org/InStock'
+				availability: 'https://schema.org/InStock',
 			},
 			amenityFeature: amenityLabels.map((name) => ({
 				'@type': 'LocationFeatureSpecification',
 				name,
-				value: true
-			}))
+				value: true,
+			})),
 		})
 	);
 
@@ -101,6 +102,7 @@
 	let galleryIndex = $state(0);
 	const canGalleryPrev = $derived.by(() => galleryIndex > 0);
 	const canGalleryNext = $derived.by(() => galleryIndex < galleryImages.length - 1);
+	let shareStatus = $state<'idle' | 'copied' | 'error'>('idle');
 
 	const openGallery = (index: number) => {
 		galleryIndex = index;
@@ -109,6 +111,36 @@
 
 	const closeGallery = () => {
 		galleryOpen = false;
+	};
+
+	const shareRoom = async () => {
+		if (!browser) return;
+
+		const shareUrl = roomUrl;
+		const shareTitle = accommodation.title;
+		const shareText = accommodation.subtitle;
+
+		if (navigator.share) {
+			try {
+				await navigator.share({ title: shareTitle, text: shareText, url: shareUrl });
+				return;
+			} catch {
+				shareStatus = 'error';
+				return;
+			}
+		}
+
+		if (navigator.clipboard) {
+			try {
+				await navigator.clipboard.writeText(shareUrl);
+				shareStatus = 'copied';
+				setTimeout(() => {
+					shareStatus = 'idle';
+				}, 2000);
+			} catch {
+				shareStatus = 'error';
+			}
+		}
 	};
 </script>
 
@@ -121,7 +153,9 @@
 	<meta property="og:url" content={roomUrl} />
 	<meta property="og:image" content={ogImage} />
 	<meta name="twitter:card" content="summary_large_image" />
-	<script type="application/ld+json">{roomJsonLd}</script>
+	<script type="application/ld+json">
+{roomJsonLd}
+	</script>
 </svelte:head>
 
 <main class="bg-[#fbfaf7]">
@@ -196,7 +230,9 @@
 			<!-- HEADER + SHARE -->
 			<div class="mt-7 flex items-start justify-between gap-6">
 				<div class="min-w-0">
-					<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand pb-3">Gästehaus Rader</p>
+					<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand pb-3">
+						Gästehaus Rader
+					</p>
 					<h1 class="font-serif text-3xl leading-[0.95] text-slate-900 sm:text-5xl">
 						{accommodation.title}
 					</h1>
@@ -209,9 +245,15 @@
 				<button
 					type="button"
 					class="hidden items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 sm:inline-flex"
+					onclick={shareRoom}
+					aria-live="polite"
 				>
 					<Share2 class="h-4 w-4" />
-					Teilen
+					{#if shareStatus === 'copied'}
+						Link kopiert
+					{:else}
+						Teilen
+					{/if}
 				</button>
 			</div>
 
@@ -298,7 +340,9 @@
 					<!-- Floorplan -->
 					<section>
 						<h2 class="text-2xl font-serif text-slate-900">Grundriss</h2>
-						<div class="mt-5 overflow-hidden rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
+						<div
+							class="mt-5 overflow-hidden rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6"
+						>
 							<img
 								src={withAsset(accommodation.floorplanImage)}
 								alt=""
@@ -312,9 +356,13 @@
 					<section>
 						<h2 class="text-2xl font-serif text-slate-900">Preise & Details</h2>
 
-						<div class="mt-5 w-full overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+						<div
+							class="mt-5 w-full overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
+						>
 							<table class="hidden w-full text-left text-sm sm:table">
-								<thead class="bg-[#fbf3e8] text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-600">
+								<thead
+									class="bg-[#fbf3e8] text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-600"
+								>
 									<tr>
 										<th class="px-4 py-3">Saison</th>
 										<!-- <th class="px-4 py-3">Zeitraum</th> -->
@@ -368,7 +416,8 @@
 						</div>
 
 						<p class="mt-3 text-xs text-slate-500">
-							Alle Preise für 2 Personen inkl. gesetzlicher MwSt. zzgl. Endreinigung (einmalig 45€) und Kurtaxe.
+							Alle Preise für 2 Personen inkl. gesetzlicher MwSt. zzgl. Endreinigung (einmalig 45€) und
+							Kurtaxe.
 						</p>
 					</section>
 
@@ -393,7 +442,11 @@
 									class={`grid h-9 w-9 place-items-center rounded-full border border-slate-200 bg-white shadow-sm transition hover:bg-slate-50 ${
 										!canNext ? 'opacity-40 pointer-events-none' : ''
 									}`}
-									onclick={() => (reviewIndex = Math.min((accommodation.reviews.length ?? 0) - visibleReviews, reviewIndex + 1))}
+									onclick={() =>
+										(reviewIndex = Math.min(
+											(accommodation.reviews.length ?? 0) - visibleReviews,
+											reviewIndex + 1
+										))}
 									aria-label="Nächste Bewertungen"
 								>
 									›
@@ -401,18 +454,20 @@
 							</div>
 						</div>
 
-						<div class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+						<div class="mt-5 grid gap-4 sm:grid-cols-1 lg:grid-cols-2">
 							{#each accommodation.reviews.slice(reviewIndex, reviewIndex + visibleReviews) as review}
 								<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 									<p class="mt-3 text-sm leading-relaxed text-slate-600">“{review.text}”</p>
 
 									<div class="mt-4 flex items-center gap-3">
-										<div class="grid h-9 w-9 place-items-center rounded-full bg-brand/10 text-xs font-semibold text-brand">
-											<!-- {review.initials ?? review.name?.slice(0, 2)?.toUpperCase()} -->
+										<div
+											class="grid h-9 w-9 place-items-center rounded-full bg-brand/10 text-xs font-semibold text-brand"
+										>
+											{review.name?.slice(0, 2)?.toUpperCase()}
 										</div>
 										<div class="min-w-0">
 											<p class="text-xs font-semibold text-slate-900">{review.name}</p>
-											<!-- <p class="text-[11px] text-slate-500">{review.date ?? ''}</p> -->
+											<p class="text-[11px] text-slate-500">{review.date ?? ''}</p>
 										</div>
 									</div>
 								</div>
@@ -423,77 +478,98 @@
 
 				<!-- RIGHT BOOKING CARD (sticky) -->
 				<aside class="lg:sticky booking-card">
-					<div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-						<div class="flex items-start justify-between gap-3">
+					<div
+						class="rounded-3xl border border-slate-200/70 bg-white/80 p-5 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.35)] backdrop-blur sm:p-6"
+					>
+						<!-- Header -->
+						<div class="flex items-start justify-between gap-4">
 							<div>
-								<p class="text-sm font-semibold text-slate-900">
-									ab <span class="text-2xl font-semibold text-slate-900">{accommodation.pricePerNightBase}€</span>
-									<span class="text-xs text-slate-500">/ Nacht</span>
+								<p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-500">Preis ab</p>
+								<p class="mt-1 text-slate-900">
+									<span class="text-3xl font-semibold tracking-tight"
+										>{accommodation.pricePerNightBase}€</span
+									>
+									<span class="ml-1 text-xs text-slate-500">/ Nacht</span>
 								</p>
+								<p class="mt-2 text-xs text-slate-500">inkl. MwSt. • zzgl. Endreinigung & Ortstaxe</p>
 							</div>
 						</div>
 
-						<div class="mt-5 space-y-3">
-							<div>
-								<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">Anreise</p>
-								<button
-									type="button"
-									class="mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-left text-sm text-slate-700 shadow-sm hover:bg-slate-50"
-								>
-									Datum wählen
-								</button>
+						<!-- Separator -->
+						<div class="my-5 h-px bg-slate-200/70"></div>
+
+						<!-- Fakten -->
+						<div class="rounded-2xl border border-slate-200/60 bg-slate-50/70 p-4">
+							<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+								Kurze Fakten
+							</p>
+
+							<div class="mt-3 space-y-3 text-sm">
+								<div class="flex items-center justify-between gap-4">
+									<span class="text-slate-600">Check-in</span>
+									<span class="font-semibold text-slate-900">ab 14:00 Uhr</span>
+								</div>
+								<div class="flex items-center justify-between gap-4">
+									<span class="text-slate-600">Check-out</span>
+									<span class="font-semibold text-slate-900">bis 10:00 Uhr</span>
+								</div>
+								<div class="flex items-center justify-between gap-4">
+									<span class="text-slate-600">Mindestaufenthalt</span>
+									<span class="font-semibold text-slate-900">3 Nächte</span>
+								</div>
+								<div class="flex items-center justify-between gap-4">
+									<span class="text-slate-600">Storno</span>
+									<span class="font-semibold text-slate-900">laut Bedingungen</span>
+								</div>
+								<div class="flex items-center justify-between gap-4">
+									<span class="text-slate-600">Haustiere</span>
+									<span class="font-semibold text-slate-900">nicht erlaubt</span>
+								</div>
+							</div>
+						</div>
+
+						<!-- Aufschlüsselung -->
+						<div class="mt-4 rounded-2xl border border-slate-200/60 bg-white p-4">
+							<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+								Preisaufschlüsselung
+							</p>
+
+							<div class="mt-3 space-y-2 text-sm text-slate-700">
+								<div class="flex items-center justify-between gap-4">
+									<span class="text-slate-600">Übernachtung</span>
+									<span class="font-semibold text-slate-900"
+										>ab {accommodation.pricePerNightBase}€ / Nacht</span
+									>
+								</div>
+								<div class="flex items-center justify-between gap-4">
+									<span class="text-slate-600">Endreinigung</span>
+									<span class="font-semibold text-slate-900">45€ einmalig</span>
+								</div>
+								<div class="flex items-center justify-between gap-4">
+									<span class="text-slate-600">Ortstaxe</span>
+									<span class="font-semibold text-slate-900">laut Gemeinde</span>
+								</div>
 							</div>
 
-							<div>
-								<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">Abreise</p>
-								<button
-									type="button"
-									class="mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-left text-sm text-slate-700 shadow-sm hover:bg-slate-50"
-								>
-									Datum wählen
-								</button>
-							</div>
-
-							<div>
-								<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">Gäste</p>
-								<button
-									type="button"
-									class="mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-left text-sm text-slate-700 shadow-sm hover:bg-slate-50"
-								>
-									2 Erwachsene, 0 Kinder
-								</button>
-							</div>
-
-							<button
-								type="button"
-								class="mt-2 inline-flex w-full items-center justify-center rounded-xl bg-brand px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:brightness-110"
+							<div
+								class="mt-4 rounded-xl bg-slate-50 px-3 py-2 text-xs text-slate-600 ring-1 ring-slate-200/60"
 							>
-								Jetzt anfragen / Buchen
-							</button>
-
-							<p class="text-center text-[11px] text-slate-500">Sie werden noch nicht belastet</p>
-						</div>
-
-						<!-- price breakdown (UI) -->
-						<div class="mt-6 border-t border-slate-100 pt-5 text-sm">
-							<div class="flex items-center justify-between text-slate-600">
-								<span>120€ × 5 Nächte</span>
-								<span>600€</span>
-							</div>
-							<div class="mt-2 flex items-center justify-between text-slate-600">
-								<span>Endreinigung</span>
-								<span>45€</span>
-							</div>
-							<div class="mt-2 flex items-center justify-between text-slate-600">
-								<span>Kurtaxe</span>
-								<span>15€</span>
-							</div>
-
-							<div class="mt-4 flex items-center justify-between font-semibold text-slate-900">
-								<span>Gesamt</span>
-								<span>660€</span>
+								Tipp: Früh buchen lohnt sich — beliebte Wochenenden sind schnell ausgebucht.
 							</div>
 						</div>
+
+						<!-- CTA -->
+						<a
+							href={resolve('/buchen')}
+							class="mt-5 inline-flex w-full items-center justify-center rounded-xl bg-brand px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:brightness-110 focus:outline-none focus:ring-4 focus:ring-brand/25"
+						>
+							Jetzt buchen
+						</a>
+
+						<!-- Secondary line -->
+						<p class="mt-3 text-center text-[11px] text-slate-500">
+							Buchung erfolgt über unseren Partner. Es entstehen noch keine Kosten.
+						</p>
 					</div>
 				</aside>
 			</div>
@@ -502,7 +578,11 @@
 </main>
 
 {#if galleryOpen}
-	<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 sm:p-6" role="dialog" aria-modal="true">
+	<div
+		class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 sm:p-6"
+		role="dialog"
+		aria-modal="true"
+	>
 		<div class="relative w-full max-w-5xl">
 			<button
 				type="button"
