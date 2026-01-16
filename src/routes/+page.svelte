@@ -100,6 +100,7 @@
 			altKey: 'home.gallery.imageAlt.winterBalkon',
 		},
 	];
+	destinationImages.sort(() => Math.random() - 0.5);
 
 	let galleryTrack: HTMLDivElement | null = null;
 

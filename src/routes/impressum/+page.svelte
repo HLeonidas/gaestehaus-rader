@@ -1,33 +1,41 @@
 <script lang="ts">
 	import { asset } from '$app/paths';
-	import { ArrowUpRight } from 'lucide-svelte';
+	import { t } from '$lib/i18n';
 
 	const withAsset = (path: string) => asset(path);
 </script>
 
 <svelte:head>
-	<title>Impressum – Gästehaus Rader</title>
+	<title>{$t('imprint.title')} - {$t('brand.name')}</title>
 </svelte:head>
 
 <div class="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
 	<section class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10 lg:p-12">
-		<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">Gästehaus Rader</p>
-		<h1 class="mt-4 font-serif text-4xl leading-[0.95] text-slate-900 sm:text-5xl">Impressum</h1>
+		<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">{$t('brand.name')}</p>
+		<h1 class="mt-4 font-serif text-4xl leading-[0.95] text-slate-900 sm:text-5xl">
+			{$t('imprint.title')}
+		</h1>
 		<div class="mt-4 h-[3px] w-14 rounded-full bg-brand"></div>
 		<p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600">
-			Angaben gemäß § 5 ECG, § 14 UGB und Offenlegung gemäß § 25 MedienG.
+			{$t('imprint.subtitle')}
 		</p>
 
 		<div class="mt-10 grid gap-8 border-t border-slate-100 pt-8 lg:grid-cols-2">
 			<div class="space-y-3 text-sm text-slate-600">
-				<p class="text-sm font-semibold text-slate-900">Unternehmensangaben</p>
-				<p class="font-semibold text-slate-800">Familie Herold-Hueber</p>
-				<p>Weißbriach 92</p>
-				<p>9622 Weißbriach, Österreich</p>
-				<p>Telefon: <a class="hover:text-slate-900" href="tel:+436766246826">+43 676 6246826</a></p>
-				<p>Telefon: <a class="hover:text-slate-900" href="tel:+43428622">+43 4286 222</a></p>
+				<p class="text-sm font-semibold text-slate-900">{$t('imprint.company.title')}</p>
+				<p class="font-semibold text-slate-800">{$t('imprint.company.name')}</p>
+				<p>{$t('imprint.company.addressLine1')}</p>
+				<p>{$t('imprint.company.addressLine2')}</p>
 				<p>
-					E-Mail:
+					{$t('imprint.company.phone')}:
+					<a class="hover:text-slate-900" href="tel:+436766246826">+43 676 6246826</a>
+				</p>
+				<p>
+					{$t('imprint.company.phone')}:
+					<a class="hover:text-slate-900" href="tel:+43428622">+43 4286 222</a>
+				</p>
+				<p>
+					{$t('imprint.company.email')}:
 					<a class="hover:text-slate-900" href="mailto:info@rader-gitschtal.at">
 						info@rader-gitschtal.at
 					</a>
@@ -35,48 +43,63 @@
 			</div>
 
 			<div class="space-y-3 text-sm text-slate-600">
-				<p class="text-sm font-semibold text-slate-900">Rechtliche Angaben</p>
-				<p>Rechtsform: <span class="text-slate-500">Privatvermietung</span></p>
-				<p>Firmenbuchnummer: <span class="text-slate-500">nicht im Firmenbuch eingetragen</span></p>
-				<p>Firmenbuchgericht: <span class="text-slate-500">entf&auml;llt</span></p>
-				<p>UID-Nummer: <span class="text-slate-500">entf&auml;llt</span></p>
-				<p>Gewerbebeh&ouml;rde: <span class="text-slate-500">Bezirkshauptmannschaft Hermagor</span></p>
+				<p class="text-sm font-semibold text-slate-900">{$t('imprint.legal.title')}</p>
 				<p>
-					Berufsbezeichnung:
-					<span class="text-slate-500">Beherbergungsbetrieb / Privatvermietung</span>
+					{$t('imprint.legal.legalForm.label')}:
+					<span class="text-slate-500">{$t('imprint.legal.legalForm.value')}</span>
 				</p>
-				<p>Staat der Verleihung: <span class="text-slate-500">&Ouml;sterreich</span></p>
 				<p>
-					Medieninhaber (&sect;25 MedienG):
-					<span class="text-slate-500"
-						>Familie Herold-Hueber, Wei&szlig;briach 92, 9622 Wei&szlig;briach</span
-					>
+					{$t('imprint.legal.companyRegister.label')}:
+					<span class="text-slate-500">{$t('imprint.legal.companyRegister.value')}</span>
 				</p>
-				<p>Unternehmensgegenstand: <span class="text-slate-500">Beherbergung von G&auml;sten</span></p>
+				<p>
+					{$t('imprint.legal.registerCourt.label')}:
+					<span class="text-slate-500">{$t('imprint.legal.registerCourt.value')}</span>
+				</p>
+				<p>
+					{$t('imprint.legal.vatId.label')}:
+					<span class="text-slate-500">{$t('imprint.legal.vatId.value')}</span>
+				</p>
+				<p>
+					{$t('imprint.legal.authority.label')}:
+					<span class="text-slate-500">{$t('imprint.legal.authority.value')}</span>
+				</p>
+				<p>
+					{$t('imprint.legal.profession.label')}:
+					<span class="text-slate-500">{$t('imprint.legal.profession.value')}</span>
+				</p>
+				<p>
+					{$t('imprint.legal.country.label')}:
+					<span class="text-slate-500">{$t('imprint.legal.country.value')}</span>
+				</p>
+				<p>
+					{$t('imprint.legal.mediaOwner.label')}:
+					<span class="text-slate-500">{$t('imprint.legal.mediaOwner.value')}</span>
+				</p>
+				<p>
+					{$t('imprint.legal.businessPurpose.label')}:
+					<span class="text-slate-500">{$t('imprint.legal.businessPurpose.value')}</span>
+				</p>
 			</div>
 		</div>
 
 		<div class="mt-10 grid gap-6 border-t border-slate-100 pt-8 text-sm text-slate-600">
 			<div>
-				<p class="text-sm font-semibold text-slate-900">Haftung für Inhalte</p>
+				<p class="text-sm font-semibold text-slate-900">{$t('imprint.liability.content.title')}</p>
 				<p class="mt-2">
-					Wir entwickeln die Inhalte dieser Website laufend weiter und bemühen uns, korrekte und aktuelle
-					Informationen bereitzustellen. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte
-					können wir keine Haftung übernehmen.
+					{$t('imprint.liability.content.body')}
 				</p>
 			</div>
 			<div>
-				<p class="text-sm font-semibold text-slate-900">Haftung für Links</p>
+				<p class="text-sm font-semibold text-slate-900">{$t('imprint.liability.links.title')}</p>
 				<p class="mt-2">
-					Unsere Website enthält Links zu externen Websites, für deren Inhalte wir nicht verantwortlich
-					sind. Bei Kenntnis von Rechtsverletzungen werden wir derartige Links umgehend entfernen.
+					{$t('imprint.liability.links.body')}
 				</p>
 			</div>
 			<div>
-				<p class="text-sm font-semibold text-slate-900">Urheberrecht</p>
+				<p class="text-sm font-semibold text-slate-900">{$t('imprint.copyright.title')}</p>
 				<p class="mt-2">
-					Die Inhalte dieser Website unterliegen dem Urheberrecht. Die Verwendung von Bildern und Texten
-					ist nur mit unserer ausdrücklichen Zustimmung gestattet.
+					{$t('imprint.copyright.body')}
 				</p>
 			</div>
 		</div>
@@ -90,7 +113,7 @@
 					<div class="h-28 w-28 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
 						<img
 							src={withAsset('/images/other/lh.jpg')}
-							alt="Webdesign Profil"
+							alt={$t('imprint.webdesign.imageAlt')}
 							class="h-full w-full object-cover"
 							loading="lazy"
 						/>
@@ -99,11 +122,13 @@
 					<!-- Text -->
 					<div>
 						<p class="text-[11px] font-semibold uppercase tracking-[0.3em] text-brand">
-							Webdesign & Entwicklung
+							{$t('imprint.webdesign.kicker')}
 						</p>
-						<p class="mt-2 text-xl font-semibold text-slate-900">Leon Hueber</p>
+						<p class="mt-2 text-xl font-semibold text-slate-900">
+							{$t('imprint.webdesign.name')}
+						</p>
 						<p class="mt-1 text-sm text-slate-600 max-w-md">
-							Konzeption, Design und technische Umsetzung dieser Website.
+							{$t('imprint.webdesign.body')}
 						</p>
 					</div>
 				</div>

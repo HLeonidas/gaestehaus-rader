@@ -1,25 +1,28 @@
+<script lang="ts">
+	import { t } from '$lib/i18n';
+</script>
+
 <svelte:head>
-	<title>Bild- & Lizenznachweise – Gästehaus Rader</title>
+	<title>{$t('credits.title')} - {$t('brand.name')}</title>
 </svelte:head>
 
 <div class="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
 	<section class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10 lg:p-12">
-		<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">Gästehaus Rader</p>
+		<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">{$t('brand.name')}</p>
 		<h1 class="mt-4 font-serif text-4xl leading-[0.95] text-slate-900 sm:text-5xl">
-			Bild- & Lizenznachweise
+			{$t('credits.title')}
 		</h1>
 		<div class="mt-4 h-[3px] w-14 rounded-full bg-brand"></div>
 
 		<div class="mt-8 space-y-6 text-sm text-slate-600 sm:text-base">
 			<p>
-				Sofern nicht anders angegeben, stammen alle auf dieser Website verwendeten Fotos, Grafiken und
-				Inhalte von Gästehaus Rader.
+				{$t('credits.intro')}
 			</p>
 
 			<div>
-				<p class="text-sm font-semibold text-slate-900">Icons</p>
+				<p class="text-sm font-semibold text-slate-900">{$t('credits.icons.title')}</p>
 				<p class="mt-2">
-					Auf dieser Website werden Icons aus der Bibliothek Lucide verwendet. Lizenz: MIT License.
+					{$t('credits.icons.body')}
 					<a class="text-brand hover:opacity-90" href="https://lucide.dev" target="_blank" rel="noreferrer">
 						https://lucide.dev
 					</a>
@@ -27,9 +30,9 @@
 			</div>
 
 			<div>
-				<p class="text-sm font-semibold text-slate-900">Schriftarten (Google Fonts)</p>
+				<p class="text-sm font-semibold text-slate-900">{$t('credits.fonts.title')}</p>
 				<p class="mt-2">
-					Diese Website verwendet Schriftarten von Google Fonts.
+					{$t('credits.fonts.body')}
 					<a
 						class="text-brand hover:opacity-90"
 						href="https://fonts.google.com"
@@ -42,9 +45,9 @@
 			</div>
 
 			<div>
-				<p class="text-sm font-semibold text-slate-900">Kartenmaterial</p>
+				<p class="text-sm font-semibold text-slate-900">{$t('credits.maps.title')}</p>
 				<p class="mt-2">
-					Kartendarstellung erfolgt über Google Maps.
+					{$t('credits.maps.body')}
 					<a
 						class="text-brand hover:opacity-90"
 						href="https://www.google.com/maps"
@@ -57,13 +60,13 @@
 			</div>
 
 			<div>
-				<p class="text-sm font-semibold text-slate-900">Eigene Inhalte</p>
+				<p class="text-sm font-semibold text-slate-900">{$t('credits.own.title')}</p>
 				<p class="mt-2">
-					Alle Texte, Logos und eigenen Fotografien unterliegen dem Urheberrecht von Gästehaus Rader.
+					{$t('credits.own.body')}
 				</p>
 			</div>
 
-			<p class="pt-2 text-sm text-slate-500">Stand: 15.01.2026</p>
+			<p class="pt-2 text-sm text-slate-500">{$t('credits.updated')}</p>
 		</div>
 	</section>
 </div>
