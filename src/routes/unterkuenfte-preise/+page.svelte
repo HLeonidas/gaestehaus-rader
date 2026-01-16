@@ -119,7 +119,10 @@
 								<div class="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3 text-xs text-slate-600">
 									{#each room.amenities as amenity}
 										<span class="inline-flex items-center gap-2">
-											<svelte:component this={amenityIcons[amenity]} class="h-4 w-4 text-brand" />
+											{#if amenityIcons[amenity]}
+												{@const Icon = amenityIcons[amenity]}
+												<Icon class="h-4 w-4 text-brand" />
+											{/if}
 											{$t(`amenity.${amenity}`)}
 										</span>
 									{/each}

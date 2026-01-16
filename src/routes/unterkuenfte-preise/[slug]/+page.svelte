@@ -18,7 +18,7 @@
 	} from 'lucide-svelte';
 
 	let { data } = $props();
-	const accommodation = data.accommodation;
+	const accommodation = $derived.by(() => data.accommodation);
 
 	const withAsset = (path: string) => asset(path);
 
@@ -32,14 +32,16 @@
 	} as const;
 
 	// helper for "+X Bilder" overlay
-	const galleryCount = accommodation?.images?.gallery?.length ?? 0;
-	const overlayMore = Math.max(0, galleryCount - 2);
+	const galleryCount = $derived.by(() => accommodation?.images?.gallery?.length ?? 0);
+	const overlayMore = $derived.by(() => Math.max(0, galleryCount - 2));
 
 	// reviews carousel UI-only
-	let reviewIndex = 0;
+	let reviewIndex = $state(0);
 	const visibleReviews = 3; // like screenshot
-	const canPrev = reviewIndex > 0;
-	const canNext = reviewIndex + visibleReviews < (accommodation?.reviews?.length ?? 0);
+	const canPrev = $derived.by(() => reviewIndex > 0);
+	const canNext = $derived.by(
+		() => reviewIndex + visibleReviews < (accommodation?.reviews?.length ?? 0)
+	);
 </script>
 
 <svelte:head>
@@ -165,12 +167,10 @@
 						<div class="mt-5 grid gap-x-10 gap-y-4 text-sm text-slate-700 sm:grid-cols-2">
 							{#each accommodation.amenities as amenity}
 								{#if amenityIcons[amenity as keyof typeof amenityIcons]}
+									{@const Icon = amenityIcons[amenity as keyof typeof amenityIcons]}
 									<div class="flex items-center gap-3">
 										<span class="grid h-8 w-8 place-items-center rounded-xl bg-brand/10 text-brand">
-											<svelte:component
-												this={amenityIcons[amenity as keyof typeof amenityIcons]}
-												class="h-4 w-4"
-											></svelte:component>
+											<Icon class="h-4 w-4" />
 										</span>
 										<span>{$t(`amenity.${amenity}`)}</span>
 									</div>

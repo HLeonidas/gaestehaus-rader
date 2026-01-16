@@ -268,7 +268,7 @@
 
 								<div class="absolute bottom-0 left-0 right-0 p-6">
 									<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
-										<svelte:component this={event.icon} class="h-4 w-4 text-brand" aria-hidden="true" />
+										<event.icon class="h-4 w-4 text-brand" aria-hidden="true" />
 										{event.kicker}
 									</p>
 									<h3 class={`mt-2 font-semibold text-white ${event.titleSize ?? 'text-xl'}`}>

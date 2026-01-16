@@ -171,7 +171,7 @@
 						class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md"
 					>
 						<div class="flex h-10 w-10 items-center justify-center rounded-full bg-brand/10 text-brand">
-							<svelte:component this={item.icon} class="h-5 w-5" />
+							<item.icon class="h-5 w-5" />
 						</div>
 						<h3 class="mt-4 text-base font-semibold text-slate-900">
 							{$t(`usp.${item.key}.title`)}
@@ -250,16 +250,14 @@
 										<div class="mt-4 flex items-center gap-3 text-slate-500">
 											{#each r.amenities as a}
 												<!-- Use any icon you like; here are tiny placeholders as circles -->
-												{#if amenityIcons[a as AmenityKey]}
+												{@const Icon = amenityIcons[a as AmenityKey]}
+												{#if Icon}
 													<span
 														class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-slate-100"
 														title={$t(`amenity.${a}`)}
 														aria-label={$t(`amenity.${a}`)}
 													>
-														<svelte:component
-															this={amenityIcons[a as AmenityKey]}
-															class="h-4 w-4 text-slate-500"
-														/>
+														<Icon class="h-4 w-4 text-slate-500" />
 													</span>
 												{/if}
 											{/each}

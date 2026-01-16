@@ -4,7 +4,7 @@
 	import { ArrowRight, CalendarDays, Star, Users, Wifi, Utensils, Mountain } from 'lucide-svelte';
 
 	let { data } = $props();
-	const accommodation = data.accommodation;
+	const accommodation = $derived.by(() => data.accommodation);
 
 	const withAsset = (path: string) => asset(path);
 
