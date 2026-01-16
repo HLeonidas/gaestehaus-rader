@@ -103,6 +103,7 @@
 	const canGalleryPrev = $derived.by(() => galleryIndex > 0);
 	const canGalleryNext = $derived.by(() => galleryIndex < galleryImages.length - 1);
 	let shareStatus = $state<'idle' | 'copied' | 'error'>('idle');
+	let floorplanOpen = $state(false);
 
 	const openGallery = (index: number) => {
 		galleryIndex = index;
@@ -111,6 +112,14 @@
 
 	const closeGallery = () => {
 		galleryOpen = false;
+	};
+
+	const openFloorplan = () => {
+		floorplanOpen = true;
+	};
+
+	const closeFloorplan = () => {
+		floorplanOpen = false;
 	};
 
 	const shareRoom = async () => {
@@ -179,7 +188,7 @@
 					<img
 						src={withAsset(accommodation.images.main)}
 						alt=""
-						class="h-[220px] w-full object-cover sm:h-[320px] lg:h-[420px]"
+						class="h-[220px] w-full object-cover bg-white sm:h-[320px] sm:object-cover lg:h-[420px]"
 						loading="lazy"
 					/>
 				</button>
@@ -194,7 +203,7 @@
 						<img
 							src={withAsset(accommodation.images.gallery?.[0] ?? accommodation.images.main)}
 							alt=""
-							class="h-[120px] w-full object-cover sm:h-[160px] lg:h-[200px]"
+							class="h-[120px] w-full object-contain bg-white sm:h-[160px] sm:object-cover lg:h-[200px]"
 							loading="lazy"
 						/>
 					</button>
@@ -207,7 +216,7 @@
 						<img
 							src={withAsset(accommodation.images.gallery?.[1] ?? accommodation.images.main)}
 							alt=""
-							class="h-[120px] w-full object-cover sm:h-[160px] lg:h-[200px]"
+							class="h-[120px] w-full object-contain bg-white sm:h-[160px] sm:object-cover lg:h-[200px]"
 							loading="lazy"
 						/>
 
@@ -343,12 +352,14 @@
 						<div
 							class="mt-5 overflow-hidden rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6"
 						>
-							<img
-								src={withAsset(accommodation.floorplanImage)}
-								alt=""
-								class="h-72 w-full object-contain sm:h-80"
-								loading="lazy"
-							/>
+							<button type="button" class="w-full" onclick={openFloorplan}>
+								<img
+									src={withAsset(accommodation.floorplanImage)}
+									alt=""
+									class="h-72 w-full object-contain sm:h-80"
+									loading="lazy"
+								/>
+							</button>
 						</div>
 					</section>
 
@@ -611,7 +622,7 @@
 				<img
 					src={withAsset(galleryImages[galleryIndex])}
 					alt=""
-					class="h-[60vh] max-h-[520px] w-full object-cover"
+					class="h-[60vh] max-h-[520px] w-full object-contain bg-white sm:object-cover"
 				/>
 			</div>
 
@@ -634,7 +645,7 @@
 							}`}
 							onclick={() => (galleryIndex = i)}
 						>
-							<img src={withAsset(img)} alt="" class="h-full w-full object-cover" />
+							<img src={withAsset(img)} alt="" class="h-full w-full object-contain bg-white sm:object-cover" />
 						</button>
 					{/each}
 				</div>
@@ -652,12 +663,36 @@
 	</div>
 {/if}
 
+{#if floorplanOpen}
+	<div
+		class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 sm:p-6"
+		role="dialog"
+		aria-modal="true"
+	>
+		<div class="relative w-full max-w-5xl">
+			<button
+				type="button"
+				class="absolute right-3 top-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm sm:-top-10 sm:right-0"
+				onclick={closeFloorplan}
+				aria-label="{$t('room.detail.gallery.close')}"
+			>{$t('room.detail.gallery.close')}</button>
+
+			<div class="overflow-hidden rounded-3xl bg-white shadow-xl">
+				<img
+					src={withAsset(accommodation.floorplanImage)}
+					alt=""
+					class="h-[70vh] max-h-[560px] w-full object-contain bg-white"
+				/>
+			</div>
+		</div>
+	</div>
+{/if}
+
 <style>
 	.booking-card {
 		top: 9rem;
 	}
 </style>
-
 
 
 
