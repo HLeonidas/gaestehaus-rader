@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import { asset, resolve } from '$app/paths';
-	import { t } from '$lib/i18n';
+	import { lang, t } from '$lib/i18n';
 	import {
 		ArrowLeft,
 		Bath,
@@ -68,7 +68,7 @@
 			'@context': 'https://schema.org',
 			'@type': 'HotelRoom',
 			name: accommodation.title,
-			description: accommodation.detailBody,
+			description: accommodation.detailBody[$lang],
 			image: ogImage,
 			url: roomUrl,
 			offers: {
@@ -118,7 +118,7 @@
 
 		const shareUrl = roomUrl;
 		const shareTitle = accommodation.title;
-		const shareText = accommodation.subtitle;
+		const shareText = accommodation.subtitle[$lang];
 
 		if (navigator.share) {
 			try {
@@ -145,10 +145,10 @@
 </script>
 
 <svelte:head>
-	<title>{accommodation.title} - Gästehaus Rader</title>
-	<meta name="description" content={accommodation.subtitle} />
+	<title>{accommodation.title} - {$t('brand.name')}</title>
+	<meta name="description" content={accommodation.subtitle[$lang]} />
 	<meta property="og:title" content={accommodation.title} />
-	<meta property="og:description" content={accommodation.subtitle} />
+	<meta property="og:description" content={accommodation.subtitle[$lang]} />
 	<meta property="og:type" content="product" />
 	<meta property="og:url" content={roomUrl} />
 	<meta property="og:image" content={ogImage} />
@@ -166,9 +166,7 @@
 				href={resolve('/unterkuenfte-preise')}
 				class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-brand hover:opacity-90"
 			>
-				<ArrowLeft class="h-4 w-4" />
-				Zurück
-			</a>
+				<ArrowLeft class="h-4 w-4" />{$t('room.detail.back')}</a>
 
 			<!-- GALLERY -->
 			<div class="mt-5 grid gap-4 lg:grid-cols-[1fr,340px]">
@@ -219,7 +217,7 @@
 								<span
 									class="rounded-full bg-white/90 px-4 py-2 text-xs font-semibold text-slate-900 shadow-sm backdrop-blur"
 								>
-									+{overlayMore} Bilder
+									+{overlayMore} {$t('room.detail.gallery.more')}
 								</span>
 							</div>
 						{/if}
@@ -230,15 +228,13 @@
 			<!-- HEADER + SHARE -->
 			<div class="mt-7 flex items-start justify-between gap-6">
 				<div class="min-w-0">
-					<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand pb-3">
-						Gästehaus Rader
-					</p>
+					<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand pb-3">{$t('brand.name')}</p>
 					<h1 class="font-serif text-3xl leading-[0.95] text-slate-900 sm:text-5xl">
 						{accommodation.title}
 					</h1>
 					<div class="mt-4 h-[3px] w-14 rounded-full bg-brand"></div>
 					<p class="mt-2 max-w-2xl text-sm text-slate-600 sm:text-base">
-						{accommodation.subtitle}
+						{accommodation.subtitle[$lang]}
 					</p>
 				</div>
 
@@ -250,9 +246,9 @@
 				>
 					<Share2 class="h-4 w-4" />
 					{#if shareStatus === 'copied'}
-						Link kopiert
+						{$t('room.detail.shareCopied')}
 					{:else}
-						Teilen
+						{$t('room.detail.share')}
 					{/if}
 				</button>
 			</div>
@@ -265,7 +261,7 @@
 							<Ruler class="h-5 w-5" />
 						</span>
 						<div>
-							<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">Größe</p>
+							<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">{$t('room.detail.info.size')}</p>
 							<p class="mt-1 text-sm font-semibold text-slate-900">{accommodation.attributes.size}</p>
 						</div>
 					</div>
@@ -276,7 +272,7 @@
 							<Building2 class="h-5 w-5" />
 						</span>
 						<div>
-							<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">Etage</p>
+							<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">{$t('room.detail.info.floor')}</p>
 							<p class="mt-1 text-sm font-semibold text-slate-900">{accommodation.attributes.floor}</p>
 						</div>
 					</div>
@@ -287,8 +283,10 @@
 							<MountainSnow class="h-5 w-5" />
 						</span>
 						<div>
-							<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">Aussicht</p>
-							<p class="mt-1 text-sm font-semibold text-slate-900">{accommodation.attributes.view}</p>
+							<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">{$t('room.detail.info.view')}</p>
+							<p class="mt-1 text-sm font-semibold text-slate-900">
+								{accommodation.attributes.view[$lang]}
+							</p>
 						</div>
 					</div>
 				</div>
@@ -298,8 +296,10 @@
 							<Users class="h-5 w-5" />
 						</span>
 						<div>
-							<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">Gäste</p>
-							<p class="mt-1 text-sm font-semibold text-slate-900">{accommodation.attributes.guests}</p>
+							<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">{$t('room.detail.info.guests')}</p>
+							<p class="mt-1 text-sm font-semibold text-slate-900">
+								{accommodation.attributes.guests[$lang]}
+							</p>
 						</div>
 					</div>
 				</div>
@@ -311,9 +311,9 @@
 				<div class="space-y-12">
 					<!-- Description -->
 					<section>
-						<h2 class="text-2xl font-serif text-slate-900">Ihr Zuhause in den Alpen</h2>
+						<h2 class="text-2xl font-serif text-slate-900">{$t('room.detail.sections.homeTitle')}</h2>
 						<div class="mt-4 space-y-4 text-sm leading-relaxed text-slate-600 sm:text-base">
-							{#each accommodation.description as paragraph}
+							{#each accommodation.description[$lang] as paragraph}
 								<p>{paragraph}</p>
 							{/each}
 						</div>
@@ -321,7 +321,7 @@
 
 					<!-- Amenities -->
 					<section>
-						<h2 class="text-2xl font-serif text-slate-900">Ausstattung</h2>
+						<h2 class="text-2xl font-serif text-slate-900">{$t('room.detail.sections.amenities')}</h2>
 						<div class="mt-5 grid gap-x-10 gap-y-4 text-sm text-slate-700 sm:grid-cols-2">
 							{#each accommodation.amenities as amenity}
 								{#if amenityIcons[amenity as keyof typeof amenityIcons]}
@@ -339,7 +339,7 @@
 
 					<!-- Floorplan -->
 					<section>
-						<h2 class="text-2xl font-serif text-slate-900">Grundriss</h2>
+						<h2 class="text-2xl font-serif text-slate-900">{$t('room.detail.sections.floorplan')}</h2>
 						<div
 							class="mt-5 overflow-hidden rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6"
 						>
@@ -354,7 +354,7 @@
 
 					<!-- Prices & Details TABLE -->
 					<section>
-						<h2 class="text-2xl font-serif text-slate-900">Preise & Details</h2>
+						<h2 class="text-2xl font-serif text-slate-900">{$t('room.detail.sections.prices')}</h2>
 
 						<div
 							class="mt-5 w-full overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
@@ -364,21 +364,23 @@
 									class="bg-[#fbf3e8] text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-600"
 								>
 									<tr>
-										<th class="px-4 py-3">Saison</th>
+										<th class="px-4 py-3">{$t('room.detail.prices.season')}</th>
 										<!-- <th class="px-4 py-3">Zeitraum</th> -->
-										<th class="px-4 py-3">Preis / Nacht</th>
-										<th class="px-4 py-3">Aufschlag pro weiterer Person</th>
-										<th class="px-4 py-3">Mindestaufenthalt</th>
+										<th class="px-4 py-3">{$t('room.detail.prices.priceNight')}</th>
+										<th class="px-4 py-3">{$t('room.detail.prices.extraPerson')}</th>
+										<th class="px-4 py-3">{$t('room.detail.prices.minStay')}</th>
 									</tr>
 								</thead>
 								<tbody class="divide-y divide-slate-100">
 									{#each accommodation.priceMatrix as row}
 										<tr class="text-slate-700">
-											<td class="px-4 py-3 font-semibold text-slate-900">{row.season}</td>
+											<td class="px-4 py-3 font-semibold text-slate-900">{row.season[$lang]}</td>
 											<!-- <td class="px-4 py-3 text-slate-600">{row.period}</td> -->
 											<td class="px-4 py-3 font-semibold text-brand">{row.pricePerNight}</td>
-											<td class="px-4 py-3 font-semibold text-slate-900">{row.extraPerson}</td>
-											<td class="px-4 py-3 font-semibold text-slate-900">{row.minStay}</td>
+											<td class="px-4 py-3 font-semibold text-slate-900">
+												{row.extraPerson[$lang]}
+											</td>
+											<td class="px-4 py-3 font-semibold text-slate-900">{row.minStay[$lang]}</td>
 										</tr>
 									{/each}
 								</tbody>
@@ -388,43 +390,40 @@
 									<div class="space-y-3 p-4 text-slate-700">
 										<div class="flex items-baseline justify-between gap-3">
 											<p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-												Saison
+												{$t('room.detail.prices.season')}
 											</p>
-											<p class="text-right font-semibold text-slate-900">{row.season}</p>
+											<p class="text-right font-semibold text-slate-900">{row.season[$lang]}</p>
 										</div>
 										<div class="flex items-baseline justify-between gap-3">
 											<p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-												Preis / Nacht
+												{$t('room.detail.prices.priceNight')}
 											</p>
 											<p class="text-right font-semibold text-brand">{row.pricePerNight}</p>
 										</div>
 										<div class="flex items-baseline justify-between gap-3">
 											<p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-												Aufschlag / Person
+												{$t('room.detail.prices.extraPersonShort')}
 											</p>
-											<p class="text-right font-semibold text-slate-900">{row.extraPerson}</p>
+											<p class="text-right font-semibold text-slate-900">{row.extraPerson[$lang]}</p>
 										</div>
 										<div class="flex items-baseline justify-between gap-3">
 											<p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-												Mindestaufenthalt
+												{$t('room.detail.card.facts.minStayLabel')}
 											</p>
-											<p class="text-right font-semibold text-slate-900">{row.minStay}</p>
+											<p class="text-right font-semibold text-slate-900">{row.minStay[$lang]}</p>
 										</div>
 									</div>
 								{/each}
 							</div>
 						</div>
 
-						<p class="mt-3 text-xs text-slate-500">
-							Alle Preise für 2 Personen inkl. gesetzlicher MwSt. zzgl. Endreinigung (einmalig 45€) und
-							Kurtaxe.
-						</p>
+						<p class="mt-3 text-xs text-slate-500">{$t('room.detail.prices.note')}</p>
 					</section>
 
 					<!-- Reviews carousel -->
 					<section>
 						<div class="flex items-center justify-between gap-4">
-							<h2 class="text-2xl font-serif text-slate-900">Gästebewertungen</h2>
+							<h2 class="text-2xl font-serif text-slate-900">{$t('room.detail.sections.reviews')}</h2>
 
 							<div class="flex items-center gap-2">
 								<button
@@ -433,7 +432,7 @@
 										!canPrev ? 'opacity-40 pointer-events-none' : ''
 									}`}
 									onclick={() => (reviewIndex = Math.max(0, reviewIndex - 1))}
-									aria-label="Vorherige Bewertungen"
+									aria-label="{$t('room.detail.reviews.prev')}"
 								>
 									‹
 								</button>
@@ -447,7 +446,7 @@
 											(accommodation.reviews.length ?? 0) - visibleReviews,
 											reviewIndex + 1
 										))}
-									aria-label="Nächste Bewertungen"
+									aria-label="{$t('room.detail.reviews.next')}"
 								>
 									›
 								</button>
@@ -484,14 +483,16 @@
 						<!-- Header -->
 						<div class="flex items-start justify-between gap-4">
 							<div>
-								<p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-500">Preis ab</p>
+								<p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-500">
+									{$t('room.detail.card.priceFrom')}
+								</p>
 								<p class="mt-1 text-slate-900">
 									<span class="text-3xl font-semibold tracking-tight"
-										>{accommodation.pricePerNightBase}€</span
+										>{accommodation.pricePerNightBase}&euro;</span
 									>
-									<span class="ml-1 text-xs text-slate-500">/ Nacht</span>
+									<span class="ml-1 text-xs text-slate-500">/ {$t('price.night')}</span>
 								</p>
-								<p class="mt-2 text-xs text-slate-500">inkl. MwSt. • zzgl. Endreinigung & Ortstaxe</p>
+								<p class="mt-2 text-xs text-slate-500">{$t('room.detail.card.vatNote')}</p>
 							</div>
 						</div>
 
@@ -501,60 +502,75 @@
 						<!-- Fakten -->
 						<div class="rounded-2xl border border-slate-200/60 bg-slate-50/70 p-4">
 							<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-								Kurze Fakten
+								{$t('room.detail.card.facts.title')}
 							</p>
 
 							<div class="mt-3 space-y-3 text-sm">
 								<div class="flex items-center justify-between gap-4">
-									<span class="text-slate-600">Check-in</span>
-									<span class="font-semibold text-slate-900">ab 14:00 Uhr</span>
+									<span class="text-slate-600">{$t('room.detail.card.facts.checkinLabel')}</span>
+									<span class="font-semibold text-slate-900">
+										{$t('room.detail.card.facts.checkinValue')}
+									</span>
 								</div>
 								<div class="flex items-center justify-between gap-4">
-									<span class="text-slate-600">Check-out</span>
-									<span class="font-semibold text-slate-900">bis 10:00 Uhr</span>
+									<span class="text-slate-600">{$t('room.detail.card.facts.checkoutLabel')}</span>
+									<span class="font-semibold text-slate-900">
+										{$t('room.detail.card.facts.checkoutValue')}
+									</span>
 								</div>
 								<div class="flex items-center justify-between gap-4">
-									<span class="text-slate-600">Mindestaufenthalt</span>
-									<span class="font-semibold text-slate-900">3 Nächte</span>
+									<span class="text-slate-600">{$t('room.detail.card.facts.minStayLabel')}</span>
+									<span class="font-semibold text-slate-900">
+										{$t('room.detail.card.facts.minStayValue')}
+									</span>
 								</div>
 								<div class="flex items-center justify-between gap-4">
-									<span class="text-slate-600">Storno</span>
-									<span class="font-semibold text-slate-900">laut Bedingungen</span>
+									<span class="text-slate-600">{$t('room.detail.card.facts.cancelLabel')}</span>
+									<span class="font-semibold text-slate-900">
+										{$t('room.detail.card.facts.cancelValue')}
+									</span>
 								</div>
 								<div class="flex items-center justify-between gap-4">
-									<span class="text-slate-600">Haustiere</span>
-									<span class="font-semibold text-slate-900">nicht erlaubt</span>
+									<span class="text-slate-600">{$t('room.detail.card.facts.petsLabel')}</span>
+									<span class="font-semibold text-slate-900">
+										{$t('room.detail.card.facts.petsValue')}
+									</span>
 								</div>
 							</div>
 						</div>
 
-						<!-- Aufschlüsselung -->
+						<!-- Aufschlsselung -->
 						<div class="mt-4 rounded-2xl border border-slate-200/60 bg-white p-4">
 							<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-								Preisaufschlüsselung
+								{$t('room.detail.card.breakdown.title')}
 							</p>
 
 							<div class="mt-3 space-y-2 text-sm text-slate-700">
 								<div class="flex items-center justify-between gap-4">
-									<span class="text-slate-600">Übernachtung</span>
-									<span class="font-semibold text-slate-900"
-										>ab {accommodation.pricePerNightBase}€ / Nacht</span
-									>
+									<span class="text-slate-600">{$t('room.detail.card.breakdown.nightLabel')}</span>
+									<span class="font-semibold text-slate-900">
+										{$t('room.detail.card.breakdown.nightFrom')} {accommodation.pricePerNightBase}&euro; /
+										{$t('price.night')}
+									</span>
 								</div>
 								<div class="flex items-center justify-between gap-4">
-									<span class="text-slate-600">Endreinigung</span>
-									<span class="font-semibold text-slate-900">45€ einmalig</span>
+									<span class="text-slate-600">{$t('room.detail.card.breakdown.cleaningLabel')}</span>
+									<span class="font-semibold text-slate-900">
+										{$t('room.detail.card.breakdown.cleaningValue')}
+									</span>
 								</div>
 								<div class="flex items-center justify-between gap-4">
-									<span class="text-slate-600">Ortstaxe</span>
-									<span class="font-semibold text-slate-900">laut Gemeinde</span>
+									<span class="text-slate-600">{$t('room.detail.card.breakdown.taxLabel')}</span>
+									<span class="font-semibold text-slate-900">
+										{$t('room.detail.card.breakdown.taxValue')}
+									</span>
 								</div>
 							</div>
 
 							<div
 								class="mt-4 rounded-xl bg-slate-50 px-3 py-2 text-xs text-slate-600 ring-1 ring-slate-200/60"
 							>
-								Tipp: Früh buchen lohnt sich — beliebte Wochenenden sind schnell ausgebucht.
+								{$t('room.detail.card.breakdown.tip')}
 							</div>
 						</div>
 
@@ -563,12 +579,12 @@
 							href={resolve('/buchen')}
 							class="mt-5 inline-flex w-full items-center justify-center rounded-xl bg-brand px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:brightness-110 focus:outline-none focus:ring-4 focus:ring-brand/25"
 						>
-							Jetzt buchen
+							{$t('room.detail.card.cta')}
 						</a>
 
 						<!-- Secondary line -->
 						<p class="mt-3 text-center text-[11px] text-slate-500">
-							Buchung erfolgt über unseren Partner. Es entstehen noch keine Kosten.
+							{$t('room.detail.card.note')}
 						</p>
 					</div>
 				</aside>
@@ -588,10 +604,8 @@
 				type="button"
 				class="absolute right-3 top-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm sm:-top-10 sm:right-0"
 				onclick={closeGallery}
-				aria-label="Galerie schließen"
-			>
-				Schließen
-			</button>
+				aria-label="{$t('room.detail.gallery.close')}"
+			>{$t('room.detail.gallery.close')}</button>
 
 			<div class="overflow-hidden rounded-3xl bg-white shadow-xl">
 				<img
@@ -609,7 +623,7 @@
 					}`}
 					onclick={() => (galleryIndex = Math.max(0, galleryIndex - 1))}
 				>
-					‹ Vorheriges
+					‹ {$t('room.detail.gallery.prev')}
 				</button>
 				<div class="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0">
 					{#each galleryImages as img, i}
@@ -631,7 +645,7 @@
 					}`}
 					onclick={() => (galleryIndex = Math.min(galleryImages.length - 1, galleryIndex + 1))}
 				>
-					Nächstes ›
+					{$t('room.detail.gallery.next')} >
 				</button>
 			</div>
 		</div>
@@ -643,3 +657,31 @@
 		top: 9rem;
 	}
 </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -122,6 +122,7 @@
 			image: '/images/winter-ice.jpg',
 			layout: 'winter',
 			className: 'c2',
+			badge: 'beliebt',
 			titleSize: 'text-xl',
 		},
 		{
@@ -145,7 +146,6 @@
 			image: '/images/winter-crosscountry.jpg',
 			layout: 'winter',
 			className: 'c4',
-			badge: 'beliebt',
 			titleSize: 'text-2xl',
 		},
 	];
@@ -240,10 +240,7 @@
 				</div>
 
 				{#key activeTab}
-					<div
-						class="experience-grid mt-8 gap-6"
-						in:fly={{ y: 26, duration: 520, easing: cubicOut }}
-					>
+					<div class="experience-grid mt-8 gap-6" in:fly={{ y: 26, duration: 520, easing: cubicOut }}>
 						{#each currentEvents as event, i (event.id)}
 							<article
 								class={`experience-card group relative overflow-hidden rounded-3xl ${event.className ?? ''}`}
@@ -267,7 +264,9 @@
 								{/if}
 
 								<div class="absolute bottom-0 left-0 right-0 p-6">
-									<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
+									<p
+										class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand"
+									>
 										<event.icon class="h-4 w-4 text-brand" aria-hidden="true" />
 										{event.kicker}
 									</p>
@@ -321,7 +320,6 @@
 			grid-column: 5 / span 8; /* 8/12 */
 			grid-row: 2;
 		}
-
 	}
 
 	/* cards fill their grid cell */

@@ -1,9 +1,13 @@
+import type { Lang } from '$lib/i18n';
+
+type Localized<T> = Record<Lang, T>;
+
 export type Accommodation = {
 	key: number;
 	slug: string;
 	title: string;
-	subtitle: string;
-	description: string[];
+	subtitle: Localized<string>;
+	description: Localized<string[]>;
 	images: {
 		main: string;
 		gallery: string[];
@@ -11,25 +15,25 @@ export type Accommodation = {
 	attributes: {
 		size: string;
 		floor: string;
-		view: string;
-		guests: string;
+		view: Localized<string>;
+		guests: Localized<string>;
 	};
 	amenities: string[];
 	floorplanImage: string;
 	pricePerNightBase: number;
 	priceMatrix: Array<{
-		season: string;
-		period: string;
+		season: Localized<string>;
+		period: Localized<string>;
 		pricePerNight: string;
-		minStay: string;
-		extraPerson: string;
+		minStay: Localized<string>;
+		extraPerson: Localized<string>;
 	}>;
-	reviews: Array<{ name: string; rating: number; text: string, date?: string }>;
-	cardMeta: string;
+	reviews: Array<{ name: string; rating: number; text: string; date?: string }>;
+	cardMeta: Localized<string>;
 	badgeLabel?: string | null;
-	typeLabel: string;
-	detailMeta: string;
-	detailBody: string;
+	typeLabel: Localized<string>;
+	detailMeta: Localized<string>;
+	detailBody: Localized<string>;
 };
 
 export const accommodations: Accommodation[] = [
@@ -37,12 +41,22 @@ export const accommodations: Accommodation[] = [
 		key: 3,
 		slug: 'nr-1',
 		title: 'Nº 1',
-		subtitle: 'Gemütliche Ferienwohnung mit Balkon',
-		description: [
-			'Gemütliches Appartement mit Balkon und viel Ruhe.',
-			'Ideal für Paare oder Alleinreisende, die abschalten möchten.',
-			'Küche mit Sitzecke, Bad mit Dusche und WC – Sicht nach Osten (1–3 Personen).',
-		],
+		subtitle: {
+			de: 'Gemütliche Ferienwohnung mit Balkon',
+			en: 'Cozy apartment with balcony',
+		},
+		description: {
+			de: [
+				'Gemütliches Appartement mit Balkon und viel Ruhe.',
+				'Ideal für Paare oder Alleinreisende, die abschalten möchten.',
+				'Küche mit Sitzecke, Bad mit Dusche und WC - Sicht nach Osten (1-3 Personen).',
+			],
+			en: [
+				'Cozy apartment with balcony and plenty of peace and quiet.',
+				'Ideal for couples or solo travelers who want to unwind.',
+				'Kitchen with dining nook, bathroom with shower and toilet - east-facing view (1-3 guests).',
+			],
+		},
 		images: {
 			main: '/images/1/room-1.jpg',
 			gallery: [
@@ -56,29 +70,56 @@ export const accommodations: Accommodation[] = [
 		attributes: {
 			size: '35 m²',
 			floor: '1',
-			view: 'Osten',
-			guests: '1–3 Personen',
+			view: {
+				de: 'Osten',
+				en: 'East',
+			},
+			guests: {
+				de: '1-3 Personen',
+				en: '1-3 guests',
+			},
 		},
-		amenities: [
-			'balkon',
-			'fernseher',
-			'kueche',
-			'ausziehcouch',
-			'wifi',
-			'badezimmer'
-		],
+		amenities: ['balkon', 'fernseher', 'kueche', 'ausziehcouch', 'wifi', 'badezimmer'],
 		floorplanImage: '/images/1/Nr3-skizze.png',
 		pricePerNightBase: 75,
 		priceMatrix: [
 			{
-				season: 'Sommer', period: '01. Apr - 30. Sep', pricePerNight: '€ 75,-', minStay: '3 Nächte', extraPerson: '€ 10,- pro Nacht',
+				season: {
+					de: 'Sommer',
+					en: 'Summer',
+				},
+				period: {
+					de: '01. Apr - 30. Sep',
+					en: 'Apr 01 - Sep 30',
+				},
+				pricePerNight: '€ 75,-',
+				minStay: {
+					de: '3 Nächte',
+					en: '3 nights',
+				},
+				extraPerson: {
+					de: '€ 10,- pro Nacht',
+					en: '€ 10,- per night',
+				},
 			},
 			{
-				season: 'Winter',
-				period: '20. Dez - 06. Jan',
+				season: {
+					de: 'Winter',
+					en: 'Winter',
+				},
+				period: {
+					de: '20. Dez - 06. Jan',
+					en: 'Dec 20 - Jan 06',
+				},
 				pricePerNight: '€ 85,-',
-				minStay: '3 Nächte',
-				extraPerson: '€ 10,- pro Nacht',
+				minStay: {
+					de: '3 Nächte',
+					en: '3 nights',
+				},
+				extraPerson: {
+					de: '€ 10,- pro Nacht',
+					en: '€ 10,- per night',
+				},
 			},
 		],
 		reviews: [
@@ -86,57 +127,108 @@ export const accommodations: Accommodation[] = [
 				name: 'Lenka',
 				rating: 5,
 				date: '2023-08-15',
-				text: 'Sehr gute Unterkunft in einem ruhigen Dorf. Die Besitzer sind tolle Leute, nett und hilfsbereit. Jedes Zimmer hatte eine Küche, was wir sehr zu schätzen wussten. Das Gästehaus Rader ist eine sehr gute Wahl für Familien mit Kindern. Das Haus war sauber und gut ausgestattet. Das Parken war völlig problemlos direkt neben dem Gästehaus.',
+				text:
+					'Sehr gute Unterkunft in einem ruhigen Dorf. Die Besitzer sind tolle Leute, nett und hilfsbereit. Jedes Zimmer hatte eine Küche, was wir sehr zu schätzen wussten. Das Gästehaus Rader ist eine sehr gute Wahl für Familien mit Kindern. Das Haus war sauber und gut ausgestattet. Das Parken war völlig problemlos direkt neben dem Gästehaus.',
 			},
 		],
-		cardMeta: '35 m² · 1–3 Personen · Osten',
+		cardMeta: {
+			de: '35 m² · 1-3 Personen · Osten',
+			en: '35 m² · 1-3 guests · East',
+		},
 		badgeLabel: null,
-		typeLabel: 'Appartement',
-		detailMeta: '35 m² · 1–3 Personen · Osten',
-		detailBody: 'Gemütliche Ferienwohnung mit Balkon – Küche mit Sitzecke – Bad mit Dusche und WC – Sicht nach Osten (1–3 Personen).',
+		typeLabel: {
+			de: 'Appartement',
+			en: 'Apartment',
+		},
+		detailMeta: {
+			de: '35 m² · 1-3 Personen · Osten',
+			en: '35 m² · 1-3 guests · East',
+		},
+		detailBody: {
+			de: 'Gemütliche Ferienwohnung mit Balkon - Küche mit Sitzecke - Bad mit Dusche und WC - Sicht nach Osten (1-3 Personen).',
+			en: 'Cozy apartment with balcony - kitchen with dining nook - bathroom with shower and toilet - east-facing view (1-3 guests).',
+		},
 	},
 	{
 		key: 2,
 		slug: 'nr-2',
 		title: 'Nº 2',
-		subtitle: 'Gemütliche Ferienwohnung mit Balkon',
-		description: [
-			'Gemütliche Ferienwohnung mit Balkon.',
-			'Küche mit Sitzecke, Bad mit Dusche und WC – Sicht nach Osten und Westen (1–3 Personen).',
-		],
+		subtitle: {
+			de: 'Gemütliche Ferienwohnung mit Balkon',
+			en: 'Cozy apartment with balcony',
+		},
+		description: {
+			de: [
+				'Gemütliche Ferienwohnung mit Balkon.',
+				'Küche mit Sitzecke, Bad mit Dusche und WC - Sicht nach Osten und Westen (1-3 Personen).',
+			],
+			en: [
+				'Cozy apartment with balcony.',
+				'Kitchen with dining nook, bathroom with shower and toilet - east and west view (1-3 guests).',
+			],
+		},
 		images: {
 			main: '/images/2/Doppelbett.png',
 			gallery: [
 				'/images/2/Einzelbett_2.png',
 				'/images/2/IMG_1394.png',
 				'/images/2/Komode.png',
-				'/images/2/Kueche.png'
+				'/images/2/Kueche.png',
 			],
 		},
 		attributes: {
 			size: '35 m²',
 			floor: '1',
-			view: 'Osten/Westen',
-			guests: '1–3 Personen',
+			view: {
+				de: 'Osten/Westen',
+				en: 'East/West',
+			},
+			guests: {
+				de: '1-3 Personen',
+				en: '1-3 guests',
+			},
 		},
-		amenities: [
-			'balkon',
-			'fernseher',
-			'kueche',
-			'ausziehcouch',
-			'wifi',
-			'badezimmer'
-		],
+		amenities: ['balkon', 'fernseher', 'kueche', 'ausziehcouch', 'wifi', 'badezimmer'],
 		floorplanImage: '/images/2/Nr4-skizze.png',
 		pricePerNightBase: 75,
 		priceMatrix: [
-			{ season: 'Sommer', period: '01. Apr - 30. Sep', pricePerNight: '€ 75,-', minStay: '3 Nächte', extraPerson: '€ 10,- pro Nacht' },
 			{
-				season: 'Winter',
-				period: '20. Dez - 06. Jan',
+				season: {
+					de: 'Sommer',
+					en: 'Summer',
+				},
+				period: {
+					de: '01. Apr - 30. Sep',
+					en: 'Apr 01 - Sep 30',
+				},
+				pricePerNight: '€ 75,-',
+				minStay: {
+					de: '3 Nächte',
+					en: '3 nights',
+				},
+				extraPerson: {
+					de: '€ 10,- pro Nacht',
+					en: '€ 10,- per night',
+				},
+			},
+			{
+				season: {
+					de: 'Winter',
+					en: 'Winter',
+				},
+				period: {
+					de: '20. Dez - 06. Jan',
+					en: 'Dec 20 - Jan 06',
+				},
 				pricePerNight: '€ 85,-',
-				minStay: '3 Nächte',
-				extraPerson: '€ 10,- pro Nacht',
+				minStay: {
+					de: '3 Nächte',
+					en: '3 nights',
+				},
+				extraPerson: {
+					de: '€ 10,- pro Nacht',
+					en: '€ 10,- per night',
+				},
 			},
 		],
 		reviews: [
@@ -148,23 +240,42 @@ export const accommodations: Accommodation[] = [
 					'Sehr gute Unterkunft in einem ruhigen Dorf. Die Besitzer sind tolle Leute, nett und hilfsbereit. Das Haus war sauber und gut ausgestattet. Parken problemlos direkt neben dem Gästehaus.',
 			},
 		],
-		cardMeta: '35 m² · 1–3 Personen · Osten/Westen',
+		cardMeta: {
+			de: '35 m² · 1-3 Personen · Osten/Westen',
+			en: '35 m² · 1-3 guests · East/West',
+		},
 		badgeLabel: null,
-		typeLabel: 'Appartement',
-		detailMeta: '35 m² · 1–3 Personen · Osten/Westen',
-		detailBody:
-			'Gemütliche Ferienwohnung mit Balkon – Küche mit Sitzecke – Bad mit Dusche und WC – Sicht nach Osten und Westen (1–3 Personen).',
-
+		typeLabel: {
+			de: 'Appartement',
+			en: 'Apartment',
+		},
+		detailMeta: {
+			de: '35 m² · 1-3 Personen · Osten/Westen',
+			en: '35 m² · 1-3 guests · East/West',
+		},
+		detailBody: {
+			de: 'Gemütliche Ferienwohnung mit Balkon - Küche mit Sitzecke - Bad mit Dusche und WC - Sicht nach Osten und Westen (1-3 Personen).',
+			en: 'Cozy apartment with balcony - kitchen with dining nook - bathroom with shower and toilet - east and west view (1-3 guests).',
+		},
 	},
 	{
 		key: 1,
 		slug: 'nr-3',
 		title: 'Nº 3',
-		subtitle: 'Gemütliche Ferienwohnung mit Balkon',
-		description: [
-			'Gemütliche Ferienwohnung mit Balkon.',
-			'Küche mit Sitzecke, Bad mit Dusche und WC – Sicht nach Süden (1–2 Personen).',
-		],
+		subtitle: {
+			de: 'Gemütliche Ferienwohnung mit Balkon',
+			en: 'Cozy apartment with balcony',
+		},
+		description: {
+			de: [
+				'Gemütliche Ferienwohnung mit Balkon.',
+				'Küche mit Sitzecke, Bad mit Dusche und WC - Sicht nach Süden (1-2 Personen).',
+			],
+			en: [
+				'Cozy apartment with balcony.',
+				'Kitchen with dining nook, bathroom with shower and toilet - south-facing view (1-2 guests).',
+			],
+		},
 		images: {
 			main: '/images/3/room-3.jpg',
 			gallery: [
@@ -172,32 +283,62 @@ export const accommodations: Accommodation[] = [
 				'/images/3/Kuchengeraete.jpeg',
 				'/images/3/Couch.jpeg',
 				'/images/3/Bett.jpeg',
-				'/images/3/Schuhregal.jpeg'
+				'/images/3/Schuhregal.jpeg',
 			],
 		},
 		attributes: {
 			size: '28 m²',
 			floor: '1',
-			view: 'Süden',
-			guests: '1–2 Personen',
+			view: {
+				de: 'Süden',
+				en: 'South',
+			},
+			guests: {
+				de: '1-2 Personen',
+				en: '1-2 guests',
+			},
 		},
-		amenities: [
-			'balkon',
-			'fernseher',
-			'kueche',
-			'wifi',
-			'badezimmer'
-		],
+		amenities: ['balkon', 'fernseher', 'kueche', 'wifi', 'badezimmer'],
 		floorplanImage: '/images/3/Nr7-skizze.png',
 		pricePerNightBase: 65,
 		priceMatrix: [
-			{ season: 'Sommer', period: '01. Apr - 30. Sep', pricePerNight: '€ 65,-', minStay: '3 Nächte', extraPerson: '/' },
 			{
-				season: 'Winter',
-				period: '20. Dez - 06. Jan',
+				season: {
+					de: 'Sommer',
+					en: 'Summer',
+				},
+				period: {
+					de: '01. Apr - 30. Sep',
+					en: 'Apr 01 - Sep 30',
+				},
+				pricePerNight: '€ 65,-',
+				minStay: {
+					de: '3 Nächte',
+					en: '3 nights',
+				},
+				extraPerson: {
+					de: '/',
+					en: '/',
+				},
+			},
+			{
+				season: {
+					de: 'Winter',
+					en: 'Winter',
+				},
+				period: {
+					de: '20. Dez - 06. Jan',
+					en: 'Dec 20 - Jan 06',
+				},
 				pricePerNight: '€ 75,-',
-				minStay: '3 Nächte',
-				extraPerson: '/',
+				minStay: {
+					de: '3 Nächte',
+					en: '3 nights',
+				},
+				extraPerson: {
+					de: '/',
+					en: '/',
+				},
 			},
 		],
 		reviews: [
@@ -208,14 +349,24 @@ export const accommodations: Accommodation[] = [
 					'Die Gastgeber-Familie war super freundlich und sehr zuvorkommend. Sehr persönlicher Umgang. Die Lage war perfekt. Man konnte alles gut sowohl mit dem Auto als auch zu Fuß oder mit dem Fahrrad erreichen. Alles in allem war es ein toller Urlaub im schönen Österreich den wir gerne im Gästehaus Rader wiederholen möchten!',
 			},
 		],
-		cardMeta: '28 m² · 1–2 Personen · Süden',
+		cardMeta: {
+			de: '28 m² · 1-2 Personen · Süden',
+			en: '28 m² · 1-2 guests · South',
+		},
 		badgeLabel: null,
-		typeLabel: 'Appartement',
-		detailMeta: '28 m² · 1–2 Personen · Süden',
-		detailBody:
-			'Gemütliche Ferienwohnung mit Balkon – Küche mit Sitzecke – Bad mit Dusche und WC – Sicht nach Süden (1–2 Personen).',
-
-	}
+		typeLabel: {
+			de: 'Appartement',
+			en: 'Apartment',
+		},
+		detailMeta: {
+			de: '28 m² · 1-2 Personen · Süden',
+			en: '28 m² · 1-2 guests · South',
+		},
+		detailBody: {
+			de: 'Gemütliche Ferienwohnung mit Balkon - Küche mit Sitzecke - Bad mit Dusche und WC - Sicht nach Süden (1-2 Personen).',
+			en: 'Cozy apartment with balcony - kitchen with dining nook - bathroom with shower and toilet - south-facing view (1-2 guests).',
+		},
+	},
 ];
 
 export const accommodationBySlug = (slug: string) =>

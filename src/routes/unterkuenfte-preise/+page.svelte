@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { t } from '$lib/i18n';
+	import { lang, t } from '$lib/i18n';
 	import { asset, resolve } from '$app/paths';
 	import { accommodations } from '$lib/data/accommodations';
 	import {
@@ -138,9 +138,9 @@
 										{room.title}
 									</a>
 								</h2>
-								<p class="text-sm text-slate-700">{room.typeLabel}</p>
+								<p class="text-sm text-slate-700">{room.typeLabel[$lang]}</p>
 
-								<div class="mt-2 text-xs text-slate-500">{room.detailMeta}</div>
+								<div class="mt-2 text-xs text-slate-500">{room.detailMeta[$lang]}</div>
 
 								<!-- <p class="mt-4 max-w-xl text-sm leading-relaxed text-slate-600">
 									{room.detailBody}

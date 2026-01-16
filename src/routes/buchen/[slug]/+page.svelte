@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { asset, resolve } from '$app/paths';
 	import { onMount } from 'svelte';
+	import { lang } from '$lib/i18n';
 	import { ArrowRight, CalendarDays, Star, Users, Wifi, Utensils, Mountain } from 'lucide-svelte';
 
 	let { data } = $props();
@@ -234,11 +235,15 @@
 						<div class="mt-5 space-y-3 text-sm text-slate-600">
 							<div class="flex items-center justify-between">
 								<span>Guests</span>
-								<span class="font-semibold text-slate-900">{accommodation.attributes.guests}</span>
+								<span class="font-semibold text-slate-900">
+									{accommodation.attributes.guests[$lang]}
+								</span>
 							</div>
 							<div class="flex items-center justify-between">
 								<span>View</span>
-								<span class="font-semibold text-slate-900">{accommodation.attributes.view}</span>
+								<span class="font-semibold text-slate-900">
+									{accommodation.attributes.view[$lang]}
+								</span>
 							</div>
 							<div class="flex items-center justify-between">
 								<span>Total Price</span>

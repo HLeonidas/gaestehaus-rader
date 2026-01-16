@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { t } from '$lib/i18n';
+	import { lang, t } from '$lib/i18n';
 	import { asset, resolve } from '$app/paths';
 	import { accommodations } from '$lib/data/accommodations';
 	import {
@@ -283,7 +283,7 @@
 
 									<!-- Meta line (small, muted) -->
 									<p class="mt-2 text-xs text-slate-500">
-										{r.cardMeta}
+										{r.cardMeta[$lang]}
 									</p>
 
 									<!-- Amenities (optional) -->
