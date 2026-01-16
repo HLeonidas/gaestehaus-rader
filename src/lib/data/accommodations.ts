@@ -17,7 +17,13 @@ export type Accommodation = {
 	amenities: string[];
 	floorplanImage: string;
 	pricePerNightBase: number;
-	priceMatrix: Array<{ period: string; pricePerNight: string; extraPerson: string }>;
+	priceMatrix: Array<{
+		season: string;
+		period: string;
+		pricePerNight: string;
+		minStay: string;
+		extraPerson: string;
+	}>;
 	reviews: Array<{ name: string; rating: number; text: string, date?: string }>;
 	cardMeta: string;
 	badgeLabel?: string | null;
@@ -67,8 +73,16 @@ export const accommodations: Accommodation[] = [
 		floorplanImage: '/images/1/Nr3-skizze.png',
 		pricePerNightBase: 75,
 		priceMatrix: [
-			{ period: 'Sommer', pricePerNight: '€ 75,-', extraPerson: '€ 10,-' },
-			{ period: 'Winter', pricePerNight: '€ 85,-', extraPerson: '€ 10,-' },
+			{
+				season: 'Sommer', period: '01. Apr - 30. Sep', pricePerNight: '€ 85,-', minStay: '3 Nächte', extraPerson: '€ 10,- pro Nacht',
+			},
+			{
+				season: 'Winter',
+				period: '20. Dez - 06. Jan',
+				pricePerNight: '€ 95,-',
+				minStay: '3 Nächte',
+				extraPerson: '€ 10,- pro Nacht',
+			},
 		],
 		reviews: [
 			{
@@ -94,13 +108,12 @@ export const accommodations: Accommodation[] = [
 			'Küche mit Sitzecke, Bad mit Dusche und WC – Sicht nach Osten und Westen (1–3 Personen).',
 		],
 		images: {
-			main: '/images/2/room-2.jpg',
+			main: '/images/2/Doppelbett.png',
 			gallery: [
-				'/images/2/Doppelbett.png',
 				'/images/2/Einzelbett_2.png',
 				'/images/2/IMG_1394.png',
 				'/images/2/Komode.png',
-				'/images/2/Küche.png'
+				'/images/2/Kueche.png'
 			],
 		},
 		attributes: {
@@ -122,8 +135,14 @@ export const accommodations: Accommodation[] = [
 		floorplanImage: '/images/2/Nr4-skizze.png',
 		pricePerNightBase: 75,
 		priceMatrix: [
-			{ period: 'Sommer', pricePerNight: '€ 75,-', extraPerson: '€ 10,-' },
-			{ period: 'Winter', pricePerNight: '€ 85,-', extraPerson: '€ 10,-' },
+			{ season: 'Sommer', period: '01. Apr - 30. Sep', pricePerNight: '€ 85,-', minStay: '3 Nächte', extraPerson: '€ 10,- pro Nacht' },
+			{
+				season: 'Winter',
+				period: '20. Dez - 06. Jan',
+				pricePerNight: '€ 95,-',
+				minStay: '3 Nächte',
+				extraPerson: '€ 10,- pro Nacht',
+			},
 		],
 		reviews: [
 			{
@@ -180,8 +199,14 @@ export const accommodations: Accommodation[] = [
 		floorplanImage: '/images/3/Nr7-skizze.png',
 		pricePerNightBase: 65,
 		priceMatrix: [
-			{ period: 'Sommer', pricePerNight: '€ 65,-', extraPerson: '-' },
-			{ period: 'Winter', pricePerNight: '€ 75,-', extraPerson: '-' },
+			{ season: 'Sommer', period: '01. Apr - 30. Sep', pricePerNight: '€ 75,-', minStay: '3 Nächte', extraPerson: '/' },
+			{
+				season: 'Winter',
+				period: '20. Dez - 06. Jan',
+				pricePerNight: '€ 85,-',
+				minStay: '3 Nächte',
+				extraPerson: '/',
+			},
 		],
 		reviews: [
 			{

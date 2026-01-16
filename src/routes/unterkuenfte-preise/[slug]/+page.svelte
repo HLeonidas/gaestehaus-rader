@@ -8,12 +8,15 @@
 		Heart,
 		MapPin,
 		Mountain,
+		Ruler,
+		Building2,
+		MountainSnow,
+		Users,
 		Share2,
 		SquareParking,
 		Star,
 		Sun,
 		Utensils,
-		Users,
 		Wifi
 	} from 'lucide-svelte';
 
@@ -31,6 +34,11 @@
 		parking: SquareParking
 	} as const;
 
+	const galleryImages = $derived.by(() => [
+		accommodation.images.main,
+		...(accommodation.images.gallery ?? []),
+	]);
+
 	// helper for "+X Bilder" overlay
 	const galleryCount = $derived.by(() => accommodation?.images?.gallery?.length ?? 0);
 	const overlayMore = $derived.by(() => Math.max(0, galleryCount - 2));
@@ -42,6 +50,20 @@
 	const canNext = $derived.by(
 		() => reviewIndex + visibleReviews < (accommodation?.reviews?.length ?? 0)
 	);
+
+	let galleryOpen = $state(false);
+	let galleryIndex = $state(0);
+	const canGalleryPrev = $derived.by(() => galleryIndex > 0);
+	const canGalleryNext = $derived.by(() => galleryIndex < galleryImages.length - 1);
+
+	const openGallery = (index: number) => {
+		galleryIndex = index;
+		galleryOpen = true;
+	};
+
+	const closeGallery = () => {
+		galleryOpen = false;
+	};
 </script>
 
 <svelte:head>
@@ -63,27 +85,39 @@
 			<!-- GALLERY -->
 			<div class="mt-6 grid gap-4 lg:grid-cols-[1fr,340px]">
 				<!-- Left big -->
-				<div class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+				<button
+					type="button"
+					class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm"
+					onclick={() => openGallery(0)}
+				>
 					<img
 						src={withAsset(accommodation.images.main)}
 						alt=""
 						class="h-[320px] w-full object-cover sm:h-[380px] lg:h-[420px]"
 						loading="lazy"
 					/>
-				</div>
+				</button>
 
 				<!-- Right stack -->
 				<div class="grid gap-4">
-					<div class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+					<button
+						type="button"
+						class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm"
+						onclick={() => openGallery(1)}
+					>
 						<img
 							src={withAsset(accommodation.images.gallery?.[0] ?? accommodation.images.main)}
 							alt=""
 							class="h-[152px] w-full object-cover sm:h-[180px] lg:h-[200px]"
 							loading="lazy"
 						/>
-					</div>
+					</button>
 
-					<div class="relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+					<button
+						type="button"
+						class="relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm"
+						onclick={() => openGallery(2)}
+					>
 						<img
 							src={withAsset(accommodation.images.gallery?.[1] ?? accommodation.images.main)}
 							alt=""
@@ -101,7 +135,7 @@
 								</span>
 							</div>
 						{/if}
-					</div>
+					</button>
 				</div>
 			</div>
 
@@ -130,20 +164,48 @@
 			<!-- INFO CARDS (4) -->
 			<div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
 				<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-					<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">Größe</p>
-					<p class="mt-1 text-sm font-semibold text-slate-900">{accommodation.attributes.size}</p>
+					<div class="flex items-center gap-3">
+						<span class="grid h-10 w-10 place-items-center rounded-xl bg-brand/10 text-brand">
+							<Ruler class="h-5 w-5" />
+						</span>
+						<div>
+							<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">Größe</p>
+							<p class="mt-1 text-sm font-semibold text-slate-900">{accommodation.attributes.size}</p>
+						</div>
+					</div>
 				</div>
 				<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-					<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">Etage</p>
-					<p class="mt-1 text-sm font-semibold text-slate-900">{accommodation.attributes.floor}</p>
+					<div class="flex items-center gap-3">
+						<span class="grid h-10 w-10 place-items-center rounded-xl bg-brand/10 text-brand">
+							<Building2 class="h-5 w-5" />
+						</span>
+						<div>
+							<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">Etage</p>
+							<p class="mt-1 text-sm font-semibold text-slate-900">{accommodation.attributes.floor}</p>
+						</div>
+					</div>
 				</div>
 				<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-					<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">Aussicht</p>
-					<p class="mt-1 text-sm font-semibold text-slate-900">{accommodation.attributes.view}</p>
+					<div class="flex items-center gap-3">
+						<span class="grid h-10 w-10 place-items-center rounded-xl bg-brand/10 text-brand">
+							<MountainSnow class="h-5 w-5" />
+						</span>
+						<div>
+							<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">Aussicht</p>
+							<p class="mt-1 text-sm font-semibold text-slate-900">{accommodation.attributes.view}</p>
+						</div>
+					</div>
 				</div>
 				<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-					<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">Gäste</p>
-					<p class="mt-1 text-sm font-semibold text-slate-900">{accommodation.attributes.guests}</p>
+					<div class="flex items-center gap-3">
+						<span class="grid h-10 w-10 place-items-center rounded-xl bg-brand/10 text-brand">
+							<Users class="h-5 w-5" />
+						</span>
+						<div>
+							<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">Gäste</p>
+							<p class="mt-1 text-sm font-semibold text-slate-900">{accommodation.attributes.guests}</p>
+						</div>
+					</div>
 				</div>
 			</div>
 
@@ -198,19 +260,23 @@
 
 						<div class="mt-5 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
 							<table class="w-full text-left text-sm">
-								<thead class="bg-slate-50 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-600">
+								<thead class="bg-[#fbf3e8] text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-600">
 									<tr>
-										<th class="px-4 py-3">Zeitraum</th>
+										<th class="px-4 py-3">Saison</th>
+										<!-- <th class="px-4 py-3">Zeitraum</th> -->
 										<th class="px-4 py-3">Preis / Nacht</th>
-										<th class="px-4 py-3">Aufschlag / Person</th>
+										<th class="px-4 py-3">Aufschlag pro weiterer Person</th>
+										<th class="px-4 py-3">Mindestaufenthalt</th>
 									</tr>
 								</thead>
 								<tbody class="divide-y divide-slate-100">
 									{#each accommodation.priceMatrix as row}
 										<tr class="text-slate-700">
-											<td class="px-4 py-3 font-medium text-slate-900">{row.period}</td>
+											<td class="px-4 py-3 font-semibold text-slate-900">{row.season}</td>
+											<!-- <td class="px-4 py-3 text-slate-600">{row.period}</td> -->
 											<td class="px-4 py-3 font-semibold text-brand">{row.pricePerNight}</td>
 											<td class="px-4 py-3 font-semibold text-slate-900">{row.extraPerson}</td>
+											<td class="px-4 py-3 font-semibold text-slate-900">{row.minStay}</td>
 										</tr>
 									{/each}
 								</tbody>
@@ -218,7 +284,7 @@
 						</div>
 
 						<p class="mt-3 text-xs text-slate-500">
-							<!-- Alle Preise inkl. gesetzlicher MwSt. zzgl. Endreinigung (einmalig {accommodation.cleaningFee ?? '45€'}) und Kurtaxe. -->
+							Alle Preise für 2 Personen inkl. gesetzlicher MwSt. zzgl. Endreinigung (einmalig 45€) und Kurtaxe.
 						</p>
 					</section>
 
@@ -350,6 +416,63 @@
 		</section>
 	</div>
 </main>
+
+{#if galleryOpen}
+	<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-6" role="dialog" aria-modal="true">
+		<div class="relative w-full max-w-5xl">
+			<button
+				type="button"
+				class="absolute -top-10 right-0 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm"
+				onclick={closeGallery}
+				aria-label="Galerie schließen"
+			>
+				Schließen
+			</button>
+
+			<div class="overflow-hidden rounded-3xl bg-white shadow-xl">
+				<img
+					src={withAsset(galleryImages[galleryIndex])}
+					alt=""
+					class="h-[520px] w-full object-cover"
+				/>
+			</div>
+
+			<div class="mt-4 flex items-center justify-between">
+				<button
+					type="button"
+					class={`rounded-full bg-white/90 px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm ${
+						!canGalleryPrev ? 'opacity-40 pointer-events-none' : ''
+					}`}
+					onclick={() => (galleryIndex = Math.max(0, galleryIndex - 1))}
+				>
+					‹ Vorheriges
+				</button>
+				<div class="flex items-center gap-2">
+					{#each galleryImages as img, i}
+						<button
+							type="button"
+							class={`h-12 w-16 overflow-hidden rounded-xl border ${
+								i === galleryIndex ? 'border-brand' : 'border-transparent'
+							}`}
+							onclick={() => (galleryIndex = i)}
+						>
+							<img src={withAsset(img)} alt="" class="h-full w-full object-cover" />
+						</button>
+					{/each}
+				</div>
+				<button
+					type="button"
+					class={`rounded-full bg-white/90 px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm ${
+						!canGalleryNext ? 'opacity-40 pointer-events-none' : ''
+					}`}
+					onclick={() => (galleryIndex = Math.min(galleryImages.length - 1, galleryIndex + 1))}
+				>
+					Nächstes ›
+				</button>
+			</div>
+		</div>
+	</div>
+{/if}
 
 <style>
 	.booking-card {
