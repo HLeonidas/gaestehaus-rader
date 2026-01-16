@@ -16,7 +16,8 @@ const config = {
 			fallback: '404.html'
 		}),
 		paths: {
-			base
+			base,
+			relative: false
 		},
 		prerender: {
 			handleHttpError: ({ status, path, referrer, message }) => {
