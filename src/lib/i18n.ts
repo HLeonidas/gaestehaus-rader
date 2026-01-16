@@ -82,6 +82,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'rooms.page.inclusive.kids': 'Kinderbett & Hochstuhl',
 		'rooms.page.inclusive.parking': 'Parken',
 		'rooms.page.inclusive.free': 'KOSTENLOS',
+		'rooms.page.detailsCta': 'Details ansehen',
 		'rooms.page.pricing.title': 'Weitere Informationen zu den Preisen',
 		'rooms.page.pricing.subtitle':
 			'Preise gelten für 2 Personen pro Ferienwohnung und Tag (ohne Verpflegung)',
@@ -570,6 +571,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'rooms.page.inclusive.kids': 'Crib & high chair',
 		'rooms.page.inclusive.parking': 'Parking',
 		'rooms.page.inclusive.free': 'FREE',
+		'rooms.page.detailsCta': 'See details',
 		'rooms.page.pricing.title': 'More information about pricing',
 		'rooms.page.pricing.subtitle':
 			'Prices are for 2 people per apartment and per day (excluding meals)',

@@ -179,7 +179,7 @@
 										href={`${accommodationsBase}/${room.slug}`}
 										class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-brand/30"
 									>
-										See details
+										{$t('rooms.page.detailsCta')}
 									</a>
 									<a
 										href={resolve('/buchen')}
