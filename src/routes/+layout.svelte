@@ -1,5 +1,5 @@
 <script lang="ts">
-	import favicon from '$lib/assets/favicon.svg';
+	import favicon from '$lib/assets/favicon.ico';
 	import { asset, resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import { lang, setLang, t } from '$lib/i18n';
@@ -28,6 +28,12 @@
 
 <!-- No more isHome theme switching -->
 <div class="flex min-h-screen flex-col bg-[#faf9f6] text-slate-900">
+	<a
+		href="#main-content"
+		class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-slate-900 focus:shadow-md"
+	>
+		{$t('accessibility.skip')}
+	</a>
 	<header class="sticky top-0 z-40 w-full border-b border-slate-200 bg-white/90 backdrop-blur">
 		<div class="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-4 py-4 sm:px-6">
 			<a
@@ -49,6 +55,7 @@
 
 			<nav
 				class="hidden flex-1 items-center justify-center gap-8 text-sm font-semibold text-slate-700 lg:flex"
+				aria-label={$t('nav.primary')}
 			>
 				{#each navItems as item}
 					<a
@@ -56,6 +63,7 @@
 						class={`transition-colors hover:text-brand ${
 							page.url.pathname === item.href ? 'text-brand' : 'text-slate-700'
 						}`}
+						aria-current={page.url.pathname === item.href ? 'page' : undefined}
 					>
 						{$t(item.key)}
 					</a>
@@ -72,6 +80,8 @@
 							$lang === 'de' ? 'bg-brand text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'
 						}`}
 						onclick={() => setLang('de')}
+						aria-pressed={$lang === 'de'}
+						aria-label={$t('nav.langDe')}
 					>
 						DE
 					</button>
@@ -81,6 +91,8 @@
 							$lang === 'en' ? 'bg-brand text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'
 						}`}
 						onclick={() => setLang('en')}
+						aria-pressed={$lang === 'en'}
+						aria-label={$t('nav.langEn')}
 					>
 						EN
 					</button>
@@ -89,13 +101,14 @@
 				<a
 					href={bookingHref}
 					class="inline-flex items-center justify-center rounded-full bg-brand px-3.5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-brand/90 focus:outline-none focus:ring-2 focus:ring-brand/40 sm:px-5 sm:text-sm"
+					aria-label={$t('nav.booking')}
 				>
 					{$t('nav.booking')}
 				</a>
 			</div>
 		</div>
 
-		<nav class="border-t border-slate-100 bg-white/70 lg:hidden">
+		<nav class="border-t border-slate-100 bg-white/70 lg:hidden" aria-label={$t('nav.primary')}>
 			<div
 				class="mx-auto flex max-w-6xl items-center gap-5 overflow-x-auto px-4 py-3 text-sm font-medium sm:px-6"
 			>
@@ -105,6 +118,7 @@
 						class={`whitespace-nowrap transition-colors hover:text-brand ${
 							page.url.pathname === item.href ? 'text-brand' : 'text-slate-700'
 						}`}
+						aria-current={page.url.pathname === item.href ? 'page' : undefined}
 					>
 						{$t(item.key)}
 					</a>
@@ -115,6 +129,7 @@
 
 	<!-- ONLY remaining isHome logic: max-width behavior -->
 	<main
+		id="main-content"
 		class={`w-full flex-1 ${
 			isHome ? '' : isFullWidth ? '' : 'mx-auto max-w-6xl px-4 py-10 sm:px-6'
 		}`}
@@ -200,6 +215,9 @@
 					<a href={resolve('/impressum')} class="hover:text-slate-900">{$t('footer.imprint')}</a>
 					<a href={resolve('/datenschutz')} class="hover:text-slate-900">{$t('footer.privacy')}</a>
 					<a href={resolve('/agb')} class="hover:text-slate-900">{$t('footer.terms')}</a>
+					<a href={resolve('/barrierefreiheit')} class="hover:text-slate-900">
+						{$t('footer.accessibility')}
+					</a>
 					<a href={resolve('/bildnachweise')} class="hover:text-slate-900">
 						{$t('footer.credits')}
 					</a>

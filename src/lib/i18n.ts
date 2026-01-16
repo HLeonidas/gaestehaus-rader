@@ -25,6 +25,10 @@ const translations: Record<Lang, Record<string, string>> = {
 		'nav.experiences': 'Erlebnisse',
 		'nav.booking': 'Jetzt buchen',
 		'nav.contact': 'Kontakt',
+		'nav.primary': 'Hauptnavigation',
+		'nav.langDe': 'Sprache Deutsch',
+		'nav.langEn': 'Sprache Englisch',
+		'accessibility.skip': 'Zum Inhalt springen',
 		'brand.name': 'Gästehaus Rader',
 		'hero.kicker': 'Alpine Ruhe · Kärnten',
 		'hero.title': 'Ihr Wohlfühl-Urlaub in Kärnten',
@@ -190,7 +194,31 @@ const translations: Record<Lang, Record<string, string>> = {
 		'footer.imprint': 'Impressum',
 		'footer.privacy': 'Datenschutz',
 		'footer.terms': 'AGB',
+		'footer.accessibility': 'Barrierefreiheit',
 		'footer.credits': 'Bild- & Lizenznachweise',
+		'accessibility.kicker': 'Barrierefreiheit',
+		'accessibility.title': 'Erklärung zur Barrierefreiheit',
+		'accessibility.intro':
+			'Wir möchten diese Website für alle Menschen zugänglich gestalten. Wir orientieren uns an den Anforderungen der EU-Richtlinie zur Barrierefreiheit sowie an den WCAG 2.1 (Konformitätsstufe AA).',
+		'accessibility.status.title': 'Stand der Vereinbarkeit',
+		'accessibility.status.body':
+			'Diese Website ist teilweise mit den Anforderungen der WCAG 2.1 AA vereinbar. Wir arbeiten laufend daran, die Nutzung weiter zu verbessern.',
+		'accessibility.limitations.title': 'Nicht barrierefreie Inhalte',
+		'accessibility.limitations.body':
+			'Trotz unserer Bemühungen können folgende Inhalte derzeit Einschränkungen aufweisen:',
+		'accessibility.limitations.item1':
+			'Einzelne Bildbeschreibungen können noch ergänzt oder präzisiert werden.',
+		'accessibility.limitations.item2':
+			'Einige Kontraste und Fokuszustände werden weiter optimiert.',
+		'accessibility.feedback.title': 'Feedback und Kontakt',
+		'accessibility.feedback.body':
+			'Wenn Ihnen Barrieren auffallen oder Sie Hilfe benötigen, schreiben Sie uns bitte an ',
+		'accessibility.feedback.cta': 'Zur Kontaktseite',
+		'accessibility.enforcement.title': 'Durchsetzungsverfahren',
+		'accessibility.enforcement.body':
+			'Wenn Sie keine zufriedenstellende Antwort auf Ihre Anfrage erhalten, können Sie sich an die zuständige Durchsetzungsstelle wenden.',
+		'accessibility.created.title': 'Erstellung dieser Erklärung',
+		'accessibility.created.body': 'Diese Erklärung wurde am 16. Januar 2026 erstellt.',
 		'about.title': 'Über Gästehaus Rader',
 		'about.body':
 			'Hier erzählen wir die Geschichte Ihres Hauses, Ihre Werte und was den Aufenthalt besonders macht.',
@@ -258,6 +286,10 @@ const translations: Record<Lang, Record<string, string>> = {
 		'nav.experiences': 'Experiences',
 		'nav.booking': 'Book now',
 		'nav.contact': 'Contact',
+		'nav.primary': 'Primary navigation',
+		'nav.langDe': 'Language: German',
+		'nav.langEn': 'Language: English',
+		'accessibility.skip': 'Skip to content',
 		'brand.name': 'Gästehaus Rader',
 		'hero.kicker': 'Alpine calm · Carinthia',
 		'hero.title': 'Your cozy getaway in Carinthia',
@@ -424,7 +456,31 @@ const translations: Record<Lang, Record<string, string>> = {
 		'footer.imprint': 'Imprint',
 		'footer.privacy': 'Privacy',
 		'footer.terms': 'Terms',
+		'footer.accessibility': 'Accessibility',
 		'footer.credits': 'Image & License Credits',
+		'accessibility.kicker': 'Accessibility',
+		'accessibility.title': 'Accessibility statement',
+		'accessibility.intro':
+			'We want this website to be accessible to everyone. We follow the requirements of EU accessibility law and the WCAG 2.1 guidelines (conformance level AA).',
+		'accessibility.status.title': 'Status of compliance',
+		'accessibility.status.body':
+			'This website is partially compliant with WCAG 2.1 AA. We are continuously improving accessibility.',
+		'accessibility.limitations.title': 'Non-accessible content',
+		'accessibility.limitations.body':
+			'Despite our efforts, the following areas may still have limitations:',
+		'accessibility.limitations.item1':
+			'Some image descriptions may still need more detail.',
+		'accessibility.limitations.item2':
+			'We are refining certain contrast and focus states.',
+		'accessibility.feedback.title': 'Feedback and contact',
+		'accessibility.feedback.body':
+			'If you notice any barriers or need assistance, please contact us at ',
+		'accessibility.feedback.cta': 'Go to the contact page',
+		'accessibility.enforcement.title': 'Enforcement procedure',
+		'accessibility.enforcement.body':
+			'If you do not receive a satisfactory response, you can contact the responsible enforcement body.',
+		'accessibility.created.title': 'Statement creation',
+		'accessibility.created.body': 'This statement was created on January 16, 2026.',
 		'about.title': 'About Gästehaus Rader',
 		'about.body':
 			'Here we share the story of your home, your values, and what makes each stay special.',

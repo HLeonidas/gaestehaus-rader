@@ -171,7 +171,7 @@
 						class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md"
 					>
 						<div class="flex h-10 w-10 items-center justify-center rounded-full bg-brand/10 text-brand">
-							<item.icon class="h-5 w-5" />
+							<item.icon class="h-5 w-5" aria-hidden="true" />
 						</div>
 						<h3 class="mt-4 text-base font-semibold text-slate-900">
 							{$t(`usp.${item.key}.title`)}
@@ -201,7 +201,7 @@
 							class="ml-auto inline-flex items-center gap-2 text-sm font-semibold text-brand hover:opacity-90"
 						>
 							{$t('rooms.section.cta')}
-							<ArrowRight class="h-4 w-4" />
+							<ArrowRight class="h-4 w-4" aria-hidden="true" />
 						</a>
 					</div>
 				</div>
@@ -219,7 +219,7 @@
 								<div class="relative">
 									<img
 										src={withAsset(r.images.main)}
-										alt=""
+										alt={`Photo of ${r.title}`}
 										class="h-[260px] w-full object-cover sm:h-[280px]"
 										loading="lazy"
 									/>
@@ -257,7 +257,7 @@
 														title={$t(`amenity.${a}`)}
 														aria-label={$t(`amenity.${a}`)}
 													>
-														<Icon class="h-4 w-4 text-slate-500" />
+														<Icon class="h-4 w-4 text-slate-500" aria-hidden="true" />
 													</span>
 												{/if}
 											{/each}
@@ -290,7 +290,7 @@
 						<div class="relative overflow-hidden rounded-3xl">
 							<img
 								src={withAsset('/images/solar.png')}
-								alt=""
+								alt="Solar panels on the guesthouse roof"
 								class="h-[320px] w-full object-cover sm:h-[380px]"
 								loading="lazy"
 							/>
@@ -304,7 +304,7 @@
 							<div
 								class="grid h-20 w-20 place-items-center rounded-2xl bg-emerald-600 text-white shadow-lg ring-1 ring-black/5"
 							>
-								<Sun class="h-8 w-8" />
+								<Sun class="h-8 w-8" aria-hidden="true" />
 							</div>
 						</div>
 					</div>
@@ -314,7 +314,7 @@
 						<div
 							class="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-700"
 						>
-							<Leaf class="h-4 w-4" />
+							<Leaf class="h-4 w-4" aria-hidden="true" />
 							ECO-FRIENDLY
 						</div>
 						<h2 class="text-3xl font-serif font-semibold leading-[0.95] text-slate-900 sm:text-4xl">
@@ -342,7 +342,7 @@
 									<div
 										class="mt-0.5 grid h-10 w-10 place-items-center rounded-xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100"
 									>
-										<Sun class="h-5 w-5" />
+										<Sun class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
 										<p class="text-sm font-semibold text-slate-900">Solar & Photovoltaik</p>
@@ -355,7 +355,7 @@
 									<div
 										class="mt-0.5 grid h-10 w-10 place-items-center rounded-xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100"
 									>
-										<Flame class="h-5 w-5" />
+										<Flame class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
 										<p class="text-sm font-semibold text-slate-900">Heizung mit Fernw„rme</p>
@@ -394,11 +394,13 @@
 					>
 						<img
 							src={withAsset('/images/house-summer.jpg')}
-							alt=""
+							alt="Guesthouse exterior in summer"
 							class="h-64 w-full object-cover sm:h-72"
 							loading="lazy"
 						/>
-						<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" ></div>
+						<div
+							class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
+						></div>
 						<div class="absolute bottom-0 left-0 right-0 p-6">
 							<h3 class="text-xl font-semibold text-white">
 								{$t('seasons.summer.title')}
@@ -420,11 +422,13 @@
 					>
 						<img
 							src={withAsset('/images/house-winter.jpg')}
-							alt=""
+							alt="Guesthouse exterior in winter"
 							class="h-64 w-full object-cover sm:h-72"
 							loading="lazy"
 						/>
-						<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" ></div>
+						<div
+							class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
+						></div>
 						<div class="absolute bottom-0 left-0 right-0 p-6">
 							<h3 class="text-xl font-semibold text-white">
 								{$t('seasons.winter.title')}
@@ -446,7 +450,7 @@
 			<section class="rounded-3xl px-0 py-0 sm:px-10 sm:py-14">
 				<div class="flex items-center gap-3">
 					<div class="grid h-10 w-10 place-items-center rounded-xl bg-brand/10 text-brand">
-						<Sparkles class="h-5 w-5" />
+						<Sparkles class="h-5 w-5" aria-hidden="true" />
 					</div>
 					<div>
 						<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">Ausstattung</p>
@@ -467,7 +471,7 @@
 					<div class="space-y-4">
 						<div class="flex items-center gap-2">
 							<div class="text-brand">
-								<BedDouble class="h-5 w-5" />
+								<BedDouble class="h-5 w-5" aria-hidden="true" />
 							</div>
 							<h3 class="text-base font-semibold text-slate-900">Basis-Komfort</h3>
 						</div>
@@ -476,7 +480,7 @@
 							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 								<div class="flex items-start gap-3">
 									<div class="grid h-9 w-9 place-items-center rounded-xl bg-brand/10 text-brand">
-										<Bed class="h-5 w-5" />
+										<Bed class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
 										<p class="text-sm font-semibold text-slate-900">Hochwertige Bettwäsche</p>
@@ -490,7 +494,7 @@
 							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 								<div class="flex items-start gap-3">
 									<div class="grid h-9 w-9 place-items-center rounded-xl bg-brand/10 text-brand">
-										<ShowerHead class="h-5 w-5" />
+										<ShowerHead class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
 										<p class="text-sm font-semibold text-slate-900">Frische Handtücher</p>
@@ -504,7 +508,7 @@
 							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 								<div class="flex items-start gap-3">
 									<div class="grid h-9 w-9 place-items-center rounded-xl bg-brand/10 text-brand">
-										<Leaf class="h-5 w-5" />
+										<Leaf class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
 										<p class="text-sm font-semibold text-slate-900">Bio-Pflegeprodukte</p>
@@ -521,7 +525,7 @@
 					<div class="space-y-4">
 						<div class="flex items-center gap-2">
 							<div class="text-brand">
-								<Microwave class="h-5 w-5" />
+								<Microwave class="h-5 w-5" aria-hidden="true" />
 							</div>
 							<h3 class="text-base font-semibold text-slate-900">Küche</h3>
 						</div>
@@ -530,7 +534,7 @@
 							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 								<div class="flex items-start gap-3">
 									<div class="grid h-9 w-9 place-items-center rounded-xl bg-brand/10 text-brand">
-										<Microwave class="h-5 w-5" />
+										<Microwave class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
 										<p class="text-sm font-semibold text-slate-900">Küchenzeile</p>
@@ -544,7 +548,7 @@
 							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 								<div class="flex items-start gap-3">
 									<div class="grid h-9 w-9 place-items-center rounded-xl bg-brand/10 text-brand">
-										<Coffee class="h-5 w-5" />
+										<Coffee class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
 										<p class="text-sm font-semibold text-slate-900">Nespresso-Maschine</p>
@@ -558,7 +562,7 @@
 							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 								<div class="flex items-start gap-3">
 									<div class="grid h-9 w-9 place-items-center rounded-xl bg-brand/10 text-brand">
-										<CupSoda class="h-5 w-5" />
+										<CupSoda class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
 										<p class="text-sm font-semibold text-slate-900">Wasserkocher</p>
@@ -572,7 +576,7 @@
 							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 								<div class="flex items-start gap-3">
 									<div class="grid h-9 w-9 place-items-center rounded-xl bg-brand/10 text-brand">
-										<Utensils class="h-5 w-5" />
+										<Utensils class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
 										<p class="text-sm font-semibold text-slate-900">Geschirr-Set</p>
@@ -586,7 +590,7 @@
 							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 								<div class="flex items-start gap-3">
 									<div class="grid h-9 w-9 place-items-center rounded-xl bg-brand/10 text-brand">
-										<Sandwich class="h-5 w-5" />
+										<Sandwich class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
 										<p class="text-sm font-semibold text-slate-900">Toaster</p>
@@ -603,7 +607,7 @@
 					<div class="space-y-4">
 						<div class="flex items-center gap-2">
 							<div class="text-brand">
-								<House class="h-5 w-5" />
+								<House class="h-5 w-5" aria-hidden="true" />
 							</div>
 							<h3 class="text-base font-semibold text-slate-900">Haus-Ausstattung</h3>
 						</div>
@@ -612,7 +616,7 @@
 							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 								<div class="flex items-start gap-3">
 									<div class="grid h-9 w-9 place-items-center rounded-xl bg-brand/10 text-brand">
-										<Wifi class="h-5 w-5" />
+										<Wifi class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
 										<p class="text-sm font-semibold text-slate-900">High-Speed WLAN</p>
@@ -626,7 +630,7 @@
 							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 								<div class="flex items-start gap-3">
 									<div class="grid h-9 w-9 place-items-center rounded-xl bg-brand/10 text-brand">
-										<SquareParking class="h-5 w-5" />
+										<SquareParking class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
 										<p class="text-sm font-semibold text-slate-900">Privater Parkplatz</p>
@@ -640,7 +644,7 @@
 							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 								<div class="flex items-start gap-3">
 									<div class="grid h-9 w-9 place-items-center rounded-xl bg-brand/10 text-brand">
-										<Snowflake class="h-5 w-5" />
+										<Snowflake class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
 										<p class="text-sm font-semibold text-slate-900">Skiraum mit Trockner</p>
