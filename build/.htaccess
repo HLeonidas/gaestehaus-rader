@@ -1,11 +1,21 @@
+# --- UTF-8 for text files (incl. llms.txt) ---
+AddDefaultCharset UTF-8
+<IfModule mod_mime.c>
+  AddCharset UTF-8 .txt
+</IfModule>
+
 <IfModule mod_rewrite.c>
-	RewriteEngine On
+  RewriteEngine On
 
-	# If file or folder exists: serve it normally
-	RewriteCond %{REQUEST_FILENAME} -f [OR]
-	RewriteCond %{REQUEST_FILENAME} -d
-	RewriteRule ^ - [L]
+  # Allow SvelteKit build assets and common static folders
+  RewriteRule ^_app/ - [L]
+  RewriteRule ^(images|assets|fonts|icons)/ - [L]
+  RewriteRule ^(robots\.txt|sitemap\.xml|llms\.txt)$ - [L]
 
-	# Otherwise always serve the SPA entry
-	RewriteRule ^ index.html [L]
+  # If a real file exists: serve it
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteRule ^ - [L]
+
+  # Otherwise serve SPA entry
+  RewriteRule ^ index.html [L]
 </IfModule>
