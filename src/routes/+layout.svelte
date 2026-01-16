@@ -50,7 +50,7 @@
 					class="flex h-16 w-44 items-center justify-center rounded-xl bg-white shadow-sm ring-1 ring-slate-200 sm:h-20 sm:w-52"
 				>
 					<img
-						src={withAsset('/images/logo-rader-gitschtal.jpg')}
+						src={withAsset('/images/other/logo-rader-gitschtal.jpg')}
 						alt="Gästehaus Rader"
 						class="h-12 w-auto object-contain sm:h-14"
 						loading="lazy"
@@ -149,7 +149,7 @@
 					<div class="flex items-center gap-3">
 						<div class="flex items-center justify-center rounded-lg shadow-sm">
 							<img
-								src={withAsset('/images/logo-rader-gitschtal.jpg')}
+								src={withAsset('/images/other/logo-rader-gitschtal.jpg')}
 								alt="Gästehaus Rader"
 								class="h-12 w-auto object-contain sm:h-14"
 								loading="lazy"

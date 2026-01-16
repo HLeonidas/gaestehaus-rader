@@ -42,8 +42,8 @@
 	const currentMonth = new Date().getMonth();
 	const heroImage =
 		currentMonth >= 4 && currentMonth <= 8
-			? withAsset('/images/balkon-ausblick.jpg')
-			: withAsset('/images/winter-balkon_ausblick-1.jpg');
+			? withAsset('/images/other/balkon-ausblick.jpg')
+			: withAsset('/images/other/winter-balkon_ausblick-1.jpg');
 
 	const rooms = accommodations;
 	const accommodationsBase = resolve('/unterkuenfte-preise');
@@ -358,7 +358,7 @@
 					<div class="relative">
 						<div class="relative overflow-hidden rounded-3xl">
 							<img
-								src={withAsset('/images/solar.png')}
+								src={withAsset('/images/other/solar.png')}
 								alt={$t('home.sustainability.imageAlt')}
 								class="h-[320px] w-full object-cover sm:h-[380px]"
 								loading="lazy"
@@ -461,7 +461,7 @@
 						class="group relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-200 shadow-sm"
 					>
 						<img
-							src={withAsset('/images/house-summer.jpg')}
+							src={withAsset('/images/other/house-summer.jpg')}
 							alt={$t('home.seasons.summer.imageAlt')}
 							class="h-64 w-full object-cover sm:h-72"
 							loading="lazy"
@@ -489,7 +489,7 @@
 						class="group relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-200 shadow-sm"
 					>
 						<img
-							src={withAsset('/images/house-winter.jpg')}
+							src={withAsset('/images/other/house-winter.jpg')}
 							alt={$t('home.seasons.winter.imageAlt')}
 							class="h-64 w-full object-cover sm:h-72"
 							loading="lazy"

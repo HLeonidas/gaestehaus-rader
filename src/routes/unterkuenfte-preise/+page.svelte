@@ -47,7 +47,7 @@
 	const accommodationsBase = resolve('/unterkuenfte-preise');
 	const siteUrl = 'https://rader-gitschtal.at';
 	const ogImage = $derived.by(() =>
-		new URL(withAsset(rooms[0]?.images?.main ?? '/images/1/room-1.jpg'), siteUrl).toString()
+		new URL(withAsset(rooms[0]?.images?.main ?? '/images/1/main.jpg'), siteUrl).toString()
 	);
 	const roomsJsonLd = $derived.by(() =>
 		JSON.stringify({

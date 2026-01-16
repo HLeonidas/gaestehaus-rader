@@ -28,7 +28,7 @@
 				>
 					<!-- Replace src with your image -->
 					<img
-						src={withAsset('/images/familie.jpg')}
+						src={withAsset('/images/other/familie.jpg')}
 						alt="Gästehaus Rader"
 						class="h-full w-full object-cover"
 					/>

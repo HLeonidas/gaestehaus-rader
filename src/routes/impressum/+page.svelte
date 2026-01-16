@@ -89,7 +89,7 @@
 					<!-- Avatar -->
 					<div class="h-28 w-28 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
 						<img
-							src={withAsset('/images/lh.jpg')}
+							src={withAsset('/images/other/lh.jpg')}
 							alt="Webdesign Profil"
 							class="h-full w-full object-cover"
 							loading="lazy"
