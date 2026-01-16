@@ -20,6 +20,14 @@
 	const siteUrl = 'https://rader-gitschtal.at';
 	const canonicalUrl = $derived.by(() => new URL(page.url.pathname, siteUrl).toString());
 
+	const normalizePath = (path: string) => (path === '/' ? '/' : path.replace(/\/+$/, ''));
+	const isActive = (href: string) => {
+		const current = normalizePath(page.url.pathname);
+		const target = normalizePath(href);
+
+		return current === target || (target !== '/' && current.startsWith(`${target}/`));
+	};
+
 	// Keep ONLY for max-width control
 	const isHome = $derived(page.url.pathname === resolve('/'));
 	const isFullWidth = $derived(page.url.pathname.startsWith(resolve('/buchen')));
@@ -66,9 +74,9 @@
 					<a
 						href={item.href}
 						class={`transition-colors hover:text-brand ${
-							page.url.pathname === item.href ? 'text-brand' : 'text-slate-700'
+							isActive(item.href) ? 'text-brand' : 'text-slate-700'
 						}`}
-						aria-current={page.url.pathname === item.href ? 'page' : undefined}
+						aria-current={isActive(item.href) ? 'page' : undefined}
 					>
 						{$t(item.key)}
 					</a>
@@ -121,9 +129,9 @@
 					<a
 						href={item.href}
 						class={`whitespace-nowrap transition-colors hover:text-brand ${
-							page.url.pathname === item.href ? 'text-brand' : 'text-slate-700'
+							isActive(item.href) ? 'text-brand' : 'text-slate-700'
 						}`}
-						aria-current={page.url.pathname === item.href ? 'page' : undefined}
+						aria-current={isActive(item.href) ? 'page' : undefined}
 					>
 						{$t(item.key)}
 					</a>
