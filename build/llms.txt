@@ -4,11 +4,11 @@ Summary:
 Family-run guesthouse in Weissbriach (Gitschtal, Carinthia, Austria) with three apartments. Static site with basic prices, amenities, and contact/booking links.
 
 Key pages:
-- Home: https://rader-gitschtal.at/
-- Rooms & prices: https://rader-gitschtal.at/unterkuenfte-preise
-- Booking: https://rader-gitschtal.at/buchen
-- Contact: https://rader-gitschtal.at/kontakt
-- About: https://rader-gitschtal.at/ueber-uns
+- Home: https://www.rader-gitschtal.at/
+- Rooms & prices: https://www.rader-gitschtal.at/unterkuenfte-preise/
+- Booking: https://www.rader-gitschtal.at/buchen/
+- Contact: https://www.rader-gitschtal.at/kontakt/
+- About: https://www.rader-gitschtal.at/ueber-uns/
 
 Policies:
 - Pricing shown in EUR. Prices can be seasonal and may change.
