@@ -19,7 +19,9 @@
 					<p>Weißbriach 92</p>
 					<p>9622 Weißbriach</p>
 					<p>Österreich</p>
-					<p class="mt-3">Telefon: <a class="hover:text-slate-900" href="tel:+434286222">+43 4286 222</a></p>
+					<p class="mt-3">
+						Telefon: <a class="hover:text-slate-900" href="tel:+434286222">+43 4286 222</a>
+					</p>
 					<p>
 						E-Mail:
 						<a class="hover:text-slate-900" href="mailto:info@rader-gitschtal.at">
@@ -45,8 +47,8 @@
 			<section>
 				<h2 class="text-base font-semibold text-slate-900">3. Keine Cookies / kein Tracking</h2>
 				<p class="mt-3">
-					Unsere Website verwendet keine Cookies zu Analyse- oder Marketingzwecken und kein Tracking (z. B.
-					Google Analytics oder ähnliche Dienste).
+					Unsere Website verwendet keine Cookies zu Analyse- oder Marketingzwecken und kein Tracking (z.
+					B. Google Analytics oder ähnliche Dienste).
 				</p>
 			</section>
 
@@ -60,8 +62,8 @@
 					<p>Deutschland</p>
 				</div>
 				<p class="mt-3">
-					Beim Besuch unserer Website werden durch DomainFactory technisch notwendige Daten verarbeitet, um
-					den sicheren und stabilen Betrieb der Website zu gewährleisten (Server-Logfiles).
+					Beim Besuch unserer Website werden durch DomainFactory technisch notwendige Daten verarbeitet,
+					um den sicheren und stabilen Betrieb der Website zu gewährleisten (Server-Logfiles).
 				</p>
 				<p class="mt-3">Dabei können folgende Daten verarbeitet werden:</p>
 				<ul class="mt-2 list-inside list-disc space-y-1">
@@ -89,8 +91,9 @@
 			<section>
 				<h2 class="text-base font-semibold text-slate-900">5. Kontakt per E-Mail oder Telefon</h2>
 				<p class="mt-3">
-					Wenn Sie per E-Mail oder telefonisch mit uns Kontakt aufnehmen, werden die von Ihnen übermittelten
-					Daten (z. B. Name, Kontaktdaten, Inhalt Ihrer Anfrage) verarbeitet, um Ihre Anfrage zu bearbeiten.
+					Wenn Sie per E-Mail oder telefonisch mit uns Kontakt aufnehmen, werden die von Ihnen
+					übermittelten Daten (z. B. Name, Kontaktdaten, Inhalt Ihrer Anfrage) verarbeitet, um Ihre
+					Anfrage zu bearbeiten.
 				</p>
 				<p class="mt-3">
 					Zweck: Bearbeitung von Anfragen<br />
@@ -98,8 +101,8 @@
 				</p>
 				<ul class="mt-2 list-inside list-disc space-y-1">
 					<li>
-						Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen), sofern Ihre Anfrage auf eine Buchung oder
-						Leistung abzielt
+						Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen), sofern Ihre Anfrage auf eine Buchung
+						oder Leistung abzielt
 					</li>
 					<li>Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Kommunikation)</li>
 				</ul>
@@ -110,25 +113,22 @@
 			</section>
 
 			<section>
-				<h2 class="text-base font-semibold text-slate-900">6. Google Fonts</h2>
+				<h2 class="text-base font-semibold text-slate-900">6. Schriftarten (lokal gehostet)</h2>
+
 				<p class="mt-3">
-					Unsere Website verwendet Google Fonts, die über einen externen Link von Servern von Google geladen
-					werden.
+					Unsere Website verwendet die Schriftart „Montserrat“. Diese Schriftart wird lokal auf unserem
+					eigenen Server gespeichert und von dort geladen.
 				</p>
+
 				<p class="mt-3">
-					Beim Aufruf unserer Website wird eine Verbindung zu Servern von Google Ireland Limited, Gordon
-					House, Barrow Street, Dublin 4, Irland hergestellt. Dabei wird insbesondere Ihre IP-Adresse an
-					Google übertragen.
+					Dabei wird keine Verbindung zu Servern von Google oder anderen externen Anbietern hergestellt.
+					Es erfolgt somit keine Übertragung personenbezogener Daten an Dritte im Zusammenhang mit der
+					Nutzung der Schriftart.
 				</p>
-				<p class="mt-3">Es kann nicht ausgeschlossen werden, dass Daten auch an Google-Server in den USA übertragen werden.</p>
+
 				<p class="mt-3">
 					Zweck: Einheitliche und ansprechende Darstellung unserer Website<br />
 					Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse)
-				</p>
-				<p class="mt-3">
-					Hinweis: Wenn Sie dies nicht wünschen, können Sie die Darstellung durch Deaktivierung externer
-					Schriftarten in Ihrem Browser verhindern. In diesem Fall wird eine Standardschrift Ihres Systems
-					verwendet.
 				</p>
 			</section>
 
@@ -138,8 +138,9 @@
 					Auf unserer Website ist Google Maps eingebunden, um unseren Standort darzustellen.
 				</p>
 				<p class="mt-3">
-					Beim Aufruf der Kartenfunktion wird eine Verbindung zu Servern von Google Ireland Limited, Gordon
-					House, Barrow Street, Dublin 4, Irland hergestellt. Dabei können folgende Daten verarbeitet werden:
+					Beim Aufruf der Kartenfunktion wird eine Verbindung zu Servern von Google Ireland Limited,
+					Gordon House, Barrow Street, Dublin 4, Irland hergestellt. Dabei können folgende Daten
+					verarbeitet werden:
 				</p>
 				<ul class="mt-2 list-inside list-disc space-y-1">
 					<li>IP-Adresse</li>
@@ -155,8 +156,8 @@
 				</p>
 				<p class="mt-3">
 					Wenn Sie mit der Datenübertragung an Google nicht einverstanden sind, können Sie Google Maps
-					deaktivieren, indem Sie JavaScript in Ihrem Browser deaktivieren. Die Kartenanzeige steht dann nicht
-					zur Verfügung.
+					deaktivieren, indem Sie JavaScript in Ihrem Browser deaktivieren. Die Kartenanzeige steht dann
+					nicht zur Verfügung.
 				</p>
 			</section>
 
@@ -166,8 +167,8 @@
 				</h2>
 				<p class="mt-3">
 					Auf unserer Website bieten wir die Möglichkeit, unsere Appartements online zu buchen. Die
-					Buchungsfunktion wird dabei über einen externen Drittanbieter bereitgestellt und mittels iFrame in
-					unsere Website eingebunden.
+					Buchungsfunktion wird dabei über einen externen Drittanbieter bereitgestellt und mittels iFrame
+					in unsere Website eingebunden.
 				</p>
 				<p class="mt-3">Anbieter:</p>
 				<div class="mt-2 space-y-1">
@@ -175,9 +176,9 @@
 					<p class="text-slate-500">[Adresse des Buchungsanbieters eintragen]</p>
 				</div>
 				<p class="mt-3">
-					Beim Aufruf der Buchungsmaske wird eine direkte Verbindung zwischen Ihrem Browser und den Servern
-					des Buchungsanbieters hergestellt. Dabei können insbesondere folgende personenbezogene Daten
-					verarbeitet werden:
+					Beim Aufruf der Buchungsmaske wird eine direkte Verbindung zwischen Ihrem Browser und den
+					Servern des Buchungsanbieters hergestellt. Dabei können insbesondere folgende personenbezogene
+					Daten verarbeitet werden:
 				</p>
 				<ul class="mt-2 list-inside list-disc space-y-1">
 					<li>IP-Adresse</li>
@@ -186,8 +187,8 @@
 					<li>ggf. Buchungs- und Kontaktdaten, die Sie im Buchungsformular eingeben</li>
 				</ul>
 				<p class="mt-3">
-					Wir haben keinen Einfluss auf Art, Umfang und Zweck der Datenverarbeitung durch den Buchungsanbieter.
-					Die Verarbeitung erfolgt in eigener Verantwortung des Buchungsanbieters.
+					Wir haben keinen Einfluss auf Art, Umfang und Zweck der Datenverarbeitung durch den
+					Buchungsanbieter. Die Verarbeitung erfolgt in eigener Verantwortung des Buchungsanbieters.
 				</p>
 				<p class="mt-3">
 					Zweck: Bereitstellung einer Online-Buchungsmöglichkeit für unsere Gäste<br />
@@ -200,7 +201,9 @@
 				<p class="mt-3">
 					Weitere Informationen zur Datenverarbeitung finden Sie in der Datenschutzerklärung des
 					Buchungsanbieters:
-					<span class="text-slate-500">[Link zur Datenschutzerklärung des Buchungsanbieters eintragen]</span>
+					<span class="text-slate-500"
+						>[Link zur Datenschutzerklärung des Buchungsanbieters eintragen]</span
+					>
 				</p>
 			</section>
 
@@ -212,16 +215,17 @@
 				</p>
 				<p class="mt-3">
 					Durch die Einbindung von Google Fonts und Google Maps kann Google als Empfänger Ihrer Daten
-					auftreten (siehe Punkte 6 und 7). Der Buchungsanbieter kann als Empfänger auftreten (siehe Punkt 8).
+					auftreten (siehe Punkte 6 und 7). Der Buchungsanbieter kann als Empfänger auftreten (siehe
+					Punkt 8).
 				</p>
 			</section>
 
 			<section>
 				<h2 class="text-base font-semibold text-slate-900">10. Ihre Rechte</h2>
 				<p class="mt-3">
-					Sie haben nach der DSGVO folgende Rechte: Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16 DSGVO),
-					Löschung (Art. 17 DSGVO), Einschränkung der Verarbeitung (Art. 18 DSGVO), Datenübertragbarkeit (Art. 20
-					DSGVO), Widerspruch gegen Verarbeitung (Art. 21 DSGVO).
+					Sie haben nach der DSGVO folgende Rechte: Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16
+					DSGVO), Löschung (Art. 17 DSGVO), Einschränkung der Verarbeitung (Art. 18 DSGVO),
+					Datenübertragbarkeit (Art. 20 DSGVO), Widerspruch gegen Verarbeitung (Art. 21 DSGVO).
 				</p>
 				<p class="mt-3">
 					Zur Ausübung Ihrer Rechte kontaktieren Sie uns bitte unter:
@@ -244,19 +248,21 @@
 				<h2 class="text-base font-semibold text-slate-900">12. Datensicherheit</h2>
 				<p class="mt-3">
 					Wir setzen technische und organisatorische Sicherheitsmaßnahmen ein, um Ihre Daten vor Verlust,
-					Missbrauch und unbefugtem Zugriff zu schützen. Unsere Website verwendet eine TLS-/HTTPS-Verschlüsselung.
+					Missbrauch und unbefugtem Zugriff zu schützen. Unsere Website verwendet eine
+					TLS-/HTTPS-Verschlüsselung.
 				</p>
 			</section>
 
 			<section>
-				<h2 class="text-base font-semibold text-slate-900">13. Änderungen dieser Datenschutzerklärung</h2>
+				<h2 class="text-base font-semibold text-slate-900">
+					13. Änderungen dieser Datenschutzerklärung
+				</h2>
 				<p class="mt-3">
-					Wir behalten uns vor, diese Datenschutzerklärung bei Bedarf anzupassen. Es gilt die jeweils aktuelle
-					Version auf unserer Website.
+					Wir behalten uns vor, diese Datenschutzerklärung bei Bedarf anzupassen. Es gilt die jeweils
+					aktuelle Version auf unserer Website.
 				</p>
 				<p class="mt-3">Stand: 15.01.2026</p>
 			</section>
 		</div>
 	</section>
 </div>
-

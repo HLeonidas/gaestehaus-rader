@@ -29,13 +29,21 @@
 
 			<div class="space-y-3 text-sm text-slate-600">
 				<p class="text-sm font-semibold text-slate-900">Rechtliche Angaben</p>
-				<p>Rechtsform: <span class="text-slate-500">noch zu ergänzen</span></p>
-				<p>Firmenbuchnummer: <span class="text-slate-500">noch zu ergänzen</span></p>
-				<p>Firmenbuchgericht: <span class="text-slate-500">noch zu ergänzen</span></p>
-				<p>UID-Nummer: <span class="text-slate-500">noch zu ergänzen</span></p>
-				<p>Gewerbebehörde: <span class="text-slate-500">noch zu ergänzen</span></p>
-				<p>Berufsbezeichnung: <span class="text-slate-500">Beherbergungsbetrieb</span></p>
-				<p>Staat der Verleihung: <span class="text-slate-500">Österreich</span></p>
+				<p>Rechtsform: <span class="text-slate-500">Privatvermietung</span></p>
+				<p>Firmenbuchnummer: <span class="text-slate-500">nicht im Firmenbuch eingetragen</span></p>
+				<p>Firmenbuchgericht: <span class="text-slate-500">entf&auml;llt</span></p>
+				<p>UID-Nummer: <span class="text-slate-500">entf&auml;llt</span></p>
+				<p>Gewerbebeh&ouml;rde: <span class="text-slate-500">Bezirkshauptmannschaft Hermagor</span></p>
+				<p>
+					Berufsbezeichnung:
+					<span class="text-slate-500">Beherbergungsbetrieb / Privatvermietung</span>
+				</p>
+				<p>Staat der Verleihung: <span class="text-slate-500">&Ouml;sterreich</span></p>
+				<p>
+					Medieninhaber (&sect;25 MedienG):
+					<span class="text-slate-500">Familie Herold-Hueber, Wei&szlig;briach 92, 9622 Wei&szlig;briach</span>
+				</p>
+				<p>Unternehmensgegenstand: <span class="text-slate-500">Beherbergung von G&auml;sten</span></p>
 			</div>
 		</div>
 
@@ -65,3 +73,5 @@
 		</div>
 	</section>
 </div>
+
+

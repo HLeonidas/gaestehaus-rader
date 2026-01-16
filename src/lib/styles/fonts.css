@@ -1,0 +1,19 @@
+/* === Montserrat Variable Font - Normal === */
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/montserrat/Montserrat-VariableFont_wght.woff2') format('woff2'),
+       url('/fonts/montserrat/Montserrat-VariableFont_wght.woff') format('woff');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* === Montserrat Variable Font - Italic === */
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/montserrat/Montserrat-Italic-VariableFont_wght.woff2') format('woff2'),
+       url('/fonts/montserrat/Montserrat-Italic-VariableFont_wght.woff') format('woff');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
