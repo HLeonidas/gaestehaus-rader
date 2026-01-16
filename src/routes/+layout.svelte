@@ -17,7 +17,7 @@
 
 	const withAsset = (path: string) => asset(path);
 	const bookingHref = resolve('/buchen');
-	const siteUrl = 'https://rader-gitschtal.at';
+	const siteUrl = 'https://www.rader-gitschtal.at';
 	const canonicalUrl = $derived.by(() => new URL(page.url.pathname, siteUrl).toString());
 
 	const normalizePath = (path: string) => (path === '/' ? '/' : path.replace(/\/+$/, ''));

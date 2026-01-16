@@ -47,7 +47,7 @@
 
 	const rooms = accommodations;
 	const accommodationsBase = resolve('/unterkuenfte-preise');
-	const siteUrl = 'https://rader-gitschtal.at';
+	const siteUrl = 'https://www.rader-gitschtal.at';
 	const ogImage = $derived.by(() => new URL(heroImage, siteUrl).toString());
 	const homeJsonLd = $derived.by(() =>
 		JSON.stringify({
@@ -56,6 +56,8 @@
 			name: 'Gästehaus Rader',
 			url: siteUrl,
 			image: ogImage,
+			description: $t('home.seo.description'),
+			priceRange: '€€',
 			address: {
 				'@type': 'PostalAddress',
 				streetAddress: 'Weißbriach 92',
@@ -115,10 +117,10 @@
 </script>
 
 <svelte:head>
-	<title>Gästehaus Rader</title>
-	<meta name="description" content={$t('hero.subtitle')} />
-	<meta property="og:title" content={$t('hero.title')} />
-	<meta property="og:description" content={$t('hero.subtitle')} />
+	<title>{$t('home.seo.title')}</title>
+	<meta name="description" content={$t('home.seo.description')} />
+	<meta property="og:title" content={$t('home.seo.title')} />
+	<meta property="og:description" content={$t('home.seo.description')} />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content={siteUrl} />
 	<meta property="og:image" content={ogImage} />

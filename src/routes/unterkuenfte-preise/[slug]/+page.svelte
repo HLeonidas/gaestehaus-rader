@@ -31,7 +31,7 @@
 	const accommodation = $derived.by(() => data.accommodation);
 
 	const withAsset = (path: string) => asset(path);
-	const siteUrl = 'https://rader-gitschtal.at';
+	const siteUrl = 'https://www.rader-gitschtal.at';
 
 	const amenityIcons = {
 		wifi: Wifi,

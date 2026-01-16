@@ -31,8 +31,11 @@ const translations: Record<Lang, Record<string, string>> = {
 		'accessibility.skip': 'Zum Inhalt springen',
 		'brand.name': 'Gästehaus Rader',
 		'hero.kicker': 'Alpine Ruhe · Kärnten',
-		'hero.title': 'Ihr Wohlfühl-Urlaub in Kärnten',
+		'hero.title': 'Gästehaus Rader – Ferienwohnungen in Weißbriach im Gitschtal',
 		'hero.subtitle': 'Erleben Sie alpine Gelassenheit und kärntner Gastfreundschaft in ihrer schönsten Form.',
+		'home.seo.title': 'Gästehaus Rader – Ferienwohnungen in Weißbriach im Gitschtal',
+		'home.seo.description':
+			'Gästehaus Rader – gemütliche Ferienwohnungen in Weißbriach im Gitschtal, Kärnten. Sommer- und Winterurlaub in den Alpen. Jetzt Unterkunft buchen!',
 		'hero.cta.primary': 'Zimmer entdecken',
 		'hero.cta.secondary': 'Region erkunden',
 		'booking.bar.checkin': 'Anreise',
@@ -340,6 +343,16 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.gallery.imageAlt.sliderWinter': 'Winterliche Stimmung im Gitschtal',
 		'home.gallery.imageAlt.tischtennis': 'Tischtennis im Außenbereich',
 		'home.gallery.imageAlt.winterBalkon': 'Winterlicher Balkon-Ausblick',
+		'landing.weissbriach.kicker': 'Unterkunft Weißbriach',
+		'landing.weissbriach.title': 'Unterkunft in Weißbriach – Gästehaus Rader',
+		'landing.weissbriach.subtitle': 'Ferienwohnungen im Gitschtal, Kärnten',
+		'landing.weissbriach.body1':
+			'Mitten im Gitschtal, nur wenige Schritte vom Ortskern Weißbriachs entfernt, liegt das Gästehaus Rader – Ihre ruhige Basis für Sommer- und Winterurlaub.',
+		'landing.weissbriach.body2':
+			'Unsere drei Appartements bieten Platz für Paare und Familien, mit Balkon, moderner Ausstattung und viel Raum zum Ankommen.',
+		'landing.weissbriach.body3':
+			'Ob Wandern, Radfahren, Skifahren oder entspannte Tage am See: Von hier erreichen Sie die schönsten Ziele Kärntens schnell und unkompliziert.',
+		'landing.weissbriach.cta': 'Verfügbarkeit prüfen',
 		'footer.tagline': 'Ihr Rückzugsort in den Kärntner Alpen. Tradition trifft auf modernen Komfort.',
 		'footer.quicklinks': 'Schnellzugriff',
 		'footer.winter': 'Winterurlaub',
@@ -505,9 +518,12 @@ const translations: Record<Lang, Record<string, string>> = {
 		'accessibility.skip': 'Skip to content',
 		'brand.name': 'Gästehaus Rader',
 		'hero.kicker': 'Alpine calm · Carinthia',
-		'hero.title': 'Your cozy getaway in Carinthia',
+		'hero.title': 'Guesthouse Rader – Holiday apartments in Weissbriach, Gitschtal',
 		'hero.subtitle':
 			'Experience alpine serenity and Carinthian hospitality at its finest.',
+		'home.seo.title': 'Guesthouse Rader – Holiday apartments in Weissbriach, Gitschtal',
+		'home.seo.description':
+			'Guesthouse Rader – cozy holiday apartments in Weissbriach, Gitschtal, Carinthia. Summer and winter breaks in the Alps. Book your stay now!',
 		'hero.cta.primary': 'Discover rooms',
 		'hero.cta.secondary': 'Explore the region',
 		'booking.bar.checkin': 'Check-in',
@@ -808,6 +824,16 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.gallery.imageAlt.sliderWinter': 'Winter atmosphere in the Gitschtal',
 		'home.gallery.imageAlt.tischtennis': 'Outdoor table tennis',
 		'home.gallery.imageAlt.winterBalkon': 'Winter balcony view',
+		'landing.weissbriach.kicker': 'Accommodation in Weissbriach',
+		'landing.weissbriach.title': 'Accommodation in Weissbriach – Guesthouse Rader',
+		'landing.weissbriach.subtitle': 'Holiday apartments in the Gitschtal, Carinthia',
+		'landing.weissbriach.body1':
+			'In the heart of the Gitschtal, just steps from the village center of Weissbriach, Guesthouse Rader is your quiet base for summer and winter stays.',
+		'landing.weissbriach.body2':
+			'Our three apartments are ideal for couples and families, with balconies, modern amenities, and plenty of space to settle in.',
+		'landing.weissbriach.body3':
+			'Whether hiking, cycling, skiing, or relaxing by the lake, you can reach Carinthia’s best spots quickly and easily from here.',
+		'landing.weissbriach.cta': 'Check availability',
 		'footer.tagline': 'Alpine guesthouse in the Gitschtal with warm apartments and personal service.',
 		'footer.quicklinks': 'Quick links',
 		'footer.winter': 'Winter getaway',
