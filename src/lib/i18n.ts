@@ -328,9 +328,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.amenities.house.ski.body':
 			'Beheizter Abstellraum für Ihre Skiausrüstung mit integriertem Schuhtrockner.',
 		'home.gallery.kicker': 'Bilder',
-		'home.gallery.title': 'Mehr Eindrücke von unserem Reiseziel',
+		'home.gallery.title': 'Mehr Eindrücke aus unserem Gästehaus im Gitschtal',
 		'home.gallery.subtitle':
-			'Ein paar weitere Perspektiven aus Weißbriach und dem Gitschtal - zu jeder Jahreszeit.',
+			'Erleben Sie Weißbriach und das Gitschtal von ihrer schönsten Seite – sonnige Sommertage im Garten, gemütliche Stunden auf der Terrasse und verschneite Winterlandschaften direkt vor der Haustür. Zu jeder Jahreszeit ein Ort zum Ankommen und Wohlfühlen.',
 		'home.gallery.imageAlt.balkon': 'Balkon mit Ausblick',
 		'home.gallery.imageAlt.sommer': 'Gästehaus im Sommer',
 		'home.gallery.imageAlt.winter': 'Gästehaus im Winter',
@@ -796,9 +796,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.amenities.house.ski.title': 'Ski room with dryer',
 		'home.amenities.house.ski.body': 'Heated storage for your ski gear with built-in boot dryer.',
 		'home.gallery.kicker': 'Gallery',
-		'home.gallery.title': 'More images of our destination',
+		'home.gallery.title': 'More impressions from our guesthouse in the Gitschtal',
 		'home.gallery.subtitle':
-			'A few more perspectives from Weißbriach and the Gitschtal - in every season.',
+			'Discover Weißbriach and the Gitschtal at their finest — sunny summer days in the garden, cozy hours on the terrace, and snowy winter landscapes right outside your door. A place to arrive and feel at home in every season.',
 		'home.gallery.imageAlt.balkon': 'Balcony with a view',
 		'home.gallery.imageAlt.sommer': 'Guesthouse in summer',
 		'home.gallery.imageAlt.winter': 'Guesthouse in winter',
