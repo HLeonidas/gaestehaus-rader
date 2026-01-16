@@ -41,8 +41,8 @@
 	<title>{$t('contact.title')} - {$t('brand.name')}</title>
 </svelte:head>
 
-<div class="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6">
-	<section class="rounded-3xl border border-slate-200 bg-white p-10 shadow-sm sm:p-12">
+<div class="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
+	<section class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10 lg:p-12">
 		<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
 			{$t('brand.name')}
 		</p>
@@ -54,8 +54,8 @@
 			{$t('contact.subtitle')}
 		</p>
 
-		<div class="mt-10 grid gap-8 border-t border-slate-100 lg:grid-cols-[1.2fr,1fr]">
-			<div class="mt-8 grid gap-8 sm:grid-cols-2">
+		<div class="mt-8 grid gap-8 border-t border-slate-100 lg:grid-cols-[1.2fr,1fr]">
+			<div class="mt-6 grid gap-8 sm:grid-cols-2">
 				<div>
 					<p class="text-sm font-semibold text-slate-900">{$t('contact.address.title')}</p>
 					<div class="mt-3 space-y-1 text-sm text-slate-600">
@@ -101,9 +101,7 @@
 				</div>
 			</div>
 
-			<div
-				class="relative mt-8 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
-			>
+			<div class="relative mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
 				{#if mapEnabled}
 					<iframe
 						title="Google Maps"
@@ -125,7 +123,7 @@
 					</div>
 				{:else}
 					<!-- Placeholder / consent card -->
-					<div class="grid h-[320px] place-items-center px-6 py-8 sm:h-[360px]">
+					<div class="grid h-[320px] place-items-center px-4 py-6 sm:h-[360px]">
 						<div class="max-w-sm text-center">
 							<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
 								{$t('contact.map.label')}
@@ -164,10 +162,10 @@
 				{/if}
 			</div>
 		</div>
-		<div class="mt-10 grid gap-8 border-t border-slate-100 lg:grid-cols-[1.2fr,1fr]">
-			<div class="mt-8 grid gap-8 sm:grid-cols-2">
+		<div class="mt-8 grid gap-8 border-t border-slate-100 lg:grid-cols-[1.2fr,1fr]">
+			<div class="mt-6 grid gap-8 sm:grid-cols-2">
 				<div class="sm:col-span-2">
-					<div class="grid gap-6 rounded-2xl bg-slate-50 p-6 text-xs text-slate-600 sm:grid-cols-2">
+					<div class="grid gap-6 rounded-2xl bg-slate-50 p-4 text-xs text-slate-600 sm:p-6 sm:grid-cols-2">
 						<div>
 							<p class="font-semibold uppercase tracking-[0.2em] text-slate-500">IBAN</p>
 							<div class="mt-2 flex flex-wrap items-center gap-3">

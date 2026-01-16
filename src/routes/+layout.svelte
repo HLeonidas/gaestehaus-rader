@@ -62,13 +62,13 @@
 				{/each}
 			</nav>
 
-			<div class="flex items-center gap-3">
+			<div class="flex flex-wrap items-center justify-end gap-2 sm:gap-3">
 				<div
-					class="hidden items-center rounded-full border border-slate-200 bg-white p-1 text-xs font-semibold md:flex"
+					class="flex items-center rounded-full border border-slate-200 bg-white p-1 text-[11px] font-semibold sm:text-xs"
 				>
 					<button
 						type="button"
-						class={`rounded-full px-3 py-1 transition ${
+						class={`rounded-full px-2.5 py-1 transition sm:px-3 ${
 							$lang === 'de' ? 'bg-brand text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'
 						}`}
 						onclick={() => setLang('de')}
@@ -77,7 +77,7 @@
 					</button>
 					<button
 						type="button"
-						class={`rounded-full px-3 py-1 transition ${
+						class={`rounded-full px-2.5 py-1 transition sm:px-3 ${
 							$lang === 'en' ? 'bg-brand text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'
 						}`}
 						onclick={() => setLang('en')}
@@ -88,7 +88,7 @@
 
 				<a
 					href={bookingHref}
-					class="inline-flex items-center justify-center rounded-full bg-brand px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90 focus:outline-none focus:ring-2 focus:ring-brand/40"
+					class="inline-flex items-center justify-center rounded-full bg-brand px-3.5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-brand/90 focus:outline-none focus:ring-2 focus:ring-brand/40 sm:px-5 sm:text-sm"
 				>
 					{$t('nav.booking')}
 				</a>

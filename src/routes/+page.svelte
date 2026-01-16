@@ -208,7 +208,7 @@
 
 				<div class="mt-8">
 					<div
-						class="mt-5 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+						class="mt-5 -mx-4 flex snap-x snap-mandatory gap-6 overflow-x-auto px-4 pb-2 scroll-pl-4 scroll-pr-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:px-0 sm:scroll-pl-0 sm:scroll-pr-0"
 					>
 						{#each rooms as r}
 							<a
@@ -283,7 +283,7 @@
 	<!-- SUSTAINABILITY -->
 	<div class="w-full bg-[#f1eee7]">
 		<section class="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6">
-			<div class="rounded-3xl px-6 py-10 sm:px-10 sm:py-12">
+			<div class="rounded-3xl px-0 py-0 sm:px-10 sm:py-12">
 				<div class="grid items-center gap-10 lg:grid-cols-2">
 					<!-- Left: image card -->
 					<div class="relative">
@@ -443,7 +443,7 @@
 			</section>
 
 			<!-- AUSSTATTUNG (unter den Jahreszeiten einfügen) -->
-			<section class="rounded-3xl px-6 py-12 sm:px-10 sm:py-14">
+			<section class="rounded-3xl px-0 py-0 sm:px-10 sm:py-14">
 				<div class="flex items-center gap-3">
 					<div class="grid h-10 w-10 place-items-center rounded-xl bg-brand/10 text-brand">
 						<Sparkles class="h-5 w-5" />
