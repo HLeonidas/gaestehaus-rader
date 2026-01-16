@@ -25,6 +25,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'nav.experiences': 'Erlebnisse',
 		'nav.booking': 'Jetzt buchen',
 		'nav.contact': 'Kontakt',
+		'brand.name': 'Gästehaus Rader',
 		'hero.kicker': 'Alpine Ruhe · Kärnten',
 		'hero.title': 'Ihr Wohlfühl-Urlaub in Kärnten',
 		'hero.subtitle': 'Erleben Sie alpine Gelassenheit und kärntner Gastfreundschaft in ihrer schönsten Form.',
@@ -193,6 +194,12 @@ const translations: Record<Lang, Record<string, string>> = {
 		'about.title': 'Über Gästehaus Rader',
 		'about.body':
 			'Hier erzählen wir die Geschichte Ihres Hauses, Ihre Werte und was den Aufenthalt besonders macht.',
+		'about.kicker': 'Herzlich Willkommen',
+		'about.headingPrefix': 'Über',
+		'about.headingEmphasis': 'uns',
+		'about.paragraphOne': 'Unser Haus befindet sich mitten im Ort und doch nur wenige Schritte vom Waldrand entfernt. Die charakteristische Dorfstruktur mit viel Wiesenfläche und alten Brunnen zwischen den Gehöften ist bei uns noch erhalten.',
+		'about.paragraphTwo': 'Auf Wandertour gehen oder vor dem Haus auf der großen Wiese faulenzen, so lässt es sich im Urlaub leben. Seit Generationen pflegen wir die Gastfreundschaft in den österreichischen Alpen und freuen uns darauf, Ihnen ein Stück unserer Heimat näher zu bringen.',
+		'about.signature': 'Ihre Gastgeber',
 		'about.card.1.title': 'Gastgeber mit Herz',
 		'about.card.1.body':
 			'Wir setzen auf persönliche Betreuung, regionale Empfehlungen und flexible Lösungen.',
@@ -211,6 +218,23 @@ const translations: Record<Lang, Record<string, string>> = {
 		'contact.title': 'Kontakt',
 		'contact.body':
 			'Kontaktformular, Lageplan, Anreiseinfos und direkte Kontaktmöglichkeiten.',
+		'contact.headingPrefix': 'Kontaktieren',
+		'contact.headingEmphasis': 'Sie uns',
+		'contact.subtitle':
+			'Haben Sie Fragen zu Ihrem Aufenthalt im Gitschtal? Wir sind gerne für Sie da und freuen uns auf Ihre Nachricht.',
+		'contact.address.title': 'Anschrift',
+		'contact.address.name': 'Familie Herold-Hueber',
+		'contact.address.line1': 'Weißbriach 92',
+		'contact.address.line2': '9622 Weißbriach, Österreich',
+		'contact.direct.title': 'Direktkontakt',
+		'contact.map.label': 'Google Maps',
+		'contact.map.title': 'Karte laden?',
+		'contact.map.description':
+			'Beim Laden der Karte werden Daten (z. B. Ihre IP-Adresse) an Google übertragen.',
+		'contact.map.load': 'Karte laden',
+		'contact.map.open': 'In Google Maps öffnen',
+		'contact.map.tip': 'Tipp: Sie können die Karte jederzeit nachträglich laden.',
+		'contact.map.close': 'Karte schließen',
 		'booking.form.checkin': 'Anreise',
 		'booking.form.checkout': 'Abreise',
 		'booking.form.guests': 'Gäste',
@@ -234,6 +258,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'nav.experiences': 'Experiences',
 		'nav.booking': 'Book now',
 		'nav.contact': 'Contact',
+		'brand.name': 'Gästehaus Rader',
 		'hero.kicker': 'Alpine calm · Carinthia',
 		'hero.title': 'Your cozy getaway in Carinthia',
 		'hero.subtitle':
@@ -403,7 +428,13 @@ const translations: Record<Lang, Record<string, string>> = {
 		'about.title': 'About Gästehaus Rader',
 		'about.body':
 			'Here we share the story of your home, your values, and what makes each stay special.',
-		'about.card.1.title': 'Hosts with heart',
+				'about.kicker': 'A warm welcome',
+		'about.headingPrefix': 'About',
+		'about.headingEmphasis': 'us',
+		'about.paragraphOne': 'Our house sits in the heart of the village yet just steps from the forest edge. The characteristic layout with meadows and traditional wells between the farmsteads is still preserved here.',
+		'about.paragraphTwo': 'Head out on hiking tours or relax on the large meadow in front of the house—this is what a holiday in the Alps should feel like. For generations we have fostered genuine hospitality in the Austrian Alps and look forward to showing you a piece of our homeland.',
+		'about.signature': 'Your hosts',
+'about.card.1.title': 'Hosts with heart',
 		'about.card.1.body':
 			'Personal care, local recommendations, and flexible solutions tailored to you.',
 		'about.card.2.title': 'Quality & details',
@@ -421,6 +452,23 @@ const translations: Record<Lang, Record<string, string>> = {
 		'contact.title': 'Contact',
 		'contact.body':
 			'Contact form, map, travel information, and direct ways to reach us.',
+		'contact.headingPrefix': 'Get in',
+		'contact.headingEmphasis': 'touch',
+		'contact.subtitle':
+			'Do you have questions about your stay in the Gitschtal? We are happy to help and look forward to your message.',
+		'contact.address.title': 'Address',
+		'contact.address.name': 'Herold-Hueber family',
+		'contact.address.line1': 'Weißbriach 92',
+		'contact.address.line2': '9622 Weißbriach, Austria',
+		'contact.direct.title': 'Direct contact',
+		'contact.map.label': 'Google Maps',
+		'contact.map.title': 'Load map?',
+		'contact.map.description':
+			'When loading the map, data (e.g. your IP address) is transmitted to Google.',
+		'contact.map.load': 'Load map',
+		'contact.map.open': 'Open in Google Maps',
+		'contact.map.tip': 'Tip: You can load the map later at any time.',
+		'contact.map.close': 'Close map',
 		'booking.form.checkin': 'Check-in',
 		'booking.form.checkout': 'Check-out',
 		'booking.form.guests': 'Guests',
@@ -442,3 +490,4 @@ export const t = derived(lang, ($lang) => {
 });
 
 export const setLang = (value: Lang) => lang.set(value);
+

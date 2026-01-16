@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { t } from '$lib/i18n';
-	import { Check, Copy } from 'lucide-svelte';
+	import { Check, Copy, Mail, Phone, PhoneCall } from 'lucide-svelte';
 
 	let ibanCopied = false;
 	let bicCopied = false;
@@ -38,53 +38,42 @@
 </script>
 
 <svelte:head>
-	<title>{$t('contact.title')} Gästehaus Rader</title>
+	<title>{$t('contact.title')} - {$t('brand.name')}</title>
 </svelte:head>
 
 <div class="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6">
 	<section class="rounded-3xl border border-slate-200 bg-white p-10 shadow-sm sm:p-12">
-		<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">Gästehaus Rader</p>
+		<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
+			{$t('brand.name')}
+		</p>
 		<h1 class="mt-4 font-serif text-4xl leading-[0.95] text-slate-900 sm:text-5xl">
-			Kontaktieren <span class="italic">Sie uns</span>
+			{$t('contact.headingPrefix')} <span class="italic">{$t('contact.headingEmphasis')}</span>
 		</h1>
 		<div class="mt-4 h-[3px] w-14 rounded-full bg-brand"></div>
 		<p class="mt-4 max-w-2xl text-base leading-relaxed text-slate-600">
-			Haben Sie Fragen zu Ihrem Aufenthalt im Gitschtal? Wir sind gerne für Sie da und freuen uns auf
-			Ihre Nachricht.
+			{$t('contact.subtitle')}
 		</p>
 
 		<div class="mt-10 grid gap-8 border-t border-slate-100 lg:grid-cols-[1.2fr,1fr]">
 			<div class="mt-8 grid gap-8 sm:grid-cols-2">
 				<div>
-					<p class="text-sm font-semibold text-slate-900">Anschrift</p>
+					<p class="text-sm font-semibold text-slate-900">{$t('contact.address.title')}</p>
 					<div class="mt-3 space-y-1 text-sm text-slate-600">
-						<p class="font-semibold text-slate-800">Familie Herold-Hueber</p>
-						<p>Weißbriach 92</p>
-						<p>9622 Weißbriach, Österreich</p>
+						<p class="font-semibold text-slate-800">{$t('contact.address.name')}</p>
+						<p>{$t('contact.address.line1')}</p>
+						<p>{$t('contact.address.line2')}</p>
 					</div>
 				</div>
 
 				<div>
-					<p class="text-sm font-semibold text-slate-900">Direktkontakt</p>
+					<p class="text-sm font-semibold text-slate-900">{$t('contact.direct.title')}</p>
 					<div class="mt-3 space-y-2 text-sm text-slate-600">
 						<p class="flex items-center">
 							<span
 								class="mr-2 inline-flex h-7 w-7 items-center justify-center rounded-full bg-brand/10 text-brand"
 								aria-hidden="true"
 							>
-								<svg
-									viewBox="0 0 24 24"
-									class="h-4 w-4"
-									fill="none"
-									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								>
-									<path
-										d="M22 16.92v2a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 1h2a2 2 0 0 1 2 1.72c.12.81.31 1.6.57 2.35a2 2 0 0 1-.45 2.11L7.09 8.09a16 16 0 0 0 6.82 6.82l1.91-1.14a2 2 0 0 1 2.11-.45c.75.26 1.54.45 2.35.57A2 2 0 0 1 22 16.92z"
-									/>
-								</svg>
+								<Phone class="h-4 w-4" />
 							</span>
 							+43 676 6246826
 						</p>
@@ -93,19 +82,7 @@
 								class="mr-2 inline-flex h-7 w-7 items-center justify-center rounded-full bg-brand/10 text-brand"
 								aria-hidden="true"
 							>
-								<svg
-									viewBox="0 0 24 24"
-									class="h-4 w-4"
-									fill="none"
-									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								>
-									<path
-										d="M22 16.92v2a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 1h2a2 2 0 0 1 2 1.72c.12.81.31 1.6.57 2.35a2 2 0 0 1-.45 2.11L7.09 8.09a16 16 0 0 0 6.82 6.82l1.91-1.14a2 2 0 0 1 2.11-.45c.75.26 1.54.45 2.35.57A2 2 0 0 1 22 16.92z"
-									/>
-								</svg>
+								<PhoneCall class="h-4 w-4" />
 							</span>
 							+43 4286 22
 						</p>
@@ -114,18 +91,7 @@
 								class="mr-2 inline-flex h-7 w-7 items-center justify-center rounded-full bg-brand/10 text-brand"
 								aria-hidden="true"
 							>
-								<svg
-									viewBox="0 0 24 24"
-									class="h-4 w-4"
-									fill="none"
-									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								>
-									<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4" />
-									<path d="M22 6l-10 7L2 6" />
-								</svg>
+								<Mail class="h-4 w-4" />
 							</span>
 							<a class="font-semibold text-slate-900" href="mailto:info@rader-gitschtal.at">
 								info@rader-gitschtal.at
@@ -154,17 +120,21 @@
 							class="rounded-full bg-white/90 px-3 py-1 text-[11px] font-semibold text-slate-800 shadow-sm ring-1 ring-slate-200 backdrop-blur hover:bg-white"
 							onclick={() => (mapEnabled = false)}
 						>
-							Karte schließen
+							{$t('contact.map.close')}
 						</button>
 					</div>
 				{:else}
 					<!-- Placeholder / consent card -->
 					<div class="grid h-[320px] place-items-center px-6 py-8 sm:h-[360px]">
 						<div class="max-w-sm text-center">
-							<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">Google Maps</p>
-							<h3 class="mt-3 text-lg font-semibold text-slate-900">Karte laden?</h3>
+							<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
+								{$t('contact.map.label')}
+							</p>
+							<h3 class="mt-3 text-lg font-semibold text-slate-900">
+								{$t('contact.map.title')}
+							</h3>
 							<p class="mt-2 text-sm leading-relaxed text-slate-600">
-								Beim Laden der Karte werden Daten (z.&nbsp;B. Ihre IP-Adresse) an Google übertragen.
+								{$t('contact.map.description')}
 							</p>
 
 							<div class="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -173,7 +143,7 @@
 									class="inline-flex items-center justify-center rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:brightness-110"
 									onclick={() => (mapEnabled = true)}
 								>
-									Karte laden
+									{$t('contact.map.load')}
 								</button>
 
 								<a
@@ -182,12 +152,12 @@
 									target="_blank"
 									rel="noopener noreferrer"
 								>
-									In Google Maps öffnen
+									{$t('contact.map.open')}
 								</a>
 							</div>
 
 							<p class="mt-4 text-[12px] text-slate-500">
-								Tipp: Sie können die Karte jederzeit nachträglich laden.
+								{$t('contact.map.tip')}
 							</p>
 						</div>
 					</div>
@@ -238,3 +208,5 @@
 		</div>
 	</section>
 </div>
+
+
