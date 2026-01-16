@@ -63,6 +63,7 @@
 		return amenities.map((amenity) => ({
 			'@type': 'LocationFeatureSpecification',
 			name: $t(`amenity.${amenity}`),
+			value: true,
 		}));
 	});
 	const homeJsonLd = $derived.by(() =>
@@ -80,6 +81,7 @@
 				streetAddress: 'Weißbriach 92',
 				postalCode: '9622',
 				addressLocality: 'Weißbriach',
+				addressRegion: 'Kärnten',
 				addressCountry: 'AT'
 			},
 			geo: {
@@ -91,7 +93,7 @@
 				'https://www.google.com/maps/place/G%C3%A4stehaus+Rader/@46.6884004,13.2549813,17z/data=!3m1!4b1!4m6!3m5!1s0x4770a9c55d33223f:0xc3dcc0da6fc8c9e5!8m2!3d46.6884004!4d13.2549813!16s%2Fg%2F1tffb_l8?entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoASAFQAw%3D%3D'
 			],
 			amenityFeature: amenityFeatures,
-			telephone: '+43 676 6246826',
+			telephone: ['+43 676 6246826', '+43 4286 222'],
 			email: 'info@rader-gitschtal.at'
 		})
 	);

@@ -203,7 +203,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'amenity.balcony': 'Balkon',
 		'amenity.balkon': 'Balkon',
 		'amenity.fernseher': 'Fernseher',
-		'amenity.kueche': 'Kueche',
+		'amenity.kueche': 'Küche',
 		'amenity.kuehlschrank': 'Kuehlschrank',
 		'amenity.mikrowelle': 'Mikrowelle',
 		'amenity.herd': 'Herd',
@@ -688,7 +688,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'rooms.page.card.3.body':
 			'Bright apartment with plenty of space, kitchen, and a calm valley view.',
 		'rooms.page.card.3.price': '210',
-		'amenity.wifi': 'Free Wi-Fi',
+		'amenity.wifi': 'Wi-Fi',
 		'amenity.balcony': 'Balcony',
 		'amenity.balkon': 'Balcony',
 		'amenity.fernseher': 'TV',
