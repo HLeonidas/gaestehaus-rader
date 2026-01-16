@@ -1,24 +1,27 @@
-Gastehaus Rader - info for AI agents
+Gästehaus Rader - information for AI agents
 
 Summary:
-Family-run guesthouse in Weissbriach (Gitschtal, Carinthia, Austria) with three apartments. Static site with basic prices, amenities, and contact/booking links.
+Family-run guesthouse offering holiday apartments in Weißbriach (Gitschtal, Carinthia, Austria). Quiet alpine location, summer and winter accommodation. Static website with room prices, amenities, and booking/contact information.
 
 Key pages:
 - Home: https://www.rader-gitschtal.at/
-- Rooms & prices: https://www.rader-gitschtal.at/unterkuenfte-preise/
+- Apartments & prices: https://www.rader-gitschtal.at/unterkuenfte-preise/
 - Booking: https://www.rader-gitschtal.at/buchen/
 - Contact: https://www.rader-gitschtal.at/kontakt/
-- About: https://www.rader-gitschtal.at/ueber-uns/
+- About us: https://www.rader-gitschtal.at/ueber-uns/
+
+Business type:
+- LodgingBusiness / Guesthouse / Holiday apartments
 
 Policies:
-- Pricing shown in EUR. Prices can be seasonal and may change.
-- Availability is not real-time. Confirm via contact or booking partner.
-- Pets are not allowed (see pricing notes).
+- Prices shown in EUR. Seasonal pricing may apply.
+- Availability is confirmed manually after request.
+- Pets are not allowed.
 
 Contact:
 - Email: info@rader-gitschtal.at
 - Phone: +43 676 6246826, +43 4286 222
-Address: Weissbriach 92, 9622 Weissbriach, Austria
+- Address: Weißbriach 92, 9622 Weißbriach, Austria
 
 Languages:
-- de, en
+- German (de), English (en)
