@@ -45,6 +45,26 @@
 
 	const rooms = accommodations;
 	const accommodationsBase = resolve('/unterkuenfte-preise');
+	const siteUrl = 'https://rader-gitschtal.at';
+	const ogImage = $derived.by(() => new URL(heroImage, siteUrl).toString());
+	const homeJsonLd = $derived.by(() =>
+		JSON.stringify({
+			'@context': 'https://schema.org',
+			'@type': 'LodgingBusiness',
+			name: 'Gästehaus Rader',
+			url: siteUrl,
+			image: ogImage,
+			address: {
+				'@type': 'PostalAddress',
+				streetAddress: 'Weißbriach 92',
+				postalCode: '9622',
+				addressLocality: 'Weißbriach',
+				addressCountry: 'AT'
+			},
+			telephone: '+43 676 6246826',
+			email: 'info@rader-gitschtal.at'
+		})
+	);
 
 	const amenityIcons = {
 		wifi: Wifi,
@@ -67,6 +87,14 @@
 
 <svelte:head>
 	<title>Gästehaus Rader</title>
+	<meta name="description" content={$t('hero.subtitle')} />
+	<meta property="og:title" content={$t('hero.title')} />
+	<meta property="og:description" content={$t('hero.subtitle')} />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content={siteUrl} />
+	<meta property="og:image" content={ogImage} />
+	<meta name="twitter:card" content="summary_large_image" />
+	<script type="application/ld+json">{homeJsonLd}</script>
 </svelte:head>
 
 <div class="space-y-16 pb-16">

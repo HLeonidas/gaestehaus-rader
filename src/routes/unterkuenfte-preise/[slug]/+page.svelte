@@ -32,6 +32,7 @@
 	const accommodation = $derived.by(() => data.accommodation);
 
 	const withAsset = (path: string) => asset(path);
+	const siteUrl = 'https://rader-gitschtal.at';
 
 	const amenityIcons = {
 		wifi: Wifi,
@@ -54,6 +55,35 @@
 		accommodation.images.main,
 		...(accommodation.images.gallery ?? []),
 	]);
+	const roomUrl = $derived.by(() =>
+		new URL(`${resolve('/unterkuenfte-preise')}/${accommodation.slug}`, siteUrl).toString()
+	);
+	const ogImage = $derived.by(() => new URL(withAsset(accommodation.images.main), siteUrl).toString());
+	const amenityLabels = $derived.by(() =>
+		accommodation.amenities.map((amenity) => $t(`amenity.${amenity}`))
+	);
+	const roomJsonLd = $derived.by(() =>
+		JSON.stringify({
+			'@context': 'https://schema.org',
+			'@type': 'HotelRoom',
+			name: accommodation.title,
+			description: accommodation.detailBody,
+			image: ogImage,
+			url: roomUrl,
+			offers: {
+				'@type': 'Offer',
+				price: accommodation.pricePerNightBase,
+				priceCurrency: 'EUR',
+				url: roomUrl,
+				availability: 'https://schema.org/InStock'
+			},
+			amenityFeature: amenityLabels.map((name) => ({
+				'@type': 'LocationFeatureSpecification',
+				name,
+				value: true
+			}))
+		})
+	);
 
 	// helper for "+X Bilder" overlay
 	const galleryCount = $derived.by(() => accommodation?.images?.gallery?.length ?? 0);
@@ -83,7 +113,15 @@
 </script>
 
 <svelte:head>
-	<title>{accommodation.title} – Gästehaus Rader</title>
+	<title>{accommodation.title} - Gästehaus Rader</title>
+	<meta name="description" content={accommodation.subtitle} />
+	<meta property="og:title" content={accommodation.title} />
+	<meta property="og:description" content={accommodation.subtitle} />
+	<meta property="og:type" content="product" />
+	<meta property="og:url" content={roomUrl} />
+	<meta property="og:image" content={ogImage} />
+	<meta name="twitter:card" content="summary_large_image" />
+	<script type="application/ld+json">{roomJsonLd}</script>
 </svelte:head>
 
 <main class="bg-[#fbfaf7]">

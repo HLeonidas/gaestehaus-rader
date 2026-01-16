@@ -18,7 +18,7 @@
 				<p>Weißbriach 92</p>
 				<p>9622 Weißbriach, Österreich</p>
 				<p>Telefon: <a class="hover:text-slate-900" href="tel:+436766246826">+43 676 6246826</a></p>
-				<p>Telefon: <a class="hover:text-slate-900" href="tel:+43428622">+43 4286 22</a></p>
+				<p>Telefon: <a class="hover:text-slate-900" href="tel:+43428622">+43 4286 222</a></p>
 				<p>
 					E-Mail:
 					<a class="hover:text-slate-900" href="mailto:info@rader-gitschtal.at">

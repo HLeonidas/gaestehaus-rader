@@ -3,6 +3,7 @@
 	import { asset, resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import { lang, setLang, t } from '$lib/i18n';
+	import { MessageCircle } from 'lucide-svelte';
 	import '../app.css';
 
 	let { children } = $props();
@@ -16,6 +17,8 @@
 
 	const withAsset = (path: string) => asset(path);
 	const bookingHref = resolve('/buchen');
+	const siteUrl = 'https://rader-gitschtal.at';
+	const canonicalUrl = $derived.by(() => new URL(page.url.pathname, siteUrl).toString());
 
 	// Keep ONLY for max-width control
 	const isHome = $derived(page.url.pathname === resolve('/'));
@@ -24,6 +27,8 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
+	<link rel="canonical" href={canonicalUrl} />
+	<meta property="og:site_name" content="Gästehaus Rader" />
 </svelte:head>
 
 <!-- No more isHome theme switching -->
@@ -195,6 +200,10 @@
 						<li>9622 Weißbriach, Österreich</li>
 						<li>
 							<a class="hover:text-slate-900" href="tel:+436766246826">+43 676 6246826</a>
+							<span class="ml-2 inline-flex items-center gap-1 text-xs font-semibold text-emerald-600">
+								<MessageCircle class="h-3.5 w-3.5" aria-hidden="true" />
+								WhatsApp
+							</span>
 						</li>
 						<li>
 							<a class="hover:text-slate-900" href="mailto:info@rader-gitschtal.at">

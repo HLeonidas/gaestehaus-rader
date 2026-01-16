@@ -45,6 +45,22 @@
 
 	const rooms = accommodations;
 	const accommodationsBase = resolve('/unterkuenfte-preise');
+	const siteUrl = 'https://rader-gitschtal.at';
+	const ogImage = $derived.by(() =>
+		new URL(withAsset(rooms[0]?.images?.main ?? '/images/1/room-1.jpg'), siteUrl).toString()
+	);
+	const roomsJsonLd = $derived.by(() =>
+		JSON.stringify({
+			'@context': 'https://schema.org',
+			'@type': 'ItemList',
+			itemListElement: rooms.map((room, index) => ({
+				'@type': 'ListItem',
+				position: index + 1,
+				name: room.title,
+				url: new URL(`${accommodationsBase}/${room.slug}`, siteUrl).toString()
+			}))
+		})
+	);
 
 	function badgeClasses(badgeLabel: string) {
 		if (badgeLabel === 'Exklusiv') {
@@ -56,6 +72,14 @@
 
 <svelte:head>
 	<title>{$t('rooms.page.title')} · Gästehaus Rader</title>
+	<meta name="description" content={$t('rooms.page.subtitle')} />
+	<meta property="og:title" content={$t('rooms.page.title')} />
+	<meta property="og:description" content={$t('rooms.page.subtitle')} />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content={new URL(accommodationsBase, siteUrl).toString()} />
+	<meta property="og:image" content={ogImage} />
+	<meta name="twitter:card" content="summary_large_image" />
+	<script type="application/ld+json">{roomsJsonLd}</script>
 </svelte:head>
 
 <div class="mx-auto w-full max-w-4xl px-4 py-10 sm:px-6">

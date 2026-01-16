@@ -84,7 +84,7 @@
 							>
 								<PhoneCall class="h-4 w-4" />
 							</span>
-							+43 4286 22
+							+43 4286 222
 						</p>
 						<p class="flex items-center">
 							<span
