@@ -38,13 +38,13 @@ export const accommodations: Accommodation[] = [
 			'Küche mit Sitzecke, Bad mit Dusche und WC – Sicht nach Osten (1–3 Personen).',
 		],
 		images: {
-			main: '/images/room-1.jpg',
+			main: '/images/1/room-1.jpg',
 			gallery: [
-				'/images/room-1-bedroom.jpg',
-				'/images/room-1-living.jpg',
-				'/images/room-1-kitchen.jpg',
-				'/images/room-1-balcony.jpg',
-				'/images/room-1-view.jpg',
+				'/images/1/Esszimmer-Nr3.jpg',
+				'/images/1/Wohnzimmer-Nr3.jpg',
+				'/images/1/Balkon-Nr3.png',
+				'/images/1/Balkon-Sitze-Nr2.png',
+				'/images/1/Bettzimmer-Nr3.jpg',
 			],
 		},
 		attributes: {
@@ -64,7 +64,7 @@ export const accommodations: Accommodation[] = [
 			'wifi',
 			'badezimmer',
 		],
-		floorplanImage: '/images/floorplan-nr-1.png',
+		floorplanImage: '/images/1/Nr3-skizze.png',
 		pricePerNightBase: 75,
 		priceMatrix: [
 			{ period: 'Sommer', pricePerNight: '€ 75,-', extraPerson: '€ 10,-' },
@@ -94,13 +94,13 @@ export const accommodations: Accommodation[] = [
 			'Küche mit Sitzecke, Bad mit Dusche und WC – Sicht nach Osten und Westen (1–3 Personen).',
 		],
 		images: {
-			main: '/images/room-2.jpg',
+			main: '/images/2/room-2.jpg',
 			gallery: [
-				'/images/room-2-bedroom.jpg',
-				'/images/room-2-bedroom-2.jpg',
-				'/images/room-2-living.jpg',
-				'/images/room-2-sofa.jpg',
-				'/images/room-2-balcony.jpg',
+				'/images/2/Doppelbett.png',
+				'/images/2/Einzelbett_2.png',
+				'/images/2/IMG_1394.png',
+				'/images/2/Komode.png',
+				'/images/2/Küche.png'
 			],
 		},
 		attributes: {
@@ -119,7 +119,7 @@ export const accommodations: Accommodation[] = [
 			'wifi',
 			'badezimmer',
 		],
-		floorplanImage: '/images/floorplan-nr-2.png',
+		floorplanImage: '/images/2/Nr4-skizze.png',
 		pricePerNightBase: 75,
 		priceMatrix: [
 			{ period: 'Sommer', pricePerNight: '€ 75,-', extraPerson: '€ 10,-' },
@@ -152,13 +152,13 @@ export const accommodations: Accommodation[] = [
 			'Küche mit Sitzecke, Bad mit Dusche und WC – Sicht nach Süden (1–2 Personen).',
 		],
 		images: {
-			main: '/images/room-3.jpg',
+			main: '/images/3/room-3.jpg',
 			gallery: [
-				'/images/room-3-bedroom.jpg',
-				'/images/room-3-living.jpg',
-				'/images/room-3-hallway.jpg',
-				'/images/room-3-kitchen.jpg',
-				'/images/room-3-view.jpg',
+				'/images/3/Ausblick.jpeg',
+				'/images/3/Kuchengeraete.jpeg',
+				'/images/3/Couch.jpeg',
+				'/images/3/Bett.jpeg',
+				'/images/3/Schuhregal.jpeg'
 			],
 		},
 		attributes: {
@@ -177,7 +177,7 @@ export const accommodations: Accommodation[] = [
 			'wifi',
 			'badezimmer',
 		],
-		floorplanImage: '/images/floorplan-nr-3.png',
+		floorplanImage: '/images/3/Nr7-skizze.png',
 		pricePerNightBase: 65,
 		priceMatrix: [
 			{ period: 'Sommer', pricePerNight: '€ 65,-', extraPerson: '-' },
