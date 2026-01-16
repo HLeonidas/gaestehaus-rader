@@ -7,6 +7,8 @@
 		HeartHandshake,
 		Snowflake,
 		ArrowRight,
+		ChevronLeft,
+		ChevronRight,
 		Leaf,
 		Sun,
 		Flame,
@@ -83,6 +85,32 @@
 		parking: SquareParking,
 	} as const;
 	type AmenityKey = keyof typeof amenityIcons;
+
+	const destinationImages = [
+		{ src: '/images/house/balkon-ausblick.jpg', altKey: 'home.gallery.imageAlt.balkon' },
+		{ src: '/images/house/haus-sommer.jpg', altKey: 'home.gallery.imageAlt.sommer' },
+		{ src: '/images/house/Haus-Winter-2.png', altKey: 'home.gallery.imageAlt.winter' },
+		{ src: '/images/house/IMG_0580.jpeg', altKey: 'home.gallery.imageAlt.view' },
+		{ src: '/images/house/kirche.jpg', altKey: 'home.gallery.imageAlt.kirche' },
+		{ src: '/images/house/pavillon.jpg', altKey: 'home.gallery.imageAlt.pavillon' },
+		{ src: '/images/house/slider-4-winter.jpg', altKey: 'home.gallery.imageAlt.sliderWinter' },
+		{ src: '/images/house/tischtennis.jpg', altKey: 'home.gallery.imageAlt.tischtennis' },
+		{
+			src: '/images/house/winter-balkon_ausblick-1.jpg',
+			altKey: 'home.gallery.imageAlt.winterBalkon',
+		},
+	];
+
+	let galleryTrack: HTMLDivElement | null = null;
+
+	const scrollGallery = (direction: 'prev' | 'next') => {
+		if (!galleryTrack) return;
+		const amount = galleryTrack.clientWidth * 0.8;
+		galleryTrack.scrollBy({
+			left: direction === 'prev' ? -amount : amount,
+			behavior: 'smooth',
+		});
+	};
 </script>
 
 <svelte:head>
@@ -725,6 +753,68 @@
 							</div>
 						</div>
 					</div>
+				</div>
+			</section>
+
+			<!-- Gallery -->
+			<section class="rounded-3xl px-0 py-0 sm:px-10 sm:py-10">
+				<div class="flex items-center gap-3">
+					<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
+						<Sun class="h-5 w-5" aria-hidden="true" />
+					</div>
+					<div>
+						<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
+							{$t('home.gallery.kicker')}
+						</p>
+						<h2 class="mt-2 text-3xl font-serif font-semibold leading-[0.95] text-slate-900 sm:text-4xl">
+							{$t('home.gallery.title')}
+						</h2>
+						<div class="mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
+					</div>
+				</div>
+
+				<p class="mt-4 max-w-3xl text-sm leading-relaxed text-slate-600 sm:text-base">
+					{$t('home.gallery.subtitle')}
+				</p>
+
+				<div class="mt-6 hidden items-center justify-end gap-2 sm:flex">
+					<button
+						type="button"
+						class="grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white text-slate-600 shadow-sm transition hover:bg-slate-50"
+						onclick={() => scrollGallery('prev')}
+						aria-label="{$t('room.detail.gallery.prev')}"
+					>
+						<ChevronLeft class="h-5 w-5" />
+					</button>
+					<button
+						type="button"
+						class="grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white text-slate-600 shadow-sm transition hover:bg-slate-50"
+						onclick={() => scrollGallery('next')}
+						aria-label="{$t('room.detail.gallery.next')}"
+					>
+						<ChevronRight class="h-5 w-5" />
+					</button>
+				</div>
+
+				<div
+					class="mt-8 -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 scroll-pl-4 scroll-pr-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:px-0 sm:scroll-pl-0 sm:scroll-pr-0"
+					bind:this={galleryTrack}
+				>
+					{#each destinationImages as image}
+						<div
+							class="group relative h-56 w-[260px] shrink-0 snap-start overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm sm:h-72 sm:w-[360px]"
+						>
+							<img
+								src={withAsset(image.src)}
+								alt={$t(image.altKey)}
+								class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+								loading="lazy"
+							/>
+							<div
+								class="pointer-events-none absolute inset-0 ring-1 ring-transparent transition group-hover:ring-brand/20"
+							></div>
+						</div>
+					{/each}
 				</div>
 			</section>
 		</div>
