@@ -98,7 +98,7 @@
 			image: '/images/summer-lift.png',
 			layout: 'summer',
 			className: 'c4',
-			badgeKey: 'experiences.badge.includedCard',
+			// badgeKey: 'experiences.badge.includedCard',
 			titleSize: 'text-2xl',
 		},
 		{
