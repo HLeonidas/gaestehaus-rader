@@ -69,7 +69,7 @@
 
 			<section>
 				<h2 class="text-base font-semibold text-slate-900">5. An- und Abreise</h2>
-				<p class="mt-3">Anreise: ab 15:00 Uhr</p>
+				<p class="mt-3">Anreise: ab 14:00 Uhr</p>
 				<p>Abreise: bis 10:00 Uhr</p>
 				<p class="mt-3">Abweichende Zeiten sind nach vorheriger Absprache möglich.</p>
 			</section>
