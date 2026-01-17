@@ -511,7 +511,7 @@
 
 			<!-- Gallery -->
 			<section class="rounded-3xl px-0 py-0 sm:px-10 sm:py-10">
-				<div class="flex items-center gap-3">
+				<div class="flex items-center gap-4">
 					<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
 						<Sun class="h-5 w-5" aria-hidden="true" />
 					</div>
@@ -519,7 +519,7 @@
 						<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
 							{$t('home.gallery.kicker')}
 						</p>
-						<h2 class="mt-2 text-3xl font-serif font-semibold leading-[0.95] text-slate-900 sm:text-4xl">
+						<h2 class="mt-3 text-4xl font-serif font-medium leading-[0.95] text-slate-900">
 							{$t('home.gallery.title')}
 						</h2>
 						<div class="mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
@@ -577,7 +577,7 @@
 		<div class="space-y-16">
 			<!-- AUSSTATTUNG (unter den Jahreszeiten einfügen) -->
 			<section class="rounded-3xl px-0 py-0 sm:px-10 sm:py-14">
-				<div class="flex items-center gap-3">
+				<div class="flex items-center gap-4">
 					<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
 						<Sparkles class="h-5 w-5" aria-hidden="true" />
 					</div>
@@ -585,7 +585,7 @@
 						<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
 							{$t('home.amenities.kicker')}
 						</p>
-						<h2 class="mt-2 text-3xl font-serif font-semibold leading-[0.95] text-slate-900 sm:text-4xl">
+						<h2 class="mt-3 text-4xl font-serif font-medium leading-[0.95] text-slate-900">
 							{$t('home.amenities.title')}
 						</h2>
 						<div class="mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
