@@ -449,6 +449,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'about.body':
 			'Hier erzählen wir die Geschichte Ihres Hauses, Ihre Werte und was den Aufenthalt besonders macht.',
 		'about.kicker': 'Herzlich Willkommen',
+		'about.traditionSince': 'Tradition seit',
 		'about.headingPrefix': 'Über',
 		'about.headingEmphasis': 'uns',
 		'about.paragraphOne': 'Unser Haus befindet sich mitten im Ort und doch nur wenige Schritte vom Waldrand entfernt. Die charakteristische Dorfstruktur mit viel Wiesenfläche und alten Brunnen zwischen den Gehöften ist bei uns noch erhalten.',
@@ -930,6 +931,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'about.body':
 			'Here we share the story of your home, your values, and what makes each stay special.',
 				'about.kicker': 'A warm welcome',
+				'about.traditionSince': 'Tradition since',
 		'about.headingPrefix': 'About',
 		'about.headingEmphasis': 'us',
 		'about.paragraphOne': 'Our house sits in the heart of the village yet just steps from the forest edge. The characteristic layout with meadows and traditional wells between the farmsteads is still preserved here.',

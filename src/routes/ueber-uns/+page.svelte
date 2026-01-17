@@ -53,7 +53,7 @@
 							</div>
 							<div>
 								<p class="text-[10px] font-semibold uppercase tracking-[0.28em] text-slate-500">
-									Tradition seit
+									{$t('about.traditionSince')}
 								</p>
 								<p class="mt-1 text-2xl font-semibold text-slate-900">1964</p>
 							</div>
