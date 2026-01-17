@@ -9,6 +9,7 @@ Key pages:
 - Booking: https://www.rader-gitschtal.at/buchen/
 - Contact: https://www.rader-gitschtal.at/kontakt/
 - About us: https://www.rader-gitschtal.at/ueber-uns/
+- FAQ: https://www.rader-gitschtal.at/faq/
 
 Business type:
 - LodgingBusiness / Guesthouse / Holiday apartments
