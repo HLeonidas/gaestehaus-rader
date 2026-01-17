@@ -28,7 +28,8 @@
 		SquareParking,
 		Tv,
 		Sofa,
-		Bath
+		Bath,
+		Star
 	} from 'lucide-svelte';
 
 	const usps = [
@@ -339,6 +340,9 @@
 									<h3 class="text-base font-semibold tracking-tight text-slate-900">
 										{r.title}
 									</h3>
+									<p class="mt-1 text-xs font-semibold text-slate-500">
+										{$t('price.from')} {r.pricePerNightBase} / {$t('price.night')}
+									</p>
 
 									<!-- Meta line (small, muted) -->
 									<p class="mt-2 text-xs text-slate-500">
@@ -377,174 +381,134 @@
 					</div>
 				</div>
 			</section>
-		</div>
-	</div>
 
-	<!-- SUSTAINABILITY -->
-	<div class="w-full bg-[#f1eee7]">
-		<section class="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6">
-			<div class="rounded-3xl px-0 py-0 sm:px-10 sm:py-12">
-				<div class="grid items-center gap-10 lg:grid-cols-2">
-					<!-- Left: image card -->
-					<div class="relative">
-						<div class="relative overflow-hidden rounded-3xl">
-							<img
-								src={withAsset('/images/other/solar.png')}
-								alt={$t('home.sustainability.imageAlt')}
-								class="h-[320px] w-full object-cover sm:h-[380px]"
-								loading="lazy"
-							/>
-							<div
-								class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/10 via-transparent to-transparent"
-							></div>
+			<!-- TRUST -->
+			<section class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
+				<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
+					{$t('trust.kicker')}
+				</p>
+				<h2 class="mt-3 font-serif text-3xl leading-[0.95] text-slate-900 sm:text-4xl">
+					{$t('trust.title')}
+				</h2>
+				<div class="mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
+
+				<div class="mt-6 grid gap-6 lg:grid-cols-[1.1fr,1fr]">
+					<div class="space-y-5">
+						<div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+							<div class="flex items-center gap-2 text-brand">
+								<Star class="h-5 w-5" aria-hidden="true" />
+								<p class="text-xs font-semibold uppercase tracking-[0.18em] text-brand">
+									{$t('trust.ratingLabel')}
+								</p>
+							</div>
+							<div class="mt-3 flex flex-wrap items-baseline gap-3">
+								<span class="text-3xl font-semibold text-slate-900">
+									{$t('trust.ratingValue')}
+								</span>
+								<span class="text-sm text-slate-600">{$t('trust.ratingMeta')}</span>
+							</div>
 						</div>
 
-						<!-- Floating icon tile (bottom-right) -->
-						<div class="absolute -bottom-6 right-6">
-							<div
-								class="grid h-20 w-20 place-items-center rounded-2xl bg-emerald-600 text-white shadow-lg ring-1 ring-black/5"
+						<div class="flex flex-wrap gap-2">
+							<span
+								class="rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-600"
 							>
-								<Sun class="h-8 w-8" aria-hidden="true" />
-							</div>
+								{$t('trust.badge.family')}
+							</span>
+							<span
+								class="rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-600"
+							>
+								{$t('trust.badge.since')}
+							</span>
+							<span
+								class="rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-600"
+							>
+								{$t('trust.badge.direct')}
+							</span>
 						</div>
 					</div>
 
-					<!-- Right: content -->
-					<div class="space-y-5">
-						<div
-							class="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-700"
-						>
-							<Leaf class="h-4 w-4" aria-hidden="true" />
-							{$t('home.sustainability.badge')}
+					<div class="grid gap-4">
+						<div class="rounded-2xl border border-slate-200 bg-white p-4 text-sm text-slate-600">
+							"{$t('trust.review.1')}"
 						</div>
-						<h2 class="text-3xl font-serif font-semibold leading-[0.95] text-slate-900 sm:text-4xl">
-							{$t('home.sustainability.title.line1')}<br />{$t('home.sustainability.title.line2')}
-						</h2>
-
-						<div class="space-y-4 text-sm leading-relaxed text-slate-600 sm:text-base">
-							<p>{$t('home.sustainability.body1')}</p>
-							<p>{$t('home.sustainability.body2')}</p>
+						<div class="rounded-2xl border border-slate-200 bg-white p-4 text-sm text-slate-600">
+							"{$t('trust.review.2')}"
 						</div>
-
-						<div class="mt-6 border-t border-slate-200 pt-6">
-							<div class="grid gap-5 sm:grid-cols-2">
-								<!-- Solar / Photovoltaik -->
-								<div class="flex items-start gap-3">
-									<div
-										class="mt-0.5 grid h-10 w-10 place-items-center rounded-xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100"
-									>
-										<Sun class="h-5 w-5" aria-hidden="true" />
-									</div>
-									<div>
-										<p class="text-sm font-semibold text-slate-900">
-											{$t('home.sustainability.solar.title')}
-										</p>
-										<p class="text-xs text-slate-500">
-											{$t('home.sustainability.solar.body')}
-										</p>
-									</div>
-								</div>
-
-								<!-- Fernw„rme -->
-								<div class="flex items-start gap-3">
-									<div
-										class="mt-0.5 grid h-10 w-10 place-items-center rounded-xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100"
-									>
-										<Flame class="h-5 w-5" aria-hidden="true" />
-									</div>
-									<div>
-										<p class="text-sm font-semibold text-slate-900">
-											{$t('home.sustainability.heating.title')}
-										</p>
-										<p class="text-xs text-slate-500">
-											{$t('home.sustainability.heating.body')}
-										</p>
-									</div>
-								</div>
-							</div>
+						<div class="rounded-2xl border border-slate-200 bg-white p-4 text-sm text-slate-600">
+							"{$t('trust.review.3')}"
 						</div>
 					</div>
 				</div>
-			</div>
-		</section>
+			</section>
+
+			<!-- Gallery -->
+			<section class="rounded-3xl px-0 py-0 sm:px-10 sm:py-10">
+				<div class="flex items-center gap-3">
+					<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
+						<Sun class="h-5 w-5" aria-hidden="true" />
+					</div>
+					<div>
+						<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
+							{$t('home.gallery.kicker')}
+						</p>
+						<h2 class="mt-2 text-3xl font-serif font-semibold leading-[0.95] text-slate-900 sm:text-4xl">
+							{$t('home.gallery.title')}
+						</h2>
+						<div class="mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
+					</div>
+				</div>
+
+				<p class="mt-4 max-w-3xl text-sm leading-relaxed text-slate-600 sm:text-base">
+					{$t('home.gallery.subtitle')}
+				</p>
+
+				<div class="mt-6 hidden items-center justify-end gap-2 sm:flex">
+					<button
+						type="button"
+						class="grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white text-slate-600 shadow-sm transition hover:bg-slate-50"
+						onclick={() => scrollGallery('prev')}
+						aria-label="{$t('room.detail.gallery.prev')}"
+					>
+						<ChevronLeft class="h-5 w-5" />
+					</button>
+					<button
+						type="button"
+						class="grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white text-slate-600 shadow-sm transition hover:bg-slate-50"
+						onclick={() => scrollGallery('next')}
+						aria-label="{$t('room.detail.gallery.next')}"
+					>
+						<ChevronRight class="h-5 w-5" />
+					</button>
+				</div>
+
+				<div
+					class="mt-8 -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 scroll-pl-4 scroll-pr-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:px-0 sm:scroll-pl-0 sm:scroll-pr-0"
+					bind:this={galleryTrack}
+				>
+					{#each destinationImages as image}
+						<div
+							class="group relative h-56 w-[260px] shrink-0 snap-start overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm sm:h-72 sm:w-[360px]"
+						>
+							<img
+								src={withAsset(image.src)}
+								alt={$t(image.altKey)}
+								class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+								loading="lazy"
+							/>
+							<div
+								class="pointer-events-none absolute inset-0 ring-1 ring-transparent transition group-hover:ring-brand/20"
+							></div>
+						</div>
+					{/each}
+				</div>
+			</section>
+
+		</div>
 	</div>
 
 	<div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
 		<div class="space-y-16">
-			<!-- SEASONS -->
-			<section class="rounded-3xl bg-[#f3efe6] px-6 py-12 sm:px-10 sm:py-14">
-				<div class="text-center">
-					<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
-						{$t('seasons.kicker')}
-					</p>
-					<h2 class="mt-3 text-3xl font-serif font-semibold leading-[0.95] text-slate-900 sm:text-4xl">
-						{$t('seasons.title')}
-					</h2>
-					<div class="mx-auto mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
-					<p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">
-						{$t('seasons.subtitle')}
-					</p>
-				</div>
-
-				<div class="mt-10 grid gap-6 lg:grid-cols-2">
-					<a
-						href={resolve('/erlebnisse/sommer')}
-						class="group relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-200 shadow-sm"
-					>
-						<img
-							src={withAsset('/images/other/house-summer.jpg')}
-							alt={$t('home.seasons.summer.imageAlt')}
-							class="h-64 w-full object-cover sm:h-72"
-							loading="lazy"
-						/>
-						<div
-							class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
-						></div>
-						<div class="absolute bottom-0 left-0 right-0 p-6">
-							<h3 class="text-xl font-semibold text-white">
-								{$t('seasons.summer.title')}
-							</h3>
-							<p class="mt-1 text-sm text-white/85">
-								{$t('seasons.summer.body')}
-							</p>
-							<span
-								class="mt-4 inline-flex items-center rounded-xl bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm transition group-hover:translate-y-[-1px]"
-							>
-								{$t('seasons.summer.cta')}
-							</span>
-						</div>
-					</a>
-
-					<a
-						href={resolve('/erlebnisse/winter')}
-						class="group relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-200 shadow-sm"
-					>
-						<img
-							src={withAsset('/images/other/house-winter.jpg')}
-							alt={$t('home.seasons.winter.imageAlt')}
-							class="h-64 w-full object-cover sm:h-72"
-							loading="lazy"
-						/>
-						<div
-							class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
-						></div>
-						<div class="absolute bottom-0 left-0 right-0 p-6">
-							<h3 class="text-xl font-semibold text-white">
-								{$t('seasons.winter.title')}
-							</h3>
-							<p class="mt-1 text-sm text-white/85">
-								{$t('seasons.winter.body')}
-							</p>
-							<span
-								class="mt-4 inline-flex items-center rounded-xl bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm transition group-hover:translate-y-[-1px]"
-							>
-								{$t('seasons.winter.cta')}
-							</span>
-						</div>
-					</a>
-				</div>
-			</section>
-
 			<!-- AUSSTATTUNG (unter den Jahreszeiten einfügen) -->
 			<section class="rounded-3xl px-0 py-0 sm:px-10 sm:py-14">
 				<div class="flex items-center gap-3">
@@ -787,67 +751,210 @@
 				</div>
 			</section>
 
-			<!-- Gallery -->
-			<section class="rounded-3xl px-0 py-0 sm:px-10 sm:py-10">
-				<div class="flex items-center gap-3">
-					<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-						<Sun class="h-5 w-5" aria-hidden="true" />
-					</div>
-					<div>
-						<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
-							{$t('home.gallery.kicker')}
-						</p>
-						<h2 class="mt-2 text-3xl font-serif font-semibold leading-[0.95] text-slate-900 sm:text-4xl">
-							{$t('home.gallery.title')}
-						</h2>
-						<div class="mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
-					</div>
+			<!-- SEASONS -->
+			<section class="rounded-3xl bg-[#f3efe6] px-6 py-12 sm:px-10 sm:py-14">
+				<div class="text-center">
+					<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
+						{$t('seasons.kicker')}
+					</p>
+					<h2 class="mt-3 text-3xl font-serif font-semibold leading-[0.95] text-slate-900 sm:text-4xl">
+						{$t('seasons.title')}
+					</h2>
+					<div class="mx-auto mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
+					<p class="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">
+						{$t('seasons.subtitle')}
+					</p>
 				</div>
 
-				<p class="mt-4 max-w-3xl text-sm leading-relaxed text-slate-600 sm:text-base">
-					{$t('home.gallery.subtitle')}
-				</p>
-
-				<div class="mt-6 hidden items-center justify-end gap-2 sm:flex">
-					<button
-						type="button"
-						class="grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white text-slate-600 shadow-sm transition hover:bg-slate-50"
-						onclick={() => scrollGallery('prev')}
-						aria-label="{$t('room.detail.gallery.prev')}"
+				<div class="mt-10 grid gap-6 lg:grid-cols-2">
+					<a
+						href={resolve('/erlebnisse/sommer')}
+						class="group relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-200 shadow-sm"
 					>
-						<ChevronLeft class="h-5 w-5" />
-					</button>
-					<button
-						type="button"
-						class="grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white text-slate-600 shadow-sm transition hover:bg-slate-50"
-						onclick={() => scrollGallery('next')}
-						aria-label="{$t('room.detail.gallery.next')}"
-					>
-						<ChevronRight class="h-5 w-5" />
-					</button>
-				</div>
-
-				<div
-					class="mt-8 -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 scroll-pl-4 scroll-pr-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:px-0 sm:scroll-pl-0 sm:scroll-pr-0"
-					bind:this={galleryTrack}
-				>
-					{#each destinationImages as image}
+						<img
+							src={withAsset('/images/other/house-summer.jpg')}
+							alt={$t('home.seasons.summer.imageAlt')}
+							class="h-64 w-full object-cover sm:h-72"
+							loading="lazy"
+						/>
 						<div
-							class="group relative h-56 w-[260px] shrink-0 snap-start overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm sm:h-72 sm:w-[360px]"
-						>
+							class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
+						></div>
+						<div class="absolute bottom-0 left-0 right-0 p-6">
+							<h3 class="text-xl font-semibold text-white">
+								{$t('seasons.summer.title')}
+							</h3>
+							<p class="mt-1 text-sm text-white/85">
+								{$t('seasons.summer.body')}
+							</p>
+							<span
+								class="mt-4 inline-flex items-center rounded-xl bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm transition group-hover:translate-y-[-1px]"
+							>
+								{$t('seasons.summer.cta')}
+							</span>
+						</div>
+					</a>
+
+					<a
+						href={resolve('/erlebnisse/winter')}
+						class="group relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-200 shadow-sm"
+					>
+						<img
+							src={withAsset('/images/other/house-winter.jpg')}
+							alt={$t('home.seasons.winter.imageAlt')}
+							class="h-64 w-full object-cover sm:h-72"
+							loading="lazy"
+						/>
+						<div
+							class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
+						></div>
+						<div class="absolute bottom-0 left-0 right-0 p-6">
+							<h3 class="text-xl font-semibold text-white">
+								{$t('seasons.winter.title')}
+							</h3>
+							<p class="mt-1 text-sm text-white/85">
+								{$t('seasons.winter.body')}
+							</p>
+							<span
+								class="mt-4 inline-flex items-center rounded-xl bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm transition group-hover:translate-y-[-1px]"
+							>
+								{$t('seasons.winter.cta')}
+							</span>
+						</div>
+					</a>
+				</div>
+			</section>
+
+		</div>
+	</div>
+
+	<!-- SUSTAINABILITY -->
+	<div class="w-full bg-[#f1eee7]">
+		<section class="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6">
+			<div class="rounded-3xl px-0 py-0 sm:px-10 sm:py-12">
+				<div class="grid items-center gap-10 lg:grid-cols-2">
+					<!-- Left: image card -->
+					<div class="relative">
+						<div class="relative overflow-hidden rounded-3xl">
 							<img
-								src={withAsset(image.src)}
-								alt={$t(image.altKey)}
-								class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+								src={withAsset('/images/other/solar.png')}
+								alt={$t('home.sustainability.imageAlt')}
+								class="h-[320px] w-full object-cover sm:h-[380px]"
 								loading="lazy"
 							/>
 							<div
-								class="pointer-events-none absolute inset-0 ring-1 ring-transparent transition group-hover:ring-brand/20"
+								class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/10 via-transparent to-transparent"
 							></div>
 						</div>
-					{/each}
+
+						<!-- Floating icon tile (bottom-right) -->
+						<div class="absolute -bottom-6 right-6">
+							<div
+								class="grid h-20 w-20 place-items-center rounded-2xl bg-emerald-600 text-white shadow-lg ring-1 ring-black/5"
+							>
+								<Sun class="h-8 w-8" aria-hidden="true" />
+							</div>
+						</div>
+					</div>
+
+					<!-- Right: content -->
+					<div class="space-y-5">
+						<div
+							class="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-700"
+						>
+							<Leaf class="h-4 w-4" aria-hidden="true" />
+							{$t('home.sustainability.badge')}
+						</div>
+						<h2 class="text-3xl font-serif font-semibold leading-[0.95] text-slate-900 sm:text-4xl">
+							{$t('home.sustainability.title.line1')}<br />{$t('home.sustainability.title.line2')}
+						</h2>
+
+						<div class="space-y-4 text-sm leading-relaxed text-slate-600 sm:text-base">
+							<p>{$t('home.sustainability.body1')}</p>
+							<p>{$t('home.sustainability.body2')}</p>
+						</div>
+
+						<div class="mt-6 border-t border-slate-200 pt-6">
+							<div class="grid gap-5 sm:grid-cols-2">
+								<!-- Solar / Photovoltaik -->
+								<div class="flex items-start gap-3">
+									<div
+										class="mt-0.5 grid h-10 w-10 place-items-center rounded-xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100"
+									>
+										<Sun class="h-5 w-5" aria-hidden="true" />
+									</div>
+									<div>
+										<p class="text-sm font-semibold text-slate-900">
+											{$t('home.sustainability.solar.title')}
+										</p>
+										<p class="text-xs text-slate-500">
+											{$t('home.sustainability.solar.body')}
+										</p>
+									</div>
+								</div>
+
+								<!-- Fernw"rme -->
+								<div class="flex items-start gap-3">
+									<div
+										class="mt-0.5 grid h-10 w-10 place-items-center rounded-xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100"
+									>
+										<Flame class="h-5 w-5" aria-hidden="true" />
+									</div>
+									<div>
+										<p class="text-sm font-semibold text-slate-900">
+											{$t('home.sustainability.heating.title')}
+										</p>
+										<p class="text-xs text-slate-500">
+											{$t('home.sustainability.heating.body')}
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-			</section>
-		</div>
+			</div>
+		</section>
 	</div>
+
+	<section class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+		<div class="rounded-3xl bg-brand px-6 py-10 text-white sm:px-10 sm:py-12">
+			<p class="text-xs font-semibold uppercase tracking-[0.35em] text-white/70">
+				{$t('brand.name')}
+			</p>
+			<h2 class="mt-3 font-serif text-3xl leading-[0.95] text-white sm:text-4xl">
+				{$t('cta.title')}
+			</h2>
+			<div class="mt-3 h-[3px] w-14 rounded-full bg-white/70"></div>
+			<p class="mt-4 max-w-2xl text-sm leading-relaxed text-white/85 sm:text-base">
+				{$t('cta.body')}
+			</p>
+
+			<div class="mt-6 flex flex-wrap gap-3">
+				<a
+					href={resolve('/buchen')}
+					class="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-white/90"
+				>
+					{$t('cta.primary')}
+				</a>
+				<a
+					href={resolve('/unterkuenfte-preise')}
+					class="inline-flex items-center justify-center rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white/95 transition hover:bg-white/10"
+				>
+					{$t('cta.secondary')}
+				</a>
+			</div>
+
+			<div class="mt-6 flex flex-wrap items-center gap-3 text-sm text-white/80">
+				<span class="font-semibold text-white/90">{$t('contact.direct.title')}</span>
+				<a class="hover:text-white" href="tel:+436766246826">+43 676 6246826</a>
+				<span class="text-white/50">•</span>
+				<a class="hover:text-white" href="tel:+434286222">+43 4286 222</a>
+				<span class="text-white/50">•</span>
+				<a class="hover:text-white" href="mailto:info@rader-gitschtal.at">
+					info@rader-gitschtal.at
+				</a>
+			</div>
+		</div>
+	</section>
 </div>
