@@ -29,7 +29,10 @@
 		Tv,
 		Sofa,
 		Bath,
-		Star
+		Star,
+		BadgeCheck,
+		Home,
+		Building2,
 	} from 'lucide-svelte';
 
 	const usps = [
@@ -57,9 +60,7 @@
 		new URL(withAsset('/images/house/IMG_0580.jpeg'), siteUrl).toString(),
 	];
 	const amenityFeatures = $derived.by(() => {
-		const amenities = Array.from(
-			new Set(rooms.flatMap((room) => room.amenities ?? []))
-		);
+		const amenities = Array.from(new Set(rooms.flatMap((room) => room.amenities ?? [])));
 
 		return amenities.map((amenity) => ({
 			'@type': 'LocationFeatureSpecification',
@@ -83,19 +84,19 @@
 				postalCode: '9622',
 				addressLocality: 'Weißbriach',
 				addressRegion: 'Kärnten',
-				addressCountry: 'AT'
+				addressCountry: 'AT',
 			},
 			geo: {
 				'@type': 'GeoCoordinates',
 				latitude: 46.688407,
-				longitude: 13.2549914
+				longitude: 13.2549914,
 			},
 			sameAs: [
-				'https://www.google.com/maps/place/G%C3%A4stehaus+Rader/@46.6884004,13.2549813,17z/data=!3m1!4b1!4m6!3m5!1s0x4770a9c55d33223f:0xc3dcc0da6fc8c9e5!8m2!3d46.6884004!4d13.2549813!16s%2Fg%2F1tffb_l8?entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoASAFQAw%3D%3D'
+				'https://www.google.com/maps/place/G%C3%A4stehaus+Rader/@46.6884004,13.2549813,17z/data=!3m1!4b1!4m6!3m5!1s0x4770a9c55d33223f:0xc3dcc0da6fc8c9e5!8m2!3d46.6884004!4d13.2549813!16s%2Fg%2F1tffb_l8?entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoASAFQAw%3D%3D',
 			],
 			amenityFeature: amenityFeatures,
 			telephone: ['+43 676 6246826', '+43 4286 222'],
-			email: 'info@rader-gitschtal.at'
+			email: 'info@rader-gitschtal.at',
 		})
 	);
 
@@ -134,6 +135,7 @@
 	destinationImages.sort(() => Math.random() - 0.5);
 
 	let galleryTrack: HTMLDivElement | null = null;
+	const trustStars = Array.from({ length: 5 });
 
 	const scrollGallery = (direction: 'prev' | 'next') => {
 		if (!galleryTrack) return;
@@ -341,7 +343,8 @@
 										{r.title}
 									</h3>
 									<p class="mt-1 text-xs font-semibold text-slate-500">
-										{$t('price.from')} {r.pricePerNightBase} / {$t('price.night')}
+										{$t('price.from')}
+										{r.pricePerNightBase} / {$t('price.night')}
 									</p>
 
 									<!-- Meta line (small, muted) -->
@@ -383,61 +386,125 @@
 			</section>
 
 			<!-- TRUST -->
-			<section class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10">
-				<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
-					{$t('trust.kicker')}
-				</p>
-				<h2 class="mt-3 font-serif text-3xl leading-[0.95] text-slate-900 sm:text-4xl">
-					{$t('trust.title')}
-				</h2>
-				<div class="mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
+			<section class="py-4">
+				<!-- Header row -->
+				<div class="flex flex-wrap items-start justify-between gap-6">
+					<div class="max-w-2xl">
+						<p class="text-[11px] font-semibold uppercase tracking-[0.35em] text-brand">
+							{$t('trust.kicker')}
+						</p>
+						<h2 class="mt-3 text-4xl font-serif font-medium leading-[0.95] text-slate-900">
+							{$t('trust.title')}
+						</h2>
+						<div class="mt-4 h-[3px] w-16 rounded-full bg-brand"></div>
+					</div>
 
-				<div class="mt-6 grid gap-6 lg:grid-cols-[1.1fr,1fr]">
-					<div class="space-y-5">
-						<div class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-							<div class="flex items-center gap-2 text-brand">
-								<Star class="h-5 w-5" aria-hidden="true" />
-								<p class="text-xs font-semibold uppercase tracking-[0.18em] text-brand">
-									{$t('trust.ratingLabel')}
-								</p>
-							</div>
-							<div class="mt-3 flex flex-wrap items-baseline gap-3">
-								<span class="text-3xl font-semibold text-slate-900">
-									{$t('trust.ratingValue')}
-								</span>
-								<span class="text-sm text-slate-600">{$t('trust.ratingMeta')}</span>
-							</div>
+					<div class="mt-6 flex items-center gap-2 text-sm font-medium text-slate-500 sm:mt-10">
+						<BadgeCheck class="h-4 w-4 text-brand" aria-hidden="true" />
+						{$t('trust.verified')}
+					</div>
+				</div>
+
+				<!-- Cards row (4 columns like screenshot) -->
+				<div class="mt-10 grid gap-6 lg:grid-cols-4">
+					<!-- Rating card (Google) -->
+					<div class="rounded-3xl border border-slate-200/70 bg-white p-6">
+						<div
+							class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-slate-400"
+						>
+							
+							<span>Google</span>
 						</div>
 
-						<div class="flex flex-wrap gap-2">
-							<span
-								class="rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-600"
-							>
-								{$t('trust.badge.family')}
+						<div class="mt-5 flex items-end gap-2">
+							<span class="text-5xl font-semibold leading-none text-slate-900">
+								{$t('trust.ratingValue')}
 							</span>
-							<span
-								class="rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-600"
-							>
-								{$t('trust.badge.since')}
-							</span>
-							<span
-								class="rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-600"
-							>
-								{$t('trust.badge.direct')}
-							</span>
+							<span class="pb-1 text-sm font-semibold text-slate-400">/ 5</span>
+						</div>
+
+						<div class="mt-3 flex items-center gap-1 text-amber-500">
+							{#each trustStars as _}
+								<Star class="h-4 w-4 fill-current" aria-hidden="true" />
+							{/each}
+						</div>
+
+						<p class="mt-6 text-xs font-medium text-slate-400">
+							{$t('trust.ratingMeta')}
+						</p>
+
+						<!-- Small “platform score” tile (bottom) -->
+						<div class="mt-6 rounded-2xl border border-slate-200/70 bg-white px-4 py-3">
+							<div class="flex items-center gap-3">
+								<span
+									class="grid h-10 w-10 place-items-center rounded-full bg-slate-900 text-sm font-semibold text-white"
+								>
+									{$t('trust.booking.score')}
+								</span>
+								<div class="leading-tight">
+									<p class="text-xs font-semibold text-slate-900">
+										{$t('trust.booking.label')}
+									</p>
+									<p class="text-[11px] text-slate-400">
+										{$t('trust.booking.meta')}
+									</p>
+								</div>
+							</div>
 						</div>
 					</div>
 
-					<div class="grid gap-4">
-						<div class="rounded-2xl border border-slate-200 bg-white p-4 text-sm text-slate-600">
-							"{$t('trust.review.1')}"
+					<!-- Review cards -->
+					{#each [1, 2, 3] as i}
+						<div class="flex h-full flex-col rounded-3xl border border-slate-200/70 bg-white p-6">
+							<div class="flex items-center gap-1 text-amber-500">
+								{#each trustStars as _}
+									<Star class="h-4 w-4 fill-current" aria-hidden="true" />
+								{/each}
+							</div>
+
+							<p class="mt-5 text-sm italic leading-relaxed text-slate-600">
+								"{$t(`trust.review.${i}`)}"
+							</p>
+
+							<div class="mt-auto border-t border-slate-200/70 pt-4">
+								<div class="flex items-center gap-3">
+									<!-- Avatar -->
+									<div
+										class="grid h-10 w-10 place-items-center overflow-hidden rounded-full bg-slate-100 text-xs font-semibold text-slate-700"
+									>
+										{$t(`trust.review.${i}.initials`)}
+									</div>
+
+									<div class="leading-tight">
+										<p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-900">
+											{$t(`trust.review.${i}.name`)}
+										</p>
+										<p class="text-[11px] text-slate-400">
+											{$t(`trust.review.${i}.meta`)}
+										</p>
+									</div>
+								</div>
+							</div>
 						</div>
-						<div class="rounded-2xl border border-slate-200 bg-white p-4 text-sm text-slate-600">
-							"{$t('trust.review.2')}"
-						</div>
-						<div class="rounded-2xl border border-slate-200 bg-white p-4 text-sm text-slate-600">
-							"{$t('trust.review.3')}"
-						</div>
+					{/each}
+				</div>
+
+				<!-- Bottom platform row (like screenshot) -->
+				<div class="mt-10 flex flex-wrap items-center justify-center gap-8 text-sm text-slate-400">
+					<div class="flex items-center gap-2">
+						<Home class="h-4 w-4 text-slate-500" aria-hidden="true" />
+						<span class="text-slate-500">Airbnb</span>
+						<span class="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600">
+							{$t('trust.airbnb.score')}
+						</span>
+					</div>
+					<span class="h-4 w-px bg-slate-200"></span>
+					<div class="flex items-center gap-2">
+						<Building2 class="h-4 w-4 text-slate-500" aria-hidden="true" />
+						<span class="text-slate-500">Booking.com</span>
+						<span class="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600">
+							{$t('trust.booking.score')}
+						</span>
 					</div>
 				</div>
 			</section>
@@ -468,7 +535,7 @@
 						type="button"
 						class="grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white text-slate-600 shadow-sm transition hover:bg-slate-50"
 						onclick={() => scrollGallery('prev')}
-						aria-label="{$t('room.detail.gallery.prev')}"
+						aria-label={$t('room.detail.gallery.prev')}
 					>
 						<ChevronLeft class="h-5 w-5" />
 					</button>
@@ -476,7 +543,7 @@
 						type="button"
 						class="grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white text-slate-600 shadow-sm transition hover:bg-slate-50"
 						onclick={() => scrollGallery('next')}
-						aria-label="{$t('room.detail.gallery.next')}"
+						aria-label={$t('room.detail.gallery.next')}
 					>
 						<ChevronRight class="h-5 w-5" />
 					</button>
@@ -503,7 +570,6 @@
 					{/each}
 				</div>
 			</section>
-
 		</div>
 	</div>
 
@@ -824,7 +890,6 @@
 					</a>
 				</div>
 			</section>
-
 		</div>
 	</div>
 
@@ -951,9 +1016,7 @@
 				<span class="text-white/50">•</span>
 				<a class="hover:text-white" href="tel:+434286222">+43 4286 222</a>
 				<span class="text-white/50">•</span>
-				<a class="hover:text-white" href="mailto:info@rader-gitschtal.at">
-					info@rader-gitschtal.at
-				</a>
+				<a class="hover:text-white" href="mailto:info@rader-gitschtal.at"> info@rader-gitschtal.at </a>
 			</div>
 		</div>
 	</section>
