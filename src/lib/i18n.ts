@@ -265,11 +265,14 @@ const translations: Record<Lang, Record<string, string>> = {
 		'trust.kicker': 'Vertrauen',
 		'trust.title': 'Gäste empfehlen uns weiter',
 		'trust.ratingLabel': 'Google Bewertung',
-		'trust.ratingValue': '4,9/5',
-		'trust.ratingMeta': '120+ Bewertungen',
-		'trust.review.1': 'Sehr sauber, ruhige Lage und super freundliche Gastgeber.',
-		'trust.review.2': 'Perfekt für Familien, Parkplatz direkt vor dem Haus.',
-		'trust.review.3': 'Gemütlich, top ausgestattet, wir kommen gerne wieder.',
+		'trust.ratingValue': '4,9',
+		'trust.ratingMeta': '24 Rezensionen',
+		'trust.review.1':
+			'Die Wohnung ist gemütlich, warm und komplett ausgestattet. Der Vermieter ist sehr nett und hilfsbereit.',
+		'trust.review.2':
+			'Sehr sauber, sehr freundliche Gastgeberin, und nach dem Schlittschuhlaufen wartete ein köstliches Gebäck. Absolut empfehlenswert.',
+		'trust.review.3':
+			'Absolut empfehlenswert! Fantastische Gastgeber, komfortable und ruhige Apartments und ein großartiger Ort für einen Aktivurlaub.',
 		'trust.badge.family': 'Familiengeführt',
 		'trust.badge.since': 'Seit 1964',
 		'trust.badge.direct': 'Direktbuchung = bester Preis',
@@ -788,11 +791,14 @@ const translations: Record<Lang, Record<string, string>> = {
 		'trust.kicker': 'Trust',
 		'trust.title': 'Guest-approved stays',
 		'trust.ratingLabel': 'Google rating',
-		'trust.ratingValue': '4.9/5',
-		'trust.ratingMeta': '120+ reviews',
-		'trust.review.1': 'Very clean, quiet location, and wonderful hosts.',
-		'trust.review.2': 'Perfect for families, parking right outside.',
-		'trust.review.3': 'Cozy, well equipped, we would gladly return.',
+		'trust.ratingValue': '4.9',
+		'trust.ratingMeta': '24 reviews',
+		'trust.review.1':
+			'The apartment is cozy, warm, and fully equipped. The host is very kind and helpful.',
+		'trust.review.2':
+			'Very clean, very friendly host, and after ice skating there was delicious pastry waiting. Absolutely recommended.',
+		'trust.review.3':
+			'Absolutely recommended! Fantastic hosts, comfortable and quiet apartments, and a great base for an active holiday.',
 		'trust.badge.family': 'Family-run',
 		'trust.badge.since': 'Since 1964',
 		'trust.badge.direct': 'Best price when booking direct',
