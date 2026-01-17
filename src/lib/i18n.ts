@@ -85,7 +85,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'rooms.page.detailsCta': 'Details ansehen',
 		'rooms.page.pricing.title': 'Weitere Informationen zu den Preisen',
 		'rooms.page.pricing.subtitle':
-			'Preise gelten für 2 Personen pro Ferienwohnung und Tag (ohne Verpflegung)',
+			'Preise gelten für 2 Personen pro Ferienwohnung und Tag',
 		'rooms.page.pricing.kids': 'Kinder bis 8 Jahre übernachten kostenfrei',
 		'rooms.page.pricing.extraPrefix': 'Aufschlag für ',
 		'rooms.page.pricing.extraHighlight': 'jede weitere Person',
@@ -627,7 +627,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'rooms.page.detailsCta': 'See details',
 		'rooms.page.pricing.title': 'More information about pricing',
 		'rooms.page.pricing.subtitle':
-			'Prices are for 2 people per apartment and per day (excluding meals)',
+			'Prices are for 2 people per apartment and per day',
 		'rooms.page.pricing.kids': 'Children up to age 8 stay free of charge',
 		'rooms.page.pricing.extraPrefix': 'Surcharge for ',
 		'rooms.page.pricing.extraHighlight': 'each additional person',
