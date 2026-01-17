@@ -195,6 +195,11 @@
 								{$t('nav.contact')}
 							</a>
 						</li>
+						<li>
+							<a class="hover:text-slate-900" href={resolve('/faq')}>
+								{$t('footer.faq')}
+							</a>
+						</li>
 					</ul>
 				</div>
 

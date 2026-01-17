@@ -368,6 +368,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'footer.terms': 'AGB',
 		'footer.accessibility': 'Barrierefreiheit',
 		'footer.credits': 'Bild- & Lizenznachweise',
+		'footer.faq': 'FAQ',
 		'credits.title': 'Bild- & Lizenznachweise',
 		'credits.intro':
 			'Sofern nicht anders angegeben, stammen alle auf dieser Website verwendeten Fotos, Grafiken und Inhalte von Gästehaus Rader.',
@@ -503,7 +504,26 @@ const translations: Record<Lang, Record<string, string>> = {
 		'contact.form.message': 'Nachricht',
 		'contact.form.cta': 'Nachricht senden',
 		'contact.arrival.title': 'Anreise',
-		'contact.arrival.body': 'Details zu Anfahrt und Check-in folgen.'
+		'contact.arrival.body': 'Details zu Anfahrt und Check-in folgen.',
+		'faq.title': 'Häufige Fragen',
+		'faq.subtitle': 'Antworten auf die wichtigsten Fragen rund um Ihren Aufenthalt.',
+		'faq.q1': 'Wie sind die Check-in und Check-out Zeiten?',
+		'faq.a1': 'Check-in ab 14:00 Uhr, Check-out bis 10:00 Uhr. Früher oder später nach Absprache.',
+		'faq.q2': 'Sind Haustiere erlaubt?',
+		'faq.a2': 'Leider sind Haustiere nicht erlaubt.',
+		'faq.q3': 'Gibt es Parkplätze?',
+		'faq.a3': 'Kostenfreie Parkplätze direkt vor dem Gästehaus.',
+		'faq.q4': 'Wie funktioniert die Bezahlung?',
+		'faq.a4': 'Bezahlung vor Ort in bar, Überweisung nach Absprache.',
+		'faq.q5': 'Gibt es WLAN?',
+		'faq.a5': 'Kostenloses Highspeed-WLAN in allen Appartements.',
+		'faq.q6': 'Gibt es eine Gästecard?',
+		'faq.a6': 'Ja, Sie erhalten bei Anreise die Gästecard der Region.',
+		'faq.q7': 'Welche Vorteile hat die Gästecard?',
+		'faq.a7':
+			'Je nach Saison gibt es kostenlose oder vergünstigte Leistungen, z. B. Bergbahnen, Badeeintritte, Busverbindungen, geführte Touren oder Museen. Die aktuellen Details erhalten Sie bei uns vor Ort.',
+		'faq.q8': 'Ist Rauchen erlaubt?',
+		'faq.a8': 'In den Appartements ist Rauchen nicht gestattet. Auf den Balkonen stehen Aschenbecher bereit.',
 	},
 	en: {
 		'nav.home': 'Home',
@@ -851,6 +871,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'footer.terms': 'Terms',
 		'footer.accessibility': 'Accessibility',
 		'footer.credits': 'Image & license credits',
+		'footer.faq': 'FAQ',
 		'credits.title': 'Image & license credits',
 		'credits.intro':
 			'Unless otherwise stated, all photos, graphics, and content used on this website are provided by Gästehaus Rader.',
@@ -985,7 +1006,26 @@ const translations: Record<Lang, Record<string, string>> = {
 		'contact.form.message': 'Message',
 		'contact.form.cta': 'Send message',
 		'contact.arrival.title': 'Arrival',
-		'contact.arrival.body': 'Directions and check-in details will follow.'
+		'contact.arrival.body': 'Directions and check-in details will follow.',
+		'faq.title': 'Frequently asked questions',
+		'faq.subtitle': 'Quick answers to the most common questions about your stay.',
+		'faq.q1': 'What are the check-in and check-out times?',
+		'faq.a1': 'Check-in from 2:00 pm and check-out by 10:00 am. Earlier or later by arrangement.',
+		'faq.q2': 'Are pets allowed?',
+		'faq.a2': 'Unfortunately, pets are not allowed.',
+		'faq.q3': 'Is parking available?',
+		'faq.a3': 'Free parking is available right in front of the guesthouse.',
+		'faq.q4': 'How does payment work?',
+		'faq.a4': 'Payment on site in cash, or by bank transfer by arrangement.',
+		'faq.q5': 'Is Wi-Fi available?',
+		'faq.a5': 'Free high-speed Wi-Fi is available in all apartments.',
+		'faq.q6': 'Is there a guest card?',
+		'faq.a6': 'Yes, you receive the regional guest card on arrival.',
+		'faq.q7': 'What benefits does the guest card include?',
+		'faq.a7':
+			'Benefits vary by season, but typically include free or discounted services such as cable cars, lake access, public transport, guided tours, or museums. We can share the current details on site.',
+		'faq.q8': 'Is smoking allowed?',
+		'faq.a8': 'Smoking is not permitted inside the apartments. Ashtrays are available on the balconies.',
 	}
 };
 
