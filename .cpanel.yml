@@ -3,4 +3,4 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/ycmjxegouest/gaestehaus-rader/
     - /bin/rm -rf $DEPLOYPATH/*
-    - /bin/cp -R build/* $DEPLOYPATH
+    - /bin/cp -R build/. $DEPLOYPATH
