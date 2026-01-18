@@ -456,8 +456,8 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.amenities.basic.towels.title': 'Frische Handtücher',
 		'home.amenities.basic.towels.body':
 			'Extra flauschige Handtücher und Bademäntel für Ihren Wellness-Moment.',
-		'home.amenities.basic.care.title': 'Bio-Pflegeprodukte',
-		'home.amenities.basic.care.body': 'Nachhaltige Seifen und Shampoos mit alpinen Kräuterextrakten.',
+		'home.amenities.basic.care.title': 'Pflegeprodukte',
+		'home.amenities.basic.care.body': 'Nachhaltige Seifen und Shampoos.',
 		'home.amenities.kitchen.title': 'Küche',
 		'home.amenities.kitchen.kitchenette.title': 'Küchenzeile',
 		'home.amenities.kitchen.kitchenette.body':
@@ -478,7 +478,7 @@ const translations: Record<Lang, Record<string, string>> = {
 			'Kostenloses Glasfaser-Internet im gesamten Resort für Ihre Verbindung zur Welt.',
 		'home.amenities.house.parking.title': 'Privater Parkplatz',
 		'home.amenities.house.parking.body':
-			'Sicherer, kameraüberwachter Parkplatz direkt vor dem Haupteingang.',
+			'Sicherer Parkplatz direkt vor dem Haupteingang.',
 		'home.amenities.house.ski.title': 'Skiraum mit Trockner',
 		'home.amenities.house.ski.body':
 			'Beheizter Abstellraum für Ihre Skiausrüstung mit integriertem Schuhtrockner.',
@@ -1146,8 +1146,8 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.amenities.basic.bedding.body': 'Finest Egyptian cotton for deep, restful sleep.',
 		'home.amenities.basic.towels.title': 'Fresh towels',
 		'home.amenities.basic.towels.body': 'Extra fluffy towels and bathrobes for your wellness moment.',
-		'home.amenities.basic.care.title': 'Organic care products',
-		'home.amenities.basic.care.body': 'Sustainable soaps and shampoos with alpine herbal extracts.',
+		'home.amenities.basic.care.title': 'Care products',
+		'home.amenities.basic.care.body': 'Sustainable soaps and shampoos.',
 		'home.amenities.kitchen.title': 'Kitchen',
 		'home.amenities.kitchen.kitchenette.title': 'Kitchenette',
 		'home.amenities.kitchen.kitchenette.body': 'Fully equipped with induction stove and microwave.',
@@ -1163,7 +1163,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.amenities.house.wifi.title': 'High-speed Wi-Fi',
 		'home.amenities.house.wifi.body': 'Free fiber internet throughout the property for staying connected.',
 		'home.amenities.house.parking.title': 'Private parking',
-		'home.amenities.house.parking.body': 'Secure, monitored parking right by the main entrance.',
+		'home.amenities.house.parking.body': 'Secure parking right by the main entrance.',
 		'home.amenities.house.ski.title': 'Ski room with dryer',
 		'home.amenities.house.ski.body': 'Heated storage for your ski gear with built-in boot dryer.',
 		'home.gallery.kicker': 'Gallery',
