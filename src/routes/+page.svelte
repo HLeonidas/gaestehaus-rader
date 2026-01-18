@@ -611,7 +611,7 @@
 
 						<ul class="space-y-4 text-sm text-slate-600 sm:text-base">
 							<li class="flex items-start gap-3">
-								<span class="mt-0.5 grid h-12 w-12 place-items-center rounded-full bg-brand/10 text-brand">
+								<span class="mt-0.5 grid h-12 w-12 shrink-0 place-items-center rounded-full bg-brand/10 text-brand">
 									<BusFront class="h-6 w-6" aria-hidden="true" />
 								</span>
 								<div>
@@ -624,7 +624,7 @@
 								</div>
 							</li>
 							<li class="flex items-start gap-3">
-								<span class="mt-0.5 grid h-12 w-12 place-items-center rounded-full bg-brand/10 text-brand">
+								<span class="mt-0.5 grid h-12 w-12 shrink-0 place-items-center rounded-full bg-brand/10 text-brand">
 									<Sparkles class="h-6 w-6" aria-hidden="true" />
 								</span>
 								<div>
@@ -637,7 +637,7 @@
 								</div>
 							</li>
 							<li class="flex items-start gap-3">
-								<span class="mt-0.5 grid h-12 w-12 place-items-center rounded-full bg-brand/10 text-brand">
+								<span class="mt-0.5 grid h-12 w-12 shrink-0 place-items-center rounded-full bg-brand/10 text-brand">
 									<CalendarDays class="h-6 w-6" aria-hidden="true" />
 								</span>
 								<div>

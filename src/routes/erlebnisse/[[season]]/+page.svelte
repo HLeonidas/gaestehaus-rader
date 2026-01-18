@@ -504,7 +504,7 @@
 						<div class="mt-4">
 							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 								<div class="flex items-start gap-3">
-									<div class="grid h-10 w-10 place-items-center rounded-full bg-brand/10 text-brand">
+									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-brand/10 text-brand">
 										<Utensils class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
@@ -531,7 +531,7 @@
 						<div class="mt-4">
 							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 								<div class="flex items-start gap-3">
-									<div class="grid h-10 w-10 place-items-center rounded-full bg-brand/10 text-brand">
+									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-brand/10 text-brand">
 										<Landmark class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div>
@@ -579,7 +579,7 @@
 							</p>
 						</details>
 
-						<details class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+						<!-- <details class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 							<summary class="flex cursor-pointer list-none items-center justify-between text-sm font-semibold text-slate-900">
 								{$t('faq.guestcard.q5')}
 								<ChevronDown
@@ -590,7 +590,7 @@
 							<p class="mt-3 text-sm leading-relaxed text-slate-600">
 								{$t('faq.guestcard.a5')}
 							</p>
-						</details>
+						</details> -->
 					</div>
 				</div>
 			</section>
