@@ -19,6 +19,7 @@ AddDefaultCharset UTF-8
 </IfModule>
 
 # --- 404 handling for static build ---
+Options -MultiViews
 ErrorDocument 404 /404.html
 
 <IfModule mod_rewrite.c>

@@ -1,0 +1,1 @@
+import{y as u,l as _,_ as o,j as t,A as g,D as p,W as a,x as i,w as d,C as m}from"./Mw9s90Lo.js";function E(n,r){let s=null,y=t;var l;if(t){s=m;for(var e=g(document.head);e!==null&&(e.nodeType!==p||e.data!==n);)e=a(e);if(e===null)i(!1);else{var f=a(e);e.remove(),d(f)}}t||(l=document.head.appendChild(u()));try{_(()=>r(l),o)}finally{y&&(i(!0),d(s))}}export{E as h};
