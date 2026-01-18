@@ -408,9 +408,13 @@
 				</div>
 
 				<!-- Cards row (4 columns like screenshot) -->
-				<div class="mt-10 grid gap-6 lg:grid-cols-4">
+				<div
+					class="mt-10 -mx-4 flex snap-x snap-mandatory items-stretch gap-6 overflow-x-auto px-4 pb-2 scroll-pl-4 scroll-pr-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:mx-0 lg:grid lg:grid-cols-4 lg:overflow-visible lg:px-0 lg:pb-0"
+				>
 					<!-- Rating card (Google) -->
-					<div class="rounded-3xl border border-slate-200/70 bg-white p-6">
+					<div
+						class="flex h-full w-[280px] min-h-[360px] shrink-0 snap-start flex-col rounded-3xl border border-slate-200/70 bg-white p-6 shadow-sm lg:min-h-0 lg:w-auto lg:shrink"
+					>
 						<div
 							class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-slate-400"
 						>
@@ -456,7 +460,9 @@
 
 					<!-- Review cards -->
 					{#each [1, 2, 3] as i}
-						<div class="flex h-full flex-col rounded-3xl border border-slate-200/70 bg-white p-6">
+						<div
+							class="flex h-full w-[280px] min-h-[360px] shrink-0 snap-start flex-col rounded-3xl border border-slate-200/70 bg-white p-6 shadow-sm lg:min-h-0 lg:w-auto lg:shrink"
+						>
 							<div class="flex items-center gap-1 text-amber-500">
 								{#each trustStars as _}
 									<Star class="h-4 w-4 fill-current" aria-hidden="true" />
