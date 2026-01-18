@@ -1,21 +1,37 @@
-# --- UTF-8 for text files (incl. llms.txt) ---
+# --- UTF-8 for text files ---
 AddDefaultCharset UTF-8
 <IfModule mod_mime.c>
   AddCharset UTF-8 .txt
 </IfModule>
 
+# --- Prevent caching of entry HTML ---
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html)$">
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+
+  # Cache static build assets long-term
+  <FilesMatch "\.(js|css|woff2|png|jpg|jpeg|svg|webp)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
+
+# --- SPA routing fallback for SvelteKit ---
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
-  # Allow SvelteKit build assets and common static folders
+  # Allow SvelteKit client assets through
   RewriteRule ^_app/ - [L]
   RewriteRule ^(images|assets|fonts|icons)/ - [L]
   RewriteRule ^(robots\.txt|sitemap\.xml|llms\.txt)$ - [L]
 
-  # If a real file exists: serve it
-  RewriteCond %{REQUEST_FILENAME} -f
+  # Serve real files / folders directly
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  # Otherwise serve SPA entry
-  RewriteRule ^ index.html [L]
+  # Everything else -> SPA entry
+  RewriteRule . /index.html [L]
 </IfModule>

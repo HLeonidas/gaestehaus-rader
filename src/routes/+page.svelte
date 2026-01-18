@@ -575,7 +575,7 @@
 
 	<div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
 		<div class="space-y-16">
-			<!-- AUSSTATTUNG (unter den Jahreszeiten einfügen) -->
+			<!-- AUSSTATTUNG -->
 			<section class="rounded-3xl px-0 py-0 sm:px-10 sm:py-14">
 				<div class="flex items-center gap-4">
 					<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
