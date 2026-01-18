@@ -681,7 +681,7 @@ const translations: Record<Lang, Record<string, string>> = {
 			'Alles Wichtige zur Karte: Ausgabe, Gültigkeit, Nutzung und Regeln für alle Gäste.',
 		'faq.guestcard.q1': 'Wer bekommt die GästeCard Basic?',
 		'faq.guestcard.a1':
-			'Jeder Gast, der in der Gemeinde Hermagor-Pressegger See übernachtet, erhält die GästeCard Basic. Pro Person wird eine Card ausgestellt.',
+			'Jeder Gast, der in der Region übernachtet, erhält die GästeCard Basic. Pro Person wird eine Card ausgestellt.',
 		'faq.guestcard.q2': 'Was kostet die GästeCard Basic und wo bekomme ich diese?',
 		'faq.guestcard.a2':
 			'Die GästeCard Basic ist kostenfrei und wird Ihnen bei der Anmeldung direkt im Beherbergungsbetrieb ausgehändigt.',
@@ -1362,7 +1362,7 @@ const translations: Record<Lang, Record<string, string>> = {
 			'Key details about issuance, validity, usage, and rules for all guests.',
 		'faq.guestcard.q1': 'Who receives the Guest Card Basic?',
 		'faq.guestcard.a1':
-			'Every guest staying in the Hermagor-Pressegger See municipality receives the Guest Card Basic. One card is issued per person.',
+			'Every guest staying in the region receives the Guest Card Basic. One card is issued per person.',
 		'faq.guestcard.q2': 'What does the Guest Card Basic cost and where do I get it?',
 		'faq.guestcard.a2':
 			'The Guest Card Basic is free of charge and is handed over at check-in by your accommodation provider.',
@@ -1392,6 +1392,7 @@ export const t = derived(lang, ($lang) => {
 });
 
 export const setLang = (value: Lang) => lang.set(value);
+
 
 
 
