@@ -300,6 +300,20 @@ const translations: Record<Lang, Record<string, string>> = {
 		'guestcard.bullet3': 'Gültig für den gesamten Aufenthalt (inkl. An-/Abreise)',
 		'guestcard.cta.primary': 'Alle Vorteile ansehen',
 		'guestcard.cta.secondary': 'So erhalten Sie die Karte',
+		'guestcard.landing.kicker': 'Exklusiv für unsere Gäste',
+		'guestcard.landing.title': 'GästeCard Basic inklusive',
+		'guestcard.landing.body':
+			'Erleben Sie maximale Freiheit in Ihrem Kärnten-Urlaub. Die Vorteilskarte ist Ihr kostenloser Schlüssel zu den schönsten Erlebnissen der Region.',
+		'guestcard.landing.item1.title': 'Gratis öffentlicher Verkehr',
+		'guestcard.landing.item1.body':
+			'Freie Fahrt mit Bus & ÖBB S-Bahn in ganz Kärnten während Ihres gesamten Aufenthalts.',
+		'guestcard.landing.item2.title': '40+ Vorteile',
+		'guestcard.landing.item2.body':
+			'Zahlreiche Ermäßigungen und kostenlose Eintritte ab der 1. Übernachtung genießen.',
+		'guestcard.landing.item3.title': 'Gültig inkl. An- & Abreisetag',
+		'guestcard.landing.item3.body':
+			'Ihre Mobilitätsgarantie vom Moment des Check-ins bis zur letzten Urlaubsminute.',
+		'guestcard.landing.imageAlt': 'Zugreise durch die Kärntner Berge',
 		'guestcard.page.kicker': 'GästeCard',
 		'guestcard.page.title': 'GästeCard Basic',
 		'guestcard.page.subtitle':
@@ -608,6 +622,28 @@ const translations: Record<Lang, Record<string, string>> = {
 			'Je nach Saison gibt es kostenlose oder vergünstigte Leistungen, z. B. Bergbahnen, Badeeintritte, Busverbindungen, geführte Touren oder Museen. Die aktuellen Details erhalten Sie bei uns vor Ort.',
 		'faq.q8': 'Ist Rauchen erlaubt?',
 		'faq.a8': 'In den Appartements ist Rauchen nicht gestattet. Auf den Balkonen stehen Aschenbecher bereit.',
+		'faq.guestcard.kicker': 'GästeCard Basic',
+		'faq.guestcard.title': 'GästeCard Basic im Überblick',
+		'faq.guestcard.subtitle':
+			'Alles Wichtige zur Karte: Ausgabe, Gültigkeit, Nutzung und Regeln für alle Gäste.',
+		'faq.guestcard.q1': 'Wer bekommt die GästeCard Basic?',
+		'faq.guestcard.a1':
+			'Jeder Gast, der in der Gemeinde Hermagor-Pressegger See übernachtet, erhält die GästeCard Basic. Pro Person wird eine Card ausgestellt.',
+		'faq.guestcard.q2': 'Was kostet die GästeCard Basic und wo bekomme ich diese?',
+		'faq.guestcard.a2':
+			'Die GästeCard Basic ist kostenfrei und wird Ihnen bei der Anmeldung direkt im Beherbergungsbetrieb ausgehändigt.',
+		'faq.guestcard.q3': 'Wann ist diese Card gültig?',
+		'faq.guestcard.a3':
+			'Die Card ist für die gesamte Dauer des Aufenthaltes gültig (auch am Tag der An- und Abreise). Sie muss nicht zurückgegeben werden und kann als Souvenir behalten werden. Bei Verlängerung des Aufenthalts stellt der Gastgeber eine neue Card aus.',
+		'faq.guestcard.q4': 'Wie oft kann ich die Leistungen der GästeCard Basic in Anspruch nehmen?',
+		'faq.guestcard.a4':
+			'Die Leistungen können uneingeschränkt genutzt werden. Datums- oder wochentagsgebundene Leistungen sind nur am angegebenen Tag gültig. Maßgeblich sind die beim jeweiligen Leistungsträger angeführten Daten.',
+		'faq.guestcard.q5': 'Was tun, wenn ich die GästeCard Basic verliere?',
+		'faq.guestcard.a5':
+			'Bei Verlust kann der Gastgeber ein Duplikat ausstellen. Die erste Card verliert damit automatisch ihre Gültigkeit; es gilt nur mehr das Duplikat.',
+		'faq.guestcard.q6': 'Was passiert bei Missbrauch der GästeCard Basic?',
+		'faq.guestcard.a6':
+			'Bei Missbrauch oder Verdacht kann die Stadtgemeinde Hermagor die Card ersatzlos einziehen bzw. sofort sperren. Die Weitergabe an Dritte ist nicht gestattet und kann strafrechtliche Konsequenzen nach sich ziehen. Auf Verlangen ist ein Lichtbildausweis vorzuzeigen.',
 		'error.404.title': 'Seite nicht gefunden',
 		'error.404.body': 'Diese Seite existiert leider nicht (mehr). Bitte überprüfen Sie die URL oder kehren Sie zur Startseite zurück.',
 		'error.404.cta': 'Zur Startseite',
@@ -900,6 +936,20 @@ const translations: Record<Lang, Record<string, string>> = {
 		'guestcard.bullet3': 'Valid for your entire stay (incl. arrival/departure)',
 		'guestcard.cta.primary': 'View all benefits',
 		'guestcard.cta.secondary': 'How to receive the card',
+		'guestcard.landing.kicker': 'Exclusive for our guests',
+		'guestcard.landing.title': 'Guest Card Basic included',
+		'guestcard.landing.body':
+			'Enjoy maximum freedom on your Carinthia getaway. The benefit card is your free key to the region’s best experiences.',
+		'guestcard.landing.item1.title': 'Free public transport',
+		'guestcard.landing.item1.body':
+			'Ride regional buses and ÖBB S-Bahn across Carinthia throughout your stay.',
+		'guestcard.landing.item2.title': '40+ benefits',
+		'guestcard.landing.item2.body':
+			'Enjoy many discounts and free admissions from your first night.',
+		'guestcard.landing.item3.title': 'Valid incl. arrival & departure',
+		'guestcard.landing.item3.body':
+			'Your mobility guarantee from check-in to the final minute of your holiday.',
+		'guestcard.landing.imageAlt': 'Train ride through the Carinthian mountains',
 		'guestcard.page.kicker': 'Guest Card',
 		'guestcard.page.title': 'Guest Card Basic',
 		'guestcard.page.subtitle':
@@ -1200,6 +1250,28 @@ const translations: Record<Lang, Record<string, string>> = {
 			'Benefits vary by season, but typically include free or discounted services such as cable cars, lake access, public transport, guided tours, or museums. We can share the current details on site.',
 		'faq.q8': 'Is smoking allowed?',
 		'faq.a8': 'Smoking is not permitted inside the apartments. Ashtrays are available on the balconies.',
+		'faq.guestcard.kicker': 'Guest Card Basic',
+		'faq.guestcard.title': 'Guest Card Basic at a glance',
+		'faq.guestcard.subtitle':
+			'Key details about issuance, validity, usage, and rules for all guests.',
+		'faq.guestcard.q1': 'Who receives the Guest Card Basic?',
+		'faq.guestcard.a1':
+			'Every guest staying in the Hermagor-Pressegger See municipality receives the Guest Card Basic. One card is issued per person.',
+		'faq.guestcard.q2': 'What does the Guest Card Basic cost and where do I get it?',
+		'faq.guestcard.a2':
+			'The Guest Card Basic is free of charge and is handed over at check-in by your accommodation provider.',
+		'faq.guestcard.q3': 'When is the card valid?',
+		'faq.guestcard.a3':
+			'The card is valid for the entire duration of your stay, including arrival and departure day. It does not need to be returned and can be kept as a souvenir. If you extend your stay, a new card will be issued.',
+		'faq.guestcard.q4': 'How often can I use the Guest Card Basic benefits?',
+		'faq.guestcard.a4':
+			'Benefits can be used without limitation. Date- or weekday-specific services are valid only on the specified day. The information provided by each partner is binding.',
+		'faq.guestcard.q5': 'What if I lose the Guest Card Basic?',
+		'faq.guestcard.a5':
+			'If the card is lost, your host can issue a duplicate. The original card becomes invalid, and only the duplicate remains valid.',
+		'faq.guestcard.q6': 'What happens in case of misuse of the Guest Card Basic?',
+		'faq.guestcard.a6':
+			'In case of misuse or suspicion, the city of Hermagor can confiscate or immediately block the card. Passing it on to third parties is prohibited and may have legal consequences. A photo ID must be shown on request.',
 		'error.404.title': 'Page not found',
 		'error.404.body': 'This page no longer exists. Please check the URL or return to the homepage.',
 		'error.404.cta': 'Back to home',
@@ -1214,6 +1286,8 @@ export const t = derived(lang, ($lang) => {
 });
 
 export const setLang = (value: Lang) => lang.set(value);
+
+
 
 
 

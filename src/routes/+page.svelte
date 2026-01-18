@@ -13,6 +13,8 @@
 		Sun,
 		Flame,
 		Sparkles,
+		BusFront,
+		CalendarDays,
 		BedDouble,
 		Bed,
 		ShowerHead,
@@ -33,7 +35,6 @@
 		BadgeCheck,
 		Home,
 		Building2,
-		Check,
 	} from 'lucide-svelte';
 
 	const usps = [
@@ -511,53 +512,89 @@
 			</section>
 
 			<!-- GUEST CARD -->
-			<section class="rounded-3xl border border-slate-200 bg-white px-6 py-8 shadow-sm sm:px-10 sm:py-10">
-				<div class="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-					<div class="max-w-2xl">
-						<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
-							{$t('guestcard.kicker')}
-						</p>
-						<h2 class="mt-3 text-3xl font-serif font-medium leading-[0.95] text-slate-900 sm:text-4xl">
-							{$t('guestcard.title')}
-						</h2>
-						<div class="mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
-
-						<ul class="mt-6 space-y-3 text-sm text-slate-600 sm:text-base">
-							<li class="flex items-start gap-3">
-								<span class="mt-0.5 grid h-6 w-6 place-items-center rounded-full bg-brand/10 text-brand">
-									<Check class="h-4 w-4" aria-hidden="true" />
-								</span>
-								{$t('guestcard.bullet1')}
-							</li>
-							<li class="flex items-start gap-3">
-								<span class="mt-0.5 grid h-6 w-6 place-items-center rounded-full bg-brand/10 text-brand">
-									<Check class="h-4 w-4" aria-hidden="true" />
-								</span>
-								{$t('guestcard.bullet2')}
-							</li>
-							<li class="flex items-start gap-3">
-								<span class="mt-0.5 grid h-6 w-6 place-items-center rounded-full bg-brand/10 text-brand">
-									<Check class="h-4 w-4" aria-hidden="true" />
-								</span>
-								{$t('guestcard.bullet3')}
-							</li>
-						</ul>
+			<section class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+				<div class="grid gap-8 lg:grid-cols-[1.1fr,0.9fr]">
+					<div class="relative min-h-[280px] lg:min-h-full">
+						<img
+							src={withAsset('/images/experiences/train.png')}
+							alt={$t('guestcard.landing.imageAlt')}
+							class="h-full w-full object-cover"
+							loading="lazy"
+						/>
+						<div class="absolute inset-0 bg-gradient-to-r from-black/10 via-transparent to-transparent"></div>
 					</div>
 
-					<div class="flex flex-wrap items-center gap-3">
-						<a
-							href={resolve('/gaestecard')}
-							class="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90"
-						>
-							{$t('guestcard.cta.primary')}
-							<ArrowRight class="h-4 w-4" aria-hidden="true" />
-						</a>
-						<a
-							href={`${resolve('/faq')}#gaestecard`}
-							class="inline-flex items-center justify-center rounded-full border border-slate-200 px-6 py-3 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50"
-						>
-							{$t('guestcard.cta.secondary')}
-						</a>
+					<div class="space-y-6 px-6 py-8 sm:px-10 sm:py-10">
+						<div>
+							<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
+								{$t('guestcard.landing.kicker')}
+							</p>
+							<h2 class="mt-3 text-3xl font-serif font-medium leading-[0.95] text-slate-900 sm:text-4xl">
+								{$t('guestcard.landing.title')}
+							</h2>
+							<div class="mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
+							<p class="mt-4 text-sm leading-relaxed text-slate-600 sm:text-base">
+								{$t('guestcard.landing.body')}
+							</p>
+						</div>
+
+						<ul class="space-y-4 text-sm text-slate-600 sm:text-base">
+							<li class="flex items-start gap-3">
+								<span class="mt-0.5 grid h-12 w-12 place-items-center rounded-full bg-brand/10 text-brand">
+									<BusFront class="h-6 w-6" aria-hidden="true" />
+								</span>
+								<div>
+									<p class="text-sm font-semibold text-slate-900">
+										{$t('guestcard.landing.item1.title')}
+									</p>
+									<p class="mt-1 text-xs leading-relaxed text-slate-500">
+										{$t('guestcard.landing.item1.body')}
+									</p>
+								</div>
+							</li>
+							<li class="flex items-start gap-3">
+								<span class="mt-0.5 grid h-12 w-12 place-items-center rounded-full bg-brand/10 text-brand">
+									<Sparkles class="h-6 w-6" aria-hidden="true" />
+								</span>
+								<div>
+									<p class="text-sm font-semibold text-slate-900">
+										{$t('guestcard.landing.item2.title')}
+									</p>
+									<p class="mt-1 text-xs leading-relaxed text-slate-500">
+										{$t('guestcard.landing.item2.body')}
+									</p>
+								</div>
+							</li>
+							<li class="flex items-start gap-3">
+								<span class="mt-0.5 grid h-12 w-12 place-items-center rounded-full bg-brand/10 text-brand">
+									<CalendarDays class="h-6 w-6" aria-hidden="true" />
+								</span>
+								<div>
+									<p class="text-sm font-semibold text-slate-900">
+										{$t('guestcard.landing.item3.title')}
+									</p>
+									<p class="mt-1 text-xs leading-relaxed text-slate-500">
+										{$t('guestcard.landing.item3.body')}
+									</p>
+								</div>
+							</li>
+						</ul>
+
+						<div class="flex flex-wrap items-center gap-3">
+							<a
+								href={`${resolve('/erlebnisse')}#gaestecard`}
+								class="inline-flex items-center gap-2 rounded-xl bg-brand px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90"
+							>
+								{$t('guestcard.cta.primary')}
+								<ArrowRight class="h-4 w-4" aria-hidden="true" />
+							</a>
+							<a
+								href={`${resolve('/faq')}#gaestecard`}
+								class="inline-flex items-center justify-center rounded-xl bg-slate-100 px-6 py-3 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-200"
+							>
+								{$t('guestcard.cta.secondary')}
+							</a>
+						</div>
 					</div>
 				</div>
 			</section>

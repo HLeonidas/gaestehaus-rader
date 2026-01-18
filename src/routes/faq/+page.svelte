@@ -42,5 +42,63 @@
 				</div>
 			{/each}
 		</div>
+
+		<section class="mt-12" id="gaestecard">
+			<div class="space-y-4">
+				<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
+					{$t('faq.guestcard.kicker')}
+				</p>
+				<h2 class="font-serif text-3xl leading-[0.95] text-slate-900 sm:text-4xl">
+					{$t('faq.guestcard.title')}
+				</h2>
+				<div class="h-[3px] w-14 rounded-full bg-brand"></div>
+				<p class="max-w-3xl text-sm leading-relaxed text-slate-600 sm:text-base">
+					{$t('faq.guestcard.subtitle')}
+				</p>
+			</div>
+
+			<div class="mt-8 grid gap-6 sm:grid-cols-2">
+				<div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-sm">
+					<h3 class="text-base font-semibold text-slate-900">
+						{$t('faq.guestcard.q1')}
+					</h3>
+					<p class="mt-2 text-sm leading-relaxed text-slate-600">
+						{$t('faq.guestcard.a1')}
+					</p>
+				</div>
+				<div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-sm">
+					<h3 class="text-base font-semibold text-slate-900">
+						{$t('faq.guestcard.q2')}
+					</h3>
+					<p class="mt-2 text-sm leading-relaxed text-slate-600">
+						{$t('faq.guestcard.a2')}
+					</p>
+				</div>
+				<div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-sm">
+					<h3 class="text-base font-semibold text-slate-900">
+						{$t('faq.guestcard.q3')}
+					</h3>
+					<p class="mt-2 text-sm leading-relaxed text-slate-600">
+						{$t('faq.guestcard.a3')}
+					</p>
+				</div>
+				<div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-sm">
+					<h3 class="text-base font-semibold text-slate-900">
+						{$t('faq.guestcard.q4')}
+					</h3>
+					<p class="mt-2 text-sm leading-relaxed text-slate-600">
+						{$t('faq.guestcard.a4')}
+					</p>
+				</div>
+				<div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-sm">
+					<h3 class="text-base font-semibold text-slate-900">
+						{$t('faq.guestcard.q5')}
+					</h3>
+					<p class="mt-2 text-sm leading-relaxed text-slate-600">
+						{$t('faq.guestcard.a5')}
+					</p>
+				</div>
+			</div>
+		</section>
 	</section>
 </div>
