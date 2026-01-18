@@ -309,7 +309,7 @@ const translations: Record<Lang, Record<string, string>> = {
 			'Freie Fahrt mit Bus & ÖBB S-Bahn in ganz Kärnten während Ihres gesamten Aufenthalts.',
 		'guestcard.landing.item2.title': '40+ Vorteile',
 		'guestcard.landing.item2.body':
-			'Zahlreiche Ermäßigungen und kostenlose Eintritte ab der 1. Übernachtung genießen.',
+			'Zahlreiche Ermäßigungen und ausgewählte kostenlose Eintritte ab der 1. Übernachtung genießen.',
 		'guestcard.landing.item3.title': 'Gültig inkl. An- & Abreisetag',
 		'guestcard.landing.item3.body':
 			'Ihre Mobilitätsgarantie vom Moment des Check-ins bis zur letzten Urlaubsminute.',
@@ -998,7 +998,7 @@ const translations: Record<Lang, Record<string, string>> = {
 			'Ride regional buses and ÖBB S-Bahn across Carinthia throughout your stay.',
 		'guestcard.landing.item2.title': '40+ benefits',
 		'guestcard.landing.item2.body':
-			'Enjoy many discounts and free admissions from your first night.',
+			'Enjoy many discounts and selected free admissions from the first night.',
 		'guestcard.landing.item3.title': 'Valid incl. arrival & departure',
 		'guestcard.landing.item3.body':
 			'Your mobility guarantee from check-in to the final minute of your holiday.',
@@ -1392,6 +1392,7 @@ export const t = derived(lang, ($lang) => {
 });
 
 export const setLang = (value: Lang) => lang.set(value);
+
 
 
 
