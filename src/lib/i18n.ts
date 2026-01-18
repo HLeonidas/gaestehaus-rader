@@ -455,7 +455,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.amenities.basic.bedding.body': 'Feinste ägyptische Baumwolle für einen tiefen, erholsamen Schlaf.',
 		'home.amenities.basic.towels.title': 'Frische Handtücher',
 		'home.amenities.basic.towels.body':
-			'Extra flauschige Handtücher und Bademäntel für Ihren Wellness-Moment.',
+			'Extra flauschige Handtücher für Ihren Aufenthalt.',
 		'home.amenities.basic.care.title': 'Pflegeprodukte',
 		'home.amenities.basic.care.body': 'Nachhaltige Seifen und Shampoos.',
 		'home.amenities.kitchen.title': 'Küche',
@@ -479,9 +479,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.amenities.house.parking.title': 'Privater Parkplatz',
 		'home.amenities.house.parking.body':
 			'Sicherer Parkplatz direkt vor dem Haupteingang.',
-		'home.amenities.house.ski.title': 'Skiraum mit Trockner',
+		'home.amenities.house.ski.title': 'Skiraum',
 		'home.amenities.house.ski.body':
-			'Beheizter Abstellraum für Ihre Skiausrüstung mit integriertem Schuhtrockner.',
+			'Beheizter Abstellraum für Ihre Skiausrüstung.',
 		'home.gallery.kicker': 'Bilder',
 		'home.gallery.title': 'Mehr Eindrücke aus unserem Gästehaus im Gitschtal',
 		'home.gallery.subtitle':
@@ -1145,7 +1145,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.amenities.basic.bedding.title': 'Premium bedding',
 		'home.amenities.basic.bedding.body': 'Finest Egyptian cotton for deep, restful sleep.',
 		'home.amenities.basic.towels.title': 'Fresh towels',
-		'home.amenities.basic.towels.body': 'Extra fluffy towels and bathrobes for your wellness moment.',
+		'home.amenities.basic.towels.body': 'Extra fluffy towels for your stay.',
 		'home.amenities.basic.care.title': 'Care products',
 		'home.amenities.basic.care.body': 'Sustainable soaps and shampoos.',
 		'home.amenities.kitchen.title': 'Kitchen',
@@ -1164,8 +1164,8 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.amenities.house.wifi.body': 'Free fiber internet throughout the property for staying connected.',
 		'home.amenities.house.parking.title': 'Private parking',
 		'home.amenities.house.parking.body': 'Secure parking right by the main entrance.',
-		'home.amenities.house.ski.title': 'Ski room with dryer',
-		'home.amenities.house.ski.body': 'Heated storage for your ski gear with built-in boot dryer.',
+		'home.amenities.house.ski.title': 'Ski room',
+		'home.amenities.house.ski.body': 'Heated storage for your ski gear.',
 		'home.gallery.kicker': 'Gallery',
 		'home.gallery.title': 'More impressions from our guesthouse in the Gitschtal',
 		'home.gallery.subtitle':
