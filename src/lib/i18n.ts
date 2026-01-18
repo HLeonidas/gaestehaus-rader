@@ -295,7 +295,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'trust.airbnb.meta': '6 Bewertungen',
 		'guestcard.kicker': 'Mehr inklusive',
 		'guestcard.title': 'GästeCard Basic inklusive',
-		'guestcard.bullet1': 'Gratis öffentlicher Verkehr (Busse regional + ÖBB S-Bahn in Kärnten)',
+		'guestcard.bullet1': 'Kostenloser öffentlicher Verkehr (Busse regional + ÖBB S-Bahn in Kärnten)',
 		'guestcard.bullet2': '40+ Vorteile ab der 1. Nacht',
 		'guestcard.bullet3': 'Gültig für den gesamten Aufenthalt (inkl. An-/Abreise)',
 		'guestcard.cta.primary': 'Alle Vorteile ansehen',
@@ -303,8 +303,8 @@ const translations: Record<Lang, Record<string, string>> = {
 		'guestcard.landing.kicker': 'Exklusiv für unsere Gäste',
 		'guestcard.landing.title': 'GästeCard Basic inklusive',
 		'guestcard.landing.body':
-			'Erleben Sie maximale Freiheit in Ihrem Kärnten-Urlaub. Die Vorteilskarte ist Ihr kostenloser Schlüssel zu den schönsten Erlebnissen der Region.',
-		'guestcard.landing.item1.title': 'Gratis öffentlicher Verkehr',
+			'Erleben Sie maximale Freiheit in Ihrem Kärnten-Urlaub. Die GästeCard ist Ihr kostenloser Schlüssel zu den schönsten Erlebnissen der Region.',
+		'guestcard.landing.item1.title': 'Kostenloser öffentlicher Verkehr',
 		'guestcard.landing.item1.body':
 			'Freie Fahrt mit Bus & ÖBB S-Bahn in ganz Kärnten während Ihres gesamten Aufenthalts.',
 		'guestcard.landing.item2.title': '40+ Vorteile',
@@ -445,7 +445,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.seasons.summer.imageAlt': 'Gästehaus im Sommer',
 		'home.seasons.winter.imageAlt': 'Gästehaus im Winter',
 		'home.amenities.kicker': 'Ausstattung',
-		'home.amenities.title': 'In allen Appartements inklusive',
+		'home.amenities.title': 'Komfort in allen Appartements',
 		'home.amenities.subtitle':
 			'Alles, was Sie für einen entspannten Aufenthalt brauchen - von Basis-Komfort über Küche bis zur Haus-Ausstattung. Ohne Aufpreis, in jedem Appartement.',
 		'home.amenities.basic.title': 'Basis-Komfort',
@@ -1134,7 +1134,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.seasons.summer.imageAlt': 'Guesthouse exterior in summer',
 		'home.seasons.winter.imageAlt': 'Guesthouse exterior in winter',
 		'home.amenities.kicker': 'Amenities',
-		'home.amenities.title': 'Included in every apartment',
+		'home.amenities.title': 'Comfort in every apartment',
 		'home.amenities.subtitle':
 			'Everything you need for a relaxing stay - from basic comforts and the kitchen to house amenities. Included, in every apartment.',
 		'home.amenities.basic.title': 'Basic comforts',

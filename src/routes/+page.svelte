@@ -414,7 +414,6 @@
 						<div
 							class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-slate-400"
 						>
-							
 							<span>Google</span>
 						</div>
 
@@ -511,6 +510,68 @@
 				</div>
 			</section>
 
+			<!-- Gallery -->
+			<section class="rounded-3xl px-0 py-0 sm:px-10 sm:py-10">
+				<div class="flex items-center gap-4">
+					<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
+						<Sun class="h-5 w-5" aria-hidden="true" />
+					</div>
+					<div>
+						<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
+							{$t('home.gallery.kicker')}
+						</p>
+						<h2 class="mt-3 text-4xl font-serif font-medium leading-[0.95] text-slate-900">
+							{$t('home.gallery.title')}
+						</h2>
+						<div class="mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
+					</div>
+				</div>
+
+				<p class="mt-4 max-w-3xl text-sm leading-relaxed text-slate-600 sm:text-base">
+					{$t('home.gallery.subtitle')}
+				</p>
+
+				<div class="mt-6 hidden items-center justify-end gap-2 sm:flex">
+					<button
+						type="button"
+						class="grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white text-slate-600 shadow-sm transition hover:bg-slate-50"
+						onclick={() => scrollGallery('prev')}
+						aria-label={$t('room.detail.gallery.prev')}
+					>
+						<ChevronLeft class="h-5 w-5" />
+					</button>
+					<button
+						type="button"
+						class="grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white text-slate-600 shadow-sm transition hover:bg-slate-50"
+						onclick={() => scrollGallery('next')}
+						aria-label={$t('room.detail.gallery.next')}
+					>
+						<ChevronRight class="h-5 w-5" />
+					</button>
+				</div>
+
+				<div
+					class="mt-8 -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 scroll-pl-4 scroll-pr-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:px-0 sm:scroll-pl-0 sm:scroll-pr-0"
+					bind:this={galleryTrack}
+				>
+					{#each destinationImages as image}
+						<div
+							class="group relative h-56 w-[260px] shrink-0 snap-start overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm sm:h-72 sm:w-[360px]"
+						>
+							<img
+								src={withAsset(image.src)}
+								alt={$t(image.altKey)}
+								class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+								loading="lazy"
+							/>
+							<div
+								class="pointer-events-none absolute inset-0 ring-1 ring-transparent transition group-hover:ring-brand/20"
+							></div>
+						</div>
+					{/each}
+				</div>
+			</section>
+
 			<!-- GUEST CARD -->
 			<section class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
 				<div class="grid gap-8 lg:grid-cols-[1.1fr,0.9fr]">
@@ -521,7 +582,9 @@
 							class="h-full w-full object-cover"
 							loading="lazy"
 						/>
-						<div class="absolute inset-0 bg-gradient-to-r from-black/10 via-transparent to-transparent"></div>
+						<div
+							class="absolute inset-0 bg-gradient-to-r from-black/10 via-transparent to-transparent"
+						></div>
 					</div>
 
 					<div class="space-y-6 px-6 py-8 sm:px-10 sm:py-10">
@@ -590,68 +653,6 @@
 							</a>
 						</div>
 					</div>
-				</div>
-			</section>
-
-			<!-- Gallery -->
-			<section class="rounded-3xl px-0 py-0 sm:px-10 sm:py-10">
-				<div class="flex items-center gap-4">
-					<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-						<Sun class="h-5 w-5" aria-hidden="true" />
-					</div>
-					<div>
-						<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
-							{$t('home.gallery.kicker')}
-						</p>
-						<h2 class="mt-3 text-4xl font-serif font-medium leading-[0.95] text-slate-900">
-							{$t('home.gallery.title')}
-						</h2>
-						<div class="mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
-					</div>
-				</div>
-
-				<p class="mt-4 max-w-3xl text-sm leading-relaxed text-slate-600 sm:text-base">
-					{$t('home.gallery.subtitle')}
-				</p>
-
-				<div class="mt-6 hidden items-center justify-end gap-2 sm:flex">
-					<button
-						type="button"
-						class="grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white text-slate-600 shadow-sm transition hover:bg-slate-50"
-						onclick={() => scrollGallery('prev')}
-						aria-label={$t('room.detail.gallery.prev')}
-					>
-						<ChevronLeft class="h-5 w-5" />
-					</button>
-					<button
-						type="button"
-						class="grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white text-slate-600 shadow-sm transition hover:bg-slate-50"
-						onclick={() => scrollGallery('next')}
-						aria-label={$t('room.detail.gallery.next')}
-					>
-						<ChevronRight class="h-5 w-5" />
-					</button>
-				</div>
-
-				<div
-					class="mt-8 -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 scroll-pl-4 scroll-pr-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:px-0 sm:scroll-pl-0 sm:scroll-pr-0"
-					bind:this={galleryTrack}
-				>
-					{#each destinationImages as image}
-						<div
-							class="group relative h-56 w-[260px] shrink-0 snap-start overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm sm:h-72 sm:w-[360px]"
-						>
-							<img
-								src={withAsset(image.src)}
-								alt={$t(image.altKey)}
-								class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
-								loading="lazy"
-							/>
-							<div
-								class="pointer-events-none absolute inset-0 ring-1 ring-transparent transition group-hover:ring-brand/20"
-							></div>
-						</div>
-					{/each}
 				</div>
 			</section>
 		</div>
