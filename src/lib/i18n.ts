@@ -300,6 +300,8 @@ const translations: Record<Lang, Record<string, string>> = {
 		'guestcard.bullet3': 'Gültig für den gesamten Aufenthalt (inkl. An-/Abreise)',
 		'guestcard.cta.primary': 'Alle Vorteile ansehen',
 		'guestcard.cta.secondary': 'So erhalten Sie die Karte',
+		'guestcard.cta.moreInfo': 'Mehr Infos',
+		'guestcard.cta.pdf': 'PDF herunterladen',
 		'guestcard.landing.kicker': 'Exklusiv für unsere Gäste',
 		'guestcard.landing.title': 'GästeCard Basic inklusive',
 		'guestcard.landing.body':
@@ -989,6 +991,8 @@ const translations: Record<Lang, Record<string, string>> = {
 		'guestcard.bullet3': 'Valid for your entire stay (incl. arrival/departure)',
 		'guestcard.cta.primary': 'View all benefits',
 		'guestcard.cta.secondary': 'How to receive the card',
+		'guestcard.cta.moreInfo': 'More info',
+		'guestcard.cta.pdf': 'Download PDF',
 		'guestcard.landing.kicker': 'Exclusive for our guests',
 		'guestcard.landing.title': 'Guest Card Basic included',
 		'guestcard.landing.body':
@@ -1392,6 +1396,7 @@ export const t = derived(lang, ($lang) => {
 });
 
 export const setLang = (value: Lang) => lang.set(value);
+
 
 
 

@@ -15,6 +15,8 @@
 		Sparkles,
 		BusFront,
 		CalendarDays,
+		Download,
+		Info,
 		BedDouble,
 		Bed,
 		ShowerHead,
@@ -413,7 +415,7 @@
 				>
 					<!-- Rating card (Google) -->
 					<div
-						class="flex h-full w-[280px] min-h-[360px] shrink-0 snap-start flex-col rounded-3xl border border-slate-200/70 bg-white p-6 shadow-sm lg:min-h-0 lg:w-auto lg:shrink"
+						class="flex h-full w-[280px] min-h-[300px] shrink-0 snap-start flex-col rounded-3xl border border-slate-200/70 bg-white p-6 shadow-sm lg:min-h-0 lg:w-auto lg:shrink"
 					>
 						<div
 							class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-slate-400"
@@ -461,7 +463,7 @@
 					<!-- Review cards -->
 					{#each [1, 2, 3] as i}
 						<div
-							class="flex h-full w-[280px] min-h-[360px] shrink-0 snap-start flex-col rounded-3xl border border-slate-200/70 bg-white p-6 shadow-sm lg:min-h-0 lg:w-auto lg:shrink"
+							class="flex h-full w-[280px] min-h-[300px] shrink-0 snap-start flex-col rounded-3xl border border-slate-200/70 bg-white p-6 shadow-sm lg:min-h-0 lg:w-auto lg:shrink"
 						>
 							<div class="flex items-center gap-1 text-amber-500">
 								{#each trustStars as _}
@@ -654,8 +656,17 @@
 								href={`${resolve('/erlebnisse')}#gaestecard`}
 								class="inline-flex items-center gap-2 rounded-xl bg-brand px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90"
 							>
-								{$t('guestcard.cta.primary')}
-								<ArrowRight class="h-4 w-4" aria-hidden="true" />
+								<Info class="h-4 w-4" aria-hidden="true" />
+								{$t('guestcard.cta.moreInfo')}
+							</a>
+							<a
+								href="https://www.nassfeld.at/PDFs/NPS/Gaestekarten/BasisCard_Broschuere.pdf"
+								class="mt-2 inline-flex items-center gap-2 rounded-xl bg-white/15 px-6 py-3 text-sm font-semibold text-slate-900 ring-1 ring-slate-200 backdrop-blur-sm transition hover:bg-white/20 sm:mt-0"
+								target="_blank"
+								rel="noreferrer"
+							>
+								<Download class="h-4 w-4" aria-hidden="true" />
+								{$t('guestcard.cta.pdf')}
 							</a>
 						</div>
 					</div>
