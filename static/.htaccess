@@ -18,20 +18,17 @@ AddDefaultCharset UTF-8
   </FilesMatch>
 </IfModule>
 
-# --- SPA routing fallback for SvelteKit ---
+# --- 404 handling for static build ---
+ErrorDocument 404 /404.html
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
-
-  # Allow SvelteKit client assets through
-  RewriteRule ^_app/ - [L]
-  RewriteRule ^(images|assets|fonts|icons)/ - [L]
-  RewriteRule ^(robots\.txt|sitemap\.xml|llms\.txt)$ - [L]
 
   # Serve real files / folders directly
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  # Everything else -> SPA entry
-  RewriteRule . /index.html [L]
+  # All other requests return 404 (served by ErrorDocument above)
+  RewriteRule . - [R=404,L]
 </IfModule>
