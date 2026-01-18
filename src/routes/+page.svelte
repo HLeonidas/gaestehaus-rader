@@ -33,6 +33,7 @@
 		BadgeCheck,
 		Home,
 		Building2,
+		Check,
 	} from 'lucide-svelte';
 
 	const usps = [
@@ -505,6 +506,58 @@
 						<span class="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600">
 							{$t('trust.booking.score')}
 						</span>
+					</div>
+				</div>
+			</section>
+
+			<!-- GUEST CARD -->
+			<section class="rounded-3xl border border-slate-200 bg-white px-6 py-8 shadow-sm sm:px-10 sm:py-10">
+				<div class="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+					<div class="max-w-2xl">
+						<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
+							{$t('guestcard.kicker')}
+						</p>
+						<h2 class="mt-3 text-3xl font-serif font-medium leading-[0.95] text-slate-900 sm:text-4xl">
+							{$t('guestcard.title')}
+						</h2>
+						<div class="mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
+
+						<ul class="mt-6 space-y-3 text-sm text-slate-600 sm:text-base">
+							<li class="flex items-start gap-3">
+								<span class="mt-0.5 grid h-6 w-6 place-items-center rounded-full bg-brand/10 text-brand">
+									<Check class="h-4 w-4" aria-hidden="true" />
+								</span>
+								{$t('guestcard.bullet1')}
+							</li>
+							<li class="flex items-start gap-3">
+								<span class="mt-0.5 grid h-6 w-6 place-items-center rounded-full bg-brand/10 text-brand">
+									<Check class="h-4 w-4" aria-hidden="true" />
+								</span>
+								{$t('guestcard.bullet2')}
+							</li>
+							<li class="flex items-start gap-3">
+								<span class="mt-0.5 grid h-6 w-6 place-items-center rounded-full bg-brand/10 text-brand">
+									<Check class="h-4 w-4" aria-hidden="true" />
+								</span>
+								{$t('guestcard.bullet3')}
+							</li>
+						</ul>
+					</div>
+
+					<div class="flex flex-wrap items-center gap-3">
+						<a
+							href={resolve('/gaestecard')}
+							class="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90"
+						>
+							{$t('guestcard.cta.primary')}
+							<ArrowRight class="h-4 w-4" aria-hidden="true" />
+						</a>
+						<a
+							href={`${resolve('/faq')}#gaestecard`}
+							class="inline-flex items-center justify-center rounded-full border border-slate-200 px-6 py-3 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50"
+						>
+							{$t('guestcard.cta.secondary')}
+						</a>
 					</div>
 				</div>
 			</section>

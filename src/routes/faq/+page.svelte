@@ -7,7 +7,7 @@
 		{ question: 'faq.q3', answer: 'faq.a3' },
 		{ question: 'faq.q4', answer: 'faq.a4' },
 		{ question: 'faq.q5', answer: 'faq.a5' },
-		{ question: 'faq.q6', answer: 'faq.a6' },
+		{ question: 'faq.q6', answer: 'faq.a6', id: 'gaestecard' },
 		{ question: 'faq.q7', answer: 'faq.a7' },
 		{ question: 'faq.q8', answer: 'faq.a8' },
 	];
@@ -32,7 +32,7 @@
 
 		<div class="mt-8 grid gap-6 sm:grid-cols-2">
 			{#each faqItems as item}
-				<div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-sm">
+				<div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-sm" id={item.id}>
 					<h2 class="text-base font-semibold text-slate-900">
 						{$t(item.question)}
 					</h2>

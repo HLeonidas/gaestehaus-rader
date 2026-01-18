@@ -21,6 +21,7 @@
 		CreditCard,
 		CigaretteOff,
 		Clock,
+		Ticket,
 	} from 'lucide-svelte';
 
 	const amenityIcons: Record<string, typeof Wifi> = {
@@ -211,7 +212,7 @@
 			</div>
 
 			<!-- Inclusive services tiles -->
-			<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+			<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
 				<div class="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
 					<div class="mx-auto grid h-12 w-12 place-items-center rounded-full bg-brand/10 text-brand">
 						<Lightbulb class="h-6 w-6" />
@@ -254,6 +255,18 @@
 					</div>
 					<p class="mt-4 text-sm font-semibold text-slate-900">
 						{$t('rooms.page.inclusive.parking')}
+					</p>
+					<p class="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">
+						{$t('rooms.page.inclusive.free')}
+					</p>
+				</div>
+
+				<div class="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
+					<div class="mx-auto grid h-12 w-12 place-items-center rounded-full bg-brand/10 text-brand">
+						<Ticket class="h-6 w-6" />
+					</div>
+					<p class="mt-4 text-sm font-semibold text-slate-900">
+						{$t('rooms.page.inclusive.guestcard')}
 					</p>
 					<p class="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">
 						{$t('rooms.page.inclusive.free')}

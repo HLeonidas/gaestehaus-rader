@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
-	import { lang } from '$lib/i18n';
+	import { lang, t } from '$lib/i18n';
+	import { Ticket } from 'lucide-svelte';
 
 	const ACCOUNT_ID = 'fa73de04-c8e1-4b05-b4a8-5697e2d52a1c';
 	const SCRIPT_ID = 'deskline-script';
@@ -62,6 +63,25 @@
 	});
 </script>
 
+<div class="mx-auto w-full max-w-4xl px-4 pt-8 sm:px-6">
+	<div class="rounded-2xl border border-brand/20 bg-brand/5 p-4 sm:p-5">
+		<div class="flex items-start gap-3">
+			<div class="grid h-10 w-10 place-items-center rounded-xl bg-brand/10 text-brand">
+				<Ticket class="h-5 w-5" aria-hidden="true" />
+			</div>
+			<div>
+				<p class="text-sm font-semibold text-slate-900">
+					{$t('booking.guestcard.title')}
+				</p>
+				<p class="mt-1 text-xs text-slate-600 sm:text-sm">
+					{$t('booking.guestcard.body')}
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
 <div id="deskline-container" bind:this={containerEl}>
 	<p class="py-10 text-center text-slate-500">Buchungsplattform wird geladen…</p>
 </div>
+

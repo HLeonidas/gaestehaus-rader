@@ -81,6 +81,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'rooms.page.inclusive.wifi': 'Highspeed WLAN',
 		'rooms.page.inclusive.kids': 'Kinderbett & Hochstuhl',
 		'rooms.page.inclusive.parking': 'Parken',
+		'rooms.page.inclusive.guestcard': 'GästeCard Basic',
 		'rooms.page.inclusive.free': 'KOSTENLOS',
 		'rooms.page.detailsCta': 'Details ansehen',
 		'rooms.page.pricing.title': 'Weitere Informationen zu den Preisen',
@@ -292,6 +293,55 @@ const translations: Record<Lang, Record<string, string>> = {
 		'trust.airbnb.score': '5,0',
 		'trust.airbnb.label': 'Airbnb',
 		'trust.airbnb.meta': '6 Bewertungen',
+		'guestcard.kicker': 'Mehr inklusive',
+		'guestcard.title': 'GästeCard Basic inklusive',
+		'guestcard.bullet1': 'Gratis öffentlicher Verkehr (Busse regional + ÖBB S-Bahn in Kärnten)',
+		'guestcard.bullet2': '40+ Vorteile ab der 1. Nacht',
+		'guestcard.bullet3': 'Gültig für den gesamten Aufenthalt (inkl. An-/Abreise)',
+		'guestcard.cta.primary': 'Alle Vorteile ansehen',
+		'guestcard.cta.secondary': 'So erhalten Sie die Karte',
+		'guestcard.page.kicker': 'GästeCard',
+		'guestcard.page.title': 'GästeCard Basic',
+		'guestcard.page.subtitle':
+			'Kostenlose Mobilität und zahlreiche Vorteile ab der ersten Nacht - gültig während Ihres gesamten Aufenthalts.',
+		'guestcard.page.what.title': 'Was ist die GästeCard Basic?',
+		'guestcard.page.what.body':
+			'Die GästeCard Basic ist Ihre Gästekarte der Region. Sie beinhaltet die kostenlose Nutzung des öffentlichen Verkehrs in Kärnten sowie viele weitere Vorteile bei Partnerbetrieben.',
+		'guestcard.page.who.title': 'Wer erhält sie?',
+		'guestcard.page.who.body':
+			'Alle Übernachtungsgäste erhalten die Karte automatisch ab der ersten Nacht - ohne Zusatzkosten.',
+		'guestcard.page.validity.title': 'Gültigkeit',
+		'guestcard.page.validity.body':
+			'Die Karte gilt für den gesamten Aufenthalt inklusive An- und Abreisetag. Sie ist personalisiert und nicht übertragbar.',
+		'guestcard.page.quick.title': 'Auf einen Blick',
+		'guestcard.page.quick.item1': 'Kostenloser öffentlicher Verkehr in Kärnten (Bus + ÖBB S-Bahn)',
+		'guestcard.page.quick.item2': '40+ Vorteile ab der ersten Nacht',
+		'guestcard.page.quick.item3': 'Sie erhalten die Karte bei Ankunft im Gästehaus',
+		'guestcard.page.rules.title': 'Nutzung & Regeln',
+		'guestcard.page.rules.body':
+			'Bei einzelnen Leistungen ist eine Anmeldung oder Vorabreservierung nötig. Bitte beachten Sie die Hinweise der Partnerbetriebe.',
+		'guestcard.page.categories.kicker': 'Vorteile',
+		'guestcard.page.categories.title': 'Ihre Vorteile in großen Kategorien',
+		'guestcard.page.category.transport.title': 'Transport',
+		'guestcard.page.category.transport.body':
+			'Regionale Busse und ÖBB S-Bahn in Kärnten kostenfrei nutzen.',
+		'guestcard.page.category.wellness.title': 'Baden & Wellness',
+		'guestcard.page.category.wellness.body':
+			'Ermäßigungen für Seen, Bäder und ausgewählte Wellnessangebote.',
+		'guestcard.page.category.outdoor.title': 'Outdoor',
+		'guestcard.page.category.outdoor.body':
+			'Vorteile für Wanderungen, Seilbahnen, Sport- und Naturerlebnisse.',
+		'guestcard.page.category.food.title': 'Kulinarik',
+		'guestcard.page.category.food.body':
+			'Rabatte bei ausgewählten Gasthäusern und Produzenten.',
+		'guestcard.page.overview.title': 'Offizielle Übersicht',
+		'guestcard.page.overview.body':
+			'Alle aktuellen Leistungen und Partner finden Sie in der offiziellen Übersicht.',
+		'guestcard.page.overview.cta': 'Zur offiziellen Übersicht',
+		'guestcard.page.cta.title': 'Direkt buchen und Vorteile sichern',
+		'guestcard.page.cta.body': 'Bei Ankunft erhalten Sie die GästeCard Basic automatisch.',
+		'guestcard.page.cta.primary': 'Jetzt buchen',
+		'guestcard.page.cta.secondary': 'FAQ zur GästeCard',
 		'price.from': 'ab €',
 		'price.night': 'Nacht',
 		'experiences.card.1.title': 'Weißensee',
@@ -529,6 +579,8 @@ const translations: Record<Lang, Record<string, string>> = {
 		'booking.form.guests': 'Gäste',
 		'booking.form.cta': 'Jetzt prüfen',
 		'booking.form.note': 'Sie werden zum Buchungspartner weitergeleitet.',
+		'booking.guestcard.title': 'GästeCard Basic inklusive',
+		'booking.guestcard.body': 'Sie erhalten die GästeCard bei Ankunft.',
 		'booking.direct.title': 'Direktkontakt',
 		'booking.direct.body': 'Fragen? Schreiben oder rufen Sie uns gerne an.',
 		'contact.form.name': 'Name',
@@ -629,6 +681,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'rooms.page.inclusive.wifi': 'High-speed Wi-Fi',
 		'rooms.page.inclusive.kids': 'Crib & high chair',
 		'rooms.page.inclusive.parking': 'Parking',
+		'rooms.page.inclusive.guestcard': 'Guest Card Basic',
 		'rooms.page.inclusive.free': 'FREE',
 		'rooms.page.detailsCta': 'See details',
 		'rooms.page.pricing.title': 'More information about pricing',
@@ -840,6 +893,55 @@ const translations: Record<Lang, Record<string, string>> = {
 		'trust.airbnb.score': '5.0',
 		'trust.airbnb.label': 'Airbnb',
 		'trust.airbnb.meta': '6 reviews',
+		'guestcard.kicker': 'Extra included',
+		'guestcard.title': 'Guest Card Basic included',
+		'guestcard.bullet1': 'Free public transport (regional buses + ÖBB S-Bahn in Carinthia)',
+		'guestcard.bullet2': '40+ benefits from the first night',
+		'guestcard.bullet3': 'Valid for your entire stay (incl. arrival/departure)',
+		'guestcard.cta.primary': 'View all benefits',
+		'guestcard.cta.secondary': 'How to receive the card',
+		'guestcard.page.kicker': 'Guest Card',
+		'guestcard.page.title': 'Guest Card Basic',
+		'guestcard.page.subtitle':
+			'Free mobility and many benefits from the first night - valid throughout your stay.',
+		'guestcard.page.what.title': 'What is the Guest Card Basic?',
+		'guestcard.page.what.body':
+			'The Guest Card Basic is your regional guest card. It includes free public transport in Carinthia plus many additional partner benefits.',
+		'guestcard.page.who.title': 'Who receives it?',
+		'guestcard.page.who.body':
+			'All overnight guests receive the card automatically from the first night - at no extra cost.',
+		'guestcard.page.validity.title': 'Validity',
+		'guestcard.page.validity.body':
+			'Valid for the entire stay including arrival and departure day. It is personalized and non-transferable.',
+		'guestcard.page.quick.title': 'At a glance',
+		'guestcard.page.quick.item1': 'Free public transport in Carinthia (bus + ÖBB S-Bahn)',
+		'guestcard.page.quick.item2': '40+ benefits from the first night',
+		'guestcard.page.quick.item3': 'You receive the card upon arrival at the guesthouse',
+		'guestcard.page.rules.title': 'Use & rules',
+		'guestcard.page.rules.body':
+			'Some services require registration or advance booking. Please note the partner information.',
+		'guestcard.page.categories.kicker': 'Benefits',
+		'guestcard.page.categories.title': 'Your benefits at a glance',
+		'guestcard.page.category.transport.title': 'Transport',
+		'guestcard.page.category.transport.body':
+			'Use regional buses and ÖBB S-Bahn in Carinthia free of charge.',
+		'guestcard.page.category.wellness.title': 'Swimming & wellness',
+		'guestcard.page.category.wellness.body':
+			'Discounts for lakes, pools, and selected wellness offers.',
+		'guestcard.page.category.outdoor.title': 'Outdoor',
+		'guestcard.page.category.outdoor.body':
+			'Perks for hikes, cable cars, sports, and nature experiences.',
+		'guestcard.page.category.food.title': 'Cuisine',
+		'guestcard.page.category.food.body':
+			'Discounts at selected restaurants and local producers.',
+		'guestcard.page.overview.title': 'Official overview',
+		'guestcard.page.overview.body':
+			'Find all current benefits and partners in the official overview.',
+		'guestcard.page.overview.cta': 'Open official overview',
+		'guestcard.page.cta.title': 'Book direct and secure the benefits',
+		'guestcard.page.cta.body': 'You automatically receive the Guest Card Basic upon arrival.',
+		'guestcard.page.cta.primary': 'Book now',
+		'guestcard.page.cta.secondary': 'Guest card FAQ',
 		'price.from': 'from €',
 		'price.night': 'night',
 		'experiences.card.1.title': 'Weißensee',
@@ -1021,14 +1123,14 @@ const translations: Record<Lang, Record<string, string>> = {
 		'about.title': 'About Gästehaus Rader',
 		'about.body':
 			'Here we share the story of your home, your values, and what makes each stay special.',
-				'about.kicker': 'A warm welcome',
-				'about.traditionSince': 'Tradition since',
+		'about.kicker': 'A warm welcome',
+		'about.traditionSince': 'Tradition since',
 		'about.headingPrefix': 'About',
 		'about.headingEmphasis': 'us',
 		'about.paragraphOne': 'Our house sits in the heart of the village yet just steps from the forest edge. The characteristic layout with meadows and traditional wells between the farmsteads is still preserved here.',
 		'about.paragraphTwo': 'Head out on hiking tours or relax on the large meadow in front of the house—this is what a holiday in the Alps should feel like. For generations we have fostered genuine hospitality in the Austrian Alps and look forward to showing you a piece of our homeland.',
 		'about.signature': 'Your hosts',
-'about.card.1.title': 'Hosts with heart',
+		'about.card.1.title': 'Hosts with heart',
 		'about.card.1.body':
 			'Personal care, local recommendations, and flexible solutions tailored to you.',
 		'about.card.2.title': 'Quality & details',
@@ -1069,6 +1171,8 @@ const translations: Record<Lang, Record<string, string>> = {
 		'booking.form.guests': 'Guests',
 		'booking.form.cta': 'Check now',
 		'booking.form.note': 'You will be redirected to our booking partner.',
+		'booking.guestcard.title': 'Guest Card Basic included',
+		'booking.guestcard.body': 'You receive the guest card upon arrival.',
 		'booking.direct.title': 'Direct contact',
 		'booking.direct.body': 'Questions? Send us a message or give us a call.',
 		'contact.form.name': 'Name',
@@ -1110,6 +1214,14 @@ export const t = derived(lang, ($lang) => {
 });
 
 export const setLang = (value: Lang) => lang.set(value);
+
+
+
+
+
+
+
+
 
 
 
