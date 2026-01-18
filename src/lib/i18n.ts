@@ -556,6 +556,12 @@ const translations: Record<Lang, Record<string, string>> = {
 			'Je nach Saison gibt es kostenlose oder vergünstigte Leistungen, z. B. Bergbahnen, Badeeintritte, Busverbindungen, geführte Touren oder Museen. Die aktuellen Details erhalten Sie bei uns vor Ort.',
 		'faq.q8': 'Ist Rauchen erlaubt?',
 		'faq.a8': 'In den Appartements ist Rauchen nicht gestattet. Auf den Balkonen stehen Aschenbecher bereit.',
+		'error.404.title': 'Seite nicht gefunden',
+		'error.404.body': 'Diese Seite existiert leider nicht (mehr). Bitte überprüfen Sie die URL oder kehren Sie zur Startseite zurück.',
+		'error.404.cta': 'Zur Startseite',
+		'error.generic.title': 'Etwas ist schiefgelaufen',
+		'error.generic.body': 'Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.',
+		'error.statusLabel': 'Status',
 	},
 	en: {
 		'nav.home': 'Home',
@@ -1090,6 +1096,12 @@ const translations: Record<Lang, Record<string, string>> = {
 			'Benefits vary by season, but typically include free or discounted services such as cable cars, lake access, public transport, guided tours, or museums. We can share the current details on site.',
 		'faq.q8': 'Is smoking allowed?',
 		'faq.a8': 'Smoking is not permitted inside the apartments. Ashtrays are available on the balconies.',
+		'error.404.title': 'Page not found',
+		'error.404.body': 'This page no longer exists. Please check the URL or return to the homepage.',
+		'error.404.cta': 'Back to home',
+		'error.generic.title': 'Something went wrong',
+		'error.generic.body': 'An unexpected error occurred. Please try again later.',
+		'error.statusLabel': 'Status',
 	}
 };
 
