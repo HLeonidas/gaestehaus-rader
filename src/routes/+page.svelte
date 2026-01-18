@@ -588,12 +588,6 @@
 								{$t('guestcard.cta.primary')}
 								<ArrowRight class="h-4 w-4" aria-hidden="true" />
 							</a>
-							<a
-								href={`${resolve('/faq')}#gaestecard`}
-								class="inline-flex items-center justify-center rounded-xl bg-slate-100 px-6 py-3 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-200"
-							>
-								{$t('guestcard.cta.secondary')}
-							</a>
 						</div>
 					</div>
 				</div>
