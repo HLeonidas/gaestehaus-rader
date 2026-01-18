@@ -261,7 +261,7 @@
 					</p>
 				</div>
 
-				<div class="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
+				<div class="rounded-2xl border border-slate-200 bg-[#fff4e6] p-6 text-center shadow-sm">
 					<div class="mx-auto grid h-12 w-12 place-items-center rounded-full bg-brand/10 text-brand">
 						<Ticket class="h-6 w-6" />
 					</div>

@@ -6,21 +6,19 @@
 	import type { ComponentType } from 'svelte';
 	import {
 		ArrowRight,
-		BadgeCheck,
 		Bike,
 		BusFront,
 		CableCar,
-		Check,
-		Clock,
+		CalendarDays,
+		ChevronDown,
 		Footprints,
-		Info,
+		Landmark,
+		Map,
 		Mountain,
 		Snowflake,
-		Sparkles,
 		Sun,
-		Ticket,
+		TrainFront,
 		Utensils,
-		Users,
 		Waves,
 	} from 'lucide-svelte';
 
@@ -43,11 +41,6 @@
 	};
 
 	const withAsset = (path: string) => asset(path);
-	const guestCardOverviewUrl = $derived.by(() =>
-		$lang === 'en'
-			? 'https://www.nassfeld.at/en/Accommodation/Plan-your-trip/PREMIUM-cards/GuestCard-basic'
-			: 'https://www.nassfeld.at/de/Unterkunft-finden/Reise-planen/PREMIUM-Cards/GaesteCard-basic'
-	);
 
 	// get active tab from url param (default: summer)
 	const seasonFromUrl = $derived.by(() => {
@@ -310,249 +303,294 @@
 				{/key}
 			</section>
 
-			<section class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10" id="gaestecard">
-				<div class="space-y-4">
+			<section class="mt-12 sm:p-10" id="gaestecard">
+				<div class="mx-auto max-w-3xl text-center">
 					<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
-						{$t('guestcard.page.kicker')}
+						{$t('guestcard.experiences.freeNote')}
 					</p>
-					<h2 class="font-serif text-3xl leading-[0.95] text-slate-900 sm:text-4xl">
-						{$t('guestcard.page.title')}
+					<h2 class="mt-3 font-serif text-3xl leading-[0.95] text-slate-900 sm:text-4xl">
+						{$t('guestcard.experiences.title')}
 					</h2>
-					<div class="h-[3px] w-14 rounded-full bg-brand"></div>
-					<p class="max-w-3xl text-base leading-relaxed text-slate-600">
-						{$t('guestcard.page.subtitle')}
+					<div class="mx-auto mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
+					<p class="mt-4 text-sm leading-relaxed text-slate-600 sm:text-base">
+						{$t('guestcard.experiences.subtitle')}
 					</p>
+					<a
+						href="https://www.nassfeld.at/PDFs/NPS/Gaestekarten/BasisCard_Broschuere.pdf"
+						class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand"
+						target="_blank"
+						rel="noreferrer"
+					>
+						{$t('guestcard.experiences.brochure.cta')}
+						<ArrowRight class="h-4 w-4" aria-hidden="true" />
+					</a>
 				</div>
 
-				<div class="mt-8 grid gap-6 lg:grid-cols-[1.1fr,0.9fr]">
-					<div class="space-y-6">
-						<div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-							<div class="flex items-start gap-4">
-								<div class="grid h-11 w-11 place-items-center rounded-xl bg-brand/10 text-brand">
-									<Ticket class="h-5 w-5" aria-hidden="true" />
-								</div>
-								<div>
-									<h3 class="text-lg font-semibold text-slate-900">
-										{$t('guestcard.page.what.title')}
-									</h3>
-									<p class="mt-2 text-sm leading-relaxed text-slate-600">
-										{$t('guestcard.page.what.body')}
-									</p>
-								</div>
-							</div>
-						</div>
-
-						<div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-							<div class="flex items-start gap-4">
-								<div class="grid h-11 w-11 place-items-center rounded-xl bg-brand/10 text-brand">
-									<Users class="h-5 w-5" aria-hidden="true" />
-								</div>
-								<div>
-									<h3 class="text-lg font-semibold text-slate-900">
-										{$t('guestcard.page.who.title')}
-									</h3>
-									<p class="mt-2 text-sm leading-relaxed text-slate-600">
-										{$t('guestcard.page.who.body')}
-									</p>
-								</div>
-							</div>
-						</div>
-
-						<div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-							<div class="flex items-start gap-4">
-								<div class="grid h-11 w-11 place-items-center rounded-xl bg-brand/10 text-brand">
-									<Clock class="h-5 w-5" aria-hidden="true" />
-								</div>
-								<div>
-									<h3 class="text-lg font-semibold text-slate-900">
-										{$t('guestcard.page.validity.title')}
-									</h3>
-									<p class="mt-2 text-sm leading-relaxed text-slate-600">
-										{$t('guestcard.page.validity.body')}
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<aside class="space-y-6">
-						<div class="rounded-3xl border border-brand/20 bg-brand/5 p-6 shadow-sm">
-							<div class="flex items-start gap-4">
-								<div class="grid h-11 w-11 place-items-center rounded-xl bg-white text-brand shadow-sm">
-									<BadgeCheck class="h-5 w-5" aria-hidden="true" />
-								</div>
-								<div>
-									<p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
-										{$t('guestcard.page.quick.title')}
-									</p>
-									<ul class="mt-3 space-y-2 text-sm text-slate-600">
-										<li class="flex items-start gap-2">
-											<Check class="mt-0.5 h-4 w-4 text-brand" aria-hidden="true" />
-											<span>{$t('guestcard.page.quick.item1')}</span>
-										</li>
-										<li class="flex items-start gap-2">
-											<Check class="mt-0.5 h-4 w-4 text-brand" aria-hidden="true" />
-											<span>{$t('guestcard.page.quick.item2')}</span>
-										</li>
-										<li class="flex items-start gap-2">
-											<Check class="mt-0.5 h-4 w-4 text-brand" aria-hidden="true" />
-											<span>{$t('guestcard.page.quick.item3')}</span>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-
-						<div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-							<div class="flex items-start gap-4">
-								<div class="grid h-11 w-11 place-items-center rounded-xl bg-brand/10 text-brand">
-									<Info class="h-5 w-5" aria-hidden="true" />
-								</div>
-								<div>
-									<h3 class="text-lg font-semibold text-slate-900">
-										{$t('guestcard.page.rules.title')}
-									</h3>
-									<p class="mt-2 text-sm leading-relaxed text-slate-600">
-										{$t('guestcard.page.rules.body')}
-									</p>
-								</div>
-							</div>
-						</div>
-					</aside>
-				</div>
-
-				<div class="mt-10">
-					<div class="flex items-center gap-4">
-						<div class="grid h-10 w-10 place-items-center rounded-xl bg-brand/10 text-brand">
-							<Sparkles class="h-5 w-5" aria-hidden="true" />
-						</div>
-						<div>
-							<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
-								{$t('guestcard.page.categories.kicker')}
-							</p>
-							<h3 class="mt-2 text-2xl font-serif font-medium leading-[0.95] text-slate-900 sm:text-3xl">
-								{$t('guestcard.page.categories.title')}
+				<div class="mt-10 space-y-10">
+					<div>
+						<div class="flex items-center gap-3">
+							<span class="h-[2px] w-6 rounded-full bg-brand"></span>
+							<h3 class="text-base font-semibold text-slate-900">
+								{$t('guestcard.experiences.transport.title')}
 							</h3>
-							<div class="mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
 						</div>
-					</div>
 
-					<div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-						<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-							<div class="flex items-start gap-3">
-								<div class="grid h-10 w-10 place-items-center rounded-xl bg-brand/10 text-brand">
+						<div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+								<div class="grid h-10 w-10 place-items-center rounded-full bg-brand/10 text-brand">
 									<BusFront class="h-5 w-5" aria-hidden="true" />
 								</div>
-								<div>
-									<p class="text-sm font-semibold text-slate-900">
-										{$t('guestcard.page.category.transport.title')}
-									</p>
-									<p class="mt-1 text-xs leading-relaxed text-slate-500">
-										{$t('guestcard.page.category.transport.body')}
-									</p>
+								<h4 class="mt-4 text-sm font-semibold text-slate-900">
+									{$t('guestcard.experiences.transport.bus.title')}
+								</h4>
+								<p class="mt-2 text-xs leading-relaxed text-slate-500">
+									{$t('guestcard.experiences.transport.bus.body')}
+								</p>
+							</div>
+
+							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+								<div class="grid h-10 w-10 place-items-center rounded-full bg-brand/10 text-brand">
+									<TrainFront class="h-5 w-5" aria-hidden="true" />
 								</div>
+								<h4 class="mt-4 text-sm font-semibold text-slate-900">
+									{$t('guestcard.experiences.transport.sbahn.title')}
+								</h4>
+								<p class="mt-2 text-xs leading-relaxed text-slate-500">
+									{$t('guestcard.experiences.transport.sbahn.body')}
+								</p>
+							</div>
+
+							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+								<div class="grid h-10 w-10 place-items-center rounded-full bg-brand/10 text-brand">
+									<CalendarDays class="h-5 w-5" aria-hidden="true" />
+								</div>
+								<h4 class="mt-4 text-sm font-semibold text-slate-900">
+									{$t('guestcard.experiences.transport.arrival.title')}
+								</h4>
+								<p class="mt-2 text-xs leading-relaxed text-slate-500">
+									{$t('guestcard.experiences.transport.arrival.body')}
+								</p>
 							</div>
 						</div>
+					</div>
 
-						<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-							<div class="flex items-start gap-3">
-								<div class="grid h-10 w-10 place-items-center rounded-xl bg-brand/10 text-brand">
-									<Waves class="h-5 w-5" aria-hidden="true" />
-								</div>
-								<div>
-									<p class="text-sm font-semibold text-slate-900">
-										{$t('guestcard.page.category.wellness.title')}
-									</p>
-									<p class="mt-1 text-xs leading-relaxed text-slate-500">
-										{$t('guestcard.page.category.wellness.body')}
-									</p>
-								</div>
-							</div>
+					<div>
+						<div class="flex items-center gap-3">
+							<span class="h-[2px] w-6 rounded-full bg-brand"></span>
+							<h3 class="text-base font-semibold text-slate-900">
+								{$t('guestcard.experiences.wellness.title')}
+							</h3>
 						</div>
 
-						<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-							<div class="flex items-start gap-3">
-								<div class="grid h-10 w-10 place-items-center rounded-xl bg-brand/10 text-brand">
+						<div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+							<article class="group relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 shadow-sm">
+								<img
+									src={withAsset('/images/experiences/freibad.png')}
+									alt={$t('guestcard.experiences.wellness.card1.alt')}
+									class="h-44 w-full object-cover sm:h-40 lg:h-44"
+									loading="lazy"
+								/>
+								<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+								<div class="absolute bottom-0 left-0 right-0 p-4">
+									<p class="text-sm font-semibold text-white">
+										{$t('guestcard.experiences.wellness.card1.title')}
+									</p>
+									<p class="mt-1 text-xs text-white/85">
+										{$t('guestcard.experiences.wellness.card1.body')}
+									</p>
+								</div>
+							</article>
+
+							<article class="group relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 shadow-sm">
+								<img
+									src={withAsset('/images/experiences/summer-lake.png')}
+									alt={$t('guestcard.experiences.wellness.card2.alt')}
+									class="h-44 w-full object-cover sm:h-40 lg:h-44"
+									loading="lazy"
+								/>
+								<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+								<div class="absolute bottom-0 left-0 right-0 p-4">
+									<p class="text-sm font-semibold text-white">
+										{$t('guestcard.experiences.wellness.card2.title')}
+									</p>
+									<p class="mt-1 text-xs text-white/85">
+										{$t('guestcard.experiences.wellness.card2.body')}
+									</p>
+								</div>
+							</article>
+
+							<article class="group relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 shadow-sm">
+								<img
+									src={withAsset('/images/experiences/sauna.png')}
+									alt={$t('guestcard.experiences.wellness.card3.alt')}
+									class="h-44 w-full object-cover sm:h-40 lg:h-44"
+									loading="lazy"
+								/>
+								<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+								<div class="absolute bottom-0 left-0 right-0 p-4">
+									<p class="text-sm font-semibold text-white">
+										{$t('guestcard.experiences.wellness.card3.title')}
+									</p>
+									<p class="mt-1 text-xs text-white/85">
+										{$t('guestcard.experiences.wellness.card3.body')}
+									</p>
+								</div>
+							</article>
+						</div>
+					</div>
+
+					<div>
+						<div class="flex items-center gap-3">
+							<span class="h-[2px] w-6 rounded-full bg-brand"></span>
+							<h3 class="text-base font-semibold text-slate-900">
+								{$t('guestcard.experiences.outdoor.title')}
+							</h3>
+						</div>
+
+						<div class="mt-4 grid gap-4 lg:grid-cols-4">
+							<div class="rounded-2xl border border-brand/20 bg-[#fff4e6] p-6 shadow-sm lg:col-span-2">
+								<div class="grid h-10 w-10 place-items-center rounded-full bg-brand/10 text-brand">
+									<Footprints class="h-5 w-5" aria-hidden="true" />
+								</div>
+								<p class="mt-4 text-sm font-semibold text-slate-900">
+									{$t('guestcard.experiences.outdoor.feature.title')}
+								</p>
+								<p class="mt-2 text-xs leading-relaxed text-slate-600">
+									{$t('guestcard.experiences.outdoor.feature.body')}
+								</p>
+								<!-- <a
+									href={`${resolve('/erlebnisse/sommer')}#aktivitaeten`}
+									class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand"
+								>
+									{$t('guestcard.experiences.outdoor.feature.cta')}
+									<ArrowRight class="h-4 w-4" aria-hidden="true" />
+								</a> -->
+							</div>
+
+							<div class="rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-sm">
+								<div class="mx-auto grid h-10 w-10 place-items-center rounded-full bg-brand/10 text-brand">
+									<Bike class="h-5 w-5" aria-hidden="true" />
+								</div>
+								<p class="mt-3 text-sm font-semibold text-slate-900">
+									{$t('guestcard.experiences.outdoor.bike.title')}
+								</p>
+								<p class="mt-2 text-xs text-slate-500">
+									{$t('guestcard.experiences.outdoor.bike.body')}
+								</p>
+							</div>
+
+							<div class="rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-sm">
+								<div class="mx-auto grid h-10 w-10 place-items-center rounded-full bg-brand/10 text-brand">
 									<Mountain class="h-5 w-5" aria-hidden="true" />
 								</div>
-								<div>
-									<p class="text-sm font-semibold text-slate-900">
-										{$t('guestcard.page.category.outdoor.title')}
-									</p>
-									<p class="mt-1 text-xs leading-relaxed text-slate-500">
-										{$t('guestcard.page.category.outdoor.body')}
-									</p>
+								<p class="mt-3 text-sm font-semibold text-slate-900">
+									{$t('guestcard.experiences.outdoor.adventure.title')}
+								</p>
+								<p class="mt-2 text-xs text-slate-500">
+									{$t('guestcard.experiences.outdoor.adventure.body')}
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div>
+						<div class="flex items-center gap-3">
+							<span class="h-[2px] w-6 rounded-full bg-brand"></span>
+							<h3 class="text-base font-semibold text-slate-900">
+								{$t('guestcard.experiences.food.title')}
+							</h3>
+						</div>
+
+						<div class="mt-4">
+							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+								<div class="flex items-start gap-3">
+									<div class="grid h-10 w-10 place-items-center rounded-full bg-brand/10 text-brand">
+										<Utensils class="h-5 w-5" aria-hidden="true" />
+									</div>
+									<div>
+										<p class="text-sm font-semibold text-slate-900">
+											{$t('guestcard.experiences.food.card.title')}
+										</p>
+										<p class="mt-1 text-xs leading-relaxed text-slate-500">
+											{$t('guestcard.experiences.food.card.body')}
+										</p>
+									</div>
 								</div>
 							</div>
 						</div>
+					</div>
 
-						<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-							<div class="flex items-start gap-3">
-								<div class="grid h-10 w-10 place-items-center rounded-xl bg-brand/10 text-brand">
-									<Utensils class="h-5 w-5" aria-hidden="true" />
-								</div>
-								<div>
-									<p class="text-sm font-semibold text-slate-900">
-										{$t('guestcard.page.category.food.title')}
-									</p>
-									<p class="mt-1 text-xs leading-relaxed text-slate-500">
-										{$t('guestcard.page.category.food.body')}
-									</p>
+					<div>
+						<div class="flex items-center gap-3">
+							<span class="h-[2px] w-6 rounded-full bg-brand"></span>
+							<h3 class="text-base font-semibold text-slate-900">
+								{$t('guestcard.experiences.culture.title')}
+							</h3>
+						</div>
+
+						<div class="mt-4">
+							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+								<div class="flex items-start gap-3">
+									<div class="grid h-10 w-10 place-items-center rounded-full bg-brand/10 text-brand">
+										<Landmark class="h-5 w-5" aria-hidden="true" />
+									</div>
+									<div>
+										<p class="text-sm font-semibold text-slate-900">
+											{$t('guestcard.experiences.culture.card.title')}
+										</p>
+										<p class="mt-1 text-xs leading-relaxed text-slate-500">
+											{$t('guestcard.experiences.culture.card.body')}
+										</p>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 
-				<div class="mt-10 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-					<div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-						<div class="max-w-2xl">
-							<h3 class="text-xl font-semibold text-slate-900">
-								{$t('guestcard.page.overview.title')}
-							</h3>
-							<p class="mt-2 text-sm leading-relaxed text-slate-600">
-								{$t('guestcard.page.overview.body')}
+				<div class="mt-12 border-t border-slate-200/70 pt-10">
+					<h3 class="text-center font-serif text-2xl text-slate-900 sm:text-3xl">
+						{$t('guestcard.experiences.faq.title')}
+					</h3>
+					<div class="mx-auto mt-6 max-w-3xl space-y-3">
+						<details class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm" open>
+							<summary class="flex cursor-pointer list-none items-center justify-between text-sm font-semibold text-slate-900">
+								{$t('faq.guestcard.q2')}
+								<ChevronDown
+									class="h-4 w-4 text-slate-400 transition-transform group-open:rotate-180"
+									aria-hidden="true"
+								/>
+							</summary>
+							<p class="mt-3 text-sm leading-relaxed text-slate-600">
+								{$t('faq.guestcard.a2')}
 							</p>
-						</div>
-						<a
-							href={guestCardOverviewUrl}
-							class="inline-flex items-center justify-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90"
-							target="_blank"
-							rel="noreferrer"
-						>
-							{$t('guestcard.page.overview.cta')}
-							<ArrowRight class="h-4 w-4" aria-hidden="true" />
-						</a>
-					</div>
-				</div>
+						</details>
 
-				<div class="mt-10 rounded-3xl bg-brand px-6 py-8 text-white sm:px-10 sm:py-10">
-					<div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-						<div>
-							<p class="text-xs font-semibold uppercase tracking-[0.35em] text-white/70">
-								{$t('brand.name')}
+						<details class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+							<summary class="flex cursor-pointer list-none items-center justify-between text-sm font-semibold text-slate-900">
+								{$t('faq.guestcard.q3')}
+								<ChevronDown
+									class="h-4 w-4 text-slate-400 transition-transform group-open:rotate-180"
+									aria-hidden="true"
+								/>
+							</summary>
+							<p class="mt-3 text-sm leading-relaxed text-slate-600">
+								{$t('faq.guestcard.a3')}
 							</p>
-							<h3 class="mt-3 font-serif text-3xl leading-[0.95] text-white sm:text-4xl">
-								{$t('guestcard.page.cta.title')}
-							</h3>
-							<p class="mt-3 max-w-xl text-sm text-white/85 sm:text-base">
-								{$t('guestcard.page.cta.body')}
+						</details>
+
+						<details class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+							<summary class="flex cursor-pointer list-none items-center justify-between text-sm font-semibold text-slate-900">
+								{$t('faq.guestcard.q5')}
+								<ChevronDown
+									class="h-4 w-4 text-slate-400 transition-transform group-open:rotate-180"
+									aria-hidden="true"
+								/>
+							</summary>
+							<p class="mt-3 text-sm leading-relaxed text-slate-600">
+								{$t('faq.guestcard.a5')}
 							</p>
-						</div>
-						<div class="flex flex-wrap gap-3">
-							<a
-								href={resolve('/buchen')}
-								class="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-white/90"
-							>
-								{$t('guestcard.page.cta.primary')}
-							</a>
-							<a
-								href={`${resolve('/faq')}#gaestecard`}
-								class="inline-flex items-center justify-center rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white/95 transition hover:bg-white/10"
-							>
-								{$t('guestcard.page.cta.secondary')}
-							</a>
-						</div>
+						</details>
 					</div>
 				</div>
 			</section>

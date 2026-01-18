@@ -356,6 +356,59 @@ const translations: Record<Lang, Record<string, string>> = {
 		'guestcard.page.cta.body': 'Bei Ankunft erhalten Sie die GästeCard Basic automatisch.',
 		'guestcard.page.cta.primary': 'Jetzt buchen',
 		'guestcard.page.cta.secondary': 'FAQ zur GästeCard',
+		'guestcard.experiences.kicker': 'Exklusiv für Sie',
+		'guestcard.experiences.title': 'Mehr Erleben, Weniger Bezahlen',
+		'guestcard.experiences.subtitle':
+			'Mit der GästeCard Basic genießen Sie freien Eintritt zu den schönsten Ausflugszielen, kostenlose Nutzung der öffentlichen Verkehrsmittel und zahlreiche Rabatte bei unseren Partnern. Alles inklusive während Ihres Aufenthalts im Gästehaus Rader.',
+		'guestcard.experiences.freeNote': 'Kostenlos für alle Gäste',
+		'guestcard.experiences.brochure.cta': 'Alle Leistungen ansehen',
+		'guestcard.experiences.intro.item1': 'kostenlose Nutzung des öffentlichen Verkehrs in Kärnten',
+		'guestcard.experiences.intro.item2': 'über 40 Ermäßigungen bei Freizeit- & Erlebnispartnern',
+		'guestcard.experiences.intro.item3': 'gültig ab der ersten Nacht Ihres Aufenthalts',
+		'guestcard.experiences.transport.title': 'Mobilität & Transport',
+		'guestcard.experiences.transport.bus.title': 'Regionale Busse',
+		'guestcard.experiences.transport.bus.body':
+			'Kostenlose Nutzung aller Linienbusse in der Region.',
+		'guestcard.experiences.transport.sbahn.title': 'ÖBB S-Bahn in Kärnten',
+		'guestcard.experiences.transport.sbahn.body':
+			'Kostenlose Nutzung aller ÖBB S-Bahn-Linien in ganz Kärnten.',
+		'guestcard.experiences.transport.arrival.title': 'An- & Abreisetag inklusive',
+		'guestcard.experiences.transport.arrival.body':
+			'Öffentlicher Verkehr auch am An- und Abreisetag kostenlos nutzbar.',
+		'guestcard.experiences.wellness.title': 'Baden & Wellness',
+		'guestcard.experiences.wellness.card1.title': 'Thermen & Erlebnisbäder',
+		'guestcard.experiences.wellness.card1.body':
+			'Ermäßigte Eintrittspreise bei Aquarena Kötschach-Mauthen & Erlebnisbad Lesachtal.',
+		'guestcard.experiences.wellness.card1.alt': 'Thermalbad mit Blick ins Grüne',
+		'guestcard.experiences.wellness.card2.title': 'Strandbäder am See',
+		'guestcard.experiences.wellness.card2.body':
+			'Ermäßigter Eintritt bei Strandbädern am Pressegger See & Weissensee.',
+		'guestcard.experiences.wellness.card2.alt': 'Seeufer mit Steg und Bergen',
+		'guestcard.experiences.wellness.card3.title': 'Saunawelt',
+		'guestcard.experiences.wellness.card3.body':
+			'Vergünstigte Nutzung der Saunen in der Region.',
+		'guestcard.experiences.wellness.card3.alt': 'Saunabereich aus Holz',
+		'guestcard.experiences.outdoor.title': 'Outdoor Erlebnisse',
+		'guestcard.experiences.outdoor.feature.title': 'Geführte Bergtouren',
+		'guestcard.experiences.outdoor.feature.body':
+			'Ermäßigte Teilnahme an geführten Wanderungen in der Region.',
+		'guestcard.experiences.outdoor.feature.cta': 'Zum Wanderprogramm',
+		'guestcard.experiences.outdoor.bike.title': 'E-Bike Verleih',
+		'guestcard.experiences.outdoor.bike.body': '10% Ermäßigung bei Bikeverleih-Partnern.',
+		'guestcard.experiences.outdoor.maps.title': 'Wanderkarten',
+		'guestcard.experiences.outdoor.maps.body': 'Kostenlos an der Rezeption erhältlich.',
+		'guestcard.experiences.outdoor.adventure.title': 'Outdoor-Abenteuer',
+		'guestcard.experiences.outdoor.adventure.body':
+			'Ermäßigungen bei Klettersteigen, Flying Fox & Canyoning.',
+		'guestcard.experiences.food.title': 'Kulinarik & Genuss',
+		'guestcard.experiences.food.card.title': 'Regionale Kulinarik',
+		'guestcard.experiences.food.card.body':
+			'Ermäßigungen bei Brotbackkurs, Brettljause & Kräuterführungen.',
+		'guestcard.experiences.culture.title': 'Kultur & Museen',
+		'guestcard.experiences.culture.card.title': 'Kultur & Museen',
+		'guestcard.experiences.culture.card.body':
+			'Ermäßigter Eintritt bei Museen & Veranstaltungen in der Region.',
+		'guestcard.experiences.faq.title': 'Häufig gestellte Fragen',
 		'price.from': 'ab €',
 		'price.night': 'Nacht',
 		'experiences.card.1.title': 'Weißensee',
@@ -992,6 +1045,59 @@ const translations: Record<Lang, Record<string, string>> = {
 		'guestcard.page.cta.body': 'You automatically receive the Guest Card Basic upon arrival.',
 		'guestcard.page.cta.primary': 'Book now',
 		'guestcard.page.cta.secondary': 'Guest card FAQ',
+		'guestcard.experiences.kicker': 'Exclusive for you',
+		'guestcard.experiences.title': 'Experience more, pay less',
+		'guestcard.experiences.subtitle':
+			'With the Guest Card Basic, enjoy free transport and over 40 discounts with local partners.',
+		'guestcard.experiences.freeNote': 'Free for every guest',
+		'guestcard.experiences.brochure.cta': 'View all included services',
+		'guestcard.experiences.intro.item1': 'free use of public transport in Carinthia',
+		'guestcard.experiences.intro.item2': 'over 40 discounts with leisure & experience partners',
+		'guestcard.experiences.intro.item3': 'valid from the first night of your stay',
+		'guestcard.experiences.transport.title': 'Mobility & transport',
+		'guestcard.experiences.transport.bus.title': 'Regional buses',
+		'guestcard.experiences.transport.bus.body':
+			'Free use of all regional bus lines.',
+		'guestcard.experiences.transport.sbahn.title': 'ÖBB S-Bahn in Carinthia',
+		'guestcard.experiences.transport.sbahn.body':
+			'Free use of all ÖBB S-Bahn lines across Carinthia.',
+		'guestcard.experiences.transport.arrival.title': 'Arrival & departure day included',
+		'guestcard.experiences.transport.arrival.body':
+			'Public transport is free to use on arrival and departure days as well.',
+		'guestcard.experiences.wellness.title': 'Swimming & wellness',
+		'guestcard.experiences.wellness.card1.title': 'Thermal & adventure pools',
+		'guestcard.experiences.wellness.card1.body':
+			'Discounted admission to Aquarena Kötschach-Mauthen & Erlebnisbad Lesachtal.',
+		'guestcard.experiences.wellness.card1.alt': 'Thermal baths with green views',
+		'guestcard.experiences.wellness.card2.title': 'Lake lidos',
+		'guestcard.experiences.wellness.card2.body':
+			'Discounted admission to lidos on Lake Pressegger & Lake Weissensee.',
+		'guestcard.experiences.wellness.card2.alt': 'Lakeside jetty with mountain backdrop',
+		'guestcard.experiences.wellness.card3.title': 'Sauna world',
+		'guestcard.experiences.wellness.card3.body':
+			'Discounted use of regional sauna facilities.',
+		'guestcard.experiences.wellness.card3.alt': 'Wooden sauna interior',
+		'guestcard.experiences.outdoor.title': 'Outdoor experiences',
+		'guestcard.experiences.outdoor.feature.title': 'Guided mountain tours',
+		'guestcard.experiences.outdoor.feature.body':
+			'Discounted participation in guided hikes in the region.',
+		'guestcard.experiences.outdoor.feature.cta': 'Go to hiking program',
+		'guestcard.experiences.outdoor.bike.title': 'E-bike rental',
+		'guestcard.experiences.outdoor.bike.body': '10% discount with bike rental partners.',
+		'guestcard.experiences.outdoor.maps.title': 'Hiking maps',
+		'guestcard.experiences.outdoor.maps.body': 'Available free at reception.',
+		'guestcard.experiences.outdoor.adventure.title': 'Outdoor adventures',
+		'guestcard.experiences.outdoor.adventure.body':
+			'Discounts for via ferrata, flying fox, and canyoning.',
+		'guestcard.experiences.food.title': 'Food & local flavors',
+		'guestcard.experiences.food.card.title': 'Regional cuisine',
+		'guestcard.experiences.food.card.body':
+			'Discounts for bread baking courses, snack platters, and herb walks.',
+		'guestcard.experiences.culture.title': 'Culture & museums',
+		'guestcard.experiences.culture.card.title': 'Culture & museums',
+		'guestcard.experiences.culture.card.body':
+			'Discounted admission to museums and events in the region.',
+		'guestcard.experiences.faq.title': 'Frequently asked questions',
 		'price.from': 'from €',
 		'price.night': 'night',
 		'experiences.card.1.title': 'Weißensee',
@@ -1286,6 +1392,19 @@ export const t = derived(lang, ($lang) => {
 });
 
 export const setLang = (value: Lang) => lang.set(value);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
