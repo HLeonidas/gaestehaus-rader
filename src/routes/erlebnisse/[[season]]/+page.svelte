@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { t } from '$lib/i18n';
-	import { base, asset } from '$app/paths';
+	import { asset, resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
 	import type { ComponentType } from 'svelte';
@@ -47,7 +47,7 @@
 	function setSeason(season: SeasonKey) {
 		if (activeTab === season) return;
 		activeTab = season;
-		void goto(`${base}/erlebnisse/${seasonToParam(season)}`, {
+		void goto(resolve(`/erlebnisse/${seasonToParam(season)}`), {
 			keepFocus: true,
 			noScroll: true,
 		});
