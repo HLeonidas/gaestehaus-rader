@@ -3,8 +3,10 @@
 	import { asset, resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import { lang, setLang, t } from '$lib/i18n';
+	import { trackPageview } from '$lib/analytics/plausible';
 	import { MessageCircle } from 'lucide-svelte';
 	import '../app.css';
+	import { afterNavigate } from '$app/navigation';
 
 	let { children } = $props();
 
@@ -31,6 +33,10 @@
 	// Keep ONLY for max-width control
 	const isHome = $derived(page.url.pathname === resolve('/'));
 	const isFullWidth = $derived(page.url.pathname.startsWith(resolve('/buchen')));
+
+	afterNavigate(({ to }) => {
+		trackPageview(to?.url.href ?? page.url.href);
+	});
 </script>
 
 <svelte:head>
@@ -143,9 +149,7 @@
 	<!-- ONLY remaining isHome logic: max-width behavior -->
 	<main
 		id="main-content"
-		class={`w-full flex-1 ${
-			isHome ? '' : isFullWidth ? '' : 'mx-auto max-w-6xl px-2 py-10 sm:px-6'
-		}`}
+		class={`w-full flex-1 ${isHome ? '' : isFullWidth ? '' : 'mx-auto max-w-6xl px-2 py-10 sm:px-6'}`}
 	>
 		{@render children()}
 	</main>

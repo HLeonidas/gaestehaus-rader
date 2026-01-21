@@ -24,6 +24,7 @@
 		"vite": "^7.2.6"
 	},
 	"dependencies": {
+		"@plausible-analytics/tracker": "^0.4.4",
 		"lucide-svelte": "^0.562.0"
 	}
 }

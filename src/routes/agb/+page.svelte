@@ -78,13 +78,10 @@
 				<h2 class="text-base font-semibold text-slate-900">6. Rücktritt (Stornierung) durch den Gast</h2>
 				<p class="mt-3">Sofern nichts Abweichendes vereinbart wurde, gelten folgende Stornobedingungen:</p>
 				<ul class="mt-2 list-inside list-disc space-y-1">
-					<li>Bis 14 Tage vor Anreise: kostenlose Stornierung</li>
-					<li>13 bis 7 Tage vor Anreise: 50 % des Gesamtpreises</li>
-					<li>Ab 6 Tage vor Anreise oder Nichtanreise (No-Show): 90 % des Gesamtpreises</li>
+					<li>Bis zu 14 Tage vor der Anreise: kostenlose Stornierung</li>
+					<li>Innerhalb von 14 Tagen vor der Anreise: 100 % des Gesamtpreises</li>
 				</ul>
-				<p class="mt-3">
-					Maßgeblich ist der Zeitpunkt des Einlangens der Stornierung bei Gästehaus Rader.
-				</p>
+				<p class="mt-3">Maßgeblich ist der Zeitpunkt des Einlangens der Stornierung bei Gästehaus Rader.</p>
 			</section>
 
 			<section>

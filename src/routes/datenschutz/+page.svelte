@@ -19,7 +19,7 @@
 					<p>Weißbriach 92</p>
 					<p>9622 Weißbriach</p>
 					<p>Österreich</p>
-					<p class="mt-3">
+				<p class="mt-3">
 						Telefon: <a class="hover:text-slate-900" href="tel:+434286222">+43 4286 222</a>
 					</p>
 					<p>
@@ -45,10 +45,28 @@
 			</section>
 
 			<section>
-				<h2 class="text-base font-semibold text-slate-900">3. Keine Cookies / kein Tracking</h2>
+				<h2 class="text-base font-semibold text-slate-900">3. Webanalyse mit Plausible (ohne Cookies)</h2>
 				<p class="mt-3">
-					Unsere Website verwendet keine Cookies zu Analyse- oder Marketingzwecken und kein Tracking (z.
-					B. Google Analytics oder ähnliche Dienste).
+					Wir nutzen Plausible Analytics, um die Nutzung unserer Website zu verstehen und zu verbessern.
+					Plausible verwendet keine Cookies und erstellt keine personenbezogenen Nutzerprofile.
+				</p>
+				<p class="mt-3">Dabei können insbesondere folgende Daten verarbeitet werden:</p>
+				<ul class="mt-2 list-inside list-disc space-y-1">
+					<li>aufgerufene Seite / URL</li>
+					<li>Referrer-URL</li>
+					<li>Browsertyp und Betriebssystem</li>
+					<li>Datum und Uhrzeit des Zugriffs</li>
+				</ul>
+				<p class="mt-3">
+					Die IP-Adresse wird von Plausible nur gekürzt verarbeitet (anonymisiert).
+				</p>
+				<p class="mt-3">
+					Zweck: Reichweitenmessung und Verbesserung unserer Website<br />
+					Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse)
+				</p>
+				<p class="mt-3">
+					Anbieter: Plausible Insights O&Uuml; (Plausible Analytics). Die Datenübermittlung erfolgt
+					an den Plausible-Endpunkt (https://plausible.io/api/event).
 				</p>
 			</section>
 
@@ -214,9 +232,9 @@
 					erforderlich, wir sind gesetzlich dazu verpflichtet oder Sie haben eingewilligt.
 				</p>
 				<p class="mt-3">
-					Durch die Einbindung von Google Fonts und Google Maps kann Google als Empfänger Ihrer Daten
-					auftreten (siehe Punkte 6 und 7). Der Buchungsanbieter kann als Empfänger auftreten (siehe
-					Punkt 8).
+					Durch die Einbindung von Plausible Analytics und Google Maps k&ouml;nnen Plausible Insights
+					O&Uuml; sowie Google als Empf&auml;nger Ihrer Daten auftreten (siehe Punkte 3 und 7). Der
+					Buchungsanbieter kann als Empf&auml;nger auftreten (siehe Punkt 8).
 				</p>
 			</section>
 

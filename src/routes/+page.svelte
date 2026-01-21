@@ -463,7 +463,7 @@
 					<!-- Review cards -->
 					{#each [1, 2, 3] as i}
 						<div
-							class="flex h-full w-[280px] min-h-[300px] shrink-0 snap-start flex-col rounded-3xl border border-slate-200/70 bg-white p-6 shadow-sm lg:min-h-0 lg:w-auto lg:shrink"
+							class="flex h-full w-[280px] min-h-[300px] shrink-0 snap-start flex-col rounded-3xl border border-slate-200/70 bg-white p-6 shadow-sm transition transition hover:shadow-md lg:min-h-0 lg:w-auto lg:shrink"
 						>
 							<div class="flex items-center gap-1 text-amber-500">
 								{#each trustStars as _}

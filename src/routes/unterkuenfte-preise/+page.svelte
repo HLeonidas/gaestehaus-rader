@@ -217,8 +217,13 @@
 					<div class="mx-auto grid h-12 w-12 place-items-center rounded-full bg-brand/10 text-brand">
 						<Lightbulb class="h-6 w-6" />
 					</div>
-					<p class="mt-4 text-sm font-semibold text-slate-900">
-						{$t('rooms.page.inclusive.power')}
+					<p class="mt-4 text-sm font-semibold text-slate-900 leading-snug">
+						{#if $t('rooms.page.inclusive.power').includes('/')}
+							{$t('rooms.page.inclusive.power').split('/')[0]}<br />
+							{$t('rooms.page.inclusive.power').split('/')[1]}
+						{:else}
+							{$t('rooms.page.inclusive.power')}
+						{/if}
 					</p>
 					<p class="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">
 						{$t('rooms.page.inclusive.free')}
@@ -229,7 +234,7 @@
 					<div class="mx-auto grid h-12 w-12 place-items-center rounded-full bg-brand/10 text-brand">
 						<Wifi class="h-6 w-6" />
 					</div>
-					<p class="mt-4 text-sm font-semibold text-slate-900">
+					<p class="mt-4 text-sm font-semibold text-slate-900 leading-snug break-words">
 						{$t('rooms.page.inclusive.wifi')}
 					</p>
 					<p class="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">
@@ -241,7 +246,7 @@
 					<div class="mx-auto grid h-12 w-12 place-items-center rounded-full bg-brand/10 text-brand">
 						<Baby class="h-6 w-6" />
 					</div>
-					<p class="mt-4 text-sm font-semibold text-slate-900">
+					<p class="mt-4 text-sm font-semibold text-slate-900 leading-snug break-words">
 						{$t('rooms.page.inclusive.kids')}
 					</p>
 					<p class="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">
@@ -253,7 +258,7 @@
 					<div class="mx-auto grid h-12 w-12 place-items-center rounded-full bg-brand/10 text-brand">
 						<SquareParking class="h-6 w-6" />
 					</div>
-					<p class="mt-4 text-sm font-semibold text-slate-900">
+					<p class="mt-4 text-sm font-semibold text-slate-900 leading-snug break-words">
 						{$t('rooms.page.inclusive.parking')}
 					</p>
 					<p class="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">
@@ -265,7 +270,7 @@
 					<div class="mx-auto grid h-12 w-12 place-items-center rounded-full bg-brand/10 text-brand">
 						<Ticket class="h-6 w-6" />
 					</div>
-					<p class="mt-4 text-sm font-semibold text-slate-900">
+					<p class="mt-4 text-sm font-semibold text-slate-900 leading-snug break-words">
 						{$t('rooms.page.inclusive.guestcard')}
 					</p>
 					<p class="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">
