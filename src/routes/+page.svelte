@@ -1,5 +1,5 @@
-/* eslint-disable */
 <script lang="ts">
+	/* eslint-disable */
 	import { lang, t } from '$lib/i18n';
 	import { asset, resolve } from '$app/paths';
 	import { browser } from '$app/environment';
@@ -125,19 +125,17 @@
 	} as const;
 	type AmenityKey = keyof typeof amenityIcons;
 
+	const galleryImageSizes = '(min-width: 640px) 360px, 260px';
 	const destinationImages = [
-		{ src: '/images/house/balkon-ausblick.jpg', altKey: 'home.gallery.imageAlt.balkon' },
-		{ src: '/images/house/haus-sommer.jpg', altKey: 'home.gallery.imageAlt.sommer' },
-		{ src: '/images/house/Haus-Winter-2.png', altKey: 'home.gallery.imageAlt.winter' },
-		{ src: '/images/house/IMG_0580.jpeg', altKey: 'home.gallery.imageAlt.view' },
-		{ src: '/images/house/kirche.jpg', altKey: 'home.gallery.imageAlt.kirche' },
-		{ src: '/images/house/pavillon.jpg', altKey: 'home.gallery.imageAlt.pavillon' },
-		{ src: '/images/house/slider-4-winter.jpg', altKey: 'home.gallery.imageAlt.sliderWinter' },
-		{ src: '/images/house/tischtennis.jpg', altKey: 'home.gallery.imageAlt.tischtennis' },
-		{
-			src: '/images/house/winter-balkon_ausblick-1.jpg',
-			altKey: 'home.gallery.imageAlt.winterBalkon',
-		},
+		{ base: 'balkon-ausblick', altKey: 'home.gallery.imageAlt.balkon' },
+		{ base: 'haus-sommer', altKey: 'home.gallery.imageAlt.sommer' },
+		{ base: 'Haus-Winter-2', altKey: 'home.gallery.imageAlt.winter' },
+		{ base: 'IMG_0580', altKey: 'home.gallery.imageAlt.view' },
+		{ base: 'kirche', altKey: 'home.gallery.imageAlt.kirche' },
+		{ base: 'pavillon', altKey: 'home.gallery.imageAlt.pavillon' },
+		{ base: 'slider-4-winter', altKey: 'home.gallery.imageAlt.sliderWinter' },
+		{ base: 'tischtennis', altKey: 'home.gallery.imageAlt.tischtennis' },
+		{ base: 'winter-balkon_ausblick-1', altKey: 'home.gallery.imageAlt.winterBalkon' },
 	];
 
 	function shuffle<T>(arr: readonly T[]): T[] {
@@ -589,10 +587,13 @@
 							class="group relative h-56 w-[260px] shrink-0 snap-start overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm sm:h-72 sm:w-[360px]"
 						>
 							<img
-								src={withAsset(image.src)}
+								src={withAsset(`/images/house/gallery/${image.base}-720.jpg`)}
+								srcset={`${withAsset(`/images/house/gallery/${image.base}-720.jpg`)} 720w, ${withAsset(`/images/house/gallery/${image.base}-1080.jpg`)} 1080w, ${withAsset(`/images/house/gallery/${image.base}-1440.jpg`)} 1440w`}
+								sizes={galleryImageSizes}
 								alt={$t(image.altKey)}
 								class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
 								loading="lazy"
+								decoding="async"
 							/>
 							<div
 								class="pointer-events-none absolute inset-0 ring-1 ring-transparent transition group-hover:ring-brand/20"

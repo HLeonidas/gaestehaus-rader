@@ -112,10 +112,13 @@
 					<!-- Avatar -->
 					<div class="h-28 w-28 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
 						<img
-							src={withAsset('/images/other/lh.jpg')}
+							src={withAsset('/images/other/profile/lh-224.jpg')}
+							srcset={`${withAsset('/images/other/profile/lh-224.jpg')} 224w, ${withAsset('/images/other/profile/lh-336.jpg')} 336w, ${withAsset('/images/other/profile/lh-448.jpg')} 448w`}
+							sizes="112px"
 							alt={$t('imprint.webdesign.imageAlt')}
 							class="h-full w-full object-cover"
 							loading="lazy"
+							decoding="async"
 						/>
 					</div>
 
