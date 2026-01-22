@@ -3,6 +3,7 @@
 	import { asset, resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
+	import { trackEvent } from '$lib/analytics/plausible';
 	import type { ComponentType } from 'svelte';
 	import {
 		ArrowRight,
@@ -61,6 +62,7 @@
 
 	function setSeason(season: SeasonKey) {
 		if (activeTab === season) return;
+		void trackEvent('Filter: Season Change', { season });
 		activeTab = season;
 		void goto(resolve(`/erlebnisse/${seasonToParam(season)}`), {
 			keepFocus: true,

@@ -1,7 +1,11 @@
+/* eslint-disable */
 <script lang="ts">
 	import { lang, t } from '$lib/i18n';
 	import { asset, resolve } from '$app/paths';
+	import { browser } from '$app/environment';
 	import { accommodations } from '$lib/data/accommodations';
+	import { trackEvent } from '$lib/analytics/plausible';
+	import { onMount } from 'svelte';
 	import {
 		Mountain,
 		HeartHandshake,
@@ -95,10 +99,7 @@
 				latitude: 46.688407,
 				longitude: 13.2549914,
 			},
-			sameAs: [
-				'https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9',
-				'https://www.booking.com/Share-deqca7p'
-			],
+			sameAs: ['https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9', 'https://www.booking.com/Share-deqca7p'],
 			hasMap: 'https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9',
 			amenityFeature: amenityFeatures,
 			telephone: ['+43 676 6246826', '+43 4286 222'],
@@ -138,7 +139,23 @@
 			altKey: 'home.gallery.imageAlt.winterBalkon',
 		},
 	];
-	destinationImages.sort(() => Math.random() - 0.5);
+
+	function shuffle<T>(arr: readonly T[]): T[] {
+		const a = arr.slice();
+		for (let i = a.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[a[i], a[j]] = [a[j], a[i]];
+		}
+		return a;
+	}
+
+	let shuffledImages = $state(destinationImages);
+
+	onMount(() => {
+		if (browser) {
+			shuffledImages = shuffle(destinationImages);
+		}
+	});
 
 	let galleryTrack: HTMLDivElement | null = null;
 	const trustStars = Array.from({ length: 5 });
@@ -323,6 +340,7 @@
 							<a
 								href={`${accommodationsBase}/${r.slug}`}
 								class="group relative w-[280px] shrink-0 snap-start overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:shadow-md sm:w-[340px]"
+								onclick={() => trackEvent('Content: Room Card Click', { source: 'home', room: r.slug })}
 							>
 								<!-- Image -->
 								<div class="relative">
@@ -464,8 +482,10 @@
 
 					<!-- Review cards -->
 					{#each [1, 2, 3] as i}
-						<div
-							class="flex h-full w-[280px] min-h-[300px] shrink-0 snap-start flex-col rounded-3xl border border-slate-200/70 bg-white p-6 shadow-sm transition transition hover:shadow-md lg:min-h-0 lg:w-auto lg:shrink"
+						<button
+							type="button"
+							class="flex h-full w-[280px] min-h-[300px] shrink-0 snap-start flex-col rounded-3xl border border-slate-200/70 bg-white p-6 text-left shadow-sm transition transition hover:shadow-md lg:min-h-0 lg:w-auto lg:shrink"
+							onclick={() => trackEvent('Trust: Review Click', { source: 'home', index: i })}
 						>
 							<div class="flex items-center gap-1 text-amber-500">
 								{#each trustStars as _}
@@ -496,7 +516,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</button>
 					{/each}
 				</div>
 
@@ -564,7 +584,7 @@
 					class="mt-8 -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 scroll-pl-4 scroll-pr-4 [scrollbar-width:thin] [scrollbar-color:theme(colors.slate.300)_transparent] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-200 hover:[&::-webkit-scrollbar-thumb]:bg-slate-300 sm:mx-0 sm:px-0 sm:scroll-pl-0 sm:scroll-pr-0"
 					bind:this={galleryTrack}
 				>
-					{#each destinationImages as image}
+					{#each shuffledImages as image}
 						<div
 							class="group relative h-56 w-[260px] shrink-0 snap-start overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm sm:h-72 sm:w-[360px]"
 						>
@@ -1109,6 +1129,7 @@
 				<a
 					href={resolve('/buchen')}
 					class="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-white/90"
+					onclick={() => trackEvent('Booking: Jetzt buchen', { source: 'home-cta' })}
 				>
 					{$t('cta.primary')}
 				</a>
@@ -1122,11 +1143,29 @@
 
 			<div class="mt-6 flex flex-wrap items-center gap-3 text-sm text-white/80">
 				<span class="font-semibold text-white/90">{$t('contact.direct.title')}</span>
-				<a class="hover:text-white" href="tel:+436766246826">+43 676 6246826</a>
+				<a
+					class="hover:text-white"
+					href="tel:+436766246826"
+					onclick={() => trackEvent('Contact: Phone Click', { source: 'home', line: 'mobile' })}
+				>
+					+43 676 6246826
+				</a>
 				<span class="text-white/50">•</span>
-				<a class="hover:text-white" href="tel:+434286222">+43 4286 222</a>
+				<a
+					class="hover:text-white"
+					href="tel:+434286222"
+					onclick={() => trackEvent('Contact: Phone Click', { source: 'home', line: 'landline' })}
+				>
+					+43 4286 222
+				</a>
 				<span class="text-white/50">•</span>
-				<a class="hover:text-white" href="mailto:info@rader-gitschtal.at"> info@rader-gitschtal.at </a>
+				<a
+					class="hover:text-white"
+					href="mailto:info@rader-gitschtal.at"
+					onclick={() => trackEvent('Contact: Email Click', { source: 'home' })}
+				>
+					info@rader-gitschtal.at
+				</a>
 			</div>
 		</div>
 	</section>

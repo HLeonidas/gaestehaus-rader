@@ -41,3 +41,18 @@ export const trackPageview = async (url?: string) => {
 
 	tracker.track('pageview', url ? { url } : {});
 };
+
+export const trackEvent = async (
+	eventName: string,
+	props?: Record<string, string | number | boolean>
+) => {
+	await ensureInitialized();
+
+	if (!browser) {
+		return;
+	}
+
+	const tracker = await loadTracker();
+
+	tracker.track(eventName, props ? { props } : {});
+};

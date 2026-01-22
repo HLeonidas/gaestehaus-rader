@@ -2,6 +2,8 @@
 	import { browser } from '$app/environment';
 	import { asset, resolve } from '$app/paths';
 	import { lang, t } from '$lib/i18n';
+	import { trackEvent } from '$lib/analytics/plausible';
+	import { onMount } from 'svelte';
 	import {
 		ArrowLeft,
 		Bath,
@@ -100,10 +102,14 @@
 	const canGalleryNext = $derived.by(() => galleryIndex < galleryImages.length - 1);
 	let shareStatus = $state<'idle' | 'copied' | 'error'>('idle');
 	let floorplanOpen = $state(false);
+	let priceSectionEl: HTMLElement | null = null;
+	let priceSectionTracked = false;
 
 	const openGallery = (index: number) => {
 		galleryIndex = index;
 		galleryOpen = true;
+		void trackEvent('Content: Gallery Opened', { room: accommodation.slug, index });
+		void trackEvent('Content: Photo Lightbox Opened', { room: accommodation.slug, index });
 	};
 
 	const closeGallery = () => {
@@ -117,6 +123,27 @@
 	const closeFloorplan = () => {
 		floorplanOpen = false;
 	};
+
+	onMount(() => {
+		if (!browser || !priceSectionEl) return;
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				if (priceSectionTracked) return;
+				const hasVisible = entries.some((entry) => entry.isIntersecting);
+				if (!hasVisible) return;
+
+				priceSectionTracked = true;
+				void trackEvent('Trust: Price Section Viewed', { room: accommodation.slug });
+				observer.disconnect();
+			},
+			{ threshold: 0.4 }
+		);
+
+		observer.observe(priceSectionEl);
+
+		return () => observer.disconnect();
+	});
 
 	const shareRoom = async () => {
 		if (!browser) return;
@@ -158,6 +185,7 @@
 	<meta property="og:url" content={roomUrl} />
 	<meta property="og:image" content={ogImage} />
 	<meta name="twitter:card" content="summary_large_image" />
+	<!-- eslint-disable-next-line -->
 	{@html `<script type="application/ld+json">${roomJsonLd}</script>`}
 </svelte:head>
 
@@ -358,7 +386,7 @@
 					</section>
 
 					<!-- Prices & Details TABLE -->
-					<section>
+					<section bind:this={priceSectionEl}>
 						<h2 class="text-2xl font-serif text-slate-900">{$t('room.detail.sections.prices')}</h2>
 
 						<div
@@ -583,6 +611,9 @@
 						<a
 							href={resolve('/buchen')}
 							class="mt-5 inline-flex w-full items-center justify-center rounded-xl bg-brand px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:brightness-110 focus:outline-none focus:ring-4 focus:ring-brand/25"
+							onclick={() =>
+								trackEvent('Booking: Jetzt buchen', { source: 'room-detail', room: accommodation.slug })
+							}
 						>
 							{$t('room.detail.card.cta')}
 						</a>

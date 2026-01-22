@@ -3,7 +3,7 @@
 	import { asset, resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import { lang, setLang, t } from '$lib/i18n';
-	import { trackPageview } from '$lib/analytics/plausible';
+	import { trackEvent, trackPageview } from '$lib/analytics/plausible';
 	import { MessageCircle } from 'lucide-svelte';
 	import '../app.css';
 	import { afterNavigate } from '$app/navigation';
@@ -33,6 +33,12 @@
 	// Keep ONLY for max-width control
 	const isHome = $derived(page.url.pathname === resolve('/'));
 	const isFullWidth = $derived(page.url.pathname.startsWith(resolve('/buchen')));
+
+	const trackLanguage = (nextLang: 'de' | 'en') => {
+		if ($lang === nextLang) return;
+		void trackEvent('Filter: Language Change', { lang: nextLang });
+		setLang(nextLang);
+	};
 
 	afterNavigate(({ to }) => {
 		trackPageview(to?.url.href ?? page.url.href);
@@ -98,7 +104,7 @@
 						class={`rounded-full px-2.5 py-1 transition sm:px-3 ${
 							$lang === 'de' ? 'bg-brand text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'
 						}`}
-						onclick={() => setLang('de')}
+						onclick={() => trackLanguage('de')}
 						aria-pressed={$lang === 'de'}
 						aria-label={$t('nav.langDe')}
 					>
@@ -109,7 +115,7 @@
 						class={`rounded-full px-2.5 py-1 transition sm:px-3 ${
 							$lang === 'en' ? 'bg-brand text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'
 						}`}
-						onclick={() => setLang('en')}
+						onclick={() => trackLanguage('en')}
 						aria-pressed={$lang === 'en'}
 						aria-label={$t('nav.langEn')}
 					>
@@ -121,6 +127,7 @@
 					href={bookingHref}
 					class="inline-flex items-center justify-center rounded-full bg-brand px-3.5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-brand/90 focus:outline-none focus:ring-2 focus:ring-brand/40 sm:px-5 sm:text-sm"
 					aria-label={$t('nav.booking')}
+					onclick={() => trackEvent('Booking: Jetzt buchen', { source: 'header' })}
 				>
 					{$t('nav.booking')}
 				</a>
@@ -200,7 +207,11 @@
 							</a>
 						</li>
 						<li>
-							<a class="hover:text-slate-900" href={resolve('/faq')}>
+							<a
+								class="hover:text-slate-900"
+								href={resolve('/faq')}
+								onclick={() => trackEvent('Trust: FAQ Click', { source: 'footer' })}
+							>
 								{$t('footer.faq')}
 							</a>
 						</li>
@@ -216,20 +227,31 @@
 						<li>Weißbriach 92</li>
 						<li>9622 Weißbriach, Österreich</li>
 						<li>
-							<a class="hover:text-slate-900" href="tel:+436766246826">+43 676 6246826</a>
+							<a
+								class="hover:text-slate-900"
+								href="tel:+436766246826"
+								onclick={() => trackEvent('Contact: Phone Click', { source: 'footer', line: 'mobile' })}
+							>
+								+43 676 6246826
+							</a>
 							<a
 								class="ml-2 inline-flex items-center gap-1 text-xs font-semibold text-emerald-600 hover:text-emerald-700"
 								href="https://wa.me/436766246826"
 								target="_blank"
 								rel="noopener noreferrer"
 								aria-label="WhatsApp: +43 676 6246826"
+								onclick={() => trackEvent('Contact: WhatsApp Click', { source: 'footer' })}
 							>
 								<MessageCircle class="h-3.5 w-3.5" aria-hidden="true" />
 								WhatsApp
 							</a>
 						</li>
 						<li>
-							<a class="hover:text-slate-900" href="mailto:info@rader-gitschtal.at">
+							<a
+								class="hover:text-slate-900"
+								href="mailto:info@rader-gitschtal.at"
+								onclick={() => trackEvent('Contact: Email Click', { source: 'footer' })}
+							>
 								info@rader-gitschtal.at
 							</a>
 						</li>

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { t } from '$lib/i18n';
+	import { trackEvent } from '$lib/analytics/plausible';
 	import { Check, Copy, Mail, Phone, PhoneCall } from 'lucide-svelte';
 
 	let ibanCopied = false;
@@ -34,6 +35,11 @@
 
 	// optional: externer Link (öffnet Maps in neuem Tab)
 	const mapLink = 'https://maps.app.goo.gl/65opqP1cKtHpL6pT6';
+
+	const enableMap = () => {
+		mapEnabled = true;
+		void trackEvent('Map: Loaded', { source: 'contact' });
+	};
 </script>
 
 <svelte:head>
@@ -74,7 +80,13 @@
 							>
 								<Phone class="h-4 w-4" />
 							</span>
-							+43 676 6246826
+							<a
+								class="font-semibold text-slate-900"
+								href="tel:+436766246826"
+								onclick={() => trackEvent('Contact: Phone Click', { source: 'contact', line: 'mobile' })}
+							>
+								+43 676 6246826
+							</a>
 						</p>
 						<p class="flex items-center">
 							<span
@@ -83,7 +95,13 @@
 							>
 								<PhoneCall class="h-4 w-4" />
 							</span>
-							+43 4286 222
+							<a
+								class="font-semibold text-slate-900"
+								href="tel:+434286222"
+								onclick={() => trackEvent('Contact: Phone Click', { source: 'contact', line: 'landline' })}
+							>
+								+43 4286 222
+							</a>
 						</p>
 						<p class="flex items-center">
 							<span
@@ -92,7 +110,11 @@
 							>
 								<Mail class="h-4 w-4" />
 							</span>
-							<a class="font-semibold text-slate-900" href="mailto:info@rader-gitschtal.at">
+							<a
+								class="font-semibold text-slate-900"
+								href="mailto:info@rader-gitschtal.at"
+								onclick={() => trackEvent('Contact: Email Click', { source: 'contact' })}
+							>
 								info@rader-gitschtal.at
 							</a>
 						</p>
@@ -140,7 +162,7 @@
 								<button
 									type="button"
 									class="inline-flex items-center justify-center rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:brightness-110"
-									onclick={() => (mapEnabled = true)}
+									onclick={enableMap}
 								>
 									{$t('contact.map.load')}
 								</button>
@@ -150,6 +172,7 @@
 									href={mapLink}
 									target="_blank"
 									rel="noopener noreferrer"
+									onclick={() => trackEvent('Map: Open External', { source: 'contact' })}
 								>
 									{$t('contact.map.open')}
 								</a>

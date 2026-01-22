@@ -2,6 +2,7 @@
 	import { lang, t } from '$lib/i18n';
 	import { asset, resolve } from '$app/paths';
 	import { accommodations } from '$lib/data/accommodations';
+	import { trackEvent } from '$lib/analytics/plausible';
 	import {
 		Lightbulb,
 		Wifi,
@@ -58,8 +59,8 @@
 				'@type': 'ListItem',
 				position: index + 1,
 				name: room.title,
-				url: new URL(`${accommodationsBase}/${room.slug}`, siteUrl).toString()
-			}))
+				url: new URL(`${accommodationsBase}/${room.slug}`, siteUrl).toString(),
+			})),
 		})
 	);
 
@@ -80,7 +81,7 @@
 	<meta property="og:url" content={new URL(accommodationsBase, siteUrl).toString()} />
 	<meta property="og:image" content={ogImage} />
 	<meta name="twitter:card" content="summary_large_image" />
-	{@html `<script type="application/ld+json">${roomsJsonLd}</script>`}
+	{@html /* eslint-disable-next-line */ `<script type="application/ld+json">${roomsJsonLd}</script>`}
 </svelte:head>
 
 <div class="mx-auto w-full max-w-4xl px-4 py-10 sm:px-6">
@@ -179,12 +180,18 @@
 									<a
 										href={`${accommodationsBase}/${room.slug}`}
 										class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-brand/30"
+										onclick={() =>
+											trackEvent('Content: Room Card Click', {
+												source: 'rooms-list',
+												room: room.slug,
+											})}
 									>
 										{$t('rooms.page.detailsCta')}
 									</a>
 									<a
 										href={resolve('/buchen')}
 										class="inline-flex items-center gap-2 rounded-xl bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90 focus:outline-none focus:ring-2 focus:ring-brand/30"
+										onclick={() => trackEvent('Booking: Jetzt buchen', { source: 'rooms-list' })}
 									>
 										{$t('rooms.page.cta')}
 										<ArrowRight class="h-4 w-4" />
