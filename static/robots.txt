@@ -2,3 +2,4 @@
 User-agent: *
 Disallow:
 Sitemap: https://www.rader-gitschtal.at/sitemap.xml
+llms: https://www.rader-gitschtal.at/llms.txt

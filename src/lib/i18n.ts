@@ -34,11 +34,11 @@ const translations: Record<Lang, Record<string, string>> = {
 		'hero.title': 'Gästehaus Rader – Ferienwohnungen in Weißbriach im Gitschtal',
 		'hero.subtitle': 'Erleben Sie alpine Gelassenheit und kärntner Gastfreundschaft in ihrer schönsten Form.',
 		'seo.default.title':
-			'Ferienwohnungen in Weißbriach – nahe Weißensee & Nassfeld | Gästehaus Rader',
+			'Ferienwohnungen Weißbriach / Gitschtal – Gästehaus Rader – Nähe Weissensee & Nassfeld',
 		'seo.default.description':
 			'Alpine Ferienwohnungen in Weißbriach im Gitschtal. Ruhige Lage, persönliche Gastgeber und kurze Wege zu Natur, Seen und Skigebieten.',
 		'home.seo.title':
-			'Ferienwohnungen in Weißbriach – nahe Weißensee & Nassfeld | Gästehaus Rader',
+			'Ferienwohnungen in Weißbriach – Gästehaus Rader – Nähe Weissensee & Nassfeld',
 		'home.seo.description':
 			'Gästehaus Rader – gemütliche Ferienwohnungen in Weißbriach im Gitschtal, Kärnten. Sommer- und Winterurlaub in den Alpen. Jetzt Unterkunft buchen!',
 		'hero.cta.primary': 'Appartements entdecken',
@@ -771,10 +771,12 @@ const translations: Record<Lang, Record<string, string>> = {
 		'hero.title': 'Gästehaus Rader – Holiday apartments in Weissbriach / Gitschtal',
 		'hero.subtitle':
 			'Experience alpine serenity and Carinthian hospitality at its finest.',
-		'seo.default.title': 'Holiday apartments in Weissbriach / Gitschtal | Guesthouse Rader',
+		'seo.default.title':
+			'Holiday apartments in Weissbriach / Gitschtal – Guesthouse Rader – near Weissensee & Nassfeld',
 		'seo.default.description':
 			'Alpine holiday apartments in Weissbriach, Gitschtal. Quiet setting, personal hosts, and quick access to nature, lakes, and ski areas.',
-		'home.seo.title': 'Holiday apartments in Weissbriach / Gitschtal | Guesthouse Rader',
+		'home.seo.title':
+			'Holiday apartments in Weissbriach / Gitschtal – Guesthouse Rader – near Weissensee & Nassfeld',
 		'home.seo.description':
 			'Guesthouse Rader – cozy holiday apartments in Weissbriach, Gitschtal, Carinthia. Summer and winter breaks in the Alps. Book your stay now!',
 		'hero.cta.primary': 'Discover apartments',
