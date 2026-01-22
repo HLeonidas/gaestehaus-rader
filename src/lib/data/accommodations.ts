@@ -43,7 +43,7 @@ export const accommodations: Accommodation[] = [
 		title: 'Nº 1',
 		subtitle: {
 			de: 'Helle Ferienwohnung mit Balkon und Morgensonne',
-			en: 'Cozy apartment with balcony',
+			en: 'Bright apartment with balcony and morning sun',
 		},
 		description: {
 			de: [
@@ -52,9 +52,9 @@ export const accommodations: Accommodation[] = [
 				'Das Appartement verfügt über eine voll ausgestattete Küche mit gemütlicher Sitzecke, ein Badezimmer mit Dusche und WC sowie einen sonnigen Balkon mit Blick nach Osten. Geeignet für 1–3 Personen.',
 			],
 			en: [
-				'Cozy apartment with balcony and plenty of peace and quiet.',
-				'Ideal for couples or solo travelers who want to unwind.',
-				'Kitchen with dining nook, bathroom with shower and toilet - east-facing view (1-3 guests).',
+				'Enjoy relaxing days in our lovingly furnished apartment with balcony and a beautiful view.',
+				'Ideal for couples or solo travelers seeking peace and a chance to recharge.',
+				'The apartment features a fully equipped kitchen with a cozy dining nook, a bathroom with shower and toilet, and a sunny balcony facing east. Suitable for 1-3 guests.',
 			],
 		},
 		images: {
@@ -146,7 +146,7 @@ export const accommodations: Accommodation[] = [
 		},
 		detailBody: {
 			de: 'Helle Ferienwohnung mit Balkon und Morgensonne - Küche mit Sitzecke - Bad mit Dusche und WC - Balkon mit Blick nach Osten (1-3 Personen).',
-			en: 'Cozy apartment with balcony - kitchen with dining nook - bathroom with shower and toilet - east-facing view (1-3 guests).',
+			en: 'Bright apartment with balcony and morning sun - kitchen with dining nook - bathroom with shower and toilet - east-facing balcony (1-3 guests).',
 		},
 	},
 	{
@@ -155,7 +155,7 @@ export const accommodations: Accommodation[] = [
 		title: 'Nº 2',
 		subtitle: {
 			de: 'Charmante Dachgeschosswohnung mit Balkon',
-			en: 'Cozy apartment with balcony',
+			en: 'Charming top-floor apartment with balcony',
 		},
 		description: {
 			de: [
@@ -164,8 +164,9 @@ export const accommodations: Accommodation[] = [
 				'Die Wohnung verfügt über eine voll ausgestattete Küche mit Sitzecke, ein Badezimmer mit Dusche und WC sowie zwei gemütliche Schlafbereiche. Ideal für 1–3 Personen, die Komfort und Ruhe schätzen.',
 			],
 			en: [
-				'Cozy apartment with balcony.',
-				'Kitchen with dining nook, bathroom with shower and toilet - east and west view (1-3 guests).',
+				'Our cozy top-floor apartment blends alpine comfort with light-filled rooms.',
+				'Enjoy morning sun from the east and evening views to the west right from the balcony.',
+				'The apartment features a fully equipped kitchen with dining nook, a bathroom with shower and toilet, and two cozy sleeping areas. Ideal for 1-3 guests who value comfort and quiet.',
 			],
 		},
 		images: {
@@ -256,7 +257,7 @@ export const accommodations: Accommodation[] = [
 		},
 		detailBody: {
 			de: 'Helle Ferienwohnung mit Balkon und Panoramaausblick - Küche mit Sitzecke - Bad mit Dusche und WC - Sicht nach Osten und Westen (1-3 Personen).',
-			en: 'Cozy apartment with balcony - kitchen with dining nook - bathroom with shower and toilet - east and west view (1-3 guests).',
+			en: 'Bright apartment with balcony and panoramic view - kitchen with dining nook - bathroom with shower and toilet - east and west views (1-3 guests).',
 		},
 	},
 	{
@@ -265,7 +266,7 @@ export const accommodations: Accommodation[] = [
 		title: 'Nº 3',
 		subtitle: {
 			de: 'Sonnige Ferienwohnung mit Südbalkon und Gartenblick',
-			en: 'Cozy apartment with balcony',
+			en: 'Sunny apartment with south-facing balcony and garden view',
 		},
 		description: {
 			de: [
@@ -274,8 +275,9 @@ export const accommodations: Accommodation[] = [
 				'Mit voll ausgestatteter Küche, gemütlicher Sitzecke, Bad mit Dusche/WC und Balkon ist die Wohnung ideal für 1–2 Personen.',
 			],
 			en: [
-				'Cozy apartment with balcony.',
-				'Kitchen with dining nook, bathroom with shower and toilet - south-facing view (1-2 guests).',
+				'This bright apartment offers plenty of space to relax and unwind.',
+				'Thanks to the south-facing orientation, you can enjoy sunshine all day and a lovely garden view.',
+				'With a fully equipped kitchen, cozy dining nook, bathroom with shower/toilet, and a balcony, the apartment is ideal for 1-2 guests.',
 			],
 		},
 		images: {
@@ -366,7 +368,7 @@ export const accommodations: Accommodation[] = [
 		},
 		detailBody: {
 			de: 'Sonnige Ferienwohnung mit Südbalkon und Gartenblick - Küche mit Sitzecke - Bad mit Dusche und WC - Südausrichtung (1-2 Personen).',
-			en: 'Cozy apartment with balcony - kitchen with dining nook - bathroom with shower and toilet - south-facing view (1-2 guests).',
+			en: 'Sunny apartment with south-facing balcony and garden view - kitchen with dining nook - bathroom with shower and toilet - south-facing (1-2 guests).',
 		},
 	},
 ];
