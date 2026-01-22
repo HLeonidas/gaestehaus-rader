@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { lang, t } from '$lib/i18n';
+	import { t } from '$lib/i18n';
 	import { asset, resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
@@ -13,7 +13,6 @@
 		ChevronDown,
 		Footprints,
 		Landmark,
-		Map,
 		Mountain,
 		Snowflake,
 		Sun,
@@ -259,7 +258,7 @@
 
 				{#key activeTab}
 					<div class="experience-grid mt-8 gap-6" in:fly={{ y: 26, duration: 520, easing: cubicOut }}>
-							{#each currentEvents as event, i (event.id)}
+							{#each currentEvents as event (event.id)}
 								<article
 									class={`experience-card group relative overflow-hidden rounded-3xl ${event.className ?? ''}`}
 								>

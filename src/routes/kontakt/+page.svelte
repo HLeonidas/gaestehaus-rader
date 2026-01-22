@@ -33,8 +33,7 @@
 		'https://www.google.com/maps?q=Weissbriach%2092%2C%209622%20Weissbriach%2C%20Austria&output=embed';
 
 	// optional: externer Link (öffnet Maps in neuem Tab)
-	const mapLink =
-		'https://www.google.com/maps?q=Weissbriach%2092%2C%209622%20Weissbriach%2C%20Austria';
+	const mapLink = 'https://maps.app.goo.gl/65opqP1cKtHpL6pT6';
 </script>
 
 <svelte:head>

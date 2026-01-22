@@ -6,9 +6,6 @@
 		ArrowLeft,
 		Bath,
 		Coffee,
-		Copy,
-		Heart,
-		MapPin,
 		Mountain,
 		Ruler,
 		Refrigerator,
@@ -20,7 +17,6 @@
 		Users,
 		Share2,
 		SquareParking,
-		Star,
 		Sun,
 		Utensils,
 		Wifi,
@@ -162,9 +158,7 @@
 	<meta property="og:url" content={roomUrl} />
 	<meta property="og:image" content={ogImage} />
 	<meta name="twitter:card" content="summary_large_image" />
-	<script type="application/ld+json">
-{roomJsonLd}
-	</script>
+	{@html `<script type="application/ld+json">${roomJsonLd}</script>`}
 </svelte:head>
 
 <main class="bg-[#fbfaf7]">

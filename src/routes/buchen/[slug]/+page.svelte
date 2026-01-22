@@ -115,13 +115,13 @@
 									<span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
 								</div>
 								<div class="grid grid-cols-7 gap-2 text-xs text-slate-600">
-									{#each Array.from({ length: 31 }) as _, i}
+									{#each Array.from({ length: 31 }, (_, index) => index) as dayIndex}
 										<span
 											class={`grid h-8 w-8 place-items-center rounded-full ${
-												i >= 4 && i <= 26 ? 'bg-amber-100 text-amber-900' : ''
+												dayIndex >= 4 && dayIndex <= 26 ? 'bg-amber-100 text-amber-900' : ''
 											}`}
 										>
-											{i + 1}
+											{dayIndex + 1}
 										</span>
 									{/each}
 								</div>
@@ -132,13 +132,13 @@
 									<span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
 								</div>
 								<div class="grid grid-cols-7 gap-2 text-xs text-slate-600">
-									{#each Array.from({ length: 31 }) as _, i}
+									{#each Array.from({ length: 31 }, (_, index) => index) as dayIndex}
 										<span
 											class={`grid h-8 w-8 place-items-center rounded-full ${
-												i >= 1 && i <= 7 ? 'bg-amber-100 text-amber-900' : ''
-											} ${i === 6 ? 'bg-amber-400 text-white' : ''}`}
+												dayIndex >= 1 && dayIndex <= 7 ? 'bg-amber-100 text-amber-900' : ''
+											} ${dayIndex === 6 ? 'bg-amber-400 text-white' : ''}`}
 										>
-											{i + 1}
+											{dayIndex + 1}
 										</span>
 									{/each}
 								</div>

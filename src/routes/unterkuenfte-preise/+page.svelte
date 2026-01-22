@@ -80,7 +80,7 @@
 	<meta property="og:url" content={new URL(accommodationsBase, siteUrl).toString()} />
 	<meta property="og:image" content={ogImage} />
 	<meta name="twitter:card" content="summary_large_image" />
-	<script type="application/ld+json">{roomsJsonLd}</script>
+	{@html `<script type="application/ld+json">${roomsJsonLd}</script>`}
 </svelte:head>
 
 <div class="mx-auto w-full max-w-4xl px-4 py-10 sm:px-6">

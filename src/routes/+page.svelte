@@ -96,8 +96,10 @@
 				longitude: 13.2549914,
 			},
 			sameAs: [
-				'https://www.google.com/maps/place/G%C3%A4stehaus+Rader/@46.6884004,13.2549813,17z/data=!3m1!4b1!4m6!3m5!1s0x4770a9c55d33223f:0xc3dcc0da6fc8c9e5!8m2!3d46.6884004!4d13.2549813!16s%2Fg%2F1tffb_l8?entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoASAFQAw%3D%3D',
+				'https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9',
+				'https://www.booking.com/Share-deqca7p'
 			],
+			hasMap: 'https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9',
 			amenityFeature: amenityFeatures,
 			telephone: ['+43 676 6246826', '+43 4286 222'],
 			email: 'info@rader-gitschtal.at',
@@ -611,7 +613,9 @@
 
 						<ul class="space-y-4 text-sm text-slate-600 sm:text-base">
 							<li class="flex items-start gap-3">
-								<span class="mt-0.5 grid h-12 w-12 shrink-0 place-items-center rounded-full bg-brand/10 text-brand">
+								<span
+									class="mt-0.5 grid h-12 w-12 shrink-0 place-items-center rounded-full bg-brand/10 text-brand"
+								>
 									<BusFront class="h-6 w-6" aria-hidden="true" />
 								</span>
 								<div>
@@ -624,7 +628,9 @@
 								</div>
 							</li>
 							<li class="flex items-start gap-3">
-								<span class="mt-0.5 grid h-12 w-12 shrink-0 place-items-center rounded-full bg-brand/10 text-brand">
+								<span
+									class="mt-0.5 grid h-12 w-12 shrink-0 place-items-center rounded-full bg-brand/10 text-brand"
+								>
 									<Sparkles class="h-6 w-6" aria-hidden="true" />
 								</span>
 								<div>
@@ -637,7 +643,9 @@
 								</div>
 							</li>
 							<li class="flex items-start gap-3">
-								<span class="mt-0.5 grid h-12 w-12 shrink-0 place-items-center rounded-full bg-brand/10 text-brand">
+								<span
+									class="mt-0.5 grid h-12 w-12 shrink-0 place-items-center rounded-full bg-brand/10 text-brand"
+								>
 									<CalendarDays class="h-6 w-6" aria-hidden="true" />
 								</span>
 								<div>
