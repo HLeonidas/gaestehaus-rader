@@ -155,7 +155,7 @@
 				</p>
 			</section>
 
-			<p class="pt-2 text-sm text-slate-500">Stand: 15.01.2026</p>
+			<p class="pt-2 text-sm text-slate-500">Stand: 22.01.2026</p>
 		</div>
 	</section>
 </div>

@@ -279,7 +279,7 @@
 					Wir behalten uns vor, diese Datenschutzerklärung bei Bedarf anzupassen. Es gilt die jeweils
 					aktuelle Version auf unserer Website.
 				</p>
-				<p class="mt-3">Stand: 15.01.2026</p>
+				<p class="mt-3">Stand: 22.01.2026</p>
 			</section>
 		</div>
 	</section>
