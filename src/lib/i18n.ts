@@ -31,12 +31,12 @@ const translations: Record<Lang, Record<string, string>> = {
 		'accessibility.skip': 'Zum Inhalt springen',
 		'brand.name': 'Gästehaus Rader',
 		'hero.kicker': 'Alpine Ruhe · Kärnten',
-		'hero.title': 'Gästehaus Rader – Ferienwohnungen in Weißbriach im Gitschtal',
+		'hero.title': 'Ferienwohnungen in Weißbriach im Gitschtal',
 		'hero.subtitle': 'Erleben Sie alpine Gelassenheit und kärntner Gastfreundschaft in ihrer schönsten Form.',
-		'seo.default.title': 'Gästehaus Rader – Ferienwohnungen in Weißbriach',
+		'seo.default.title': 'Ferienwohnungen in Weißbriach / Gitschtal | Gästehaus Rader',
 		'seo.default.description':
 			'Alpine Ferienwohnungen in Weißbriach im Gitschtal. Ruhige Lage, persönliche Gastgeber und kurze Wege zu Natur, Seen und Skigebieten.',
-		'home.seo.title': 'Gästehaus Rader – Ferienwohnungen in Weißbriach im Gitschtal',
+		'home.seo.title': 'Ferienwohnungen in Weißbriach / Gitschtal | Gästehaus Rader',
 		'home.seo.description':
 			'Gästehaus Rader – gemütliche Ferienwohnungen in Weißbriach im Gitschtal, Kärnten. Sommer- und Winterurlaub in den Alpen. Jetzt Unterkunft buchen!',
 		'hero.cta.primary': 'Appartements entdecken',
@@ -760,13 +760,13 @@ const translations: Record<Lang, Record<string, string>> = {
 		'accessibility.skip': 'Skip to content',
 		'brand.name': 'Gästehaus Rader',
 		'hero.kicker': 'Alpine calm · Carinthia',
-		'hero.title': 'Guesthouse Rader – Holiday apartments in Weissbriach, Gitschtal',
+		'hero.title': 'Holiday apartments in Weissbriach / Gitschtal',
 		'hero.subtitle':
 			'Experience alpine serenity and Carinthian hospitality at its finest.',
-		'seo.default.title': 'Guesthouse Rader – Holiday apartments in Weissbriach',
+		'seo.default.title': 'Holiday apartments in Weissbriach / Gitschtal | Guesthouse Rader',
 		'seo.default.description':
 			'Alpine holiday apartments in Weissbriach, Gitschtal. Quiet setting, personal hosts, and quick access to nature, lakes, and ski areas.',
-		'home.seo.title': 'Guesthouse Rader – Holiday apartments in Weissbriach, Gitschtal',
+		'home.seo.title': 'Holiday apartments in Weissbriach / Gitschtal | Guesthouse Rader',
 		'home.seo.description':
 			'Guesthouse Rader – cozy holiday apartments in Weissbriach, Gitschtal, Carinthia. Summer and winter breaks in the Alps. Book your stay now!',
 		'hero.cta.primary': 'Discover apartments',

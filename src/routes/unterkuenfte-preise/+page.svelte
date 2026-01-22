@@ -111,7 +111,7 @@
 							<a href={`${accommodationsBase}/${room.slug}`}>
 								<img
 									src={withAsset(room.images.main)}
-									alt=""
+									alt={`${room.title} – ${room.subtitle[$lang]}`}
 									class="h-auto w-full object-cover sm:h-72"
 									loading="lazy"
 								/>

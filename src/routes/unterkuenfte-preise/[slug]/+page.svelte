@@ -65,6 +65,10 @@
 	const amenityLabels = $derived.by(() =>
 		accommodation.amenities.map((amenity) => $t(`amenity.${amenity}`))
 	);
+	const roomImageAlt = $derived.by(() => `${accommodation.title} – ${accommodation.subtitle[$lang]}`);
+	const floorplanAlt = $derived.by(
+		() => `${$t('room.detail.sections.floorplan')} – ${accommodation.title}`
+	);
 	const roomJsonLd = $derived.by(() =>
 		JSON.stringify({
 			'@context': 'https://schema.org',
@@ -207,7 +211,7 @@
 				>
 					<img
 						src={withAsset(accommodation.images.main)}
-						alt=""
+						alt={roomImageAlt}
 						class="h-[220px] w-full object-cover bg-white sm:h-[320px] sm:object-cover lg:h-[420px]"
 						loading="lazy"
 					/>
@@ -222,7 +226,7 @@
 					>
 						<img
 							src={withAsset(accommodation.images.gallery?.[0] ?? accommodation.images.main)}
-							alt=""
+							alt={roomImageAlt}
 							class="h-[120px] w-full object-contain bg-white sm:h-[160px] sm:object-cover lg:h-[200px]"
 							loading="lazy"
 						/>
@@ -235,7 +239,7 @@
 					>
 						<img
 							src={withAsset(accommodation.images.gallery?.[1] ?? accommodation.images.main)}
-							alt=""
+							alt={roomImageAlt}
 							class="h-[120px] w-full object-contain bg-white sm:h-[160px] sm:object-cover lg:h-[200px]"
 							loading="lazy"
 						/>
@@ -375,7 +379,7 @@
 							<button type="button" class="w-full" onclick={openFloorplan}>
 								<img
 									src={withAsset(accommodation.floorplanImage)}
-									alt=""
+									alt={floorplanAlt}
 									class="h-72 w-full object-contain sm:h-80"
 									loading="lazy"
 								/>
@@ -644,7 +648,7 @@
 			<div class="overflow-hidden rounded-3xl bg-white shadow-xl">
 				<img
 					src={withAsset(galleryImages[galleryIndex])}
-					alt=""
+					alt={roomImageAlt}
 					class="h-[60vh] max-h-[520px] w-full object-contain bg-white sm:object-cover"
 				/>
 			</div>
@@ -668,7 +672,11 @@
 							}`}
 							onclick={() => (galleryIndex = i)}
 						>
-							<img src={withAsset(img)} alt="" class="h-full w-full object-contain bg-white sm:object-cover" />
+							<img
+								src={withAsset(img)}
+								alt={roomImageAlt}
+								class="h-full w-full object-contain bg-white sm:object-cover"
+							/>
 						</button>
 					{/each}
 				</div>
@@ -703,7 +711,7 @@
 			<div class="overflow-hidden rounded-3xl bg-white shadow-xl">
 				<img
 					src={withAsset(accommodation.floorplanImage)}
-					alt=""
+					alt={floorplanAlt}
 					class="h-[70vh] max-h-[560px] w-full object-contain bg-white"
 				/>
 			</div>

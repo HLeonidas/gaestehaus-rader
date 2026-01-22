@@ -275,7 +275,7 @@
 								>
 								<img
 									src={withAsset(event.image)}
-									alt=""
+									alt={`${$t(event.titleKey)} – ${$t(event.kickerKey)}`}
 									class="h-full w-full object-cover"
 									loading="lazy"
 								/>

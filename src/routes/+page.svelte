@@ -173,7 +173,7 @@
 <SeoHead
 	titleKey="home.seo.title"
 	descriptionKey="home.seo.description"
-	image={heroImagePath}
+	image="/images/other/haus-sommer.jpg"
 />
 
 <svelte:head>
