@@ -6,7 +6,11 @@
 </script>
 
 <svelte:head>
-	<title>{$t('about.title')} - {$t('brand.name')}</title>
+	<title>{$t('about.seo.title')}</title>
+	<meta name="description" content={$t('about.seo.description')} />
+	<meta property="og:title" content={$t('about.seo.title')} />
+	<meta property="og:description" content={$t('about.seo.description')} />
+	<meta name="twitter:card" content="summary" />
 </svelte:head>
 
 <!-- <div class="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6"> -->

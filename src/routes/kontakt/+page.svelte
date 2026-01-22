@@ -43,7 +43,11 @@
 </script>
 
 <svelte:head>
-	<title>{$t('contact.title')} - {$t('brand.name')}</title>
+	<title>{$t('contact.seo.title')}</title>
+	<meta name="description" content={$t('contact.seo.description')} />
+	<meta property="og:title" content={$t('contact.seo.title')} />
+	<meta property="og:description" content={$t('contact.seo.description')} />
+	<meta name="twitter:card" content="summary" />
 </svelte:head>
 
 <div class="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12">

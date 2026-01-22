@@ -190,10 +190,24 @@
 			},
 		};
 	const currentContent = $derived(content[activeTab]);
+	const seo = $derived.by(() => {
+		const isWinter = seasonFromUrl === 'winter';
+
+		return {
+			titleKey: isWinter ? 'experiences.seo.winter.title' : 'experiences.seo.summer.title',
+			descriptionKey: isWinter
+				? 'experiences.seo.winter.description'
+				: 'experiences.seo.summer.description',
+		};
+	});
 </script>
 
 <svelte:head>
-	<title>{$t('experiences.title')} - {$t('brand.name')}</title>
+	<title>{$t(seo.titleKey)}</title>
+	<meta name="description" content={$t(seo.descriptionKey)} />
+	<meta property="og:title" content={$t(seo.titleKey)} />
+	<meta property="og:description" content={$t(seo.descriptionKey)} />
+	<meta name="twitter:card" content="summary" />
 </svelte:head>
 
 <!-- ERLEBNISSE PAGE (Tailwind) -->

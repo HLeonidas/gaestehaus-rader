@@ -1,5 +1,13 @@
+<script lang="ts">
+	import { t } from '$lib/i18n';
+</script>
+
 <svelte:head>
-	<title>AGB – Gästehaus Rader</title>
+	<title>{$t('terms.seo.title')}</title>
+	<meta name="description" content={$t('terms.seo.description')} />
+	<meta property="og:title" content={$t('terms.seo.title')} />
+	<meta property="og:description" content={$t('terms.seo.description')} />
+	<meta name="twitter:card" content="summary" />
 </svelte:head>
 
 <div class="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12">

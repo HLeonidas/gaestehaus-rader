@@ -221,6 +221,12 @@ const translations: Record<Lang, Record<string, string>> = {
 		'badge.popular': 'Beliebt',
 		'badge.exclusive': 'Exklusiv',
 		'experiences.title': 'Erlebnisse rund um das Gästehaus',
+		'experiences.seo.summer.title': 'Sommer-Erlebnisse im Gitschtal – Gästehaus Rader',
+		'experiences.seo.summer.description':
+			'Wandern, Seen, Mountainbiken und Bergbahnen rund um Weißbriach – Sommerurlaub beim Gästehaus Rader.',
+		'experiences.seo.winter.title': 'Winter-Erlebnisse im Gitschtal – Gästehaus Rader',
+		'experiences.seo.winter.description':
+			'Skifahren, Langlaufen, Eislaufen und Winterwandern rund um Weißbriach im Gitschtal.',
 		'experiences.body':
 			'Vom Skitag auf der Nassfeld-Region bis zur Sommerfrische am Weißensee - hier beginnt der Urlaub vor der Haustür.',
 		'experiences.tabs.summer': 'Sommer',
@@ -534,6 +540,9 @@ const translations: Record<Lang, Record<string, string>> = {
 			'Alle Texte, Logos und eigenen Fotografien unterliegen dem Urheberrecht von Gästehaus Rader.',
 		'credits.updated': 'Stand: 15.01.2026',
 		'imprint.title': 'Impressum',
+		'imprint.seo.title': 'Impressum Gästehaus Rader',
+		'imprint.seo.description':
+			'Rechtliche Angaben und Kontaktinformationen zum Gästehaus Rader in Weißbriach.',
 		'imprint.subtitle': 'Angaben gemäß § 5 ECG, § 14 UGB und Offenlegung gemäß § 25 MedienG.',
 		'imprint.company.title': 'Unternehmensangaben',
 		'imprint.company.name': 'Familie Herold-Hueber',
@@ -576,6 +585,9 @@ const translations: Record<Lang, Record<string, string>> = {
 			'Konzeption, Design und technische Umsetzung dieser Website.',
 		'accessibility.kicker': 'Barrierefreiheit',
 		'accessibility.title': 'Erklärung zur Barrierefreiheit',
+		'accessibility.seo.title': 'Barrierefreiheit – Gästehaus Rader',
+		'accessibility.seo.description':
+			'Erklärung zur Barrierefreiheit und Hinweise zum Feedback für die Website des Gästehauses.',
 		'accessibility.intro':
 			'Wir möchten diese Website für alle Menschen zugänglich gestalten. Wir orientieren uns an den Anforderungen der EU-Richtlinie zur Barrierefreiheit sowie an den WCAG 2.1 (Konformitätsstufe AA).',
 		'accessibility.status.title': 'Stand der Vereinbarkeit',
@@ -598,6 +610,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'accessibility.created.title': 'Erstellung dieser Erklärung',
 		'accessibility.created.body': 'Diese Erklärung wurde am 16. Januar 2026 erstellt.',
 		'about.title': 'Über Gästehaus Rader',
+		'about.seo.title': 'Über Gästehaus Rader – Ihre Gastgeber in Weißbriach',
+		'about.seo.description':
+			'Lernen Sie die Familie Herold-Hueber kennen und erfahren Sie mehr über unser Gästehaus im Gitschtal.',
 		'about.body':
 			'Hier erzählen wir die Geschichte Ihres Hauses, Ihre Werte und was den Aufenthalt besonders macht.',
 		'about.kicker': 'Herzlich Willkommen',
@@ -623,6 +638,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'booking.body':
 			'Derzeit führt die Buchung zum externen Partner. Später kann hier ein eigenes System integriert werden.',
 		'contact.title': 'Kontakt',
+		'contact.seo.title': 'Kontakt Gästehaus Rader – Anreise & Direktkontakt',
+		'contact.seo.description':
+			'Adresse in Weißbriach, Telefon, E-Mail und Anreiseinfos für Ihren Urlaub im Gitschtal.',
 		'contact.body':
 			'Kontaktformular, Lageplan, Anreiseinfos und direkte Kontaktmöglichkeiten.',
 		'contact.headingPrefix': 'Kontaktieren',
@@ -659,6 +677,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'contact.arrival.title': 'Anreise',
 		'contact.arrival.body': 'Details zu Anfahrt und Check-in folgen.',
 		'faq.title': 'Häufige Fragen',
+		'faq.seo.title': 'FAQ Gästehaus Rader – Häufige Fragen zum Aufenthalt',
+		'faq.seo.description':
+			'Antworten zu Check-in, Parkplatz, WLAN, Haustieren, Bezahlung und GästeCard Basic.',
 		'faq.subtitle': 'Antworten auf die wichtigsten Fragen rund um Ihren Aufenthalt.',
 		'faq.q1': 'Wie sind die Check-in und Check-out Zeiten?',
 		'faq.a1': 'Check-in ab 14:00 Uhr, Check-out bis 10:00 Uhr. Früher oder später nach Absprache.',
@@ -699,6 +720,12 @@ const translations: Record<Lang, Record<string, string>> = {
 		'faq.guestcard.q6': 'Was passiert bei Missbrauch der GästeCard Basic?',
 		'faq.guestcard.a6':
 			'Bei Missbrauch oder Verdacht kann die Stadtgemeinde Hermagor die Card ersatzlos einziehen bzw. sofort sperren. Die Weitergabe an Dritte ist nicht gestattet und kann strafrechtliche Konsequenzen nach sich ziehen. Auf Verlangen ist ein Lichtbildausweis vorzuzeigen.',
+		'privacy.seo.title': 'Datenschutz Gästehaus Rader',
+		'privacy.seo.description':
+			'Informationen zur Verarbeitung personenbezogener Daten, Analytics und eingebundenen Diensten.',
+		'terms.seo.title': 'AGB Gästehaus Rader',
+		'terms.seo.description':
+			'Allgemeine Geschäftsbedingungen für Buchungen und Aufenthalte im Gästehaus Rader.',
 		'error.404.title': 'Seite nicht gefunden',
 		'error.404.body': 'Diese Seite existiert leider nicht (mehr). Bitte überprüfen Sie die URL oder kehren Sie zur Startseite zurück.',
 		'error.404.cta': 'Zur Startseite',
@@ -912,6 +939,12 @@ const translations: Record<Lang, Record<string, string>> = {
 		'badge.popular': 'Popular',
 		'badge.exclusive': 'Exclusive',
 		'experiences.title': 'Experiences nearby',
+		'experiences.seo.summer.title': 'Summer experiences in the Gitschtal – Guesthouse Rader',
+		'experiences.seo.summer.description':
+			'Hiking, lakes, mountain biking, and lifts around Weissbriach for your summer holiday.',
+		'experiences.seo.winter.title': 'Winter experiences in the Gitschtal – Guesthouse Rader',
+		'experiences.seo.winter.description':
+			'Skiing, cross-country trails, ice skating, and winter walks around Weissbriach.',
 		'experiences.body':
 			'From ski days in Nassfeld to summer escapes at Weißensee - your holiday starts right outside.',
 		'experiences.tabs.summer': 'Summer',
@@ -1218,6 +1251,9 @@ const translations: Record<Lang, Record<string, string>> = {
 			'All texts, logos, and original photographs are subject to the copyright of Gästehaus Rader.',
 		'credits.updated': 'Updated: 2026-01-15',
 		'imprint.title': 'Imprint',
+		'imprint.seo.title': 'Imprint – Guesthouse Rader',
+		'imprint.seo.description':
+			'Legal information and contact details for Guesthouse Rader in Weissbriach.',
 		'imprint.subtitle': 'Information according to § 5 ECG, § 14 UGB and disclosure according to § 25 MedienG.',
 		'imprint.company.title': 'Company details',
 		'imprint.company.name': 'Herold-Hueber family',
@@ -1259,6 +1295,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'imprint.webdesign.body': 'Concept, design, and technical implementation of this website.',
 		'accessibility.kicker': 'Accessibility',
 		'accessibility.title': 'Accessibility statement',
+		'accessibility.seo.title': 'Accessibility statement – Guesthouse Rader',
+		'accessibility.seo.description':
+			'Accessibility statement and feedback guidance for the Guesthouse Rader website.',
 		'accessibility.intro':
 			'We want this website to be accessible to everyone. We follow the requirements of EU accessibility law and the WCAG 2.1 guidelines (conformance level AA).',
 		'accessibility.status.title': 'Status of compliance',
@@ -1281,6 +1320,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'accessibility.created.title': 'Statement creation',
 		'accessibility.created.body': 'This statement was created on January 16, 2026.',
 		'about.title': 'About Gästehaus Rader',
+		'about.seo.title': 'About Guesthouse Rader – your hosts in Weissbriach',
+		'about.seo.description':
+			'Meet the Herold-Hueber family and learn more about our guesthouse in the Gitschtal.',
 		'about.body':
 			'Here we share the story of your home, your values, and what makes each stay special.',
 		'about.kicker': 'A warm welcome',
@@ -1306,6 +1348,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'booking.body':
 			'Booking currently redirects to our external partner. Later, this can be upgraded to a full in-house system.',
 		'contact.title': 'Contact',
+		'contact.seo.title': 'Contact Guesthouse Rader – address, phone & email',
+		'contact.seo.description':
+			'Get in touch for stays in Weissbriach with address, phone numbers, email, and travel info.',
 		'contact.body':
 			'Contact form, map, travel information, and direct ways to reach us.',
 		'contact.headingPrefix': 'Get in',
@@ -1342,6 +1387,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'contact.arrival.title': 'Arrival',
 		'contact.arrival.body': 'Directions and check-in details will follow.',
 		'faq.title': 'Frequently asked questions',
+		'faq.seo.title': 'FAQ Guesthouse Rader – questions about your stay',
+		'faq.seo.description':
+			'Answers about check-in, parking, Wi-Fi, pets, payment, and the Guest Card Basic.',
 		'faq.subtitle': 'Quick answers to the most common questions about your stay.',
 		'faq.q1': 'What are the check-in and check-out times?',
 		'faq.a1': 'Check-in from 2:00 pm and check-out by 10:00 am. Earlier or later by arrangement.',
@@ -1382,6 +1430,12 @@ const translations: Record<Lang, Record<string, string>> = {
 		'faq.guestcard.q6': 'What happens in case of misuse of the Guest Card Basic?',
 		'faq.guestcard.a6':
 			'In case of misuse or suspicion, the city of Hermagor can confiscate or immediately block the card. Passing it on to third parties is prohibited and may have legal consequences. A photo ID must be shown on request.',
+		'privacy.seo.title': 'Privacy policy – Guesthouse Rader',
+		'privacy.seo.description':
+			'Details on personal data processing, analytics, and embedded services on our website.',
+		'terms.seo.title': 'Terms & conditions – Guesthouse Rader',
+		'terms.seo.description':
+			'General terms and conditions for bookings and stays at Guesthouse Rader.',
 		'error.404.title': 'Page not found',
 		'error.404.body': 'This page no longer exists. Please check the URL or return to the homepage.',
 		'error.404.cta': 'Back to home',
