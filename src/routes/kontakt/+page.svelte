@@ -114,7 +114,7 @@
 					></iframe>
 
 					<!-- small control to disable again (optional) -->
-					<div class="absolute left-4 top-4">
+					<!-- <div class="absolute left-4 top-4">
 						<button
 							type="button"
 							class="rounded-full bg-white/90 px-3 py-1 text-[11px] font-semibold text-slate-800 shadow-sm ring-1 ring-slate-200 backdrop-blur hover:bg-white"
@@ -122,7 +122,7 @@
 						>
 							{$t('contact.map.close')}
 						</button>
-					</div>
+					</div> -->
 				{:else}
 					<!-- Placeholder / consent card -->
 					<div class="grid h-[320px] place-items-center px-4 py-6 sm:h-[360px]">
