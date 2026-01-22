@@ -1,0 +1,1 @@
+import{x as c,v as _,w as o,E as d,y,H as E,z as T,A as b,B as v,C as f}from"./CusJulOc.js";function g(t,i,u=!1){_&&o();var r=new v(t),h=u?d:0;function n(a,s){if(_){const l=y(t)===E;if(a===l){var e=T();b(e),r.anchor=e,f(!1),r.ensure(a,s),f(!0);return}}r.ensure(a,s)}c(()=>{var a=!1;i((s,e=!0)=>{a=!0,n(e,s)}),a||n(!1,null)},h)}export{g as i};
