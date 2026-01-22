@@ -72,12 +72,50 @@
 	const amenityFeatures = $derived.by(() => {
 		const amenities = Array.from(new Set(rooms.flatMap((room) => room.amenities ?? [])));
 
-		return amenities.map((amenity) => ({
+		const baseFeatures = amenities.map((amenity) => ({
 			'@type': 'LocationFeatureSpecification',
 			name: $t(`amenity.${amenity}`),
 			value: true,
 		}));
+		const extraFeatures = [
+			{
+				'@type': 'LocationFeatureSpecification',
+				name: 'High-speed Wi-Fi (fiber)',
+				value: true,
+			},
+			{
+				'@type': 'LocationFeatureSpecification',
+				name: 'Parking',
+				value: true,
+			},
+			{
+				'@type': 'LocationFeatureSpecification',
+				name: 'Ski room',
+				value: true,
+			},
+		];
+
+		return [...baseFeatures, ...extraFeatures];
 	});
+	const containsPlaces = $derived.by(() =>
+		rooms.map((room) => ({
+			'@type': 'VacationRental',
+			name: room.title,
+			description: room.subtitle[$lang],
+			url: new URL(`${resolve('/unterkuenfte-preise')}/${room.slug}`, siteUrl).toString(),
+			image: [new URL(withAsset(room.images.main), siteUrl).toString()],
+			amenityFeature: (room.amenities ?? []).map((amenity) => ({
+				'@type': 'LocationFeatureSpecification',
+				name: $t(`amenity.${amenity}`),
+				value: true,
+			})),
+			floorSize: {
+				'@type': 'QuantitativeValue',
+				value: Number.parseFloat(room.attributes.size.replace(',', '.')),
+				unitCode: 'MTK',
+			},
+		}))
+	);
 	const homeJsonLd = $derived.by(() =>
 		JSON.stringify({
 			'@context': 'https://schema.org',
@@ -104,6 +142,7 @@
 			sameAs: ['https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9', 'https://www.booking.com/Share-deqca7p'],
 			hasMap: 'https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9',
 			amenityFeature: amenityFeatures,
+			containsPlace: containsPlaces,
 			telephone: ['+43 676 6246826', '+43 4286 222'],
 			email: 'info@rader-gitschtal.at',
 		})

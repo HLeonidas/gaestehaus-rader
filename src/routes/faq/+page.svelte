@@ -11,6 +11,9 @@
 		{ question: 'faq.q6', answer: 'faq.a6', id: 'gaestecard' },
 		{ question: 'faq.q7', answer: 'faq.a7' },
 		{ question: 'faq.q8', answer: 'faq.a8' },
+		{ question: 'faq.q9', answer: 'faq.a9' },
+		{ question: 'faq.q10', answer: 'faq.a10' },
+		{ question: 'faq.q11', answer: 'faq.a11' },
 	];
 </script>
 

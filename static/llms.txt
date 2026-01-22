@@ -1,27 +1,53 @@
 Gästehaus Rader – information for AI agents
 
 Summary:
-Family-run guesthouse offering holiday apartments in Weißbriach (Gitschtal, Carinthia, Austria). Quiet alpine location, summer and winter accommodation. Static website with room prices, amenities, and online booking via booking provider.
+Family-run guesthouse offering 3 holiday apartments in Weißbriach (Gitschtal, Carinthia, Austria). Quiet alpine location with summer and winter stays. Static website with room prices, amenities, and online booking via an external booking provider.
+
+Key facts:
+- Business type: LodgingBusiness / Guesthouse / Holiday apartments
+- Location: Weißbriach 92, 9622 Weißbriach, Austria
+- Languages: German (de), English (en)
+- Phone: +43 676 6246826, +43 4286 222
+- Email: info@rader-gitschtal.at
+
+Amenities (selection):
+- Free Wi‑Fi in all apartments
+- Private parking at the guesthouse
+- Ski room available for gear storage
+- Balconies available
+- Fully equipped kitchens
+
+Check-in / check-out:
+- Check-in from 14:00
+- Check-out until 10:00
+
+Policies:
+- Prices shown in EUR; seasonal pricing may apply
+- Pets are not allowed
+- Smoking is not permitted inside apartments (ashtrays on balconies)
+
+Guest card:
+- Guests receive the regional GästeCard Basic on arrival
+
+Booking:
+- Online booking is available via an external booking provider
+- Booking page: https://www.rader-gitschtal.at/buchen/
 
 Key pages:
 - Home: https://www.rader-gitschtal.at/
 - Apartments & prices: https://www.rader-gitschtal.at/unterkuenfte-preise/
-- Booking: https://www.rader-gitschtal.at/buchen/
-- Contact: https://www.rader-gitschtal.at/kontakt/
+- Apartment detail pages: https://www.rader-gitschtal.at/unterkuenfte-preise/{slug}
+- Experiences: https://www.rader-gitschtal.at/erlebnisse/
 - About us: https://www.rader-gitschtal.at/ueber-uns/
+- Contact: https://www.rader-gitschtal.at/kontakt/
 - FAQ: https://www.rader-gitschtal.at/faq/
+- Accessibility: https://www.rader-gitschtal.at/barrierefreiheit/
+- Imprint: https://www.rader-gitschtal.at/impressum/
+- Privacy: https://www.rader-gitschtal.at/datenschutz/
 
-Business type:
-- LodgingBusiness / Guesthouse / Holiday apartments
+Data sources:
+- Prices, amenities, and apartment details: /unterkuenfte-preise/
+- Contact and address: /kontakt/
+- Policies and FAQs: /faq/
 
-Policies:
-- Prices shown in EUR. Seasonal pricing may apply.
-- Pets are not allowed.
-
-Contact:
-- Email: info@rader-gitschtal.at
-- Phone: +43 676 6246826, +43 4286 222
-- Address: Weißbriach 92, 9622 Weißbriach, Austria
-
-Languages:
-- German (de), English (en)
+Last updated: 2026-01-22

@@ -31,12 +31,14 @@ const translations: Record<Lang, Record<string, string>> = {
 		'accessibility.skip': 'Zum Inhalt springen',
 		'brand.name': 'Gästehaus Rader',
 		'hero.kicker': 'Alpine Ruhe · Kärnten',
-		'hero.title': 'Ferienwohnungen in Weißbriach im Gitschtal',
+		'hero.title': 'Gästehaus Rader – Ferienwohnungen in Weißbriach im Gitschtal',
 		'hero.subtitle': 'Erleben Sie alpine Gelassenheit und kärntner Gastfreundschaft in ihrer schönsten Form.',
-		'seo.default.title': 'Ferienwohnungen in Weißbriach / Gitschtal | Gästehaus Rader',
+		'seo.default.title':
+			'Ferienwohnungen in Weißbriach – nahe Weißensee & Nassfeld | Gästehaus Rader',
 		'seo.default.description':
 			'Alpine Ferienwohnungen in Weißbriach im Gitschtal. Ruhige Lage, persönliche Gastgeber und kurze Wege zu Natur, Seen und Skigebieten.',
-		'home.seo.title': 'Ferienwohnungen in Weißbriach / Gitschtal | Gästehaus Rader',
+		'home.seo.title':
+			'Ferienwohnungen in Weißbriach – nahe Weißensee & Nassfeld | Gästehaus Rader',
 		'home.seo.description':
 			'Gästehaus Rader – gemütliche Ferienwohnungen in Weißbriach im Gitschtal, Kärnten. Sommer- und Winterurlaub in den Alpen. Jetzt Unterkunft buchen!',
 		'hero.cta.primary': 'Appartements entdecken',
@@ -710,6 +712,12 @@ const translations: Record<Lang, Record<string, string>> = {
 			'Je nach Saison gibt es kostenlose oder vergünstigte Leistungen, z. B. Bergbahnen, Badeeintritte, Busverbindungen, geführte Touren oder Museen. Die aktuellen Details erhalten Sie bei uns vor Ort.',
 		'faq.q8': 'Ist Rauchen erlaubt?',
 		'faq.a8': 'In den Appartements ist Rauchen nicht gestattet. Auf den Balkonen stehen Aschenbecher bereit.',
+		'faq.q9': 'Gibt es einen Skikeller?',
+		'faq.a9': 'Ja, ein Skikeller zum Abstellen der Ausrüstung ist vorhanden.',
+		'faq.q10': 'Ist das Gästehaus Ski4Free-Partner?',
+		'faq.a10': 'Nein, Ski4Free ist aktuell nicht verfügbar.',
+		'faq.q11': 'Wie viele Ferienwohnungen gibt es?',
+		'faq.a11': 'Wir bieten drei Ferienwohnungen.',
 		'faq.guestcard.kicker': 'GästeCard Basic',
 		'faq.guestcard.title': 'GästeCard Basic im Überblick',
 		'faq.guestcard.subtitle':
@@ -760,7 +768,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'accessibility.skip': 'Skip to content',
 		'brand.name': 'Gästehaus Rader',
 		'hero.kicker': 'Alpine calm · Carinthia',
-		'hero.title': 'Holiday apartments in Weissbriach / Gitschtal',
+		'hero.title': 'Gästehaus Rader – Holiday apartments in Weissbriach / Gitschtal',
 		'hero.subtitle':
 			'Experience alpine serenity and Carinthian hospitality at its finest.',
 		'seo.default.title': 'Holiday apartments in Weissbriach / Gitschtal | Guesthouse Rader',
@@ -1432,6 +1440,12 @@ const translations: Record<Lang, Record<string, string>> = {
 			'Benefits vary by season, but typically include free or discounted services such as cable cars, lake access, public transport, guided tours, or museums. We can share the current details on site.',
 		'faq.q8': 'Is smoking allowed?',
 		'faq.a8': 'Smoking is not permitted inside the apartments. Ashtrays are available on the balconies.',
+		'faq.q9': 'Is there a ski room?',
+		'faq.a9': 'Yes. A ski room is available for storing your gear.',
+		'faq.q10': 'Is the guesthouse a Ski4Free partner?',
+		'faq.a10': 'No, Ski4Free is currently not available.',
+		'faq.q11': 'How many holiday apartments are there?',
+		'faq.a11': 'We offer three holiday apartments.',
 		'faq.guestcard.kicker': 'Guest Card Basic',
 		'faq.guestcard.title': 'Guest Card Basic at a glance',
 		'faq.guestcard.subtitle':
