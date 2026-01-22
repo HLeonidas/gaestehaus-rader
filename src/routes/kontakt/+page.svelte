@@ -2,6 +2,7 @@
 	import { t } from '$lib/i18n';
 	import { trackEvent } from '$lib/analytics/plausible';
 	import { Check, Copy, Mail, Phone, PhoneCall } from 'lucide-svelte';
+	import SeoHead from '$lib/components/SeoHead.svelte';
 
 	let ibanCopied = false;
 	let bicCopied = false;
@@ -42,13 +43,7 @@
 	};
 </script>
 
-<svelte:head>
-	<title>{$t('contact.seo.title')}</title>
-	<meta name="description" content={$t('contact.seo.description')} />
-	<meta property="og:title" content={$t('contact.seo.title')} />
-	<meta property="og:description" content={$t('contact.seo.description')} />
-	<meta name="twitter:card" content="summary" />
-</svelte:head>
+<SeoHead titleKey="contact.seo.title" descriptionKey="contact.seo.description" />
 
 <div class="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
 	<section class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10 lg:p-12">

@@ -33,6 +33,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'hero.kicker': 'Alpine Ruhe · Kärnten',
 		'hero.title': 'Gästehaus Rader – Ferienwohnungen in Weißbriach im Gitschtal',
 		'hero.subtitle': 'Erleben Sie alpine Gelassenheit und kärntner Gastfreundschaft in ihrer schönsten Form.',
+		'seo.default.title': 'Gästehaus Rader – Ferienwohnungen in Weißbriach',
+		'seo.default.description':
+			'Alpine Ferienwohnungen in Weißbriach im Gitschtal. Ruhige Lage, persönliche Gastgeber und kurze Wege zu Natur, Seen und Skigebieten.',
 		'home.seo.title': 'Gästehaus Rader – Ferienwohnungen in Weißbriach im Gitschtal',
 		'home.seo.description':
 			'Gästehaus Rader – gemütliche Ferienwohnungen in Weißbriach im Gitschtal, Kärnten. Sommer- und Winterurlaub in den Alpen. Jetzt Unterkunft buchen!',
@@ -72,6 +75,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'rooms.page.title': 'Unsere Appartements',
 		'rooms.page.subtitle':
 			'Erleben Sie alpinen Komfort und moderne Ausstattung im Herzen der österreichischen Alpen.',
+		'rooms.seo.title': 'Unterkünfte & Preise – Gästehaus Rader',
+		'rooms.seo.description':
+			'Vergleichen Sie unsere Ferienwohnungen in Weißbriach: Ausstattung, Größen und Preise auf einen Blick.',
 		'rooms.page.breadcrumb': 'Home / Appartements',
 		'rooms.page.from': 'ab Preis',
 		'rooms.page.cta': 'Buchen',
@@ -527,6 +533,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'footer.credits': 'Bild- & Lizenznachweise',
 		'footer.faq': 'FAQ',
 		'credits.title': 'Bild- & Lizenznachweise',
+		'credits.seo.title': 'Bild- & Lizenznachweise – Gästehaus Rader',
+		'credits.seo.description':
+			'Hinweise zu Bildrechten, Icons, Kartenmaterial und verwendeten Schriftarten.',
 		'credits.intro':
 			'Sofern nicht anders angegeben, stammen alle auf dieser Website verwendeten Fotos, Grafiken und Inhalte von Gästehaus Rader.',
 		'credits.icons.title': 'Icons',
@@ -637,6 +646,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'booking.title': 'Verfügbarkeit & Buchung',
 		'booking.body':
 			'Derzeit führt die Buchung zum externen Partner. Später kann hier ein eigenes System integriert werden.',
+		'booking.seo.title': 'Buchen – Gästehaus Rader',
+		'booking.seo.description':
+			'Verfügbarkeit prüfen und direkt buchen – schnell und unkompliziert.',
 		'contact.title': 'Kontakt',
 		'contact.seo.title': 'Kontakt Gästehaus Rader – Anreise & Direktkontakt',
 		'contact.seo.description':
@@ -751,6 +763,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'hero.title': 'Guesthouse Rader – Holiday apartments in Weissbriach, Gitschtal',
 		'hero.subtitle':
 			'Experience alpine serenity and Carinthian hospitality at its finest.',
+		'seo.default.title': 'Guesthouse Rader – Holiday apartments in Weissbriach',
+		'seo.default.description':
+			'Alpine holiday apartments in Weissbriach, Gitschtal. Quiet setting, personal hosts, and quick access to nature, lakes, and ski areas.',
 		'home.seo.title': 'Guesthouse Rader – Holiday apartments in Weissbriach, Gitschtal',
 		'home.seo.description':
 			'Guesthouse Rader – cozy holiday apartments in Weissbriach, Gitschtal, Carinthia. Summer and winter breaks in the Alps. Book your stay now!',
@@ -790,6 +805,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'rooms.page.title': 'Our apartments',
 		'rooms.page.subtitle':
 			'Experience alpine comfort and modern design in the heart of the Austrian Alps.',
+		'rooms.seo.title': 'Apartments & prices – Guesthouse Rader',
+		'rooms.seo.description':
+			'Compare our holiday apartments in Weissbriach with amenities, sizes, and pricing at a glance.',
 		'rooms.page.breadcrumb': 'Home / Apartments',
 		'rooms.page.from': 'from price',
 		'rooms.page.cta': 'Book',
@@ -1238,6 +1256,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'footer.credits': 'Image & license credits',
 		'footer.faq': 'FAQ',
 		'credits.title': 'Image & license credits',
+		'credits.seo.title': 'Image & license credits – Guesthouse Rader',
+		'credits.seo.description':
+			'Notes about image rights, icons, map data, and fonts used on this website.',
 		'credits.intro':
 			'Unless otherwise stated, all photos, graphics, and content used on this website are provided by Gästehaus Rader.',
 		'credits.icons.title': 'Icons',
@@ -1347,6 +1368,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'booking.title': 'Availability & Booking',
 		'booking.body':
 			'Booking currently redirects to our external partner. Later, this can be upgraded to a full in-house system.',
+		'booking.seo.title': 'Book now – Guesthouse Rader',
+		'booking.seo.description':
+			'Check availability and book directly — fast and straightforward.',
 		'contact.title': 'Contact',
 		'contact.seo.title': 'Contact Guesthouse Rader – address, phone & email',
 		'contact.seo.description':

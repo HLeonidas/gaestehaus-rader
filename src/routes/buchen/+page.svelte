@@ -3,6 +3,7 @@
 	import { browser } from '$app/environment';
 	import { lang, t } from '$lib/i18n';
 	import { Ticket } from 'lucide-svelte';
+	import SeoHead from '$lib/components/SeoHead.svelte';
 
 	const ACCOUNT_ID = 'fa73de04-c8e1-4b05-b4a8-5697e2d52a1c';
 	const SCRIPT_ID = 'deskline-script';
@@ -62,6 +63,8 @@
 		injectDeskline();
 	});
 </script>
+
+<SeoHead titleKey="booking.seo.title" descriptionKey="booking.seo.description" />
 
 <div class="mx-auto w-full max-w-4xl px-4 pt-8 sm:px-6">
 	<div class="rounded-2xl border border-brand/20 bg-brand/5 p-4 sm:p-5">

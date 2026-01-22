@@ -3,6 +3,8 @@
 	import { asset, resolve } from '$app/paths';
 	import { lang, t } from '$lib/i18n';
 	import { trackEvent } from '$lib/analytics/plausible';
+	import SeoHead from '$lib/components/SeoHead.svelte';
+	import { SITE_ORIGIN } from '$lib/seo';
 	import { onMount } from 'svelte';
 	import {
 		ArrowLeft,
@@ -29,7 +31,7 @@
 	const accommodation = $derived.by(() => data.accommodation);
 
 	const withAsset = (path: string) => asset(path);
-	const siteUrl = 'https://www.rader-gitschtal.at';
+	const siteUrl = SITE_ORIGIN;
 
 	const amenityIcons = {
 		wifi: Wifi,
@@ -58,6 +60,8 @@
 	const ogImage = $derived.by(() =>
 		new URL(withAsset(accommodation.images.main), siteUrl).toString()
 	);
+	const seoTitle = $derived.by(() => `${accommodation.title} – ${$t('rooms.page.title')}`);
+	const seoDescription = $derived.by(() => accommodation.subtitle[$lang]);
 	const amenityLabels = $derived.by(() =>
 		accommodation.amenities.map((amenity) => $t(`amenity.${amenity}`))
 	);
@@ -176,15 +180,9 @@
 	};
 </script>
 
+<SeoHead title={seoTitle} description={seoDescription} image={accommodation.images.main} />
+
 <svelte:head>
-	<title>{accommodation.title} - {$t('brand.name')}</title>
-	<meta name="description" content={accommodation.subtitle[$lang]} />
-	<meta property="og:title" content={accommodation.title} />
-	<meta property="og:description" content={accommodation.subtitle[$lang]} />
-	<meta property="og:type" content="product" />
-	<meta property="og:url" content={roomUrl} />
-	<meta property="og:image" content={ogImage} />
-	<meta name="twitter:card" content="summary_large_image" />
 	<!-- eslint-disable-next-line -->
 	{@html `<script type="application/ld+json">${roomJsonLd}</script>`}
 </svelte:head>

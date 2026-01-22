@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { t } from '$lib/i18n';
+	import SeoHead from '$lib/components/SeoHead.svelte';
 
 	const faqItems = [
 		{ question: 'faq.q1', answer: 'faq.a1' },
@@ -13,13 +14,7 @@
 	];
 </script>
 
-<svelte:head>
-	<title>{$t('faq.seo.title')}</title>
-	<meta name="description" content={$t('faq.seo.description')} />
-	<meta property="og:title" content={$t('faq.seo.title')} />
-	<meta property="og:description" content={$t('faq.seo.description')} />
-	<meta name="twitter:card" content="summary" />
-</svelte:head>
+<SeoHead titleKey="faq.seo.title" descriptionKey="faq.seo.description" />
 
 <div class="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
 	<section class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10 lg:p-12">

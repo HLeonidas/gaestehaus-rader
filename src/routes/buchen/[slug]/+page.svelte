@@ -1,11 +1,14 @@
 <script lang="ts">
 	import { asset, resolve } from '$app/paths';
 	import { onMount } from 'svelte';
-	import { lang } from '$lib/i18n';
+	import { lang, t } from '$lib/i18n';
+	import SeoHead from '$lib/components/SeoHead.svelte';
 	import { ArrowRight, CalendarDays, Star, Users, Wifi, Utensils, Mountain } from 'lucide-svelte';
 
 	let { data } = $props();
 	const accommodation = $derived.by(() => data.accommodation);
+	const seoTitle = $derived.by(() => `${accommodation.title} – ${$t('booking.title')}`);
+	const seoDescription = $derived.by(() => accommodation.subtitle?.[$lang] ?? $t('booking.seo.description'));
 
 	const withAsset = (path: string) => asset(path);
 
@@ -62,9 +65,7 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{accommodation.title} – Buchung | Gästehaus Rader</title>
-</svelte:head>
+<SeoHead title={seoTitle} description={seoDescription} image={accommodation.images.main} />
 
 <main class="bg-[#fbfaf7]">
 	<div class="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 lg:px-8">

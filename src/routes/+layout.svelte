@@ -19,8 +19,6 @@
 
 	const withAsset = (path: string) => asset(path);
 	const bookingHref = resolve('/buchen');
-	const siteUrl = 'https://www.rader-gitschtal.at';
-	const canonicalUrl = $derived.by(() => new URL(page.url.pathname, siteUrl).toString());
 
 	const normalizePath = (path: string) => (path === '/' ? '/' : path.replace(/\/+$/, ''));
 	const isActive = (href: string) => {
@@ -47,8 +45,6 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
-	<link rel="canonical" href={canonicalUrl} />
-	<meta property="og:site_name" content="Gästehaus Rader" />
 </svelte:head>
 
 <!-- No more isHome theme switching -->

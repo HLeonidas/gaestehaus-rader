@@ -5,6 +5,8 @@
 	import { browser } from '$app/environment';
 	import { accommodations } from '$lib/data/accommodations';
 	import { trackEvent } from '$lib/analytics/plausible';
+	import SeoHead from '$lib/components/SeoHead.svelte';
+	import { SITE_ORIGIN } from '$lib/seo';
 	import { onMount } from 'svelte';
 	import {
 		Mountain,
@@ -52,15 +54,15 @@
 
 	const withAsset = (path: string) => asset(path);
 	const currentMonth = new Date().getMonth();
-	const heroImage =
+	const heroImagePath =
 		currentMonth >= 4 && currentMonth <= 8
-			? withAsset('/images/other/balkon-ausblick.jpg')
-			: withAsset('/images/other/winter-balkon_ausblick-1.jpg');
+			? '/images/other/balkon-ausblick.jpg'
+			: '/images/other/winter-balkon_ausblick-1.jpg';
+	const heroImage = withAsset(heroImagePath);
 
 	const rooms = accommodations;
 	const accommodationsBase = resolve('/unterkuenfte-preise');
-	const siteUrl = 'https://www.rader-gitschtal.at';
-	const ogImage = $derived.by(() => new URL(heroImage, siteUrl).toString());
+	const siteUrl = SITE_ORIGIN;
 	const lodgingImages = [
 		new URL(withAsset('/images/house/haus-sommer.jpg'), siteUrl).toString(),
 		new URL(withAsset('/images/house/winter-balkon_ausblick-1.jpg'), siteUrl).toString(),
@@ -168,15 +170,13 @@
 	};
 </script>
 
+<SeoHead
+	titleKey="home.seo.title"
+	descriptionKey="home.seo.description"
+	image={heroImagePath}
+/>
+
 <svelte:head>
-	<title>{$t('home.seo.title')}</title>
-	<meta name="description" content={$t('home.seo.description')} />
-	<meta property="og:title" content={$t('home.seo.title')} />
-	<meta property="og:description" content={$t('home.seo.description')} />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content={siteUrl} />
-	<meta property="og:image" content={ogImage} />
-	<meta name="twitter:card" content="summary_large_image" />
 	{@html `<script type="application/ld+json">${homeJsonLd}</script>`}
 </svelte:head>
 

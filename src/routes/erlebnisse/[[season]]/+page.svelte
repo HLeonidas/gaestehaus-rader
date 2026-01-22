@@ -4,6 +4,7 @@
 	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
 	import { trackEvent } from '$lib/analytics/plausible';
+	import SeoHead from '$lib/components/SeoHead.svelte';
 	import type { ComponentType } from 'svelte';
 	import {
 		ArrowRight,
@@ -202,13 +203,7 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{$t(seo.titleKey)}</title>
-	<meta name="description" content={$t(seo.descriptionKey)} />
-	<meta property="og:title" content={$t(seo.titleKey)} />
-	<meta property="og:description" content={$t(seo.descriptionKey)} />
-	<meta name="twitter:card" content="summary" />
-</svelte:head>
+<SeoHead titleKey={seo.titleKey} descriptionKey={seo.descriptionKey} image={currentContent.bg} />
 
 <!-- ERLEBNISSE PAGE (Tailwind) -->
 <!-- Requirements: Tailwind + your bg-brand/text-brand utilities available -->

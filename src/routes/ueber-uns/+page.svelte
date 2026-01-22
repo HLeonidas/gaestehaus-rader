@@ -1,17 +1,16 @@
 <script lang="ts">
 	import { t } from '$lib/i18n';
 	import { asset } from '$app/paths';
+	import SeoHead from '$lib/components/SeoHead.svelte';
 
 	const withAsset = (path: string) => asset(path);
 </script>
 
-<svelte:head>
-	<title>{$t('about.seo.title')}</title>
-	<meta name="description" content={$t('about.seo.description')} />
-	<meta property="og:title" content={$t('about.seo.title')} />
-	<meta property="og:description" content={$t('about.seo.description')} />
-	<meta name="twitter:card" content="summary" />
-</svelte:head>
+<SeoHead
+	titleKey="about.seo.title"
+	descriptionKey="about.seo.description"
+	image="/images/other/familie.jpg"
+/>
 
 <!-- <div class="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6"> -->
 <!-- ABOUT / ÜBER UNS (Tailwind) -->

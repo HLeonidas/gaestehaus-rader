@@ -1,14 +1,8 @@
 <script lang="ts">
-	import { t } from '$lib/i18n';
+	import SeoHead from '$lib/components/SeoHead.svelte';
 </script>
 
-<svelte:head>
-	<title>{$t('terms.seo.title')}</title>
-	<meta name="description" content={$t('terms.seo.description')} />
-	<meta property="og:title" content={$t('terms.seo.title')} />
-	<meta property="og:description" content={$t('terms.seo.description')} />
-	<meta name="twitter:card" content="summary" />
-</svelte:head>
+<SeoHead titleKey="terms.seo.title" descriptionKey="terms.seo.description" />
 
 <div class="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
 	<section class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10 lg:p-12">

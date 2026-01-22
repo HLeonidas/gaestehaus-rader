@@ -1,10 +1,9 @@
 <script lang="ts">
 	import { t } from '$lib/i18n';
+	import SeoHead from '$lib/components/SeoHead.svelte';
 </script>
 
-<svelte:head>
-	<title>{$t('credits.title')} - {$t('brand.name')}</title>
-</svelte:head>
+<SeoHead titleKey="credits.seo.title" descriptionKey="credits.seo.description" />
 
 <div class="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
 	<section class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10 lg:p-12">
