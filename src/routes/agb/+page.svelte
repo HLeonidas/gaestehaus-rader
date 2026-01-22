@@ -53,7 +53,8 @@
 				<h2 class="text-base font-semibold text-slate-900">3. Preise</h2>
 				<p class="mt-3">
 					Es gelten die zum Zeitpunkt der Buchung angegebenen Preise. Alle Preise verstehen sich in Euro
-					inklusive der gesetzlichen Abgaben, zuzüglich der jeweils gültigen Ortstaxe.
+					inklusive der gesetzlichen Abgaben, zuzüglich der jeweils gültigen Ortstaxe. Preise können
+					auf externen Buchungsplattformen abweichen.
 				</p>
 			</section>
 
@@ -80,6 +81,7 @@
 				<ul class="mt-2 list-inside list-disc space-y-1">
 					<li>Bis zu 14 Tage vor der Anreise: kostenlose Stornierung</li>
 					<li>Innerhalb von 14 Tagen vor der Anreise: 100 % des Gesamtpreises</li>
+					<li>Bei Nichtanreise (No-Show) ohne Stornierung: 100 % des Gesamtpreises</li>
 				</ul>
 				<p class="mt-3">Maßgeblich ist der Zeitpunkt des Einlangens der Stornierung bei Gästehaus Rader.</p>
 			</section>
