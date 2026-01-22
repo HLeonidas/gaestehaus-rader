@@ -65,6 +65,11 @@ This document explains the intended site usage and outlines legal items to imple
 - Provide fallback contact info in case the booking system is unavailable.
 - Link to legal pages in the footer on every page.
 
+## Redirects
+
+- Retired URLs are preserved via 308 redirects so old links and search results keep working.
+- Add new redirects by creating a `+page.ts` in `src/routes/<old-path>/` that throws `redirect(308, resolve('<new-path>'))` and set `export const prerender = true`.
+
 ## Open Questions (to finalize later)
 
 - Who is the booking provider and are they a controller or processor?
