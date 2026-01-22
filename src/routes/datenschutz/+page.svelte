@@ -92,9 +92,6 @@
 				<p class="mt-3">Unsere Website wird bei folgendem Hosting-Anbieter betrieben:</p>
 				<div class="mt-3 space-y-1">
 					<p class="font-semibold text-slate-800">DomainFactory GmbH</p>
-					<p>Oskar-Messter-Str. 33</p>
-					<p>85737 Ismaning</p>
-					<p>Deutschland</p>
 				</div>
 				<p class="mt-3">
 					Beim Besuch unserer Website werden durch DomainFactory technisch notwendige Daten verarbeitet,
