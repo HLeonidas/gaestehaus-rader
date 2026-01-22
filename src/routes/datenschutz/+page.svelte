@@ -71,7 +71,24 @@
 			</section>
 
 			<section>
-				<h2 class="text-base font-semibold text-slate-900">4. Hosting bei DomainFactory</h2>
+				<h2 class="text-base font-semibold text-slate-900">4. Google Search Console</h2>
+				<p class="mt-3">
+					Wir nutzen die Google Search Console, um technische Informationen zur Auffindbarkeit unserer
+					Website in der Google-Suche zu erhalten (z. B. Crawling- und Indexierungsdaten).
+				</p>
+				<p class="mt-3">
+					Google Search Console verarbeitet keine personenbezogenen Daten unserer Website-Besucher. Es
+					werden keine Cookies gesetzt, kein Opt-In benötigt und keine Tracking-Skripte auf der Website
+					eingebunden.
+				</p>
+				<p class="mt-3">
+					Zweck: Technische Analyse und Optimierung der Sichtbarkeit in Suchmaschinen<br />
+					Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse)
+				</p>
+			</section>
+
+			<section>
+				<h2 class="text-base font-semibold text-slate-900">5. Hosting bei DomainFactory</h2>
 				<p class="mt-3">Unsere Website wird bei folgendem Hosting-Anbieter betrieben:</p>
 				<div class="mt-3 space-y-1">
 					<p class="font-semibold text-slate-800">DomainFactory GmbH</p>
@@ -107,7 +124,7 @@
 			</section>
 
 			<section>
-				<h2 class="text-base font-semibold text-slate-900">5. Kontakt per E-Mail oder Telefon</h2>
+				<h2 class="text-base font-semibold text-slate-900">6. Kontakt per E-Mail oder Telefon</h2>
 				<p class="mt-3">
 					Wenn Sie per E-Mail oder telefonisch mit uns Kontakt aufnehmen, werden die von Ihnen
 					übermittelten Daten (z. B. Name, Kontaktdaten, Inhalt Ihrer Anfrage) verarbeitet, um Ihre
@@ -131,7 +148,7 @@
 			</section>
 
 			<section>
-				<h2 class="text-base font-semibold text-slate-900">6. Schriftarten (lokal gehostet)</h2>
+				<h2 class="text-base font-semibold text-slate-900">7. Schriftarten (lokal gehostet)</h2>
 
 				<p class="mt-3">
 					Unsere Website verwendet die Schriftart „Montserrat“. Diese Schriftart wird lokal auf unserem
@@ -151,7 +168,7 @@
 			</section>
 
 			<section>
-				<h2 class="text-base font-semibold text-slate-900">7. Google Maps</h2>
+				<h2 class="text-base font-semibold text-slate-900">8. Google Maps</h2>
 				<p class="mt-3">
 					Auf unserer Website ist Google Maps eingebunden, um unseren Standort darzustellen.
 				</p>
@@ -181,7 +198,7 @@
 
 			<section>
 				<h2 class="text-base font-semibold text-slate-900">
-					8. Online-Buchung über externen Buchungsanbieter (iFrame)
+					9. Online-Buchung über externen Buchungsanbieter (iFrame)
 				</h2>
 				<p class="mt-3">
 					Auf unserer Website bieten wir die Möglichkeit, unsere Appartements online zu buchen. Die
@@ -226,20 +243,20 @@
 			</section>
 
 			<section>
-				<h2 class="text-base font-semibold text-slate-900">9. Weitergabe von Daten</h2>
+				<h2 class="text-base font-semibold text-slate-900">10. Weitergabe von Daten</h2>
 				<p class="mt-3">
 					Wir geben personenbezogene Daten nicht an Dritte weiter, außer: dies ist zur Vertragserfüllung
 					erforderlich, wir sind gesetzlich dazu verpflichtet oder Sie haben eingewilligt.
 				</p>
 				<p class="mt-3">
 					Durch die Einbindung von Plausible Analytics und Google Maps k&ouml;nnen Plausible Insights
-					O&Uuml; sowie Google als Empf&auml;nger Ihrer Daten auftreten (siehe Punkte 3 und 7). Der
-					Buchungsanbieter kann als Empf&auml;nger auftreten (siehe Punkt 8).
+					O&Uuml; sowie Google als Empf&auml;nger Ihrer Daten auftreten (siehe Punkte 3 und 8). Der
+					Buchungsanbieter kann als Empf&auml;nger auftreten (siehe Punkt 9).
 				</p>
 			</section>
 
 			<section>
-				<h2 class="text-base font-semibold text-slate-900">10. Ihre Rechte</h2>
+				<h2 class="text-base font-semibold text-slate-900">11. Ihre Rechte</h2>
 				<p class="mt-3">
 					Sie haben nach der DSGVO folgende Rechte: Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16
 					DSGVO), Löschung (Art. 17 DSGVO), Einschränkung der Verarbeitung (Art. 18 DSGVO),
@@ -254,7 +271,7 @@
 			</section>
 
 			<section>
-				<h2 class="text-base font-semibold text-slate-900">11. Beschwerderecht</h2>
+				<h2 class="text-base font-semibold text-slate-900">12. Beschwerderecht</h2>
 				<p class="mt-3">
 					Wenn Sie glauben, dass die Verarbeitung Ihrer personenbezogenen Daten gegen Datenschutzrecht
 					verstößt, haben Sie das Recht, sich bei der Aufsichtsbehörde zu beschweren.
@@ -263,7 +280,7 @@
 			</section>
 
 			<section>
-				<h2 class="text-base font-semibold text-slate-900">12. Datensicherheit</h2>
+				<h2 class="text-base font-semibold text-slate-900">13. Datensicherheit</h2>
 				<p class="mt-3">
 					Wir setzen technische und organisatorische Sicherheitsmaßnahmen ein, um Ihre Daten vor Verlust,
 					Missbrauch und unbefugtem Zugriff zu schützen. Unsere Website verwendet eine
@@ -273,7 +290,7 @@
 
 			<section>
 				<h2 class="text-base font-semibold text-slate-900">
-					13. Änderungen dieser Datenschutzerklärung
+					14. Änderungen dieser Datenschutzerklärung
 				</h2>
 				<p class="mt-3">
 					Wir behalten uns vor, diese Datenschutzerklärung bei Bedarf anzupassen. Es gilt die jeweils
