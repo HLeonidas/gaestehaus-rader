@@ -178,26 +178,32 @@
 				name: room.title,
 				description: room.subtitle[$lang],
 				url: new URL(`${resolve('/unterkuenfte-preise')}/${room.slug}`, siteUrl).toString(),
-				identifier: {
-					'@type': 'PropertyValue',
-					propertyID: 'room',
-					value: room.slug,
-				},
-				additionalType: 'https://schema.org/Apartment',
+				identifier: room.slug,
+				additionalType: 'Apartment',
 				image: buildVacationImages([room.images.main, ...(room.images.gallery ?? [])]),
 				geo: geoCoordinates,
 				containsPlace: {
-					'@type': 'Apartment',
+					'@type': 'Accommodation',
 					name: room.title,
 					floorLevel: room.attributes.floor,
+					additionalType: 'EntirePlace',
+					occupancy: maxGuests
+						? {
+								'@type': 'QuantitativeValue',
+								value: maxGuests.maxValue,
+							}
+						: undefined,
+					amenityFeature: (room.amenities ?? []).map((amenity) => ({
+						'@type': 'LocationFeatureSpecification',
+						name: $t(`amenity.${amenity}`),
+						value: true,
+					})),
+					floorSize: {
+						'@type': 'QuantitativeValue',
+						value: Number.parseFloat(room.attributes.size.replace(',', '.')),
+						unitCode: 'MTK',
+					},
 				},
-				occupancy: maxGuests
-					? {
-							'@type': 'QuantitativeValue',
-							minValue: maxGuests.minValue,
-							maxValue: maxGuests.maxValue,
-						}
-					: undefined,
 				aggregateRating: buildAggregateRating(reviewRatings),
 				review: buildReviews(room.reviews),
 				amenityFeature: (room.amenities ?? []).map((amenity) => ({
@@ -205,11 +211,6 @@
 					name: $t(`amenity.${amenity}`),
 					value: true,
 				})),
-				floorSize: {
-					'@type': 'QuantitativeValue',
-					value: Number.parseFloat(room.attributes.size.replace(',', '.')),
-					unitCode: 'MTK',
-				},
 			};
 		})
 	);
