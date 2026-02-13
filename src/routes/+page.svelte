@@ -97,24 +97,121 @@
 
 		return [...baseFeatures, ...extraFeatures];
 	});
-	const containsPlaces = $derived.by(() =>
-		rooms.map((room) => ({
-			'@type': 'VacationRental',
-			name: room.title,
-			description: room.subtitle[$lang],
-			url: new URL(`${resolve('/unterkuenfte-preise')}/${room.slug}`, siteUrl).toString(),
-			image: [new URL(withAsset(room.images.main), siteUrl).toString()],
-			amenityFeature: (room.amenities ?? []).map((amenity) => ({
-				'@type': 'LocationFeatureSpecification',
-				name: $t(`amenity.${amenity}`),
-				value: true,
-			})),
-			floorSize: {
-				'@type': 'QuantitativeValue',
-				value: Number.parseFloat(room.attributes.size.replace(',', '.')),
-				unitCode: 'MTK',
+	const geoCoordinates = {
+		'@type': 'GeoCoordinates',
+		latitude: 46.688407,
+		longitude: 13.2549914,
+	} as const;
+	const fallbackVacationImagePaths = [
+		'/images/house/haus-sommer.jpg',
+		'/images/house/winter-balkon_ausblick-1.jpg',
+		'/images/house/balkon-ausblick.jpg',
+		'/images/house/IMG_0580.jpeg',
+		'/images/house/kirche.jpg',
+		'/images/house/pavillon.jpg',
+		'/images/house/slider-4-winter.jpg',
+		'/images/house/tischtennis.jpg',
+		'/images/house/Haus-Winter-2.png',
+	];
+	const parseGuestCapacity = (guestText: string) => {
+		const rangeMatch = guestText.match(/(\d+)\s*-\s*(\d+)/);
+		if (rangeMatch) {
+			return {
+				minValue: Number.parseInt(rangeMatch[1], 10),
+				maxValue: Number.parseInt(rangeMatch[2], 10),
+			};
+		}
+		const singleMatch = guestText.match(/(\d+)/);
+		if (singleMatch) {
+			const value = Number.parseInt(singleMatch[1], 10);
+			return { minValue: value, maxValue: value };
+		}
+		return null;
+	};
+	const isIsoDate = (value: string | undefined) => Boolean(value?.match(/^\d{4}-\d{2}-\d{2}$/));
+	const buildVacationImages = (paths: string[]) => {
+		const allPaths = [...paths, ...fallbackVacationImagePaths];
+		const absoluteImages = Array.from(
+			new Set(allPaths.map((path) => new URL(withAsset(path), siteUrl).toString()))
+		);
+		const minImages = 8;
+		if (absoluteImages.length >= minImages) return absoluteImages.slice(0, minImages);
+		while (absoluteImages.length < minImages && absoluteImages.length > 0) {
+			absoluteImages.push(absoluteImages[absoluteImages.length - 1]);
+		}
+		return absoluteImages;
+	};
+	const buildAggregateRating = (ratings: number[]) => {
+		if (!ratings.length) return undefined;
+		const ratingValue = Number((ratings.reduce((sum, value) => sum + value, 0) / ratings.length).toFixed(1));
+		return {
+			'@type': 'AggregateRating',
+			ratingValue,
+			reviewCount: ratings.length,
+		};
+	};
+	const buildReviews = (
+		reviews: Array<{ name: string; rating: number; text: string; date?: string }>
+	) =>
+		reviews.map((review) => ({
+			'@type': 'Review',
+			reviewBody: review.text,
+			author: {
+				'@type': 'Person',
+				name: review.name,
 			},
-		}))
+			reviewRating: {
+				'@type': 'Rating',
+				ratingValue: review.rating,
+				bestRating: 5,
+				worstRating: 1,
+			},
+			...(isIsoDate(review.date) ? { datePublished: review.date } : {}),
+		}));
+	const containsPlaces = $derived.by(() =>
+		rooms.map((room) => {
+			const maxGuests = parseGuestCapacity(room.attributes.guests[$lang]);
+			const reviewRatings = room.reviews.map((review) => review.rating);
+			return {
+				'@type': 'VacationRental',
+				'@id': new URL(`${resolve('/unterkuenfte-preise')}/${room.slug}#vacation-rental`, siteUrl).toString(),
+				name: room.title,
+				description: room.subtitle[$lang],
+				url: new URL(`${resolve('/unterkuenfte-preise')}/${room.slug}`, siteUrl).toString(),
+				identifier: {
+					'@type': 'PropertyValue',
+					propertyID: 'room',
+					value: room.slug,
+				},
+				additionalType: 'https://schema.org/Apartment',
+				image: buildVacationImages([room.images.main, ...(room.images.gallery ?? [])]),
+				geo: geoCoordinates,
+				containsPlace: {
+					'@type': 'Apartment',
+					name: room.title,
+					floorLevel: room.attributes.floor,
+				},
+				occupancy: maxGuests
+					? {
+							'@type': 'QuantitativeValue',
+							minValue: maxGuests.minValue,
+							maxValue: maxGuests.maxValue,
+						}
+					: undefined,
+				aggregateRating: buildAggregateRating(reviewRatings),
+				review: buildReviews(room.reviews),
+				amenityFeature: (room.amenities ?? []).map((amenity) => ({
+					'@type': 'LocationFeatureSpecification',
+					name: $t(`amenity.${amenity}`),
+					value: true,
+				})),
+				floorSize: {
+					'@type': 'QuantitativeValue',
+					value: Number.parseFloat(room.attributes.size.replace(',', '.')),
+					unitCode: 'MTK',
+				},
+			};
+		})
 	);
 	const homeJsonLd = $derived.by(() =>
 		JSON.stringify({
@@ -134,11 +231,7 @@
 				addressRegion: 'Kärnten',
 				addressCountry: 'AT',
 			},
-			geo: {
-				'@type': 'GeoCoordinates',
-				latitude: 46.688407,
-				longitude: 13.2549914,
-			},
+			geo: geoCoordinates,
 			sameAs: ['https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9', 'https://www.booking.com/Share-deqca7p'],
 			hasMap: 'https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9',
 			amenityFeature: amenityFeatures,
