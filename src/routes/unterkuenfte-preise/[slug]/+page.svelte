@@ -110,7 +110,9 @@
 	const buildReviews = (
 		reviews: Array<{ name: string; rating: number; text: string; date?: string }>
 	) =>
-		reviews.map((review) => ({
+		reviews
+			.filter((review) => isIsoDate(review.date))
+			.map((review) => ({
 			'@type': 'Review',
 			reviewBody: review.text,
 			author: {
@@ -123,7 +125,7 @@
 				bestRating: 5,
 				worstRating: 1,
 			},
-			...(isIsoDate(review.date) ? { datePublished: review.date } : {}),
+			datePublished: review.date,
 		}));
 	const roomUrl = $derived.by(() =>
 		new URL(`${resolve('/unterkuenfte-preise')}/${accommodation.slug}`, siteUrl).toString()
@@ -143,7 +145,8 @@
 	const roomJsonLd = $derived.by(() =>
 		JSON.stringify((() => {
 			const maxGuests = parseGuestCapacity(accommodation.attributes.guests[$lang]);
-			const reviewRatings = accommodation.reviews.map((review) => review.rating);
+			const reviewsWithDate = accommodation.reviews.filter((review) => isIsoDate(review.date));
+			const reviewRatings = reviewsWithDate.map((review) => review.rating);
 			return {
 				'@context': 'https://schema.org',
 				'@type': 'VacationRental',
@@ -178,7 +181,7 @@
 					},
 				},
 				aggregateRating: buildAggregateRating(reviewRatings),
-				review: buildReviews(accommodation.reviews),
+				review: buildReviews(reviewsWithDate),
 				offers: {
 					'@type': 'Offer',
 					price: accommodation.pricePerNightBase,

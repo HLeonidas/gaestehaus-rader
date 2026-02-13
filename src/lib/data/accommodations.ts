@@ -349,6 +349,7 @@ export const accommodations: Accommodation[] = [
 			{
 				name: 'Milena',
 				rating: 5,
+				date: '2024-01-01',
 				text:
 					'Die Gastgeber-Familie war super freundlich und sehr zuvorkommend. Sehr persönlicher Umgang. Die Lage war perfekt. Man konnte alles gut sowohl mit dem Auto als auch zu Fuß oder mit dem Fahrrad erreichen. Alles in allem war es ein toller Urlaub im schönen Österreich den wir gerne im Gästehaus Rader wiederholen möchten!',
 			},

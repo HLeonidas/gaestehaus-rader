@@ -153,7 +153,9 @@
 	const buildReviews = (
 		reviews: Array<{ name: string; rating: number; text: string; date?: string }>
 	) =>
-		reviews.map((review) => ({
+		reviews
+			.filter((review) => isIsoDate(review.date))
+			.map((review) => ({
 			'@type': 'Review',
 			reviewBody: review.text,
 			author: {
@@ -166,12 +168,13 @@
 				bestRating: 5,
 				worstRating: 1,
 			},
-			...(isIsoDate(review.date) ? { datePublished: review.date } : {}),
+			datePublished: review.date,
 		}));
 	const containsPlaces = $derived.by(() =>
 		rooms.map((room) => {
 			const maxGuests = parseGuestCapacity(room.attributes.guests[$lang]);
-			const reviewRatings = room.reviews.map((review) => review.rating);
+			const reviewsWithDate = room.reviews.filter((review) => isIsoDate(review.date));
+			const reviewRatings = reviewsWithDate.map((review) => review.rating);
 			return {
 				'@type': 'VacationRental',
 				'@id': new URL(`${resolve('/unterkuenfte-preise')}/${room.slug}#vacation-rental`, siteUrl).toString(),
@@ -205,7 +208,7 @@
 					},
 				},
 				aggregateRating: buildAggregateRating(reviewRatings),
-				review: buildReviews(room.reviews),
+				review: buildReviews(reviewsWithDate),
 				amenityFeature: (room.amenities ?? []).map((amenity) => ({
 					'@type': 'LocationFeatureSpecification',
 					name: $t(`amenity.${amenity}`),
