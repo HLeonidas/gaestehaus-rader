@@ -286,7 +286,7 @@
 	}
 
 	let shuffledImages = $state(destinationImages);
-	let heroHeaderOffset = $state('141px');
+	let heroHeaderOffset = $state('113px');
 
 	const getHeroOffsetFallback = () =>
 		browser && window.matchMedia('(min-width: 640px)').matches ? 112 : 141;
