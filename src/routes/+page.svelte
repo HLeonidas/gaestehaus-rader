@@ -143,7 +143,9 @@
 	};
 	const buildAggregateRating = (ratings: number[]) => {
 		if (!ratings.length) return undefined;
-		const ratingValue = Number((ratings.reduce((sum, value) => sum + value, 0) / ratings.length).toFixed(1));
+		const ratingValue = Number(
+			(ratings.reduce((sum, value) => sum + value, 0) / ratings.length).toFixed(1)
+		);
 		return {
 			'@type': 'AggregateRating',
 			ratingValue,
@@ -156,20 +158,20 @@
 		reviews
 			.filter((review) => isIsoDate(review.date))
 			.map((review) => ({
-			'@type': 'Review',
-			reviewBody: review.text,
-			author: {
-				'@type': 'Person',
-				name: review.name,
-			},
-			reviewRating: {
-				'@type': 'Rating',
-				ratingValue: review.rating,
-				bestRating: 5,
-				worstRating: 1,
-			},
-			datePublished: review.date,
-		}));
+				'@type': 'Review',
+				reviewBody: review.text,
+				author: {
+					'@type': 'Person',
+					name: review.name,
+				},
+				reviewRating: {
+					'@type': 'Rating',
+					ratingValue: review.rating,
+					bestRating: 5,
+					worstRating: 1,
+				},
+				datePublished: review.date,
+			}));
 	const containsPlaces = $derived.by(() =>
 		rooms.map((room) => {
 			const maxGuests = parseGuestCapacity(room.attributes.guests[$lang]);
@@ -177,7 +179,10 @@
 			const reviewRatings = reviewsWithDate.map((review) => review.rating);
 			return {
 				'@type': 'VacationRental',
-				'@id': new URL(`${resolve('/unterkuenfte-preise')}/${room.slug}#vacation-rental`, siteUrl).toString(),
+				'@id': new URL(
+					`${resolve('/unterkuenfte-preise')}/${room.slug}#vacation-rental`,
+					siteUrl
+				).toString(),
 				name: room.title,
 				description: room.subtitle[$lang],
 				url: new URL(`${resolve('/unterkuenfte-preise')}/${room.slug}`, siteUrl).toString(),
@@ -341,53 +346,7 @@
 		browser && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 	function revealOnScroll(node: HTMLElement, options: RevealOptions = {}) {
-		if (!browser || prefersReducedMotion()) {
-			return {};
-		}
-
-		const isMobileViewport = window.matchMedia('(max-width: 639px)').matches;
-		const threshold = options.threshold ?? (isMobileViewport ? 0.05 : 0.2);
-		const rootMargin = options.rootMargin ?? (isMobileViewport ? '0px 0px -4% 0px' : '0px 0px -12% 0px');
-		const distance = options.distance ?? (isMobileViewport ? 12 : 22);
-		const duration = options.duration ?? (isMobileViewport ? 320 : 560);
-		const delay = options.delay ?? 0;
-		const easing = 'cubic-bezier(0.22, 1, 0.36, 1)';
-		const prewarmZone = window.innerHeight * 0.92;
-		const { top } = node.getBoundingClientRect();
-
-		// Avoid an "empty" first viewport by skipping hidden pre-state near the fold on mobile.
-		if (isMobileViewport && top <= prewarmZone) {
-			node.style.opacity = '1';
-			node.style.transform = 'translate3d(0, 0, 0)';
-			node.style.willChange = 'auto';
-			return {};
-		}
-
-		node.style.opacity = '0';
-		node.style.transform = `translate3d(0, ${distance}px, 0)`;
-		node.style.willChange = 'opacity, transform';
-		node.style.transition = `opacity ${duration}ms ${easing} ${delay}ms, transform ${duration}ms ${easing} ${delay}ms`;
-
-		const observer = new IntersectionObserver(
-			(entries) => {
-				const [entry] = entries;
-				if (!entry?.isIntersecting) return;
-
-				node.style.opacity = '1';
-				node.style.transform = 'translate3d(0, 0, 0)';
-				node.style.willChange = 'auto';
-				observer.unobserve(node);
-			},
-			{ threshold, rootMargin }
-		);
-
-		observer.observe(node);
-
-		return {
-			destroy() {
-				observer.disconnect();
-			},
-		};
+		return {};
 	}
 </script>
 
@@ -403,7 +362,7 @@
 
 <div class="space-y-16 pb-16">
 	<section
-		class="relative min-h-[calc(100vh-var(--hero-header-offset,141px))]"
+		class="relative min-h-[calc(100lvh-var(--hero-header-offset,141px))]"
 		style={`--hero-header-offset: ${heroHeaderOffset};`}
 	>
 		<div class="absolute inset-0">
@@ -515,7 +474,6 @@
 		<div class="space-y-16">
 			<section
 				class="-mx-4 mt-1 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 scroll-pl-4 scroll-pr-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 sm:scroll-pl-0 sm:scroll-pr-0 lg:grid-cols-4"
-				use:revealOnScroll
 			>
 				{#each usps as item}
 					<div
@@ -535,7 +493,7 @@
 			</section>
 
 			<!-- ROOMS -->
-			<section use:revealOnScroll>
+			<section>
 				<div class="flex flex-wrap items-end justify-between gap-4">
 					<div>
 						<p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand">
@@ -635,7 +593,7 @@
 			</section>
 
 			<!-- TRUST -->
-			<section class="py-4" use:revealOnScroll>
+			<section class="py-4">
 				<!-- Header row -->
 				<div class="flex flex-wrap items-start justify-between gap-6">
 					<div class="max-w-2xl">
@@ -766,7 +724,7 @@
 			</section>
 
 			<!-- Gallery -->
-			<section class="rounded-3xl px-0 py-0 sm:px-10 sm:py-10" use:revealOnScroll>
+			<section class="rounded-3xl px-0 py-0 sm:px-10 sm:py-10">
 				<div class="flex items-center gap-4">
 					<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
 						<Sun class="h-5 w-5" aria-hidden="true" />
@@ -831,10 +789,7 @@
 			</section>
 
 			<!-- GUEST CARD -->
-			<section
-				class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm"
-				use:revealOnScroll
-			>
+			<section class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
 				<div class="grid gap-8 lg:grid-cols-[1.1fr,0.9fr]">
 					<div class="relative min-h-[280px] lg:min-h-full">
 						<img
@@ -1179,7 +1134,7 @@
 			</section>
 
 			<!-- SEASONS -->
-			<section class="rounded-3xl bg-[#f3efe6] px-6 py-12 sm:px-10 sm:py-14" use:revealOnScroll>
+			<section class="rounded-3xl bg-[#f3efe6] px-6 py-12 sm:px-10 sm:py-14">
 				<div class="text-center">
 					<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
 						{$t('seasons.kicker')}
@@ -1256,7 +1211,7 @@
 
 	<!-- SUSTAINABILITY -->
 	<div class="w-full bg-[#f1eee7]">
-		<section class="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6" use:revealOnScroll>
+		<section class="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6">
 			<div class="rounded-3xl px-0 py-0 sm:px-10 sm:py-12">
 				<div class="grid items-center gap-10 lg:grid-cols-2">
 					<!-- Left: image card -->
@@ -1343,7 +1298,7 @@
 		</section>
 	</div>
 
-	<section class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8" use:revealOnScroll>
+	<section class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
 		<div class="rounded-3xl bg-brand px-6 py-10 text-white sm:px-10 sm:py-12">
 			<p class="text-xs font-semibold uppercase tracking-[0.35em] text-white/70">
 				{$t('brand.name')}
