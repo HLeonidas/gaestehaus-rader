@@ -304,6 +304,56 @@
 			behavior: 'smooth',
 		});
 	};
+
+	type RevealOptions = {
+		threshold?: number;
+		rootMargin?: string;
+		distance?: number;
+		duration?: number;
+		delay?: number;
+	};
+
+	const prefersReducedMotion = () =>
+		browser && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+	function revealOnScroll(node: HTMLElement, options: RevealOptions = {}) {
+		if (!browser || prefersReducedMotion()) {
+			return {};
+		}
+
+		const threshold = options.threshold ?? 0.2;
+		const rootMargin = options.rootMargin ?? '0px 0px -12% 0px';
+		const distance = options.distance ?? 22;
+		const duration = options.duration ?? 560;
+		const delay = options.delay ?? 0;
+		const easing = 'cubic-bezier(0.22, 1, 0.36, 1)';
+
+		node.style.opacity = '0';
+		node.style.transform = `translate3d(0, ${distance}px, 0)`;
+		node.style.willChange = 'opacity, transform';
+		node.style.transition = `opacity ${duration}ms ${easing} ${delay}ms, transform ${duration}ms ${easing} ${delay}ms`;
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				const [entry] = entries;
+				if (!entry?.isIntersecting) return;
+
+				node.style.opacity = '1';
+				node.style.transform = 'translate3d(0, 0, 0)';
+				node.style.willChange = 'auto';
+				observer.unobserve(node);
+			},
+			{ threshold, rootMargin }
+		);
+
+		observer.observe(node);
+
+		return {
+			destroy() {
+				observer.disconnect();
+			},
+		};
+	}
 </script>
 
 <SeoHead
@@ -425,7 +475,7 @@
 
 	<div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
 		<div class="space-y-16">
-			<section class="grid gap-6 lg:grid-cols-4">
+			<section class="grid gap-6 lg:grid-cols-4" use:revealOnScroll>
 				{#each usps as item}
 					<div
 						class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md"
@@ -444,7 +494,7 @@
 			</section>
 
 			<!-- ROOMS -->
-			<section>
+			<section use:revealOnScroll>
 				<div class="flex flex-wrap items-end justify-between gap-4">
 					<div>
 						<p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand">
@@ -544,7 +594,7 @@
 			</section>
 
 			<!-- TRUST -->
-			<section class="py-4">
+			<section class="py-4" use:revealOnScroll>
 				<!-- Header row -->
 				<div class="flex flex-wrap items-start justify-between gap-6">
 					<div class="max-w-2xl">
@@ -675,7 +725,7 @@
 			</section>
 
 			<!-- Gallery -->
-			<section class="rounded-3xl px-0 py-0 sm:px-10 sm:py-10">
+			<section class="rounded-3xl px-0 py-0 sm:px-10 sm:py-10" use:revealOnScroll>
 				<div class="flex items-center gap-4">
 					<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
 						<Sun class="h-5 w-5" aria-hidden="true" />
@@ -740,7 +790,10 @@
 			</section>
 
 			<!-- GUEST CARD -->
-			<section class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+			<section
+				class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm"
+				use:revealOnScroll
+			>
 				<div class="grid gap-8 lg:grid-cols-[1.1fr,0.9fr]">
 					<div class="relative min-h-[280px] lg:min-h-full">
 						<img
@@ -1085,7 +1138,7 @@
 			</section>
 
 			<!-- SEASONS -->
-			<section class="rounded-3xl bg-[#f3efe6] px-6 py-12 sm:px-10 sm:py-14">
+			<section class="rounded-3xl bg-[#f3efe6] px-6 py-12 sm:px-10 sm:py-14" use:revealOnScroll>
 				<div class="text-center">
 					<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
 						{$t('seasons.kicker')}
@@ -1162,7 +1215,7 @@
 
 	<!-- SUSTAINABILITY -->
 	<div class="w-full bg-[#f1eee7]">
-		<section class="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6">
+		<section class="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6" use:revealOnScroll>
 			<div class="rounded-3xl px-0 py-0 sm:px-10 sm:py-12">
 				<div class="grid items-center gap-10 lg:grid-cols-2">
 					<!-- Left: image card -->
@@ -1249,7 +1302,7 @@
 		</section>
 	</div>
 
-	<section class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+	<section class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8" use:revealOnScroll>
 		<div class="rounded-3xl bg-brand px-6 py-10 text-white sm:px-10 sm:py-12">
 			<p class="text-xs font-semibold uppercase tracking-[0.35em] text-white/70">
 				{$t('brand.name')}
