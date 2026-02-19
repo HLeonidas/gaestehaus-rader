@@ -345,12 +345,23 @@
 			return {};
 		}
 
-		const threshold = options.threshold ?? 0.2;
-		const rootMargin = options.rootMargin ?? '0px 0px -12% 0px';
-		const distance = options.distance ?? 22;
-		const duration = options.duration ?? 560;
+		const isMobileViewport = window.matchMedia('(max-width: 639px)').matches;
+		const threshold = options.threshold ?? (isMobileViewport ? 0.05 : 0.2);
+		const rootMargin = options.rootMargin ?? (isMobileViewport ? '0px 0px -4% 0px' : '0px 0px -12% 0px');
+		const distance = options.distance ?? (isMobileViewport ? 12 : 22);
+		const duration = options.duration ?? (isMobileViewport ? 320 : 560);
 		const delay = options.delay ?? 0;
 		const easing = 'cubic-bezier(0.22, 1, 0.36, 1)';
+		const prewarmZone = window.innerHeight * 0.92;
+		const { top } = node.getBoundingClientRect();
+
+		// Avoid an "empty" first viewport by skipping hidden pre-state near the fold on mobile.
+		if (isMobileViewport && top <= prewarmZone) {
+			node.style.opacity = '1';
+			node.style.transform = 'translate3d(0, 0, 0)';
+			node.style.willChange = 'auto';
+			return {};
+		}
 
 		node.style.opacity = '0';
 		node.style.transform = `translate3d(0, ${distance}px, 0)`;
@@ -392,7 +403,7 @@
 
 <div class="space-y-16 pb-16">
 	<section
-		class="relative min-h-[calc(100svh-var(--hero-header-offset,141px))]"
+		class="relative min-h-[calc(100vh-var(--hero-header-offset,141px))]"
 		style={`--hero-header-offset: ${heroHeaderOffset};`}
 	>
 		<div class="absolute inset-0">
