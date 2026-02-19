@@ -75,13 +75,13 @@
 			</a>
 
 			<nav
-				class="hidden flex-1 items-center justify-center gap-8 text-sm font-semibold text-slate-700 lg:flex"
+				class="hidden flex-1 items-center justify-center text-sm font-semibold text-slate-700 lg:flex"
 				aria-label={$t('nav.primary')}
 			>
 				{#each navItems as item}
 					<a
 						href={item.href}
-						class={`transition-colors hover:text-brand ${
+						class={`transition-colors hover:text-brand px-4 py-3 ${
 							isActive(item.href) ? 'text-brand' : 'text-slate-700'
 						}`}
 						aria-current={isActive(item.href) ? 'page' : undefined}
