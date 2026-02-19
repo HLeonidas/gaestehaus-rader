@@ -5,6 +5,7 @@
 	import { lang, setLang, t } from '$lib/i18n';
 	import { trackEvent, trackPageview } from '$lib/analytics/plausible';
 	import { MessageCircle } from 'lucide-svelte';
+	import { onMount } from 'svelte';
 	import '../app.css';
 	import { afterNavigate } from '$app/navigation';
 
@@ -38,6 +39,55 @@
 		setLang(nextLang);
 	};
 
+	let headerHidden = $state(false);
+
+	onMount(() => {
+		let lastScrollY = window.scrollY;
+		const scrollDeltaThreshold = 8;
+		const topRevealThreshold = 20;
+
+		const isMobileViewport = () => window.matchMedia('(max-width: 1023px)').matches;
+
+		const onScroll = () => {
+			const currentScrollY = window.scrollY;
+
+			if (!isMobileViewport()) {
+				headerHidden = false;
+				lastScrollY = currentScrollY;
+				return;
+			}
+
+			if (currentScrollY <= topRevealThreshold) {
+				headerHidden = false;
+				lastScrollY = currentScrollY;
+				return;
+			}
+
+			const delta = currentScrollY - lastScrollY;
+			if (Math.abs(delta) < scrollDeltaThreshold) {
+				lastScrollY = currentScrollY;
+				return;
+			}
+
+			headerHidden = delta > 0;
+			lastScrollY = currentScrollY;
+		};
+
+		const onResize = () => {
+			if (!isMobileViewport()) {
+				headerHidden = false;
+			}
+		};
+
+		window.addEventListener('scroll', onScroll, { passive: true });
+		window.addEventListener('resize', onResize);
+
+		return () => {
+			window.removeEventListener('scroll', onScroll);
+			window.removeEventListener('resize', onResize);
+		};
+	});
+
 	afterNavigate(({ to }) => {
 		trackPageview(to?.url.href ?? page.url.href);
 	});
@@ -55,7 +105,12 @@
 	>
 		{$t('accessibility.skip')}
 	</a>
-	<header id="site-header" class="sticky top-0 z-40 w-full border-b border-slate-200 bg-white/90 backdrop-blur">
+	<header
+		id="site-header"
+		class={`sticky top-0 z-40 w-full border-b border-slate-200 bg-white/90 backdrop-blur transition-transform duration-300 will-change-transform ${
+			headerHidden ? '-translate-y-full' : 'translate-y-0'
+		}`}
+	>
 		<div class="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-4 py-4 sm:px-6">
 			<a
 				href={resolve('/')}
