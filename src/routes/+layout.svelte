@@ -55,7 +55,7 @@
 	>
 		{$t('accessibility.skip')}
 	</a>
-	<header class="sticky top-0 z-40 w-full border-b border-slate-200 bg-white/90 backdrop-blur">
+	<header id="site-header" class="sticky top-0 z-40 w-full border-b border-slate-200 bg-white/90 backdrop-blur">
 		<div class="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-4 py-4 sm:px-6">
 			<a
 				href={resolve('/')}

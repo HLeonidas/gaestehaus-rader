@@ -286,11 +286,35 @@
 	}
 
 	let shuffledImages = $state(destinationImages);
+	let heroHeaderOffset = $state('141px');
+
+	const getHeroOffsetFallback = () =>
+		browser && window.matchMedia('(min-width: 640px)').matches ? 112 : 141;
+
+	const updateHeroHeaderOffset = () => {
+		if (!browser) return;
+		const header = document.getElementById('site-header');
+		const headerHeight = header?.getBoundingClientRect().height ?? getHeroOffsetFallback();
+		heroHeaderOffset = `${Math.round(headerHeight)}px`;
+	};
 
 	onMount(() => {
-		if (browser) {
-			shuffledImages = shuffle(destinationImages);
+		if (!browser) return;
+		shuffledImages = shuffle(destinationImages);
+		updateHeroHeaderOffset();
+
+		const header = document.getElementById('site-header');
+		const resizeObserver = header ? new ResizeObserver(updateHeroHeaderOffset) : null;
+		if (header && resizeObserver) {
+			resizeObserver.observe(header);
 		}
+
+		window.addEventListener('resize', updateHeroHeaderOffset);
+
+		return () => {
+			resizeObserver?.disconnect();
+			window.removeEventListener('resize', updateHeroHeaderOffset);
+		};
 	});
 
 	let galleryTrack: HTMLDivElement | null = null;
@@ -367,7 +391,10 @@
 </svelte:head>
 
 <div class="space-y-16 pb-16">
-	<section class="relative min-h-screen">
+	<section
+		class="relative min-h-[calc(100svh-var(--hero-header-offset,141px))]"
+		style={`--hero-header-offset: ${heroHeaderOffset};`}
+	>
 		<div class="absolute inset-0">
 			<div
 				class="h-full w-full bg-cover bg-center"
@@ -385,7 +412,7 @@
 		</div>
 
 		<div
-			class="relative flex min-h-screen flex-col items-center justify-center px-6 pt-20 text-center text-white sm:px-10"
+			class="relative flex min-h-[calc(100svh-var(--hero-header-offset,141px))] flex-col items-center justify-center px-6 pt-20 text-center text-white sm:px-10"
 		>
 			<h1 class="mx-auto max-w-3xl font-serif text-4xl font-semibold leading-[0.95] sm:text-6xl">
 				{$t('hero.title')}
@@ -475,10 +502,13 @@
 
 	<div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
 		<div class="space-y-16">
-			<section class="grid gap-6 lg:grid-cols-4" use:revealOnScroll>
+			<section
+				class="-mx-4 mt-1 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 scroll-pl-4 scroll-pr-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 sm:scroll-pl-0 sm:scroll-pr-0 lg:grid-cols-4"
+				use:revealOnScroll
+			>
 				{#each usps as item}
 					<div
-						class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md"
+						class="w-[84vw] max-w-[320px] shrink-0 snap-start rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md sm:w-auto sm:max-w-none sm:p-6"
 					>
 						<div class="flex h-10 w-10 items-center justify-center rounded-full bg-brand/10 text-brand">
 							<item.icon class="h-5 w-5" aria-hidden="true" />
