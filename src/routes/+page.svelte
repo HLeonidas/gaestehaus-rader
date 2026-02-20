@@ -194,7 +194,6 @@
 				description: room.subtitle[$lang],
 				url: roomUrl,
 				identifier: room.slug,
-				accommodationCategory: 'Apartment',
 				image: buildVacationImages([room.images.main, ...(room.images.gallery ?? [])]),
 				geo: geoCoordinates,
 				offers: {
@@ -205,6 +204,7 @@
 				containsPlace: {
 					'@type': 'Accommodation',
 					name: room.title,
+					accommodationCategory: 'Apartment',
 					floorLevel: room.attributes.floor,
 					occupancy: maxGuests
 						? {
@@ -269,7 +269,7 @@
 					url: siteUrl,
 					description: $t('home.seo.description'),
 					image: lodgingImages,
-					isPartOf: {
+					parentOrganization: {
 						'@id': lodgingId,
 					},
 					address: {
@@ -285,6 +285,11 @@
 					email: 'info@rader-gitschtal.at',
 					sameAs: businessSameAs,
 					amenityFeature: amenityFeatures,
+					offers: {
+						'@type': 'Offer',
+						priceCurrency: 'EUR',
+						url: siteUrl,
+					},
 				},
 				{
 					'@type': 'TouristDestination',
