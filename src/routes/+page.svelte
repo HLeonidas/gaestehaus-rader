@@ -196,11 +196,6 @@
 				identifier: room.slug,
 				image: buildVacationImages([room.images.main, ...(room.images.gallery ?? [])]),
 				geo: geoCoordinates,
-				offers: {
-					'@type': 'Offer',
-					priceCurrency: 'EUR',
-					url: roomUrl,
-				},
 				containsPlace: {
 					'@type': 'Accommodation',
 					name: room.title,
@@ -233,6 +228,20 @@
 			};
 		})
 	);
+	const lodgingOffers = $derived.by(() =>
+		rooms.map((room) => {
+			const roomUrl = new URL(`${resolve('/unterkuenfte-preise')}/${room.slug}`, siteUrl).toString();
+			const roomId = `${roomUrl}#vacation-rental`;
+			return {
+				'@type': 'Offer',
+				priceCurrency: 'EUR',
+				url: roomUrl,
+				itemOffered: {
+					'@id': roomId,
+				},
+			};
+		})
+	);
 	const homeJsonLd = $derived.by(() =>
 		JSON.stringify({
 			'@context': 'https://schema.org',
@@ -259,6 +268,7 @@
 					hasMap: 'https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9',
 					amenityFeature: amenityFeatures,
 					containsPlace: containsPlaces,
+					makesOffer: lodgingOffers,
 					telephone: ['+43 676 6246826', '+43 4286 222'],
 					email: 'info@rader-gitschtal.at',
 				},
