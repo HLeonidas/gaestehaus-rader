@@ -558,14 +558,15 @@
 			>
 				{#each usps as item}
 					<div
-						class="w-[84vw] max-w-[320px] shrink-0 snap-start rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md sm:w-auto sm:max-w-none sm:p-6"
+						class="group w-[84vw] max-w-[320px] shrink-0 snap-start rounded-2xl border border-slate-200/50 bg-white/80 p-5 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md sm:w-auto sm:max-w-none sm:p-6"
 					>
-						<div class="flex h-10 w-10 items-center justify-center rounded-full bg-brand/10 text-brand">
+						<div class="flex h-10 w-10 items-center justify-center rounded-full bg-brand/10 text-brand transition-all duration-300 group-hover:bg-brand group-hover:text-white">
 							<item.icon class="h-5 w-5" aria-hidden="true" />
 						</div>
 						<h3 class="mt-4 text-base font-semibold text-slate-900">
 							{$t(`usp.${item.key}.title`)}
 						</h3>
+						<div class="mt-3 h-[2px] w-8 bg-brand/40 transition-all duration-300 group-hover:w-12"></div>
 						<p class="mt-2 text-sm leading-relaxed text-slate-600">
 							{$t(`usp.${item.key}.body`)}
 						</p>
