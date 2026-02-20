@@ -187,7 +187,7 @@
 												room: room.slug,
 											})}
 									>
-										{$t('rooms.page.detailsCta')}
+										{$t('rooms.page.detailsCta')}: {room.title}
 									</a>
 									<a
 										href={resolve('/buchen')}

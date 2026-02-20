@@ -31,7 +31,7 @@
 				</p>
 				<p>
 					{$t('imprint.company.phone')}:
-					<a class="hover:text-slate-900" href="tel:+43428622">+43 4286 222</a>
+					<a class="hover:text-slate-900" href="tel:+434286222">+43 4286 222</a>
 				</p>
 				<p>
 					{$t('imprint.company.email')}:
