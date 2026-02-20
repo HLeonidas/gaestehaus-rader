@@ -298,7 +298,7 @@
 					offers: {
 						'@type': 'Offer',
 						priceCurrency: 'EUR',
-						url: siteUrl,
+						url: new URL(resolve('/unterkuenfte-preise'), siteUrl).toString(),
 					},
 				},
 				{
