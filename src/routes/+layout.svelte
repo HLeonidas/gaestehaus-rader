@@ -279,7 +279,17 @@
 					</p>
 					<ul class="mt-4 space-y-3 text-sm text-slate-600">
 						<li class="font-semibold text-slate-800">Familie Herold-Hueber</li>
-						<li>Weißbriach 92</li>
+						<li>
+							<a
+								class="font-medium text-slate-800 underline decoration-slate-300 underline-offset-2 hover:text-slate-900"
+								href="https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9"
+								target="_blank"
+								rel="noopener noreferrer"
+								onclick={() => trackEvent('Map: Route Click', { source: 'footer' })}
+							>
+								Weißbriach 92
+							</a>
+						</li>
 						<li>9622 Weißbriach, Österreich</li>
 						<li>
 							<a

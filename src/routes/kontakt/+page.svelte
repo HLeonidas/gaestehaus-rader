@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { t } from '$lib/i18n';
+	import { resolve } from '$app/paths';
 	import { trackEvent } from '$lib/analytics/plausible';
-	import { Check, Copy, Mail, Phone, PhoneCall } from 'lucide-svelte';
+	import { ArrowRight, Check, Copy, Mail, Phone, PhoneCall } from 'lucide-svelte';
 	import SeoHead from '$lib/components/SeoHead.svelte';
 
 	let ibanCopied = false;
@@ -34,8 +35,9 @@
 	const mapSrc =
 		'https://www.google.com/maps?q=Weissbriach%2092%2C%209622%20Weissbriach%2C%20Austria&output=embed';
 
-	// optional: externer Link (öffnet Maps in neuem Tab)
-	const mapLink = 'https://maps.app.goo.gl/65opqP1cKtHpL6pT6';
+	// externer Link zum Google-Unternehmensprofil
+	const mapLink = 'https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9';
+	const bookingUrl = resolve('/buchen');
 
 	const enableMap = () => {
 		mapEnabled = true;
@@ -57,76 +59,176 @@
 		<p class="mt-4 max-w-2xl text-base leading-relaxed text-slate-600">
 			{$t('contact.subtitle')}
 		</p>
+		<div class="mt-6 flex flex-wrap items-center gap-3">
+			<a
+				href={bookingUrl}
+				class="inline-flex items-center justify-center rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90"
+			>
+				{$t('contact.cta.book')}
+			</a>
+			<a
+				href="tel:+436766246826"
+				class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-800 shadow-sm transition hover:bg-slate-50"
+				onclick={() => trackEvent('Contact: Phone Click', { source: 'contact', line: 'mobile' })}
+			>
+				{$t('contact.cta.call')}
+			</a>
+			<a
+				href="mailto:info@rader-gitschtal.at"
+				class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-800 shadow-sm transition hover:bg-slate-50"
+				onclick={() => trackEvent('Contact: Email Click', { source: 'contact' })}
+			>
+				{$t('contact.cta.email')}
+			</a>
+		</div>
 
-		<div class="mt-8 grid gap-8 border-t border-slate-100 lg:grid-cols-[1.2fr,1fr]">
-			<div class="mt-6 grid gap-8 sm:grid-cols-2">
-				<div>
+		<div class="mt-8 grid gap-8 border-t border-slate-100 pt-6 lg:grid-cols-[1.2fr,1fr]">
+			<div class="space-y-6">
+				<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 					<p class="text-sm font-semibold text-slate-900">{$t('contact.address.title')}</p>
 					<div class="mt-3 space-y-1 text-sm text-slate-600">
 						<p class="font-semibold text-slate-800">{$t('contact.address.name')}</p>
 						<p>{$t('contact.address.line1')}</p>
 						<p>{$t('contact.address.line2')}</p>
 					</div>
+					<div class="mt-4 flex flex-wrap gap-3">
+						<a
+							class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-800 transition hover:bg-slate-50"
+							href={mapLink}
+							target="_blank"
+							rel="noopener noreferrer"
+							onclick={() => trackEvent('Map: Open External', { source: 'contact' })}
+						>
+							{$t('contact.route.cta')}
+							<ArrowRight class="h-4 w-4" aria-hidden="true" />
+						</a>
+					</div>
 				</div>
 
-				<div>
+				<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 					<p class="text-sm font-semibold text-slate-900">{$t('contact.direct.title')}</p>
 					<div class="mt-3 space-y-2 text-sm text-slate-600">
-						<p class="flex items-center">
-							<span
-								class="mr-2 inline-flex h-7 w-7 items-center justify-center rounded-full bg-brand/10 text-brand"
-								aria-hidden="true"
-							>
-								<Phone class="h-4 w-4" />
+						<a
+							class="flex items-center justify-between rounded-xl px-3 py-3 transition hover:bg-slate-50"
+							href="tel:+436766246826"
+							onclick={() => trackEvent('Contact: Phone Click', { source: 'contact', line: 'mobile' })}
+						>
+							<span class="flex items-center gap-3">
+								<span
+									class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-brand/10 text-brand"
+									aria-hidden="true"
+								>
+									<Phone class="h-4 w-4" />
+								</span>
+								<span class="font-semibold text-slate-900">+43 676 6246826</span>
 							</span>
-							<a
-								class="font-semibold text-slate-900"
-								href="tel:+436766246826"
-								onclick={() => trackEvent('Contact: Phone Click', { source: 'contact', line: 'mobile' })}
-							>
-								+43 676 6246826
-							</a>
-						</p>
-						<p class="flex items-center">
-							<span
-								class="mr-2 inline-flex h-7 w-7 items-center justify-center rounded-full bg-brand/10 text-brand"
-								aria-hidden="true"
-							>
-								<PhoneCall class="h-4 w-4" />
+							<span class="text-slate-400" aria-hidden="true">↗</span>
+						</a>
+
+						<a
+							class="flex items-center justify-between rounded-xl px-3 py-3 transition hover:bg-slate-50"
+							href="tel:+434286222"
+							onclick={() => trackEvent('Contact: Phone Click', { source: 'contact', line: 'landline' })}
+						>
+							<span class="flex items-center gap-3">
+								<span
+									class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-brand/10 text-brand"
+									aria-hidden="true"
+								>
+									<PhoneCall class="h-4 w-4" />
+								</span>
+								<span class="font-semibold text-slate-900">+43 4286 222</span>
 							</span>
-							<a
-								class="font-semibold text-slate-900"
-								href="tel:+434286222"
-								onclick={() => trackEvent('Contact: Phone Click', { source: 'contact', line: 'landline' })}
-							>
-								+43 4286 222
-							</a>
-						</p>
-						<p class="flex items-center">
-							<span
-								class="mr-2 inline-flex h-7 w-7 items-center justify-center rounded-full bg-brand/10 text-brand"
-								aria-hidden="true"
-							>
-								<Mail class="h-4 w-4" />
+							<span class="text-slate-400" aria-hidden="true">↗</span>
+						</a>
+
+						<a
+							class="flex items-center justify-between rounded-xl px-3 py-3 transition hover:bg-slate-50"
+							href="mailto:info@rader-gitschtal.at"
+							onclick={() => trackEvent('Contact: Email Click', { source: 'contact' })}
+						>
+							<span class="flex items-center gap-3">
+								<span
+									class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-brand/10 text-brand"
+									aria-hidden="true"
+								>
+									<Mail class="h-4 w-4" />
+								</span>
+								<span class="font-semibold text-slate-900">info@rader-gitschtal.at</span>
 							</span>
-							<a
-								class="font-semibold text-slate-900"
-								href="mailto:info@rader-gitschtal.at"
-								onclick={() => trackEvent('Contact: Email Click', { source: 'contact' })}
-							>
-								info@rader-gitschtal.at
-							</a>
-						</p>
+							<span class="text-slate-400" aria-hidden="true">↗</span>
+						</a>
 					</div>
+				</div>
+
+				<div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-sm">
+					<p class="text-sm font-semibold text-slate-900">{$t('contact.payment.title')}</p>
+					<p class="mt-1 text-xs text-slate-500">{$t('contact.payment.subtitle')}</p>
+					<div class="mt-4 grid gap-4 sm:grid-cols-2">
+						<div>
+							<p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">IBAN</p>
+							<div class="mt-2 flex flex-wrap items-center gap-2">
+								<span class="font-mono text-sm font-semibold text-slate-800 sm:text-base">
+									AT86 3936 4001 0361 6109
+								</span>
+								<button
+									type="button"
+									class="inline-flex items-center gap-2 rounded-lg bg-white px-3 py-2 text-xs font-semibold text-slate-700 ring-1 ring-slate-200 transition hover:ring-brand/30"
+									onclick={() => copyToClipboard('AT86 3936 4001 0361 6109', 'iban')}
+									aria-label={$t('contact.payment.copyIban')}
+								>
+									{#if ibanCopied}
+										<Check class="h-4 w-4 text-emerald-600" />
+										<span aria-live="polite">{$t('contact.payment.copied')}</span>
+									{:else}
+										<Copy class="h-4 w-4 text-slate-500" />
+										<span>{$t('contact.payment.copy')}</span>
+									{/if}
+								</button>
+							</div>
+						</div>
+						<div>
+							<p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">BIC</p>
+							<div class="mt-2 flex flex-wrap items-center gap-2">
+								<span class="font-mono text-sm font-semibold text-slate-800 sm:text-base">
+									RZKTAT2K364
+								</span>
+								<button
+									type="button"
+									class="inline-flex items-center gap-2 rounded-lg bg-white px-3 py-2 text-xs font-semibold text-slate-700 ring-1 ring-slate-200 transition hover:ring-brand/30"
+									onclick={() => copyToClipboard('RZKTAT2K364', 'bic')}
+									aria-label={$t('contact.payment.copyBic')}
+								>
+									{#if bicCopied}
+										<Check class="h-4 w-4 text-emerald-600" />
+										<span aria-live="polite">{$t('contact.payment.copied')}</span>
+									{:else}
+										<Copy class="h-4 w-4 text-slate-500" />
+										<span>{$t('contact.payment.copy')}</span>
+									{/if}
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+					<p class="text-sm font-semibold text-slate-900">{$t('contact.trust.title')}</p>
+					<ul class="mt-3 space-y-2 text-sm text-slate-600">
+						<li>{$t('contact.trust.response')}</li>
+						<li>{$t('contact.trust.languages')}</li>
+						<li>{$t('contact.trust.checkin')}</li>
+						<li>{$t('contact.trust.parking')}</li>
+					</ul>
 				</div>
 			</div>
 
 			<div
-				class="relative mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
+				class="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
 			>
 				{#if mapEnabled}
 					<iframe
-						title="Google Maps"
+						title={$t('contact.map.iframeTitle')}
 						class="h-[320px] w-full border-0 sm:h-[360px]"
 						loading="lazy"
 						referrerpolicy="no-referrer-when-downgrade"
@@ -183,50 +285,6 @@
 						</div>
 					</div>
 				{/if}
-			</div>
-		</div>
-		<div class="mt-8 grid gap-8 border-t border-slate-100 lg:grid-cols-[1.2fr,1fr]">
-			<div class="mt-6 grid gap-8 sm:grid-cols-2">
-				<div class="sm:col-span-2">
-					<div
-						class="grid gap-6 rounded-2xl bg-slate-50 p-4 text-xs text-slate-600 sm:p-6 sm:grid-cols-2"
-					>
-						<div>
-							<p class="font-semibold uppercase tracking-[0.2em] text-slate-500">IBAN</p>
-							<div class="mt-2 flex flex-wrap items-center gap-3">
-								<button
-									type="button"
-									class="inline-flex items-center gap-2 font-semibold text-slate-800 underline decoration-dotted decoration-slate-400 underline-offset-4 transition hover:text-brand"
-									onclick={() => copyToClipboard('AT86 3936 4001 0361 6109', 'iban')}
-								>
-									AT86 3936 4001 0361 6109
-									{#if ibanCopied}
-										<Check class="h-4 w-4 text-emerald-600" />
-									{:else}
-										<Copy class="h-4 w-4 text-slate-500" />
-									{/if}
-								</button>
-							</div>
-						</div>
-						<div>
-							<p class="font-semibold uppercase tracking-[0.2em] text-slate-500">BIC</p>
-							<div class="mt-2 flex flex-wrap items-center gap-3">
-								<button
-									type="button"
-									class="inline-flex items-center gap-2 font-semibold text-slate-800 underline decoration-dotted decoration-slate-400 underline-offset-4 transition hover:text-brand"
-									onclick={() => copyToClipboard('RZKTAT2K364', 'bic')}
-								>
-									RZKTAT2K364
-									{#if bicCopied}
-										<Check class="h-4 w-4 text-emerald-600" />
-									{:else}
-										<Copy class="h-4 w-4 text-slate-500" />
-									{/if}
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 	</section>

@@ -639,12 +639,12 @@
 
 				<div class="mt-8">
 					<div
-						class="-mx-4 mt-2 flex snap-x snap-mandatory gap-8 overflow-x-auto px-4 pb-3 scroll-pl-4 scroll-pr-4 [scrollbar-width:thin] [scrollbar-color:theme(colors.slate.300)_transparent] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-200 hover:[&::-webkit-scrollbar-thumb]:bg-slate-300 sm:mx-0 sm:px-0 sm:scroll-pl-0 sm:scroll-pr-0"
+						class="-mx-4 mt-2 flex snap-x snap-mandatory gap-8 overflow-x-auto px-4 pb-3 pt-2 scroll-pl-4 scroll-pr-4 [scrollbar-width:thin] [scrollbar-color:theme(colors.slate.300)_transparent] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-200 hover:[&::-webkit-scrollbar-thumb]:bg-slate-300 sm:mx-0 sm:px-0 sm:scroll-pl-0 sm:scroll-pr-0"
 					>
 						{#each rooms as r}
 							<a
 								href={`${accommodationsBase}/${r.slug}`}
-								class="group relative w-[280px] shrink-0 snap-start overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:w-[340px]"
+								class="group relative w-[280px] shrink-0 snap-start overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:shadow-lg sm:w-[340px] sm:hover:-translate-y-1"
 								onclick={() => trackEvent('Content: Room Card Click', { source: 'home', room: r.slug })}
 							>
 								<!-- Image -->
@@ -1474,7 +1474,7 @@
 							</div>
 
 							<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
 									<div class="flex items-start gap-3">
 										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
 											<Bed class="h-5 w-5" aria-hidden="true" />
@@ -1490,7 +1490,7 @@
 									</div>
 								</div>
 
-								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
 									<div class="flex items-start gap-3">
 										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
 											<ShowerHead class="h-5 w-5" aria-hidden="true" />
@@ -1506,7 +1506,7 @@
 									</div>
 								</div>
 
-								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
 									<div class="flex items-start gap-3">
 										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
 											<Leaf class="h-5 w-5" aria-hidden="true" />
@@ -1538,7 +1538,7 @@
 							</div>
 
 							<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
 									<div class="flex items-start gap-3">
 										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
 											<Microwave class="h-5 w-5" aria-hidden="true" />
@@ -1554,7 +1554,7 @@
 									</div>
 								</div>
 
-								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
 									<div class="flex items-start gap-3">
 										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
 											<Coffee class="h-5 w-5" aria-hidden="true" />
@@ -1570,7 +1570,7 @@
 									</div>
 								</div>
 
-								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
 									<div class="flex items-start gap-3">
 										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
 											<CupSoda class="h-5 w-5" aria-hidden="true" />
@@ -1586,7 +1586,7 @@
 									</div>
 								</div>
 
-								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
 									<div class="flex items-start gap-3">
 										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
 											<Utensils class="h-5 w-5" aria-hidden="true" />
@@ -1602,7 +1602,7 @@
 									</div>
 								</div>
 
-								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
 									<div class="flex items-start gap-3">
 										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
 											<Sandwich class="h-5 w-5" aria-hidden="true" />
@@ -1634,7 +1634,7 @@
 							</div>
 
 							<div class="grid gap-4 sm:grid-cols-2">
-								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
 									<div class="flex items-start gap-3">
 										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
 											<Wifi class="h-5 w-5" aria-hidden="true" />
@@ -1650,7 +1650,7 @@
 									</div>
 								</div>
 
-								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
 									<div class="flex items-start gap-3">
 										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
 											<SquareParking class="h-5 w-5" aria-hidden="true" />
@@ -1666,7 +1666,7 @@
 									</div>
 								</div>
 
-								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
 									<div class="flex items-start gap-3">
 										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
 											<Snowflake class="h-5 w-5" aria-hidden="true" />
