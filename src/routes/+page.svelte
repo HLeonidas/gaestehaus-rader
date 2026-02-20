@@ -534,7 +534,7 @@
 	</section>
 
 	<div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-		<div class="space-y-16">
+		<div class="space-y-20">
 			<section
 				class="-mx-4 mt-1 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 scroll-pl-4 scroll-pr-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 sm:scroll-pl-0 sm:scroll-pr-0 lg:grid-cols-4"
 			>

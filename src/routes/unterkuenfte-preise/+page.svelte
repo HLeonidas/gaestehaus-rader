@@ -103,16 +103,18 @@
 			<!-- removed -->
 
 			<!-- Room list -->
-			<div class="space-y-10">
+			<div class="space-y-14 sm:space-y-16">
 				{#each rooms as room}
-					<article class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+					<article
+						class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+					>
 						<!-- Image -->
 						<div class="relative">
 							<a href={`${accommodationsBase}/${room.slug}`}>
 								<img
 									src={withAsset(room.images.main)}
 									alt={`${room.title} – ${room.subtitle[$lang]}`}
-									class="h-auto w-full object-cover sm:h-72"
+									class="h-56 w-full object-cover sm:h-72"
 									loading="lazy"
 								/>
 							</a>
@@ -125,10 +127,13 @@
 									{room.badgeLabel}
 								</span>
 							{/if}
+							<div
+								class="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/10 to-transparent"
+							></div>
 						</div>
 
 						<!-- Content (split like screenshot) -->
-						<div class="grid gap-8 p-6 md:grid-cols-[1.6fr,0.9fr] md:gap-0">
+						<div class="grid gap-8 p-6 sm:p-7 md:grid-cols-[1.6fr,0.9fr] md:gap-0">
 							<!-- Left -->
 							<div class="md:pr-10">
 								<h2 class="text-lg font-semibold text-slate-900 sm:text-xl">
@@ -175,7 +180,7 @@
 								<div class="mt-6 flex flex-wrap items-center justify-end gap-3">
 									<a
 										href={`${accommodationsBase}/${room.slug}`}
-										class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-brand/30"
+										class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-brand/30"
 										onclick={() =>
 											trackEvent('Content: Room Card Click', {
 												source: 'rooms-list',
@@ -186,7 +191,7 @@
 									</a>
 									<a
 										href={resolve('/buchen')}
-										class="inline-flex items-center gap-2 rounded-xl bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90 focus:outline-none focus:ring-2 focus:ring-brand/30"
+										class="inline-flex items-center gap-2 rounded-xl bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-brand/30"
 										onclick={() => trackEvent('Booking: Jetzt buchen', { source: 'rooms-list' })}
 									>
 										{$t('rooms.page.cta')}
@@ -201,8 +206,8 @@
 		</section>
 
 		<!-- Bottom section -->
-		<section class="space-y-10">
-			<div class="text-center space-y-3 pt-15">
+		<section class="space-y-12 sm:space-y-14">
+			<div class="space-y-3 pt-14 text-center sm:pt-16">
 				<p class="text-xs font-semibold tracking-[0.35em] uppercase text-brand">
 					{$t('rooms.page.inclusive.kicker')}
 				</p>
