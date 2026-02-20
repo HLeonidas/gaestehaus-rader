@@ -1061,7 +1061,7 @@
 			<!-- GUEST CARD -->
 			<section class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
 				<div class="grid gap-8 lg:grid-cols-[1.1fr,0.9fr]">
-					<div class="relative min-h-[280px] lg:min-h-full">
+					<div class="order-2 relative h-[260px] sm:h-[320px] lg:order-1 lg:h-auto lg:min-h-full">
 						<img
 							src={withAsset('/images/experiences/train.png')}
 							alt={$t('guestcard.landing.imageAlt')}
@@ -1073,12 +1073,12 @@
 						></div>
 					</div>
 
-					<div class="space-y-6 px-6 py-8 sm:px-10 sm:py-10">
+					<div class="order-1 space-y-5 px-6 py-7 sm:px-10 sm:py-10 lg:order-2">
 						<div>
 							<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
 								{$t('guestcard.landing.kicker')}
 							</p>
-							<h2 class="mt-3 text-3xl font-serif font-medium leading-[0.95] text-slate-900 sm:text-4xl">
+							<h2 class="mt-2 text-2xl font-serif font-medium leading-[0.95] text-slate-900 sm:text-3xl lg:text-4xl">
 								{$t('guestcard.landing.title')}
 							</h2>
 							<div class="mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
@@ -1088,11 +1088,11 @@
 						</div>
 
 						<ul class="space-y-4 text-sm text-slate-600 sm:text-base">
-							<li class="flex items-start gap-3">
+							<li class="flex items-start gap-3 rounded-xl border border-brand/20 bg-brand/5 p-3">
 								<span
-									class="mt-0.5 grid h-12 w-12 shrink-0 place-items-center rounded-full bg-brand/10 text-brand"
+									class="mt-0.5 grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand/15 text-brand"
 								>
-									<BusFront class="h-6 w-6" aria-hidden="true" />
+									<BusFront class="h-5 w-5" aria-hidden="true" />
 								</span>
 								<div>
 									<p class="text-sm font-semibold text-slate-900">
@@ -1135,17 +1135,17 @@
 							</li>
 						</ul>
 
-						<div class="flex flex-wrap items-center gap-3">
+						<div class="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
 							<a
 								href={`${resolve('/erlebnisse')}#gaestecard`}
-								class="inline-flex items-center gap-2 rounded-xl bg-brand px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90"
+								class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90 sm:w-auto"
 							>
 								<Info class="h-4 w-4" aria-hidden="true" />
 								{$t('guestcard.cta.moreInfo')}
 							</a>
 							<a
 								href="https://www.nassfeld.at/PDFs/NPS/Gaestekarten/BasisCard_Broschuere.pdf"
-								class="mt-2 inline-flex items-center gap-2 rounded-xl bg-white/15 px-6 py-3 text-sm font-semibold text-slate-900 ring-1 ring-slate-200 backdrop-blur-sm transition hover:bg-white/20 sm:mt-0"
+								class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white/15 px-6 py-3 text-sm font-semibold text-slate-900 ring-1 ring-slate-200 backdrop-blur-sm transition hover:bg-white/20 sm:w-auto"
 								target="_blank"
 								rel="noreferrer"
 							>
