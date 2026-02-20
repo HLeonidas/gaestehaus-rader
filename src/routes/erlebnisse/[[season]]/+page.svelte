@@ -19,6 +19,7 @@
 		Snowflake,
 		Sun,
 		TrainFront,
+		Users,
 		Utensils,
 		Waves,
 	} from 'lucide-svelte';
@@ -39,6 +40,7 @@
 		badgeKey?: string;
 		titleSize?: string;
 		layout?: string;
+		metaKeys?: string[];
 	};
 	type DestinationCard = {
 		id: string;
@@ -47,6 +49,12 @@
 		titleKey: string;
 		bodyKey: string;
 		tagsBySeason: Record<SeasonKey, string[]>;
+	};
+	type InterestLink = {
+		id: string;
+		icon: ComponentType;
+		labelKey: string;
+		href: string;
 	};
 
 	const withAsset = (path: string) => asset(path);
@@ -91,6 +99,7 @@
 			layout: 'summer',
 			className: 'c1',
 			titleSize: 'text-2xl',
+			metaKeys: ['experiences.event.summer.hike.meta1', 'experiences.event.summer.hike.meta2'],
 		},
 		{
 			id: 'summer-lake',
@@ -102,6 +111,7 @@
 			layout: 'summer',
 			className: 'c2',
 			titleSize: 'text-xl',
+			metaKeys: ['experiences.event.summer.lake.meta1', 'experiences.event.summer.lake.meta2'],
 		},
 		{
 			id: 'summer-bike',
@@ -113,6 +123,7 @@
 			layout: 'summer',
 			className: 'c3',
 			titleSize: 'text-xl',
+			metaKeys: ['experiences.event.summer.bike.meta1', 'experiences.event.summer.bike.meta2'],
 		},
 		{
 			id: 'summer-lift',
@@ -126,6 +137,7 @@
 			className: 'c4',
 			// badgeKey: 'experiences.badge.includedCard',
 			titleSize: 'text-2xl',
+			metaKeys: ['experiences.event.summer.lift.meta1', 'experiences.event.summer.lift.meta2'],
 		},
 		{
 			id: 'winter-ski',
@@ -138,6 +150,7 @@
 			layout: 'winter',
 			className: 'c1',
 			titleSize: 'text-2xl',
+			metaKeys: ['experiences.event.winter.ski.meta1', 'experiences.event.winter.ski.meta2'],
 		},
 		{
 			id: 'winter-ice',
@@ -150,6 +163,7 @@
 			className: 'c2',
 			badgeKey: 'experiences.badge.popular',
 			titleSize: 'text-xl',
+			metaKeys: ['experiences.event.winter.ice.meta1', 'experiences.event.winter.ice.meta2'],
 		},
 		{
 			id: 'winter-hike',
@@ -161,6 +175,7 @@
 			layout: 'winter',
 			className: 'c3',
 			titleSize: 'text-xl',
+			metaKeys: ['experiences.event.winter.hike.meta1', 'experiences.event.winter.hike.meta2'],
 		},
 		{
 			id: 'winter-crosscountry',
@@ -173,12 +188,18 @@
 			layout: 'winter',
 			className: 'c4',
 			titleSize: 'text-2xl',
+			metaKeys: [
+				'experiences.event.winter.crosscountry.meta1',
+				'experiences.event.winter.crosscountry.meta2',
+			],
 		},
 	];
 
 	const summerEvents = events.filter((event) => event.season === 'summer');
 	const winterEvents = events.filter((event) => event.season === 'winter');
 	const currentEvents = $derived(activeTab === 'summer' ? summerEvents : winterEvents);
+	const featuredEvent = $derived(currentEvents[0]);
+	const secondaryEvents = $derived(currentEvents.slice(1));
 
 	const content: Record<
 		SeasonKey,
@@ -289,6 +310,45 @@
 		},
 	];
 
+	const interestLinks: InterestLink[] = [
+		{
+			id: 'hiking',
+			icon: Mountain,
+			labelKey: 'experiences.interests.hiking',
+			href: '#highlights',
+		},
+		{
+			id: 'active',
+			icon: Bike,
+			labelKey: 'experiences.interests.active',
+			href: '#highlights',
+		},
+		{
+			id: 'family',
+			icon: Users,
+			labelKey: 'experiences.interests.family',
+			href: '#ausflugsideen',
+		},
+		{
+			id: 'lakes',
+			icon: Waves,
+			labelKey: 'experiences.interests.lakes',
+			href: '#highlights',
+		},
+		{
+			id: 'culture',
+			icon: Utensils,
+			labelKey: 'experiences.interests.culture',
+			href: '#ausflugsideen',
+		},
+		{
+			id: 'winter',
+			icon: Snowflake,
+			labelKey: 'experiences.interests.winter',
+			href: '#highlights',
+		},
+	];
+
 	const guestCardLinks = {
 		benefitsOverview:
 			'https://www.nassfeld.at/de/Unterkunft-finden/Reise-planen/PREMIUM-Cards/GaesteCard-basic',
@@ -303,126 +363,220 @@
 
 <main class="bg-[#fbfaf7]">
 	<div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-		<!-- HERO -->
-		<section class="px-6 sm:px-10">
-			<div class="flex justify-center">
-				<div class="inline-flex rounded-full border border-slate-200 bg-white p-1 shadow-sm">
-					<button
-						type="button"
-						class={`tab-btn inline-flex items-center gap-2 rounded-full px-6 py-2 text-sm font-semibold transition-all duration-300 ${
-							activeTab === 'summer'
-								? 'is-active bg-brand text-white shadow-sm'
-								: 'text-slate-700 hover:text-slate-900 hover:bg-slate-50'
-						}`}
-						onclick={() => setSeason('summer')}
-					>
-						<Sun
-							class={`h-4 w-4 transition-transform duration-300 ${
-								activeTab === 'summer' ? 'rotate-12 scale-110' : 'rotate-0 scale-100'
-							}`}
-						/>
-						{$t('experiences.tabs.summer')}
-					</button>
-
-					<button
-						type="button"
-						class={`tab-btn inline-flex items-center gap-2 rounded-full px-6 py-2 text-sm font-semibold transition-all duration-300 ${
-							activeTab === 'winter'
-								? 'is-active bg-brand text-white shadow-sm'
-								: 'text-slate-700 hover:text-slate-900 hover:bg-slate-50'
-						}`}
-						onclick={() => setSeason('winter')}
-					>
-						<Snowflake
-							class={`h-4 w-4 transition-transform duration-300 ${
-								activeTab === 'winter' ? '-rotate-12 scale-110' : 'rotate-0 scale-100'
-							}`}
-						/>
-						{$t('experiences.tabs.winter')}
-					</button>
-				</div>
-			</div>
-		</section>
-
 		<!-- CONTENT WRAPPER -->
-		<div class="mt-5 space-y-12" id="aktivitaeten">
+		<div class="space-y-14" id="aktivitaeten">
 			<section class="sm:p-10">
-				<div class="mx-auto max-w-3xl text-center">
-					<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
+				<div class="mx-auto max-w-6xl text-center">
+					<div class="flex justify-center">
+						<div class="inline-flex rounded-full border border-slate-200 bg-white p-1 shadow-sm">
+							<button
+								type="button"
+								class={`tab-btn inline-flex items-center gap-2 rounded-full px-6 py-2 text-sm font-semibold transition-all duration-300 ${
+									activeTab === 'summer'
+										? 'is-active bg-brand text-white shadow-sm'
+										: 'text-slate-700 hover:text-slate-900 hover:bg-slate-50'
+								}`}
+								onclick={() => setSeason('summer')}
+							>
+								<Sun
+									class={`h-4 w-4 transition-transform duration-300 ${
+										activeTab === 'summer' ? 'rotate-12 scale-110' : 'rotate-0 scale-100'
+									}`}
+								/>
+								{$t('experiences.tabs.summer')}
+							</button>
+
+							<button
+								type="button"
+								class={`tab-btn inline-flex items-center gap-2 rounded-full px-6 py-2 text-sm font-semibold transition-all duration-300 ${
+									activeTab === 'winter'
+										? 'is-active bg-brand text-white shadow-sm'
+										: 'text-slate-700 hover:text-slate-900 hover:bg-slate-50'
+								}`}
+								onclick={() => setSeason('winter')}
+							>
+								<Snowflake
+									class={`h-4 w-4 transition-transform duration-300 ${
+										activeTab === 'winter' ? '-rotate-12 scale-110' : 'rotate-0 scale-100'
+									}`}
+								/>
+								{$t('experiences.tabs.winter')}
+							</button>
+						</div>
+					</div>
+					<p class="mt-8 text-xs font-semibold uppercase tracking-[0.35em] text-brand sm:mt-10">
 						{$t('experiences.destinations.kicker')}
 					</p>
-					<h1 class="mt-3 font-serif text-3xl leading-[0.95] text-slate-900 sm:text-4xl">
+					<h1 class="mt-3 font-serif text-4xl leading-[0.95] text-slate-900 sm:text-5xl">
 						{$t('experiences.destinations.title')}
 					</h1>
 					<div class="mx-auto mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
-					<p class="mt-4 text-sm leading-relaxed text-slate-600 sm:text-base">
+					<p class="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-slate-600 sm:text-base">
 						{$t('experiences.destinations.subtitle')}
 					</p>
 				</div>
 
-				<div class="mt-8">
+				<div class="anchor-target mt-10" id="interessen">
+					<p class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
+						{$t('experiences.interests.title')}
+					</p>
+					<div class="mt-4 flex flex-wrap gap-3">
+						{#each interestLinks as interest}
+							<a
+								href={interest.href}
+								class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-3 text-base font-semibold text-slate-700 shadow-sm transition duration-300 hover:scale-[1.02] hover:border-brand/30 hover:text-slate-900"
+							>
+								<interest.icon class="h-4 w-4 text-brand" aria-hidden="true" />
+								{$t(interest.labelKey)}
+							</a>
+						{/each}
+					</div>
+				</div>
+
+				<div class="anchor-target mt-10" id="highlights">
 					<p class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
 						{$t('experiences.destinations.topHighlights')}
 					</p>
 
 					{#key activeTab}
-						<div class="experience-grid mt-4 gap-6" in:fly={{ y: 26, duration: 520, easing: cubicOut }}>
-							{#each currentEvents as event (event.id)}
+						<div class="mt-4 space-y-6" in:fly={{ y: 26, duration: 520, easing: cubicOut }}>
+							{#if featuredEvent}
 								<article
-									class={`experience-card group relative overflow-hidden rounded-3xl ${event.className ?? ''}`}
+									class="group relative aspect-[4/5] overflow-hidden rounded-3xl sm:aspect-[16/10]"
 								>
 									<img
-										src={withAsset(event.image)}
-										alt={`${$t(event.titleKey)} – ${$t(event.kickerKey)}`}
-										class="h-full w-full object-cover"
+										src={withAsset(featuredEvent.image)}
+										alt={`${$t(featuredEvent.titleKey)} – ${$t(featuredEvent.kickerKey)}`}
+										class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
 										loading="lazy"
 									/>
 									<div
-										class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent"
+										class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent"
 									></div>
 
-									{#if event.badgeKey}
+									{#if featuredEvent.badgeKey}
 										<span
 											class="absolute right-5 top-5 rounded-full bg-brand px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white shadow-sm"
 										>
-											{$t(event.badgeKey)}
+											{$t(featuredEvent.badgeKey)}
 										</span>
 									{/if}
 
 									<div class="absolute bottom-0 left-0 right-0 p-6">
-										<p
-											class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand"
-										>
-											<event.icon class="h-4 w-4 text-brand" aria-hidden="true" />
-											{$t(event.kickerKey)}
-										</p>
-										<h3 class={`mt-2 font-semibold text-white ${event.titleSize ?? 'text-xl'}`}>
-											{$t(event.titleKey)}
-										</h3>
-										{#if event.descriptionKey}
-											<p class="mt-2 max-w-xl text-sm text-white/85">
-												{$t(event.descriptionKey)}
+										<div class="max-w-2xl rounded-xl border border-white/15 bg-black/40 p-6 backdrop-blur-sm">
+											<p
+												class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand"
+											>
+												<featuredEvent.icon class="h-4 w-4 text-brand" aria-hidden="true" />
+												{$t(featuredEvent.kickerKey)}
 											</p>
-										{/if}
+											<h3 class={`mt-2 font-semibold text-white ${featuredEvent.titleSize ?? 'text-xl'}`}>
+												{$t(featuredEvent.titleKey)}
+											</h3>
+											{#if featuredEvent.descriptionKey}
+												<p class="mt-2 max-w-xl text-sm text-white/85">
+													{$t(featuredEvent.descriptionKey)}
+												</p>
+											{/if}
+											{#if featuredEvent.metaKeys?.length}
+												<div class="mt-3 flex flex-wrap gap-2">
+													{#each featuredEvent.metaKeys as metaKey}
+														<span class="rounded-full border border-white/20 bg-white/15 px-3 py-1 text-xs font-semibold text-white">
+															{$t(metaKey)}
+														</span>
+													{/each}
+												</div>
+											{/if}
+										</div>
 									</div>
 								</article>
-							{/each}
+							{/if}
+
+							<div class="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:grid md:grid-cols-12 md:gap-6 md:overflow-visible md:pb-0">
+								{#each secondaryEvents as event, index (event.id)}
+									<article
+										class={`experience-card group relative aspect-[4/3] w-[82%] shrink-0 snap-start overflow-hidden rounded-3xl md:h-[290px] md:w-auto md:shrink md:aspect-auto ${
+											index === 0 ? 'md:col-span-6' : 'md:col-span-3'
+										}`}
+									>
+										<img
+											src={withAsset(event.image)}
+											alt={`${$t(event.titleKey)} – ${$t(event.kickerKey)}`}
+											class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+											loading="lazy"
+										/>
+										<div
+											class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent"
+										></div>
+										<div class="absolute bottom-0 left-0 right-0 p-6">
+											<p
+												class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand"
+											>
+												<event.icon class="h-4 w-4 text-brand" aria-hidden="true" />
+												{$t(event.kickerKey)}
+											</p>
+											<h3 class={`mt-2 font-semibold text-white ${event.titleSize ?? 'text-xl'}`}>
+												{$t(event.titleKey)}
+											</h3>
+											{#if event.metaKeys?.length}
+												<div class="mt-3 flex flex-wrap gap-2">
+													{#each event.metaKeys as metaKey}
+														<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white">
+															{$t(metaKey)}
+														</span>
+													{/each}
+												</div>
+											{/if}
+										</div>
+									</article>
+								{/each}
+							</div>
 						</div>
 					{/key}
 				</div>
 
-				<div class="mt-10">
+				<div class="mt-10 rounded-2xl border border-brand/15 bg-[#fdf8f2] p-6 shadow-sm">
+					<div class="grid gap-6 md:grid-cols-[1.5fr,auto] md:items-center">
+						<div>
+							<p class="text-xs font-semibold uppercase tracking-[0.22em] text-brand">
+								{$t('experiences.base.kicker')}
+							</p>
+							<h3 class="mt-2 text-2xl font-semibold text-slate-900">
+								{$t('experiences.base.title')}
+							</h3>
+							<p class="mt-2 max-w-3xl text-sm leading-relaxed text-slate-600">
+								{$t('experiences.base.body')}
+							</p>
+						</div>
+						<div class="flex flex-wrap gap-3 md:flex-col md:justify-center">
+							<a
+								href={resolve('/unterkuenfte-preise')}
+								class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-800 transition hover:bg-slate-50"
+							>
+								{$t('experiences.base.cta.rooms')}
+							</a>
+							<a
+								href={resolve('/buchen')}
+								class="inline-flex items-center justify-center rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand/90"
+							>
+								{$t('experiences.base.cta.booking')}
+							</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="anchor-target mt-10 pt-16" id="ausflugsideen">
 					<p class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
 						{$t('experiences.destinations.popular')}
 					</p>
 					<div class="mt-4 grid gap-4 sm:grid-cols-2">
 						{#each destinationCards as card}
-							<article class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
+							<article class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg">
 								<div class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">
 									<card.icon class="h-4 w-4" aria-hidden="true" />
 									{$t(card.kickerKey)}
 								</div>
-								<h3 class="mt-2 text-lg font-semibold leading-tight text-slate-900">
+								<h3 class="mt-2 text-xl font-semibold leading-tight text-slate-900">
 									{$t(card.titleKey)}
 								</h3>
 								<p class="mt-2 text-sm leading-relaxed text-slate-600">
@@ -441,7 +595,7 @@
 				</div>
 			</section>
 
-			<section class="mt-12 sm:p-10" id="gaestecard">
+			<section class="anchor-target mt-12 sm:p-10" id="gaestecard">
 				<div class="mx-auto max-w-3xl">
 					<div class="rounded-2xl border border-slate-200 bg-white/70 p-5 text-left sm:border-0 sm:bg-transparent sm:p-0 sm:text-center">
 						<p class="text-xs font-semibold uppercase tracking-[0.28em] text-brand sm:tracking-[0.35em]">
@@ -739,38 +893,37 @@
 </main>
 
 <style>
-	.experience-grid {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 1.5rem; /* gap-6 */
+	.anchor-target {
+		scroll-margin-top: 7rem;
+		border-radius: 1rem;
+		transition:
+			background-color 240ms ease,
+			box-shadow 240ms ease;
 	}
 
-	/* ---- SUMMER GRID (like screenshot) ---- */
-	@media (min-width: 768px) {
-		.experience-grid {
-			/* 12-col grid for 8/4 + 4/8 layout */
-			grid-template-columns: repeat(12, minmax(0, 1fr));
-			grid-template-rows: 320px 300px; /* adjust if you want */
-		}
+	.anchor-target:target {
+		background-color: rgba(247, 171, 0, 0.05);
+		box-shadow:
+			0 0 0 1px rgba(247, 171, 0, 0.22),
+			0 0 0 12px rgba(247, 171, 0, 0.07),
+			0 12px 28px -22px rgba(247, 171, 0, 0.45);
+		animation: anchorTargetPulse 800ms ease-out 1;
+	}
 
-		/* Row 1 */
-		.c1 {
-			grid-column: 1 / span 8; /* 8/12 */
-			grid-row: 1;
+	@keyframes anchorTargetPulse {
+		0% {
+			background-color: rgba(247, 171, 0, 0.13);
+			box-shadow:
+				0 0 0 1px rgba(247, 171, 0, 0.3),
+				0 0 0 16px rgba(247, 171, 0, 0.1),
+				0 14px 30px -22px rgba(247, 171, 0, 0.5);
 		}
-		.c2 {
-			grid-column: 9 / span 4; /* 4/12 */
-			grid-row: 1;
-		}
-
-		/* Row 2 */
-		.c3 {
-			grid-column: 1 / span 4; /* 4/12 */
-			grid-row: 2;
-		}
-		.c4 {
-			grid-column: 5 / span 8; /* 8/12 */
-			grid-row: 2;
+		100% {
+			background-color: rgba(247, 171, 0, 0.05);
+			box-shadow:
+				0 0 0 1px rgba(247, 171, 0, 0.22),
+				0 0 0 12px rgba(247, 171, 0, 0.07),
+				0 12px 28px -22px rgba(247, 171, 0, 0.45);
 		}
 	}
 

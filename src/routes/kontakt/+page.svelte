@@ -32,6 +32,12 @@
 	const mapSrc =
 		'https://www.google.com/maps?q=Weissbriach%2092%2C%209622%20Weissbriach%2C%20Austria&output=embed';
 	const mapLink = 'https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9';
+	let mapEnabled = false;
+
+	const enableMap = () => {
+		mapEnabled = true;
+		void trackEvent('Map: Loaded', { source: 'contact' });
+	};
 </script>
 
 <SeoHead titleKey="contact.seo.title" descriptionKey="contact.seo.description" />
@@ -171,14 +177,50 @@
 			<div
 				class="relative min-h-[320px] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm sm:min-h-[360px] lg:min-h-full"
 			>
-				<iframe
-					title={$t('contact.map.iframeTitle')}
-					class="h-full w-full border-0"
-					loading="lazy"
-					referrerpolicy="no-referrer-when-downgrade"
-					src={mapSrc}
-					onload={() => trackEvent('Map: Loaded', { source: 'contact' })}
-				></iframe>
+				{#if mapEnabled}
+					<iframe
+						title={$t('contact.map.iframeTitle')}
+						class="h-full w-full border-0"
+						loading="lazy"
+						referrerpolicy="no-referrer-when-downgrade"
+						src={mapSrc}
+					></iframe>
+				{:else}
+					<div class="grid h-full place-items-center px-4 py-6">
+						<div class="max-w-sm text-center">
+							<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
+								{$t('contact.map.label')}
+							</p>
+							<h3 class="mt-3 text-lg font-semibold text-slate-900">
+								{$t('contact.map.title')}
+							</h3>
+
+							<div class="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
+								<button
+									type="button"
+									class="inline-flex items-center justify-center rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:brightness-110"
+									onclick={enableMap}
+								>
+									{$t('contact.map.load')}
+								</button>
+
+								<a
+									class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-800 shadow-sm transition hover:bg-slate-50"
+									href={mapLink}
+									target="_blank"
+									rel="noopener noreferrer"
+									onclick={() => trackEvent('Map: Open External', { source: 'contact' })}
+								>
+									{$t('contact.map.open')}
+								</a>
+							</div>
+
+							<p class="mt-4 text-[12px] text-slate-500">
+								{$t('contact.map.tip')}
+							</p>
+						</div>
+					</div>
+				{/if}
 			</div>
 		</div>
 
