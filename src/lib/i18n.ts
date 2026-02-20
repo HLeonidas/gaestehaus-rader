@@ -277,6 +277,53 @@ const translations: Record<Lang, Record<string, string>> = {
 		'experiences.event.winter.crosscountry.title': 'Loipen in Weißbriach',
 		'experiences.event.winter.crosscountry.description':
 			'Von der sonnigen Genussrunde bis zur längeren Runde: gespurte Loipen und Skating-Spuren im Gitschtal.',
+		'experiences.destinations.kicker': 'Ausflugsziele',
+		'experiences.destinations.title': 'In der Umgebung entdecken',
+		'experiences.destinations.subtitle':
+			'Vier starke Ziele rund ums Gitschtal - perfekt für Tagesausflüge, je nach Saison und Wetter.',
+		'experiences.destinations.topHighlights': 'Top-Erlebnisse',
+		'experiences.destinations.popular': 'Beliebte Ausflugsziele',
+		'experiences.destinations.nassfeld.kicker': 'Berge',
+		'experiences.destinations.nassfeld.title': 'Nassfeld',
+		'experiences.destinations.nassfeld.body':
+			'Sommer-Bergbahnen, Panoramawege und im Winter Kärntens Top-Skigebiet.',
+		'experiences.destinations.weissensee.kicker': 'See & Natur',
+		'experiences.destinations.weissensee.title': 'Weißensee',
+		'experiences.destinations.weissensee.body':
+			'Naturpark-Feeling im Sommer - und im Winter ein echtes Natureis-Highlight.',
+		'experiences.destinations.hermagor.kicker': 'Kultur',
+		'experiences.destinations.hermagor.title': 'Hermagor',
+		'experiences.destinations.hermagor.body':
+			'Regionaler Ausgangspunkt fürs Gailtal - ideal für Markt, Kultur & Schlechtwettertipps.',
+		'experiences.destinations.gailtal.kicker': 'Aktiv & Genuss',
+		'experiences.destinations.gailtal.title': 'Gailtal',
+		'experiences.destinations.gailtal.body':
+			'Genussradeln am R3 und kulinarische Entdeckungen entlang der Gail.',
+		'experiences.destinations.gitschtal.kicker': 'Ruhe & Natur',
+		'experiences.destinations.gitschtal.title': 'Gitschtal',
+		'experiences.destinations.gitschtal.body':
+			'Sanfte Almen, Panoramawege und echte Ruhe - das Gitschtal ist der ideale Ausgangspunkt für entspannte Naturerlebnisse direkt vor der Haustür.',
+		'experiences.destinations.genussregion.kicker': 'Kultur & Genuss',
+		'experiences.destinations.genussregion.title': 'Genussregion',
+		'experiences.destinations.genussregion.body':
+			'Regionale Küche, Bauernmärkte und Slow-Food-Erlebnisse zwischen Gailtal und Weißensee - Kärnten zum Genießen.',
+		'experiences.destinations.tags.summer': 'Sommer',
+		'experiences.destinations.tags.winter': 'Winter',
+		'experiences.destinations.tags.panorama': 'Panorama',
+		'experiences.destinations.tags.nature': 'Natur',
+		'experiences.destinations.tags.swim': 'Baden',
+		'experiences.destinations.tags.ice': 'Eis',
+		'experiences.destinations.tags.culture': 'Kultur',
+		'experiences.destinations.tags.market': 'Markt',
+		'experiences.destinations.tags.rainy': 'Schlechtwetter',
+		'experiences.destinations.tags.bike': 'Rad',
+		'experiences.destinations.tags.enjoy': 'Genuss',
+		'experiences.destinations.tags.slowfood': 'Slow Food',
+		'experiences.destinations.tags.hiking': 'Wandern',
+		'experiences.destinations.tags.ski': 'Ski',
+		'experiences.destinations.tags.family': 'Familie',
+		'experiences.destinations.tags.calm': 'Ruhe',
+		'experiences.destinations.tags.regional': 'Regional',
 		'cta.title': 'Bereit für Ihre Auszeit?',
 		'cta.body': 'Prüfen Sie Verfügbarkeit und sichern Sie sich Ihr Wunsch-Appartement.',
 		'cta.primary': 'Jetzt buchen',
@@ -385,22 +432,23 @@ const translations: Record<Lang, Record<string, string>> = {
 		'guestcard.experiences.kicker': 'Exklusiv für Sie',
 		'guestcard.experiences.title': 'GästeCard Basic inklusive',
 		'guestcard.experiences.subtitle':
-			'Mit der GästeCard Basic nutzen Sie den öffentlichen Verkehr kostenlos und profitieren von vielen Vergünstigungen in der Region - ideal für Ausflüge ohne Auto.',
+			'Mit der GästeCard Basic sind Sie ohne Auto flexibel unterwegs - und nutzen zusätzlich zahlreiche Ermäßigungen und Vorteile in der Region.',
 		'guestcard.experiences.freeNote': 'Kostenlos für unsere Übernachtungsgäste',
 		'guestcard.experiences.brochure.cta': 'Alle Vorteile in der Broschüre ansehen',
+		'guestcard.experiences.benefitsOverviewCta': 'Aktuelle Leistungsübersicht',
 		'guestcard.experiences.intro.item1': 'kostenlose Nutzung des öffentlichen Verkehrs in Kärnten',
 		'guestcard.experiences.intro.item2': 'über 40 Ermäßigungen bei Freizeit- & Erlebnispartnern',
 		'guestcard.experiences.intro.item3': 'gültig ab der ersten Nacht Ihres Aufenthalts',
 		'guestcard.experiences.transport.title': 'Mobil unterwegs - ohne Auto',
 		'guestcard.experiences.transport.bus.title': 'Regionale Linienbusse',
 		'guestcard.experiences.transport.bus.body':
-			'Mit der GästeCard Basic fahren Sie mit Linienbussen in der Region kostenlos - perfekt für Ausflüge und Startpunkte von Touren.',
+			'Stündlich unterwegs: In der Urlaubsregion sowie Richtung Lesachtal und Weißensee fahren Gäste kostenlos mit dem Linienbus.',
 		'guestcard.experiences.transport.sbahn.title': 'ÖBB S-Bahn in Kärnten',
 		'guestcard.experiences.transport.sbahn.body':
-			'Mit gültiger Gästekarte können Sie S-Bahn-Linien und ausgewählte Regionalverbindungen in Kärnten nutzen - entspannt, nachhaltig und flexibel.',
+			'ÖBB S-Bahn, REX und Radsprinter in Kärnten (bis nach Lienz) kostenlos nutzen - Ausweis bitte mitführen.',
 		'guestcard.experiences.transport.arrival.title': 'An- & Abreisetag inklusive',
 		'guestcard.experiences.transport.arrival.body':
-			'Die Karte ist personengebunden und gilt für die gesamte Dauer Ihres Aufenthalts - inklusive Anreise- und Abreisetag.',
+			'Die Karte ist kostenlos, personalisiert und für Ihren gesamten Aufenthalt gültig.',
 		'guestcard.experiences.wellness.title': 'Baden & Wellness',
 		'guestcard.experiences.wellness.card1.title': 'Schwimmbäder & Freibäder',
 		'guestcard.experiences.wellness.card1.body':
@@ -408,7 +456,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'guestcard.experiences.wellness.card1.alt': 'Thermalbad mit Blick ins Grüne',
 		'guestcard.experiences.wellness.card2.title': 'Weißensee: Natur pur',
 		'guestcard.experiences.wellness.card2.body':
-			'Glasklares Wasser und Naturpark-Feeling - ein besonderer Badesee in Kärnten.',
+			'Vergünstigungen bei ausgewählten Angeboten rund um den Weißensee - Naturpark-Feeling inklusive.',
 		'guestcard.experiences.wellness.card2.alt': 'Seeufer mit Steg und Bergen',
 		'guestcard.experiences.wellness.card3.title': 'Sauna & Wellness',
 		'guestcard.experiences.wellness.card3.body':
@@ -417,24 +465,24 @@ const translations: Record<Lang, Record<string, string>> = {
 		'guestcard.experiences.outdoor.title': 'Draußen erleben',
 		'guestcard.experiences.outdoor.feature.title': 'Geführte Naturerlebnisse',
 		'guestcard.experiences.outdoor.feature.body':
-			'Von geführten Wanderungen bis zu Naturprogrammen: Entdecken Sie die Landschaft rund um Gitschtal, Gailtal und Weißensee.',
+			'Ermäßigte geführte Wanderungen und Naturprogramme in der Region rund um Gitschtal, Gailtal und Weißensee.',
 		'guestcard.experiences.outdoor.feature.cta': 'Zum Wanderprogramm',
 		'guestcard.experiences.outdoor.bike.title': 'Radwege im Gailtal',
 		'guestcard.experiences.outdoor.bike.body':
-			'Genussradeln am R3 Gailtalradweg oder sportlicher unterwegs - je nach Tempo und Lust.',
+			'Vergünstigte Angebote für Rad- und Freizeitprogramme im Gailtal - vom Genussradeln bis sportlich aktiv.',
 		'guestcard.experiences.outdoor.maps.title': 'Wanderkarten',
 		'guestcard.experiences.outdoor.maps.body': 'Kostenlos an der Rezeption erhältlich.',
 		'guestcard.experiences.outdoor.adventure.title': 'Berge & Action am Nassfeld',
 		'guestcard.experiences.outdoor.adventure.body':
-			'Bergbahnen, Outdoor-Angebote und Abenteuerprogramme machen das Nassfeld zum starken Tagesziel.',
+			'Ermäßigte Bergbahn-, Outdoor- und Abenteuerangebote machen das Nassfeld zum starken Tagesziel.',
 		'guestcard.experiences.food.title': 'Kulinarik',
 		'guestcard.experiences.food.card.title': 'Regionale Genüsse entdecken',
 		'guestcard.experiences.food.card.body':
-			'Die Gegend ist bekannt für kulinarische Erlebnisse - von Bauernprodukten bis zu geführten Genussangeboten.',
+			'Vergünstigungen bei ausgewählten kulinarischen Erlebnissen - von Bauernprodukten bis zu geführten Genussangeboten.',
 		'guestcard.experiences.culture.title': 'Kultur & Ausflüge',
 		'guestcard.experiences.culture.card.title': 'Museen & regionale Geschichte',
 		'guestcard.experiences.culture.card.body':
-			'Z. B. Schloss Möderndorf bei Hermagor mit dem Gailtaler Museum - ein schönes Ziel für Schlechtwettertage.',
+			'Ermäßigte Eintritte bei ausgewählten Kulturzielen, z. B. Schloss Möderndorf bei Hermagor mit dem Gailtaler Museum.',
 		'guestcard.experiences.faq.title': 'Häufig gestellte Fragen',
 		'price.from': 'ab €',
 		'price.night': 'Nacht',
@@ -1049,6 +1097,53 @@ const translations: Record<Lang, Record<string, string>> = {
 		'experiences.event.winter.crosscountry.title': 'Trails in Weißbriach',
 		'experiences.event.winter.crosscountry.description':
 			'From sunny easy loops to longer routes: groomed classic and skating trails in the Gitschtal.',
+		'experiences.destinations.kicker': 'Day trips',
+		'experiences.destinations.title': 'Explore nearby highlights',
+		'experiences.destinations.subtitle':
+			'Four strong destinations around the Gitschtal - perfect for day trips in any season.',
+		'experiences.destinations.topHighlights': 'Top experiences',
+		'experiences.destinations.popular': 'Popular destinations',
+		'experiences.destinations.nassfeld.kicker': 'Mountains',
+		'experiences.destinations.nassfeld.title': 'Nassfeld',
+		'experiences.destinations.nassfeld.body':
+			'Summer lifts, panoramic trails - and in winter one of Carinthia’s top ski areas.',
+		'experiences.destinations.weissensee.kicker': 'Lake & nature',
+		'experiences.destinations.weissensee.title': 'Lake Weißensee',
+		'experiences.destinations.weissensee.body':
+			'Nature-park vibes in summer - and a famous natural ice experience in winter.',
+		'experiences.destinations.hermagor.kicker': 'Culture',
+		'experiences.destinations.hermagor.title': 'Hermagor',
+		'experiences.destinations.hermagor.body':
+			'Regional hub for the Gailtal valley - great for markets, culture and rainy-day ideas.',
+		'experiences.destinations.gailtal.kicker': 'Active & local flavors',
+		'experiences.destinations.gailtal.title': 'Gailtal valley',
+		'experiences.destinations.gailtal.body':
+			'Easy cycling on the R3 and culinary discoveries along the river Gail.',
+		'experiences.destinations.gitschtal.kicker': 'Calm & nature',
+		'experiences.destinations.gitschtal.title': 'Gitschtal',
+		'experiences.destinations.gitschtal.body':
+			'Gentle alpine meadows, panoramic paths, and real calm - the Gitschtal is the ideal base for relaxed nature experiences right outside your door.',
+		'experiences.destinations.genussregion.kicker': 'Culture & flavors',
+		'experiences.destinations.genussregion.title': 'Culinary region',
+		'experiences.destinations.genussregion.body':
+			'Regional cuisine, farmers markets, and Slow Food experiences between the Gailtal and Lake Weißensee - Carinthia at its most enjoyable.',
+		'experiences.destinations.tags.summer': 'Summer',
+		'experiences.destinations.tags.winter': 'Winter',
+		'experiences.destinations.tags.panorama': 'Panorama',
+		'experiences.destinations.tags.nature': 'Nature',
+		'experiences.destinations.tags.swim': 'Swimming',
+		'experiences.destinations.tags.ice': 'Ice',
+		'experiences.destinations.tags.culture': 'Culture',
+		'experiences.destinations.tags.market': 'Market',
+		'experiences.destinations.tags.rainy': 'Rainy day',
+		'experiences.destinations.tags.bike': 'Cycling',
+		'experiences.destinations.tags.enjoy': 'Leisure',
+		'experiences.destinations.tags.slowfood': 'Slow Food',
+		'experiences.destinations.tags.hiking': 'Hiking',
+		'experiences.destinations.tags.ski': 'Ski',
+		'experiences.destinations.tags.family': 'Family',
+		'experiences.destinations.tags.calm': 'Calm',
+		'experiences.destinations.tags.regional': 'Regional',
 		'cta.title': 'Ready for your getaway?',
 		'cta.body': 'Check availability and secure your preferred apartment.',
 		'cta.primary': 'Check availability',
@@ -1157,22 +1252,23 @@ const translations: Record<Lang, Record<string, string>> = {
 		'guestcard.experiences.kicker': 'Exclusive for you',
 		'guestcard.experiences.title': 'Guest Card Basic included',
 		'guestcard.experiences.subtitle':
-			'With the Guest Card Basic, you use public transport for free and get many regional discounts - ideal for outings without a car.',
+			'With the Guest Card Basic, you can get around comfortably without a car - plus enjoy many regional discounts and perks.',
 		'guestcard.experiences.freeNote': 'Free for our overnight guests',
 		'guestcard.experiences.brochure.cta': 'See all benefits in the brochure',
+		'guestcard.experiences.benefitsOverviewCta': 'Current benefits overview',
 		'guestcard.experiences.intro.item1': 'free use of public transport in Carinthia',
 		'guestcard.experiences.intro.item2': 'over 40 discounts with leisure & experience partners',
 		'guestcard.experiences.intro.item3': 'valid from the first night of your stay',
 		'guestcard.experiences.transport.title': 'Easy mobility - no car needed',
 		'guestcard.experiences.transport.bus.title': 'Regional bus lines',
 		'guestcard.experiences.transport.bus.body':
-			'With the Guest Card Basic, regional bus lines are free to use - ideal for excursions and trail starting points.',
+			'Hourly connections across the holiday region - including routes towards the Lesachtal and Lake Weißensee.',
 		'guestcard.experiences.transport.sbahn.title': 'ÖBB S-Bahn in Carinthia',
 		'guestcard.experiences.transport.sbahn.body':
-			'With a valid guest card, you can use S-Bahn lines and selected regional rail services across Carinthia - flexible and sustainable.',
+			'Use ÖBB S-Bahn, REX and Radsprinter services in Carinthia (to Lienz) for free - keep your ID with you.',
 		'guestcard.experiences.transport.arrival.title': 'Arrival & departure day included',
 		'guestcard.experiences.transport.arrival.body':
-			'The card is personal and valid for your full stay - including arrival and departure day.',
+			'Free, personal, and valid for your entire stay.',
 		'guestcard.experiences.wellness.title': 'Swimming & wellness',
 		'guestcard.experiences.wellness.card1.title': 'Pools & outdoor swimming',
 		'guestcard.experiences.wellness.card1.body':
@@ -1180,7 +1276,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'guestcard.experiences.wellness.card1.alt': 'Thermal baths with green views',
 		'guestcard.experiences.wellness.card2.title': 'Lake Weißensee: pure nature',
 		'guestcard.experiences.wellness.card2.body':
-			'Crystal-clear water and nature park atmosphere - one of Carinthia’s most special lakes.',
+			'Discounted offers around Lake Weißensee - with crystal-clear water and nature-park atmosphere.',
 		'guestcard.experiences.wellness.card2.alt': 'Lakeside jetty with mountain backdrop',
 		'guestcard.experiences.wellness.card3.title': 'Sauna & wellness',
 		'guestcard.experiences.wellness.card3.body':
@@ -1189,24 +1285,24 @@ const translations: Record<Lang, Record<string, string>> = {
 		'guestcard.experiences.outdoor.title': 'Outdoor adventures',
 		'guestcard.experiences.outdoor.feature.title': 'Guided nature experiences',
 		'guestcard.experiences.outdoor.feature.body':
-			'From guided hikes to nature programs: discover landscapes around the Gitschtal, Gailtal, and Lake Weißensee.',
+			'Reduced-price guided hikes and nature programs across the Gitschtal, Gailtal, and Lake Weißensee region.',
 		'guestcard.experiences.outdoor.feature.cta': 'Go to hiking program',
 		'guestcard.experiences.outdoor.bike.title': 'Cycling in the Gailtal',
 		'guestcard.experiences.outdoor.bike.body':
-			'Relaxed rides on the Gailtal cycle path R3 or sportier routes - depending on your pace.',
+			'Discounted cycling and leisure offers in the Gailtal - from easy R3 rides to sportier activities.',
 		'guestcard.experiences.outdoor.maps.title': 'Hiking maps',
 		'guestcard.experiences.outdoor.maps.body': 'Available free at reception.',
 		'guestcard.experiences.outdoor.adventure.title': 'Mountains & action at Nassfeld',
 		'guestcard.experiences.outdoor.adventure.body':
-			'Cable cars, outdoor activities, and adventure programs make Nassfeld a strong day-trip destination.',
+			'Reduced-price lift, outdoor, and adventure offers make Nassfeld a strong day-trip destination.',
 		'guestcard.experiences.food.title': 'Cuisine',
 		'guestcard.experiences.food.card.title': 'Discover regional flavors',
 		'guestcard.experiences.food.card.body':
-			'The area is known for culinary experiences - from local farm products to guided tasting offers.',
+			'Discounts on selected culinary experiences - from local farm products to guided tasting offers.',
 		'guestcard.experiences.culture.title': 'Culture & day trips',
 		'guestcard.experiences.culture.card.title': 'Museums & regional history',
 		'guestcard.experiences.culture.card.body':
-			'For example, Schloss Möderndorf near Hermagor with the Gailtal museum - ideal for rainy days.',
+			'Reduced-price admission at selected cultural sites, for example Schloss Möderndorf near Hermagor with the Gailtal museum.',
 		'guestcard.experiences.faq.title': 'Frequently asked questions',
 		'price.from': 'from €',
 		'price.night': 'night',

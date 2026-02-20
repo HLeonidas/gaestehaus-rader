@@ -40,6 +40,14 @@
 		titleSize?: string;
 		layout?: string;
 	};
+	type DestinationCard = {
+		id: string;
+		icon: ComponentType;
+		kickerKey: string;
+		titleKey: string;
+		bodyKey: string;
+		tagsBySeason: Record<SeasonKey, string[]>;
+	};
 
 	const withAsset = (path: string) => asset(path);
 
@@ -201,6 +209,91 @@
 				: 'experiences.seo.summer.description',
 		};
 	});
+
+	const destinationCards: DestinationCard[] = [
+		{
+			id: 'nassfeld',
+			icon: Mountain,
+			kickerKey: 'experiences.destinations.nassfeld.kicker',
+			titleKey: 'experiences.destinations.nassfeld.title',
+			bodyKey: 'experiences.destinations.nassfeld.body',
+			tagsBySeason: {
+				summer: [
+					'experiences.destinations.tags.summer',
+					'experiences.destinations.tags.hiking',
+					'experiences.destinations.tags.panorama',
+				],
+				winter: [
+					'experiences.destinations.tags.winter',
+					'experiences.destinations.tags.ski',
+					'experiences.destinations.tags.panorama',
+				],
+			},
+		},
+		{
+			id: 'weissensee',
+			icon: Waves,
+			kickerKey: 'experiences.destinations.weissensee.kicker',
+			titleKey: 'experiences.destinations.weissensee.title',
+			bodyKey: 'experiences.destinations.weissensee.body',
+			tagsBySeason: {
+				summer: [
+					'experiences.destinations.tags.nature',
+					'experiences.destinations.tags.swim',
+					'experiences.destinations.tags.summer',
+				],
+				winter: [
+					'experiences.destinations.tags.nature',
+					'experiences.destinations.tags.ice',
+					'experiences.destinations.tags.winter',
+				],
+			},
+		},
+		{
+			id: 'gitschtal',
+			icon: Footprints,
+			kickerKey: 'experiences.destinations.gitschtal.kicker',
+			titleKey: 'experiences.destinations.gitschtal.title',
+			bodyKey: 'experiences.destinations.gitschtal.body',
+			tagsBySeason: {
+				summer: [
+					'experiences.destinations.tags.hiking',
+					'experiences.destinations.tags.nature',
+					'experiences.destinations.tags.family',
+				],
+				winter: [
+					'experiences.destinations.tags.nature',
+					'experiences.destinations.tags.calm',
+					'experiences.destinations.tags.family',
+				],
+			},
+		},
+		{
+			id: 'genussregion',
+			icon: Utensils,
+			kickerKey: 'experiences.destinations.genussregion.kicker',
+			titleKey: 'experiences.destinations.genussregion.title',
+			bodyKey: 'experiences.destinations.genussregion.body',
+			tagsBySeason: {
+				summer: [
+					'experiences.destinations.tags.enjoy',
+					'experiences.destinations.tags.regional',
+					'experiences.destinations.tags.slowfood',
+				],
+				winter: [
+					'experiences.destinations.tags.culture',
+					'experiences.destinations.tags.regional',
+					'experiences.destinations.tags.enjoy',
+				],
+			},
+		},
+	];
+
+	const guestCardLinks = {
+		benefitsOverview:
+			'https://www.nassfeld.at/de/Unterkunft-finden/Reise-planen/PREMIUM-Cards/GaesteCard-basic',
+		brochure: 'https://www.nassfeld.at/PDFs/NPS/Gaestekarten/BasisCard_Broschuere.pdf',
+	};
 </script>
 
 <SeoHead titleKey={seo.titleKey} descriptionKey={seo.descriptionKey} image={currentContent.bg} />
@@ -254,63 +347,98 @@
 		<!-- CONTENT WRAPPER -->
 		<div class="mt-5 space-y-12" id="aktivitaeten">
 			<section class="sm:p-10">
-				<div class="space-y-4">
+				<div class="mx-auto max-w-3xl text-center">
 					<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
-						{$t(currentContent.kickerKey)}
+						{$t('experiences.destinations.kicker')}
 					</p>
-					<h1 class="font-serif text-4xl leading-[0.95] text-slate-900 sm:text-5xl">
-						{$t(currentContent.titleKey)}
+					<h1 class="mt-3 font-serif text-3xl leading-[0.95] text-slate-900 sm:text-4xl">
+						{$t('experiences.destinations.title')}
 					</h1>
-					<div class="h-[3px] w-14 rounded-full bg-brand"></div>
-					<p class="max-w-2xl text-base leading-relaxed text-slate-600">
-						{$t(currentContent.subtitleKey)}
+					<div class="mx-auto mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
+					<p class="mt-4 text-sm leading-relaxed text-slate-600 sm:text-base">
+						{$t('experiences.destinations.subtitle')}
 					</p>
 				</div>
 
-				{#key activeTab}
-					<div class="experience-grid mt-8 gap-6" in:fly={{ y: 26, duration: 520, easing: cubicOut }}>
+				<div class="mt-8">
+					<p class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
+						{$t('experiences.destinations.topHighlights')}
+					</p>
+
+					{#key activeTab}
+						<div class="experience-grid mt-4 gap-6" in:fly={{ y: 26, duration: 520, easing: cubicOut }}>
 							{#each currentEvents as event (event.id)}
 								<article
 									class={`experience-card group relative overflow-hidden rounded-3xl ${event.className ?? ''}`}
 								>
-								<img
-									src={withAsset(event.image)}
-									alt={`${$t(event.titleKey)} – ${$t(event.kickerKey)}`}
-									class="h-full w-full object-cover"
-									loading="lazy"
-								/>
-								<div
-									class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent"
-								></div>
+									<img
+										src={withAsset(event.image)}
+										alt={`${$t(event.titleKey)} – ${$t(event.kickerKey)}`}
+										class="h-full w-full object-cover"
+										loading="lazy"
+									/>
+									<div
+										class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent"
+									></div>
 
-								{#if event.badgeKey}
-									<span
-										class="absolute right-5 top-5 rounded-full bg-brand px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white shadow-sm"
-									>
-										{$t(event.badgeKey)}
-									</span>
-								{/if}
-
-								<div class="absolute bottom-0 left-0 right-0 p-6">
-									<p
-										class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand"
-									>
-										<event.icon class="h-4 w-4 text-brand" aria-hidden="true" />
-										{$t(event.kickerKey)}
-									</p>
-									<h3 class={`mt-2 font-semibold text-white ${event.titleSize ?? 'text-xl'}`}>
-										{$t(event.titleKey)}
-									</h3>
-									{#if event.descriptionKey}
-										<p class="mt-2 max-w-xl text-sm text-white/85">
-											{$t(event.descriptionKey)}
-										</p>
+									{#if event.badgeKey}
+										<span
+											class="absolute right-5 top-5 rounded-full bg-brand px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white shadow-sm"
+										>
+											{$t(event.badgeKey)}
+										</span>
 									{/if}
-								</div>
-							</article>
+
+									<div class="absolute bottom-0 left-0 right-0 p-6">
+										<p
+											class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand"
+										>
+											<event.icon class="h-4 w-4 text-brand" aria-hidden="true" />
+											{$t(event.kickerKey)}
+										</p>
+										<h3 class={`mt-2 font-semibold text-white ${event.titleSize ?? 'text-xl'}`}>
+											{$t(event.titleKey)}
+										</h3>
+										{#if event.descriptionKey}
+											<p class="mt-2 max-w-xl text-sm text-white/85">
+												{$t(event.descriptionKey)}
+											</p>
+										{/if}
+									</div>
+								</article>
 							{/each}
 						</div>
-				{/key}
+					{/key}
+				</div>
+
+				<div class="mt-10">
+					<p class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
+						{$t('experiences.destinations.popular')}
+					</p>
+					<div class="mt-4 grid gap-4 sm:grid-cols-2">
+						{#each destinationCards as card}
+							<article class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
+								<div class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">
+									<card.icon class="h-4 w-4" aria-hidden="true" />
+									{$t(card.kickerKey)}
+								</div>
+								<h3 class="mt-2 text-lg font-semibold leading-tight text-slate-900">
+									{$t(card.titleKey)}
+								</h3>
+								<p class="mt-2 text-sm leading-relaxed text-slate-600">
+									{$t(card.bodyKey)}
+								</p>
+								<div class="mt-4 flex flex-wrap gap-2">
+									{#each card.tagsBySeason[activeTab] as tag}
+										<span class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600">
+											{$t(tag)}
+										</span>
+									{/each}
+								</div>
+							</article>
+						{/each}
+					</div>
+				</div>
 			</section>
 
 			<section class="mt-12 sm:p-10" id="gaestecard">
@@ -327,12 +455,12 @@
 							{$t('guestcard.experiences.subtitle')}
 						</p>
 						<a
-							href="https://www.nassfeld.at/PDFs/NPS/Gaestekarten/BasisCard_Broschuere.pdf"
-							class="mt-5 inline-flex items-center gap-2 rounded-full border border-brand/20 bg-brand/5 px-4 py-2 text-sm font-semibold text-brand transition hover:bg-brand/10 sm:rounded-none sm:border-0 sm:bg-transparent sm:px-0 sm:py-0"
+							href={guestCardLinks.benefitsOverview}
+							class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-700 underline decoration-slate-300 underline-offset-4 transition hover:text-brand sm:mt-2"
 							target="_blank"
 							rel="noreferrer"
 						>
-							{$t('guestcard.experiences.brochure.cta')}
+							{$t('guestcard.experiences.benefitsOverviewCta')}
 							<ArrowRight class="h-4 w-4" aria-hidden="true" />
 						</a>
 					</div>

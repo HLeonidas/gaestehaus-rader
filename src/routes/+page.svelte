@@ -23,7 +23,6 @@
 		Sparkles,
 		BusFront,
 		CalendarDays,
-		Download,
 		Info,
 		BedDouble,
 		Bed,
@@ -1137,20 +1136,13 @@
 
 						<div class="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
 							<a
-								href={`${resolve('/erlebnisse')}#gaestecard`}
+								href="https://www.nassfeld.at/de/Unterkunft-finden/Reise-planen/PREMIUM-Cards/GaesteCard-basic"
 								class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90 sm:w-auto"
-							>
-								<Info class="h-4 w-4" aria-hidden="true" />
-								{$t('guestcard.cta.moreInfo')}
-							</a>
-							<a
-								href="https://www.nassfeld.at/PDFs/NPS/Gaestekarten/BasisCard_Broschuere.pdf"
-								class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white/15 px-6 py-3 text-sm font-semibold text-slate-900 ring-1 ring-slate-200 backdrop-blur-sm transition hover:bg-white/20 sm:w-auto"
 								target="_blank"
 								rel="noreferrer"
 							>
-								<Download class="h-4 w-4" aria-hidden="true" />
-								{$t('guestcard.cta.pdf')}
+								<Info class="h-4 w-4" aria-hidden="true" />
+								{$t('guestcard.cta.moreInfo')}
 							</a>
 						</div>
 					</div>

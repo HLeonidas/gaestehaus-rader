@@ -118,7 +118,7 @@
 				aria-label="Gästehaus Rader - Startseite"
 			>
 				<div
-					class="flex h-16 w-40 items-center justify-center rounded-xl bg-white shadow-sm sm:h-20 sm:w-52"
+					class="flex h-16 w-32 items-center justify-center rounded-xl bg-white shadow-sm sm:h-20 sm:w-52"
 				>
 					<img
 						src={withAsset('/images/other/logo-rader-gitschtal.jpg')}

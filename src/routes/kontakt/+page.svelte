@@ -161,75 +161,15 @@
 					</div>
 				</div>
 
-				<div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-sm">
-					<p class="text-sm font-semibold text-slate-900">{$t('contact.payment.title')}</p>
-					<p class="mt-1 text-xs text-slate-500">{$t('contact.payment.subtitle')}</p>
-					<div class="mt-4 grid gap-4 sm:grid-cols-2">
-						<div>
-							<p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">IBAN</p>
-							<div class="mt-2 flex flex-wrap items-center gap-2">
-								<span class="font-mono text-sm font-semibold text-slate-800 sm:text-base">
-									AT86 3936 4001 0361 6109
-								</span>
-								<button
-									type="button"
-									class="inline-flex items-center gap-2 rounded-lg bg-white px-3 py-2 text-xs font-semibold text-slate-700 ring-1 ring-slate-200 transition hover:ring-brand/30"
-									onclick={() => copyToClipboard('AT86 3936 4001 0361 6109', 'iban')}
-									aria-label={$t('contact.payment.copyIban')}
-								>
-									{#if ibanCopied}
-										<Check class="h-4 w-4 text-emerald-600" />
-										<span aria-live="polite">{$t('contact.payment.copied')}</span>
-									{:else}
-										<Copy class="h-4 w-4 text-slate-500" />
-										<span>{$t('contact.payment.copy')}</span>
-									{/if}
-								</button>
-							</div>
-						</div>
-						<div>
-							<p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">BIC</p>
-							<div class="mt-2 flex flex-wrap items-center gap-2">
-								<span class="font-mono text-sm font-semibold text-slate-800 sm:text-base">
-									RZKTAT2K364
-								</span>
-								<button
-									type="button"
-									class="inline-flex items-center gap-2 rounded-lg bg-white px-3 py-2 text-xs font-semibold text-slate-700 ring-1 ring-slate-200 transition hover:ring-brand/30"
-									onclick={() => copyToClipboard('RZKTAT2K364', 'bic')}
-									aria-label={$t('contact.payment.copyBic')}
-								>
-									{#if bicCopied}
-										<Check class="h-4 w-4 text-emerald-600" />
-										<span aria-live="polite">{$t('contact.payment.copied')}</span>
-									{:else}
-										<Copy class="h-4 w-4 text-slate-500" />
-										<span>{$t('contact.payment.copy')}</span>
-									{/if}
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-					<p class="text-sm font-semibold text-slate-900">{$t('contact.trust.title')}</p>
-					<ul class="mt-3 space-y-2 text-sm text-slate-600">
-						<li>{$t('contact.trust.response')}</li>
-						<li>{$t('contact.trust.languages')}</li>
-						<li>{$t('contact.trust.checkin')}</li>
-						<li>{$t('contact.trust.parking')}</li>
-					</ul>
-				</div>
 			</div>
 
 			<div
-				class="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
+				class="relative min-h-[320px] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm sm:min-h-[360px] lg:min-h-full"
 			>
 				{#if mapEnabled}
 					<iframe
 						title={$t('contact.map.iframeTitle')}
-						class="h-[320px] w-full border-0 sm:h-[360px]"
+						class="h-full w-full border-0"
 						loading="lazy"
 						referrerpolicy="no-referrer-when-downgrade"
 						src={mapSrc}
@@ -247,7 +187,7 @@
 					</div> -->
 				{:else}
 					<!-- Placeholder / consent card -->
-					<div class="grid h-[320px] place-items-center px-4 py-6 sm:h-[360px]">
+					<div class="grid h-full place-items-center px-4 py-6">
 						<div class="max-w-sm text-center">
 							<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
 								{$t('contact.map.label')}
@@ -285,6 +225,69 @@
 						</div>
 					</div>
 				{/if}
+			</div>
+		</div>
+
+		<div class="mt-6 space-y-6">
+			<div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-sm">
+				<p class="text-sm font-semibold text-slate-900">{$t('contact.payment.title')}</p>
+				<p class="mt-1 text-xs text-slate-500">{$t('contact.payment.subtitle')}</p>
+				<div class="mt-4 grid gap-4 sm:grid-cols-2">
+					<div>
+						<p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">IBAN</p>
+						<div class="mt-2 flex flex-wrap items-center gap-2">
+							<span class="font-mono text-sm font-semibold text-slate-800 sm:text-base">
+								AT86 3936 4001 0361 6109
+							</span>
+							<button
+								type="button"
+								class="inline-flex items-center gap-2 rounded-lg bg-white px-3 py-2 text-xs font-semibold text-slate-700 ring-1 ring-slate-200 transition hover:ring-brand/30"
+								onclick={() => copyToClipboard('AT86 3936 4001 0361 6109', 'iban')}
+								aria-label={$t('contact.payment.copyIban')}
+							>
+								{#if ibanCopied}
+									<Check class="h-4 w-4 text-emerald-600" />
+									<span aria-live="polite">{$t('contact.payment.copied')}</span>
+								{:else}
+									<Copy class="h-4 w-4 text-slate-500" />
+									<span>{$t('contact.payment.copy')}</span>
+								{/if}
+							</button>
+						</div>
+					</div>
+					<div>
+						<p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">BIC</p>
+						<div class="mt-2 flex flex-wrap items-center gap-2">
+							<span class="font-mono text-sm font-semibold text-slate-800 sm:text-base">
+								RZKTAT2K364
+							</span>
+							<button
+								type="button"
+								class="inline-flex items-center gap-2 rounded-lg bg-white px-3 py-2 text-xs font-semibold text-slate-700 ring-1 ring-slate-200 transition hover:ring-brand/30"
+								onclick={() => copyToClipboard('RZKTAT2K364', 'bic')}
+								aria-label={$t('contact.payment.copyBic')}
+							>
+								{#if bicCopied}
+									<Check class="h-4 w-4 text-emerald-600" />
+									<span aria-live="polite">{$t('contact.payment.copied')}</span>
+								{:else}
+									<Copy class="h-4 w-4 text-slate-500" />
+									<span>{$t('contact.payment.copy')}</span>
+								{/if}
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+				<p class="text-sm font-semibold text-slate-900">{$t('contact.trust.title')}</p>
+				<ul class="mt-3 grid gap-2 text-sm text-slate-600 sm:grid-cols-2">
+					<li>{$t('contact.trust.response')}</li>
+					<li>{$t('contact.trust.languages')}</li>
+					<li>{$t('contact.trust.checkin')}</li>
+					<li>{$t('contact.trust.parking')}</li>
+				</ul>
 			</div>
 		</div>
 	</section>
