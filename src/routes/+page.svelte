@@ -556,44 +556,43 @@
 			</section>
 
 			<!-- ROOMS -->
-			<section>
-				<div class="flex flex-wrap items-end justify-between gap-4">
-					<div>
+			<section class="pt-2 sm:pt-4">
+				<div class="flex flex-wrap items-end justify-between gap-6">
+					<div class="pb-6 sm:pb-10">
 						<p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand">
 							{$t('rooms.section.kicker')}
 						</p>
 						<h2 class="mt-3 text-4xl font-serif font-medium leading-[0.95] text-slate-900">
 							{$t('rooms.section.title')}
 						</h2>
-						<div class="mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
+						<div class="mt-4 h-[3px] w-16 rounded-full bg-brand"></div>
 					</div>
-					<div class="flex items-center justify-between gap-4">
-						<a
-							href={resolve('/unterkuenfte-preise')}
-							class="ml-auto inline-flex items-center gap-2 text-sm font-semibold text-brand hover:opacity-90"
-						>
-							{$t('rooms.section.cta')}
-							<ArrowRight class="h-4 w-4" aria-hidden="true" />
-						</a>
-					</div>
+
+					<a
+						href={resolve('/unterkuenfte-preise')}
+						class="ml-auto inline-flex items-center gap-2 pt-2 text-sm font-semibold text-brand/80 transition hover:text-brand"
+					>
+						{$t('rooms.section.cta')}
+						<ArrowRight class="h-4 w-4" aria-hidden="true" />
+					</a>
 				</div>
 
 				<div class="mt-8">
 					<div
-						class="mt-5 -mx-4 flex snap-x snap-mandatory gap-6 overflow-x-auto px-4 pb-2 scroll-pl-4 scroll-pr-4 [scrollbar-width:thin] [scrollbar-color:theme(colors.slate.300)_transparent] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-200 hover:[&::-webkit-scrollbar-thumb]:bg-slate-300 sm:mx-0 sm:px-0 sm:scroll-pl-0 sm:scroll-pr-0"
+						class="-mx-4 mt-2 flex snap-x snap-mandatory gap-8 overflow-x-auto px-4 pb-3 scroll-pl-4 scroll-pr-4 [scrollbar-width:thin] [scrollbar-color:theme(colors.slate.300)_transparent] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-200 hover:[&::-webkit-scrollbar-thumb]:bg-slate-300 sm:mx-0 sm:px-0 sm:scroll-pl-0 sm:scroll-pr-0"
 					>
 						{#each rooms as r}
 							<a
 								href={`${accommodationsBase}/${r.slug}`}
-								class="group relative w-[280px] shrink-0 snap-start overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:shadow-md sm:w-[340px]"
+								class="group relative w-[280px] shrink-0 snap-start overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:w-[340px]"
 								onclick={() => trackEvent('Content: Room Card Click', { source: 'home', room: r.slug })}
 							>
 								<!-- Image -->
-								<div class="relative">
+								<div class="relative aspect-[4/3] overflow-hidden">
 									<img
 										src={withAsset(r.images.main)}
 										alt={`${$t('home.rooms.card.imageAltPrefix')} ${r.title}`}
-										class="h-[260px] w-full object-cover sm:h-[280px]"
+										class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]"
 										loading="lazy"
 									/>
 
@@ -608,14 +607,16 @@
 								</div>
 
 								<!-- Content -->
-								<div class="px-5 pb-4 pt-4">
+								<div class="px-6 pb-5 pt-5">
 									<h3 class="text-base font-semibold tracking-tight text-slate-900">
 										{r.title}
 									</h3>
-									<p class="mt-1 text-xs font-semibold text-slate-500">
-										{$t('price.from')}
-										{r.pricePerNightBase} / {$t('price.night')}
-									</p>
+									<div class="mt-1 flex items-baseline gap-2">
+										<p class="text-sm font-semibold text-slate-500">
+											{$t('price.from')} <span class="text-slate-500">{r.pricePerNightBase}</span>
+										</p>
+										<span class="text-xs text-slate-500">/ {$t('price.night')}</span>
+									</div>
 
 									<!-- Meta line (small, muted) -->
 									<p class="mt-2 text-xs text-slate-500">
@@ -646,9 +647,7 @@
 								</div>
 
 								<!-- Hover ring -->
-								<div
-									class="pointer-events-none absolute inset-0 ring-1 ring-transparent transition group-hover:ring-brand/20"
-								></div>
+								<div class="pointer-events-none absolute inset-0 ring-1 ring-transparent transition group-hover:ring-brand/25"></div>
 							</a>
 						{/each}
 					</div>
