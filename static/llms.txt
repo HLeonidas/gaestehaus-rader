@@ -31,19 +31,19 @@ Guest card:
 
 Booking:
 - Online booking is available via an external booking provider
-- Booking page: https://www.rader-gitschtal.at/buchen/
+- Booking page: https://rader-gitschtal.at/buchen/
 
 Key pages:
-- Home: https://www.rader-gitschtal.at/
-- Apartments & prices: https://www.rader-gitschtal.at/unterkuenfte-preise/
-- Apartment detail pages: https://www.rader-gitschtal.at/unterkuenfte-preise/{slug}
-- Experiences: https://www.rader-gitschtal.at/erlebnisse/
-- About us: https://www.rader-gitschtal.at/ueber-uns/
-- Contact: https://www.rader-gitschtal.at/kontakt/
-- FAQ: https://www.rader-gitschtal.at/faq/
-- Accessibility: https://www.rader-gitschtal.at/barrierefreiheit/
-- Imprint: https://www.rader-gitschtal.at/impressum/
-- Privacy: https://www.rader-gitschtal.at/datenschutz/
+- Home: https://rader-gitschtal.at/
+- Apartments & prices: https://rader-gitschtal.at/unterkuenfte-preise/
+- Apartment detail pages: https://rader-gitschtal.at/unterkuenfte-preise/{slug}
+- Experiences: https://rader-gitschtal.at/erlebnisse/
+- About us: https://rader-gitschtal.at/ueber-uns/
+- Contact: https://rader-gitschtal.at/kontakt/
+- FAQ: https://rader-gitschtal.at/faq/
+- Accessibility: https://rader-gitschtal.at/barrierefreiheit/
+- Imprint: https://rader-gitschtal.at/impressum/
+- Privacy: https://rader-gitschtal.at/datenschutz/
 
 Data sources:
 - Prices, amenities, and apartment details: /unterkuenfte-preise/

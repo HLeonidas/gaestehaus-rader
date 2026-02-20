@@ -462,31 +462,39 @@
 										</span>
 									{/if}
 
-									<div class="absolute bottom-0 left-0 right-0 p-6">
-										<div class="max-w-2xl rounded-xl border border-white/15 bg-black/40 p-6 backdrop-blur-sm">
-											<p
-												class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand"
-											>
-												<featuredEvent.icon class="h-4 w-4 text-brand" aria-hidden="true" />
-												{$t(featuredEvent.kickerKey)}
-											</p>
-											<h3 class={`mt-2 font-semibold text-white ${featuredEvent.titleSize ?? 'text-xl'}`}>
-												{$t(featuredEvent.titleKey)}
-											</h3>
-											{#if featuredEvent.descriptionKey}
-												<p class="mt-2 max-w-xl text-sm text-white/85">
-													{$t(featuredEvent.descriptionKey)}
+									<div class="absolute inset-x-0 bottom-0 p-4 sm:p-6">
+										<div
+											class="relative max-w-2xl rounded-2xl border border-white/15 bg-black/40 p-4 backdrop-blur-sm max-h-[48%] overflow-hidden sm:max-h-none sm:p-6"
+										>
+											<div
+												class="pointer-events-none absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-black/60 to-transparent sm:hidden"
+												aria-hidden="true"
+											></div>
+											<div class="overflow-auto pr-1 sm:overflow-visible sm:pr-0">
+												<p
+													class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand"
+												>
+													<featuredEvent.icon class="h-4 w-4 text-brand" aria-hidden="true" />
+													{$t(featuredEvent.kickerKey)}
 												</p>
-											{/if}
-											{#if featuredEvent.metaKeys?.length}
-												<div class="mt-3 flex flex-wrap gap-2">
-													{#each featuredEvent.metaKeys as metaKey}
-														<span class="rounded-full border border-white/20 bg-white/15 px-3 py-1 text-xs font-semibold text-white">
-															{$t(metaKey)}
-														</span>
-													{/each}
-												</div>
-											{/if}
+												<h3 class={`mt-2 font-semibold text-white ${featuredEvent.titleSize ?? 'text-xl'}`}>
+													{$t(featuredEvent.titleKey)}
+												</h3>
+												{#if featuredEvent.descriptionKey}
+													<p class="mt-2 hidden max-w-xl text-sm text-white/85 sm:block">
+														{$t(featuredEvent.descriptionKey)}
+													</p>
+												{/if}
+												{#if featuredEvent.metaKeys?.length}
+													<div class="mt-3 flex flex-wrap gap-2">
+														{#each featuredEvent.metaKeys as metaKey}
+															<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white sm:px-3 sm:text-xs">
+																{$t(metaKey)}
+															</span>
+														{/each}
+													</div>
+												{/if}
+											</div>
 										</div>
 									</div>
 								</article>

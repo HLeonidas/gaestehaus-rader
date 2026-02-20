@@ -95,6 +95,7 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
+	<link rel="apple-touch-icon" href={favicon} />
 </svelte:head>
 
 <!-- No more isHome theme switching -->

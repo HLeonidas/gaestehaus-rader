@@ -280,7 +280,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'experiences.destinations.kicker': 'Ausflugsziele',
 		'experiences.destinations.title': 'In der Umgebung entdecken',
 		'experiences.destinations.subtitle':
-			'Vom Gästehaus aus erreichen Sie Seen, Berge und Ausflugsideen in kurzer Zeit - passend zur Saison und zu Ihrem Urlaubsstil.',
+			'In der Umgebung entdecken Sie vom Gästehaus Rader aus Seen, Berge und Ausflugsideen in kurzer Zeit - passend zur Saison und zu Ihrem Urlaubsstil.',
 		'experiences.destinations.topHighlights': 'Highlights rund ums Gästehaus',
 		'experiences.destinations.popular': 'Weitere Ausflugsideen',
 		'experiences.interests.title': 'Urlaub nach Ihren Interessen',
@@ -656,7 +656,7 @@ const translations: Record<Lang, Record<string, string>> = {
 			'Trotz sorgfältiger Prüfung können sich Lizenzbedingungen externer Anbieter ändern. Sollten Inhalte Rechte Dritter verletzen, bitten wir um einen entsprechenden Hinweis.',
 		'credits.updated': 'Stand: 20.02.2026',
 		'imprint.title': 'Impressum',
-		'imprint.seo.title': 'Impressum Gästehaus Rader',
+		'imprint.seo.title': 'Impressum & Kontakt – Gästehaus Rader',
 		'imprint.seo.description':
 			'Rechtliche Angaben und Kontaktinformationen zum Gästehaus Rader in Weißbriach.',
 		'imprint.subtitle': 'Angaben gemäß § 5 ECG, § 14 UGB und Offenlegung gemäß § 25 MedienG.',
@@ -753,9 +753,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'booking.title': 'Verfügbarkeit & Buchung',
 		'booking.body':
 			'Derzeit führt die Buchung zum externen Partner. Später kann hier ein eigenes System integriert werden.',
-		'booking.seo.title': 'Buchen – Gästehaus Rader',
+		'booking.seo.title': 'Verfügbarkeit & Buchung – Gästehaus Rader',
 		'booking.seo.description':
-			'Verfügbarkeit prüfen und direkt buchen – schnell und unkompliziert.',
+			'Prüfen Sie Verfügbarkeit, wählen Sie Ihre Reisedaten und senden Sie Ihre Buchungsanfrage direkt an das Gästehaus Rader.',
 		'contact.title': 'Kontakt',
 		'contact.seo.title': 'Kontakt Gästehaus Rader – Anreise & Direktkontakt',
 		'contact.seo.description':
@@ -874,10 +874,10 @@ const translations: Record<Lang, Record<string, string>> = {
 		'faq.guestcard.q6': 'Was passiert bei Missbrauch der GästeCard Basic?',
 		'faq.guestcard.a6':
 			'Bei Missbrauch oder Verdacht kann die Stadtgemeinde Hermagor die Card ersatzlos einziehen bzw. sofort sperren. Die Weitergabe an Dritte ist nicht gestattet und kann strafrechtliche Konsequenzen nach sich ziehen. Auf Verlangen ist ein Lichtbildausweis vorzuzeigen.',
-		'privacy.seo.title': 'Datenschutz Gästehaus Rader',
+		'privacy.seo.title': 'Datenschutz & Cookies – Gästehaus Rader',
 		'privacy.seo.description':
 			'Informationen zur Verarbeitung personenbezogener Daten, Analytics und eingebundenen Diensten.',
-		'terms.seo.title': 'AGB Gästehaus Rader',
+		'terms.seo.title': 'AGB & Buchungsbedingungen – Gästehaus Rader',
 		'terms.seo.description':
 			'Allgemeine Geschäftsbedingungen für Buchungen und Aufenthalte im Gästehaus Rader.',
 		'error.404.title': 'Seite nicht gefunden',
@@ -1152,7 +1152,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'experiences.destinations.kicker': 'Day trips',
 		'experiences.destinations.title': 'Explore nearby highlights',
 		'experiences.destinations.subtitle':
-			'From the guesthouse, you can reach lakes, mountains, and excursion spots quickly - matched to season and travel style.',
+			'Explore nearby highlights from Guesthouse Rader: lakes, mountains, and excursion spots are all within quick reach, matched to season and travel style.',
 		'experiences.destinations.topHighlights': 'Highlights around the guesthouse',
 		'experiences.destinations.popular': 'More excursion ideas',
 		'experiences.interests.title': 'Holiday by your interests',
@@ -1619,7 +1619,7 @@ const translations: Record<Lang, Record<string, string>> = {
 			'Booking currently redirects to our external partner. Later, this can be upgraded to a full in-house system.',
 		'booking.seo.title': 'Book now – Guesthouse Rader',
 		'booking.seo.description':
-			'Check availability and book directly — fast and straightforward.',
+			'Check availability, choose your travel dates, and send your booking request to Guesthouse Rader quickly and directly.',
 		'contact.title': 'Contact',
 		'contact.seo.title': 'Contact Guesthouse Rader – address, phone & email',
 		'contact.seo.description':
