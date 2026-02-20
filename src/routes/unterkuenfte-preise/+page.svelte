@@ -220,12 +220,14 @@
 			</div>
 
 			<!-- Inclusive services tiles -->
-			<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
-				<div class="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
-					<div class="mx-auto grid h-12 w-12 place-items-center rounded-full bg-brand/10 text-brand">
+			<div class="grid gap-3 sm:gap-6 sm:grid-cols-2 lg:grid-cols-5">
+				<div class="rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-sm sm:p-6 sm:text-center">
+					<div class="flex items-center gap-3 sm:block">
+					<div class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand sm:mx-auto sm:h-12 sm:w-12 sm:rounded-full">
 						<Lightbulb class="h-6 w-6" />
 					</div>
-					<p class="mt-4 text-sm font-semibold text-slate-900 leading-snug">
+					<div class="min-w-0">
+					<p class="text-sm font-semibold text-slate-900 leading-snug sm:mt-4">
 						{#if $t('rooms.page.inclusive.power').includes('/')}
 							{$t('rooms.page.inclusive.power').split('/')[0]}<br />
 							{$t('rooms.page.inclusive.power').split('/')[1]}
@@ -233,57 +235,75 @@
 							{$t('rooms.page.inclusive.power')}
 						{/if}
 					</p>
-					<p class="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">
+					<p class="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400 sm:mt-1">
 						{$t('rooms.page.inclusive.free')}
 					</p>
+					</div>
+					</div>
 				</div>
 
-				<div class="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
-					<div class="mx-auto grid h-12 w-12 place-items-center rounded-full bg-brand/10 text-brand">
+				<div class="rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-sm sm:p-6 sm:text-center">
+					<div class="flex items-center gap-3 sm:block">
+					<div class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand sm:mx-auto sm:h-12 sm:w-12 sm:rounded-full">
 						<Wifi class="h-6 w-6" />
 					</div>
-					<p class="mt-4 text-sm font-semibold text-slate-900 leading-snug break-words">
+					<div class="min-w-0">
+					<p class="text-sm font-semibold text-slate-900 leading-snug break-words sm:mt-4">
 						{$t('rooms.page.inclusive.wifi')}
 					</p>
-					<p class="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">
+					<p class="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400 sm:mt-1">
 						{$t('rooms.page.inclusive.free')}
 					</p>
+					</div>
+					</div>
 				</div>
 
-				<div class="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
-					<div class="mx-auto grid h-12 w-12 place-items-center rounded-full bg-brand/10 text-brand">
+				<div class="rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-sm sm:p-6 sm:text-center">
+					<div class="flex items-center gap-3 sm:block">
+					<div class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand sm:mx-auto sm:h-12 sm:w-12 sm:rounded-full">
 						<Baby class="h-6 w-6" />
 					</div>
-					<p class="mt-4 text-sm font-semibold text-slate-900 leading-snug break-words">
+					<div class="min-w-0">
+					<p class="text-sm font-semibold text-slate-900 leading-snug break-words sm:mt-4">
 						{$t('rooms.page.inclusive.kids')}
 					</p>
-					<p class="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">
+					<p class="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400 sm:mt-1">
 						{$t('rooms.page.inclusive.free')}
 					</p>
+					</div>
+					</div>
 				</div>
 
-				<div class="rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
-					<div class="mx-auto grid h-12 w-12 place-items-center rounded-full bg-brand/10 text-brand">
+				<div class="rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-sm sm:p-6 sm:text-center">
+					<div class="flex items-center gap-3 sm:block">
+					<div class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand sm:mx-auto sm:h-12 sm:w-12 sm:rounded-full">
 						<SquareParking class="h-6 w-6" />
 					</div>
-					<p class="mt-4 text-sm font-semibold text-slate-900 leading-snug break-words">
+					<div class="min-w-0">
+					<p class="text-sm font-semibold text-slate-900 leading-snug break-words sm:mt-4">
 						{$t('rooms.page.inclusive.parking')}
 					</p>
-					<p class="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">
+					<p class="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400 sm:mt-1">
 						{$t('rooms.page.inclusive.free')}
 					</p>
+					</div>
+					</div>
 				</div>
 
-				<div class="rounded-2xl border border-slate-200 bg-[#fff4e6] p-6 text-center shadow-sm">
-					<div class="mx-auto grid h-12 w-12 place-items-center rounded-full bg-brand/10 text-brand">
+				<div class="rounded-2xl border border-slate-200 bg-[#fff4e6] p-4 text-left shadow-sm sm:p-6 sm:text-center">
+					<div class="flex items-center gap-3 sm:block">
+					<div class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand sm:mx-auto sm:h-12 sm:w-12 sm:rounded-full">
 						<Ticket class="h-6 w-6" />
 					</div>
-					<p class="mt-4 text-sm font-semibold text-slate-900 leading-snug break-words">
+					<div class="min-w-0">
+					<p class="text-sm font-semibold text-slate-900 leading-snug break-words sm:mt-4">
 						{$t('rooms.page.inclusive.guestcard')}
 					</p>
-					<p class="mt-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">
+					<p class="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400 sm:mt-1">
 						{$t('rooms.page.inclusive.free')}
 					</p>
+					</div>
+					</div>
 				</div>
 			</div>
 
