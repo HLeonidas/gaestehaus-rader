@@ -465,6 +465,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.amenities.title': 'Komfort in allen Appartements',
 		'home.amenities.subtitle':
 			'Alles, was Sie für einen entspannten Aufenthalt brauchen - von Basis-Komfort über Küche bis zur Haus-Ausstattung. Ohne Aufpreis, in jedem Appartement.',
+		'home.amenities.itemsLabel': 'Leistungen',
 		'home.amenities.basic.title': 'Basis-Komfort',
 		'home.amenities.basic.bedding.title': 'Hochwertige Bettwäsche',
 		'home.amenities.basic.bedding.body': 'Feinste ägyptische Baumwolle für einen tiefen, erholsamen Schlaf.',
@@ -1204,6 +1205,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.amenities.title': 'Comfort in every apartment',
 		'home.amenities.subtitle':
 			'Everything you need for a relaxing stay - from basic comforts and the kitchen to house amenities. Included, in every apartment.',
+		'home.amenities.itemsLabel': 'items',
 		'home.amenities.basic.title': 'Basic comforts',
 		'home.amenities.basic.bedding.title': 'Premium bedding',
 		'home.amenities.basic.bedding.body': 'Finest Egyptian cotton for deep, restful sleep.',

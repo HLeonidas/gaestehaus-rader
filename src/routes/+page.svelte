@@ -974,219 +974,416 @@
 					{$t('home.amenities.subtitle')}
 				</p>
 
-				<div class="mt-10 space-y-12">
-					<!-- Basis-Komfort -->
-					<div class="space-y-4">
-						<div class="flex items-center gap-2">
-							<div class="text-brand">
-								<BedDouble class="h-5 w-5" aria-hidden="true" />
-							</div>
-							<h3 class="text-base font-semibold text-slate-900">
-								{$t('home.amenities.basic.title')}
-							</h3>
-						</div>
-
-						<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-								<div class="flex items-start gap-3">
-									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-										<Bed class="h-5 w-5" aria-hidden="true" />
+				<div class="mt-8 space-y-6 sm:mt-10 sm:space-y-12">
+					<!-- Mobile accordion -->
+					<div class="space-y-4 sm:hidden">
+						<details class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition open:border-brand/30 open:shadow-md">
+							<summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-4 transition group-open:bg-white">
+								<div class="flex min-w-0 items-center gap-3">
+									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-[#f7efe4] text-brand transition group-open:rounded-full group-open:bg-brand group-open:text-white">
+										<BedDouble class="h-5 w-5" aria-hidden="true" />
 									</div>
-									<div>
-										<p class="text-sm font-semibold text-slate-900">
-											{$t('home.amenities.basic.bedding.title')}
-										</p>
-										<p class="mt-1 text-xs leading-relaxed text-slate-500">
-											{$t('home.amenities.basic.bedding.body')}
-										</p>
+									<div class="min-w-0">
+										<div class="flex items-center gap-2">
+											<p class="truncate text-sm font-semibold text-slate-900">{$t('home.amenities.basic.title')}</p>
+											<span class="shrink-0 rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600 transition group-open:bg-brand/10 group-open:text-brand">3</span>
+										</div>
+										<div class="mt-1 flex items-center gap-1.5 text-slate-400">
+											<Bed class="h-3.5 w-3.5" aria-hidden="true" />
+											<ShowerHead class="h-3.5 w-3.5" aria-hidden="true" />
+											<Leaf class="h-3.5 w-3.5" aria-hidden="true" />
+										</div>
 									</div>
 								</div>
+								<span class="grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-500 transition group-open:bg-[#f7efe4] group-open:text-brand">
+									<ChevronRight class="h-4 w-4 transition group-open:-rotate-90" />
+								</span>
+							</summary>
+							<div class="border-t border-slate-200 bg-white">
+								<ul class="divide-y divide-slate-200/70 bg-white">
+									<li class="flex gap-3 p-4">
+										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
+											<Bed class="h-5 w-5" aria-hidden="true" />
+										</div>
+										<div class="min-w-0">
+											<p class="text-sm font-semibold leading-snug text-slate-900">{$t('home.amenities.basic.bedding.title')}</p>
+											<p class="mt-1 text-[13px] leading-snug text-slate-600">{$t('home.amenities.basic.bedding.body')}</p>
+										</div>
+									</li>
+									<li class="flex gap-3 p-4">
+										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
+											<ShowerHead class="h-5 w-5" aria-hidden="true" />
+										</div>
+										<div class="min-w-0">
+											<p class="text-sm font-semibold leading-snug text-slate-900">{$t('home.amenities.basic.towels.title')}</p>
+											<p class="mt-1 text-[13px] leading-snug text-slate-600">{$t('home.amenities.basic.towels.body')}</p>
+										</div>
+									</li>
+									<li class="flex gap-3 p-4">
+										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
+											<Leaf class="h-5 w-5" aria-hidden="true" />
+										</div>
+										<div class="min-w-0">
+											<p class="text-sm font-semibold leading-snug text-slate-900">{$t('home.amenities.basic.care.title')}</p>
+											<p class="mt-1 text-[13px] leading-snug text-slate-600">{$t('home.amenities.basic.care.body')}</p>
+										</div>
+									</li>
+								</ul>
 							</div>
+						</details>
 
-							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-								<div class="flex items-start gap-3">
-									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-										<ShowerHead class="h-5 w-5" aria-hidden="true" />
-									</div>
-									<div>
-										<p class="text-sm font-semibold text-slate-900">
-											{$t('home.amenities.basic.towels.title')}
-										</p>
-										<p class="mt-1 text-xs leading-relaxed text-slate-500">
-											{$t('home.amenities.basic.towels.body')}
-										</p>
-									</div>
-								</div>
-							</div>
-
-							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-								<div class="flex items-start gap-3">
-									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-										<Leaf class="h-5 w-5" aria-hidden="true" />
-									</div>
-									<div>
-										<p class="text-sm font-semibold text-slate-900">
-											{$t('home.amenities.basic.care.title')}
-										</p>
-										<p class="mt-1 text-xs leading-relaxed text-slate-500">
-											{$t('home.amenities.basic.care.body')}
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Küche -->
-					<div class="space-y-4">
-						<div class="flex items-center gap-2">
-							<div class="text-brand">
-								<Microwave class="h-5 w-5" aria-hidden="true" />
-							</div>
-							<h3 class="text-base font-semibold text-slate-900">
-								{$t('home.amenities.kitchen.title')}
-							</h3>
-						</div>
-
-						<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-								<div class="flex items-start gap-3">
-									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
+						<details class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition open:border-brand/30 open:shadow-md">
+							<summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-4 transition group-open:bg-white">
+								<div class="flex min-w-0 items-center gap-3">
+									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-[#f7efe4] text-brand transition group-open:rounded-full group-open:bg-brand group-open:text-white">
 										<Microwave class="h-5 w-5" aria-hidden="true" />
 									</div>
-									<div>
-										<p class="text-sm font-semibold text-slate-900">
-											{$t('home.amenities.kitchen.kitchenette.title')}
-										</p>
-										<p class="mt-1 text-xs leading-relaxed text-slate-500">
-											{$t('home.amenities.kitchen.kitchenette.body')}
-										</p>
+									<div class="min-w-0">
+										<div class="flex items-center gap-2">
+											<p class="truncate text-sm font-semibold text-slate-900">{$t('home.amenities.kitchen.title')}</p>
+											<span class="shrink-0 rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600 transition group-open:bg-brand/10 group-open:text-brand">5</span>
+										</div>
+										<div class="mt-1 flex items-center gap-1.5 text-slate-400">
+											<Microwave class="h-3.5 w-3.5" aria-hidden="true" />
+											<Coffee class="h-3.5 w-3.5" aria-hidden="true" />
+											<CupSoda class="h-3.5 w-3.5" aria-hidden="true" />
+											<Utensils class="h-3.5 w-3.5" aria-hidden="true" />
+											<Sandwich class="h-3.5 w-3.5" aria-hidden="true" />
+										</div>
 									</div>
 								</div>
+								<span class="grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-500 transition group-open:bg-[#f7efe4] group-open:text-brand">
+									<ChevronRight class="h-4 w-4 transition group-open:-rotate-90" />
+								</span>
+							</summary>
+							<div class="border-t border-slate-200 bg-white">
+								<ul class="divide-y divide-slate-200/70 bg-white">
+									<li class="flex gap-3 p-4">
+										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
+											<Microwave class="h-5 w-5" aria-hidden="true" />
+										</div>
+										<div class="min-w-0">
+											<p class="text-sm font-semibold leading-snug text-slate-900">{$t('home.amenities.kitchen.kitchenette.title')}</p>
+											<p class="mt-1 text-[13px] leading-snug text-slate-600">{$t('home.amenities.kitchen.kitchenette.body')}</p>
+										</div>
+									</li>
+									<li class="flex gap-3 p-4">
+										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
+											<Coffee class="h-5 w-5" aria-hidden="true" />
+										</div>
+										<div class="min-w-0">
+											<p class="text-sm font-semibold leading-snug text-slate-900">{$t('home.amenities.kitchen.espresso.title')}</p>
+											<p class="mt-1 text-[13px] leading-snug text-slate-600">{$t('home.amenities.kitchen.espresso.body')}</p>
+										</div>
+									</li>
+									<li class="flex gap-3 p-4">
+										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
+											<CupSoda class="h-5 w-5" aria-hidden="true" />
+										</div>
+										<div class="min-w-0">
+											<p class="text-sm font-semibold leading-snug text-slate-900">{$t('home.amenities.kitchen.kettle.title')}</p>
+											<p class="mt-1 text-[13px] leading-snug text-slate-600">{$t('home.amenities.kitchen.kettle.body')}</p>
+										</div>
+									</li>
+									<li class="flex gap-3 p-4">
+										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
+											<Utensils class="h-5 w-5" aria-hidden="true" />
+										</div>
+										<div class="min-w-0">
+											<p class="text-sm font-semibold leading-snug text-slate-900">{$t('home.amenities.kitchen.dishes.title')}</p>
+											<p class="mt-1 text-[13px] leading-snug text-slate-600">{$t('home.amenities.kitchen.dishes.body')}</p>
+										</div>
+									</li>
+									<li class="flex gap-3 p-4">
+										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
+											<Sandwich class="h-5 w-5" aria-hidden="true" />
+										</div>
+										<div class="min-w-0">
+											<p class="text-sm font-semibold leading-snug text-slate-900">{$t('home.amenities.kitchen.toaster.title')}</p>
+											<p class="mt-1 text-[13px] leading-snug text-slate-600">{$t('home.amenities.kitchen.toaster.body')}</p>
+										</div>
+									</li>
+								</ul>
 							</div>
+						</details>
 
-							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-								<div class="flex items-start gap-3">
-									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-										<Coffee class="h-5 w-5" aria-hidden="true" />
+						<details class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition open:border-brand/30 open:shadow-md">
+							<summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-4 transition group-open:bg-white">
+								<div class="flex min-w-0 items-center gap-3">
+									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-[#f7efe4] text-brand transition group-open:rounded-full group-open:bg-brand group-open:text-white">
+										<House class="h-5 w-5" aria-hidden="true" />
 									</div>
-									<div>
-										<p class="text-sm font-semibold text-slate-900">
-											{$t('home.amenities.kitchen.espresso.title')}
-										</p>
-										<p class="mt-1 text-xs leading-relaxed text-slate-500">
-											{$t('home.amenities.kitchen.espresso.body')}
-										</p>
-									</div>
-								</div>
-							</div>
-
-							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-								<div class="flex items-start gap-3">
-									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-										<CupSoda class="h-5 w-5" aria-hidden="true" />
-									</div>
-									<div>
-										<p class="text-sm font-semibold text-slate-900">
-											{$t('home.amenities.kitchen.kettle.title')}
-										</p>
-										<p class="mt-1 text-xs leading-relaxed text-slate-500">
-											{$t('home.amenities.kitchen.kettle.body')}
-										</p>
+									<div class="min-w-0">
+										<div class="flex items-center gap-2">
+											<p class="truncate text-sm font-semibold text-slate-900">{$t('home.amenities.house.title')}</p>
+											<span class="shrink-0 rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600 transition group-open:bg-brand/10 group-open:text-brand">3</span>
+										</div>
+										<div class="mt-1 flex items-center gap-1.5 text-slate-400">
+											<Wifi class="h-3.5 w-3.5" aria-hidden="true" />
+											<SquareParking class="h-3.5 w-3.5" aria-hidden="true" />
+											<Snowflake class="h-3.5 w-3.5" aria-hidden="true" />
+										</div>
 									</div>
 								</div>
+								<span class="grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-500 transition group-open:bg-[#f7efe4] group-open:text-brand">
+									<ChevronRight class="h-4 w-4 transition group-open:-rotate-90" />
+								</span>
+							</summary>
+							<div class="border-t border-slate-200 bg-white">
+								<ul class="divide-y divide-slate-200/70 bg-white">
+									<li class="flex gap-3 p-4">
+										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
+											<Wifi class="h-5 w-5" aria-hidden="true" />
+										</div>
+										<div class="min-w-0">
+											<p class="text-sm font-semibold leading-snug text-slate-900">{$t('home.amenities.house.wifi.title')}</p>
+											<p class="mt-1 text-[13px] leading-snug text-slate-600">{$t('home.amenities.house.wifi.body')}</p>
+										</div>
+									</li>
+									<li class="flex gap-3 p-4">
+										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
+											<SquareParking class="h-5 w-5" aria-hidden="true" />
+										</div>
+										<div class="min-w-0">
+											<p class="text-sm font-semibold leading-snug text-slate-900">{$t('home.amenities.house.parking.title')}</p>
+											<p class="mt-1 text-[13px] leading-snug text-slate-600">{$t('home.amenities.house.parking.body')}</p>
+										</div>
+									</li>
+									<li class="flex gap-3 p-4">
+										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
+											<Snowflake class="h-5 w-5" aria-hidden="true" />
+										</div>
+										<div class="min-w-0">
+											<p class="text-sm font-semibold leading-snug text-slate-900">{$t('home.amenities.house.ski.title')}</p>
+											<p class="mt-1 text-[13px] leading-snug text-slate-600">{$t('home.amenities.house.ski.body')}</p>
+										</div>
+									</li>
+								</ul>
 							</div>
-
-							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-								<div class="flex items-start gap-3">
-									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-										<Utensils class="h-5 w-5" aria-hidden="true" />
-									</div>
-									<div>
-										<p class="text-sm font-semibold text-slate-900">
-											{$t('home.amenities.kitchen.dishes.title')}
-										</p>
-										<p class="mt-1 text-xs leading-relaxed text-slate-500">
-											{$t('home.amenities.kitchen.dishes.body')}
-										</p>
-									</div>
-								</div>
-							</div>
-
-							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-								<div class="flex items-start gap-3">
-									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-										<Sandwich class="h-5 w-5" aria-hidden="true" />
-									</div>
-									<div>
-										<p class="text-sm font-semibold text-slate-900">
-											{$t('home.amenities.kitchen.toaster.title')}
-										</p>
-										<p class="mt-1 text-xs leading-relaxed text-slate-500">
-											{$t('home.amenities.kitchen.toaster.body')}
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
+						</details>
 					</div>
 
-					<!-- Haus-Ausstattung -->
-					<div class="space-y-4">
-						<div class="flex items-center gap-2">
-							<div class="text-brand">
-								<House class="h-5 w-5" aria-hidden="true" />
+					<!-- Desktop lists -->
+					<div class="hidden space-y-12 sm:block">
+						<!-- Basis-Komfort -->
+						<div class="space-y-4">
+							<div class="flex items-center justify-between gap-3 border-b border-slate-200 pb-3">
+								<div class="flex items-center gap-2">
+									<div class="text-brand">
+										<BedDouble class="h-5 w-5" aria-hidden="true" />
+									</div>
+									<h3 class="text-base font-semibold text-slate-900">
+										{$t('home.amenities.basic.title')}
+									</h3>
+								</div>
 							</div>
-							<h3 class="text-base font-semibold text-slate-900">
-								{$t('home.amenities.house.title')}
-							</h3>
+
+							<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+									<div class="flex items-start gap-3">
+										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
+											<Bed class="h-5 w-5" aria-hidden="true" />
+										</div>
+										<div class="min-w-0">
+											<p class="text-sm font-semibold leading-snug text-slate-900">
+												{$t('home.amenities.basic.bedding.title')}
+											</p>
+											<p class="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-500">
+												{$t('home.amenities.basic.bedding.body')}
+											</p>
+										</div>
+									</div>
+								</div>
+
+								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+									<div class="flex items-start gap-3">
+										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
+											<ShowerHead class="h-5 w-5" aria-hidden="true" />
+										</div>
+										<div class="min-w-0">
+											<p class="text-sm font-semibold leading-snug text-slate-900">
+												{$t('home.amenities.basic.towels.title')}
+											</p>
+											<p class="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-500">
+												{$t('home.amenities.basic.towels.body')}
+											</p>
+										</div>
+									</div>
+								</div>
+
+								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+									<div class="flex items-start gap-3">
+										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
+											<Leaf class="h-5 w-5" aria-hidden="true" />
+										</div>
+										<div class="min-w-0">
+											<p class="text-sm font-semibold leading-snug text-slate-900">
+												{$t('home.amenities.basic.care.title')}
+											</p>
+											<p class="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-500">
+												{$t('home.amenities.basic.care.body')}
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 
-						<div class="grid gap-4 sm:grid-cols-2">
-							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-								<div class="flex items-start gap-3">
-									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-										<Wifi class="h-5 w-5" aria-hidden="true" />
+						<!-- Küche -->
+						<div class="space-y-4">
+							<div class="flex items-center justify-between gap-3 border-b border-slate-200 pb-3">
+								<div class="flex items-center gap-2">
+									<div class="text-brand">
+										<Microwave class="h-5 w-5" aria-hidden="true" />
 									</div>
-									<div>
-										<p class="text-sm font-semibold text-slate-900">
-											{$t('home.amenities.house.wifi.title')}
-										</p>
-										<p class="mt-1 text-xs leading-relaxed text-slate-500">
-											{$t('home.amenities.house.wifi.body')}
-										</p>
-									</div>
+									<h3 class="text-base font-semibold text-slate-900">
+										{$t('home.amenities.kitchen.title')}
+									</h3>
 								</div>
 							</div>
 
-							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-								<div class="flex items-start gap-3">
-									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-										<SquareParking class="h-5 w-5" aria-hidden="true" />
+							<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+									<div class="flex items-start gap-3">
+										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
+											<Microwave class="h-5 w-5" aria-hidden="true" />
+										</div>
+										<div class="min-w-0">
+											<p class="text-sm font-semibold leading-snug text-slate-900">
+												{$t('home.amenities.kitchen.kitchenette.title')}
+											</p>
+											<p class="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-500">
+												{$t('home.amenities.kitchen.kitchenette.body')}
+											</p>
+										</div>
 									</div>
-									<div>
-										<p class="text-sm font-semibold text-slate-900">
-											{$t('home.amenities.house.parking.title')}
-										</p>
-										<p class="mt-1 text-xs leading-relaxed text-slate-500">
-											{$t('home.amenities.house.parking.body')}
-										</p>
+								</div>
+
+								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+									<div class="flex items-start gap-3">
+										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
+											<Coffee class="h-5 w-5" aria-hidden="true" />
+										</div>
+										<div class="min-w-0">
+											<p class="text-sm font-semibold leading-snug text-slate-900">
+												{$t('home.amenities.kitchen.espresso.title')}
+											</p>
+											<p class="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-500">
+												{$t('home.amenities.kitchen.espresso.body')}
+											</p>
+										</div>
+									</div>
+								</div>
+
+								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+									<div class="flex items-start gap-3">
+										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
+											<CupSoda class="h-5 w-5" aria-hidden="true" />
+										</div>
+										<div class="min-w-0">
+											<p class="text-sm font-semibold leading-snug text-slate-900">
+												{$t('home.amenities.kitchen.kettle.title')}
+											</p>
+											<p class="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-500">
+												{$t('home.amenities.kitchen.kettle.body')}
+											</p>
+										</div>
+									</div>
+								</div>
+
+								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+									<div class="flex items-start gap-3">
+										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
+											<Utensils class="h-5 w-5" aria-hidden="true" />
+										</div>
+										<div class="min-w-0">
+											<p class="text-sm font-semibold leading-snug text-slate-900">
+												{$t('home.amenities.kitchen.dishes.title')}
+											</p>
+											<p class="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-500">
+												{$t('home.amenities.kitchen.dishes.body')}
+											</p>
+										</div>
+									</div>
+								</div>
+
+								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+									<div class="flex items-start gap-3">
+										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
+											<Sandwich class="h-5 w-5" aria-hidden="true" />
+										</div>
+										<div class="min-w-0">
+											<p class="text-sm font-semibold leading-snug text-slate-900">
+												{$t('home.amenities.kitchen.toaster.title')}
+											</p>
+											<p class="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-500">
+												{$t('home.amenities.kitchen.toaster.body')}
+											</p>
+										</div>
 									</div>
 								</div>
 							</div>
+						</div>
 
-							<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-								<div class="flex items-start gap-3">
-									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-										<Snowflake class="h-5 w-5" aria-hidden="true" />
+						<!-- Haus-Ausstattung -->
+						<div class="space-y-4">
+							<div class="flex items-center justify-between gap-3 border-b border-slate-200 pb-3">
+								<div class="flex items-center gap-2">
+									<div class="text-brand">
+										<House class="h-5 w-5" aria-hidden="true" />
 									</div>
-									<div>
-										<p class="text-sm font-semibold text-slate-900">
-											{$t('home.amenities.house.ski.title')}
-										</p>
-										<p class="mt-1 text-xs leading-relaxed text-slate-500">
-											{$t('home.amenities.house.ski.body')}
-										</p>
+									<h3 class="text-base font-semibold text-slate-900">
+										{$t('home.amenities.house.title')}
+									</h3>
+								</div>
+							</div>
+
+							<div class="grid gap-4 sm:grid-cols-2">
+								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+									<div class="flex items-start gap-3">
+										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
+											<Wifi class="h-5 w-5" aria-hidden="true" />
+										</div>
+										<div class="min-w-0">
+											<p class="text-sm font-semibold leading-snug text-slate-900">
+												{$t('home.amenities.house.wifi.title')}
+											</p>
+											<p class="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-500">
+												{$t('home.amenities.house.wifi.body')}
+											</p>
+										</div>
+									</div>
+								</div>
+
+								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+									<div class="flex items-start gap-3">
+										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
+											<SquareParking class="h-5 w-5" aria-hidden="true" />
+										</div>
+										<div class="min-w-0">
+											<p class="text-sm font-semibold leading-snug text-slate-900">
+												{$t('home.amenities.house.parking.title')}
+											</p>
+											<p class="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-500">
+												{$t('home.amenities.house.parking.body')}
+											</p>
+										</div>
+									</div>
+								</div>
+
+								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+									<div class="flex items-start gap-3">
+										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
+											<Snowflake class="h-5 w-5" aria-hidden="true" />
+										</div>
+										<div class="min-w-0">
+											<p class="text-sm font-semibold leading-snug text-slate-900">
+												{$t('home.amenities.house.ski.title')}
+											</p>
+											<p class="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-500">
+												{$t('home.amenities.house.ski.body')}
+											</p>
+										</div>
 									</div>
 								</div>
 							</div>
