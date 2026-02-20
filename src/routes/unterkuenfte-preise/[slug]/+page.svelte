@@ -154,6 +154,7 @@
 				name: accommodation.title,
 				description: accommodation.detailBody[$lang],
 				url: roomUrl,
+				mainEntityOfPage: roomUrl,
 				identifier: accommodation.slug,
 				additionalType: 'Apartment',
 				image: buildVacationImages([accommodation.images.main, ...(accommodation.images.gallery ?? [])]),
@@ -162,7 +163,6 @@
 					'@type': 'Accommodation',
 					name: accommodation.title,
 					floorLevel: accommodation.attributes.floor,
-					additionalType: 'EntirePlace',
 					occupancy: maxGuests
 						? {
 								'@type': 'QuantitativeValue',

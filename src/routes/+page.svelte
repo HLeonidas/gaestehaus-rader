@@ -172,29 +172,40 @@
 				},
 				datePublished: review.date,
 			}));
+	const lodgingId = `${siteUrl}/#lodging`;
+	const hotelId = `${siteUrl}/#hotel`;
+	const destinationId = `${siteUrl}/#destination-gitschtal`;
+	const businessSameAs = [
+		'https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9',
+		'https://www.booking.com/Share-deqca7p',
+		'https://nlw.at/de/Unterkunft-finden/Reise-planen/Unterkuenfte/unterkuenfte/KTN/ee29ea3d-3203-4fc3-8e2a-2b996f9f66a1/gaestehaus-rader---fam--herold-hueber',
+	];
 	const containsPlaces = $derived.by(() =>
 		rooms.map((room) => {
 			const maxGuests = parseGuestCapacity(room.attributes.guests[$lang]);
 			const reviewsWithDate = room.reviews.filter((review) => isIsoDate(review.date));
 			const reviewRatings = reviewsWithDate.map((review) => review.rating);
+			const roomUrl = new URL(`${resolve('/unterkuenfte-preise')}/${room.slug}`, siteUrl).toString();
+			const roomId = `${roomUrl}#vacation-rental`;
 			return {
 				'@type': 'VacationRental',
-				'@id': new URL(
-					`${resolve('/unterkuenfte-preise')}/${room.slug}#vacation-rental`,
-					siteUrl
-				).toString(),
+				'@id': roomId,
 				name: room.title,
 				description: room.subtitle[$lang],
-				url: new URL(`${resolve('/unterkuenfte-preise')}/${room.slug}`, siteUrl).toString(),
+				url: roomUrl,
 				identifier: room.slug,
-				additionalType: 'Apartment',
+				accommodationCategory: 'Apartment',
 				image: buildVacationImages([room.images.main, ...(room.images.gallery ?? [])]),
 				geo: geoCoordinates,
+				offers: {
+					'@type': 'Offer',
+					priceCurrency: 'EUR',
+					url: roomUrl,
+				},
 				containsPlace: {
 					'@type': 'Accommodation',
 					name: room.title,
 					floorLevel: room.attributes.floor,
-					additionalType: 'EntirePlace',
 					occupancy: maxGuests
 						? {
 								'@type': 'QuantitativeValue',
@@ -225,28 +236,65 @@
 	const homeJsonLd = $derived.by(() =>
 		JSON.stringify({
 			'@context': 'https://schema.org',
-			'@type': 'LodgingBusiness',
-			'@id': `${siteUrl}/#lodging`,
-			name: 'Gästehaus Rader',
-			url: siteUrl,
-			image: lodgingImages,
-			description: $t('home.seo.description'),
-			priceRange: '€€',
-			address: {
-				'@type': 'PostalAddress',
-				streetAddress: 'Weißbriach 92',
-				postalCode: '9622',
-				addressLocality: 'Weißbriach',
-				addressRegion: 'Kärnten',
-				addressCountry: 'AT',
-			},
-			geo: geoCoordinates,
-			sameAs: ['https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9', 'https://www.booking.com/Share-deqca7p'],
-			hasMap: 'https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9',
-			amenityFeature: amenityFeatures,
-			containsPlace: containsPlaces,
-			telephone: ['+43 676 6246826', '+43 4286 222'],
-			email: 'info@rader-gitschtal.at',
+			'@graph': [
+				{
+					'@type': 'LodgingBusiness',
+					'@id': lodgingId,
+					name: 'Gästehaus Rader',
+					url: siteUrl,
+					additionalType: 'https://schema.org/Hotel',
+					image: lodgingImages,
+					description: $t('home.seo.description'),
+					priceRange: '€€',
+					address: {
+						'@type': 'PostalAddress',
+						streetAddress: 'Weißbriach 92',
+						postalCode: '9622',
+						addressLocality: 'Weißbriach',
+						addressRegion: 'Kärnten',
+						addressCountry: 'AT',
+					},
+					geo: geoCoordinates,
+					sameAs: businessSameAs,
+					hasMap: 'https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9',
+					amenityFeature: amenityFeatures,
+					containsPlace: containsPlaces,
+					telephone: ['+43 676 6246826', '+43 4286 222'],
+					email: 'info@rader-gitschtal.at',
+				},
+				{
+					'@type': 'Hotel',
+					'@id': hotelId,
+					name: 'Gästehaus Rader',
+					url: siteUrl,
+					description: $t('home.seo.description'),
+					image: lodgingImages,
+					isPartOf: {
+						'@id': lodgingId,
+					},
+					address: {
+						'@type': 'PostalAddress',
+						streetAddress: 'Weißbriach 92',
+						postalCode: '9622',
+						addressLocality: 'Weißbriach',
+						addressRegion: 'Kärnten',
+						addressCountry: 'AT',
+					},
+					geo: geoCoordinates,
+					telephone: ['+43 676 6246826', '+43 4286 222'],
+					email: 'info@rader-gitschtal.at',
+					sameAs: businessSameAs,
+					amenityFeature: amenityFeatures,
+				},
+				{
+					'@type': 'TouristDestination',
+					'@id': destinationId,
+					name: 'Gitschtal',
+					containsPlace: {
+						'@id': hotelId,
+					},
+				},
+			],
 		})
 	);
 
