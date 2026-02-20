@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { t } from '$lib/i18n';
-	import { resolve } from '$app/paths';
 	import { trackEvent } from '$lib/analytics/plausible';
-	import { ArrowRight, Check, Copy, Mail, Phone, PhoneCall } from 'lucide-svelte';
+	import { Check, Copy, Mail, MessageCircle, Phone, PhoneCall } from 'lucide-svelte';
 	import SeoHead from '$lib/components/SeoHead.svelte';
 
 	let ibanCopied = false;
@@ -37,7 +36,6 @@
 
 	// externer Link zum Google-Unternehmensprofil
 	const mapLink = 'https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9';
-	const bookingUrl = resolve('/buchen');
 
 	const enableMap = () => {
 		mapEnabled = true;
@@ -59,55 +57,30 @@
 		<p class="mt-4 max-w-2xl text-base leading-relaxed text-slate-600">
 			{$t('contact.subtitle')}
 		</p>
-		<div class="mt-6 flex flex-wrap items-center gap-3">
-			<a
-				href={bookingUrl}
-				class="inline-flex items-center justify-center rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90"
-			>
-				{$t('contact.cta.book')}
-			</a>
-			<a
-				href="tel:+436766246826"
-				class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-800 shadow-sm transition hover:bg-slate-50"
-				onclick={() => trackEvent('Contact: Phone Click', { source: 'contact', line: 'mobile' })}
-			>
-				{$t('contact.cta.call')}
-			</a>
-			<a
-				href="mailto:info@rader-gitschtal.at"
-				class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-800 shadow-sm transition hover:bg-slate-50"
-				onclick={() => trackEvent('Contact: Email Click', { source: 'contact' })}
-			>
-				{$t('contact.cta.email')}
-			</a>
-		</div>
-
 		<div class="mt-8 grid gap-8 border-t border-slate-100 pt-6 lg:grid-cols-[1.2fr,1fr]">
-			<div class="space-y-6">
-				<div class="rounded-2xl bg-white p-5">
+			<div class="space-y-8">
+				<div class="rounded-2xl bg-white pt-2">
 					<p class="text-sm font-semibold text-slate-900">{$t('contact.address.title')}</p>
 					<div class="mt-3 space-y-1 text-sm text-slate-600">
-						<p class="font-semibold text-slate-800">{$t('contact.address.name')}</p>
-						<p>{$t('contact.address.line1')}</p>
+						<p class="font-semibold text-slate-800">Gästehaus Rader</p>
+						<p>
+							<a
+								class="font-medium text-slate-800 underline decoration-slate-300 underline-offset-2 hover:text-slate-900"
+								href={mapLink}
+								target="_blank"
+								rel="noopener noreferrer"
+								onclick={() => trackEvent('Map: Open External', { source: 'contact' })}
+							>
+								{$t('contact.address.line1')}
+							</a>
+						</p>
 						<p>{$t('contact.address.line2')}</p>
-					</div>
-					<div class="mt-4 flex flex-wrap gap-3">
-						<a
-							class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-800 transition hover:bg-slate-50"
-							href={mapLink}
-							target="_blank"
-							rel="noopener noreferrer"
-							onclick={() => trackEvent('Map: Open External', { source: 'contact' })}
-						>
-							{$t('contact.route.cta')}
-							<ArrowRight class="h-4 w-4" aria-hidden="true" />
-						</a>
 					</div>
 				</div>
 
-				<div class="rounded-2xl bg-white p-5">
+				<div class="rounded-2xl bg-white">
 					<p class="text-sm font-semibold text-slate-900">{$t('contact.direct.title')}</p>
-					<div class="mt-3 space-y-2 text-sm text-slate-600">
+					<div class="mt-3 space-y-3 text-sm text-slate-600">
 						<a
 							class="flex items-center justify-between rounded-xl px-3 py-3 transition hover:bg-slate-50"
 							href="tel:+436766246826"
@@ -121,6 +94,24 @@
 									<Phone class="h-4 w-4" />
 								</span>
 								<span class="font-semibold text-slate-900">+43 676 6246826</span>
+							</span>
+							<span class="text-slate-400" aria-hidden="true">↗</span>
+						</a>
+						<a
+							class="flex items-center justify-between rounded-xl px-3 py-3 transition hover:bg-slate-50"
+							href="https://wa.me/436766246826"
+							target="_blank"
+							rel="noopener noreferrer"
+							onclick={() => trackEvent('Contact: WhatsApp Click', { source: 'contact' })}
+						>
+							<span class="flex items-center gap-3">
+								<span
+									class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-emerald-50 text-emerald-600"
+									aria-hidden="true"
+								>
+									<MessageCircle class="h-4 w-4" />
+								</span>
+								<span class="font-semibold text-slate-900">WhatsApp schreiben</span>
 							</span>
 							<span class="text-slate-400" aria-hidden="true">↗</span>
 						</a>
@@ -195,9 +186,6 @@
 							<h3 class="mt-3 text-lg font-semibold text-slate-900">
 								{$t('contact.map.title')}
 							</h3>
-							<p class="mt-2 text-sm leading-relaxed text-slate-600">
-								{$t('contact.map.description')}
-							</p>
 
 							<div class="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
 								<button
@@ -229,6 +217,16 @@
 		</div>
 
 		<div class="mt-6 space-y-6">
+			<div class="rounded-2xl py-5">
+				<p class="text-sm font-semibold text-slate-900">{$t('contact.trust.title')}</p>
+				<ul class="mt-3 grid list-inside list-disc gap-2 text-sm text-slate-600 sm:grid-cols-2">
+					<li>{$t('contact.trust.response')}</li>
+					<li>{$t('contact.trust.languages')}</li>
+					<li>{$t('contact.trust.checkin')}</li>
+					<li>{$t('contact.trust.parking')}</li>
+				</ul>
+			</div>
+
 			<div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-sm">
 				<p class="text-sm font-semibold text-slate-900">{$t('contact.payment.title')}</p>
 				<p class="mt-1 text-xs text-slate-500">{$t('contact.payment.subtitle')}</p>
@@ -278,16 +276,6 @@
 						</div>
 					</div>
 				</div>
-			</div>
-
-			<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-				<p class="text-sm font-semibold text-slate-900">{$t('contact.trust.title')}</p>
-				<ul class="mt-3 grid gap-2 text-sm text-slate-600 sm:grid-cols-2">
-					<li>{$t('contact.trust.response')}</li>
-					<li>{$t('contact.trust.languages')}</li>
-					<li>{$t('contact.trust.checkin')}</li>
-					<li>{$t('contact.trust.parking')}</li>
-				</ul>
 			</div>
 		</div>
 	</section>

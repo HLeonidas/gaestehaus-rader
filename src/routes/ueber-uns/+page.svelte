@@ -14,7 +14,7 @@
 
 <!-- <div class="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6"> -->
 <!-- ABOUT / ÜBER UNS (Tailwind) -->
-<section class="relative overflow-hidden">
+<section class="relative overflow-visible">
 	<!-- soft gradient background -->
 
 	<div class="relative mx-auto max-w-6xl px-6 py-16 lg:py-20">
