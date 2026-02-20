@@ -712,7 +712,7 @@
 								<span
 									class="grid h-10 w-10 place-items-center rounded-full bg-slate-900 text-sm font-semibold text-white"
 								>
-									{$t('trust.booking.score')}
+									{$t('trust.booking.scoreCompact')}
 								</span>
 								<div class="leading-tight">
 									<p class="text-xs font-semibold text-slate-900">
@@ -767,7 +767,7 @@
 				</div>
 
 				<!-- Bottom platform row (like screenshot) -->
-				<div class="mt-10 flex flex-wrap items-center justify-center gap-8 text-sm text-slate-400">
+				<div class="mt-10 flex flex-wrap items-center justify-center gap-4 text-sm text-slate-400 sm:mt-10 sm:gap-8">
 					<div class="flex items-center gap-2">
 						<Home class="h-4 w-4 text-slate-500" aria-hidden="true" />
 						<span class="text-slate-500">Airbnb</span>
