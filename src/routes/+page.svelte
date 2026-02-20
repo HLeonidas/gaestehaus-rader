@@ -13,6 +13,7 @@
 		Mountain,
 		HeartHandshake,
 		Snowflake,
+		Check,
 		ArrowRight,
 		ChevronLeft,
 		ChevronRight,
@@ -1460,7 +1461,7 @@
 			</section>
 
 			<!-- SEASONS -->
-			<section class="rounded-3xl bg-[#f3efe6] px-6 py-12 sm:px-10 sm:py-14">
+			<section class="relative py-10 sm:py-12">
 				<div class="text-center">
 					<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
 						{$t('seasons.kicker')}
@@ -1474,71 +1475,74 @@
 					</p>
 				</div>
 
-				<div class="mt-10 grid gap-6 lg:grid-cols-2">
+				<div class="mt-8 grid gap-6 lg:grid-cols-[1.3fr_0.9fr]">
 					<a
 						href={resolve('/erlebnisse/sommer')}
-						class="group relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-200 shadow-sm"
+						class="group relative overflow-hidden rounded-3xl border border-white/20 bg-white/10 ring-1 ring-black/5 shadow-none transition-all duration-500 hover:-translate-y-1 hover:shadow-xl"
 					>
 						<img
 							src={withAsset('/images/other/house-summer.jpg')}
 							alt={$t('home.seasons.summer.imageAlt')}
-							class="h-64 w-full object-cover sm:h-72"
+							class="h-72 w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] sm:h-[420px]"
 							loading="lazy"
 						/>
 						<div
-							class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
+							class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent transition-colors duration-500 group-hover:from-black/80 group-hover:via-black/50"
 						></div>
 						<div class="absolute bottom-0 left-0 right-0 p-6">
-							<h3 class="text-xl font-semibold text-white">
+							<h3 class="text-2xl font-semibold text-white sm:text-3xl">
 								{$t('seasons.summer.title')}
 							</h3>
-							<p class="mt-1 text-sm text-white/85">
+							<p class="mt-2 max-w-[34ch] text-sm text-white/90 sm:text-base">
 								{$t('seasons.summer.body')}
 							</p>
 							<span
-								class="mt-4 inline-flex items-center rounded-xl bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm transition group-hover:translate-y-[-1px]"
+								class="mt-5 inline-flex items-center gap-2 rounded-full bg-white/90 px-5 py-2.5 text-sm font-semibold text-slate-900 shadow-sm backdrop-blur-sm transition group-hover:bg-white group-hover:shadow-md"
 							>
 								{$t('seasons.summer.cta')}
+								<ArrowRight class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
 							</span>
 						</div>
 					</a>
 
 					<a
 						href={resolve('/erlebnisse/winter')}
-						class="group relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-200 shadow-sm"
+						class="group relative overflow-hidden rounded-3xl border border-white/20 bg-white/10 ring-1 ring-black/5 shadow-none transition-all duration-500 hover:-translate-y-1 hover:shadow-xl"
 					>
 						<img
 							src={withAsset('/images/other/house-winter.jpg')}
 							alt={$t('home.seasons.winter.imageAlt')}
-							class="h-64 w-full object-cover sm:h-72"
+							class="h-72 w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] sm:h-[420px]"
 							loading="lazy"
 						/>
 						<div
-							class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
+							class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent transition-colors duration-500 group-hover:from-black/80 group-hover:via-black/50"
 						></div>
 						<div class="absolute bottom-0 left-0 right-0 p-6">
-							<h3 class="text-xl font-semibold text-white">
+							<h3 class="text-2xl font-semibold text-white sm:text-3xl">
 								{$t('seasons.winter.title')}
 							</h3>
-							<p class="mt-1 text-sm text-white/85">
+							<p class="mt-2 max-w-[34ch] text-sm text-white/90 sm:text-base">
 								{$t('seasons.winter.body')}
 							</p>
 							<span
-								class="mt-4 inline-flex items-center rounded-xl bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm transition group-hover:translate-y-[-1px]"
+								class="mt-5 inline-flex items-center gap-2 rounded-full bg-white/90 px-5 py-2.5 text-sm font-semibold text-slate-900 shadow-sm backdrop-blur-sm transition group-hover:bg-white group-hover:shadow-md"
 							>
 								{$t('seasons.winter.cta')}
+								<ArrowRight class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
 							</span>
 						</div>
 					</a>
 				</div>
+
 			</section>
 		</div>
 	</div>
 
 	<!-- SUSTAINABILITY -->
 	<div class="w-full bg-[#f1eee7]">
-		<section class="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6">
-			<div class="rounded-3xl px-0 py-0 sm:px-10 sm:py-12">
+		<section class="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+			<div class="rounded-3xl bg-white/35 p-8 ring-1 ring-black/5 sm:p-10">
 				<div class="grid items-center gap-10 lg:grid-cols-2">
 					<!-- Left: image card -->
 					<div class="relative">
@@ -1554,12 +1558,12 @@
 							></div>
 						</div>
 
-						<!-- Floating icon tile (bottom-right) -->
-						<div class="absolute -bottom-6 right-6">
+						<!-- Floating icon tile (top-left) -->
+						<div class="absolute left-5 top-5">
 							<div
-								class="grid h-20 w-20 place-items-center rounded-2xl bg-emerald-600 text-white shadow-lg ring-1 ring-black/5"
+								class="grid h-14 w-14 place-items-center rounded-2xl bg-emerald-600 text-white shadow-md ring-1 ring-black/5"
 							>
-								<Sun class="h-8 w-8" aria-hidden="true" />
+								<Sun class="h-6 w-6" aria-hidden="true" />
 							</div>
 						</div>
 					</div>
@@ -1576,14 +1580,24 @@
 							{$t('home.sustainability.title.line1')}<br />{$t('home.sustainability.title.line2')}
 						</h2>
 
-						<div class="space-y-4 text-sm leading-relaxed text-slate-600 sm:text-base">
-							<p>{$t('home.sustainability.body1')}</p>
-							<p>{$t('home.sustainability.body2')}</p>
-						</div>
+						<p class="text-base font-medium text-slate-700">
+							{$t('home.sustainability.lead')}
+						</p>
 
-						<div class="mt-6 border-t border-slate-200 pt-6">
-							<div class="grid gap-5 sm:grid-cols-2">
-								<!-- Solar / Photovoltaik -->
+						<ul class="space-y-2 text-sm leading-relaxed text-slate-600">
+							<li class="flex items-start gap-2">
+								<Check class="mt-0.5 h-4 w-4 shrink-0 text-emerald-700" aria-hidden="true" />
+								<span>{$t('home.sustainability.bullet.solar')}</span>
+							</li>
+							<li class="flex items-start gap-2">
+								<Check class="mt-0.5 h-4 w-4 shrink-0 text-emerald-700" aria-hidden="true" />
+								<span>{$t('home.sustainability.bullet.heating')}</span>
+							</li>
+						</ul>
+
+						<div class="mt-6 grid gap-4 sm:grid-cols-2">
+							<!-- Solar / Photovoltaik -->
+							<div class="rounded-2xl bg-white/60 p-4 ring-1 ring-black/5">
 								<div class="flex items-start gap-3">
 									<div
 										class="mt-0.5 grid h-10 w-10 place-items-center rounded-xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100"
@@ -1594,13 +1608,15 @@
 										<p class="text-sm font-semibold text-slate-900">
 											{$t('home.sustainability.solar.title')}
 										</p>
-										<p class="text-xs text-slate-500">
+										<p class="mt-1 text-xs text-slate-500">
 											{$t('home.sustainability.solar.body')}
 										</p>
 									</div>
 								</div>
+							</div>
 
-								<!-- Fernw"rme -->
+							<!-- Fernwärme -->
+							<div class="rounded-2xl bg-white/60 p-4 ring-1 ring-black/5">
 								<div class="flex items-start gap-3">
 									<div
 										class="mt-0.5 grid h-10 w-10 place-items-center rounded-xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100"
@@ -1611,7 +1627,7 @@
 										<p class="text-sm font-semibold text-slate-900">
 											{$t('home.sustainability.heating.title')}
 										</p>
-										<p class="text-xs text-slate-500">
+										<p class="mt-1 text-xs text-slate-500">
 											{$t('home.sustainability.heating.body')}
 										</p>
 									</div>

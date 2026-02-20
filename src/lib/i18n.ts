@@ -459,6 +459,10 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.sustainability.badge': 'Nachhaltig',
 		'home.sustainability.title.line1': 'Nachhaltigkeit aus',
 		'home.sustainability.title.line2': 'Leidenschaft',
+		'home.sustainability.lead':
+			'Eigenstrom vom Dach und Fernwärme aus dem Dorf - nachhaltiger Komfort ohne Verzicht.',
+		'home.sustainability.bullet.solar': 'Photovoltaik: Strom direkt vor Ort genutzt.',
+		'home.sustainability.bullet.heating': 'Fernwärme: effizient und zuverlässig.',
 		'home.sustainability.body1':
 			'Im Gästehaus Rader gehen unsere Liebe zu den Bergen und unser Einsatz für ihren Schutz Hand in Hand. Wir glauben, echte Gastfreundschaft bedeutet, Verantwortung für die Umwelt zu übernehmen, die uns beherbergt.',
 		'home.sustainability.body2':
@@ -1208,6 +1212,10 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.sustainability.badge': 'Eco-friendly',
 		'home.sustainability.title.line1': 'Sustainability with',
 		'home.sustainability.title.line2': 'passion',
+		'home.sustainability.lead':
+			'On-site solar power and district heating from the village - sustainable comfort without compromise.',
+		'home.sustainability.bullet.solar': 'Photovoltaics: power generated and used directly on site.',
+		'home.sustainability.bullet.heating': 'District heating: efficient and reliable.',
 		'home.sustainability.body1':
 			'At Gästehaus Rader, our love for the mountains goes hand in hand with our commitment to protecting them. We believe true hospitality means taking responsibility for the environment that hosts us.',
 		'home.sustainability.body2':
