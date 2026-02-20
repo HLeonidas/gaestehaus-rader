@@ -298,6 +298,11 @@ const translations: Record<Lang, Record<string, string>> = {
 		'trust.review.3.name': 'Aneta S.',
 		'trust.review.3.initials': 'AS',
 		'trust.review.3.meta': 'vor 7 Jahren',
+		'trust.review.4':
+			'Vollkommen empfehlenswert! Wir haben uns wie zu Hause gefühlt, die Familie Rader hat seit drei Generationen Sinn für Gastfreundschaft. Die Wohnungen sind sauber, gut ausgerüstet, und wir konnten den Aperitif am Balkon mit einem Ausblick auf die Berge genießen.',
+		'trust.review.4.name': 'Elodie F.',
+		'trust.review.4.initials': 'EF',
+		'trust.review.4.meta': 'vor einem Jahr',
 		'trust.badge.family': 'Familiengeführt',
 		'trust.badge.since': 'Seit 1964',
 		'trust.badge.direct': 'Direktbuchung = bester Preis',
@@ -1038,6 +1043,11 @@ const translations: Record<Lang, Record<string, string>> = {
 		'trust.review.3.name': 'Aneta S.',
 		'trust.review.3.initials': 'AS',
 		'trust.review.3.meta': '7 years ago',
+		'trust.review.4':
+			'Highly recommended! We felt at home, and the Rader family clearly lives hospitality across generations. The apartments are clean, well equipped, and we enjoyed an aperitif on the balcony with a mountain view.',
+		'trust.review.4.name': 'Elodie F.',
+		'trust.review.4.initials': 'EF',
+		'trust.review.4.meta': '1 year ago',
 		'trust.badge.family': 'Family-run',
 		'trust.badge.since': 'Since 1964',
 		'trust.badge.direct': 'Best price when booking direct',

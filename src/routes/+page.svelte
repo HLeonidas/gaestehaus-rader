@@ -4,6 +4,7 @@
 	import { asset, resolve } from '$app/paths';
 	import { browser } from '$app/environment';
 	import { accommodations } from '$lib/data/accommodations';
+	import { homeTrustReviews } from '$lib/data/reviews';
 	import { trackEvent } from '$lib/analytics/plausible';
 	import SeoHead from '$lib/components/SeoHead.svelte';
 	import { SITE_ORIGIN } from '$lib/seo';
@@ -178,6 +179,7 @@
 	const businessSameAs = [
 		'https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9',
 		'https://www.booking.com/Share-deqca7p',
+		'https://www.airbnb.at/users/profile/1470215552721931790',
 		'https://nlw.at/de/Unterkunft-finden/Reise-planen/Unterkuenfte/unterkuenfte/KTN/ee29ea3d-3203-4fc3-8e2a-2b996f9f66a1/gaestehaus-rader---fam--herold-hueber',
 	];
 	const containsPlaces = $derived.by(() =>
@@ -387,6 +389,22 @@
 
 	let galleryTrack: HTMLDivElement | null = null;
 	const trustStars = Array.from({ length: 5 });
+	const googleProfileUrl = 'https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9';
+	const displayedTrustReviews = homeTrustReviews.filter((review) =>
+		[1, 2, 5].includes(review.id)
+	);
+	const formatReviewAge = (value: string | undefined, currentLang: 'de' | 'en') => {
+		if (!value) return '';
+		const parsed = new Date(value);
+		if (Number.isNaN(parsed.getTime())) return '';
+		const now = new Date();
+		let months =
+			(now.getFullYear() - parsed.getFullYear()) * 12 + (now.getMonth() - parsed.getMonth());
+		if (now.getDate() < parsed.getDate()) months -= 1;
+		if (months <= 1) return currentLang === 'de' ? 'vor einem Monat' : 'one month ago';
+		if (months < 12) return currentLang === 'de' ? `vor ${months} Monaten` : `${months} months ago`;
+		return currentLang === 'de' ? 'vor einem Jahr' : 'one year ago';
+	};
 
 	const scrollGallery = (direction: 'prev' | 'next') => {
 		if (!galleryTrack) return;
@@ -676,24 +694,38 @@
 
 				<!-- Cards row (4 columns like screenshot) -->
 				<div
-					class="mt-6 -mx-4 flex snap-x snap-mandatory items-stretch gap-6 overflow-x-auto px-4 pb-2 scroll-pl-4 scroll-pr-4 [scrollbar-width:thin] [scrollbar-color:theme(colors.slate.300)_transparent] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-200 hover:[&::-webkit-scrollbar-thumb]:bg-slate-300 sm:mt-10 lg:mx-0 lg:grid lg:grid-cols-4 lg:overflow-visible lg:px-0 lg:pb-0"
+					class={`mt-6 -mx-4 flex snap-x snap-mandatory items-stretch gap-6 overflow-x-auto px-4 pb-2 scroll-pl-4 scroll-pr-4 [scrollbar-width:thin] [scrollbar-color:theme(colors.slate.300)_transparent] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-200 hover:[&::-webkit-scrollbar-thumb]:bg-slate-300 sm:mt-10 lg:mx-0 lg:grid lg:overflow-visible lg:px-0 lg:pb-0 ${
+						displayedTrustReviews.length > 3 ? 'lg:grid-cols-5' : 'lg:grid-cols-4'
+					}`}
 				>
 					<!-- Rating card (Google) -->
 					<div
-						class="flex h-full w-[280px] min-h-[300px] shrink-0 snap-start flex-col rounded-3xl border border-slate-200/70 bg-white p-6 shadow-sm lg:min-h-0 lg:w-auto lg:shrink"
+						class="flex h-full w-[280px] min-h-[330px] shrink-0 snap-start flex-col rounded-3xl border border-slate-200/70 bg-white p-6 shadow-sm lg:min-h-0 lg:w-auto lg:shrink"
 					>
 						<div
 							class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-slate-400"
 						>
-							<span>Google</span>
+							<a
+								href={googleProfileUrl}
+								target="_blank"
+								rel="noreferrer"
+								class="transition hover:underline"
+							>
+								Google
+							</a>
 						</div>
 
-						<div class="mt-5 flex items-end gap-2">
-							<span class="text-5xl font-semibold leading-none text-slate-900">
+						<a
+							href={googleProfileUrl}
+							target="_blank"
+							rel="noreferrer"
+							class="group mt-5 inline-flex items-end gap-2"
+						>
+							<span class="text-5xl font-semibold leading-none text-slate-900 group-hover:underline">
 								{$t('trust.ratingValue')}
 							</span>
-							<span class="pb-1 text-sm font-semibold text-slate-400">/ 5</span>
-						</div>
+							<span class="pb-1 text-sm font-semibold text-slate-400 group-hover:underline">/ 5</span>
+						</a>
 
 						<div class="mt-3 flex items-center gap-1 text-amber-500">
 							{#each trustStars as _}
@@ -726,11 +758,14 @@
 					</div>
 
 					<!-- Review cards -->
-					{#each [1, 2, 3] as i}
-						<button
-							type="button"
-							class="flex h-full w-[280px] min-h-[300px] shrink-0 snap-start flex-col rounded-3xl border border-slate-200/70 bg-white p-6 text-left shadow-sm transition transition hover:shadow-md lg:min-h-0 lg:w-auto lg:shrink"
-							onclick={() => trackEvent('Trust: Review Click', { source: 'home', index: i })}
+					{#each displayedTrustReviews as review}
+						<a
+							href={review.url}
+							target="_blank"
+							rel="noreferrer"
+							class="flex h-full w-[280px] min-h-[330px] shrink-0 snap-start flex-col rounded-3xl border border-slate-200/70 bg-white p-6 text-left shadow-sm transition transition hover:shadow-md lg:min-h-0 lg:w-auto lg:shrink"
+							onclick={() =>
+								trackEvent('Trust: Review Click', { source: 'home', index: review.id })}
 						>
 							<div class="flex items-center gap-1 text-amber-500">
 								{#each trustStars as _}
@@ -739,7 +774,7 @@
 							</div>
 
 							<p class="mt-5 text-sm italic leading-relaxed text-slate-600">
-								"{$t(`trust.review.${i}`)}"
+								"{review.quote[$lang]}"
 							</p>
 
 							<div class="mt-auto border-t border-slate-200/70 pt-4">
@@ -748,40 +783,50 @@
 									<div
 										class="grid h-10 w-10 place-items-center overflow-hidden rounded-full bg-slate-100 text-xs font-semibold text-slate-700"
 									>
-										{$t(`trust.review.${i}.initials`)}
+										{review.initials}
 									</div>
 
 									<div class="leading-tight">
 										<p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-900">
-											{$t(`trust.review.${i}.name`)}
+											{review.name}
 										</p>
 										<p class="text-[11px] text-slate-400">
-											{$t(`trust.review.${i}.meta`)}
+											{review.date ? formatReviewAge(review.date, $lang) : review.meta[$lang]}
 										</p>
 									</div>
 								</div>
 							</div>
-						</button>
+						</a>
 					{/each}
 				</div>
 
 				<!-- Bottom platform row (like screenshot) -->
 				<div class="mt-8 flex flex-wrap items-center justify-center gap-4 text-sm text-slate-400 sm:mt-10 sm:gap-8">
-					<div class="flex items-center gap-2">
-						<Home class="h-4 w-4 text-slate-500" aria-hidden="true" />
-						<span class="text-slate-500">Airbnb</span>
-						<span class="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600">
+					<a
+						href="https://www.airbnb.at/users/profile/1470215552721931790"
+						target="_blank"
+						rel="noreferrer"
+						class="group flex items-center gap-2 rounded-full px-2 py-1 transition-colors duration-200 hover:bg-slate-100/70"
+					>
+						<Home class="h-4 w-4 text-slate-500 transition-colors group-hover:text-slate-700" aria-hidden="true" />
+						<span class="text-slate-500 transition-colors group-hover:text-slate-700 group-hover:underline">Airbnb</span>
+						<span class="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600 transition-colors group-hover:bg-brand/10 group-hover:text-brand">
 							{$t('trust.airbnb.score')}
 						</span>
-					</div>
+					</a>
 					<span class="h-4 w-px bg-slate-200"></span>
-					<div class="flex items-center gap-2">
-						<Building2 class="h-4 w-4 text-slate-500" aria-hidden="true" />
-						<span class="text-slate-500">Booking.com</span>
-						<span class="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600">
+					<a
+						href="https://www.booking.com/Share-deqca7p"
+						target="_blank"
+						rel="noreferrer"
+						class="group flex items-center gap-2 rounded-full px-2 py-1 transition-colors duration-200 hover:bg-slate-100/70"
+					>
+						<Building2 class="h-4 w-4 text-slate-500 transition-colors group-hover:text-slate-700" aria-hidden="true" />
+						<span class="text-slate-500 transition-colors group-hover:text-slate-700 group-hover:underline">Booking.com</span>
+						<span class="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600 transition-colors group-hover:bg-brand/10 group-hover:text-brand">
 							{$t('trust.booking.score')}
 						</span>
-					</div>
+					</a>
 				</div>
 			</section>
 
@@ -849,6 +894,8 @@
 					{/each}
 				</div>
 			</section>
+
+			<div class="mx-auto my-12 h-px w-full bg-gradient-to-r from-transparent via-slate-200/80 to-transparent sm:my-16"></div>
 
 			<!-- GUEST CARD -->
 			<section class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
@@ -948,6 +995,8 @@
 					</div>
 				</div>
 			</section>
+
+			<div class="mx-auto my-12 h-px w-full bg-gradient-to-r from-transparent via-slate-200/80 to-transparent sm:my-16"></div>
 		</div>
 	</div>
 
