@@ -699,33 +699,30 @@
 					}`}
 				>
 					<!-- Rating card (Google) -->
-					<div
-						class="flex h-full w-[280px] min-h-[330px] shrink-0 snap-start flex-col rounded-3xl border border-slate-200/70 bg-white p-6 shadow-sm lg:min-h-0 lg:w-auto lg:shrink"
+					<a
+						href={googleProfileUrl}
+						target="_blank"
+						rel="noreferrer"
+						class="group relative flex h-full w-[280px] min-h-[330px] shrink-0 snap-start flex-col rounded-3xl border border-slate-200/70 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:ring-offset-2 motion-reduce:transform-none motion-reduce:transition-none lg:min-h-0 lg:w-auto lg:shrink"
 					>
+						<span
+							class="pointer-events-none absolute right-5 top-5 grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-500 opacity-0 transition group-hover:opacity-100 group-hover:bg-brand/10 group-hover:text-brand"
+							aria-hidden="true"
+						>
+							↗
+						</span>
 						<div
 							class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-slate-400"
 						>
-							<a
-								href={googleProfileUrl}
-								target="_blank"
-								rel="noreferrer"
-								class="transition hover:underline"
-							>
-								Google
-							</a>
+							<span class="transition group-hover:text-slate-500 group-hover:underline">Google</span>
 						</div>
 
-						<a
-							href={googleProfileUrl}
-							target="_blank"
-							rel="noreferrer"
-							class="group mt-5 inline-flex items-end gap-2"
-						>
+						<div class="mt-5 inline-flex items-end gap-2">
 							<span class="text-5xl font-semibold leading-none text-slate-900 group-hover:underline">
 								{$t('trust.ratingValue')}
 							</span>
 							<span class="pb-1 text-sm font-semibold text-slate-400 group-hover:underline">/ 5</span>
-						</a>
+						</div>
 
 						<div class="mt-3 flex items-center gap-1 text-amber-500">
 							{#each trustStars as _}
@@ -755,7 +752,10 @@
 								</div>
 							</div>
 						</div>
-					</div>
+						<div
+							class="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-transparent transition group-hover:ring-brand/20"
+						></div>
+					</a>
 
 					<!-- Review cards -->
 					{#each displayedTrustReviews as review}
@@ -763,17 +763,24 @@
 							href={review.url}
 							target="_blank"
 							rel="noreferrer"
-							class="flex h-full w-[280px] min-h-[330px] shrink-0 snap-start flex-col rounded-3xl border border-slate-200/70 bg-white p-6 text-left shadow-sm transition transition hover:shadow-md lg:min-h-0 lg:w-auto lg:shrink"
+							class="group relative flex h-full w-[280px] min-h-[330px] shrink-0 snap-start flex-col rounded-3xl border border-slate-200/70 bg-white p-6 text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:ring-offset-2 motion-reduce:transform-none motion-reduce:transition-none lg:min-h-0 lg:w-auto lg:shrink"
 							onclick={() =>
 								trackEvent('Trust: Review Click', { source: 'home', index: review.id })}
 						>
+							<span
+								class="pointer-events-none absolute right-5 top-5 grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-500 opacity-0 transition group-hover:opacity-100 group-hover:bg-brand/10 group-hover:text-brand"
+								aria-hidden="true"
+							>
+								↗
+							</span>
+
 							<div class="flex items-center gap-1 text-amber-500">
 								{#each trustStars as _}
 									<Star class="h-4 w-4 fill-current" aria-hidden="true" />
 								{/each}
 							</div>
 
-							<p class="mt-5 text-sm italic leading-relaxed text-slate-600">
+							<p class="mt-5 text-sm italic leading-relaxed text-slate-600 transition group-hover:text-slate-700">
 								"{review.quote[$lang]}"
 							</p>
 
@@ -796,6 +803,10 @@
 									</div>
 								</div>
 							</div>
+
+							<div
+								class="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-transparent transition group-hover:ring-brand/20"
+							></div>
 						</a>
 					{/each}
 				</div>
@@ -806,12 +817,15 @@
 						href="https://www.airbnb.at/users/profile/1470215552721931790"
 						target="_blank"
 						rel="noreferrer"
-						class="group flex items-center gap-2 rounded-full px-2 py-1 transition-colors duration-200 hover:bg-slate-100/70"
+						class="group inline-flex items-center gap-2 rounded-full border border-transparent px-2.5 py-1.5 transition-all duration-200 hover:-translate-y-[1px] hover:border-slate-200 hover:bg-white hover:shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:ring-offset-2"
 					>
-						<Home class="h-4 w-4 text-slate-500 transition-colors group-hover:text-slate-700" aria-hidden="true" />
-						<span class="text-slate-500 transition-colors group-hover:text-slate-700 group-hover:underline">Airbnb</span>
-						<span class="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600 transition-colors group-hover:bg-brand/10 group-hover:text-brand">
+						<Home class="h-4 w-4 text-slate-500 transition-colors group-hover:text-slate-800" aria-hidden="true" />
+						<span class="text-slate-500 transition-colors group-hover:text-slate-800 group-hover:underline">Airbnb</span>
+						<span class="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600 transition-all duration-200 group-hover:bg-brand/10 group-hover:text-brand group-hover:ring-1 group-hover:ring-brand/20">
 							{$t('trust.airbnb.score')}
+						</span>
+						<span class="ml-0.5 text-slate-400 opacity-0 transition group-hover:opacity-100 group-hover:text-slate-600" aria-hidden="true">
+							↗
 						</span>
 					</a>
 					<span class="h-4 w-px bg-slate-200"></span>
@@ -819,12 +833,15 @@
 						href="https://www.booking.com/Share-deqca7p"
 						target="_blank"
 						rel="noreferrer"
-						class="group flex items-center gap-2 rounded-full px-2 py-1 transition-colors duration-200 hover:bg-slate-100/70"
+						class="group inline-flex items-center gap-2 rounded-full border border-transparent px-2.5 py-1.5 transition-all duration-200 hover:-translate-y-[1px] hover:border-slate-200 hover:bg-white hover:shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:ring-offset-2"
 					>
-						<Building2 class="h-4 w-4 text-slate-500 transition-colors group-hover:text-slate-700" aria-hidden="true" />
-						<span class="text-slate-500 transition-colors group-hover:text-slate-700 group-hover:underline">Booking.com</span>
-						<span class="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600 transition-colors group-hover:bg-brand/10 group-hover:text-brand">
+						<Building2 class="h-4 w-4 text-slate-500 transition-colors group-hover:text-slate-800" aria-hidden="true" />
+						<span class="text-slate-500 transition-colors group-hover:text-slate-800 group-hover:underline">Booking.com</span>
+						<span class="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600 transition-all duration-200 group-hover:bg-brand/10 group-hover:text-brand group-hover:ring-1 group-hover:ring-brand/20">
 							{$t('trust.booking.score')}
+						</span>
+						<span class="ml-0.5 text-slate-400 opacity-0 transition group-hover:opacity-100 group-hover:text-slate-600" aria-hidden="true">
+							↗
 						</span>
 					</a>
 				</div>
