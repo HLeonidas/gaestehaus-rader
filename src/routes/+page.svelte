@@ -556,9 +556,9 @@
 			</section>
 
 			<!-- ROOMS -->
-			<section class="pt-2 sm:pt-4">
-				<div class="flex flex-wrap items-end justify-between gap-6">
-					<div class="pb-6 sm:pb-10">
+			<section class="-mt-4 pt-2 sm:mt-0 sm:pt-4" style="margin-top: 1rem !important">
+				<div class="flex flex-wrap items-end justify-between gap-3 sm:gap-6">
+					<div class="pb-2 sm:pb-10">
 						<p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand">
 							{$t('rooms.section.kicker')}
 						</p>
@@ -570,7 +570,7 @@
 
 					<a
 						href={resolve('/unterkuenfte-preise')}
-						class="ml-auto inline-flex items-center gap-2 pt-2 text-sm font-semibold text-brand/80 transition hover:text-brand"
+						class="ml-auto inline-flex w-full items-center justify-end gap-2 pt-0 text-sm font-semibold text-brand/80 transition hover:text-brand sm:w-auto sm:pt-2"
 					>
 						{$t('rooms.section.cta')}
 						<ArrowRight class="h-4 w-4" aria-hidden="true" />
@@ -655,9 +655,9 @@
 			</section>
 
 			<!-- TRUST -->
-			<section class="py-4">
+			<section class="py-2 sm:py-4">
 				<!-- Header row -->
-				<div class="flex flex-wrap items-start justify-between gap-6">
+				<div class="flex flex-wrap items-start justify-between gap-3 sm:gap-6">
 					<div class="max-w-2xl">
 						<p class="text-[11px] font-semibold uppercase tracking-[0.35em] text-brand">
 							{$t('trust.kicker')}
@@ -668,7 +668,7 @@
 						<div class="mt-4 h-[3px] w-16 rounded-full bg-brand"></div>
 					</div>
 
-					<div class="mt-6 flex items-center gap-2 text-sm font-medium text-slate-500 sm:mt-10">
+					<div class="mt-2 flex items-center gap-2 text-sm font-medium text-slate-500 sm:mt-10">
 						<BadgeCheck class="h-4 w-4 text-brand" aria-hidden="true" />
 						{$t('trust.verified')}
 					</div>
@@ -676,7 +676,7 @@
 
 				<!-- Cards row (4 columns like screenshot) -->
 				<div
-					class="mt-10 -mx-4 flex snap-x snap-mandatory items-stretch gap-6 overflow-x-auto px-4 pb-2 scroll-pl-4 scroll-pr-4 [scrollbar-width:thin] [scrollbar-color:theme(colors.slate.300)_transparent] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-200 hover:[&::-webkit-scrollbar-thumb]:bg-slate-300 lg:mx-0 lg:grid lg:grid-cols-4 lg:overflow-visible lg:px-0 lg:pb-0"
+					class="mt-6 -mx-4 flex snap-x snap-mandatory items-stretch gap-6 overflow-x-auto px-4 pb-2 scroll-pl-4 scroll-pr-4 [scrollbar-width:thin] [scrollbar-color:theme(colors.slate.300)_transparent] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-200 hover:[&::-webkit-scrollbar-thumb]:bg-slate-300 sm:mt-10 lg:mx-0 lg:grid lg:grid-cols-4 lg:overflow-visible lg:px-0 lg:pb-0"
 				>
 					<!-- Rating card (Google) -->
 					<div
@@ -766,7 +766,7 @@
 				</div>
 
 				<!-- Bottom platform row (like screenshot) -->
-				<div class="mt-10 flex flex-wrap items-center justify-center gap-4 text-sm text-slate-400 sm:mt-10 sm:gap-8">
+				<div class="mt-8 flex flex-wrap items-center justify-center gap-4 text-sm text-slate-400 sm:mt-10 sm:gap-8">
 					<div class="flex items-center gap-2">
 						<Home class="h-4 w-4 text-slate-500" aria-hidden="true" />
 						<span class="text-slate-500">Airbnb</span>
