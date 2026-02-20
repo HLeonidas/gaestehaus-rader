@@ -336,28 +336,35 @@
 
 	const galleryImageSizes = '(min-width: 640px) 360px, 260px';
 	const destinationImages = [
-		{ base: 'balkon-ausblick', altKey: 'home.gallery.imageAlt.balkon' },
+		// 2) Ankommen / Haus: das Objekt zeigen
 		{ base: 'haus-sommer', altKey: 'home.gallery.imageAlt.sommer' },
-		{ base: 'Haus-Winter-2', altKey: 'home.gallery.imageAlt.winter' },
-		{ base: 'IMG_0580', altKey: 'home.gallery.imageAlt.view' },
-		{ base: 'kirche', altKey: 'home.gallery.imageAlt.kirche' },
+				// 4) Außenbereich / Garten-Feeling
 		{ base: 'pavillon', altKey: 'home.gallery.imageAlt.pavillon' },
-		{ base: 'slider-4-winter', altKey: 'home.gallery.imageAlt.sliderWinter' },
+				// 3) Wohlfühl-Detail / Innen- oder Detailshot (wenn IMG_0580 das ist)
+		{ base: 'IMG_0580', altKey: 'home.gallery.imageAlt.view' },
+		// 1) Hero / USP: Ausblick (macht sofort Lust)
+		{ base: 'balkon-ausblick', altKey: 'home.gallery.imageAlt.balkon' },
+
+		// 5) Aktivität / Feature (locker, menschlich)
 		{ base: 'tischtennis', altKey: 'home.gallery.imageAlt.tischtennis' },
+
+		// 6) Umgebung / Ort (context)
+		{ base: 'kirche', altKey: 'home.gallery.imageAlt.kirche' },
+
+		// 7) Winter-Teaser: einmal „wow“ Winter
+		{ base: 'Haus-Winter-2', altKey: 'home.gallery.imageAlt.winter' },
+
+		// 8) Winter-Atmosphäre (weitere Variation)
 		{ base: 'winter-balkon_ausblick-1', altKey: 'home.gallery.imageAlt.winterBalkon' },
+
+		// 9) Optional/zusätzliches Winterbild ans Ende (wenn’s eher „B-Roll“ ist)
+		{ base: 'slider-4-winter', altKey: 'home.gallery.imageAlt.sliderWinter' },
 	];
 
-	function shuffle<T>(arr: readonly T[]): T[] {
-		const a = arr.slice();
-		for (let i = a.length - 1; i > 0; i--) {
-			const j = Math.floor(Math.random() * (i + 1));
-			[a[i], a[j]] = [a[j], a[i]];
-		}
-		return a;
-	}
-
-	let shuffledImages = $state(destinationImages);
+	const galleryImages = destinationImages;
 	let heroHeaderOffset = $state('113px');
+	let isGalleryOpen = $state(false);
+	let activeGalleryIndex = $state(0);
 
 	const getHeroOffsetFallback = () =>
 		browser && window.matchMedia('(min-width: 640px)').matches ? 112 : 141;
@@ -369,9 +376,40 @@
 		heroHeaderOffset = `${Math.round(headerHeight)}px`;
 	};
 
+	const openGallery = (index: number) => {
+		activeGalleryIndex = index;
+		isGalleryOpen = true;
+	};
+
+	const closeGallery = () => {
+		isGalleryOpen = false;
+	};
+
+	const showPrevGalleryImage = () => {
+		if (!galleryImages.length) return;
+		activeGalleryIndex = (activeGalleryIndex - 1 + galleryImages.length) % galleryImages.length;
+	};
+
+	const showNextGalleryImage = () => {
+		if (!galleryImages.length) return;
+		activeGalleryIndex = (activeGalleryIndex + 1) % galleryImages.length;
+	};
+
+	const handleGalleryKeydown = (event: KeyboardEvent) => {
+		if (!isGalleryOpen) return;
+		if (event.key === 'Escape') {
+			closeGallery();
+		}
+		if (event.key === 'ArrowLeft') {
+			showPrevGalleryImage();
+		}
+		if (event.key === 'ArrowRight') {
+			showNextGalleryImage();
+		}
+	};
+
 	onMount(() => {
 		if (!browser) return;
-		shuffledImages = shuffle(destinationImages);
 		updateHeroHeaderOffset();
 
 		const header = document.getElementById('site-header');
@@ -381,19 +419,28 @@
 		}
 
 		window.addEventListener('resize', updateHeroHeaderOffset);
+		window.addEventListener('keydown', handleGalleryKeydown);
 
 		return () => {
 			resizeObserver?.disconnect();
 			window.removeEventListener('resize', updateHeroHeaderOffset);
+			window.removeEventListener('keydown', handleGalleryKeydown);
 		};
 	});
 
 	let galleryTrack: HTMLDivElement | null = null;
+	const scrollGallery = (direction: 'prev' | 'next') => {
+		if (!galleryTrack) return;
+		const amount = galleryTrack.clientWidth * 0.8;
+		galleryTrack.scrollBy({
+			left: direction === 'prev' ? -amount : amount,
+			behavior: 'smooth',
+		});
+	};
+
 	const trustStars = Array.from({ length: 5 });
 	const googleProfileUrl = 'https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9';
-	const displayedTrustReviews = homeTrustReviews.filter((review) =>
-		[1, 2, 5].includes(review.id)
-	);
+	const displayedTrustReviews = homeTrustReviews.filter((review) => [1, 2, 5].includes(review.id));
 	const formatReviewAge = (value: string | undefined, currentLang: 'de' | 'en') => {
 		if (!value) return '';
 		const parsed = new Date(value);
@@ -405,15 +452,6 @@
 		if (months <= 1) return currentLang === 'de' ? 'vor einem Monat' : 'one month ago';
 		if (months < 12) return currentLang === 'de' ? `vor ${months} Monaten` : `${months} months ago`;
 		return currentLang === 'de' ? 'vor einem Jahr' : 'one year ago';
-	};
-
-	const scrollGallery = (direction: 'prev' | 'next') => {
-		if (!galleryTrack) return;
-		const amount = galleryTrack.clientWidth * 0.8;
-		galleryTrack.scrollBy({
-			left: direction === 'prev' ? -amount : amount,
-			behavior: 'smooth',
-		});
 	};
 
 	type RevealOptions = {
@@ -561,7 +599,9 @@
 					<div
 						class="group w-[84vw] max-w-[320px] shrink-0 snap-start rounded-2xl border border-slate-200/50 bg-white/80 p-5 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md sm:w-auto sm:max-w-none sm:p-6"
 					>
-						<div class="flex h-10 w-10 items-center justify-center rounded-full bg-brand/10 text-brand transition-all duration-300 group-hover:bg-brand group-hover:text-white">
+						<div
+							class="flex h-10 w-10 items-center justify-center rounded-full bg-brand/10 text-brand transition-all duration-300 group-hover:bg-brand group-hover:text-white"
+						>
 							<item.icon class="h-5 w-5" aria-hidden="true" />
 						</div>
 						<h3 class="mt-4 text-base font-semibold text-slate-900">
@@ -667,7 +707,9 @@
 								</div>
 
 								<!-- Hover ring -->
-								<div class="pointer-events-none absolute inset-0 ring-1 ring-transparent transition group-hover:ring-brand/25"></div>
+								<div
+									class="pointer-events-none absolute inset-0 ring-1 ring-transparent transition group-hover:ring-brand/25"
+								></div>
 							</a>
 						{/each}
 					</div>
@@ -705,10 +747,10 @@
 						href={googleProfileUrl}
 						target="_blank"
 						rel="noreferrer"
-						class="group relative flex h-full w-[280px] min-h-[330px] shrink-0 snap-start flex-col rounded-3xl border border-slate-200/70 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:ring-offset-2 motion-reduce:transform-none motion-reduce:transition-none lg:min-h-0 lg:w-auto lg:shrink"
+						class="group relative flex h-full w-[280px] min-h-[330px] shrink-0 snap-start flex-col rounded-3xl border border-slate-200/70 bg-white p-6 shadow-sm transition-all duration-300 hover:border-brand/30 hover:shadow-lg sm:hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:ring-offset-2 motion-reduce:transform-none motion-reduce:transition-none lg:min-h-0 lg:w-auto lg:shrink"
 					>
 						<span
-							class="pointer-events-none absolute right-5 top-5 grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-500 opacity-0 transition group-hover:opacity-100 group-hover:bg-brand/10 group-hover:text-brand"
+							class="pointer-events-none absolute right-5 top-5 grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-500 opacity-100 transition sm:opacity-0 sm:group-hover:opacity-100 group-hover:bg-brand/10 group-hover:text-brand"
 							aria-hidden="true"
 						>
 							↗
@@ -765,12 +807,11 @@
 							href={review.url}
 							target="_blank"
 							rel="noreferrer"
-							class="group relative flex h-full w-[280px] min-h-[330px] shrink-0 snap-start flex-col rounded-3xl border border-slate-200/70 bg-white p-6 text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:ring-offset-2 motion-reduce:transform-none motion-reduce:transition-none lg:min-h-0 lg:w-auto lg:shrink"
-							onclick={() =>
-								trackEvent('Trust: Review Click', { source: 'home', index: review.id })}
+							class="group relative flex h-full w-[280px] min-h-[330px] shrink-0 snap-start flex-col rounded-3xl border border-slate-200/70 bg-white p-6 text-left shadow-sm transition-all duration-300 hover:border-brand/30 hover:shadow-lg sm:hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:ring-offset-2 motion-reduce:transform-none motion-reduce:transition-none lg:min-h-0 lg:w-auto lg:shrink"
+							onclick={() => trackEvent('Trust: Review Click', { source: 'home', index: review.id })}
 						>
 							<span
-								class="pointer-events-none absolute right-5 top-5 grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-500 opacity-0 transition group-hover:opacity-100 group-hover:bg-brand/10 group-hover:text-brand"
+								class="pointer-events-none absolute right-5 top-5 grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-500 opacity-100 transition sm:opacity-0 sm:group-hover:opacity-100 group-hover:bg-brand/10 group-hover:text-brand"
 								aria-hidden="true"
 							>
 								↗
@@ -782,7 +823,9 @@
 								{/each}
 							</div>
 
-							<p class="mt-5 text-sm italic leading-relaxed text-slate-600 transition group-hover:text-slate-700">
+							<p
+								class="mt-5 text-sm italic leading-relaxed text-slate-600 transition group-hover:text-slate-700"
+							>
 								"{review.quote[$lang]}"
 							</p>
 
@@ -814,19 +857,32 @@
 				</div>
 
 				<!-- Bottom platform row (like screenshot) -->
-				<div class="mt-8 flex flex-wrap items-center justify-center gap-4 text-sm text-slate-400 sm:mt-10 sm:gap-8">
+				<div
+					class="mt-8 flex flex-wrap items-center justify-center gap-4 text-sm text-slate-400 sm:mt-10 sm:gap-8"
+				>
 					<a
 						href="https://www.airbnb.at/users/profile/1470215552721931790"
 						target="_blank"
 						rel="noreferrer"
 						class="group inline-flex items-center gap-2 rounded-full border border-transparent px-2.5 py-1.5 transition-all duration-200 hover:-translate-y-[1px] hover:border-slate-200 hover:bg-white hover:shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:ring-offset-2"
 					>
-						<Home class="h-4 w-4 text-slate-500 transition-colors group-hover:text-slate-800" aria-hidden="true" />
-						<span class="text-slate-500 transition-colors group-hover:text-slate-800 group-hover:underline">Airbnb</span>
-						<span class="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600 transition-all duration-200 group-hover:bg-brand/10 group-hover:text-brand group-hover:ring-1 group-hover:ring-brand/20">
+						<Home
+							class="h-4 w-4 text-slate-500 transition-colors group-hover:text-slate-800"
+							aria-hidden="true"
+						/>
+						<span
+							class="text-slate-500 transition-colors group-hover:text-slate-800 group-hover:underline"
+							>Airbnb</span
+						>
+						<span
+							class="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600 transition-all duration-200 group-hover:bg-brand/10 group-hover:text-brand group-hover:ring-1 group-hover:ring-brand/20"
+						>
 							{$t('trust.airbnb.score')}
 						</span>
-						<span class="ml-0.5 text-slate-400 opacity-0 transition group-hover:opacity-100 group-hover:text-slate-600" aria-hidden="true">
+						<span
+							class="ml-0.5 text-slate-400 opacity-100 transition sm:opacity-0 sm:group-hover:opacity-100 group-hover:text-slate-600"
+							aria-hidden="true"
+						>
 							↗
 						</span>
 					</a>
@@ -837,12 +893,23 @@
 						rel="noreferrer"
 						class="group inline-flex items-center gap-2 rounded-full border border-transparent px-2.5 py-1.5 transition-all duration-200 hover:-translate-y-[1px] hover:border-slate-200 hover:bg-white hover:shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:ring-offset-2"
 					>
-						<Building2 class="h-4 w-4 text-slate-500 transition-colors group-hover:text-slate-800" aria-hidden="true" />
-						<span class="text-slate-500 transition-colors group-hover:text-slate-800 group-hover:underline">Booking.com</span>
-						<span class="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600 transition-all duration-200 group-hover:bg-brand/10 group-hover:text-brand group-hover:ring-1 group-hover:ring-brand/20">
+						<Building2
+							class="h-4 w-4 text-slate-500 transition-colors group-hover:text-slate-800"
+							aria-hidden="true"
+						/>
+						<span
+							class="text-slate-500 transition-colors group-hover:text-slate-800 group-hover:underline"
+							>Booking.com</span
+						>
+						<span
+							class="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600 transition-all duration-200 group-hover:bg-brand/10 group-hover:text-brand group-hover:ring-1 group-hover:ring-brand/20"
+						>
 							{$t('trust.booking.score')}
 						</span>
-						<span class="ml-0.5 text-slate-400 opacity-0 transition group-hover:opacity-100 group-hover:text-slate-600" aria-hidden="true">
+						<span
+							class="ml-0.5 text-slate-400 opacity-100 transition sm:opacity-0 sm:group-hover:opacity-100 group-hover:text-slate-600"
+							aria-hidden="true"
+						>
 							↗
 						</span>
 					</a>
@@ -850,8 +917,8 @@
 			</section>
 
 			<!-- Gallery -->
-			<section class="rounded-3xl px-0 py-0 sm:px-10 sm:py-10">
-				<div class="flex items-center gap-4">
+			<section class="py-2 lg:py-8">
+				<div class="flex items-start gap-4">
 					<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
 						<Sun class="h-5 w-5" aria-hidden="true" />
 					</div>
@@ -859,7 +926,7 @@
 						<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
 							{$t('home.gallery.kicker')}
 						</p>
-						<h2 class="mt-3 text-4xl font-serif font-medium leading-[0.95] text-slate-900">
+						<h2 class="mt-2 text-4xl font-serif font-medium leading-[0.98] text-slate-900">
 							{$t('home.gallery.title')}
 						</h2>
 						<div class="mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
@@ -870,7 +937,7 @@
 					{$t('home.gallery.subtitle')}
 				</p>
 
-				<div class="mt-6 hidden items-center justify-end gap-2 sm:flex">
+				<div class="mt-6 flex items-center justify-end gap-2">
 					<button
 						type="button"
 						class="grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white text-slate-600 shadow-sm transition hover:bg-slate-50"
@@ -890,12 +957,15 @@
 				</div>
 
 				<div
-					class="mt-8 -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 scroll-pl-4 scroll-pr-4 [scrollbar-width:thin] [scrollbar-color:theme(colors.slate.300)_transparent] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-200 hover:[&::-webkit-scrollbar-thumb]:bg-slate-300 sm:mx-0 sm:px-0 sm:scroll-pl-0 sm:scroll-pr-0"
+					class="mt-4 -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 scroll-pl-4 scroll-pr-4 [scrollbar-width:thin] [scrollbar-color:theme(colors.slate.300)_transparent] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-200 hover:[&::-webkit-scrollbar-thumb]:bg-slate-300 sm:mx-0 sm:px-0 sm:scroll-pl-0 sm:scroll-pr-0 lg:grid lg:auto-cols-[420px] lg:grid-flow-col lg:grid-rows-2"
 					bind:this={galleryTrack}
 				>
-					{#each shuffledImages as image}
-						<div
-							class="group relative h-56 w-[260px] shrink-0 snap-start overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm sm:h-72 sm:w-[360px]"
+					{#each galleryImages as image, index}
+						<button
+							type="button"
+							class="group relative aspect-[4/3] w-[300px] shrink-0 snap-start overflow-hidden rounded-3xl border border-slate-200 bg-white text-left shadow-sm transition hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 sm:aspect-[16/10] sm:w-[380px] lg:w-auto"
+							onclick={() => openGallery(index)}
+							aria-label={`${$t('home.gallery.kicker')}: ${$t(image.altKey)}`}
 						>
 							<img
 								src={withAsset(`/images/house/gallery/${image.base}-720.jpg`)}
@@ -907,14 +977,86 @@
 								decoding="async"
 							/>
 							<div
+								class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent"
+							></div>
+							<div class="pointer-events-none absolute bottom-4 left-4 right-4">
+								<p class="text-sm font-semibold text-white">{$t(image.altKey)}</p>
+								<p class="mt-1 text-[11px] font-medium uppercase tracking-[0.18em] text-white/80">
+									{$t('home.gallery.locationTag')}
+								</p>
+							</div>
+							<div
 								class="pointer-events-none absolute inset-0 ring-1 ring-transparent transition group-hover:ring-brand/20"
 							></div>
-						</div>
+						</button>
 					{/each}
 				</div>
 			</section>
 
-			<div class="mx-auto my-12 h-px w-full bg-gradient-to-r from-transparent via-slate-200/80 to-transparent sm:my-16"></div>
+			{#if isGalleryOpen}
+				<div
+					class="fixed inset-0 z-[120] flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-sm"
+					role="dialog"
+					aria-modal="true"
+					aria-label={$t('home.gallery.title')}
+					tabindex="-1"
+				>
+					<button
+						type="button"
+						class="absolute inset-0"
+						onclick={closeGallery}
+						aria-label="Close gallery"
+					></button>
+					<div class="relative z-10 w-full max-w-6xl">
+						<button
+							type="button"
+							class="absolute right-3 top-3 z-10 grid h-10 w-10 place-items-center rounded-full bg-white/90 text-slate-800 shadow-sm transition hover:bg-white"
+							onclick={closeGallery}
+							aria-label="Close gallery"
+						>
+							<span class="text-xl leading-none">×</span>
+						</button>
+
+						<button
+							type="button"
+							class="absolute left-3 top-1/2 z-10 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-slate-800 shadow-sm transition hover:bg-white"
+							onclick={showPrevGalleryImage}
+							aria-label={$t('room.detail.gallery.prev')}
+						>
+							<ChevronLeft class="h-5 w-5" />
+						</button>
+
+						<button
+							type="button"
+							class="absolute right-3 top-1/2 z-10 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-slate-800 shadow-sm transition hover:bg-white"
+							onclick={showNextGalleryImage}
+							aria-label={$t('room.detail.gallery.next')}
+						>
+							<ChevronRight class="h-5 w-5" />
+						</button>
+
+						<div class="overflow-hidden rounded-3xl bg-white">
+							<img
+								src={withAsset(`/images/house/gallery/${galleryImages[activeGalleryIndex].base}-1440.jpg`)}
+								alt={$t(galleryImages[activeGalleryIndex].altKey)}
+								class="h-auto max-h-[78vh] w-full object-contain"
+							/>
+							<div
+								class="flex items-center justify-between gap-4 border-t border-slate-200 px-5 py-3 text-sm text-slate-600"
+							>
+								<p class="font-medium text-slate-800">{$t(galleryImages[activeGalleryIndex].altKey)}</p>
+								<p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
+									{activeGalleryIndex + 1} / {galleryImages.length}
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			{/if}
+
+			<div
+				class="mx-auto my-12 h-px w-full bg-gradient-to-r from-transparent via-slate-200/80 to-transparent sm:my-16"
+			></div>
 
 			<!-- GUEST CARD -->
 			<section class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
@@ -1015,7 +1157,9 @@
 				</div>
 			</section>
 
-			<div class="mx-auto my-12 h-px w-full bg-gradient-to-r from-transparent via-slate-200/80 to-transparent sm:my-16"></div>
+			<div
+				class="mx-auto my-12 h-px w-full bg-gradient-to-r from-transparent via-slate-200/80 to-transparent sm:my-16"
+			></div>
 		</div>
 	</div>
 
@@ -1045,16 +1189,27 @@
 				<div class="mt-8 space-y-6 sm:mt-10 sm:space-y-12">
 					<!-- Mobile accordion -->
 					<div class="space-y-4 sm:hidden">
-						<details class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition open:border-brand/30 open:shadow-md">
-							<summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-4 transition group-open:bg-white">
+						<details
+							class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition open:border-brand/30 open:shadow-md"
+						>
+							<summary
+								class="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-4 transition group-open:bg-white"
+							>
 								<div class="flex min-w-0 items-center gap-3">
-									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-[#f7efe4] text-brand transition group-open:rounded-full group-open:bg-brand group-open:text-white">
+									<div
+										class="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-[#f7efe4] text-brand transition group-open:rounded-full group-open:bg-brand group-open:text-white"
+									>
 										<BedDouble class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div class="min-w-0">
 										<div class="flex items-center gap-2">
-											<p class="truncate text-sm font-semibold text-slate-900">{$t('home.amenities.basic.title')}</p>
-											<span class="shrink-0 rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600 transition group-open:bg-brand/10 group-open:text-brand">3</span>
+											<p class="truncate text-sm font-semibold text-slate-900">
+												{$t('home.amenities.basic.title')}
+											</p>
+											<span
+												class="shrink-0 rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600 transition group-open:bg-brand/10 group-open:text-brand"
+												>3</span
+											>
 										</div>
 										<div class="mt-1 flex items-center gap-1.5 text-slate-400">
 											<Bed class="h-3.5 w-3.5" aria-hidden="true" />
@@ -1063,7 +1218,9 @@
 										</div>
 									</div>
 								</div>
-								<span class="grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-500 transition group-open:bg-[#f7efe4] group-open:text-brand">
+								<span
+									class="grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-500 transition group-open:bg-[#f7efe4] group-open:text-brand"
+								>
 									<ChevronRight class="h-4 w-4 transition group-open:-rotate-90" />
 								</span>
 							</summary>
@@ -1074,8 +1231,12 @@
 											<Bed class="h-5 w-5" aria-hidden="true" />
 										</div>
 										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">{$t('home.amenities.basic.bedding.title')}</p>
-											<p class="mt-1 text-[13px] leading-snug text-slate-600">{$t('home.amenities.basic.bedding.body')}</p>
+											<p class="text-sm font-semibold leading-snug text-slate-900">
+												{$t('home.amenities.basic.bedding.title')}
+											</p>
+											<p class="mt-1 text-[13px] leading-snug text-slate-600">
+												{$t('home.amenities.basic.bedding.body')}
+											</p>
 										</div>
 									</li>
 									<li class="flex gap-3 p-4">
@@ -1083,8 +1244,12 @@
 											<ShowerHead class="h-5 w-5" aria-hidden="true" />
 										</div>
 										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">{$t('home.amenities.basic.towels.title')}</p>
-											<p class="mt-1 text-[13px] leading-snug text-slate-600">{$t('home.amenities.basic.towels.body')}</p>
+											<p class="text-sm font-semibold leading-snug text-slate-900">
+												{$t('home.amenities.basic.towels.title')}
+											</p>
+											<p class="mt-1 text-[13px] leading-snug text-slate-600">
+												{$t('home.amenities.basic.towels.body')}
+											</p>
 										</div>
 									</li>
 									<li class="flex gap-3 p-4">
@@ -1092,24 +1257,39 @@
 											<Leaf class="h-5 w-5" aria-hidden="true" />
 										</div>
 										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">{$t('home.amenities.basic.care.title')}</p>
-											<p class="mt-1 text-[13px] leading-snug text-slate-600">{$t('home.amenities.basic.care.body')}</p>
+											<p class="text-sm font-semibold leading-snug text-slate-900">
+												{$t('home.amenities.basic.care.title')}
+											</p>
+											<p class="mt-1 text-[13px] leading-snug text-slate-600">
+												{$t('home.amenities.basic.care.body')}
+											</p>
 										</div>
 									</li>
 								</ul>
 							</div>
 						</details>
 
-						<details class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition open:border-brand/30 open:shadow-md">
-							<summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-4 transition group-open:bg-white">
+						<details
+							class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition open:border-brand/30 open:shadow-md"
+						>
+							<summary
+								class="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-4 transition group-open:bg-white"
+							>
 								<div class="flex min-w-0 items-center gap-3">
-									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-[#f7efe4] text-brand transition group-open:rounded-full group-open:bg-brand group-open:text-white">
+									<div
+										class="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-[#f7efe4] text-brand transition group-open:rounded-full group-open:bg-brand group-open:text-white"
+									>
 										<Microwave class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div class="min-w-0">
 										<div class="flex items-center gap-2">
-											<p class="truncate text-sm font-semibold text-slate-900">{$t('home.amenities.kitchen.title')}</p>
-											<span class="shrink-0 rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600 transition group-open:bg-brand/10 group-open:text-brand">5</span>
+											<p class="truncate text-sm font-semibold text-slate-900">
+												{$t('home.amenities.kitchen.title')}
+											</p>
+											<span
+												class="shrink-0 rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600 transition group-open:bg-brand/10 group-open:text-brand"
+												>5</span
+											>
 										</div>
 										<div class="mt-1 flex items-center gap-1.5 text-slate-400">
 											<Microwave class="h-3.5 w-3.5" aria-hidden="true" />
@@ -1120,7 +1300,9 @@
 										</div>
 									</div>
 								</div>
-								<span class="grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-500 transition group-open:bg-[#f7efe4] group-open:text-brand">
+								<span
+									class="grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-500 transition group-open:bg-[#f7efe4] group-open:text-brand"
+								>
 									<ChevronRight class="h-4 w-4 transition group-open:-rotate-90" />
 								</span>
 							</summary>
@@ -1131,8 +1313,12 @@
 											<Microwave class="h-5 w-5" aria-hidden="true" />
 										</div>
 										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">{$t('home.amenities.kitchen.kitchenette.title')}</p>
-											<p class="mt-1 text-[13px] leading-snug text-slate-600">{$t('home.amenities.kitchen.kitchenette.body')}</p>
+											<p class="text-sm font-semibold leading-snug text-slate-900">
+												{$t('home.amenities.kitchen.kitchenette.title')}
+											</p>
+											<p class="mt-1 text-[13px] leading-snug text-slate-600">
+												{$t('home.amenities.kitchen.kitchenette.body')}
+											</p>
 										</div>
 									</li>
 									<li class="flex gap-3 p-4">
@@ -1140,8 +1326,12 @@
 											<Coffee class="h-5 w-5" aria-hidden="true" />
 										</div>
 										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">{$t('home.amenities.kitchen.espresso.title')}</p>
-											<p class="mt-1 text-[13px] leading-snug text-slate-600">{$t('home.amenities.kitchen.espresso.body')}</p>
+											<p class="text-sm font-semibold leading-snug text-slate-900">
+												{$t('home.amenities.kitchen.espresso.title')}
+											</p>
+											<p class="mt-1 text-[13px] leading-snug text-slate-600">
+												{$t('home.amenities.kitchen.espresso.body')}
+											</p>
 										</div>
 									</li>
 									<li class="flex gap-3 p-4">
@@ -1149,8 +1339,12 @@
 											<CupSoda class="h-5 w-5" aria-hidden="true" />
 										</div>
 										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">{$t('home.amenities.kitchen.kettle.title')}</p>
-											<p class="mt-1 text-[13px] leading-snug text-slate-600">{$t('home.amenities.kitchen.kettle.body')}</p>
+											<p class="text-sm font-semibold leading-snug text-slate-900">
+												{$t('home.amenities.kitchen.kettle.title')}
+											</p>
+											<p class="mt-1 text-[13px] leading-snug text-slate-600">
+												{$t('home.amenities.kitchen.kettle.body')}
+											</p>
 										</div>
 									</li>
 									<li class="flex gap-3 p-4">
@@ -1158,8 +1352,12 @@
 											<Utensils class="h-5 w-5" aria-hidden="true" />
 										</div>
 										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">{$t('home.amenities.kitchen.dishes.title')}</p>
-											<p class="mt-1 text-[13px] leading-snug text-slate-600">{$t('home.amenities.kitchen.dishes.body')}</p>
+											<p class="text-sm font-semibold leading-snug text-slate-900">
+												{$t('home.amenities.kitchen.dishes.title')}
+											</p>
+											<p class="mt-1 text-[13px] leading-snug text-slate-600">
+												{$t('home.amenities.kitchen.dishes.body')}
+											</p>
 										</div>
 									</li>
 									<li class="flex gap-3 p-4">
@@ -1167,24 +1365,39 @@
 											<Sandwich class="h-5 w-5" aria-hidden="true" />
 										</div>
 										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">{$t('home.amenities.kitchen.toaster.title')}</p>
-											<p class="mt-1 text-[13px] leading-snug text-slate-600">{$t('home.amenities.kitchen.toaster.body')}</p>
+											<p class="text-sm font-semibold leading-snug text-slate-900">
+												{$t('home.amenities.kitchen.toaster.title')}
+											</p>
+											<p class="mt-1 text-[13px] leading-snug text-slate-600">
+												{$t('home.amenities.kitchen.toaster.body')}
+											</p>
 										</div>
 									</li>
 								</ul>
 							</div>
 						</details>
 
-						<details class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition open:border-brand/30 open:shadow-md">
-							<summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-4 transition group-open:bg-white">
+						<details
+							class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition open:border-brand/30 open:shadow-md"
+						>
+							<summary
+								class="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-4 transition group-open:bg-white"
+							>
 								<div class="flex min-w-0 items-center gap-3">
-									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-[#f7efe4] text-brand transition group-open:rounded-full group-open:bg-brand group-open:text-white">
+									<div
+										class="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-[#f7efe4] text-brand transition group-open:rounded-full group-open:bg-brand group-open:text-white"
+									>
 										<House class="h-5 w-5" aria-hidden="true" />
 									</div>
 									<div class="min-w-0">
 										<div class="flex items-center gap-2">
-											<p class="truncate text-sm font-semibold text-slate-900">{$t('home.amenities.house.title')}</p>
-											<span class="shrink-0 rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600 transition group-open:bg-brand/10 group-open:text-brand">3</span>
+											<p class="truncate text-sm font-semibold text-slate-900">
+												{$t('home.amenities.house.title')}
+											</p>
+											<span
+												class="shrink-0 rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600 transition group-open:bg-brand/10 group-open:text-brand"
+												>3</span
+											>
 										</div>
 										<div class="mt-1 flex items-center gap-1.5 text-slate-400">
 											<Wifi class="h-3.5 w-3.5" aria-hidden="true" />
@@ -1193,7 +1406,9 @@
 										</div>
 									</div>
 								</div>
-								<span class="grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-500 transition group-open:bg-[#f7efe4] group-open:text-brand">
+								<span
+									class="grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-500 transition group-open:bg-[#f7efe4] group-open:text-brand"
+								>
 									<ChevronRight class="h-4 w-4 transition group-open:-rotate-90" />
 								</span>
 							</summary>
@@ -1204,8 +1419,12 @@
 											<Wifi class="h-5 w-5" aria-hidden="true" />
 										</div>
 										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">{$t('home.amenities.house.wifi.title')}</p>
-											<p class="mt-1 text-[13px] leading-snug text-slate-600">{$t('home.amenities.house.wifi.body')}</p>
+											<p class="text-sm font-semibold leading-snug text-slate-900">
+												{$t('home.amenities.house.wifi.title')}
+											</p>
+											<p class="mt-1 text-[13px] leading-snug text-slate-600">
+												{$t('home.amenities.house.wifi.body')}
+											</p>
 										</div>
 									</li>
 									<li class="flex gap-3 p-4">
@@ -1213,8 +1432,12 @@
 											<SquareParking class="h-5 w-5" aria-hidden="true" />
 										</div>
 										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">{$t('home.amenities.house.parking.title')}</p>
-											<p class="mt-1 text-[13px] leading-snug text-slate-600">{$t('home.amenities.house.parking.body')}</p>
+											<p class="text-sm font-semibold leading-snug text-slate-900">
+												{$t('home.amenities.house.parking.title')}
+											</p>
+											<p class="mt-1 text-[13px] leading-snug text-slate-600">
+												{$t('home.amenities.house.parking.body')}
+											</p>
 										</div>
 									</li>
 									<li class="flex gap-3 p-4">
@@ -1222,8 +1445,12 @@
 											<Snowflake class="h-5 w-5" aria-hidden="true" />
 										</div>
 										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">{$t('home.amenities.house.ski.title')}</p>
-											<p class="mt-1 text-[13px] leading-snug text-slate-600">{$t('home.amenities.house.ski.body')}</p>
+											<p class="text-sm font-semibold leading-snug text-slate-900">
+												{$t('home.amenities.house.ski.title')}
+											</p>
+											<p class="mt-1 text-[13px] leading-snug text-slate-600">
+												{$t('home.amenities.house.ski.body')}
+											</p>
 										</div>
 									</li>
 								</ul>
@@ -1500,7 +1727,10 @@
 								class="mt-5 inline-flex items-center gap-2 rounded-full bg-white/90 px-5 py-2.5 text-sm font-semibold text-slate-900 shadow-sm backdrop-blur-sm transition group-hover:bg-white group-hover:shadow-md"
 							>
 								{$t('seasons.summer.cta')}
-								<ArrowRight class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
+								<ArrowRight
+									class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
+									aria-hidden="true"
+								/>
 							</span>
 						</div>
 					</a>
@@ -1529,12 +1759,14 @@
 								class="mt-5 inline-flex items-center gap-2 rounded-full bg-white/90 px-5 py-2.5 text-sm font-semibold text-slate-900 shadow-sm backdrop-blur-sm transition group-hover:bg-white group-hover:shadow-md"
 							>
 								{$t('seasons.winter.cta')}
-								<ArrowRight class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
+								<ArrowRight
+									class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
+									aria-hidden="true"
+								/>
 							</span>
 						</div>
 					</a>
 				</div>
-
 			</section>
 		</div>
 	</div>
