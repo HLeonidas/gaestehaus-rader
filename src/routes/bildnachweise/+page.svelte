@@ -19,6 +19,27 @@
 			</p>
 
 			<div>
+				<p class="text-sm font-semibold text-slate-900">{$t('credits.own.title')}</p>
+				<p class="mt-2">
+					{$t('credits.own.body')}
+				</p>
+			</div>
+
+			<div>
+				<p class="text-sm font-semibold text-slate-900">{$t('credits.external.title')}</p>
+				<p class="mt-2">
+					{$t('credits.external.body')}
+				</p>
+			</div>
+
+			<div>
+				<p class="text-sm font-semibold text-slate-900">{$t('credits.logos.title')}</p>
+				<p class="mt-2">
+					{$t('credits.logos.body')}
+				</p>
+			</div>
+
+			<div>
 				<p class="text-sm font-semibold text-slate-900">{$t('credits.icons.title')}</p>
 				<p class="mt-2">
 					{$t('credits.icons.body')}
@@ -59,9 +80,9 @@
 			</div>
 
 			<div>
-				<p class="text-sm font-semibold text-slate-900">{$t('credits.own.title')}</p>
+				<p class="text-sm font-semibold text-slate-900">{$t('credits.liability.title')}</p>
 				<p class="mt-2">
-					{$t('credits.own.body')}
+					{$t('credits.liability.body')}
 				</p>
 			</div>
 

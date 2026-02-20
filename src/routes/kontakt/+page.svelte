@@ -84,7 +84,7 @@
 
 		<div class="mt-8 grid gap-8 border-t border-slate-100 pt-6 lg:grid-cols-[1.2fr,1fr]">
 			<div class="space-y-6">
-				<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+				<div class="rounded-2xl bg-white p-5">
 					<p class="text-sm font-semibold text-slate-900">{$t('contact.address.title')}</p>
 					<div class="mt-3 space-y-1 text-sm text-slate-600">
 						<p class="font-semibold text-slate-800">{$t('contact.address.name')}</p>
@@ -105,7 +105,7 @@
 					</div>
 				</div>
 
-				<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+				<div class="rounded-2xl bg-white p-5">
 					<p class="text-sm font-semibold text-slate-900">{$t('contact.direct.title')}</p>
 					<div class="mt-3 space-y-2 text-sm text-slate-600">
 						<a

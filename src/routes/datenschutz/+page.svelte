@@ -18,7 +18,7 @@
 				<h2 class="text-base font-semibold text-slate-900">1. Verantwortlicher</h2>
 				<div class="mt-3 space-y-1">
 					<p class="font-semibold text-slate-800">Gästehaus Rader</p>
-					<p>Familie Herold / Hueber</p>
+					<p>Hueber Astrid</p>
 					<p>Weißbriach 92</p>
 					<p>9622 Weißbriach</p>
 					<p>Österreich</p>
@@ -170,7 +170,8 @@
 			<section>
 				<h2 class="text-base font-semibold text-slate-900">8. Google Maps</h2>
 				<p class="mt-3">
-					Auf unserer Website ist Google Maps eingebunden, um unseren Standort darzustellen.
+					Auf unserer Website ist Google Maps eingebunden, um unseren Standort darzustellen. Die Karte
+					wird erst nach Aktivierung geladen.
 				</p>
 				<p class="mt-3">
 					Beim Aufruf der Kartenfunktion wird eine Verbindung zu Servern von Google Ireland Limited,
@@ -187,7 +188,7 @@
 				</p>
 				<p class="mt-3">
 					Zweck: Darstellung unseres Standorts und erleichterte Anfahrt<br />
-					Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse)
+					Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung)
 				</p>
 				<p class="mt-3">
 					Wenn Sie mit der Datenübertragung an Google nicht einverstanden sind, können Sie Google Maps
@@ -198,48 +199,84 @@
 
 			<section>
 				<h2 class="text-base font-semibold text-slate-900">
-					9. Online-Buchung über externen Buchungsanbieter (iFrame)
+					9. Online-Buchung über externe Buchungsplattform (iFrame)
 				</h2>
 				<p class="mt-3">
-					Auf unserer Website bieten wir die Möglichkeit, unsere Appartements online zu buchen. Die
-					Buchungsfunktion wird dabei über einen externen Drittanbieter bereitgestellt und mittels iFrame
-					in unsere Website eingebunden.
+					Auf unserer Website besteht die Möglichkeit, Appartements online zu buchen. Die
+					Buchungsfunktion wird über eine externe Buchungsplattform der Tourismusregion
+					Nassfeld-Pressegger See bereitgestellt und mittels iFrame in unsere Website eingebunden. Beim
+					Aufruf der Buchungsmaske wird eine direkte Verbindung zu den Servern der jeweiligen Anbieter
+					hergestellt.
 				</p>
-				<p class="mt-3">Anbieter:</p>
-				<div class="mt-2 space-y-1">
-					<p class="text-slate-500">[Name des Buchungsanbieters eintragen]</p>
-					<p class="text-slate-500">[Adresse des Buchungsanbieters eintragen]</p>
+
+				<div class="mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:p-5">
+					<p class="text-sm font-semibold text-slate-900">
+						Anbieter der Buchungsplattform (Verantwortlicher)
+					</p>
+					<div class="mt-2 space-y-1 text-sm text-slate-600">
+						<p class="font-semibold text-slate-800">Nassfeld-Pressegger See Tourismus GmbH</p>
+						<p>9620 Hermagor, Österreich</p>
+					</div>
+
+					<p class="mt-4 text-sm font-semibold text-slate-900">Technischer Systemanbieter</p>
+					<div class="mt-2 space-y-1 text-sm text-slate-600">
+						<p class="font-semibold text-slate-800">feratel media technologies AG</p>
+						<p>Maria-Theresien-Straße 8, 6020 Innsbruck, Österreich</p>
+					</div>
 				</div>
+
 				<p class="mt-3">
 					Beim Aufruf der Buchungsmaske wird eine direkte Verbindung zwischen Ihrem Browser und den
-					Servern des Buchungsanbieters hergestellt. Dabei können insbesondere folgende personenbezogene
-					Daten verarbeitet werden:
+					Servern des Buchungsanbieters hergestellt. Dabei können insbesondere folgende
+					personenbezogene Daten verarbeitet werden:
 				</p>
 				<ul class="mt-2 list-inside list-disc space-y-1">
 					<li>IP-Adresse</li>
 					<li>Datum und Uhrzeit des Zugriffs</li>
 					<li>Browser- und Geräteinformationen</li>
-					<li>ggf. Buchungs- und Kontaktdaten, die Sie im Buchungsformular eingeben</li>
+					<li>Buchungs- und Kontaktdaten, die Sie im Buchungsformular eingeben</li>
+					<li>ggf. Informationen zur gewählten Unterkunft / Reisedaten</li>
 				</ul>
 				<p class="mt-3">
-					Wir haben keinen Einfluss auf Art, Umfang und Zweck der Datenverarbeitung durch den
-					Buchungsanbieter. Die Verarbeitung erfolgt in eigener Verantwortung des Buchungsanbieters.
+					Die Verarbeitung der Buchungsdaten erfolgt in eigener Verantwortung der jeweiligen Anbieter.
+					Wir haben keinen Einfluss auf Art, Umfang und Zweck der Datenverarbeitung innerhalb der
+					Buchungsmaske.
 				</p>
 				<p class="mt-3">
-					Zweck: Bereitstellung einer Online-Buchungsmöglichkeit für unsere Gäste<br />
+					Zweck: Bereitstellung einer Online-Buchungsmöglichkeit<br />
 					Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung bzw. vorvertragliche Maßnahmen)
 				</p>
 				<p class="mt-3">
-					Es kann nicht ausgeschlossen werden, dass personenbezogene Daten an Server in Drittländern
-					übertragen werden (z. B. außerhalb der EU), abhängig vom Anbieter.
+					Es kann nicht ausgeschlossen werden, dass personenbezogene Daten in Drittländer (z. B.
+					außerhalb der EU) übermittelt werden, abhängig von den eingesetzten Diensten der Anbieter.
 				</p>
 				<p class="mt-3">
-					Weitere Informationen zur Datenverarbeitung finden Sie in der Datenschutzerklärung des
-					Buchungsanbieters:
-					<span class="text-slate-500"
-						>[Link zur Datenschutzerklärung des Buchungsanbieters eintragen]</span
-					>
+					Weitere Informationen finden Sie in den Datenschutzerklärungen der Anbieter:
 				</p>
+				<ul class="mt-2 list-inside list-disc space-y-1">
+					<li>
+						Nassfeld-Pressegger See Tourismus GmbH:
+						<a
+							class="hover:text-slate-900"
+							href="https://www.nassfeld.at/de/Service/Datenschutz"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Datenschutzerklärung
+						</a>
+					</li>
+					<li>
+						feratel:
+						<a
+							class="hover:text-slate-900"
+							href="https://www.feratel.com/datenschutz.html"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Datenschutzerklärung
+						</a>
+					</li>
+				</ul>
 			</section>
 
 			<section>
@@ -250,8 +287,9 @@
 				</p>
 				<p class="mt-3">
 					Durch die Einbindung von Plausible Analytics und Google Maps k&ouml;nnen Plausible Insights
-					O&Uuml; sowie Google als Empf&auml;nger Ihrer Daten auftreten (siehe Punkte 3 und 8). Der
-					Buchungsanbieter kann als Empf&auml;nger auftreten (siehe Punkt 9).
+					O&Uuml; sowie Google als Empf&auml;nger Ihrer Daten auftreten (siehe Punkte 3 und 8). Bei
+					Nutzung der Online-Buchung können die Nassfeld-Pressegger See Tourismus GmbH sowie feratel
+					als Empfänger auftreten (siehe Punkt 9).
 				</p>
 			</section>
 
@@ -296,7 +334,7 @@
 					Wir behalten uns vor, diese Datenschutzerklärung bei Bedarf anzupassen. Es gilt die jeweils
 					aktuelle Version auf unserer Website.
 				</p>
-				<p class="mt-3">Stand: 22.01.2026</p>
+				<p class="mt-3">Stand: 20.02.2026</p>
 			</section>
 		</div>
 	</section>

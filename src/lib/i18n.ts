@@ -605,17 +605,27 @@ const translations: Record<Lang, Record<string, string>> = {
 		'credits.seo.description':
 			'Hinweise zu Bildrechten, Icons, Kartenmaterial und verwendeten Schriftarten.',
 		'credits.intro':
-			'Sofern nicht anders angegeben, stammen alle auf dieser Website verwendeten Fotos, Grafiken und Inhalte von Gästehaus Rader.',
+			'Sofern nicht anders angegeben, stammen Inhalte, Texte und Fotografien dieser Website vom Gästehaus Rader oder werden im Rahmen gültiger Nutzungsrechte verwendet.',
+		'credits.external.title': 'Bildmaterial externer Partner',
+		'credits.external.body':
+			'Einzelne Bilder stammen aus offiziellen Medienpools regionaler Tourismusorganisationen und werden im Rahmen der Zusammenarbeit verwendet (u. a. Kärnten Werbung, Region Nassfeld-Pressegger See, Weissensee Tourismus).',
 		'credits.icons.title': 'Icons',
 		'credits.icons.body': 'Auf dieser Website werden Icons aus der Bibliothek Lucide verwendet. Lizenz: MIT License.',
 		'credits.fonts.title': 'Schriftarten (Google Fonts)',
 		'credits.fonts.body': 'Diese Website verwendet Schriftarten von Google Fonts.',
 		'credits.maps.title': 'Kartenmaterial',
-		'credits.maps.body': 'Kartendarstellung erfolgt über Google Maps.',
+		'credits.maps.body':
+			'Kartendarstellungen erfolgen über Google Maps. Beim Laden der Karte können personenbezogene Daten an Google übertragen werden.',
 		'credits.own.title': 'Eigene Inhalte',
 		'credits.own.body':
-			'Alle Texte, Logos und eigenen Fotografien unterliegen dem Urheberrecht von Gästehaus Rader.',
-		'credits.updated': 'Stand: 15.01.2026',
+			'Alle eigenen Texte, Fotografien, Grafiken sowie das Webdesign unterliegen dem Urheberrecht von Gästehaus Rader.',
+		'credits.logos.title': 'Logos & Marken',
+		'credits.logos.body':
+			'Die auf dieser Website verwendeten Logos und Marken (z. B. GästeCard, Kärnten Werbung, Nassfeld-Pressegger See) sind Eigentum der jeweiligen Organisationen und werden ausschließlich zur Darstellung regionaler Partnerschaften verwendet.',
+		'credits.liability.title': 'Haftungshinweis',
+		'credits.liability.body':
+			'Trotz sorgfältiger Prüfung können sich Lizenzbedingungen externer Anbieter ändern. Sollten Inhalte Rechte Dritter verletzen, bitten wir um einen entsprechenden Hinweis.',
+		'credits.updated': 'Stand: 20.02.2026',
 		'imprint.title': 'Impressum',
 		'imprint.seo.title': 'Impressum Gästehaus Rader',
 		'imprint.seo.description':
@@ -1418,17 +1428,27 @@ const translations: Record<Lang, Record<string, string>> = {
 		'credits.seo.description':
 			'Notes about image rights, icons, map data, and fonts used on this website.',
 		'credits.intro':
-			'Unless otherwise stated, all photos, graphics, and content used on this website are provided by Gästehaus Rader.',
+			'Unless otherwise stated, content, texts, and photographs on this website are provided by Gästehaus Rader or used under valid usage rights.',
+		'credits.external.title': 'Image material from external partners',
+		'credits.external.body':
+			'Some images come from official media pools of regional tourism organizations and are used within the scope of cooperation (including Kärnten Werbung, Region Nassfeld-Pressegger See, and Weissensee tourism).',
 		'credits.icons.title': 'Icons',
 		'credits.icons.body': 'This website uses icons from the Lucide library. License: MIT License.',
 		'credits.fonts.title': 'Fonts (Google Fonts)',
 		'credits.fonts.body': 'This website uses fonts from Google Fonts.',
 		'credits.maps.title': 'Maps',
-		'credits.maps.body': 'Map display is provided by Google Maps.',
+		'credits.maps.body':
+			'Map displays are provided by Google Maps. When loading maps, personal data may be transmitted to Google.',
 		'credits.own.title': 'Own content',
 		'credits.own.body':
-			'All texts, logos, and original photographs are subject to the copyright of Gästehaus Rader.',
-		'credits.updated': 'Updated: 2026-01-15',
+			'All original texts, photographs, graphics, and the website design are subject to the copyright of Gästehaus Rader.',
+		'credits.logos.title': 'Logos & trademarks',
+		'credits.logos.body':
+			'The logos and trademarks used on this website (e.g., GästeCard, Kärnten Werbung, Nassfeld-Pressegger See) are the property of their respective organizations and are used solely to present regional partnerships.',
+		'credits.liability.title': 'Liability notice',
+		'credits.liability.body':
+			'Despite careful review, license terms of external providers may change. If any content infringes third-party rights, please let us know accordingly.',
+		'credits.updated': 'Updated: 2026-02-20',
 		'imprint.title': 'Imprint',
 		'imprint.seo.title': 'Imprint – Guesthouse Rader',
 		'imprint.seo.description':

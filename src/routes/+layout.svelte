@@ -234,6 +234,21 @@
 					<p class="mt-4 max-w-sm text-sm leading-relaxed text-slate-600">
 						{$t('footer.tagline')}
 					</p>
+
+					<div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-4">
+						<img
+							src={withAsset('/images/externallogos/nassfeld-logo.png')}
+							alt="Nassfeld"
+							class="h-10 w-auto object-contain sm:h-12"
+							loading="lazy"
+						/>
+						<img
+							src={withAsset('/images/externallogos/kaernten-logo.png')}
+							alt="Kärnten"
+							class="h-10 w-auto object-contain sm:h-12"
+							loading="lazy"
+						/>
+					</div>
 				</div>
 
 				<div>
