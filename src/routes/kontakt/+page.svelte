@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { t } from '$lib/i18n';
 	import { trackEvent } from '$lib/analytics/plausible';
-	import { Check, Copy, Mail, MessageCircle, Phone, PhoneCall } from 'lucide-svelte';
 	import SeoHead from '$lib/components/SeoHead.svelte';
+	import { t } from '$lib/i18n';
+	import { Check, Copy, Mail, MessageCircle, Phone, PhoneCall } from 'lucide-svelte';
 
 	let ibanCopied = false;
 	let bicCopied = false;
@@ -29,18 +29,9 @@
 		}, 2000);
 	};
 
-	let mapEnabled = false;
-
 	const mapSrc =
 		'https://www.google.com/maps?q=Weissbriach%2092%2C%209622%20Weissbriach%2C%20Austria&output=embed';
-
-	// externer Link zum Google-Unternehmensprofil
 	const mapLink = 'https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9';
-
-	const enableMap = () => {
-		mapEnabled = true;
-		void trackEvent('Map: Loaded', { source: 'contact' });
-	};
 </script>
 
 <SeoHead titleKey="contact.seo.title" descriptionKey="contact.seo.description" />
@@ -57,19 +48,39 @@
 		<p class="mt-4 max-w-2xl text-base leading-relaxed text-slate-600">
 			{$t('contact.subtitle')}
 		</p>
+
+		<div class="mt-6 flex flex-wrap items-center gap-3">
+			<a
+				href="tel:+436766246826"
+				class="inline-flex items-center justify-center rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90"
+				onclick={() => trackEvent('Contact: Phone Click', { source: 'contact', line: 'mobile' })}
+			>
+				{$t('contact.cta.callNow')}
+			</a>
+			<a
+				href="https://wa.me/436766246826"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-800 shadow-sm transition hover:bg-slate-50"
+				onclick={() => trackEvent('Contact: WhatsApp Click', { source: 'contact', placement: 'cta' })}
+			>
+				{$t('contact.cta.whatsapp')}
+			</a>
+		</div>
+
 		<div class="mt-8 grid gap-8 border-t border-slate-100 pt-6 lg:grid-cols-[1.2fr,1fr]">
-			<div class="space-y-8">
+			<div class="space-y-10">
 				<div class="rounded-2xl bg-white pt-2">
 					<p class="text-sm font-semibold text-slate-900">{$t('contact.address.title')}</p>
 					<div class="mt-3 space-y-1 text-sm text-slate-600">
-						<p class="font-semibold text-slate-800">Gästehaus Rader</p>
+						<p class="font-semibold text-slate-800">{$t('contact.address.name')}</p>
 						<p>
 							<a
 								class="font-medium text-slate-800 underline decoration-slate-300 underline-offset-2 hover:text-slate-900"
 								href={mapLink}
 								target="_blank"
 								rel="noopener noreferrer"
-								onclick={() => trackEvent('Map: Open External', { source: 'contact' })}
+								onclick={() => trackEvent('Map: Open External', { source: 'contact', placement: 'address-line1' })}
 							>
 								{$t('contact.address.line1')}
 							</a>
@@ -80,7 +91,7 @@
 
 				<div class="rounded-2xl bg-white">
 					<p class="text-sm font-semibold text-slate-900">{$t('contact.direct.title')}</p>
-					<div class="mt-3 space-y-3 text-sm text-slate-600">
+					<div class="mt-3 space-y-2 text-sm text-slate-600">
 						<a
 							class="flex items-center justify-between rounded-xl px-3 py-3 transition hover:bg-slate-50"
 							href="tel:+436766246826"
@@ -95,25 +106,29 @@
 								</span>
 								<span class="font-semibold text-slate-900">+43 676 6246826</span>
 							</span>
-							<span class="text-slate-400" aria-hidden="true">↗</span>
+							<span class="text-sm text-slate-500">{$t('contact.cta.callNow')} →</span>
 						</a>
+
 						<a
-							class="flex items-center justify-between rounded-xl px-3 py-3 transition hover:bg-slate-50"
+							class="flex items-start justify-between rounded-xl px-3 py-3 transition hover:bg-slate-50"
 							href="https://wa.me/436766246826"
 							target="_blank"
 							rel="noopener noreferrer"
-							onclick={() => trackEvent('Contact: WhatsApp Click', { source: 'contact' })}
+							onclick={() => trackEvent('Contact: WhatsApp Click', { source: 'contact', placement: 'list' })}
 						>
-							<span class="flex items-center gap-3">
+							<span class="flex items-start gap-3">
 								<span
 									class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-emerald-50 text-emerald-600"
 									aria-hidden="true"
 								>
 									<MessageCircle class="h-4 w-4" />
 								</span>
-								<span class="font-semibold text-slate-900">WhatsApp schreiben</span>
+								<span class="space-y-0.5">
+									<span class="block font-semibold text-slate-900">{$t('contact.cta.whatsapp')}</span>
+									<span class="block text-sm text-slate-600">+43 676 6246826</span>
+								</span>
 							</span>
-							<span class="text-slate-400" aria-hidden="true">↗</span>
+							<span class="text-sm text-emerald-700">{$t('contact.cta.sendMessage')} →</span>
 						</a>
 
 						<a
@@ -130,7 +145,7 @@
 								</span>
 								<span class="font-semibold text-slate-900">+43 4286 222</span>
 							</span>
-							<span class="text-slate-400" aria-hidden="true">↗</span>
+							<span class="text-sm text-slate-500">{$t('contact.cta.callLandline')} →</span>
 						</a>
 
 						<a
@@ -147,86 +162,27 @@
 								</span>
 								<span class="font-semibold text-slate-900">info@rader-gitschtal.at</span>
 							</span>
-							<span class="text-slate-400" aria-hidden="true">↗</span>
+							<span class="text-sm text-slate-500">{$t('contact.cta.sendEmail')} →</span>
 						</a>
 					</div>
 				</div>
-
 			</div>
 
 			<div
 				class="relative min-h-[320px] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm sm:min-h-[360px] lg:min-h-full"
 			>
-				{#if mapEnabled}
-					<iframe
-						title={$t('contact.map.iframeTitle')}
-						class="h-full w-full border-0"
-						loading="lazy"
-						referrerpolicy="no-referrer-when-downgrade"
-						src={mapSrc}
-					></iframe>
-
-					<!-- small control to disable again (optional) -->
-					<!-- <div class="absolute left-4 top-4">
-						<button
-							type="button"
-							class="rounded-full bg-white/90 px-3 py-1 text-[11px] font-semibold text-slate-800 shadow-sm ring-1 ring-slate-200 backdrop-blur hover:bg-white"
-							onclick={() => (mapEnabled = false)}
-						>
-							{$t('contact.map.close')}
-						</button>
-					</div> -->
-				{:else}
-					<!-- Placeholder / consent card -->
-					<div class="grid h-full place-items-center px-4 py-6">
-						<div class="max-w-sm text-center">
-							<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
-								{$t('contact.map.label')}
-							</p>
-							<h3 class="mt-3 text-lg font-semibold text-slate-900">
-								{$t('contact.map.title')}
-							</h3>
-
-							<div class="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
-								<button
-									type="button"
-									class="inline-flex items-center justify-center rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:brightness-110"
-									onclick={enableMap}
-								>
-									{$t('contact.map.load')}
-								</button>
-
-								<a
-									class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-800 shadow-sm transition hover:bg-slate-50"
-									href={mapLink}
-									target="_blank"
-									rel="noopener noreferrer"
-									onclick={() => trackEvent('Map: Open External', { source: 'contact' })}
-								>
-									{$t('contact.map.open')}
-								</a>
-							</div>
-
-							<p class="mt-4 text-[12px] text-slate-500">
-								{$t('contact.map.tip')}
-							</p>
-						</div>
-					</div>
-				{/if}
+				<iframe
+					title={$t('contact.map.iframeTitle')}
+					class="h-full w-full border-0"
+					loading="lazy"
+					referrerpolicy="no-referrer-when-downgrade"
+					src={mapSrc}
+					onload={() => trackEvent('Map: Loaded', { source: 'contact' })}
+				></iframe>
 			</div>
 		</div>
 
-		<div class="mt-6 space-y-6">
-			<div class="rounded-2xl py-5">
-				<p class="text-sm font-semibold text-slate-900">{$t('contact.trust.title')}</p>
-				<ul class="mt-3 grid list-inside list-disc gap-2 text-sm text-slate-600 sm:grid-cols-2">
-					<li>{$t('contact.trust.response')}</li>
-					<li>{$t('contact.trust.languages')}</li>
-					<li>{$t('contact.trust.checkin')}</li>
-					<li>{$t('contact.trust.parking')}</li>
-				</ul>
-			</div>
-
+		<div class="mt-10 space-y-6">
 			<div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-sm">
 				<p class="text-sm font-semibold text-slate-900">{$t('contact.payment.title')}</p>
 				<p class="mt-1 text-xs text-slate-500">{$t('contact.payment.subtitle')}</p>
@@ -275,6 +231,16 @@
 							</button>
 						</div>
 					</div>
+				</div>
+			</div>
+
+			<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+				<p class="text-sm font-semibold text-slate-900">{$t('contact.trust.title')}</p>
+				<div class="mt-3 grid gap-x-8 gap-y-2 text-sm text-slate-600 sm:grid-cols-2">
+					<p>{$t('contact.trust.response')}</p>
+					<p>{$t('contact.trust.languages')}</p>
+					<p>{$t('contact.trust.checkin')}</p>
+					<p>{$t('contact.trust.parking')}</p>
 				</div>
 			</div>
 		</div>
