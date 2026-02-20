@@ -556,7 +556,7 @@
 			</section>
 
 			<!-- ROOMS -->
-			<section class="-mt-4 pt-2 sm:mt-0 sm:pt-4" style="margin-top: 1rem !important">
+			<section class="mt-4 pt-2 sm:mt-0 sm:pt-4">
 				<div class="flex flex-wrap items-end justify-between gap-3 sm:gap-6">
 					<div class="pb-2 sm:pb-10">
 						<p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand">
