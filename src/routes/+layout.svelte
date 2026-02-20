@@ -236,18 +236,34 @@
 					</p>
 
 					<div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-4">
-						<img
-							src={withAsset('/images/externallogos/nassfeld-logo.png')}
-							alt="Nassfeld"
-							class="h-10 w-auto object-contain sm:h-12"
-							loading="lazy"
-						/>
-						<img
-							src={withAsset('/images/externallogos/kaernten-logo.png')}
-							alt="Kärnten"
-							class="h-10 w-auto object-contain sm:h-12"
-							loading="lazy"
-						/>
+						<a
+							href="https://www.nassfeld.at/"
+							target="_blank"
+							rel="noopener noreferrer"
+							aria-label="Nassfeld"
+							onclick={() => trackEvent('Outbound: Partner Click', { source: 'footer', partner: 'nassfeld' })}
+						>
+							<img
+								src={withAsset('/images/externallogos/nassfeld-logo.png')}
+								alt="Nassfeld"
+								class="h-10 w-auto object-contain sm:h-12"
+								loading="lazy"
+							/>
+						</a>
+						<a
+							href="https://www.kaernten.at/"
+							target="_blank"
+							rel="noopener noreferrer"
+							aria-label="Kärnten"
+							onclick={() => trackEvent('Outbound: Partner Click', { source: 'footer', partner: 'kaernten' })}
+						>
+							<img
+								src={withAsset('/images/externallogos/kaernten-logo.png')}
+								alt="Kärnten"
+								class="h-10 w-auto object-contain sm:h-12"
+								loading="lazy"
+							/>
+						</a>
 					</div>
 				</div>
 

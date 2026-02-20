@@ -1077,7 +1077,7 @@
 							<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
 								{$t('guestcard.landing.kicker')}
 							</p>
-							<h2 class="mt-2 text-2xl font-serif font-medium leading-[0.95] text-slate-900 sm:text-3xl lg:text-4xl">
+							<h2 class="mt-2 text-3xl font-serif font-medium leading-[0.95] text-slate-900 sm:text-4xl">
 								{$t('guestcard.landing.title')}
 							</h2>
 							<div class="mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
