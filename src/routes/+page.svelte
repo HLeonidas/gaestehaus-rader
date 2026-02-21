@@ -661,6 +661,18 @@
 										class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]"
 										loading="lazy"
 									/>
+									<div
+										class="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/10 to-transparent"
+									></div>
+									<div
+										class="pointer-events-none absolute inset-0 hidden bg-gradient-to-t from-slate-950/55 via-slate-900/15 to-transparent opacity-0 transition-all duration-300 group-hover:opacity-100 group-focus-visible:opacity-100 sm:block"
+									></div>
+									<div
+										class="pointer-events-none absolute bottom-4 right-4 hidden items-center gap-2 text-sm font-semibold text-white/95 opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-focus-visible:opacity-100 group-focus-visible:translate-y-0 sm:inline-flex"
+									>
+										<span>{$t('rooms.page.detailsCta')}</span>
+										<ArrowRight class="h-3.5 w-3.5" aria-hidden="true" />
+									</div>
 
 									<!-- Price pill -->
 									<!-- <span
@@ -689,27 +701,6 @@
 										{r.cardMeta[$lang]}
 									</p>
 
-									<!-- Amenities (optional) -->
-									{#if r.amenities?.length}
-										<div class="mt-4 flex items-center gap-3 text-slate-500">
-											{#each r.amenities as a}
-												<!-- Use any icon you like; here are tiny placeholders as circles -->
-												{@const Icon = amenityIcons[a as AmenityKey]}
-												{#if Icon}
-													<span
-														class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-slate-100"
-														title={$t(`amenity.${a}`)}
-														aria-label={$t(`amenity.${a}`)}
-													>
-														<Icon class="h-4 w-4 text-slate-500" aria-hidden="true" />
-													</span>
-												{/if}
-											{/each}
-										</div>
-									{:else}
-										<!-- Keep spacing similar to screenshot even without amenities -->
-										<div class="mt-4 h-7"></div>
-									{/if}
 								</div>
 
 								<!-- Hover ring -->
@@ -1065,11 +1056,11 @@
 			></div>
 
 			<!-- GUEST CARD -->
-			<section class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+			<section class="group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_-18px_rgba(245,146,0,0.45)]">
 				<div class="grid gap-8 lg:grid-cols-[1.1fr,0.9fr]">
 					<div class="order-2 relative h-[260px] sm:h-[320px] lg:order-1 lg:h-auto lg:min-h-full">
 						<img
-							src={withAsset('/images/Umgebung/train.png')}
+							src={withAsset('/images/Umgebung/ski_nassfeld.jpg')}
 							alt={$t('guestcard.landing.imageAlt')}
 							class="h-full w-full object-cover"
 							loading="lazy"
