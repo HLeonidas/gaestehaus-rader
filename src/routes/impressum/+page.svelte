@@ -111,8 +111,8 @@
 					<!-- Avatar -->
 					<div class="h-28 w-28 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
 						<img
-							src={withAsset('/images/other/profile/lh-224.jpg')}
-							srcset={`${withAsset('/images/other/profile/lh-224.jpg')} 224w, ${withAsset('/images/other/profile/lh-336.jpg')} 336w, ${withAsset('/images/other/profile/lh-448.jpg')} 448w`}
+							src={withAsset('/images/Haus/profile/leon-hueber-224.jpg')}
+							srcset={`${withAsset('/images/Haus/profile/leon-hueber-224.jpg')} 224w, ${withAsset('/images/Haus/profile/leon-hueber-336.jpg')} 336w, ${withAsset('/images/Haus/profile/leon-hueber-448.jpg')} 448w`}
 							sizes="112px"
 							alt={$t('imprint.webdesign.imageAlt')}
 							class="h-full w-full object-cover"
@@ -132,9 +132,22 @@
 						<p class="mt-1 text-sm text-slate-600 max-w-md">
 							{$t('imprint.webdesign.body')}
 						</p>
+						<p class="mt-3 text-sm">
+							<a
+								class="font-medium text-brand hover:text-brand-dark"
+								href="https://www.linkedin.com/in/leon-hueber-2a116b237/"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								LinkedIn Profil
+							</a>
+						</p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 </div>
+
+
+

@@ -57,18 +57,18 @@
 	const currentMonth = new Date().getMonth();
 	const heroImagePath =
 		currentMonth >= 4 && currentMonth <= 8
-			? '/images/house/gallery/balkon-ausblick-1440.jpg'
-			: '/images/other/winter-balkon_ausblick-1-hero.jpg';
+			? '/images/Galerie/gaestehaus-balkon-ausblick-1440.jpg'
+			: '/images/Umgebung/winter-balkon-ausblick-hero.jpg';
 	const heroImage = withAsset(heroImagePath);
 
 	const rooms = accommodations;
 	const accommodationsBase = resolve('/unterkuenfte-preise');
 	const siteUrl = SITE_ORIGIN;
 	const lodgingImages = [
-		new URL(withAsset('/images/house/haus-sommer.jpg'), siteUrl).toString(),
-		new URL(withAsset('/images/house/winter-balkon_ausblick-1.jpg'), siteUrl).toString(),
-		new URL(withAsset('/images/house/balkon-ausblick.jpg'), siteUrl).toString(),
-		new URL(withAsset('/images/house/IMG_0580.jpeg'), siteUrl).toString(),
+		new URL(withAsset('/images/Haus/gaestehaus-sommer.jpg'), siteUrl).toString(),
+		new URL(withAsset('/images/Haus/balkon-ausblick-winter.jpg'), siteUrl).toString(),
+		new URL(withAsset('/images/Haus/gaestehaus-balkon-ausblick.jpg'), siteUrl).toString(),
+		new URL(withAsset('/images/Haus/familie-hueber.jpg'), siteUrl).toString(),
 	];
 	const amenityFeatures = $derived.by(() => {
 		const amenities = Array.from(new Set(rooms.flatMap((room) => room.amenities ?? [])));
@@ -104,15 +104,15 @@
 		longitude: 13.2549914,
 	} as const;
 	const fallbackVacationImagePaths = [
-		'/images/house/haus-sommer.jpg',
-		'/images/house/winter-balkon_ausblick-1.jpg',
-		'/images/house/balkon-ausblick.jpg',
-		'/images/house/IMG_0580.jpeg',
-		'/images/house/kirche.jpg',
-		'/images/house/pavillon.jpg',
-		'/images/house/slider-4-winter.jpg',
-		'/images/house/tischtennis.jpg',
-		'/images/house/Haus-Winter-2.png',
+		'/images/Haus/gaestehaus-sommer.jpg',
+		'/images/Haus/balkon-ausblick-winter.jpg',
+		'/images/Haus/gaestehaus-balkon-ausblick.jpg',
+		'/images/Haus/familie-hueber.jpg',
+		'/images/Haus/weissbriach-kirche.jpg',
+		'/images/Haus/gaestehaus-pavillon.jpg',
+		'/images/Haus/gaestehaus-winter-ansicht.jpg',
+		'/images/Haus/gaestehaus-tischtennis.jpg',
+		'/images/Haus/gaestehaus-winter.png',
 	];
 	const parseGuestCapacity = (guestText: string) => {
 		const rangeMatch = guestText.match(/(\d+)\s*-\s*(\d+)/);
@@ -336,28 +336,28 @@
 	const galleryImageSizes = '(min-width: 640px) 360px, 260px';
 	const destinationImages = [
 		// 2) Ankommen / Haus: das Objekt zeigen
-		{ base: 'haus-sommer', altKey: 'home.gallery.imageAlt.sommer' },
+		{ base: 'gaestehaus-sommer', altKey: 'home.gallery.imageAlt.sommer' },
 				// 4) Außenbereich / Garten-Feeling
-		{ base: 'pavillon', altKey: 'home.gallery.imageAlt.pavillon' },
-				// 3) Wohlfühl-Detail / Innen- oder Detailshot (wenn IMG_0580 das ist)
-		{ base: 'IMG_0580', altKey: 'home.gallery.imageAlt.view' },
+		{ base: 'gaestehaus-pavillon', altKey: 'home.gallery.imageAlt.pavillon' },
+				// 3) Wohlfühl-Detail / Innen- oder Detailshot (wenn gastgeber das ist)
+		{ base: 'familie-hueber', altKey: 'home.gallery.imageAlt.view' },
 		// 1) Hero / USP: Ausblick (macht sofort Lust)
-		{ base: 'balkon-ausblick', altKey: 'home.gallery.imageAlt.balkon' },
+		{ base: 'gaestehaus-balkon-ausblick', altKey: 'home.gallery.imageAlt.balkon' },
 
 		// 5) Aktivität / Feature (locker, menschlich)
-		{ base: 'tischtennis', altKey: 'home.gallery.imageAlt.tischtennis' },
+		{ base: 'gaestehaus-tischtennis', altKey: 'home.gallery.imageAlt.tischtennis' },
 
 		// 6) Umgebung / Ort (context)
-		{ base: 'kirche', altKey: 'home.gallery.imageAlt.kirche' },
+		{ base: 'weissbriach-kirche', altKey: 'home.gallery.imageAlt.kirche' },
 
 		// 7) Winter-Teaser: einmal „wow“ Winter
-		{ base: 'Haus-Winter-2', altKey: 'home.gallery.imageAlt.winter' },
+		{ base: 'gaestehaus-winter', altKey: 'home.gallery.imageAlt.winter' },
 
 		// 8) Winter-Atmosphäre (weitere Variation)
-		{ base: 'winter-balkon_ausblick-1', altKey: 'home.gallery.imageAlt.winterBalkon' },
+		{ base: 'balkon-ausblick-winter', altKey: 'home.gallery.imageAlt.winterBalkon' },
 
 		// 9) Optional/zusätzliches Winterbild ans Ende (wenn’s eher „B-Roll“ ist)
-		{ base: 'slider-4-winter', altKey: 'home.gallery.imageAlt.sliderWinter' },
+		{ base: 'gaestehaus-winter-ansicht', altKey: 'home.gallery.imageAlt.sliderWinter' },
 	];
 
 	const galleryImages = destinationImages;
@@ -472,7 +472,7 @@
 <SeoHead
 	titleKey="home.seo.title"
 	descriptionKey="home.seo.description"
-	image="/images/other/house-summer.jpg"
+	image="/images/Haus/gaestehaus-sommer.jpg"
 />
 
 <svelte:head>
@@ -967,8 +967,8 @@
 							aria-label={`${$t('home.gallery.kicker')}: ${$t(image.altKey)}`}
 						>
 							<img
-								src={withAsset(`/images/house/gallery/${image.base}-720.jpg`)}
-								srcset={`${withAsset(`/images/house/gallery/${image.base}-720.jpg`)} 720w, ${withAsset(`/images/house/gallery/${image.base}-1080.jpg`)} 1080w, ${withAsset(`/images/house/gallery/${image.base}-1440.jpg`)} 1440w`}
+								src={withAsset(`/images/Galerie/${image.base}-720.jpg`)}
+								srcset={`${withAsset(`/images/Galerie/${image.base}-720.jpg`)} 720w, ${withAsset(`/images/Galerie/${image.base}-1080.jpg`)} 1080w, ${withAsset(`/images/Galerie/${image.base}-1440.jpg`)} 1440w`}
 								sizes={galleryImageSizes}
 								alt={$t(image.altKey)}
 								class="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
@@ -1036,7 +1036,7 @@
 
 						<div class="overflow-hidden rounded-3xl bg-white">
 							<img
-								src={withAsset(`/images/house/gallery/${galleryImages[activeGalleryIndex].base}-1440.jpg`)}
+								src={withAsset(`/images/Galerie/${galleryImages[activeGalleryIndex].base}-1440.jpg`)}
 								alt={$t(galleryImages[activeGalleryIndex].altKey)}
 								class="h-auto max-h-[78vh] w-full object-contain"
 							/>
@@ -1062,7 +1062,7 @@
 				<div class="grid gap-8 lg:grid-cols-[1.1fr,0.9fr]">
 					<div class="order-2 relative h-[260px] sm:h-[320px] lg:order-1 lg:h-auto lg:min-h-full">
 						<img
-							src={withAsset('/images/experiences/train.png')}
+							src={withAsset('/images/Umgebung/train.png')}
 							alt={$t('guestcard.landing.imageAlt')}
 							class="h-full w-full object-cover"
 							loading="lazy"
@@ -1700,7 +1700,7 @@
 						class="group relative overflow-hidden rounded-3xl border border-white/20 bg-white/10 ring-1 ring-black/5 shadow-none transition-all duration-500 hover:-translate-y-1 hover:shadow-xl"
 					>
 						<img
-							src={withAsset('/images/other/house-summer.jpg')}
+							src={withAsset('/images/Haus/gaestehaus-sommer.jpg')}
 							alt={$t('home.seasons.summer.imageAlt')}
 							class="h-72 w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] sm:h-[420px]"
 							loading="lazy"
@@ -1732,7 +1732,7 @@
 						class="group relative overflow-hidden rounded-3xl border border-white/20 bg-white/10 ring-1 ring-black/5 shadow-none transition-all duration-500 hover:-translate-y-1 hover:shadow-xl"
 					>
 						<img
-							src={withAsset('/images/other/house-winter.jpg')}
+							src={withAsset('/images/Haus/gaestehaus-winter.png')}
 							alt={$t('home.seasons.winter.imageAlt')}
 							class="h-72 w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] sm:h-[420px]"
 							loading="lazy"
@@ -1772,7 +1772,7 @@
 					<div class="relative">
 						<div class="relative overflow-hidden rounded-3xl">
 							<img
-								src={withAsset('/images/other/solar.png')}
+								src={withAsset('/images/Drohne/solar.png')}
 								alt={$t('home.sustainability.imageAlt')}
 								class="h-[320px] w-full object-cover sm:h-[380px]"
 								loading="lazy"
@@ -1922,3 +1922,9 @@
 		</div>
 	</section>
 </div>
+
+
+
+
+
+

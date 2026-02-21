@@ -60,15 +60,15 @@
 		longitude: 13.2549914,
 	} as const;
 	const fallbackVacationImagePaths = [
-		'/images/house/haus-sommer.jpg',
-		'/images/house/winter-balkon_ausblick-1.jpg',
-		'/images/house/balkon-ausblick.jpg',
-		'/images/house/IMG_0580.jpeg',
-		'/images/house/kirche.jpg',
-		'/images/house/pavillon.jpg',
-		'/images/house/slider-4-winter.jpg',
-		'/images/house/tischtennis.jpg',
-		'/images/house/Haus-Winter-2.png',
+		'/images/Haus/gaestehaus-sommer.jpg',
+		'/images/Haus/balkon-ausblick-winter.jpg',
+		'/images/Haus/gaestehaus-balkon-ausblick.jpg',
+		'/images/Haus/familie-hueber.jpg',
+		'/images/Haus/weissbriach-kirche.jpg',
+		'/images/Haus/gaestehaus-pavillon.jpg',
+		'/images/Haus/gaestehaus-winter-ansicht.jpg',
+		'/images/Haus/gaestehaus-tischtennis.jpg',
+		'/images/Haus/gaestehaus-winter.png',
 	];
 	const parseGuestCapacity = (guestText: string) => {
 		const rangeMatch = guestText.match(/(\d+)\s*-\s*(\d+)/);
@@ -830,6 +830,9 @@
 		top: 9rem;
 	}
 </style>
+
+
+
 
 
 

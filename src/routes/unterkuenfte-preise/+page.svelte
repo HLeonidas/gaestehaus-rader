@@ -73,7 +73,7 @@
 <SeoHead
 	titleKey="rooms.seo.title"
 	descriptionKey="rooms.seo.description"
-	image={rooms[0]?.images?.main ?? '/images/1/main.jpg'}
+	image={rooms[0]?.images?.main ?? '/images/Nr1/main.jpg'}
 />
 
 <svelte:head>
@@ -114,7 +114,7 @@
 								<img
 									src={withAsset(room.images.main)}
 									alt={`${room.title} – ${room.subtitle[$lang]}`}
-									class="h-56 w-full object-cover sm:h-72"
+									class="h-64 w-full object-cover object-center sm:h-80 lg:h-[26rem]"
 									loading="lazy"
 								/>
 							</a>
@@ -488,3 +488,5 @@
 		</section>
 	</div>
 </div>
+
+

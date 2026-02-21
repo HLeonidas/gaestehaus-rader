@@ -122,7 +122,7 @@
 					class="flex h-16 w-32 items-center justify-center rounded-xl bg-white shadow-sm sm:h-20 sm:w-52"
 				>
 					<img
-						src={withAsset('/images/other/logo-rader-gitschtal.jpg')}
+						src={withAsset('/images/Logo/logo-rader-gitschtal.jpg')}
 						alt="Gästehaus Rader"
 						class="h-12 w-auto object-contain sm:h-14"
 						loading="lazy"
@@ -224,7 +224,7 @@
 					<div class="flex items-center gap-3">
 						<div class="flex items-center justify-center rounded-lg shadow-sm">
 							<img
-								src={withAsset('/images/other/logo-rader-gitschtal.jpg')}
+								src={withAsset('/images/Logo/logo-rader-gitschtal.jpg')}
 								alt="Gästehaus Rader"
 								class="h-12 w-auto object-contain sm:h-14"
 								loading="lazy"
@@ -245,7 +245,7 @@
 							onclick={() => trackEvent('Outbound: Partner Click', { source: 'footer', partner: 'nassfeld' })}
 						>
 							<img
-								src={withAsset('/images/externallogos/nassfeld-logo.png')}
+								src={withAsset('/images/Logo/nassfeld-logo.png')}
 								alt="Nassfeld"
 								class="h-10 w-auto object-contain sm:h-12"
 								loading="lazy"
@@ -259,7 +259,7 @@
 							onclick={() => trackEvent('Outbound: Partner Click', { source: 'footer', partner: 'kaernten' })}
 						>
 							<img
-								src={withAsset('/images/externallogos/kaernten-logo.png')}
+								src={withAsset('/images/Logo/kaernten-logo.png')}
 								alt="Kärnten"
 								class="h-10 w-auto object-contain sm:h-12"
 								loading="lazy"
@@ -377,3 +377,5 @@
 		</div>
 	</footer>
 </div>
+
+

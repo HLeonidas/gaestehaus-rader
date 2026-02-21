@@ -58,13 +58,13 @@ export const accommodations: Accommodation[] = [
 			],
 		},
 		images: {
-			main: '/images/1/main.jpg',
+			main: '/images/Nr1/main.jpg',
 			gallery: [
-				'/images/1/dining-room.jpg',
-				'/images/1/living-room.jpg',
-				'/images/1/balcony.jpg',
-				'/images/1/balcony-seating.jpg',
-				'/images/1/bedroom.jpg',
+				'/images/Nr1/dining-room.jpg',
+				'/images/Nr1/living-room.jpg',
+				'/images/Nr1/balcony.jpg',
+				'/images/Nr1/balcony-seating.jpg',
+				'/images/Nr1/bedroom.jpg',
 			],
 		},
 		attributes: {
@@ -80,7 +80,7 @@ export const accommodations: Accommodation[] = [
 			},
 		},
 		amenities: ['balkon', 'fernseher', 'kueche', 'ausziehcouch', 'wifi', 'badezimmer'],
-		floorplanImage: '/images/1/floorplan.png',
+		floorplanImage: '/images/Nr1/floorplan.png',
 		pricePerNightBase: 75,
 		priceMatrix: [
 			{
@@ -170,12 +170,17 @@ export const accommodations: Accommodation[] = [
 			],
 		},
 		images: {
-			main: '/images/2/main.jpg',
+			main: '/images/Nr2/nr2-bedroom-double-bright.jpg',
 			gallery: [
-				'/images/2/single-bed.png',
-				'/images/2/room-detail.png',
-				'/images/2/dresser.png',
-				'/images/2/kitchen.png',
+				'/images/Nr2/nr2-bedroom-overview-bright.jpg',
+				'/images/Nr2/nr2-living-room.jpg',
+				'/images/Nr2/nr2-kitchen-living.jpg',
+				'/images/Nr2/nr2-living-dining-bright.jpg',
+				'/images/Nr2/nr2-entry-hall.jpg',
+				'/images/Nr2/nr2-balcony-seating.jpg',
+				'/images/Nr2/nr2-balcony.jpg',
+				'/images/Nr2/nr2-balcony-view-winter.jpg',
+				'/images/Nr2/nr2-bathroom.jpg',
 			],
 		},
 		attributes: {
@@ -191,7 +196,7 @@ export const accommodations: Accommodation[] = [
 			},
 		},
 		amenities: ['balkon', 'fernseher', 'kueche', 'ausziehcouch', 'wifi', 'badezimmer'],
-		floorplanImage: '/images/2/floorplan.png',
+		floorplanImage: '/images/Nr2/floorplan.png',
 		pricePerNightBase: 75,
 		priceMatrix: [
 			{
@@ -281,13 +286,13 @@ export const accommodations: Accommodation[] = [
 			],
 		},
 		images: {
-			main: '/images/3/main.jpg',
+			main: '/images/Nr3/main.jpg',
 			gallery: [
-				'/images/3/view.jpeg',
-				'/images/3/kitchen-tools.jpeg',
-				'/images/3/sofa.jpeg',
-				'/images/3/bed.jpeg',
-				'/images/3/shoe-rack.jpeg',
+				'/images/Nr3/view.jpeg',
+				'/images/Nr3/kitchen-tools.jpeg',
+				'/images/Nr3/sofa.jpeg',
+				'/images/Nr3/bed.jpeg',
+				'/images/Nr3/shoe-rack.jpeg',
 			],
 		},
 		attributes: {
@@ -303,7 +308,7 @@ export const accommodations: Accommodation[] = [
 			},
 		},
 		amenities: ['balkon', 'fernseher', 'kueche', 'wifi', 'badezimmer'],
-		floorplanImage: '/images/3/floorplan.png',
+		floorplanImage: '/images/Nr3/floorplan.png',
 		pricePerNightBase: 65,
 		priceMatrix: [
 			{
@@ -376,3 +381,5 @@ export const accommodations: Accommodation[] = [
 
 export const accommodationBySlug = (slug: string) =>
 	accommodations.find((accommodation) => accommodation.slug === slug);
+
+

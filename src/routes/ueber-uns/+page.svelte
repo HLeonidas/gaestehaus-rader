@@ -9,7 +9,7 @@
 <SeoHead
 	titleKey="about.seo.title"
 	descriptionKey="about.seo.description"
-	image="/images/other/familie.jpg"
+	image="/images/Haus/familie-hueber.jpg"
 />
 
 <!-- <div class="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6"> -->
@@ -31,7 +31,7 @@
 				>
 					<!-- Replace src with your image -->
 					<img
-						src={withAsset('/images/other/familie.jpg')}
+						src={withAsset('/images/Haus/familie-hueber.jpg')}
 						alt="Gästehaus Rader"
 						class="h-full w-full object-cover"
 					/>
@@ -99,3 +99,6 @@
 	</div>
 </section>
 <!-- </div> -->
+
+
+

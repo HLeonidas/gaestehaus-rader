@@ -95,7 +95,7 @@
 			kickerKey: 'experiences.event.summer.hike.kicker',
 			titleKey: 'experiences.event.summer.hike.title',
 			descriptionKey: 'experiences.event.summer.hike.description',
-			image: '/images/experiences/summer-hike.jpg',
+			image: '/images/Umgebung/summer-hike.jpg',
 			layout: 'summer',
 			className: 'c1',
 			titleSize: 'text-2xl',
@@ -107,7 +107,7 @@
 			icon: Waves,
 			kickerKey: 'experiences.event.summer.lake.kicker',
 			titleKey: 'experiences.event.summer.lake.title',
-			image: '/images/experiences/summer-lake.png',
+			image: '/images/Umgebung/summer-lake.png',
 			layout: 'summer',
 			className: 'c2',
 			titleSize: 'text-xl',
@@ -119,7 +119,7 @@
 			icon: Bike,
 			kickerKey: 'experiences.event.summer.bike.kicker',
 			titleKey: 'experiences.event.summer.bike.title',
-			image: '/images/experiences/summer-bike.jpg',
+			image: '/images/Umgebung/summer-bike.jpg',
 			layout: 'summer',
 			className: 'c3',
 			titleSize: 'text-xl',
@@ -132,7 +132,7 @@
 			kickerKey: 'experiences.event.summer.lift.kicker',
 			titleKey: 'experiences.event.summer.lift.title',
 			descriptionKey: 'experiences.event.summer.lift.description',
-			image: '/images/experiences/summer-lift.png',
+			image: '/images/Umgebung/summer-lift.png',
 			layout: 'summer',
 			className: 'c4',
 			// badgeKey: 'experiences.badge.includedCard',
@@ -146,7 +146,7 @@
 			kickerKey: 'experiences.event.winter.ski.kicker',
 			titleKey: 'experiences.event.winter.ski.title',
 			descriptionKey: 'experiences.event.winter.ski.description',
-			image: '/images/experiences/winter-ski.jpg',
+			image: '/images/Umgebung/winter-ski.jpg',
 			layout: 'winter',
 			className: 'c1',
 			titleSize: 'text-2xl',
@@ -158,7 +158,7 @@
 			icon: Snowflake,
 			kickerKey: 'experiences.event.winter.ice.kicker',
 			titleKey: 'experiences.event.winter.ice.title',
-			image: '/images/experiences/winter-ice.jpg',
+			image: '/images/Umgebung/winter-ice.jpg',
 			layout: 'winter',
 			className: 'c2',
 			badgeKey: 'experiences.badge.popular',
@@ -171,7 +171,7 @@
 			icon: Footprints,
 			kickerKey: 'experiences.event.winter.hike.kicker',
 			titleKey: 'experiences.event.winter.hike.title',
-			image: '/images/experiences/winter-hike.jpg',
+			image: '/images/Umgebung/winter-hike.jpg',
 			layout: 'winter',
 			className: 'c3',
 			titleSize: 'text-xl',
@@ -184,7 +184,7 @@
 			kickerKey: 'experiences.event.winter.crosscountry.kicker',
 			titleKey: 'experiences.event.winter.crosscountry.title',
 			descriptionKey: 'experiences.event.winter.crosscountry.description',
-			image: '/images/experiences/winter-crosscountry.jpg',
+			image: '/images/Umgebung/winter-crosscountry.jpg',
 			layout: 'winter',
 			className: 'c4',
 			titleSize: 'text-2xl',
@@ -210,13 +210,13 @@
 				kickerKey: 'experiences.season.summer.kicker',
 				titleKey: 'experiences.season.summer.title',
 				subtitleKey: 'experiences.season.summer.subtitle',
-				bg: '/images/other/house-summer.jpg',
+				bg: '/images/Haus/gaestehaus-sommer.jpg',
 			},
 			winter: {
 				kickerKey: 'experiences.season.winter.kicker',
 				titleKey: 'experiences.season.winter.title',
 				subtitleKey: 'experiences.season.winter.subtitle',
-				bg: '/images/other/house-winter.jpg',
+				bg: '/images/Haus/gaestehaus-winter.png',
 			},
 		};
 	const currentContent = $derived(content[activeTab]);
@@ -687,7 +687,7 @@
 						<div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
 							<article class="group relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
 								<img
-									src={withAsset('/images/experiences/freibad.png')}
+									src={withAsset('/images/Umgebung/freibad.png')}
 									alt={$t('guestcard.experiences.wellness.card1.alt')}
 									class="h-44 w-full object-cover sm:h-40 lg:h-44"
 									loading="lazy"
@@ -705,7 +705,7 @@
 
 							<article class="group relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
 								<img
-									src={withAsset('/images/experiences/summer-lake.png')}
+									src={withAsset('/images/Umgebung/summer-lake.png')}
 									alt={$t('guestcard.experiences.wellness.card2.alt')}
 									class="h-44 w-full object-cover sm:h-40 lg:h-44"
 									loading="lazy"
@@ -723,7 +723,7 @@
 
 							<article class="group relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
 								<img
-									src={withAsset('/images/experiences/sauna.png')}
+									src={withAsset('/images/Umgebung/sauna.png')}
 									alt={$t('guestcard.experiences.wellness.card3.alt')}
 									class="h-44 w-full object-cover sm:h-40 lg:h-44"
 									loading="lazy"
@@ -953,3 +953,7 @@
 		background: radial-gradient(circle, rgba(255, 180, 0, 0.6), transparent 60%);
 	}
 </style>
+
+
+
+
