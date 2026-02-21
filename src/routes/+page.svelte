@@ -645,12 +645,12 @@
 
 				<div class="mt-8">
 					<div
-						class="-mx-4 mt-2 flex snap-x snap-mandatory gap-8 overflow-x-auto px-4 pb-3 pt-2 scroll-pl-4 scroll-pr-4 [scrollbar-width:thin] [scrollbar-color:theme(colors.slate.300)_transparent] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-200 hover:[&::-webkit-scrollbar-thumb]:bg-slate-300 sm:mx-0 sm:px-0 sm:scroll-pl-0 sm:scroll-pr-0"
+						class="-mx-4 mt-2 flex snap-x snap-mandatory gap-8 overflow-x-auto px-4 pb-7 pt-4 scroll-pl-4 scroll-pr-4 [scrollbar-width:thin] [scrollbar-color:theme(colors.slate.300)_transparent] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-200 hover:[&::-webkit-scrollbar-thumb]:bg-slate-300 sm:mx-0 sm:px-0 sm:pb-5 sm:pt-3 sm:scroll-pl-0 sm:scroll-pr-0"
 					>
 						{#each rooms as r}
 							<a
 								href={`${accommodationsBase}/${r.slug}`}
-								class="group relative w-[280px] shrink-0 snap-start overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:shadow-lg sm:w-[340px] sm:hover:-translate-y-1"
+								class="group relative w-[280px] shrink-0 snap-start overflow-hidden rounded-3xl border border-slate-200/70 bg-white shadow-sm transition-all duration-300 hover:shadow-lg sm:w-[340px] sm:hover:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none"
 								onclick={() => trackEvent('Content: Room Card Click', { source: 'home', room: r.slug })}
 							>
 								<!-- Image -->
@@ -665,13 +665,13 @@
 										class="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/10 to-transparent"
 									></div>
 									<div
-										class="pointer-events-none absolute inset-0 hidden bg-gradient-to-t from-slate-950/55 via-slate-900/15 to-transparent opacity-0 transition-all duration-300 group-hover:opacity-100 group-focus-visible:opacity-100 sm:block"
+										class="pointer-events-none absolute inset-0 hidden bg-gradient-to-t from-slate-950/22 via-slate-900/5 to-transparent opacity-0 transition-all duration-300 group-hover:opacity-100 group-focus-visible:opacity-100 sm:block"
 									></div>
 									<div
-										class="pointer-events-none absolute bottom-4 right-4 hidden items-center gap-2 text-sm font-semibold text-white/95 opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-focus-visible:opacity-100 group-focus-visible:translate-y-0 sm:inline-flex"
+										class="pointer-events-none absolute bottom-4 right-4 hidden items-center gap-2 rounded-full border border-white/35 bg-white/14 px-4 py-2 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(15,23,42,0.25)] ring-1 ring-white/20 backdrop-blur-md opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-focus-visible:opacity-100 group-focus-visible:translate-y-0 sm:inline-flex"
 									>
 										<span>{$t('rooms.page.detailsCta')}</span>
-										<ArrowRight class="h-3.5 w-3.5" aria-hidden="true" />
+										<ArrowRight class="h-4 w-4" aria-hidden="true" />
 									</div>
 
 									<!-- Price pill -->
@@ -705,7 +705,7 @@
 
 								<!-- Hover ring -->
 								<div
-									class="pointer-events-none absolute inset-0 ring-1 ring-transparent transition group-hover:ring-brand/25"
+									class="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-transparent transition"
 								></div>
 							</a>
 						{/each}
@@ -1714,7 +1714,7 @@
 								{$t('seasons.summer.body')}
 							</p>
 							<span
-								class="mt-5 inline-flex items-center gap-2 rounded-full bg-white/90 px-5 py-2.5 text-sm font-semibold text-slate-900 shadow-sm backdrop-blur-sm transition group-hover:bg-white group-hover:shadow-md"
+								class="mt-5 inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/14 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(15,23,42,0.25)] ring-1 ring-white/20 backdrop-blur-md transition group-hover:bg-white/20 group-hover:shadow-[0_12px_28px_rgba(15,23,42,0.3)]"
 							>
 								{$t('seasons.summer.cta')}
 								<ArrowRight
@@ -1746,7 +1746,7 @@
 								{$t('seasons.winter.body')}
 							</p>
 							<span
-								class="mt-5 inline-flex items-center gap-2 rounded-full bg-white/90 px-5 py-2.5 text-sm font-semibold text-slate-900 shadow-sm backdrop-blur-sm transition group-hover:bg-white group-hover:shadow-md"
+								class="mt-5 inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/14 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(15,23,42,0.25)] ring-1 ring-white/20 backdrop-blur-md transition group-hover:bg-white/20 group-hover:shadow-[0_12px_28px_rgba(15,23,42,0.3)]"
 							>
 								{$t('seasons.winter.cta')}
 								<ArrowRight
