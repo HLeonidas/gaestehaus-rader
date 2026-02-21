@@ -57,8 +57,8 @@
 	const currentMonth = new Date().getMonth();
 	const heroImagePath =
 		currentMonth >= 4 && currentMonth <= 8
-			? '/images/other/balkon-ausblick.jpg'
-			: '/images/other/winter-balkon_ausblick-1.jpg';
+			? '/images/house/gallery/balkon-ausblick-1440.jpg'
+			: '/images/other/winter-balkon_ausblick-1-hero.jpg';
 	const heroImage = withAsset(heroImagePath);
 
 	const rooms = accommodations;
@@ -472,7 +472,7 @@
 <SeoHead
 	titleKey="home.seo.title"
 	descriptionKey="home.seo.description"
-	image="/images/other/haus-sommer.jpg"
+	image="/images/other/house-summer.jpg"
 />
 
 <svelte:head>
