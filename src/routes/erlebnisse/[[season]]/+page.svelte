@@ -22,6 +22,7 @@
 		Users,
 		Utensils,
 		Waves,
+		X,
 	} from 'lucide-svelte';
 
 	import { fly } from 'svelte/transition';
@@ -354,7 +355,54 @@
 			'https://www.nassfeld.at/de/Unterkunft-finden/Reise-planen/PREMIUM-Cards/GaesteCard-basic',
 		brochure: 'https://www.nassfeld.at/PDFs/NPS/Gaestekarten/BasisCard_Broschuere.pdf',
 	};
+
+	let isNassfeldModalOpen = $state(false);
+
+	const nassfeldFacts = [
+		'Kärntens größtes Skigebiet mit rund 110 Pistenkilometern.',
+		'Breites Angebot für Familien, Genießer und sportliche Fahrer.',
+		'Viele Hütten, Panorama-Spots und moderne Liftanlagen.',
+	];
+
+	const nassfeldTips = [
+		'Anfahrt ab Gästehaus: ca. 20-25 Minuten (Auto) oder gratis mit dem Shuttlebus zum Nassfeld.',
+		'Ideal als Tagesausflug im Winter und in der Übergangszeit.',
+		'Tipp: Früh starten für entspanntes Parken und ruhige erste Abfahrten.',
+	];
+
+	function openNassfeldModal() {
+		isNassfeldModalOpen = true;
+	}
+
+	function closeNassfeldModal() {
+		isNassfeldModalOpen = false;
+	}
+
+	function onNassfeldBackdropClick(event: MouseEvent) {
+		if (event.target === event.currentTarget) {
+			closeNassfeldModal();
+		}
+	}
+
+	function onWindowKeydown(event: KeyboardEvent) {
+		if (event.key === 'Escape' && isNassfeldModalOpen) {
+			closeNassfeldModal();
+		}
+	}
+
+	$effect(() => {
+		if (!isNassfeldModalOpen) return;
+
+		const previousOverflow = document.body.style.overflow;
+		document.body.style.overflow = 'hidden';
+
+		return () => {
+			document.body.style.overflow = previousOverflow;
+		};
+	});
 </script>
+
+<svelte:window onkeydown={onWindowKeydown} />
 
 <SeoHead titleKey={seo.titleKey} descriptionKey={seo.descriptionKey} image={currentContent.bg} />
 
@@ -416,7 +464,7 @@
 					</p>
 				</div>
 
-				<div class="anchor-target mt-10" id="interessen">
+				<!-- <div class="anchor-target mt-10" id="interessen">
 					<p class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
 						{$t('experiences.interests.title')}
 					</p>
@@ -431,7 +479,7 @@
 							</a>
 						{/each}
 					</div>
-				</div>
+				</div> -->
 
 				<div class="anchor-target mt-10" id="highlights">
 					<p class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
@@ -442,7 +490,9 @@
 						<div class="mt-4 space-y-6" in:fly={{ y: 26, duration: 520, easing: cubicOut }}>
 							{#if featuredEvent}
 								<article
-									class="group relative aspect-[4/5] overflow-hidden rounded-3xl sm:aspect-[16/10]"
+									class={`group relative aspect-[4/5] overflow-hidden rounded-3xl sm:aspect-[16/10] ${
+										featuredEvent.id === 'winter-ski' ? 'cursor-pointer' : ''
+									}`}
 								>
 									<img
 										src={withAsset(featuredEvent.image)}
@@ -453,6 +503,15 @@
 									<div
 										class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent"
 									></div>
+
+									{#if featuredEvent.id === 'winter-ski'}
+										<button
+											type="button"
+											class="absolute inset-0 z-10"
+											aria-label="Nassfeld Informationen öffnen"
+											onclick={openNassfeldModal}
+										></button>
+									{/if}
 
 									{#if featuredEvent.badgeKey}
 										<span
@@ -579,25 +638,57 @@
 					</p>
 					<div class="mt-4 grid gap-4 sm:grid-cols-2">
 						{#each destinationCards as card}
-							<article class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg">
-								<div class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">
-									<card.icon class="h-4 w-4" aria-hidden="true" />
-									{$t(card.kickerKey)}
-								</div>
-								<h3 class="mt-2 text-xl font-semibold leading-tight text-slate-900">
-									{$t(card.titleKey)}
-								</h3>
-								<p class="mt-2 text-sm leading-relaxed text-slate-600">
-									{$t(card.bodyKey)}
-								</p>
-								<div class="mt-4 flex flex-wrap gap-2">
-									{#each card.tagsBySeason[activeTab] as tag}
-										<span class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600">
-											{$t(tag)}
-										</span>
-									{/each}
-								</div>
-							</article>
+							{#if card.id === 'nassfeld'}
+								<button
+									type="button"
+									class="destination-card group text-left"
+									onclick={openNassfeldModal}
+									aria-haspopup="dialog"
+									aria-expanded={isNassfeldModalOpen}
+								>
+									<div class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">
+										<card.icon class="h-4 w-4" aria-hidden="true" />
+										{$t(card.kickerKey)}
+									</div>
+									<h3 class="mt-2 text-xl font-semibold leading-tight text-slate-900">
+										{$t(card.titleKey)}
+									</h3>
+									<p class="mt-2 text-sm leading-relaxed text-slate-600">
+										{$t(card.bodyKey)}
+									</p>
+									<div class="mt-4 flex flex-wrap gap-2">
+										{#each card.tagsBySeason[activeTab] as tag}
+											<span class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600">
+												{$t(tag)}
+											</span>
+										{/each}
+									</div>
+									<div class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-slate-800">
+										Mehr zu Nassfeld
+										<ArrowRight class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+									</div>
+								</button>
+							{:else}
+								<article class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg">
+									<div class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">
+										<card.icon class="h-4 w-4" aria-hidden="true" />
+										{$t(card.kickerKey)}
+									</div>
+									<h3 class="mt-2 text-xl font-semibold leading-tight text-slate-900">
+										{$t(card.titleKey)}
+									</h3>
+									<p class="mt-2 text-sm leading-relaxed text-slate-600">
+										{$t(card.bodyKey)}
+									</p>
+									<div class="mt-4 flex flex-wrap gap-2">
+										{#each card.tagsBySeason[activeTab] as tag}
+											<span class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600">
+												{$t(tag)}
+											</span>
+										{/each}
+									</div>
+								</article>
+							{/if}
 						{/each}
 					</div>
 				</div>
@@ -898,6 +989,96 @@
 			</section>
 		</div>
 	</div>
+
+	{#if isNassfeldModalOpen}
+		<div
+			class="fixed inset-0 z-[100] grid place-items-center bg-slate-950/65 p-4 backdrop-blur-[2px] sm:p-6"
+			role="presentation"
+			onclick={onNassfeldBackdropClick}
+		>
+			<div
+				role="dialog"
+				aria-modal="true"
+				aria-labelledby="nassfeld-modal-title"
+				class="w-full max-w-4xl overflow-hidden rounded-3xl border border-white/20 bg-white shadow-2xl"
+			>
+				<div class="grid md:grid-cols-[1.05fr,0.95fr]">
+					<div class="relative min-h-[220px] md:min-h-full">
+						<img
+							src={withAsset('/images/Umgebung/ski_nassfeld.jpg')}
+							alt="Skifahren am Nassfeld"
+							class="h-full w-full object-cover object-center"
+						/>
+						<div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/45 to-transparent p-5 text-white">
+							<p class="text-xs font-semibold uppercase tracking-[0.22em] text-brand">Winter Highlight</p>
+							<h3 class="mt-1 text-xl font-semibold sm:text-2xl">Nassfeld: Sun Ski World</h3>
+						</div>
+					</div>
+
+					<div class="flex flex-col p-5 sm:p-7">
+						<div class="flex items-start justify-between gap-4">
+							<div>
+								<p class="text-xs font-semibold uppercase tracking-[0.22em] text-brand">Skigebiet</p>
+								<h2 id="nassfeld-modal-title" class="mt-1 text-2xl font-semibold leading-tight text-slate-900">
+									Nassfeld Informationen
+								</h2>
+							</div>
+							<button
+								type="button"
+								class="grid h-10 w-10 place-items-center rounded-full border border-slate-200 text-slate-600 transition hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900"
+								onclick={closeNassfeldModal}
+								aria-label="Modal schließen"
+							>
+								<X class="h-5 w-5" aria-hidden="true" />
+							</button>
+						</div>
+
+						<p class="mt-4 text-sm leading-relaxed text-slate-600">
+							Perfekt für einen aktiven Tag im Schnee: kurze Anfahrt, viele Pisten und starke Infrastruktur direkt im Grenzgebiet Kärnten/Tirol.
+						</p>
+
+						<div class="mt-5 space-y-4">
+							<div>
+								<p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">Highlights</p>
+								<ul class="mt-2 space-y-1.5 text-sm text-slate-700">
+									{#each nassfeldFacts as fact}
+										<li>• {fact}</li>
+									{/each}
+								</ul>
+							</div>
+
+							<div>
+								<p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">Gut zu wissen</p>
+								<ul class="mt-2 space-y-1.5 text-sm text-slate-700">
+									{#each nassfeldTips as tip}
+										<li>• {tip}</li>
+									{/each}
+								</ul>
+							</div>
+						</div>
+
+						<div class="mt-6 flex flex-wrap gap-3">
+							<a
+								href="https://www.nassfeld.at/"
+								target="_blank"
+								rel="noreferrer"
+								class="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand/90"
+							>
+								Nassfeld Website
+								<ArrowRight class="h-4 w-4" aria-hidden="true" />
+							</a>
+							<a
+								href={resolve('/buchen')}
+								class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-800 transition hover:bg-slate-50"
+							>
+								Unterkunft buchen
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	{/if}
 </main>
 
 <style>
@@ -951,6 +1132,25 @@
 		filter: blur(10px);
 		opacity: 0.35;
 		background: radial-gradient(circle, rgba(255, 180, 0, 0.6), transparent 60%);
+	}
+
+	.destination-card {
+		width: 100%;
+		border-radius: 1rem;
+		border: 1px solid rgb(226 232 240);
+		background: white;
+		padding: 1.25rem;
+		box-shadow: 0 1px 2px 0 rgba(15, 23, 42, 0.08);
+		transition:
+			transform 300ms,
+			box-shadow 300ms,
+			border-color 300ms;
+	}
+
+	.destination-card:hover {
+		transform: translateY(-0.25rem);
+		border-color: rgba(247, 171, 0, 0.35);
+		box-shadow: 0 14px 28px -18px rgba(15, 23, 42, 0.34);
 	}
 </style>
 

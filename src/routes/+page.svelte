@@ -670,7 +670,7 @@
 									<div
 										class="pointer-events-none absolute bottom-4 right-4 hidden items-center gap-2 rounded-full border border-white/35 bg-white/14 px-4 py-2 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(15,23,42,0.25)] ring-1 ring-white/20 backdrop-blur-md opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-focus-visible:opacity-100 group-focus-visible:translate-y-0 sm:inline-flex"
 									>
-										<span>{$t('rooms.page.detailsCta')}</span>
+										<!-- <span>{$t('rooms.page.detailsCta')}</span> -->
 										<ArrowRight class="h-4 w-4" aria-hidden="true" />
 									</div>
 
@@ -1058,7 +1058,7 @@
 			<!-- GUEST CARD -->
 			<section class="group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_-18px_rgba(245,146,0,0.45)]">
 				<div class="grid gap-8 lg:grid-cols-[1.1fr,0.9fr]">
-					<div class="order-2 relative h-[260px] sm:h-[320px] lg:order-1 lg:h-auto lg:min-h-full">
+					<div class="order-2 relative h-[260px] sm:h-[320px] lg:order-1 lg:h-[670px]">
 						<img
 							src={withAsset('/images/Umgebung/ski_nassfeld.jpg')}
 							alt={$t('guestcard.landing.imageAlt')}
@@ -1070,7 +1070,7 @@
 						></div>
 					</div>
 
-					<div class="order-1 space-y-5 px-6 py-7 sm:px-10 sm:py-10 lg:order-2">
+					<div class="order-1 flex flex-col justify-center space-y-6 px-6 py-7 sm:px-10 sm:py-10 lg:order-2">
 						<div>
 							<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
 								{$t('guestcard.landing.kicker')}

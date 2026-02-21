@@ -55,12 +55,9 @@
 			{$t('contact.subtitle')}
 		</p>
 
-		<div class="mt-10 border-t border-slate-200 pt-8">
+		<div class="mt-10">
 			<p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-600">
 				{$t('contact.quick.title')}
-			</p>
-			<p class="mt-2 max-w-2xl text-sm leading-relaxed text-slate-600">
-				{$t('contact.subtitle')}
 			</p>
 			<div class="mt-3 flex flex-wrap items-center gap-3">
 				<a
@@ -82,8 +79,9 @@
 			</div>
 		</div>
 
-		<div class="mt-8 grid gap-10 border-t border-slate-200 pt-8 lg:grid-cols-[1fr,0.95fr]">
-			<div>
+		<div class="mt-8 rounded-2xl border border-slate-200 bg-white p-5 sm:p-8">
+			<div class="grid gap-10 lg:grid-cols-[1fr,0.95fr]">
+				<div>
 				<p class="text-lg font-semibold text-slate-900">{$t('contact.card.title')}</p>
 				<div class="mt-6">
 					<p class="text-sm font-semibold text-slate-900">{$t('contact.address.title')}</p>
@@ -107,61 +105,73 @@
 				<div>
 					<p class="text-sm font-semibold text-slate-900">{$t('contact.methods.title')}</p>
 					<div class="mt-3 divide-y divide-slate-100 text-sm text-slate-600">
-						<a
-							class="flex items-center justify-between py-3 transition hover:text-slate-900"
-							href="https://wa.me/436766246826"
-							target="_blank"
-							rel="noopener noreferrer"
-							onclick={() => trackEvent('Contact: WhatsApp Click', { source: 'contact', placement: 'methods' })}
-						>
-							<span class="flex items-center gap-3">
+						<div class="flex items-center justify-between gap-4 py-3">
+							<div class="flex min-w-0 items-center gap-3">
 								<MessageCircle class="h-4 w-4 text-emerald-600" aria-hidden="true" />
 								<span class="font-semibold text-slate-900">{$t('contact.cta.whatsapp')}</span>
-								<span class="text-slate-600">+43 676 6246826</span>
-							</span>
-							<ChevronRight class="h-4 w-4 text-slate-400" aria-hidden="true" />
-						</a>
-						<a
-							class="flex items-center justify-between py-3 transition hover:text-slate-900"
-							href="tel:+436766246826"
-							onclick={() => trackEvent('Contact: Phone Click', { source: 'contact', line: 'mobile', placement: 'methods' })}
-						>
-							<span class="flex items-center gap-3">
+								<span class="select-text text-slate-600">+43 676 6246826</span>
+							</div>
+							<a
+								class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition hover:border-brand/40 hover:text-slate-900"
+								href="https://wa.me/436766246826"
+								target="_blank"
+								rel="noopener noreferrer"
+								aria-label="WhatsApp schreiben"
+								onclick={() => trackEvent('Contact: WhatsApp Click', { source: 'contact', placement: 'methods-action' })}
+							>
+								<ChevronRight class="h-4 w-4" aria-hidden="true" />
+							</a>
+						</div>
+						<div class="flex items-center justify-between gap-4 py-3">
+							<div class="flex min-w-0 items-center gap-3">
 								<Phone class="h-4 w-4 text-brand" aria-hidden="true" />
 								<span class="font-semibold text-slate-900">Mobil</span>
-								<span class="text-slate-600">+43 676 6246826</span>
-							</span>
-							<ChevronRight class="h-4 w-4 text-slate-400" aria-hidden="true" />
-						</a>
-						<a
-							class="flex items-center justify-between py-3 transition hover:text-slate-900"
-							href="tel:+434286222"
-							onclick={() => trackEvent('Contact: Phone Click', { source: 'contact', line: 'landline', placement: 'methods' })}
-						>
-							<span class="flex items-center gap-3">
+								<span class="select-text text-slate-600">+43 676 6246826</span>
+							</div>
+							<a
+								class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition hover:border-brand/40 hover:text-slate-900"
+								href="tel:+436766246826"
+								aria-label="Mobil anrufen"
+								onclick={() => trackEvent('Contact: Phone Click', { source: 'contact', line: 'mobile', placement: 'methods-action' })}
+							>
+								<ChevronRight class="h-4 w-4" aria-hidden="true" />
+							</a>
+						</div>
+						<div class="flex items-center justify-between gap-4 py-3">
+							<div class="flex min-w-0 items-center gap-3">
 								<PhoneCall class="h-4 w-4 text-brand" aria-hidden="true" />
-								<span class="font-semibold text-slate-900">Festnetz</span>
-								<span class="text-slate-600">+43 4286 222</span>
-							</span>
-							<ChevronRight class="h-4 w-4 text-slate-400" aria-hidden="true" />
-						</a>
-						<a
-							class="flex items-center justify-between py-3 transition hover:text-slate-900"
-							href="mailto:info@rader-gitschtal.at"
-							onclick={() => trackEvent('Contact: Email Click', { source: 'contact', placement: 'methods' })}
-						>
-							<span class="flex items-center gap-3">
+								<span class="font-semibold text-slate-900">{$t('contact.methods.landline')}</span>
+								<span class="select-text text-slate-600">+43 4286 222</span>
+							</div>
+							<a
+								class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition hover:border-brand/40 hover:text-slate-900"
+								href="tel:+434286222"
+								aria-label="Festnetz anrufen"
+								onclick={() => trackEvent('Contact: Phone Click', { source: 'contact', line: 'landline', placement: 'methods-action' })}
+							>
+								<ChevronRight class="h-4 w-4" aria-hidden="true" />
+							</a>
+						</div>
+						<div class="flex items-center justify-between gap-4 py-3">
+							<div class="flex min-w-0 items-center gap-3">
 								<Mail class="h-4 w-4 text-brand" aria-hidden="true" />
 								<span class="font-semibold text-slate-900">E-Mail</span>
-								<span class="text-slate-600">info@rader-gitschtal.at</span>
-							</span>
-							<ChevronRight class="h-4 w-4 text-slate-400" aria-hidden="true" />
-						</a>
+								<span class="select-text text-slate-600">info@rader-gitschtal.at</span>
+							</div>
+							<a
+								class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition hover:border-brand/40 hover:text-slate-900"
+								href="mailto:info@rader-gitschtal.at"
+								aria-label="E-Mail schreiben"
+								onclick={() => trackEvent('Contact: Email Click', { source: 'contact', placement: 'methods-action' })}
+							>
+								<ChevronRight class="h-4 w-4" aria-hidden="true" />
+							</a>
+						</div>
 					</div>
 				</div>
-			</div>
+				</div>
 
-			<div class="flex h-full flex-col">
+				<div class="flex h-full flex-col">
 				<div class="flex flex-wrap items-center justify-between gap-3">
 					<p class="text-sm font-semibold text-slate-900">{$t('contact.map.title')}</p>
 					<a
@@ -223,10 +233,11 @@
 					{/if}
 				</div>
 			</div>
-		</div>
 
-		<div class="mt-10 space-y-8 border-t border-slate-200 pt-8">
-			<div>
+			</div>
+
+			<div class="mt-10 space-y-8 border-t border-slate-200 pt-8">
+				<div>
 				<p class="text-sm font-semibold text-slate-900">{$t('contact.payment.title')}</p>
 				<p class="mt-1 text-xs text-slate-500">{$t('contact.payment.subtitle')}</p>
 				<div class="mt-4 grid gap-4 sm:grid-cols-2">
@@ -275,11 +286,11 @@
 						</div>
 					</div>
 				</div>
-			</div>
+				</div>
 
-			<div class="h-px w-full bg-slate-200"></div>
+				<div class="h-px w-full bg-slate-200"></div>
 
-			<div>
+				<div>
 				<p class="text-sm font-semibold text-slate-900">{$t('contact.trust.title')}</p>
 				<div class="mt-3 flex flex-wrap gap-2">
 					<span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
@@ -296,6 +307,7 @@
 					</span>
 				</div>
 			</div>
+		</div>
 		</div>
 	</section>
 </div>
