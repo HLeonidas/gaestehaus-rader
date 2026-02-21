@@ -123,7 +123,12 @@
 									<span class="block text-sm text-slate-600">+43 676 6246826</span>
 								</span>
 							</span>
-							<ChevronRight class="h-4 w-4 text-slate-400" aria-hidden="true" />
+							<span class="inline-flex items-center gap-2">
+								<span class="hidden text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400 sm:inline">
+									WhatsApp
+								</span>
+								<ChevronRight class="h-4 w-4 text-slate-400" aria-hidden="true" />
+							</span>
 						</a>
 
 						<a
@@ -140,7 +145,12 @@
 								</span>
 								<span class="font-semibold text-slate-900">+43 676 6246826</span>
 							</span>
-							<ChevronRight class="h-4 w-4 text-slate-400" aria-hidden="true" />
+							<span class="inline-flex items-center gap-2">
+								<span class="hidden text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400 sm:inline">
+									Mobil
+								</span>
+								<ChevronRight class="h-4 w-4 text-slate-400" aria-hidden="true" />
+							</span>
 						</a>
 
 						<a
@@ -157,7 +167,12 @@
 								</span>
 								<span class="font-semibold text-slate-900">+43 4286 222</span>
 							</span>
-							<ChevronRight class="h-4 w-4 text-slate-400" aria-hidden="true" />
+							<span class="inline-flex items-center gap-2">
+								<span class="hidden text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400 sm:inline">
+									Festnetz
+								</span>
+								<ChevronRight class="h-4 w-4 text-slate-400" aria-hidden="true" />
+							</span>
 						</a>
 
 						<a
@@ -174,7 +189,12 @@
 								</span>
 								<span class="font-semibold text-slate-900">info@rader-gitschtal.at</span>
 							</span>
-							<ChevronRight class="h-4 w-4 text-slate-400" aria-hidden="true" />
+							<span class="inline-flex items-center gap-2">
+								<span class="hidden text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400 sm:inline">
+									E-Mail
+								</span>
+								<ChevronRight class="h-4 w-4 text-slate-400" aria-hidden="true" />
+							</span>
 						</a>
 					</div>
 				</div>
