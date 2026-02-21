@@ -114,7 +114,7 @@
 								<img
 									src={withAsset(room.images.main)}
 									alt={`${room.title} – ${room.subtitle[$lang]}`}
-									class="h-64 w-full object-cover object-center sm:h-80 lg:h-[26rem]"
+									class="h-[38vh] min-h-48 max-h-72 w-full object-cover object-center sm:h-80 sm:max-h-none lg:h-[26rem]"
 									loading="lazy"
 								/>
 							</a>
@@ -133,8 +133,8 @@
 						</div>
 
 						<!-- Content (split like screenshot) -->
-						<div class="grid gap-8 p-6 sm:p-7 md:grid-cols-[1.6fr,0.9fr] md:gap-0">
-							<!-- Left -->
+						<div class="grid gap-6 p-6 sm:p-7 md:grid-cols-[1.6fr,0.9fr] md:gap-0">
+							<!-- Left: title + meta -->
 							<div class="md:pr-10">
 								<h2 class="text-lg font-semibold text-slate-900 sm:text-xl">
 									<a href={`${accommodationsBase}/${room.slug}`} class="hover:opacity-90">
@@ -145,14 +145,16 @@
 
 								<div class="mt-2 text-xs text-slate-500">{room.detailMeta[$lang]}</div>
 
-								<!-- <p class="mt-4 max-w-xl text-sm leading-relaxed text-slate-600">
-									{room.detailBody}
-								</p> -->
-
 								<!-- Amenities row -->
-								<div class="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3 text-xs text-slate-600">
+								<div class="mt-5 hidden flex-wrap items-center gap-x-6 gap-y-3 text-xs text-slate-600 sm:flex">
 									{#each room.amenities as amenity}
-										<span class="inline-flex items-center gap-2">
+										<span
+											class={`items-center gap-2 ${
+												['balkon', 'kueche', 'wifi', 'badezimmer'].includes(amenity)
+													? 'inline-flex'
+													: 'hidden lg:inline-flex'
+											}`}
+										>
 											{#if amenityIcons[amenity]}
 												{@const Icon = amenityIcons[amenity]}
 												<Icon class="h-4 w-4 text-slate-400" />
@@ -163,42 +165,36 @@
 								</div>
 							</div>
 
-							<!-- Right (divider + price + button) -->
+							<!-- Right: price + CTA (early on mobile) -->
 							<div
-								class="flex flex-col items-end justify-between md:border-l md:border-slate-200 md:pl-10"
+								class="flex w-full flex-col items-start gap-4 md:w-auto md:items-end md:border-l md:border-slate-200 md:pl-10"
 							>
-								<div class="text-right">
+								<div class="text-left md:text-right">
 									<p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">
 										{$t('rooms.page.from')}
 									</p>
-									<div class="mt-2 flex items-end justify-end gap-2">
+									<div class="mt-2 flex items-end justify-start gap-2 md:justify-end">
 										<p class="text-2xl font-semibold text-brand">€{room.pricePerNightBase}</p>
 										<span class="pb-1 text-xs text-slate-500">/ {$t('price.night')}</span>
 									</div>
 								</div>
 
-								<div class="mt-6 flex flex-wrap items-center justify-end gap-3">
-									<a
-										href={`${accommodationsBase}/${room.slug}`}
-										class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-brand/30"
-										onclick={() =>
-											trackEvent('Content: Room Card Click', {
-												source: 'rooms-list',
-												room: room.slug,
-											})}
-									>
-										{$t('rooms.page.detailsCta')}: {room.title}
-									</a>
+								<div class="flex w-full flex-col gap-4 md:w-auto md:items-end">
 									<a
 										href={resolve('/buchen')}
-										class="inline-flex items-center gap-2 rounded-xl bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-brand/30"
+										class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-brand/90 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-brand/30 md:w-auto md:min-w-[180px]"
 										onclick={() => trackEvent('Booking: Jetzt buchen', { source: 'rooms-list' })}
 									>
 										{$t('rooms.page.cta')}
 										<ArrowRight class="h-4 w-4" />
 									</a>
+									<div class="grid gap-1 text-[11px] text-slate-500 md:text-right">
+										<p>✓ {$lang === 'de' ? 'Bestpreis bei Direktbuchung' : 'Best price with direct booking'}</p>
+										<p>✓ {$lang === 'de' ? 'Keine Buchungsgebühren' : 'No booking fees'}</p>
+									</div>
 								</div>
 							</div>
+
 						</div>
 					</article>
 				{/each}

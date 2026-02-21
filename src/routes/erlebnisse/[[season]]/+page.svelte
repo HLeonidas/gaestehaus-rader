@@ -146,7 +146,7 @@
 			kickerKey: 'experiences.event.winter.ski.kicker',
 			titleKey: 'experiences.event.winter.ski.title',
 			descriptionKey: 'experiences.event.winter.ski.description',
-			image: '/images/Umgebung/winter-ski.jpg',
+			image: '/images/Umgebung/ski_nassfeld.jpg',
 			layout: 'winter',
 			className: 'c1',
 			titleSize: 'text-2xl',

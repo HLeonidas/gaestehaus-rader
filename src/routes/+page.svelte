@@ -346,6 +346,7 @@
 
 		// 5) Aktivität / Feature (locker, menschlich)
 		{ base: 'gaestehaus-tischtennis', altKey: 'home.gallery.imageAlt.tischtennis' },
+		{ base: 'nr2-hero', altKey: 'home.gallery.imageAlt.nr2Hero' },
 
 		// 6) Umgebung / Ort (context)
 		{ base: 'weissbriach-kirche', altKey: 'home.gallery.imageAlt.kirche' },
@@ -358,6 +359,12 @@
 
 		// 9) Optional/zusätzliches Winterbild ans Ende (wenn’s eher „B-Roll“ ist)
 		{ base: 'gaestehaus-winter-ansicht', altKey: 'home.gallery.imageAlt.sliderWinter' },
+
+		{
+			base: 'nassfeld-ski',
+			altKey: 'home.gallery.imageAlt.nassfeldSki',
+			locationTagKey: 'home.gallery.locationTag.nassfeld',
+		},
 	];
 
 	const galleryImages = destinationImages;
@@ -981,7 +988,7 @@
 							<div class="pointer-events-none absolute bottom-4 left-4 right-4">
 								<p class="text-sm font-semibold text-white">{$t(image.altKey)}</p>
 								<p class="mt-1 text-[11px] font-medium uppercase tracking-[0.18em] text-white/80">
-									{$t('home.gallery.locationTag')}
+									{$t(image.locationTagKey ?? 'home.gallery.locationTag')}
 								</p>
 							</div>
 							<div
