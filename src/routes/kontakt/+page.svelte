@@ -43,11 +43,11 @@
 <SeoHead titleKey="contact.seo.title" descriptionKey="contact.seo.description" />
 
 <div class="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
-	<section class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10 lg:p-12">
+	<section>
 		<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
 			{$t('brand.name')}
 		</p>
-		<h1 class="mt-4 font-serif text-3xl leading-[0.95] text-slate-900 sm:text-4xl">
+		<h1 class="mt-4 font-serif text-5xl leading-[0.95] text-slate-900 sm:text-6xl">
 			{$t('contact.headingPrefix')} <span class="italic">{$t('contact.headingEmphasis')}</span>
 		</h1>
 		<div class="mt-4 h-[3px] w-14 rounded-full bg-brand"></div>
@@ -55,7 +55,7 @@
 			{$t('contact.subtitle')}
 		</p>
 
-		<div class="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:p-5">
+		<div class="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:p-5">
 			<p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-600">
 				{$t('contact.quick.title')}
 			</p>
@@ -79,7 +79,7 @@
 			</div>
 		</div>
 
-		<div class="mt-8 space-y-6 border-t border-slate-100 pt-6">
+		<div class="grid gap-6 border-t border-slate-100 pt-8 lg:grid-cols-2">
 			<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 				<p class="text-sm font-semibold text-slate-900">{$t('contact.card.title')}</p>
 				<div class="mt-5">
@@ -200,7 +200,7 @@
 				</div>
 			</div>
 
-			<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+			<div class="flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 				<div class="flex flex-wrap items-center justify-between gap-3">
 					<p class="text-sm font-semibold text-slate-900">{$t('contact.map.title')}</p>
 					<a
@@ -214,7 +214,7 @@
 					</a>
 				</div>
 				<div
-					class="relative mt-4 h-[280px] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
+					class="relative mt-4 h-[320px] min-h-[320px] flex-1 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm sm:h-[360px] sm:min-h-[360px] lg:h-full"
 				>
 					{#if mapEnabled}
 						<iframe
@@ -264,7 +264,7 @@
 			</div>
 		</div>
 
-		<div class="mt-10 space-y-6">
+		<div class="mt-8 space-y-6">
 			<div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-sm">
 				<p class="text-sm font-semibold text-slate-900">{$t('contact.payment.title')}</p>
 				<p class="mt-1 text-xs text-slate-500">{$t('contact.payment.subtitle')}</p>
