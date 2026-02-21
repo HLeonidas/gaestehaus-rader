@@ -218,6 +218,8 @@
 	let floorplanOpen = $state(false);
 	let priceSectionEl: HTMLElement | null = null;
 	let priceSectionTracked = false;
+	let mainBookingCtaEl: HTMLAnchorElement | null = null;
+	let stickyBookingBarVisible = $state(false);
 
 	const openGallery = (index: number) => {
 		galleryIndex = index;
@@ -256,7 +258,32 @@
 
 		observer.observe(priceSectionEl);
 
-		return () => observer.disconnect();
+		const updateStickyBookingBar = () => {
+			const isMobile = window.matchMedia('(max-width: 1023px)').matches;
+			if (!isMobile) {
+				stickyBookingBarVisible = false;
+				return;
+			}
+
+			let shouldShow = window.scrollY > 480;
+			if (mainBookingCtaEl) {
+				const rect = mainBookingCtaEl.getBoundingClientRect();
+				const ctaInView = rect.top < window.innerHeight && rect.bottom > 0;
+				if (ctaInView) shouldShow = false;
+			}
+
+			stickyBookingBarVisible = shouldShow;
+		};
+
+		window.addEventListener('scroll', updateStickyBookingBar, { passive: true });
+		window.addEventListener('resize', updateStickyBookingBar);
+		updateStickyBookingBar();
+
+		return () => {
+			observer.disconnect();
+			window.removeEventListener('scroll', updateStickyBookingBar);
+			window.removeEventListener('resize', updateStickyBookingBar);
+		};
 	});
 
 	const shareRoom = async () => {
@@ -718,6 +745,7 @@
 						<!-- CTA -->
 						<a
 							href={resolve('/buchen')}
+							bind:this={mainBookingCtaEl}
 							class="mt-5 inline-flex w-full items-center justify-center rounded-xl bg-brand px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:brightness-110 focus:outline-none focus:ring-4 focus:ring-brand/25"
 							onclick={() =>
 								trackEvent('Booking: Jetzt buchen', { source: 'room-detail', room: accommodation.slug })
@@ -736,6 +764,29 @@
 		</section>
 	</div>
 </main>
+
+<div
+	class={`mobile-sticky-booking lg:hidden ${stickyBookingBarVisible ? 'is-visible' : ''}`}
+	aria-hidden={!stickyBookingBarVisible}
+>
+	<div class="min-w-0">
+		<p class="text-base font-extrabold leading-tight text-slate-900">
+			{$lang === 'de'
+				? `ab €${accommodation.pricePerNightBase} / ${$t('price.night')}`
+				: `from €${accommodation.pricePerNightBase} / ${$t('price.night')}`}
+		</p>
+		<p class="truncate text-xs text-slate-500">
+			{accommodation.attributes.guests[$lang]} · {accommodation.attributes.size}
+		</p>
+	</div>
+	<a
+		href={resolve('/buchen')}
+		class="inline-flex h-11 shrink-0 items-center justify-center rounded-xl bg-brand px-4 text-sm font-bold text-white shadow-sm transition hover:bg-brand/90"
+		onclick={() => trackEvent('Booking: Jetzt buchen', { source: 'room-detail-sticky', room: accommodation.slug })}
+	>
+		{$lang === 'de' ? 'Jetzt buchen' : 'Book now'}
+	</a>
+</div>
 
 {#if galleryOpen}
 	<div
@@ -828,6 +879,31 @@
 <style>
 	.booking-card {
 		top: 9rem;
+	}
+
+	.mobile-sticky-booking {
+		position: fixed;
+		left: 12px;
+		right: 12px;
+		bottom: calc(12px + env(safe-area-inset-bottom));
+		z-index: 40;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 12px;
+		padding: 12px 12px 12px 14px;
+		border-radius: 18px;
+		background: rgba(255, 255, 255, 0.92);
+		backdrop-filter: blur(10px);
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+		transform: translateY(120%);
+		opacity: 0;
+		transition: transform 0.25s ease, opacity 0.25s ease;
+	}
+
+	.mobile-sticky-booking.is-visible {
+		transform: translateY(0);
+		opacity: 1;
 	}
 </style>
 
