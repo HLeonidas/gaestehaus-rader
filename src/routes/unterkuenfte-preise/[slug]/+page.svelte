@@ -265,7 +265,8 @@
 				return;
 			}
 
-			let shouldShow = window.scrollY > 480;
+			const stickyShowOffset = Math.max(120, Math.round(window.innerHeight * 0.2));
+			let shouldShow = window.scrollY > stickyShowOffset;
 			if (mainBookingCtaEl) {
 				const rect = mainBookingCtaEl.getBoundingClientRect();
 				const ctaInView = rect.top < window.innerHeight && rect.bottom > 0;
@@ -769,23 +770,28 @@
 	class={`mobile-sticky-booking lg:hidden ${stickyBookingBarVisible ? 'is-visible' : ''}`}
 	aria-hidden={!stickyBookingBarVisible}
 >
-	<div class="min-w-0">
-		<p class="text-base font-extrabold leading-tight text-slate-900">
-			{$lang === 'de'
-				? `ab €${accommodation.pricePerNightBase} / ${$t('price.night')}`
-				: `from €${accommodation.pricePerNightBase} / ${$t('price.night')}`}
-		</p>
-		<p class="truncate text-xs text-slate-500">
-			{accommodation.attributes.guests[$lang]} · {accommodation.attributes.size}
-		</p>
+	<div class="rounded-2xl border border-white/40 bg-white/75 shadow-[0_18px_50px_rgba(15,23,42,0.22)] backdrop-blur-xl ring-1 ring-slate-200/60">
+		<div class="flex items-center justify-between gap-3 px-3 py-2">
+			<div class="min-w-0">
+				<p class="text-base font-extrabold leading-tight text-slate-900">
+					{$lang === 'de'
+						? `ab €${accommodation.pricePerNightBase} / ${$t('price.night')}`
+						: `from €${accommodation.pricePerNightBase} / ${$t('price.night')}`}
+				</p>
+				<p class="truncate text-xs text-slate-500">
+					{accommodation.attributes.guests[$lang]} · {accommodation.attributes.size}
+				</p>
+			</div>
+			<a
+				href={resolve('/buchen')}
+				class="inline-flex h-11 shrink-0 items-center justify-center rounded-xl bg-brand px-4 text-sm font-semibold text-white transition hover:bg-brand/90"
+				onclick={() =>
+					trackEvent('Booking: Jetzt buchen', { source: 'room-detail-sticky', room: accommodation.slug })}
+			>
+				{$lang === 'de' ? 'Jetzt buchen' : 'Book now'}
+			</a>
+		</div>
 	</div>
-	<a
-		href={resolve('/buchen')}
-		class="inline-flex h-11 shrink-0 items-center justify-center rounded-xl bg-brand px-4 text-sm font-bold text-white shadow-sm transition hover:bg-brand/90"
-		onclick={() => trackEvent('Booking: Jetzt buchen', { source: 'room-detail-sticky', room: accommodation.slug })}
-	>
-		{$lang === 'de' ? 'Jetzt buchen' : 'Book now'}
-	</a>
 </div>
 
 {#if galleryOpen}
@@ -883,19 +889,10 @@
 
 	.mobile-sticky-booking {
 		position: fixed;
-		left: 12px;
-		right: 12px;
-		bottom: calc(12px + env(safe-area-inset-bottom));
-		z-index: 40;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 12px;
-		padding: 12px 12px 12px 14px;
-		border-radius: 18px;
-		background: rgba(255, 255, 255, 0.92);
-		backdrop-filter: blur(10px);
-		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+		left: 0.75rem;
+		right: 0.75rem;
+		bottom: calc(0.75rem + env(safe-area-inset-bottom));
+		z-index: 50;
 		transform: translateY(120%);
 		opacity: 0;
 		transition: transform 0.25s ease, opacity 0.25s ease;

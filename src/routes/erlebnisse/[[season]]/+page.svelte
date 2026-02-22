@@ -901,7 +901,7 @@
 										class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
 										loading="lazy"
 									/>
-									<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent"></div>
+									<div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/22 to-transparent"></div>
 
 									{#if summerFeaturedEvent.badgeKey}
 										<span
@@ -911,8 +911,8 @@
 										</span>
 									{/if}
 
-									<div class="absolute inset-x-0 bottom-0 p-4 sm:p-6">
-										<div class="relative max-w-2xl rounded-2xl border border-white/15 bg-black/40 p-4 backdrop-blur-sm max-h-[48%] overflow-hidden sm:max-h-none sm:p-6">
+									<div class="absolute inset-x-0 bottom-0 p-4 transition-[padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-6 sm:pb-4 sm:pt-6 sm:group-hover:pb-6 sm:group-focus-within:pb-6">
+										<div class="relative max-w-2xl rounded-2xl border border-white/25 bg-white/16 p-4 backdrop-blur-md max-h-[48%] overflow-hidden transition-[background-color,border-color,backdrop-filter,box-shadow,padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-h-none sm:border-transparent sm:bg-transparent sm:backdrop-blur-0 sm:shadow-none sm:px-5 sm:pb-1 sm:pt-4 sm:group-hover:border-white/25 sm:group-hover:bg-white/16 sm:group-hover:backdrop-blur-md sm:group-hover:shadow-[0_10px_26px_rgba(15,23,42,0.16)] sm:group-hover:p-6 sm:group-focus-within:border-white/25 sm:group-focus-within:bg-white/16 sm:group-focus-within:backdrop-blur-md sm:group-focus-within:shadow-[0_10px_26px_rgba(15,23,42,0.16)] sm:group-focus-within:p-6">
 											<div class="pointer-events-none absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-black/60 to-transparent sm:hidden" aria-hidden="true"></div>
 											<div class="overflow-auto pr-1 sm:overflow-visible sm:pr-0">
 												<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
@@ -923,12 +923,12 @@
 													{$t(summerFeaturedEvent.titleKey)}
 												</h3>
 												{#if summerFeaturedEvent.descriptionKey}
-													<p class="mt-2 hidden max-w-xl text-sm text-white/85 sm:block">
+													<p class="mt-2 max-w-xl text-sm text-white/85 transition-[max-height,opacity,transform,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-h-0 sm:translate-y-1 sm:overflow-hidden sm:opacity-0 sm:blur-[2px] sm:group-hover:max-h-28 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-hover:blur-0 sm:group-focus-within:max-h-28 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100 sm:group-focus-within:blur-0">
 														{$t(summerFeaturedEvent.descriptionKey)}
 													</p>
 												{/if}
 												{#if summerFeaturedEvent.metaKeys?.length}
-													<div class="mt-3 flex flex-wrap gap-2">
+													<div class="mt-3 flex flex-wrap gap-2 transition-[max-height,opacity,transform,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-h-0 sm:translate-y-1 sm:overflow-hidden sm:opacity-0 sm:blur-[2px] sm:delay-100 sm:group-hover:max-h-20 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-hover:blur-0 sm:group-focus-within:max-h-20 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100 sm:group-focus-within:blur-0">
 														{#each summerFeaturedEvent.metaKeys as metaKey}
 															<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white sm:px-3 sm:text-xs">
 																{$t(metaKey)}
@@ -954,9 +954,9 @@
 												class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
 												loading="lazy"
 											/>
-											<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/5"></div>
+											<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/18 to-black/0"></div>
 											<div class="absolute left-4 top-4">
-												<span class="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/35 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/90 backdrop-blur">
+												<span class="inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-black/38 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/95 shadow-[0_8px_20px_rgba(0,0,0,0.25)] backdrop-blur-md">
 													<event.icon class="h-3.5 w-3.5 text-brand" aria-hidden="true" />
 													{$t(event.kickerKey)}
 												</span>
@@ -987,10 +987,10 @@
 													class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
 													loading="lazy"
 												/>
-												<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent"></div>
+												<div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/22 to-transparent"></div>
 
-												<div class="absolute inset-x-0 bottom-0 p-4 sm:p-6">
-													<div class="relative max-w-2xl rounded-2xl border border-white/15 bg-black/40 p-4 backdrop-blur-sm max-h-[48%] overflow-hidden sm:max-h-none sm:p-6">
+									<div class="absolute inset-x-0 bottom-0 p-4 sm:p-6">
+										<div class="relative max-w-2xl rounded-2xl border border-white/25 bg-white/16 p-4 backdrop-blur-md max-h-[48%] overflow-hidden transition-all duration-300 sm:max-h-none sm:translate-y-4 sm:opacity-0 sm:p-6 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100">
 														<div class="pointer-events-none absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-black/60 to-transparent sm:hidden" aria-hidden="true"></div>
 														<div class="overflow-auto pr-1 sm:overflow-visible sm:pr-0">
 															<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
@@ -1047,7 +1047,7 @@
 										class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
 										loading="lazy"
 									/>
-									<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent"></div>
+									<div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/22 to-transparent"></div>
 
 									{#if winterFeaturedEvent.id === 'winter-ski'}
 										<button
@@ -1066,8 +1066,8 @@
 										</span>
 									{/if}
 
-									<div class="absolute inset-x-0 bottom-0 p-4 sm:p-6">
-										<div class="relative max-w-2xl rounded-2xl border border-white/15 bg-black/40 p-4 backdrop-blur-sm max-h-[48%] overflow-hidden sm:max-h-none sm:p-6">
+									<div class="absolute inset-x-0 bottom-0 p-4 transition-[padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-6 sm:pb-4 sm:pt-6 sm:group-hover:pb-6 sm:group-focus-within:pb-6">
+										<div class="relative max-w-2xl rounded-2xl border border-white/25 bg-white/16 p-4 backdrop-blur-md max-h-[48%] overflow-hidden transition-[background-color,border-color,backdrop-filter,box-shadow,padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-h-none sm:border-transparent sm:bg-transparent sm:backdrop-blur-0 sm:shadow-none sm:px-5 sm:pb-1 sm:pt-4 sm:group-hover:border-white/25 sm:group-hover:bg-white/16 sm:group-hover:backdrop-blur-md sm:group-hover:shadow-[0_10px_26px_rgba(15,23,42,0.16)] sm:group-hover:p-6 sm:group-focus-within:border-white/25 sm:group-focus-within:bg-white/16 sm:group-focus-within:backdrop-blur-md sm:group-focus-within:shadow-[0_10px_26px_rgba(15,23,42,0.16)] sm:group-focus-within:p-6">
 											<div class="pointer-events-none absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-black/60 to-transparent sm:hidden" aria-hidden="true"></div>
 											<div class="overflow-auto pr-1 sm:overflow-visible sm:pr-0">
 												<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
@@ -1078,12 +1078,12 @@
 													{$t(winterFeaturedEvent.titleKey)}
 												</h3>
 												{#if winterFeaturedEvent.descriptionKey}
-													<p class="mt-2 hidden max-w-xl text-sm text-white/85 sm:block">
+													<p class="mt-2 max-w-xl text-sm text-white/85 transition-[max-height,opacity,transform,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-h-0 sm:translate-y-1 sm:overflow-hidden sm:opacity-0 sm:blur-[2px] sm:group-hover:max-h-28 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-hover:blur-0 sm:group-focus-within:max-h-28 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100 sm:group-focus-within:blur-0">
 														{$t(winterFeaturedEvent.descriptionKey)}
 													</p>
 												{/if}
 												{#if winterFeaturedEvent.metaKeys?.length}
-													<div class="mt-3 flex flex-wrap gap-2">
+													<div class="mt-3 flex flex-wrap gap-2 transition-[max-height,opacity,transform,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-h-0 sm:translate-y-1 sm:overflow-hidden sm:opacity-0 sm:blur-[2px] sm:delay-100 sm:group-hover:max-h-20 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-hover:blur-0 sm:group-focus-within:max-h-20 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100 sm:group-focus-within:blur-0">
 														{#each winterFeaturedEvent.metaKeys as metaKey}
 															<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white sm:px-3 sm:text-xs">
 																{$t(metaKey)}
@@ -1109,9 +1109,9 @@
 												class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
 												loading="lazy"
 											/>
-											<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/5"></div>
+											<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/18 to-black/0"></div>
 											<div class="absolute left-4 top-4">
-												<span class="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/35 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/90 backdrop-blur">
+												<span class="inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-black/38 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/95 shadow-[0_8px_20px_rgba(0,0,0,0.25)] backdrop-blur-md">
 													<event.icon class="h-3.5 w-3.5 text-brand" aria-hidden="true" />
 													{$t(event.kickerKey)}
 												</span>
@@ -1142,10 +1142,10 @@
 													class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
 													loading="lazy"
 												/>
-												<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent"></div>
+												<div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/22 to-transparent"></div>
 
-												<div class="absolute inset-x-0 bottom-0 p-4 sm:p-6">
-													<div class="relative max-w-2xl rounded-2xl border border-white/15 bg-black/40 p-4 backdrop-blur-sm max-h-[48%] overflow-hidden sm:max-h-none sm:p-6">
+									<div class="absolute inset-x-0 bottom-0 p-4 sm:p-6">
+										<div class="relative max-w-2xl rounded-2xl border border-white/25 bg-white/16 p-4 backdrop-blur-md max-h-[48%] overflow-hidden transition-all duration-300 sm:max-h-none sm:translate-y-4 sm:opacity-0 sm:p-6 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100">
 														<div class="pointer-events-none absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-black/60 to-transparent sm:hidden" aria-hidden="true"></div>
 														<div class="overflow-auto pr-1 sm:overflow-visible sm:pr-0">
 															<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
@@ -1368,7 +1368,7 @@
 									class="h-44 w-full object-cover sm:h-40 lg:h-44"
 									loading="lazy"
 								/>
-								<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+								<div class="absolute inset-0 bg-gradient-to-t from-black/58 via-black/16 to-transparent"></div>
 								<div class="absolute bottom-0 left-0 right-0 p-4">
 									<p class="text-sm font-semibold text-white">
 										{$t('guestcard.experiences.wellness.card1.title')}
@@ -1386,7 +1386,7 @@
 									class="h-44 w-full object-cover sm:h-40 lg:h-44"
 									loading="lazy"
 								/>
-								<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+								<div class="absolute inset-0 bg-gradient-to-t from-black/58 via-black/16 to-transparent"></div>
 								<div class="absolute bottom-0 left-0 right-0 p-4">
 									<p class="text-sm font-semibold text-white">
 										{$t('guestcard.experiences.wellness.card2.title')}
@@ -1404,7 +1404,7 @@
 									class="h-44 w-full object-cover sm:h-40 lg:h-44"
 									loading="lazy"
 								/>
-								<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+								<div class="absolute inset-0 bg-gradient-to-t from-black/58 via-black/16 to-transparent"></div>
 								<div class="absolute bottom-0 left-0 right-0 p-4">
 									<p class="text-sm font-semibold text-white">
 										{$t('guestcard.experiences.wellness.card3.title')}
