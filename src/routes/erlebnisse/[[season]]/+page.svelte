@@ -941,39 +941,77 @@
 									</div>
 								</article>
 							{/if}
-							<div class="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:pb-0 lg:grid-cols-3">
-								{#each summerSecondaryEvents as event (event.id)}
-									<article
-										data-season={event.season}
-										class="experience-card group relative aspect-[4/3] w-[82%] shrink-0 snap-start overflow-hidden rounded-3xl md:h-[330px] md:w-auto md:shrink md:aspect-auto"
-									>
-										<img
-											src={withAsset(event.image)}
-											alt={`${$t(event.titleKey)} – ${$t(event.kickerKey)}`}
-											class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-											loading="lazy"
-										/>
-										<div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent"></div>
-										<div class="absolute bottom-0 left-0 right-0 p-6">
-											<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
-												<event.icon class="h-4 w-4 text-brand" aria-hidden="true" />
-												{$t(event.kickerKey)}
-											</p>
-											<h3 class={`mt-2 font-semibold text-white ${event.titleSize ?? 'text-xl'}`}>
-												{$t(event.titleKey)}
-											</h3>
-											{#if event.metaKeys?.length}
-												<div class="mt-3 flex flex-wrap gap-2">
-													{#each event.metaKeys as metaKey}
-														<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white">
-															{$t(metaKey)}
-														</span>
-													{/each}
+							<div class="space-y-4">
+								<div class="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:pb-0">
+									{#each summerSecondaryEvents.slice(0, 2) as event (event.id)}
+										<article
+											data-season={event.season}
+											class="experience-card group relative aspect-[4/3] w-[82%] shrink-0 snap-start overflow-hidden rounded-3xl md:h-[320px] md:w-auto md:shrink md:aspect-auto"
+										>
+											<img
+												src={withAsset(event.image)}
+												alt={`${$t(event.titleKey)} – ${$t(event.kickerKey)}`}
+												class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+												loading="lazy"
+											/>
+											<div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent"></div>
+											<div class="absolute bottom-0 left-0 right-0 p-6">
+												<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
+													<event.icon class="h-4 w-4 text-brand" aria-hidden="true" />
+													{$t(event.kickerKey)}
+												</p>
+												<h3 class={`mt-2 font-semibold text-white ${event.titleSize ?? 'text-xl'}`}>
+													{$t(event.titleKey)}
+												</h3>
+												{#if event.metaKeys?.length}
+													<div class="mt-3 flex flex-wrap gap-2">
+														{#each event.metaKeys as metaKey}
+															<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white">
+																{$t(metaKey)}
+															</span>
+														{/each}
+													</div>
+												{/if}
+											</div>
+										</article>
+									{/each}
+								</div>
+								{#if summerSecondaryEvents.length > 2}
+									<div class="grid gap-4 md:gap-6">
+										{#each summerSecondaryEvents.slice(2) as event (event.id)}
+											<article
+												data-season={event.season}
+												class="experience-card group relative aspect-[4/3] overflow-hidden rounded-3xl md:h-[360px] md:aspect-auto"
+											>
+												<img
+													src={withAsset(event.image)}
+													alt={`${$t(event.titleKey)} – ${$t(event.kickerKey)}`}
+													class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+													loading="lazy"
+												/>
+												<div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent"></div>
+												<div class="absolute bottom-0 left-0 right-0 p-6">
+													<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
+														<event.icon class="h-4 w-4 text-brand" aria-hidden="true" />
+														{$t(event.kickerKey)}
+													</p>
+													<h3 class={`mt-2 font-semibold text-white ${event.titleSize ?? 'text-xl'}`}>
+														{$t(event.titleKey)}
+													</h3>
+													{#if event.metaKeys?.length}
+														<div class="mt-3 flex flex-wrap gap-2">
+															{#each event.metaKeys as metaKey}
+																<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white">
+																	{$t(metaKey)}
+																</span>
+															{/each}
+														</div>
+													{/if}
 												</div>
-											{/if}
-										</div>
-									</article>
-								{/each}
+											</article>
+										{/each}
+									</div>
+								{/if}
 							</div>
 						</div>
 					{/if}
@@ -1049,39 +1087,77 @@
 									</div>
 								</article>
 							{/if}
-							<div class="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:pb-0 lg:grid-cols-3">
-								{#each winterSecondaryEvents as event (event.id)}
-									<article
-										data-season={event.season}
-										class="experience-card group relative aspect-[4/3] w-[82%] shrink-0 snap-start overflow-hidden rounded-3xl md:h-[330px] md:w-auto md:shrink md:aspect-auto"
-									>
-										<img
-											src={withAsset(event.image)}
-											alt={`${$t(event.titleKey)} – ${$t(event.kickerKey)}`}
-											class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-											loading="lazy"
-										/>
-										<div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent"></div>
-										<div class="absolute bottom-0 left-0 right-0 p-6">
-											<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
-												<event.icon class="h-4 w-4 text-brand" aria-hidden="true" />
-												{$t(event.kickerKey)}
-											</p>
-											<h3 class={`mt-2 font-semibold text-white ${event.titleSize ?? 'text-xl'}`}>
-												{$t(event.titleKey)}
-											</h3>
-											{#if event.metaKeys?.length}
-												<div class="mt-3 flex flex-wrap gap-2">
-													{#each event.metaKeys as metaKey}
-														<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white">
-															{$t(metaKey)}
-														</span>
-													{/each}
+							<div class="space-y-4">
+								<div class="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:pb-0">
+									{#each winterSecondaryEvents.slice(0, 2) as event (event.id)}
+										<article
+											data-season={event.season}
+											class="experience-card group relative aspect-[4/3] w-[82%] shrink-0 snap-start overflow-hidden rounded-3xl md:h-[320px] md:w-auto md:shrink md:aspect-auto"
+										>
+											<img
+												src={withAsset(event.image)}
+												alt={`${$t(event.titleKey)} – ${$t(event.kickerKey)}`}
+												class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+												loading="lazy"
+											/>
+											<div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent"></div>
+											<div class="absolute bottom-0 left-0 right-0 p-6">
+												<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
+													<event.icon class="h-4 w-4 text-brand" aria-hidden="true" />
+													{$t(event.kickerKey)}
+												</p>
+												<h3 class={`mt-2 font-semibold text-white ${event.titleSize ?? 'text-xl'}`}>
+													{$t(event.titleKey)}
+												</h3>
+												{#if event.metaKeys?.length}
+													<div class="mt-3 flex flex-wrap gap-2">
+														{#each event.metaKeys as metaKey}
+															<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white">
+																{$t(metaKey)}
+															</span>
+														{/each}
+													</div>
+												{/if}
+											</div>
+										</article>
+									{/each}
+								</div>
+								{#if winterSecondaryEvents.length > 2}
+									<div class="grid gap-4 md:gap-6">
+										{#each winterSecondaryEvents.slice(2) as event (event.id)}
+											<article
+												data-season={event.season}
+												class="experience-card group relative aspect-[4/3] overflow-hidden rounded-3xl md:h-[360px] md:aspect-auto"
+											>
+												<img
+													src={withAsset(event.image)}
+													alt={`${$t(event.titleKey)} – ${$t(event.kickerKey)}`}
+													class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+													loading="lazy"
+												/>
+												<div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent"></div>
+												<div class="absolute bottom-0 left-0 right-0 p-6">
+													<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
+														<event.icon class="h-4 w-4 text-brand" aria-hidden="true" />
+														{$t(event.kickerKey)}
+													</p>
+													<h3 class={`mt-2 font-semibold text-white ${event.titleSize ?? 'text-xl'}`}>
+														{$t(event.titleKey)}
+													</h3>
+													{#if event.metaKeys?.length}
+														<div class="mt-3 flex flex-wrap gap-2">
+															{#each event.metaKeys as metaKey}
+																<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white">
+																	{$t(metaKey)}
+																</span>
+															{/each}
+														</div>
+													{/if}
 												</div>
-											{/if}
-										</div>
-									</article>
-								{/each}
+											</article>
+										{/each}
+									</div>
+								{/if}
 							</div>
 						</div>
 					{/if}
