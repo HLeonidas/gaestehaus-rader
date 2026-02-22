@@ -413,55 +413,57 @@
 	<div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
 		<!-- CONTENT WRAPPER -->
 		<div class="space-y-14" id="aktivitaeten">
-			<section class="sm:p-10">
+			<section class="pt-4 sm:pt-6 sm:px-10">
 				<div class="mx-auto max-w-6xl text-center">
-					<div class="flex justify-center">
-						<div class="inline-flex rounded-full border border-slate-200 bg-white p-1 shadow-sm">
-							<button
-								type="button"
-								class={`tab-btn inline-flex items-center gap-2 rounded-full px-6 py-2 text-sm font-semibold transition-all duration-300 ${
-									activeTab === 'summer'
-										? 'is-active bg-brand text-white shadow-sm'
-										: 'text-slate-700 hover:text-slate-900 hover:bg-slate-50'
-								}`}
-								onclick={() => setSeason('summer')}
-							>
-								<Sun
-									class={`h-4 w-4 transition-transform duration-300 ${
-										activeTab === 'summer' ? 'rotate-12 scale-110' : 'rotate-0 scale-100'
-									}`}
-								/>
-								{$t('experiences.tabs.summer')}
-							</button>
-
-							<button
-								type="button"
-								class={`tab-btn inline-flex items-center gap-2 rounded-full px-6 py-2 text-sm font-semibold transition-all duration-300 ${
-									activeTab === 'winter'
-										? 'is-active bg-brand text-white shadow-sm'
-										: 'text-slate-700 hover:text-slate-900 hover:bg-slate-50'
-								}`}
-								onclick={() => setSeason('winter')}
-							>
-								<Snowflake
-									class={`h-4 w-4 transition-transform duration-300 ${
-										activeTab === 'winter' ? '-rotate-12 scale-110' : 'rotate-0 scale-100'
-									}`}
-								/>
-								{$t('experiences.tabs.winter')}
-							</button>
-						</div>
-					</div>
-					<p class="mt-8 text-xs font-semibold uppercase tracking-[0.35em] text-brand sm:mt-10">
+					<p class="mt-6 text-xs font-semibold uppercase tracking-[0.35em] text-brand sm:mt-7">
 						{$t('experiences.destinations.kicker')}
 					</p>
 					<h1 class="mt-3 font-serif text-4xl leading-[0.95] text-slate-900 sm:text-5xl">
 						{$t('experiences.destinations.title')}
 					</h1>
 					<div class="mx-auto mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
-					<p class="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-slate-600 sm:text-base">
+					<p class="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-slate-600 sm:text-base">
 						{$t('experiences.destinations.subtitle')}
 					</p>
+				</div>
+				<div class="mt-6 mb-3 flex justify-center">
+					<div
+						class="pointer-events-auto inline-flex rounded-full border border-white/65 bg-white/70 p-1 shadow-[0_14px_35px_rgba(15,23,42,0.14)] backdrop-blur-md ring-1 ring-slate-200/70"
+					>
+						<button
+							type="button"
+							class={`tab-btn inline-flex items-center gap-2 rounded-full px-6 py-2 text-sm font-semibold transition-all duration-300 ${
+								activeTab === 'summer'
+									? 'is-active bg-brand text-white shadow-sm'
+									: 'text-slate-700 hover:text-slate-900 hover:bg-slate-50/90'
+							}`}
+							onclick={() => setSeason('summer')}
+						>
+							<Sun
+								class={`h-4 w-4 transition-transform duration-300 ${
+									activeTab === 'summer' ? 'rotate-12 scale-110' : 'rotate-0 scale-100'
+								}`}
+							/>
+							{$t('experiences.tabs.summer')}
+						</button>
+
+						<button
+							type="button"
+							class={`tab-btn inline-flex items-center gap-2 rounded-full px-6 py-2 text-sm font-semibold transition-all duration-300 ${
+								activeTab === 'winter'
+									? 'is-active bg-brand text-white shadow-sm'
+									: 'text-slate-700 hover:text-slate-900 hover:bg-slate-50/90'
+							}`}
+							onclick={() => setSeason('winter')}
+						>
+							<Snowflake
+								class={`h-4 w-4 transition-transform duration-300 ${
+									activeTab === 'winter' ? '-rotate-12 scale-110' : 'rotate-0 scale-100'
+								}`}
+							/>
+							{$t('experiences.tabs.winter')}
+						</button>
+					</div>
 				</div>
 
 				<!-- <div class="anchor-target mt-10" id="interessen">
@@ -481,7 +483,7 @@
 					</div>
 				</div> -->
 
-				<div class="anchor-target mt-10" id="highlights">
+				<div class="anchor-target mt-8 sm:mt-9" id="highlights">
 					<p class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
 						{$t('experiences.destinations.topHighlights')}
 					</p>
@@ -992,7 +994,7 @@
 
 	{#if isNassfeldModalOpen}
 		<div
-			class="fixed inset-0 z-[100] grid place-items-center bg-slate-950/65 p-4 backdrop-blur-[2px] sm:p-6"
+			class="fixed inset-0 z-[100] flex items-end justify-center bg-slate-950/65 p-2 backdrop-blur-[2px] sm:items-center sm:p-6"
 			role="presentation"
 			onclick={onNassfeldBackdropClick}
 		>
@@ -1000,23 +1002,25 @@
 				role="dialog"
 				aria-modal="true"
 				aria-labelledby="nassfeld-modal-title"
-				class="w-full max-w-4xl overflow-hidden rounded-3xl border border-white/20 bg-white shadow-2xl"
+				class="w-full max-w-4xl max-h-[95dvh] overflow-y-auto overscroll-contain rounded-2xl border border-white/20 bg-white shadow-2xl sm:max-h-[90dvh] sm:rounded-3xl"
 			>
-				<div class="grid md:grid-cols-[1.05fr,0.95fr]">
-					<div class="relative min-h-[220px] md:min-h-full">
+				<div class="grid grid-rows-[auto,1fr] md:grid-cols-[1.05fr,0.95fr] md:grid-rows-1">
+					<div class="relative min-h-[210px] max-h-[34dvh] md:min-h-full md:max-h-none">
 						<img
 							src={withAsset('/images/Umgebung/ski_nassfeld.jpg')}
 							alt="Skifahren am Nassfeld"
 							class="h-full w-full object-cover object-center"
 						/>
-						<div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/45 to-transparent p-5 text-white">
+						<div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/45 to-transparent p-4 text-white sm:p-5">
 							<p class="text-xs font-semibold uppercase tracking-[0.22em] text-brand">Winter Highlight</p>
 							<h3 class="mt-1 text-xl font-semibold sm:text-2xl">Nassfeld: Sun Ski World</h3>
 						</div>
 					</div>
 
-					<div class="flex flex-col p-5 sm:p-7">
-						<div class="flex items-start justify-between gap-4">
+					<div class="flex min-h-0 flex-col p-4 sm:p-7">
+						<div
+							class="sticky top-0 z-10 -mx-4 -mt-1 mb-2 flex items-start justify-between gap-3 border-b border-slate-100 bg-white/95 px-4 py-2 backdrop-blur-sm sm:static sm:m-0 sm:border-0 sm:bg-transparent sm:p-0"
+						>
 							<div>
 								<p class="text-xs font-semibold uppercase tracking-[0.22em] text-brand">Skigebiet</p>
 								<h2 id="nassfeld-modal-title" class="mt-1 text-2xl font-semibold leading-tight text-slate-900">
@@ -1025,7 +1029,7 @@
 							</div>
 							<button
 								type="button"
-								class="grid h-10 w-10 place-items-center rounded-full border border-slate-200 text-slate-600 transition hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900"
+								class="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-slate-200 text-slate-600 transition hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 sm:h-10 sm:w-10"
 								onclick={closeNassfeldModal}
 								aria-label="Modal schließen"
 							>
@@ -1033,14 +1037,14 @@
 							</button>
 						</div>
 
-						<p class="mt-4 text-sm leading-relaxed text-slate-600">
+						<p class="mt-3 text-[15px] leading-relaxed text-slate-600 sm:mt-4 sm:text-sm">
 							Perfekt für einen aktiven Tag im Schnee: kurze Anfahrt, viele Pisten und starke Infrastruktur direkt im Grenzgebiet Kärnten/Tirol.
 						</p>
 
-						<div class="mt-5 space-y-4">
+						<div class="mt-4 space-y-4 sm:mt-5">
 							<div>
 								<p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">Highlights</p>
-								<ul class="mt-2 space-y-1.5 text-sm text-slate-700">
+								<ul class="mt-2 space-y-1.5 text-[15px] leading-7 text-slate-700 sm:text-sm sm:leading-relaxed">
 									{#each nassfeldFacts as fact}
 										<li>• {fact}</li>
 									{/each}
@@ -1049,7 +1053,7 @@
 
 							<div>
 								<p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">Gut zu wissen</p>
-								<ul class="mt-2 space-y-1.5 text-sm text-slate-700">
+								<ul class="mt-2 space-y-1.5 text-[15px] leading-7 text-slate-700 sm:text-sm sm:leading-relaxed">
 									{#each nassfeldTips as tip}
 										<li>• {tip}</li>
 									{/each}
@@ -1057,19 +1061,19 @@
 							</div>
 						</div>
 
-						<div class="mt-6 flex flex-wrap gap-3">
+						<div class="mt-5 flex flex-col gap-2 sm:mt-6 sm:flex-row sm:flex-wrap sm:gap-3">
 							<a
 								href="https://www.nassfeld.at/"
 								target="_blank"
 								rel="noreferrer"
-								class="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand/90"
+								class="inline-flex items-center justify-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand/90 sm:justify-start"
 							>
 								Nassfeld Website
 								<ArrowRight class="h-4 w-4" aria-hidden="true" />
 							</a>
 							<a
 								href={resolve('/buchen')}
-								class="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-800 transition hover:bg-slate-50"
+								class="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-800 transition hover:bg-slate-50 sm:justify-start"
 							>
 								Unterkunft buchen
 							</a>
@@ -1153,7 +1157,3 @@
 		box-shadow: 0 14px 28px -18px rgba(15, 23, 42, 0.34);
 	}
 </style>
-
-
-
-
