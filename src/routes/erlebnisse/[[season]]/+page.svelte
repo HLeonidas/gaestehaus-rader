@@ -946,7 +946,7 @@
 									{#each summerSecondaryEvents.slice(0, 2) as event (event.id)}
 										<article
 											data-season={event.season}
-											class="experience-card group relative aspect-[4/3] w-[82%] shrink-0 snap-start overflow-hidden rounded-3xl md:h-[320px] md:w-auto md:shrink md:aspect-auto"
+											class="experience-card group relative aspect-[4/3] w-[82%] shrink-0 snap-start overflow-hidden rounded-3xl ring-1 ring-black/5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg md:h-[320px] md:w-auto md:shrink md:aspect-auto md:aspect-[16/11]"
 										>
 											<img
 												src={withAsset(event.image)}
@@ -954,24 +954,22 @@
 												class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
 												loading="lazy"
 											/>
-											<div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent"></div>
-											<div class="absolute bottom-0 left-0 right-0 p-6">
-												<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
-													<event.icon class="h-4 w-4 text-brand" aria-hidden="true" />
+											<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/5"></div>
+											<div class="absolute left-4 top-4">
+												<span class="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/35 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/90 backdrop-blur">
+													<event.icon class="h-3.5 w-3.5 text-brand" aria-hidden="true" />
 													{$t(event.kickerKey)}
-												</p>
-												<h3 class={`mt-2 font-semibold text-white ${event.titleSize ?? 'text-xl'}`}>
-													{$t(event.titleKey)}
-												</h3>
-												{#if event.metaKeys?.length}
-													<div class="mt-3 flex flex-wrap gap-2">
-														{#each event.metaKeys as metaKey}
-															<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white">
-																{$t(metaKey)}
-															</span>
-														{/each}
+												</span>
+											</div>
+											<div class="absolute inset-x-0 bottom-0 p-4">
+												<div class="relative p-1">
+													<h3 class="line-clamp-2 text-lg font-semibold leading-tight text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.45)]">
+														{$t(event.titleKey)}
+													</h3>
+													<div class="pointer-events-none absolute right-0 top-0 grid h-9 w-9 place-items-center rounded-full border border-white/20 bg-black/20 text-white/85 opacity-0 transition duration-300 group-hover:translate-x-0.5 group-hover:opacity-100">
+														<ArrowRight class="h-4 w-4" aria-hidden="true" />
 													</div>
-												{/if}
+												</div>
 											</div>
 										</article>
 									{/each}
@@ -981,7 +979,7 @@
 										{#each summerSecondaryEvents.slice(2) as event (event.id)}
 											<article
 												data-season={event.season}
-												class="experience-card group relative aspect-[4/3] overflow-hidden rounded-3xl md:h-[360px] md:aspect-auto"
+												class="experience-card group relative aspect-[4/5] overflow-hidden rounded-3xl sm:aspect-[16/10]"
 											>
 												<img
 													src={withAsset(event.image)}
@@ -989,24 +987,35 @@
 													class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
 													loading="lazy"
 												/>
-												<div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent"></div>
-												<div class="absolute bottom-0 left-0 right-0 p-6">
-													<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
-														<event.icon class="h-4 w-4 text-brand" aria-hidden="true" />
-														{$t(event.kickerKey)}
-													</p>
-													<h3 class={`mt-2 font-semibold text-white ${event.titleSize ?? 'text-xl'}`}>
-														{$t(event.titleKey)}
-													</h3>
-													{#if event.metaKeys?.length}
-														<div class="mt-3 flex flex-wrap gap-2">
-															{#each event.metaKeys as metaKey}
-																<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white">
-																	{$t(metaKey)}
-																</span>
-															{/each}
+												<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent"></div>
+
+												<div class="absolute inset-x-0 bottom-0 p-4 sm:p-6">
+													<div class="relative max-w-2xl rounded-2xl border border-white/15 bg-black/40 p-4 backdrop-blur-sm max-h-[48%] overflow-hidden sm:max-h-none sm:p-6">
+														<div class="pointer-events-none absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-black/60 to-transparent sm:hidden" aria-hidden="true"></div>
+														<div class="overflow-auto pr-1 sm:overflow-visible sm:pr-0">
+															<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
+																<event.icon class="h-4 w-4 text-brand" aria-hidden="true" />
+																{$t(event.kickerKey)}
+															</p>
+															<h3 class={`mt-2 font-semibold text-white ${event.titleSize ?? 'text-xl'}`}>
+																{$t(event.titleKey)}
+															</h3>
+															{#if event.descriptionKey}
+																<p class="mt-2 hidden max-w-xl text-sm text-white/85 sm:block">
+																	{$t(event.descriptionKey)}
+																</p>
+															{/if}
+															{#if event.metaKeys?.length}
+																<div class="mt-3 flex flex-wrap gap-2">
+																	{#each event.metaKeys as metaKey}
+																		<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white sm:px-3 sm:text-xs">
+																			{$t(metaKey)}
+																		</span>
+																	{/each}
+																</div>
+															{/if}
 														</div>
-													{/if}
+													</div>
 												</div>
 											</article>
 										{/each}
@@ -1092,7 +1101,7 @@
 									{#each winterSecondaryEvents.slice(0, 2) as event (event.id)}
 										<article
 											data-season={event.season}
-											class="experience-card group relative aspect-[4/3] w-[82%] shrink-0 snap-start overflow-hidden rounded-3xl md:h-[320px] md:w-auto md:shrink md:aspect-auto"
+											class="experience-card group relative aspect-[4/3] w-[82%] shrink-0 snap-start overflow-hidden rounded-3xl ring-1 ring-black/5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg md:h-[320px] md:w-auto md:shrink md:aspect-auto md:aspect-[16/11]"
 										>
 											<img
 												src={withAsset(event.image)}
@@ -1100,24 +1109,22 @@
 												class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
 												loading="lazy"
 											/>
-											<div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent"></div>
-											<div class="absolute bottom-0 left-0 right-0 p-6">
-												<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
-													<event.icon class="h-4 w-4 text-brand" aria-hidden="true" />
+											<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/5"></div>
+											<div class="absolute left-4 top-4">
+												<span class="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-black/35 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/90 backdrop-blur">
+													<event.icon class="h-3.5 w-3.5 text-brand" aria-hidden="true" />
 													{$t(event.kickerKey)}
-												</p>
-												<h3 class={`mt-2 font-semibold text-white ${event.titleSize ?? 'text-xl'}`}>
-													{$t(event.titleKey)}
-												</h3>
-												{#if event.metaKeys?.length}
-													<div class="mt-3 flex flex-wrap gap-2">
-														{#each event.metaKeys as metaKey}
-															<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white">
-																{$t(metaKey)}
-															</span>
-														{/each}
+												</span>
+											</div>
+											<div class="absolute inset-x-0 bottom-0 p-4">
+												<div class="relative p-1">
+													<h3 class="line-clamp-2 text-lg font-semibold leading-tight text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.45)]">
+														{$t(event.titleKey)}
+													</h3>
+													<div class="pointer-events-none absolute right-0 top-0 grid h-9 w-9 place-items-center rounded-full border border-white/20 bg-black/20 text-white/85 opacity-0 transition duration-300 group-hover:translate-x-0.5 group-hover:opacity-100">
+														<ArrowRight class="h-4 w-4" aria-hidden="true" />
 													</div>
-												{/if}
+												</div>
 											</div>
 										</article>
 									{/each}
@@ -1127,7 +1134,7 @@
 										{#each winterSecondaryEvents.slice(2) as event (event.id)}
 											<article
 												data-season={event.season}
-												class="experience-card group relative aspect-[4/3] overflow-hidden rounded-3xl md:h-[360px] md:aspect-auto"
+												class="experience-card group relative aspect-[4/5] overflow-hidden rounded-3xl sm:aspect-[16/10]"
 											>
 												<img
 													src={withAsset(event.image)}
@@ -1135,24 +1142,35 @@
 													class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
 													loading="lazy"
 												/>
-												<div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent"></div>
-												<div class="absolute bottom-0 left-0 right-0 p-6">
-													<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
-														<event.icon class="h-4 w-4 text-brand" aria-hidden="true" />
-														{$t(event.kickerKey)}
-													</p>
-													<h3 class={`mt-2 font-semibold text-white ${event.titleSize ?? 'text-xl'}`}>
-														{$t(event.titleKey)}
-													</h3>
-													{#if event.metaKeys?.length}
-														<div class="mt-3 flex flex-wrap gap-2">
-															{#each event.metaKeys as metaKey}
-																<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white">
-																	{$t(metaKey)}
-																</span>
-															{/each}
+												<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent"></div>
+
+												<div class="absolute inset-x-0 bottom-0 p-4 sm:p-6">
+													<div class="relative max-w-2xl rounded-2xl border border-white/15 bg-black/40 p-4 backdrop-blur-sm max-h-[48%] overflow-hidden sm:max-h-none sm:p-6">
+														<div class="pointer-events-none absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-black/60 to-transparent sm:hidden" aria-hidden="true"></div>
+														<div class="overflow-auto pr-1 sm:overflow-visible sm:pr-0">
+															<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
+																<event.icon class="h-4 w-4 text-brand" aria-hidden="true" />
+																{$t(event.kickerKey)}
+															</p>
+															<h3 class={`mt-2 font-semibold text-white ${event.titleSize ?? 'text-xl'}`}>
+																{$t(event.titleKey)}
+															</h3>
+															{#if event.descriptionKey}
+																<p class="mt-2 hidden max-w-xl text-sm text-white/85 sm:block">
+																	{$t(event.descriptionKey)}
+																</p>
+															{/if}
+															{#if event.metaKeys?.length}
+																<div class="mt-3 flex flex-wrap gap-2">
+																	{#each event.metaKeys as metaKey}
+																		<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white sm:px-3 sm:text-xs">
+																			{$t(metaKey)}
+																		</span>
+																	{/each}
+																</div>
+															{/if}
 														</div>
-													{/if}
+													</div>
 												</div>
 											</article>
 										{/each}
