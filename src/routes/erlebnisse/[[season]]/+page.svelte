@@ -2,9 +2,9 @@
 	import { t } from '$lib/i18n';
 	import { asset, resolve } from '$app/paths';
 	import { page } from '$app/state';
-	import { goto } from '$app/navigation';
-	import { trackEvent } from '$lib/analytics/plausible';
 	import SeoHead from '$lib/components/SeoHead.svelte';
+	import { onDestroy, onMount } from 'svelte';
+	import { tweened } from 'svelte/motion';
 	import type { ComponentType } from 'svelte';
 	import {
 		ArrowRight,
@@ -12,12 +12,13 @@
 		BusFront,
 		CableCar,
 		CalendarDays,
-		ChevronDown,
+		ChevronRight,
 		Footprints,
 		Landmark,
+		List,
 		Mountain,
+		SlidersHorizontal,
 		Snowflake,
-		Sun,
 		TrainFront,
 		Users,
 		Utensils,
@@ -29,9 +30,11 @@
 	import { cubicOut } from 'svelte/easing';
 
 	type SeasonKey = 'summer' | 'winter';
+	type ActivityFilterKey = 'hiking' | 'active' | 'winter' | 'family' | 'lakes' | 'culture';
 	type ExperienceEvent = {
 		id: string;
 		season: SeasonKey;
+		activities: ActivityFilterKey[];
 		icon: ComponentType;
 		kickerKey: string;
 		titleKey: string;
@@ -45,17 +48,22 @@
 	};
 	type DestinationCard = {
 		id: string;
+		activities: ActivityFilterKey[];
 		icon: ComponentType;
 		kickerKey: string;
 		titleKey: string;
 		bodyKey: string;
 		tagsBySeason: Record<SeasonKey, string[]>;
 	};
-	type InterestLink = {
-		id: string;
+	type ActivityFilter = {
+		id: ActivityFilterKey;
 		icon: ComponentType;
 		labelKey: string;
-		href: string;
+	};
+	type NavMode = 'compact' | 'peek';
+	type SectionLink = {
+		id: string;
+		labelKey: string;
 	};
 
 	const withAsset = (path: string) => asset(path);
@@ -68,9 +76,24 @@
 		return 'summer';
 	});
 
-	const seasonToParam = (season: SeasonKey) => (season === 'winter' ? 'winter' : 'sommer');
-
 	let activeTab = $state<SeasonKey>('summer');
+	let activeHighlightsSeason = $state<SeasonKey>('summer');
+	let selectedActivity = $state<ActivityFilterKey | null>(null);
+	let showAllSeasons = $state(true);
+	let activeSectionId = $state('aktivitaeten');
+	let isMobileFilterOpen = $state(false);
+	let navMode = $state<NavMode>('peek');
+	let navListEl = $state<HTMLDivElement | null>(null);
+	const btnEls = new Map<string, HTMLButtonElement>();
+	const indicatorTop = tweened(0, { duration: 420, easing: cubicOut });
+	const indicatorHeight = tweened(40, { duration: 420, easing: cubicOut });
+	let indicatorVisible = $state(false);
+	let scrollCollapseTimer: number | null = null;
+	let highlightObserver: IntersectionObserver | null = null;
+	let manualTabUntil = 0;
+
+	const isPeek = $derived(navMode === 'peek');
+	const isCompact = $derived(navMode === 'compact');
 
 	$effect(() => {
 		if (activeTab !== seasonFromUrl) {
@@ -78,20 +101,11 @@
 		}
 	});
 
-	function setSeason(season: SeasonKey) {
-		if (activeTab === season) return;
-		void trackEvent('Filter: Season Change', { season });
-		activeTab = season;
-		void goto(resolve(`/erlebnisse/${seasonToParam(season)}`), {
-			keepFocus: true,
-			noScroll: true,
-		});
-	}
-
 	const events: ExperienceEvent[] = [
 		{
 			id: 'summer-hike',
 			season: 'summer',
+			activities: ['hiking', 'family'],
 			icon: Mountain,
 			kickerKey: 'experiences.event.summer.hike.kicker',
 			titleKey: 'experiences.event.summer.hike.title',
@@ -105,6 +119,7 @@
 		{
 			id: 'summer-lake',
 			season: 'summer',
+			activities: ['lakes', 'family'],
 			icon: Waves,
 			kickerKey: 'experiences.event.summer.lake.kicker',
 			titleKey: 'experiences.event.summer.lake.title',
@@ -117,6 +132,7 @@
 		{
 			id: 'summer-bike',
 			season: 'summer',
+			activities: ['active'],
 			icon: Bike,
 			kickerKey: 'experiences.event.summer.bike.kicker',
 			titleKey: 'experiences.event.summer.bike.title',
@@ -129,6 +145,7 @@
 		{
 			id: 'summer-lift',
 			season: 'summer',
+			activities: ['hiking', 'family'],
 			icon: CableCar,
 			kickerKey: 'experiences.event.summer.lift.kicker',
 			titleKey: 'experiences.event.summer.lift.title',
@@ -143,6 +160,7 @@
 		{
 			id: 'winter-ski',
 			season: 'winter',
+			activities: ['winter', 'active', 'family'],
 			icon: Snowflake,
 			kickerKey: 'experiences.event.winter.ski.kicker',
 			titleKey: 'experiences.event.winter.ski.title',
@@ -156,6 +174,7 @@
 		{
 			id: 'winter-ice',
 			season: 'winter',
+			activities: ['winter', 'lakes', 'family'],
 			icon: Snowflake,
 			kickerKey: 'experiences.event.winter.ice.kicker',
 			titleKey: 'experiences.event.winter.ice.title',
@@ -169,6 +188,7 @@
 		{
 			id: 'winter-hike',
 			season: 'winter',
+			activities: ['winter', 'hiking'],
 			icon: Footprints,
 			kickerKey: 'experiences.event.winter.hike.kicker',
 			titleKey: 'experiences.event.winter.hike.title',
@@ -181,6 +201,7 @@
 		{
 			id: 'winter-crosscountry',
 			season: 'winter',
+			activities: ['winter', 'active'],
 			icon: Mountain,
 			kickerKey: 'experiences.event.winter.crosscountry.kicker',
 			titleKey: 'experiences.event.winter.crosscountry.title',
@@ -198,9 +219,22 @@
 
 	const summerEvents = events.filter((event) => event.season === 'summer');
 	const winterEvents = events.filter((event) => event.season === 'winter');
-	const currentEvents = $derived(activeTab === 'summer' ? summerEvents : winterEvents);
-	const featuredEvent = $derived(currentEvents[0]);
-	const secondaryEvents = $derived(currentEvents.slice(1));
+	const filteredSummerEvents = $derived.by(() => {
+		const activity = selectedActivity;
+		if (!activity) return summerEvents;
+		const matches = summerEvents.filter((event) => event.activities.includes(activity));
+		return matches.length ? matches : summerEvents;
+	});
+	const filteredWinterEvents = $derived.by(() => {
+		const activity = selectedActivity;
+		if (!activity) return winterEvents;
+		const matches = winterEvents.filter((event) => event.activities.includes(activity));
+		return matches.length ? matches : winterEvents;
+	});
+	const summerFeaturedEvent = $derived(filteredSummerEvents[0]);
+	const summerSecondaryEvents = $derived(filteredSummerEvents.slice(1));
+	const winterFeaturedEvent = $derived(filteredWinterEvents[0]);
+	const winterSecondaryEvents = $derived(filteredWinterEvents.slice(1));
 
 	const content: Record<
 		SeasonKey,
@@ -235,6 +269,7 @@
 	const destinationCards: DestinationCard[] = [
 		{
 			id: 'nassfeld',
+			activities: ['winter', 'hiking', 'active', 'family'],
 			icon: Mountain,
 			kickerKey: 'experiences.destinations.nassfeld.kicker',
 			titleKey: 'experiences.destinations.nassfeld.title',
@@ -254,6 +289,7 @@
 		},
 		{
 			id: 'weissensee',
+			activities: ['lakes', 'family'],
 			icon: Waves,
 			kickerKey: 'experiences.destinations.weissensee.kicker',
 			titleKey: 'experiences.destinations.weissensee.title',
@@ -273,6 +309,7 @@
 		},
 		{
 			id: 'gitschtal',
+			activities: ['hiking', 'family'],
 			icon: Footprints,
 			kickerKey: 'experiences.destinations.gitschtal.kicker',
 			titleKey: 'experiences.destinations.gitschtal.title',
@@ -292,6 +329,7 @@
 		},
 		{
 			id: 'genussregion',
+			activities: ['culture'],
 			icon: Utensils,
 			kickerKey: 'experiences.destinations.genussregion.kicker',
 			titleKey: 'experiences.destinations.genussregion.title',
@@ -311,44 +349,63 @@
 		},
 	];
 
-	const interestLinks: InterestLink[] = [
+	const activityFilters: ActivityFilter[] = [
 		{
 			id: 'hiking',
 			icon: Mountain,
 			labelKey: 'experiences.interests.hiking',
-			href: '#highlights',
 		},
 		{
 			id: 'active',
 			icon: Bike,
 			labelKey: 'experiences.interests.active',
-			href: '#highlights',
 		},
 		{
 			id: 'family',
 			icon: Users,
 			labelKey: 'experiences.interests.family',
-			href: '#ausflugsideen',
 		},
 		{
 			id: 'lakes',
 			icon: Waves,
 			labelKey: 'experiences.interests.lakes',
-			href: '#highlights',
 		},
 		{
 			id: 'culture',
 			icon: Utensils,
 			labelKey: 'experiences.interests.culture',
-			href: '#ausflugsideen',
 		},
 		{
 			id: 'winter',
 			icon: Snowflake,
 			labelKey: 'experiences.interests.winter',
-			href: '#highlights',
 		},
 	];
+
+	const sectionLinks: SectionLink[] = [
+		{ id: 'aktivitaeten', labelKey: 'experiences.nav.activities' },
+		{ id: 'ausflugsideen', labelKey: 'experiences.nav.destinations' },
+		{ id: 'gaestecard', labelKey: 'experiences.nav.guestcard' },
+	];
+	const sectionTrackingLinks: SectionLink[] = [
+		{ id: 'aktivitaeten', labelKey: 'experiences.nav.activities' },
+		{ id: 'highlights', labelKey: 'experiences.nav.highlights' },
+		{ id: 'ausflugsideen', labelKey: 'experiences.nav.destinations' },
+		{ id: 'gaestecard', labelKey: 'experiences.nav.guestcard' },
+	];
+	const navActiveSectionId = $derived(activeSectionId === 'highlights' ? '' : activeSectionId);
+
+	const activeSectionLabelKey = $derived.by(() => {
+		const match = sectionTrackingLinks.find((section) => section.id === activeSectionId);
+		return match?.labelKey ?? 'experiences.nav.title';
+	});
+
+	const filteredDestinationCards = $derived.by(() => {
+		const activity = selectedActivity;
+		if (!activity) return destinationCards;
+		const matches = destinationCards.filter((card) => card.activities.includes(activity));
+		return matches.length ? matches : destinationCards;
+	});
 
 	const guestCardLinks = {
 		benefitsOverview:
@@ -388,6 +445,138 @@
 		if (event.key === 'Escape' && isNassfeldModalOpen) {
 			closeNassfeldModal();
 		}
+		if (event.key === 'Escape' && isMobileFilterOpen) {
+			isMobileFilterOpen = false;
+		}
+	}
+
+	function scrollToSection(id: string) {
+		const el = document.getElementById(id);
+		if (!el) return;
+		el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+	}
+
+	function scrollToSeasonHighlightsFromUrl() {
+		const targetId = seasonFromUrl === 'winter' ? 'highlights-winter' : 'highlights-summer';
+		const target = document.getElementById(targetId);
+		if (!target) return;
+		target.scrollIntoView({ behavior: 'auto', block: 'start' });
+	}
+
+	function setActiveTabManual(next: SeasonKey) {
+		activeTab = next;
+		manualTabUntil = Date.now() + 1500;
+	}
+
+	function setNavMode(next: NavMode) {
+		navMode = next;
+	}
+
+	function onNavEnter() {
+		setNavMode('peek');
+	}
+
+	function onNavLeave() {
+		setNavMode('peek');
+	}
+
+	function onNavFocusIn() {
+		setNavMode('peek');
+	}
+
+	function onNavFocusOut() {
+		setNavMode('peek');
+	}
+
+	function onWindowScroll() {
+		updateActiveSectionFromViewport();
+		setNavMode('peek');
+	}
+
+	function updateActiveSectionFromViewport() {
+		const marker = window.innerHeight * 0.33;
+		let current = sectionTrackingLinks[0]?.id ?? 'aktivitaeten';
+		for (const section of sectionTrackingLinks) {
+			const el = document.getElementById(section.id);
+			if (!el) continue;
+			if (el.getBoundingClientRect().top <= marker) {
+				current = section.id;
+			} else {
+				break;
+			}
+		}
+		activeSectionId = current;
+
+		const summerHighlightsEl = document.getElementById('highlights-summer');
+		const winterHighlightsEl = document.getElementById('highlights-winter');
+		if (summerHighlightsEl && winterHighlightsEl) {
+			const summerTop = summerHighlightsEl.getBoundingClientRect().top;
+			const winterTop = winterHighlightsEl.getBoundingClientRect().top;
+			if (winterTop <= marker) {
+				activeHighlightsSeason = 'winter';
+			} else if (summerTop <= marker) {
+				activeHighlightsSeason = 'summer';
+			}
+		}
+	}
+
+	function sectionBtn(node: HTMLButtonElement, id: string) {
+		btnEls.set(id, node);
+		queueMicrotask(updateIndicator);
+		return {
+			update(nextId: string) {
+				if (nextId === id) return;
+				btnEls.delete(id);
+				id = nextId;
+				btnEls.set(id, node);
+			},
+			destroy() {
+				btnEls.delete(id);
+			},
+		};
+	}
+
+	function updateIndicator() {
+		if (!navListEl) return;
+		const el = btnEls.get(navActiveSectionId);
+		if (!el) {
+			indicatorVisible = false;
+			return;
+		}
+		const parentRect = navListEl.getBoundingClientRect();
+		const rect = el.getBoundingClientRect();
+		indicatorTop.set(rect.top - parentRect.top);
+		indicatorHeight.set(rect.height);
+		indicatorVisible = true;
+	}
+
+	function enableHighlightSeasonAuto() {
+		highlightObserver?.disconnect();
+		highlightObserver = null;
+		const container = document.getElementById('highlights');
+		if (!container) return;
+		const cards = Array.from(container.querySelectorAll<HTMLElement>('[data-season]'));
+		if (!cards.length) return;
+		highlightObserver = new IntersectionObserver(
+			(entries) => {
+				if (activeSectionId !== 'highlights') return;
+				if (!showAllSeasons) return;
+				if (Date.now() < manualTabUntil) return;
+				const best = entries
+					.filter((entry) => entry.isIntersecting)
+					.sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+				const seasonAttr = best?.target?.getAttribute('data-season');
+				const season =
+					seasonAttr === 'summer' || seasonAttr === 'winter' ? (seasonAttr as SeasonKey) : null;
+				if (season && season !== activeTab) activeTab = season;
+			},
+			{
+				root: null,
+				threshold: [0.25, 0.4, 0.55, 0.7],
+				rootMargin: '-20% 0px -55% 0px',
+			}
+		);
+		cards.forEach((card) => highlightObserver?.observe(card));
 	}
 
 	$effect(() => {
@@ -400,17 +589,261 @@
 			document.body.style.overflow = previousOverflow;
 		};
 	});
+
+	$effect(() => {
+		if (isCompact) {
+			indicatorVisible = false;
+			return;
+		}
+		navActiveSectionId;
+		queueMicrotask(updateIndicator);
+	});
+
+	$effect(() => {
+		filteredSummerEvents.length;
+		filteredWinterEvents.length;
+		showAllSeasons;
+		queueMicrotask(enableHighlightSeasonAuto);
+	});
+
+	$effect(() => {
+		seasonFromUrl;
+		queueMicrotask(scrollToSeasonHighlightsFromUrl);
+	});
+
+	onMount(() => {
+		updateActiveSectionFromViewport();
+		window.addEventListener('scroll', onWindowScroll, { passive: true });
+		window.addEventListener('resize', updateActiveSectionFromViewport);
+		queueMicrotask(scrollToSeasonHighlightsFromUrl);
+		return () => {
+			window.removeEventListener('scroll', onWindowScroll);
+			window.removeEventListener('resize', updateActiveSectionFromViewport);
+		};
+	});
+
+	onMount(() => {
+		enableHighlightSeasonAuto();
+		return () => {
+			highlightObserver?.disconnect();
+			highlightObserver = null;
+		};
+	});
+
+	onDestroy(() => {
+		highlightObserver?.disconnect();
+		if (scrollCollapseTimer) window.clearTimeout(scrollCollapseTimer);
+	});
 </script>
 
 <svelte:window onkeydown={onWindowKeydown} />
 
 <SeoHead titleKey={seo.titleKey} descriptionKey={seo.descriptionKey} image={currentContent.bg} />
 
+<aside class="hidden lg:block">
+	<div class="pointer-events-none fixed left-6 top-36 z-40">
+		<div
+			class={`pointer-events-auto origin-top-left transition-all duration-300 ease-out ${
+				isPeek ? 'w-[240px]' : 'w-[150px]'
+			}`}
+			role="group"
+			aria-label={$t('experiences.nav.title')}
+			onmouseenter={onNavEnter}
+			onmouseleave={onNavLeave}
+			onfocusin={onNavFocusIn}
+			onfocusout={onNavFocusOut}
+		>
+			<div
+				class={`relative overflow-hidden rounded-3xl border shadow-[0_12px_34px_rgba(15,23,42,0.10)] backdrop-blur-xl ring-1 ring-white/30 ${
+					isPeek ? 'border-white/30 bg-white/22' : 'border-white/25 bg-white/18'
+				}`}
+			>
+				<div class="pointer-events-none absolute inset-0">
+					<div class="nav-glass-sheen"></div>
+				</div>
+				<div class={`relative flex items-center gap-2 ${isPeek ? 'px-4 pt-4' : 'px-3 pt-3'}`}>
+					<div
+						class={`grid place-items-center rounded-2xl bg-brand/10 text-brand ${
+							isPeek ? 'h-9 w-9' : 'h-10 w-10'
+						}`}
+					>
+						<List class="h-4 w-4" aria-hidden="true" />
+					</div>
+					{#if isPeek}
+						<div>
+							<p class="text-[10px] font-semibold uppercase tracking-[0.24em] text-slate-500">
+								{$t('experiences.nav.kicker')}
+							</p>
+							<p class="text-[13px] font-semibold text-slate-900">
+								{$t('experiences.nav.title')}
+							</p>
+						</div>
+					{/if}
+				</div>
+				{#if isCompact}
+					<div class="relative px-3 pb-3 pt-2">
+						<div class="rounded-2xl border border-white/30 bg-white/20 px-2.5 py-3">
+							<div class="flex items-center justify-center gap-2">
+								{#each sectionTrackingLinks as section}
+									<button
+										type="button"
+										class="group relative grid h-5 w-5 place-items-center rounded-full"
+										onclick={() => scrollToSection(section.id)}
+										aria-label={$t(section.labelKey)}
+										title={$t(section.labelKey)}
+									>
+										<span
+											class={`h-2 w-2 rounded-full transition ${
+												activeSectionId === section.id
+													? 'bg-brand'
+													: 'bg-slate-300 group-hover:bg-slate-400'
+											}`}
+										></span>
+									</button>
+								{/each}
+							</div>
+						</div>
+					</div>
+				{/if}
+				{#if isPeek}
+					<nav class="relative mt-3 px-2 pb-2">
+						<div bind:this={navListEl} class="relative">
+							{#if indicatorVisible}
+								<div
+									class="nav-indicator"
+									style={`transform: translateY(${$indicatorTop}px); height: ${$indicatorHeight}px;`}
+									aria-hidden="true"
+								></div>
+							{/if}
+							{#each sectionLinks as section}
+								<div class="relative z-10">
+									<button
+										use:sectionBtn={section.id}
+										type="button"
+										class={`group flex w-full items-center justify-between rounded-2xl px-3 py-2 text-left text-[13px] font-semibold transition ${
+											navActiveSectionId === section.id
+												? 'text-slate-900'
+												: 'text-slate-700 hover:bg-white/18'
+										}`}
+										onclick={() => scrollToSection(section.id)}
+									>
+										<span class="flex items-center gap-2">
+										<span
+											class={`h-1.5 w-1.5 rounded-full ${
+												navActiveSectionId === section.id
+													? 'bg-brand'
+													: 'bg-slate-300 group-hover:bg-slate-400'
+											}`}
+											></span>
+											{$t(section.labelKey)}
+										</span>
+										<ChevronRight
+											class="h-4 w-4 opacity-60 transition-transform duration-300 group-hover:translate-x-0.5"
+											aria-hidden="true"
+										/>
+									</button>
+									{#if section.id === 'aktivitaeten'}
+										<div class="mt-0.5 mb-1 pl-3 pr-0">
+											<button
+												type="button"
+												class={`group flex w-full items-center justify-between rounded-2xl px-3 py-2 text-left text-[13px] font-semibold transition ${
+													activeSectionId === 'highlights' && activeHighlightsSeason === 'summer'
+														? 'border border-white/28 bg-white/38 text-slate-900 shadow-[0_10px_26px_rgba(15,23,42,0.10)] backdrop-blur-[14px]'
+														: 'text-slate-700 hover:bg-white/18'
+												}`}
+												onclick={() => scrollToSection('highlights-summer')}
+											>
+												<span class="flex items-center gap-2">
+													<span
+														class={`h-1.5 w-1.5 rounded-full ${
+															activeSectionId === 'highlights' &&
+															activeHighlightsSeason === 'summer'
+																? 'bg-brand'
+																: 'bg-slate-300 group-hover:bg-slate-400'
+														}`}
+													></span>
+													{$t('experiences.nav.summer')}
+												</span>
+												<ChevronRight
+													class="h-4 w-4 opacity-50 transition-transform duration-300 group-hover:translate-x-0.5"
+													aria-hidden="true"
+												/>
+											</button>
+											<button
+												type="button"
+												class={`group mt-0.5 flex w-full items-center justify-between rounded-2xl px-3 py-2 text-left text-[13px] font-semibold transition ${
+													activeSectionId === 'highlights' && activeHighlightsSeason === 'winter'
+														? 'border border-white/28 bg-white/38 text-slate-900 shadow-[0_10px_26px_rgba(15,23,42,0.10)] backdrop-blur-[14px]'
+														: 'text-slate-700 hover:bg-white/18'
+												}`}
+												onclick={() => scrollToSection('highlights-winter')}
+											>
+												<span class="flex items-center gap-2">
+													<span
+														class={`h-1.5 w-1.5 rounded-full ${
+															activeSectionId === 'highlights' &&
+															activeHighlightsSeason === 'winter'
+																? 'bg-brand'
+																: 'bg-slate-300 group-hover:bg-slate-400'
+														}`}
+													></span>
+													{$t('experiences.nav.winter')}
+												</span>
+												<ChevronRight
+													class="h-4 w-4 opacity-50 transition-transform duration-300 group-hover:translate-x-0.5"
+													aria-hidden="true"
+												/>
+											</button>
+										</div>
+									{/if}
+								</div>
+							{/each}
+						</div>
+					</nav>
+					<div class="relative border-t border-white/35 px-4 py-4">
+						<div class="flex items-center justify-between">
+							<p class="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500">
+								{$t('experiences.nav.filters')}
+							</p>
+							{#if selectedActivity}
+								<button
+									type="button"
+									class="text-[11px] font-semibold text-slate-600 underline decoration-slate-300 underline-offset-4 hover:text-slate-900"
+									onclick={() => (selectedActivity = null)}
+								>
+									{$t('experiences.nav.reset')}
+								</button>
+							{/if}
+						</div>
+						<div class="mt-2 flex flex-wrap gap-1.5">
+							{#each activityFilters as filter}
+								<button
+									type="button"
+									class={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-[12px] font-semibold transition ${
+										selectedActivity === filter.id
+											? 'bg-brand text-white shadow-sm'
+											: 'border border-white/35 bg-white/25 text-slate-700 hover:bg-white/35'
+									}`}
+									onclick={() => (selectedActivity = selectedActivity === filter.id ? null : filter.id)}
+									aria-pressed={selectedActivity === filter.id}
+								>
+									<filter.icon class="h-3.5 w-3.5" aria-hidden="true" />
+									{$t(filter.labelKey)}
+								</button>
+							{/each}
+						</div>
+					</div>
+				{/if}
+			</div>
+		</div>
+	</div>
+</aside>
+
 <!-- ERLEBNISSE PAGE (Tailwind) -->
 <!-- Requirements: Tailwind + your bg-brand/text-brand utilities available -->
 
-<main class="bg-[#fbfaf7]">
-	<div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+<main class="bg-[#fbfaf7] pb-24 lg:pb-0">
+	<div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:pl-[10rem] lg:pr-8">
 		<!-- CONTENT WRAPPER -->
 		<div class="space-y-14" id="aktivitaeten">
 			<section class="pt-4 sm:pt-6 sm:px-10">
@@ -426,46 +859,6 @@
 						{$t('experiences.destinations.subtitle')}
 					</p>
 				</div>
-				<div class="mt-6 mb-3 flex justify-center">
-					<div
-						class="pointer-events-auto inline-flex rounded-full border border-white/65 bg-white/70 p-1 shadow-[0_14px_35px_rgba(15,23,42,0.14)] backdrop-blur-md ring-1 ring-slate-200/70"
-					>
-						<button
-							type="button"
-							class={`tab-btn inline-flex items-center gap-2 rounded-full px-6 py-2 text-sm font-semibold transition-all duration-300 ${
-								activeTab === 'summer'
-									? 'is-active bg-brand text-white shadow-sm'
-									: 'text-slate-700 hover:text-slate-900 hover:bg-slate-50/90'
-							}`}
-							onclick={() => setSeason('summer')}
-						>
-							<Sun
-								class={`h-4 w-4 transition-transform duration-300 ${
-									activeTab === 'summer' ? 'rotate-12 scale-110' : 'rotate-0 scale-100'
-								}`}
-							/>
-							{$t('experiences.tabs.summer')}
-						</button>
-
-						<button
-							type="button"
-							class={`tab-btn inline-flex items-center gap-2 rounded-full px-6 py-2 text-sm font-semibold transition-all duration-300 ${
-								activeTab === 'winter'
-									? 'is-active bg-brand text-white shadow-sm'
-									: 'text-slate-700 hover:text-slate-900 hover:bg-slate-50/90'
-							}`}
-							onclick={() => setSeason('winter')}
-						>
-							<Snowflake
-								class={`h-4 w-4 transition-transform duration-300 ${
-									activeTab === 'winter' ? '-rotate-12 scale-110' : 'rotate-0 scale-100'
-								}`}
-							/>
-							{$t('experiences.tabs.winter')}
-						</button>
-					</div>
-				</div>
-
 				<!-- <div class="anchor-target mt-10" id="interessen">
 					<p class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
 						{$t('experiences.interests.title')}
@@ -488,67 +881,55 @@
 						{$t('experiences.destinations.topHighlights')}
 					</p>
 
-					{#key activeTab}
-						<div class="mt-4 space-y-6" in:fly={{ y: 26, duration: 520, easing: cubicOut }}>
-							{#if featuredEvent}
+					{#if showAllSeasons || activeTab === 'summer'}
+						<div
+							class="mt-4 space-y-6"
+							id="highlights-summer"
+							in:fly={{ y: 26, duration: 520, easing: cubicOut }}
+						>
+							<p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">
+								{$t('experiences.nav.summer')}
+							</p>
+							{#if summerFeaturedEvent}
 								<article
-									class={`group relative aspect-[4/5] overflow-hidden rounded-3xl sm:aspect-[16/10] ${
-										featuredEvent.id === 'winter-ski' ? 'cursor-pointer' : ''
-									}`}
+									data-season={summerFeaturedEvent.season}
+									class="group relative aspect-[4/5] overflow-hidden rounded-3xl sm:aspect-[16/10]"
 								>
 									<img
-										src={withAsset(featuredEvent.image)}
-										alt={`${$t(featuredEvent.titleKey)} – ${$t(featuredEvent.kickerKey)}`}
+										src={withAsset(summerFeaturedEvent.image)}
+										alt={`${$t(summerFeaturedEvent.titleKey)} – ${$t(summerFeaturedEvent.kickerKey)}`}
 										class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
 										loading="lazy"
 									/>
-									<div
-										class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent"
-									></div>
+									<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent"></div>
 
-									{#if featuredEvent.id === 'winter-ski'}
-										<button
-											type="button"
-											class="absolute inset-0 z-10"
-											aria-label="Nassfeld Informationen öffnen"
-											onclick={openNassfeldModal}
-										></button>
-									{/if}
-
-									{#if featuredEvent.badgeKey}
+									{#if summerFeaturedEvent.badgeKey}
 										<span
 											class="absolute right-5 top-5 rounded-full bg-brand px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white shadow-sm"
 										>
-											{$t(featuredEvent.badgeKey)}
+											{$t(summerFeaturedEvent.badgeKey)}
 										</span>
 									{/if}
 
 									<div class="absolute inset-x-0 bottom-0 p-4 sm:p-6">
-										<div
-											class="relative max-w-2xl rounded-2xl border border-white/15 bg-black/40 p-4 backdrop-blur-sm max-h-[48%] overflow-hidden sm:max-h-none sm:p-6"
-										>
-											<div
-												class="pointer-events-none absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-black/60 to-transparent sm:hidden"
-												aria-hidden="true"
-											></div>
+										<div class="relative max-w-2xl rounded-2xl border border-white/15 bg-black/40 p-4 backdrop-blur-sm max-h-[48%] overflow-hidden sm:max-h-none sm:p-6">
+											<div class="pointer-events-none absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-black/60 to-transparent sm:hidden" aria-hidden="true"></div>
 											<div class="overflow-auto pr-1 sm:overflow-visible sm:pr-0">
-												<p
-													class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand"
-												>
-													<featuredEvent.icon class="h-4 w-4 text-brand" aria-hidden="true" />
-													{$t(featuredEvent.kickerKey)}
+												<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
+													<summerFeaturedEvent.icon class="h-4 w-4 text-brand" aria-hidden="true" />
+													{$t(summerFeaturedEvent.kickerKey)}
 												</p>
-												<h3 class={`mt-2 font-semibold text-white ${featuredEvent.titleSize ?? 'text-xl'}`}>
-													{$t(featuredEvent.titleKey)}
+												<h3 class={`mt-2 font-semibold text-white ${summerFeaturedEvent.titleSize ?? 'text-xl'}`}>
+													{$t(summerFeaturedEvent.titleKey)}
 												</h3>
-												{#if featuredEvent.descriptionKey}
+												{#if summerFeaturedEvent.descriptionKey}
 													<p class="mt-2 hidden max-w-xl text-sm text-white/85 sm:block">
-														{$t(featuredEvent.descriptionKey)}
+														{$t(summerFeaturedEvent.descriptionKey)}
 													</p>
 												{/if}
-												{#if featuredEvent.metaKeys?.length}
+												{#if summerFeaturedEvent.metaKeys?.length}
 													<div class="mt-3 flex flex-wrap gap-2">
-														{#each featuredEvent.metaKeys as metaKey}
+														{#each summerFeaturedEvent.metaKeys as metaKey}
 															<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white sm:px-3 sm:text-xs">
 																{$t(metaKey)}
 															</span>
@@ -560,13 +941,11 @@
 									</div>
 								</article>
 							{/if}
-
-							<div class="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:grid md:grid-cols-12 md:gap-6 md:overflow-visible md:pb-0">
-								{#each secondaryEvents as event, index (event.id)}
+							<div class="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:pb-0 lg:grid-cols-3">
+								{#each summerSecondaryEvents as event (event.id)}
 									<article
-										class={`experience-card group relative aspect-[4/3] w-[82%] shrink-0 snap-start overflow-hidden rounded-3xl md:h-[290px] md:w-auto md:shrink md:aspect-auto ${
-											index === 0 ? 'md:col-span-6' : 'md:col-span-3'
-										}`}
+										data-season={event.season}
+										class="experience-card group relative aspect-[4/3] w-[82%] shrink-0 snap-start overflow-hidden rounded-3xl md:h-[330px] md:w-auto md:shrink md:aspect-auto"
 									>
 										<img
 											src={withAsset(event.image)}
@@ -574,13 +953,9 @@
 											class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
 											loading="lazy"
 										/>
-										<div
-											class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent"
-										></div>
+										<div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent"></div>
 										<div class="absolute bottom-0 left-0 right-0 p-6">
-											<p
-												class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand"
-											>
+											<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
 												<event.icon class="h-4 w-4 text-brand" aria-hidden="true" />
 												{$t(event.kickerKey)}
 											</p>
@@ -601,7 +976,115 @@
 								{/each}
 							</div>
 						</div>
-					{/key}
+					{/if}
+
+					{#if showAllSeasons || activeTab === 'winter'}
+						<div
+							class="mt-10 space-y-6"
+							id="highlights-winter"
+							in:fly={{ y: 26, duration: 520, easing: cubicOut }}
+						>
+							<p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">
+								{$t('experiences.nav.winter')}
+							</p>
+							{#if winterFeaturedEvent}
+								<article
+									data-season={winterFeaturedEvent.season}
+									class={`group relative aspect-[4/5] overflow-hidden rounded-3xl sm:aspect-[16/10] ${
+										winterFeaturedEvent.id === 'winter-ski' ? 'cursor-pointer' : ''
+									}`}
+								>
+									<img
+										src={withAsset(winterFeaturedEvent.image)}
+										alt={`${$t(winterFeaturedEvent.titleKey)} – ${$t(winterFeaturedEvent.kickerKey)}`}
+										class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+										loading="lazy"
+									/>
+									<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent"></div>
+
+									{#if winterFeaturedEvent.id === 'winter-ski'}
+										<button
+											type="button"
+											class="absolute inset-0 z-10"
+											aria-label="Nassfeld Informationen öffnen"
+											onclick={openNassfeldModal}
+										></button>
+									{/if}
+
+									{#if winterFeaturedEvent.badgeKey}
+										<span
+											class="absolute right-5 top-5 rounded-full bg-brand px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white shadow-sm"
+										>
+											{$t(winterFeaturedEvent.badgeKey)}
+										</span>
+									{/if}
+
+									<div class="absolute inset-x-0 bottom-0 p-4 sm:p-6">
+										<div class="relative max-w-2xl rounded-2xl border border-white/15 bg-black/40 p-4 backdrop-blur-sm max-h-[48%] overflow-hidden sm:max-h-none sm:p-6">
+											<div class="pointer-events-none absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-black/60 to-transparent sm:hidden" aria-hidden="true"></div>
+											<div class="overflow-auto pr-1 sm:overflow-visible sm:pr-0">
+												<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
+													<winterFeaturedEvent.icon class="h-4 w-4 text-brand" aria-hidden="true" />
+													{$t(winterFeaturedEvent.kickerKey)}
+												</p>
+												<h3 class={`mt-2 font-semibold text-white ${winterFeaturedEvent.titleSize ?? 'text-xl'}`}>
+													{$t(winterFeaturedEvent.titleKey)}
+												</h3>
+												{#if winterFeaturedEvent.descriptionKey}
+													<p class="mt-2 hidden max-w-xl text-sm text-white/85 sm:block">
+														{$t(winterFeaturedEvent.descriptionKey)}
+													</p>
+												{/if}
+												{#if winterFeaturedEvent.metaKeys?.length}
+													<div class="mt-3 flex flex-wrap gap-2">
+														{#each winterFeaturedEvent.metaKeys as metaKey}
+															<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white sm:px-3 sm:text-xs">
+																{$t(metaKey)}
+															</span>
+														{/each}
+													</div>
+												{/if}
+											</div>
+										</div>
+									</div>
+								</article>
+							{/if}
+							<div class="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:pb-0 lg:grid-cols-3">
+								{#each winterSecondaryEvents as event (event.id)}
+									<article
+										data-season={event.season}
+										class="experience-card group relative aspect-[4/3] w-[82%] shrink-0 snap-start overflow-hidden rounded-3xl md:h-[330px] md:w-auto md:shrink md:aspect-auto"
+									>
+										<img
+											src={withAsset(event.image)}
+											alt={`${$t(event.titleKey)} – ${$t(event.kickerKey)}`}
+											class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+											loading="lazy"
+										/>
+										<div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent"></div>
+										<div class="absolute bottom-0 left-0 right-0 p-6">
+											<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
+												<event.icon class="h-4 w-4 text-brand" aria-hidden="true" />
+												{$t(event.kickerKey)}
+											</p>
+											<h3 class={`mt-2 font-semibold text-white ${event.titleSize ?? 'text-xl'}`}>
+												{$t(event.titleKey)}
+											</h3>
+											{#if event.metaKeys?.length}
+												<div class="mt-3 flex flex-wrap gap-2">
+													{#each event.metaKeys as metaKey}
+														<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white">
+															{$t(metaKey)}
+														</span>
+													{/each}
+												</div>
+											{/if}
+										</div>
+									</article>
+								{/each}
+							</div>
+						</div>
+					{/if}
 				</div>
 
 				<div class="mt-10 rounded-2xl border border-brand/15 bg-[#fdf8f2] p-6 shadow-sm">
@@ -635,11 +1118,17 @@
 				</div>
 
 				<div class="anchor-target mt-10 pt-16" id="ausflugsideen">
-					<p class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
-						{$t('experiences.destinations.popular')}
-					</p>
-					<div class="mt-4 grid gap-4 sm:grid-cols-2">
-						{#each destinationCards as card}
+					<div class="mx-auto max-w-3xl text-center">
+						<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
+							{$t('experiences.destinations.kicker')}
+						</p>
+						<h2 class="mt-2 font-serif text-[2rem] leading-[0.98] text-slate-900 sm:text-4xl sm:leading-[0.95]">
+							{$t('experiences.destinations.popular')}
+						</h2>
+						<div class="mx-auto mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
+					</div>
+					<div class="mt-8 grid gap-4 sm:grid-cols-2">
+						{#each filteredDestinationCards as card}
 							{#if card.id === 'nassfeld'}
 								<button
 									type="button"
@@ -943,54 +1432,94 @@
 					</div>
 				</div>
 
-				<div class="mt-12 border-t border-slate-200/70 pt-10">
-					<h3 class="text-center font-serif text-2xl text-slate-900 sm:text-3xl">
-						{$t('guestcard.experiences.faq.title')}
-					</h3>
-					<div class="mx-auto mt-6 max-w-3xl space-y-3">
-						<details class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm" open>
-							<summary class="flex cursor-pointer list-none items-center justify-between text-sm font-semibold text-slate-900">
-								{$t('faq.guestcard.q2')}
-								<ChevronDown
-									class="h-4 w-4 text-slate-400 transition-transform group-open:rotate-180"
-									aria-hidden="true"
-								/>
-							</summary>
-							<p class="mt-3 text-sm leading-relaxed text-slate-600">
-								{$t('faq.guestcard.a2')}
-							</p>
-						</details>
-
-						<details class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-							<summary class="flex cursor-pointer list-none items-center justify-between text-sm font-semibold text-slate-900">
-								{$t('faq.guestcard.q3')}
-								<ChevronDown
-									class="h-4 w-4 text-slate-400 transition-transform group-open:rotate-180"
-									aria-hidden="true"
-								/>
-							</summary>
-							<p class="mt-3 text-sm leading-relaxed text-slate-600">
-								{$t('faq.guestcard.a3')}
-							</p>
-						</details>
-
-						<!-- <details class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-							<summary class="flex cursor-pointer list-none items-center justify-between text-sm font-semibold text-slate-900">
-								{$t('faq.guestcard.q5')}
-								<ChevronDown
-									class="h-4 w-4 text-slate-400 transition-transform group-open:rotate-180"
-									aria-hidden="true"
-								/>
-							</summary>
-							<p class="mt-3 text-sm leading-relaxed text-slate-600">
-								{$t('faq.guestcard.a5')}
-							</p>
-						</details> -->
-					</div>
-				</div>
 			</section>
 		</div>
 	</div>
+
+	<div class="fixed inset-x-0 bottom-0 z-50 px-3 pb-3 lg:hidden">
+		<div class="rounded-2xl border border-white/40 bg-white/75 shadow-[0_18px_50px_rgba(15,23,42,0.22)] backdrop-blur-xl ring-1 ring-slate-200/60">
+			<div class="flex items-center justify-between px-3 py-2">
+				<button
+					type="button"
+					class="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold text-slate-900 hover:bg-white/70"
+					onclick={() => scrollToSection(activeSectionId)}
+				>
+					<List class="h-4 w-4 text-brand" aria-hidden="true" />
+					<span class="max-w-[55vw] truncate">{$t(activeSectionLabelKey)}</span>
+				</button>
+				<button
+					type="button"
+					class="inline-flex items-center gap-2 rounded-xl bg-brand px-4 py-2 text-sm font-semibold text-white"
+					onclick={() => (isMobileFilterOpen = true)}
+				>
+					<SlidersHorizontal class="h-4 w-4" aria-hidden="true" />
+					{$t('experiences.nav.filters')}
+					{#if selectedActivity}
+						<span class="ml-1 rounded-full bg-white/20 px-2 py-0.5 text-xs">1</span>
+					{/if}
+				</button>
+			</div>
+		</div>
+	</div>
+
+	{#if isMobileFilterOpen}
+		<button
+			type="button"
+			class="fixed inset-0 z-[90] bg-slate-950/50 backdrop-blur-[2px]"
+			onclick={() => (isMobileFilterOpen = false)}
+			aria-label="Filter schließen"
+		></button>
+		<div
+			class="fixed inset-x-0 bottom-0 z-[100] rounded-t-3xl border border-white/20 bg-white p-4 shadow-2xl"
+		>
+			<div class="flex items-center justify-between">
+				<p class="text-sm font-semibold text-slate-900">{$t('experiences.nav.filters')}</p>
+				<button
+					type="button"
+					class="grid h-10 w-10 place-items-center rounded-full border border-slate-200 text-slate-600"
+					onclick={() => (isMobileFilterOpen = false)}
+					aria-label="Filter schließen"
+				>
+					<X class="h-5 w-5" aria-hidden="true" />
+				</button>
+			</div>
+
+			<div class="mt-3 flex flex-wrap gap-2">
+				{#each activityFilters as filter}
+					<button
+						type="button"
+						class={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition ${
+							selectedActivity === filter.id
+								? 'bg-brand text-white'
+								: 'border border-slate-200 bg-white text-slate-700'
+						}`}
+						onclick={() => (selectedActivity = selectedActivity === filter.id ? null : filter.id)}
+						aria-pressed={selectedActivity === filter.id}
+					>
+						<filter.icon class="h-4 w-4" aria-hidden="true" />
+						{$t(filter.labelKey)}
+					</button>
+				{/each}
+			</div>
+
+			<div class="mt-4 flex gap-2">
+				<button
+					type="button"
+					class="flex-1 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-800"
+					onclick={() => (selectedActivity = null)}
+				>
+					{$t('experiences.nav.reset')}
+				</button>
+				<button
+					type="button"
+					class="flex-1 rounded-2xl bg-brand px-4 py-3 text-sm font-semibold text-white"
+					onclick={() => (isMobileFilterOpen = false)}
+				>
+					{$t('experiences.nav.apply')}
+				</button>
+			</div>
+		</div>
+	{/if}
 
 	{#if isNassfeldModalOpen}
 		<div
@@ -1086,6 +1615,27 @@
 </main>
 
 <style>
+	.nav-glass-sheen {
+		position: absolute;
+		inset: -40% -30%;
+		background:
+			radial-gradient(600px 380px at 20% 10%, rgba(255, 255, 255, 0.55), transparent 60%),
+			radial-gradient(520px 360px at 90% 30%, rgba(255, 255, 255, 0.25), transparent 55%);
+		transform: rotate(8deg);
+		opacity: 0.55;
+	}
+
+	.nav-indicator {
+		position: absolute;
+		left: 0;
+		right: 0;
+		border-radius: 16px;
+		background: rgba(255, 255, 255, 0.28);
+		border: 1px solid rgba(255, 255, 255, 0.28);
+		box-shadow: 0 10px 26px rgba(15, 23, 42, 0.1);
+		backdrop-filter: blur(14px);
+	}
+
 	.anchor-target {
 		scroll-margin-top: 7rem;
 		border-radius: 1rem;
