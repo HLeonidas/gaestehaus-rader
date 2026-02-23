@@ -3,14 +3,23 @@
 	import { asset, resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import SeoHead from '$lib/components/SeoHead.svelte';
+	import {
+		activityFilters,
+		destinationCards,
+		experienceEvents as events,
+		experienceSeasonContent as content,
+		experienceSectionLinks as sectionLinks,
+		experienceSectionTrackingLinks as sectionTrackingLinks,
+		type ActivityFilterKey,
+		type SeasonKey,
+		type SectionLink,
+	} from '$lib/data/experience';
 	import { onDestroy, onMount } from 'svelte';
 	import { tweened } from 'svelte/motion';
-	import type { ComponentType } from 'svelte';
 	import {
 		ArrowRight,
 		Bike,
 		BusFront,
-		CableCar,
 		CalendarDays,
 		ChevronRight,
 		Footprints,
@@ -18,53 +27,15 @@
 		List,
 		Mountain,
 		SlidersHorizontal,
-		Snowflake,
 		TrainFront,
-		Users,
 		Utensils,
-		Waves,
 		X,
 	} from 'lucide-svelte';
 
 	import { fly } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
 
-	type SeasonKey = 'summer' | 'winter';
-	type ActivityFilterKey = 'hiking' | 'active' | 'winter' | 'family' | 'lakes' | 'culture';
-	type ExperienceEvent = {
-		id: string;
-		season: SeasonKey;
-		activities: ActivityFilterKey[];
-		icon: ComponentType;
-		kickerKey: string;
-		titleKey: string;
-		descriptionKey?: string;
-		image: string;
-		className?: string;
-		badgeKey?: string;
-		titleSize?: string;
-		layout?: string;
-		metaKeys?: string[];
-	};
-	type DestinationCard = {
-		id: string;
-		activities: ActivityFilterKey[];
-		icon: ComponentType;
-		kickerKey: string;
-		titleKey: string;
-		bodyKey: string;
-		tagsBySeason: Record<SeasonKey, string[]>;
-	};
-	type ActivityFilter = {
-		id: ActivityFilterKey;
-		icon: ComponentType;
-		labelKey: string;
-	};
 	type NavMode = 'compact' | 'peek';
-	type SectionLink = {
-		id: string;
-		labelKey: string;
-	};
 
 	const withAsset = (path: string) => asset(path);
 
@@ -101,122 +72,6 @@
 		}
 	});
 
-	const events: ExperienceEvent[] = [
-		{
-			id: 'summer-hike',
-			season: 'summer',
-			activities: ['hiking', 'family'],
-			icon: Mountain,
-			kickerKey: 'experiences.event.summer.hike.kicker',
-			titleKey: 'experiences.event.summer.hike.title',
-			descriptionKey: 'experiences.event.summer.hike.description',
-			image: '/images/Umgebung/summer-hike.jpg',
-			layout: 'summer',
-			className: 'c1',
-			titleSize: 'text-2xl',
-			metaKeys: ['experiences.event.summer.hike.meta1', 'experiences.event.summer.hike.meta2'],
-		},
-		{
-			id: 'summer-lake',
-			season: 'summer',
-			activities: ['lakes', 'family'],
-			icon: Waves,
-			kickerKey: 'experiences.event.summer.lake.kicker',
-			titleKey: 'experiences.event.summer.lake.title',
-			image: '/images/Umgebung/summer-lake.png',
-			layout: 'summer',
-			className: 'c2',
-			titleSize: 'text-xl',
-			metaKeys: ['experiences.event.summer.lake.meta1', 'experiences.event.summer.lake.meta2'],
-		},
-		{
-			id: 'summer-bike',
-			season: 'summer',
-			activities: ['active'],
-			icon: Bike,
-			kickerKey: 'experiences.event.summer.bike.kicker',
-			titleKey: 'experiences.event.summer.bike.title',
-			image: '/images/Umgebung/summer-bike.jpg',
-			layout: 'summer',
-			className: 'c3',
-			titleSize: 'text-xl',
-			metaKeys: ['experiences.event.summer.bike.meta1', 'experiences.event.summer.bike.meta2'],
-		},
-		{
-			id: 'summer-lift',
-			season: 'summer',
-			activities: ['hiking', 'family'],
-			icon: CableCar,
-			kickerKey: 'experiences.event.summer.lift.kicker',
-			titleKey: 'experiences.event.summer.lift.title',
-			descriptionKey: 'experiences.event.summer.lift.description',
-			image: '/images/Umgebung/summer-lift.png',
-			layout: 'summer',
-			className: 'c4',
-			// badgeKey: 'experiences.badge.includedCard',
-			titleSize: 'text-2xl',
-			metaKeys: ['experiences.event.summer.lift.meta1', 'experiences.event.summer.lift.meta2'],
-		},
-		{
-			id: 'winter-ski',
-			season: 'winter',
-			activities: ['winter', 'active', 'family'],
-			icon: Snowflake,
-			kickerKey: 'experiences.event.winter.ski.kicker',
-			titleKey: 'experiences.event.winter.ski.title',
-			descriptionKey: 'experiences.event.winter.ski.description',
-			image: '/images/Umgebung/ski_nassfeld.jpg',
-			layout: 'winter',
-			className: 'c1',
-			titleSize: 'text-2xl',
-			metaKeys: ['experiences.event.winter.ski.meta1', 'experiences.event.winter.ski.meta2'],
-		},
-		{
-			id: 'winter-ice',
-			season: 'winter',
-			activities: ['winter', 'lakes', 'family'],
-			icon: Snowflake,
-			kickerKey: 'experiences.event.winter.ice.kicker',
-			titleKey: 'experiences.event.winter.ice.title',
-			image: '/images/Umgebung/winter-ice.jpg',
-			layout: 'winter',
-			className: 'c2',
-			badgeKey: 'experiences.badge.popular',
-			titleSize: 'text-xl',
-			metaKeys: ['experiences.event.winter.ice.meta1', 'experiences.event.winter.ice.meta2'],
-		},
-		{
-			id: 'winter-hike',
-			season: 'winter',
-			activities: ['winter', 'hiking'],
-			icon: Footprints,
-			kickerKey: 'experiences.event.winter.hike.kicker',
-			titleKey: 'experiences.event.winter.hike.title',
-			image: '/images/Umgebung/winter-hike.jpg',
-			layout: 'winter',
-			className: 'c3',
-			titleSize: 'text-xl',
-			metaKeys: ['experiences.event.winter.hike.meta1', 'experiences.event.winter.hike.meta2'],
-		},
-		{
-			id: 'winter-crosscountry',
-			season: 'winter',
-			activities: ['winter', 'active'],
-			icon: Mountain,
-			kickerKey: 'experiences.event.winter.crosscountry.kicker',
-			titleKey: 'experiences.event.winter.crosscountry.title',
-			descriptionKey: 'experiences.event.winter.crosscountry.description',
-			image: '/images/Umgebung/winter-crosscountry.jpg',
-			layout: 'winter',
-			className: 'c4',
-			titleSize: 'text-2xl',
-			metaKeys: [
-				'experiences.event.winter.crosscountry.meta1',
-				'experiences.event.winter.crosscountry.meta2',
-			],
-		},
-	];
-
 	const summerEvents = events.filter((event) => event.season === 'summer');
 	const winterEvents = events.filter((event) => event.season === 'winter');
 	const filteredSummerEvents = $derived.by(() => {
@@ -236,24 +91,6 @@
 	const winterFeaturedEvent = $derived(filteredWinterEvents[0]);
 	const winterSecondaryEvents = $derived(filteredWinterEvents.slice(1));
 
-	const content: Record<
-		SeasonKey,
-		{ kickerKey: string; titleKey: string; subtitleKey: string; bg: string }
-	> =
-		{
-			summer: {
-				kickerKey: 'experiences.season.summer.kicker',
-				titleKey: 'experiences.season.summer.title',
-				subtitleKey: 'experiences.season.summer.subtitle',
-				bg: '/images/Haus/gaestehaus-sommer.jpg',
-			},
-			winter: {
-				kickerKey: 'experiences.season.winter.kicker',
-				titleKey: 'experiences.season.winter.title',
-				subtitleKey: 'experiences.season.winter.subtitle',
-				bg: '/images/Haus/gaestehaus-winter.png',
-			},
-		};
 	const currentContent = $derived(content[activeTab]);
 	const seo = $derived.by(() => {
 		const isWinter = seasonFromUrl === 'winter';
@@ -266,133 +103,6 @@
 		};
 	});
 
-	const destinationCards: DestinationCard[] = [
-		{
-			id: 'nassfeld',
-			activities: ['winter', 'hiking', 'active', 'family'],
-			icon: Mountain,
-			kickerKey: 'experiences.destinations.nassfeld.kicker',
-			titleKey: 'experiences.destinations.nassfeld.title',
-			bodyKey: 'experiences.destinations.nassfeld.body',
-			tagsBySeason: {
-				summer: [
-					'experiences.destinations.tags.summer',
-					'experiences.destinations.tags.hiking',
-					'experiences.destinations.tags.panorama',
-				],
-				winter: [
-					'experiences.destinations.tags.winter',
-					'experiences.destinations.tags.ski',
-					'experiences.destinations.tags.panorama',
-				],
-			},
-		},
-		{
-			id: 'weissensee',
-			activities: ['lakes', 'family'],
-			icon: Waves,
-			kickerKey: 'experiences.destinations.weissensee.kicker',
-			titleKey: 'experiences.destinations.weissensee.title',
-			bodyKey: 'experiences.destinations.weissensee.body',
-			tagsBySeason: {
-				summer: [
-					'experiences.destinations.tags.nature',
-					'experiences.destinations.tags.swim',
-					'experiences.destinations.tags.summer',
-				],
-				winter: [
-					'experiences.destinations.tags.nature',
-					'experiences.destinations.tags.ice',
-					'experiences.destinations.tags.winter',
-				],
-			},
-		},
-		{
-			id: 'gitschtal',
-			activities: ['hiking', 'family'],
-			icon: Footprints,
-			kickerKey: 'experiences.destinations.gitschtal.kicker',
-			titleKey: 'experiences.destinations.gitschtal.title',
-			bodyKey: 'experiences.destinations.gitschtal.body',
-			tagsBySeason: {
-				summer: [
-					'experiences.destinations.tags.hiking',
-					'experiences.destinations.tags.nature',
-					'experiences.destinations.tags.family',
-				],
-				winter: [
-					'experiences.destinations.tags.nature',
-					'experiences.destinations.tags.calm',
-					'experiences.destinations.tags.family',
-				],
-			},
-		},
-		{
-			id: 'genussregion',
-			activities: ['culture'],
-			icon: Utensils,
-			kickerKey: 'experiences.destinations.genussregion.kicker',
-			titleKey: 'experiences.destinations.genussregion.title',
-			bodyKey: 'experiences.destinations.genussregion.body',
-			tagsBySeason: {
-				summer: [
-					'experiences.destinations.tags.enjoy',
-					'experiences.destinations.tags.regional',
-					'experiences.destinations.tags.slowfood',
-				],
-				winter: [
-					'experiences.destinations.tags.culture',
-					'experiences.destinations.tags.regional',
-					'experiences.destinations.tags.enjoy',
-				],
-			},
-		},
-	];
-
-	const activityFilters: ActivityFilter[] = [
-		{
-			id: 'hiking',
-			icon: Mountain,
-			labelKey: 'experiences.interests.hiking',
-		},
-		{
-			id: 'active',
-			icon: Bike,
-			labelKey: 'experiences.interests.active',
-		},
-		{
-			id: 'family',
-			icon: Users,
-			labelKey: 'experiences.interests.family',
-		},
-		{
-			id: 'lakes',
-			icon: Waves,
-			labelKey: 'experiences.interests.lakes',
-		},
-		{
-			id: 'culture',
-			icon: Utensils,
-			labelKey: 'experiences.interests.culture',
-		},
-		{
-			id: 'winter',
-			icon: Snowflake,
-			labelKey: 'experiences.interests.winter',
-		},
-	];
-
-	const sectionLinks: SectionLink[] = [
-		{ id: 'aktivitaeten', labelKey: 'experiences.nav.activities' },
-		{ id: 'ausflugsideen', labelKey: 'experiences.nav.destinations' },
-		{ id: 'gaestecard', labelKey: 'experiences.nav.guestcard' },
-	];
-	const sectionTrackingLinks: SectionLink[] = [
-		{ id: 'aktivitaeten', labelKey: 'experiences.nav.activities' },
-		{ id: 'highlights', labelKey: 'experiences.nav.highlights' },
-		{ id: 'ausflugsideen', labelKey: 'experiences.nav.destinations' },
-		{ id: 'gaestecard', labelKey: 'experiences.nav.guestcard' },
-	];
 	const navActiveSectionId = $derived(activeSectionId === 'highlights' ? '' : activeSectionId);
 
 	const activeSectionLabelKey = $derived.by(() => {
@@ -941,86 +651,70 @@
 									</div>
 								</article>
 							{/if}
-							<div class="space-y-4">
-								<div class="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:pb-0">
-									{#each summerSecondaryEvents.slice(0, 2) as event (event.id)}
+							<div class="mt-6">
+								<div class="divide-y divide-slate-200/70">
+									{#each summerSecondaryEvents as event, i (event.id)}
 										<article
 											data-season={event.season}
-											class="experience-card group relative aspect-[4/3] w-[82%] shrink-0 snap-start overflow-hidden rounded-3xl ring-1 ring-black/5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg md:h-[320px] md:w-auto md:shrink md:aspect-auto md:aspect-[16/11]"
+											class="group grid gap-4 py-6 sm:grid-cols-[220px,1fr] sm:items-center"
 										>
-											<img
-												src={withAsset(event.image)}
-												alt={`${$t(event.titleKey)} – ${$t(event.kickerKey)}`}
-												class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-												loading="lazy"
-											/>
-											<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/18 to-black/0"></div>
-											<div class="absolute left-4 top-4">
-												<span class="inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-black/38 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/95 shadow-[0_8px_20px_rgba(0,0,0,0.25)] backdrop-blur-md">
-													<event.icon class="h-3.5 w-3.5 text-brand" aria-hidden="true" />
-													{$t(event.kickerKey)}
-												</span>
+											<div
+												class={`relative w-full overflow-hidden rounded-2xl bg-slate-100 aspect-[16/10] sm:aspect-[4/3] ${
+													i % 2 === 1 ? 'sm:order-2' : ''
+												}`}
+											>
+												<img
+													src={withAsset(event.image)}
+													alt={`${$t(event.titleKey)} – ${$t(event.kickerKey)}`}
+													class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.04]"
+													loading="lazy"
+												/>
+												<div class="absolute inset-0 bg-gradient-to-t from-black/30 via-black/0 to-black/0"></div>
+												{#if event.badgeKey}
+													<span class="absolute left-3 top-3 rounded-full bg-white/80 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-800 backdrop-blur">
+														{$t(event.badgeKey)}
+													</span>
+												{/if}
 											</div>
-											<div class="absolute inset-x-0 bottom-0 p-4">
-												<div class="relative p-1">
-													<h3 class="line-clamp-2 text-lg font-semibold leading-tight text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.45)]">
+
+											<div class={`min-w-0 ${i % 2 === 1 ? 'sm:pr-6' : 'sm:pl-6'}`}>
+												<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
+													<event.icon class="h-4 w-4" aria-hidden="true" />
+													{$t(event.kickerKey)}
+												</p>
+
+												<h3 class="mt-1 text-xl font-semibold leading-tight text-slate-900">
+													<span class="bg-gradient-to-r from-slate-900 to-slate-700 bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-300 group-hover:bg-[length:100%_2px]">
 														{$t(event.titleKey)}
-													</h3>
-													<div class="pointer-events-none absolute right-0 top-0 grid h-9 w-9 place-items-center rounded-full border border-white/20 bg-black/20 text-white/85 opacity-0 transition duration-300 group-hover:translate-x-0.5 group-hover:opacity-100">
-														<ArrowRight class="h-4 w-4" aria-hidden="true" />
+													</span>
+												</h3>
+
+												{#if event.descriptionKey}
+													<p class="mt-2 text-sm leading-relaxed text-slate-600">
+														{$t(event.descriptionKey)}
+													</p>
+												{/if}
+
+												{#if event.metaKeys?.length}
+													<div class="mt-3 flex flex-wrap gap-2">
+														{#each event.metaKeys as metaKey}
+															<span class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600">
+																{$t(metaKey)}
+															</span>
+														{/each}
 													</div>
+												{/if}
+
+												<div class="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-slate-800">
+													Mehr erfahren
+													<span class="grid h-8 w-8 place-items-center rounded-full bg-white shadow-sm ring-1 ring-slate-200 transition group-hover:translate-x-0.5">
+														<ArrowRight class="h-4 w-4" aria-hidden="true" />
+													</span>
 												</div>
 											</div>
 										</article>
 									{/each}
 								</div>
-								{#if summerSecondaryEvents.length > 2}
-									<div class="grid gap-4 md:gap-6">
-										{#each summerSecondaryEvents.slice(2) as event (event.id)}
-											<article
-												data-season={event.season}
-												class="experience-card group relative aspect-[4/5] overflow-hidden rounded-3xl sm:aspect-[16/10]"
-											>
-												<img
-													src={withAsset(event.image)}
-													alt={`${$t(event.titleKey)} – ${$t(event.kickerKey)}`}
-													class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-													loading="lazy"
-												/>
-												<div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/22 to-transparent"></div>
-
-									<div class="absolute inset-x-0 bottom-0 p-4 sm:p-6">
-										<div class="relative max-w-2xl rounded-2xl border border-white/25 bg-white/16 p-4 backdrop-blur-md max-h-[48%] overflow-hidden transition-all duration-300 sm:max-h-none sm:translate-y-4 sm:opacity-0 sm:p-6 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100">
-														<div class="pointer-events-none absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-black/60 to-transparent sm:hidden" aria-hidden="true"></div>
-														<div class="overflow-auto pr-1 sm:overflow-visible sm:pr-0">
-															<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
-																<event.icon class="h-4 w-4 text-brand" aria-hidden="true" />
-																{$t(event.kickerKey)}
-															</p>
-															<h3 class={`mt-2 font-semibold text-white ${event.titleSize ?? 'text-xl'}`}>
-																{$t(event.titleKey)}
-															</h3>
-															{#if event.descriptionKey}
-																<p class="mt-2 hidden max-w-xl text-sm text-white/85 sm:block">
-																	{$t(event.descriptionKey)}
-																</p>
-															{/if}
-															{#if event.metaKeys?.length}
-																<div class="mt-3 flex flex-wrap gap-2">
-																	{#each event.metaKeys as metaKey}
-																		<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white sm:px-3 sm:text-xs">
-																			{$t(metaKey)}
-																		</span>
-																	{/each}
-																</div>
-															{/if}
-														</div>
-													</div>
-												</div>
-											</article>
-										{/each}
-									</div>
-								{/if}
 							</div>
 						</div>
 					{/if}
@@ -1096,86 +790,70 @@
 									</div>
 								</article>
 							{/if}
-							<div class="space-y-4">
-								<div class="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:pb-0">
-									{#each winterSecondaryEvents.slice(0, 2) as event (event.id)}
+							<div class="mt-6">
+								<div class="divide-y divide-slate-200/70">
+									{#each winterSecondaryEvents as event, i (event.id)}
 										<article
 											data-season={event.season}
-											class="experience-card group relative aspect-[4/3] w-[82%] shrink-0 snap-start overflow-hidden rounded-3xl ring-1 ring-black/5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg md:h-[320px] md:w-auto md:shrink md:aspect-auto md:aspect-[16/11]"
+											class="group grid gap-4 py-6 sm:grid-cols-[220px,1fr] sm:items-center"
 										>
-											<img
-												src={withAsset(event.image)}
-												alt={`${$t(event.titleKey)} – ${$t(event.kickerKey)}`}
-												class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-												loading="lazy"
-											/>
-											<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/18 to-black/0"></div>
-											<div class="absolute left-4 top-4">
-												<span class="inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-black/38 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/95 shadow-[0_8px_20px_rgba(0,0,0,0.25)] backdrop-blur-md">
-													<event.icon class="h-3.5 w-3.5 text-brand" aria-hidden="true" />
-													{$t(event.kickerKey)}
-												</span>
+											<div
+												class={`relative w-full overflow-hidden rounded-2xl bg-slate-100 aspect-[16/10] sm:aspect-[4/3] ${
+													i % 2 === 1 ? 'sm:order-2' : ''
+												}`}
+											>
+												<img
+													src={withAsset(event.image)}
+													alt={`${$t(event.titleKey)} – ${$t(event.kickerKey)}`}
+													class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.04]"
+													loading="lazy"
+												/>
+												<div class="absolute inset-0 bg-gradient-to-t from-black/30 via-black/0 to-black/0"></div>
+												{#if event.badgeKey}
+													<span class="absolute left-3 top-3 rounded-full bg-white/80 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-800 backdrop-blur">
+														{$t(event.badgeKey)}
+													</span>
+												{/if}
 											</div>
-											<div class="absolute inset-x-0 bottom-0 p-4">
-												<div class="relative p-1">
-													<h3 class="line-clamp-2 text-lg font-semibold leading-tight text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.45)]">
+
+											<div class={`min-w-0 ${i % 2 === 1 ? 'sm:pr-6' : 'sm:pl-6'}`}>
+												<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
+													<event.icon class="h-4 w-4" aria-hidden="true" />
+													{$t(event.kickerKey)}
+												</p>
+
+												<h3 class="mt-1 text-xl font-semibold leading-tight text-slate-900">
+													<span class="bg-gradient-to-r from-slate-900 to-slate-700 bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-300 group-hover:bg-[length:100%_2px]">
 														{$t(event.titleKey)}
-													</h3>
-													<div class="pointer-events-none absolute right-0 top-0 grid h-9 w-9 place-items-center rounded-full border border-white/20 bg-black/20 text-white/85 opacity-0 transition duration-300 group-hover:translate-x-0.5 group-hover:opacity-100">
-														<ArrowRight class="h-4 w-4" aria-hidden="true" />
+													</span>
+												</h3>
+
+												{#if event.descriptionKey}
+													<p class="mt-2 text-sm leading-relaxed text-slate-600">
+														{$t(event.descriptionKey)}
+													</p>
+												{/if}
+
+												{#if event.metaKeys?.length}
+													<div class="mt-3 flex flex-wrap gap-2">
+														{#each event.metaKeys as metaKey}
+															<span class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600">
+																{$t(metaKey)}
+															</span>
+														{/each}
 													</div>
+												{/if}
+
+												<div class="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-slate-800">
+													Mehr erfahren
+													<span class="grid h-8 w-8 place-items-center rounded-full bg-white shadow-sm ring-1 ring-slate-200 transition group-hover:translate-x-0.5">
+														<ArrowRight class="h-4 w-4" aria-hidden="true" />
+													</span>
 												</div>
 											</div>
 										</article>
 									{/each}
 								</div>
-								{#if winterSecondaryEvents.length > 2}
-									<div class="grid gap-4 md:gap-6">
-										{#each winterSecondaryEvents.slice(2) as event (event.id)}
-											<article
-												data-season={event.season}
-												class="experience-card group relative aspect-[4/5] overflow-hidden rounded-3xl sm:aspect-[16/10]"
-											>
-												<img
-													src={withAsset(event.image)}
-													alt={`${$t(event.titleKey)} – ${$t(event.kickerKey)}`}
-													class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-													loading="lazy"
-												/>
-												<div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/22 to-transparent"></div>
-
-									<div class="absolute inset-x-0 bottom-0 p-4 sm:p-6">
-										<div class="relative max-w-2xl rounded-2xl border border-white/25 bg-white/16 p-4 backdrop-blur-md max-h-[48%] overflow-hidden transition-all duration-300 sm:max-h-none sm:translate-y-4 sm:opacity-0 sm:p-6 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100">
-														<div class="pointer-events-none absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-black/60 to-transparent sm:hidden" aria-hidden="true"></div>
-														<div class="overflow-auto pr-1 sm:overflow-visible sm:pr-0">
-															<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
-																<event.icon class="h-4 w-4 text-brand" aria-hidden="true" />
-																{$t(event.kickerKey)}
-															</p>
-															<h3 class={`mt-2 font-semibold text-white ${event.titleSize ?? 'text-xl'}`}>
-																{$t(event.titleKey)}
-															</h3>
-															{#if event.descriptionKey}
-																<p class="mt-2 hidden max-w-xl text-sm text-white/85 sm:block">
-																	{$t(event.descriptionKey)}
-																</p>
-															{/if}
-															{#if event.metaKeys?.length}
-																<div class="mt-3 flex flex-wrap gap-2">
-																	{#each event.metaKeys as metaKey}
-																		<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white sm:px-3 sm:text-xs">
-																			{$t(metaKey)}
-																		</span>
-																	{/each}
-																</div>
-															{/if}
-														</div>
-													</div>
-												</div>
-											</article>
-										{/each}
-									</div>
-								{/if}
 							</div>
 						</div>
 					{/if}
@@ -1762,11 +1440,6 @@
 				0 0 0 12px rgba(247, 171, 0, 0.07),
 				0 12px 28px -22px rgba(247, 171, 0, 0.45);
 		}
-	}
-
-	/* cards fill their grid cell */
-	.experience-card {
-		height: 100%;
 	}
 
 	.tab-btn {

@@ -195,7 +195,7 @@ export const accommodations: Accommodation[] = [
 				en: '1-3 guests',
 			},
 		},
-		amenities: ['balkon', 'fernseher', 'kueche', 'ausziehcouch', 'wifi', 'badezimmer'],
+		amenities: ['balkon', 'fernseher', 'kueche', 'wifi', 'badezimmer'],
 		floorplanImage: '/images/Nr2/floorplan.png',
 		pricePerNightBase: 75,
 		priceMatrix: [
