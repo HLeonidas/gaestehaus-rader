@@ -209,6 +209,12 @@
 	const canNext = $derived.by(
 		() => reviewIndex + visibleReviews < (accommodation?.reviews?.length ?? 0)
 	);
+	const reviewCount = $derived.by(() => accommodation?.reviews?.length ?? 0);
+	const averageRating = $derived.by(() => {
+		const ratings = (accommodation?.reviews ?? []).map((review) => review.rating).filter((rating) => rating > 0);
+		if (!ratings.length) return null;
+		return Number((ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length).toFixed(1));
+	});
 
 	let galleryOpen = $state(false);
 	let galleryIndex = $state(0);
@@ -340,13 +346,13 @@
 				<!-- Left big -->
 				<button
 					type="button"
-					class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm"
+					class="group relative overflow-hidden rounded-3xl"
 					onclick={() => openGallery(0)}
 				>
 					<img
 						src={withAsset(accommodation.images.main)}
 						alt={roomImageAlt}
-						class="h-[220px] w-full object-cover bg-white sm:h-[320px] sm:object-cover lg:h-[420px]"
+						class="h-[260px] w-full object-cover transition duration-700 group-hover:scale-[1.02] sm:h-[360px] lg:h-[480px]"
 						loading="lazy"
 					/>
 				</button>
@@ -355,26 +361,26 @@
 				<div class="grid gap-4 grid-cols-2 lg:grid-cols-1">
 					<button
 						type="button"
-						class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm"
+						class="overflow-hidden rounded-3xl transition hover:opacity-90"
 						onclick={() => openGallery(1)}
 					>
 						<img
 							src={withAsset(accommodation.images.gallery?.[0] ?? accommodation.images.main)}
 							alt={roomImageAlt}
-							class="h-[120px] w-full object-contain bg-white sm:h-[160px] sm:object-cover lg:h-[200px]"
+							class="h-[120px] w-full object-cover sm:h-[160px] lg:h-[230px]"
 							loading="lazy"
 						/>
 					</button>
 
 					<button
 						type="button"
-						class="relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm"
+						class="relative overflow-hidden rounded-3xl transition hover:opacity-90"
 						onclick={() => openGallery(2)}
 					>
 						<img
 							src={withAsset(accommodation.images.gallery?.[1] ?? accommodation.images.main)}
 							alt={roomImageAlt}
-							class="h-[120px] w-full object-contain bg-white sm:h-[160px] sm:object-cover lg:h-[200px]"
+							class="h-[120px] w-full object-cover sm:h-[160px] lg:h-[230px]"
 							loading="lazy"
 						/>
 
@@ -393,14 +399,14 @@
 			</div>
 
 			<!-- HEADER + SHARE -->
-			<div class="mt-7 flex items-start justify-between gap-6">
+			<div class="mt-8 flex items-start justify-between gap-6">
 				<div class="min-w-0">
 					<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand pb-3">{$t('brand.name')}</p>
 					<h1 class="font-serif text-3xl leading-[0.95] text-slate-900 sm:text-5xl">
 						{accommodation.title}
 					</h1>
 					<div class="mt-4 h-[3px] w-14 rounded-full bg-brand"></div>
-					<p class="mt-2 max-w-2xl text-sm text-slate-600 sm:text-base">
+					<p class="mt-3 max-w-2xl text-sm text-slate-600 sm:text-base">
 						{accommodation.subtitle[$lang]}
 					</p>
 				</div>
@@ -420,62 +426,21 @@
 				</button>
 			</div>
 
-			<!-- INFO CARDS (4) -->
-			<div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-				<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-					<div class="flex items-center gap-3">
-						<span class="grid h-10 w-10 place-items-center rounded-xl bg-brand/10 text-brand">
-							<Ruler class="h-5 w-5" />
-						</span>
-						<div>
-							<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">{$t('room.detail.info.size')}</p>
-							<p class="mt-1 text-sm font-semibold text-slate-900">{accommodation.attributes.size}</p>
-						</div>
-					</div>
-				</div>
-				<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-					<div class="flex items-center gap-3">
-						<span class="grid h-10 w-10 place-items-center rounded-xl bg-brand/10 text-brand">
-							<Building2 class="h-5 w-5" />
-						</span>
-						<div>
-							<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">{$t('room.detail.info.floor')}</p>
-							<p class="mt-1 text-sm font-semibold text-slate-900">{accommodation.attributes.floor}</p>
-						</div>
-					</div>
-				</div>
-				<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-					<div class="flex items-center gap-3">
-						<span class="grid h-10 w-10 place-items-center rounded-xl bg-brand/10 text-brand">
-							<MountainSnow class="h-5 w-5" />
-						</span>
-						<div>
-							<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">{$t('room.detail.info.view')}</p>
-							<p class="mt-1 text-sm font-semibold text-slate-900">
-								{accommodation.attributes.view[$lang]}
-							</p>
-						</div>
-					</div>
-				</div>
-				<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-					<div class="flex items-center gap-3">
-						<span class="grid h-10 w-10 place-items-center rounded-xl bg-brand/10 text-brand">
-							<Users class="h-5 w-5" />
-						</span>
-						<div>
-							<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">{$t('room.detail.info.guests')}</p>
-							<p class="mt-1 text-sm font-semibold text-slate-900">
-								{accommodation.attributes.guests[$lang]}
-							</p>
-						</div>
-					</div>
-				</div>
+			<!-- META ROW -->
+			<div class="mt-7 flex flex-wrap items-center gap-4 text-sm font-semibold text-slate-700">
+				<span class="inline-flex items-center gap-2"><Ruler class="h-4 w-4 text-brand" />{accommodation.attributes.size}</span>
+				<span class="text-slate-300">•</span>
+				<span class="inline-flex items-center gap-2"><Building2 class="h-4 w-4 text-brand" />{accommodation.attributes.floor}</span>
+				<span class="text-slate-300">•</span>
+				<span class="inline-flex items-center gap-2"><MountainSnow class="h-4 w-4 text-brand" />{accommodation.attributes.view[$lang]}</span>
+				<span class="text-slate-300">•</span>
+				<span class="inline-flex items-center gap-2"><Users class="h-4 w-4 text-brand" />{accommodation.attributes.guests[$lang]}</span>
 			</div>
 
 			<!-- MAIN CONTENT + BOOKING CARD -->
-			<div class="mt-8 grid gap-10 lg:grid-cols-[1fr,360px] lg:items-start">
+			<div class="mt-4 grid gap-10 lg:grid-cols-[1fr,360px] lg:items-start">
 				<!-- LEFT CONTENT -->
-				<div class="space-y-12">
+				<div class="space-y-12 lg:pt-4">
 					<!-- Description -->
 					<section>
 						<h2 class="text-2xl font-serif text-slate-900">{$t('room.detail.sections.homeTitle')}</h2>
@@ -529,20 +494,18 @@
 							class="mt-5 w-full overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
 						>
 							<table class="hidden w-full text-left text-sm sm:table">
-								<thead
-									class="bg-[#fbf3e8] text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-600"
-								>
+								<thead class="bg-[#fbf3e8] text-sm font-semibold text-slate-600">
 									<tr>
-										<th class="px-4 py-3">{$t('room.detail.prices.season')}</th>
+										<th class="px-4 py-4">{$t('room.detail.prices.season')}</th>
 										<!-- <th class="px-4 py-3">Zeitraum</th> -->
-										<th class="px-4 py-3">{$t('room.detail.prices.priceNight')}</th>
-										<th class="px-4 py-3">{$t('room.detail.prices.extraPerson')}</th>
-										<th class="px-4 py-3">{$t('room.detail.prices.minStay')}</th>
+										<th class="px-4 py-4">{$t('room.detail.prices.priceNight')}</th>
+										<th class="px-4 py-4">{$t('room.detail.prices.extraPerson')}</th>
+										<th class="px-4 py-4">{$t('room.detail.prices.minStay')}</th>
 									</tr>
 								</thead>
 								<tbody class="divide-y divide-slate-100">
 									{#each accommodation.priceMatrix as row}
-										<tr class="text-slate-700">
+										<tr class={`text-slate-700 ${/sommer|summer/i.test(row.season[$lang]) ? 'bg-amber-50/50' : ''}`}>
 											<td class="px-4 py-3 font-semibold text-slate-900">{row.season[$lang]}</td>
 											<!-- <td class="px-4 py-3 text-slate-600">{row.period}</td> -->
 											<td class="px-4 py-3 font-semibold text-brand">{row.pricePerNight}</td>
@@ -592,7 +555,15 @@
 					<!-- Reviews carousel -->
 					<section>
 						<div class="flex items-center justify-between gap-4">
-							<h2 class="text-2xl font-serif text-slate-900">{$t('room.detail.sections.reviews')}</h2>
+							<div>
+								<h2 class="text-2xl font-serif text-slate-900">{$t('room.detail.sections.reviews')}</h2>
+								{#if averageRating}
+									<p class="mt-1 text-sm font-semibold text-slate-700">
+										<span class="text-amber-500">★</span> {averageRating} / 5
+										<span class="font-normal text-slate-500"> · {reviewCount} Bewertungen</span>
+									</p>
+								{/if}
+							</div>
 
 							<div class="flex items-center gap-2">
 								<button
@@ -624,7 +595,12 @@
 
 						<div class="mt-5 grid gap-4 sm:grid-cols-1 lg:grid-cols-2">
 							{#each accommodation.reviews.slice(reviewIndex, reviewIndex + visibleReviews) as review}
-								<div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+								<div class="rounded-2xl border border-[#f2e8d9] bg-[#fdfbf7] p-5 shadow-sm">
+									<div class="flex items-center gap-1 text-amber-500">
+										{#each Array(5) as _, starIndex}
+											<span class={`${starIndex < review.rating ? 'opacity-100' : 'opacity-25'}`}>★</span>
+										{/each}
+									</div>
 									<p class="mt-3 text-sm leading-relaxed text-slate-600">“{review.text}”</p>
 
 									<div class="mt-4 flex items-center gap-3">
@@ -635,7 +611,7 @@
 										</div>
 										<div class="min-w-0">
 											<p class="text-xs font-semibold text-slate-900">{review.name}</p>
-											<p class="text-[11px] text-slate-500">{review.date ?? ''}</p>
+											<p class="text-[10px] text-slate-500">{review.date ?? ''}</p>
 										</div>
 									</div>
 								</div>
@@ -647,29 +623,22 @@
 				<!-- RIGHT BOOKING CARD (sticky) -->
 				<aside class="lg:sticky booking-card">
 					<div
-						class="rounded-3xl border border-slate-200/70 bg-white/80 p-5 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.35)] backdrop-blur sm:p-6"
+						class="rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_10px_30px_-18px_rgba(15,23,42,0.35)]"
 					>
 						<!-- Header -->
-						<div class="flex items-start justify-between gap-4">
-							<div>
-								<p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-500">
-									{$t('room.detail.card.priceFrom')}
-								</p>
-								<p class="mt-1 text-slate-900">
-									<span class="text-3xl font-semibold tracking-tight"
-										>{accommodation.pricePerNightBase}&euro;</span
-									>
-									<span class="ml-1 text-xs text-slate-500">/ {$t('price.night')}</span>
-								</p>
-								<p class="mt-2 text-xs text-slate-500">{$t('room.detail.card.vatNote')}</p>
-							</div>
+						<div>
+							<p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-500">
+								{$t('room.detail.card.priceFrom')}
+							</p>
+							<p class="mt-2 text-slate-900">
+								<span class="text-5xl font-semibold tracking-tight">{accommodation.pricePerNightBase}&euro;</span>
+							</p>
+							<p class="mt-1 text-sm text-slate-500">{$t('price.night')}</p>
+							<p class="mt-2 text-xs text-slate-500">{$t('room.detail.card.vatNote')}</p>
 						</div>
 
-						<!-- Separator -->
-						<div class="my-5 h-px bg-slate-200/70"></div>
-
 						<!-- Fakten -->
-						<div class="rounded-2xl border border-slate-200/60 bg-slate-50/70 p-4">
+						<div class="mt-6">
 							<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
 								{$t('room.detail.card.facts.title')}
 							</p>
@@ -709,7 +678,7 @@
 						</div>
 
 						<!-- Aufschlsselung -->
-						<div class="mt-4 rounded-2xl border border-slate-200/60 bg-white p-4">
+						<div class="mt-6 border-t border-slate-200 pt-4">
 							<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
 								{$t('room.detail.card.breakdown.title')}
 							</p>
@@ -736,9 +705,7 @@
 								</div>
 							</div>
 
-							<div
-								class="mt-4 rounded-xl bg-slate-50 px-3 py-2 text-xs text-slate-600 ring-1 ring-slate-200/60"
-							>
+							<div class="mt-4 rounded-xl bg-slate-50 px-3 py-2 text-xs text-slate-600">
 								{$t('room.detail.card.breakdown.tip')}
 							</div>
 						</div>

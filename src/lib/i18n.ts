@@ -177,7 +177,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'room.detail.card.breakdown.cleaningLabel': 'Endreinigung',
 		'room.detail.card.breakdown.cleaningValue': '45 € einmalig',
 		'room.detail.card.breakdown.taxLabel': 'Ortstaxe',
-		'room.detail.card.breakdown.taxValue': 'laut Gemeinde',
+		'room.detail.card.breakdown.taxValue': '2,70 € pro Person / Nacht',
 		'room.detail.card.breakdown.tip':
 			'Tipp: Früh buchen lohnt sich – beliebte Wochenenden sind schnell ausgebucht.',
 		'room.detail.card.cta': 'Jetzt buchen',
@@ -641,7 +641,8 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.amenities.itemsLabel': 'Leistungen',
 		'home.amenities.basic.title': 'Basis-Komfort',
 		'home.amenities.basic.bedding.title': 'Hochwertige Bettwäsche',
-		'home.amenities.basic.bedding.body': 'Feinste ägyptische Baumwolle für einen tiefen, erholsamen Schlaf.',
+		'home.amenities.basic.bedding.body':
+			'Angenehm weiche Bettwäsche für einen erholsamen Schlaf.',
 		'home.amenities.basic.towels.title': 'Frische Handtücher',
 		'home.amenities.basic.towels.body':
 			'Extra flauschige Handtücher für Ihren Aufenthalt.',
@@ -650,7 +651,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.amenities.kitchen.title': 'Küche',
 		'home.amenities.kitchen.kitchenette.title': 'Küchenzeile',
 		'home.amenities.kitchen.kitchenette.body':
-			'Voll ausgestattet mit Induktionsherd und Mikrowelle.',
+			'Voll ausgestattet mit Herd und Mikrowelle.',
 		'home.amenities.kitchen.espresso.title': 'Nespresso-Maschine',
 		'home.amenities.kitchen.espresso.body':
 			'Inklusive einer Auswahl an Premium-Kaffeekapseln.',
@@ -1135,7 +1136,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'room.detail.card.breakdown.cleaningLabel': 'Final cleaning',
 		'room.detail.card.breakdown.cleaningValue': '€45 one-time',
 		'room.detail.card.breakdown.taxLabel': 'Local tax',
-		'room.detail.card.breakdown.taxValue': 'per municipality',
+		'room.detail.card.breakdown.taxValue': '€2.70 per person / night',
 		'room.detail.card.breakdown.tip':
 			'Tip: Booking early pays off — popular weekends fill up fast.',
 		'room.detail.card.cta': 'Book now',
@@ -1599,14 +1600,14 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.amenities.itemsLabel': 'items',
 		'home.amenities.basic.title': 'Basic comforts',
 		'home.amenities.basic.bedding.title': 'Premium bedding',
-		'home.amenities.basic.bedding.body': 'Finest Egyptian cotton for deep, restful sleep.',
+		'home.amenities.basic.bedding.body': 'High-quality, soft bed linen for restful sleep.',
 		'home.amenities.basic.towels.title': 'Fresh towels',
 		'home.amenities.basic.towels.body': 'Extra fluffy towels for your stay.',
 		'home.amenities.basic.care.title': 'Care products',
 		'home.amenities.basic.care.body': 'Sustainable soaps and shampoos.',
 		'home.amenities.kitchen.title': 'Kitchen',
 		'home.amenities.kitchen.kitchenette.title': 'Kitchenette',
-		'home.amenities.kitchen.kitchenette.body': 'Fully equipped with induction stove and microwave.',
+		'home.amenities.kitchen.kitchenette.body': 'Fully equipped with stove and microwave.',
 		'home.amenities.kitchen.espresso.title': 'Nespresso machine',
 		'home.amenities.kitchen.espresso.body': 'Includes a selection of premium coffee capsules.',
 		'home.amenities.kitchen.kettle.title': 'Kettle',
