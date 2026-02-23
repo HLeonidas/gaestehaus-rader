@@ -351,7 +351,7 @@
 <SeoHead titleKey={seo.titleKey} descriptionKey={seo.descriptionKey} image={currentContent.bg} />
 
 <aside class="hidden lg:block">
-	<div class="pointer-events-none fixed left-6 top-36 z-40">
+	<div class="pointer-events-none fixed left-6 top-24 z-40">
 		<div
 			class={`pointer-events-auto origin-top-left transition-all duration-300 ease-out ${
 				isPeek ? 'w-[240px]' : 'w-[150px]'
@@ -552,16 +552,16 @@
 <!-- ERLEBNISSE PAGE (Tailwind) -->
 <!-- Requirements: Tailwind + your bg-brand/text-brand utilities available -->
 
-<main class="bg-[#fbfaf7] pb-24 lg:pb-0">
-	<div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:pl-[10rem] lg:pr-8">
+<main class="min-h-dvh bg-[#fbfaf7] pb-24 lg:pb-0">
+	<div class="mx-auto w-full max-w-none px-4 sm:px-8 lg:px-10">
 		<!-- CONTENT WRAPPER -->
-		<div class="space-y-14" id="aktivitaeten">
+		<div class="space-y-14 lg:space-y-20" id="aktivitaeten">
 			<section class="pt-4 sm:pt-6 sm:px-10">
 				<div class="mx-auto max-w-6xl text-center">
 					<p class="mt-6 text-xs font-semibold uppercase tracking-[0.35em] text-brand sm:mt-7">
 						{$t('experiences.destinations.kicker')}
 					</p>
-					<h1 class="mt-3 font-serif text-4xl leading-[0.95] text-slate-900 sm:text-5xl">
+					<h1 class="mt-3 font-serif text-4xl leading-[0.95] text-slate-900 sm:text-5xl lg:text-6xl">
 						{$t('experiences.destinations.title')}
 					</h1>
 					<div class="mx-auto mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
@@ -601,65 +601,67 @@
 								{$t('experiences.nav.summer')}
 							</p>
 							{#if summerFeaturedEvent}
-								<article
-									data-season={summerFeaturedEvent.season}
-									class="group relative aspect-[4/5] overflow-hidden rounded-3xl sm:aspect-[16/10]"
-								>
-									<img
-										src={withAsset(summerFeaturedEvent.image)}
-										alt={`${$t(summerFeaturedEvent.titleKey)} – ${$t(summerFeaturedEvent.kickerKey)}`}
-										class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-										loading="lazy"
-									/>
-									<div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/22 to-transparent"></div>
+								<div class="relative left-1/2 right-1/2 -mx-[50vw] w-screen px-4 sm:px-8 lg:px-10">
+									<article
+										data-season={summerFeaturedEvent.season}
+										class="group relative overflow-hidden rounded-3xl min-h-[420px] lg:h-[calc(100dvh-180px)] lg:min-h-[640px]"
+									>
+										<img
+											src={withAsset(summerFeaturedEvent.image)}
+											alt={`${$t(summerFeaturedEvent.titleKey)} – ${$t(summerFeaturedEvent.kickerKey)}`}
+											class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+											loading="lazy"
+										/>
+										<div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/22 to-transparent"></div>
 
-									{#if summerFeaturedEvent.badgeKey}
-										<span
-											class="absolute right-5 top-5 rounded-full bg-brand px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white shadow-sm"
-										>
-											{$t(summerFeaturedEvent.badgeKey)}
-										</span>
-									{/if}
+										{#if summerFeaturedEvent.badgeKey}
+											<span
+												class="absolute right-5 top-5 rounded-full bg-brand px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white shadow-sm"
+											>
+												{$t(summerFeaturedEvent.badgeKey)}
+											</span>
+										{/if}
 
-									<div class="absolute inset-x-0 bottom-0 p-4 transition-[padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-6 sm:pb-4 sm:pt-6 sm:group-hover:pb-6 sm:group-focus-within:pb-6">
-										<div class="relative max-w-2xl rounded-2xl border border-white/25 bg-white/16 p-4 backdrop-blur-md max-h-[48%] overflow-hidden transition-[background-color,border-color,backdrop-filter,box-shadow,padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-h-none sm:border-transparent sm:bg-transparent sm:backdrop-blur-0 sm:shadow-none sm:px-5 sm:pb-1 sm:pt-4 sm:group-hover:border-white/25 sm:group-hover:bg-white/16 sm:group-hover:backdrop-blur-md sm:group-hover:shadow-[0_10px_26px_rgba(15,23,42,0.16)] sm:group-hover:p-6 sm:group-focus-within:border-white/25 sm:group-focus-within:bg-white/16 sm:group-focus-within:backdrop-blur-md sm:group-focus-within:shadow-[0_10px_26px_rgba(15,23,42,0.16)] sm:group-focus-within:p-6">
-											<div class="pointer-events-none absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-black/60 to-transparent sm:hidden" aria-hidden="true"></div>
-											<div class="overflow-auto pr-1 sm:overflow-visible sm:pr-0">
-												<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
-													<summerFeaturedEvent.icon class="h-4 w-4 text-brand" aria-hidden="true" />
-													{$t(summerFeaturedEvent.kickerKey)}
-												</p>
-												<h3 class={`mt-2 font-semibold text-white ${summerFeaturedEvent.titleSize ?? 'text-xl'}`}>
-													{$t(summerFeaturedEvent.titleKey)}
-												</h3>
-												{#if summerFeaturedEvent.descriptionKey}
-													<p class="mt-2 max-w-xl text-sm text-white/85 transition-[max-height,opacity,transform,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-h-0 sm:translate-y-1 sm:overflow-hidden sm:opacity-0 sm:blur-[2px] sm:group-hover:max-h-28 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-hover:blur-0 sm:group-focus-within:max-h-28 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100 sm:group-focus-within:blur-0">
-														{$t(summerFeaturedEvent.descriptionKey)}
+										<div class="absolute inset-x-0 bottom-0 p-4 transition-[padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-6 sm:pb-4 sm:pt-6 sm:group-hover:pb-6 sm:group-focus-within:pb-6">
+											<div class="relative max-w-2xl rounded-2xl border border-white/25 bg-white/16 p-4 backdrop-blur-md max-h-[48%] overflow-hidden transition-[background-color,border-color,backdrop-filter,box-shadow,padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-h-none sm:border-transparent sm:bg-transparent sm:backdrop-blur-0 sm:shadow-none sm:px-5 sm:pb-1 sm:pt-4 sm:group-hover:border-white/25 sm:group-hover:bg-white/16 sm:group-hover:backdrop-blur-md sm:group-hover:shadow-[0_10px_26px_rgba(15,23,42,0.16)] sm:group-hover:p-6 sm:group-focus-within:border-white/25 sm:group-focus-within:bg-white/16 sm:group-focus-within:backdrop-blur-md sm:group-focus-within:shadow-[0_10px_26px_rgba(15,23,42,0.16)] sm:group-focus-within:p-6">
+												<div class="pointer-events-none absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-black/60 to-transparent sm:hidden" aria-hidden="true"></div>
+												<div class="overflow-auto pr-1 sm:overflow-visible sm:pr-0">
+													<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
+														<summerFeaturedEvent.icon class="h-4 w-4 text-brand" aria-hidden="true" />
+														{$t(summerFeaturedEvent.kickerKey)}
 													</p>
-												{/if}
-												{#if summerFeaturedEvent.metaKeys?.length}
-													<div class="mt-3 flex flex-wrap gap-2 transition-[max-height,opacity,transform,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-h-0 sm:translate-y-1 sm:overflow-hidden sm:opacity-0 sm:blur-[2px] sm:delay-100 sm:group-hover:max-h-20 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-hover:blur-0 sm:group-focus-within:max-h-20 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100 sm:group-focus-within:blur-0">
-														{#each summerFeaturedEvent.metaKeys as metaKey}
-															<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white sm:px-3 sm:text-xs">
-																{$t(metaKey)}
-															</span>
-														{/each}
-													</div>
-												{/if}
+													<h3 class={`mt-2 font-semibold text-white ${summerFeaturedEvent.titleSize ?? 'text-xl'}`}>
+														{$t(summerFeaturedEvent.titleKey)}
+													</h3>
+													{#if summerFeaturedEvent.descriptionKey}
+														<p class="mt-2 max-w-xl text-sm text-white/85 transition-[max-height,opacity,transform,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-h-0 sm:translate-y-1 sm:overflow-hidden sm:opacity-0 sm:blur-[2px] sm:group-hover:max-h-28 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-hover:blur-0 sm:group-focus-within:max-h-28 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100 sm:group-focus-within:blur-0">
+															{$t(summerFeaturedEvent.descriptionKey)}
+														</p>
+													{/if}
+													{#if summerFeaturedEvent.metaKeys?.length}
+														<div class="mt-3 flex flex-wrap gap-2 transition-[max-height,opacity,transform,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-h-0 sm:translate-y-1 sm:overflow-hidden sm:opacity-0 sm:blur-[2px] sm:delay-100 sm:group-hover:max-h-20 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-hover:blur-0 sm:group-focus-within:max-h-20 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100 sm:group-focus-within:blur-0">
+															{#each summerFeaturedEvent.metaKeys as metaKey}
+																<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white sm:px-3 sm:text-xs">
+																	{$t(metaKey)}
+																</span>
+															{/each}
+														</div>
+													{/if}
+												</div>
 											</div>
 										</div>
-									</div>
-								</article>
+									</article>
+								</div>
 							{/if}
 							<div class="mt-6">
 								<div class="divide-y divide-slate-200/70">
 									{#each summerSecondaryEvents as event, i (event.id)}
 										<article
 											data-season={event.season}
-											class="group grid gap-4 py-6 sm:grid-cols-[220px,1fr] sm:items-center"
+											class="group grid gap-6 py-8 sm:grid-cols-[240px,1fr] lg:grid-cols-[320px,1fr] lg:items-center"
 										>
 											<div
-												class={`relative w-full overflow-hidden rounded-2xl bg-slate-100 aspect-[16/10] sm:aspect-[4/3] ${
+												class={`relative w-full overflow-hidden rounded-2xl bg-slate-100 aspect-[16/10] sm:aspect-[4/3] lg:aspect-[16/10] ${
 													i % 2 === 1 ? 'sm:order-2' : ''
 												}`}
 											>
@@ -729,76 +731,78 @@
 								{$t('experiences.nav.winter')}
 							</p>
 							{#if winterFeaturedEvent}
-								<article
-									data-season={winterFeaturedEvent.season}
-									class={`group relative aspect-[4/5] overflow-hidden rounded-3xl sm:aspect-[16/10] ${
-										winterFeaturedEvent.id === 'winter-ski' ? 'cursor-pointer' : ''
-									}`}
-								>
-									<img
-										src={withAsset(winterFeaturedEvent.image)}
-										alt={`${$t(winterFeaturedEvent.titleKey)} – ${$t(winterFeaturedEvent.kickerKey)}`}
-										class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-										loading="lazy"
-									/>
-									<div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/22 to-transparent"></div>
+								<div class="relative left-1/2 right-1/2 -mx-[50vw] w-screen px-4 sm:px-8 lg:px-10">
+									<article
+										data-season={winterFeaturedEvent.season}
+										class={`group relative overflow-hidden rounded-3xl min-h-[420px] lg:h-[calc(100dvh-180px)] lg:min-h-[640px] ${
+											winterFeaturedEvent.id === 'winter-ski' ? 'cursor-pointer' : ''
+										}`}
+									>
+										<img
+											src={withAsset(winterFeaturedEvent.image)}
+											alt={`${$t(winterFeaturedEvent.titleKey)} – ${$t(winterFeaturedEvent.kickerKey)}`}
+											class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+											loading="lazy"
+										/>
+										<div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/22 to-transparent"></div>
 
-									{#if winterFeaturedEvent.id === 'winter-ski'}
-										<button
-											type="button"
-											class="absolute inset-0 z-10"
-											aria-label="Nassfeld Informationen öffnen"
-											onclick={openNassfeldModal}
-										></button>
-									{/if}
+										{#if winterFeaturedEvent.id === 'winter-ski'}
+											<button
+												type="button"
+												class="absolute inset-0 z-10"
+												aria-label="Nassfeld Informationen öffnen"
+												onclick={openNassfeldModal}
+											></button>
+										{/if}
 
-									{#if winterFeaturedEvent.badgeKey}
-										<span
-											class="absolute right-5 top-5 rounded-full bg-brand px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white shadow-sm"
-										>
-											{$t(winterFeaturedEvent.badgeKey)}
-										</span>
-									{/if}
+										{#if winterFeaturedEvent.badgeKey}
+											<span
+												class="absolute right-5 top-5 rounded-full bg-brand px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white shadow-sm"
+											>
+												{$t(winterFeaturedEvent.badgeKey)}
+											</span>
+										{/if}
 
-									<div class="absolute inset-x-0 bottom-0 p-4 transition-[padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-6 sm:pb-4 sm:pt-6 sm:group-hover:pb-6 sm:group-focus-within:pb-6">
-										<div class="relative max-w-2xl rounded-2xl border border-white/25 bg-white/16 p-4 backdrop-blur-md max-h-[48%] overflow-hidden transition-[background-color,border-color,backdrop-filter,box-shadow,padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-h-none sm:border-transparent sm:bg-transparent sm:backdrop-blur-0 sm:shadow-none sm:px-5 sm:pb-1 sm:pt-4 sm:group-hover:border-white/25 sm:group-hover:bg-white/16 sm:group-hover:backdrop-blur-md sm:group-hover:shadow-[0_10px_26px_rgba(15,23,42,0.16)] sm:group-hover:p-6 sm:group-focus-within:border-white/25 sm:group-focus-within:bg-white/16 sm:group-focus-within:backdrop-blur-md sm:group-focus-within:shadow-[0_10px_26px_rgba(15,23,42,0.16)] sm:group-focus-within:p-6">
-											<div class="pointer-events-none absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-black/60 to-transparent sm:hidden" aria-hidden="true"></div>
-											<div class="overflow-auto pr-1 sm:overflow-visible sm:pr-0">
-												<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
-													<winterFeaturedEvent.icon class="h-4 w-4 text-brand" aria-hidden="true" />
-													{$t(winterFeaturedEvent.kickerKey)}
-												</p>
-												<h3 class={`mt-2 font-semibold text-white ${winterFeaturedEvent.titleSize ?? 'text-xl'}`}>
-													{$t(winterFeaturedEvent.titleKey)}
-												</h3>
-												{#if winterFeaturedEvent.descriptionKey}
-													<p class="mt-2 max-w-xl text-sm text-white/85 transition-[max-height,opacity,transform,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-h-0 sm:translate-y-1 sm:overflow-hidden sm:opacity-0 sm:blur-[2px] sm:group-hover:max-h-28 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-hover:blur-0 sm:group-focus-within:max-h-28 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100 sm:group-focus-within:blur-0">
-														{$t(winterFeaturedEvent.descriptionKey)}
+										<div class="absolute inset-x-0 bottom-0 p-4 transition-[padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-6 sm:pb-4 sm:pt-6 sm:group-hover:pb-6 sm:group-focus-within:pb-6">
+											<div class="relative max-w-2xl rounded-2xl border border-white/25 bg-white/16 p-4 backdrop-blur-md max-h-[48%] overflow-hidden transition-[background-color,border-color,backdrop-filter,box-shadow,padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-h-none sm:border-transparent sm:bg-transparent sm:backdrop-blur-0 sm:shadow-none sm:px-5 sm:pb-1 sm:pt-4 sm:group-hover:border-white/25 sm:group-hover:bg-white/16 sm:group-hover:backdrop-blur-md sm:group-hover:shadow-[0_10px_26px_rgba(15,23,42,0.16)] sm:group-hover:p-6 sm:group-focus-within:border-white/25 sm:group-focus-within:bg-white/16 sm:group-focus-within:backdrop-blur-md sm:group-focus-within:shadow-[0_10px_26px_rgba(15,23,42,0.16)] sm:group-focus-within:p-6">
+												<div class="pointer-events-none absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-black/60 to-transparent sm:hidden" aria-hidden="true"></div>
+												<div class="overflow-auto pr-1 sm:overflow-visible sm:pr-0">
+													<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
+														<winterFeaturedEvent.icon class="h-4 w-4 text-brand" aria-hidden="true" />
+														{$t(winterFeaturedEvent.kickerKey)}
 													</p>
-												{/if}
-												{#if winterFeaturedEvent.metaKeys?.length}
-													<div class="mt-3 flex flex-wrap gap-2 transition-[max-height,opacity,transform,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-h-0 sm:translate-y-1 sm:overflow-hidden sm:opacity-0 sm:blur-[2px] sm:delay-100 sm:group-hover:max-h-20 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-hover:blur-0 sm:group-focus-within:max-h-20 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100 sm:group-focus-within:blur-0">
-														{#each winterFeaturedEvent.metaKeys as metaKey}
-															<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white sm:px-3 sm:text-xs">
-																{$t(metaKey)}
-															</span>
-														{/each}
-													</div>
-												{/if}
+													<h3 class={`mt-2 font-semibold text-white ${winterFeaturedEvent.titleSize ?? 'text-xl'}`}>
+														{$t(winterFeaturedEvent.titleKey)}
+													</h3>
+													{#if winterFeaturedEvent.descriptionKey}
+														<p class="mt-2 max-w-xl text-sm text-white/85 transition-[max-height,opacity,transform,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-h-0 sm:translate-y-1 sm:overflow-hidden sm:opacity-0 sm:blur-[2px] sm:group-hover:max-h-28 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-hover:blur-0 sm:group-focus-within:max-h-28 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100 sm:group-focus-within:blur-0">
+															{$t(winterFeaturedEvent.descriptionKey)}
+														</p>
+													{/if}
+													{#if winterFeaturedEvent.metaKeys?.length}
+														<div class="mt-3 flex flex-wrap gap-2 transition-[max-height,opacity,transform,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-h-0 sm:translate-y-1 sm:overflow-hidden sm:opacity-0 sm:blur-[2px] sm:delay-100 sm:group-hover:max-h-20 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-hover:blur-0 sm:group-focus-within:max-h-20 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100 sm:group-focus-within:blur-0">
+															{#each winterFeaturedEvent.metaKeys as metaKey}
+																<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white sm:px-3 sm:text-xs">
+																	{$t(metaKey)}
+																</span>
+															{/each}
+														</div>
+													{/if}
+												</div>
 											</div>
 										</div>
-									</div>
-								</article>
+									</article>
+								</div>
 							{/if}
 							<div class="mt-6">
 								<div class="divide-y divide-slate-200/70">
 									{#each winterSecondaryEvents as event, i (event.id)}
 										<article
 											data-season={event.season}
-											class="group grid gap-4 py-6 sm:grid-cols-[220px,1fr] sm:items-center"
+											class="group grid gap-6 py-8 sm:grid-cols-[240px,1fr] lg:grid-cols-[320px,1fr] lg:items-center"
 										>
 											<div
-												class={`relative w-full overflow-hidden rounded-2xl bg-slate-100 aspect-[16/10] sm:aspect-[4/3] ${
+												class={`relative w-full overflow-hidden rounded-2xl bg-slate-100 aspect-[16/10] sm:aspect-[4/3] lg:aspect-[16/10] ${
 													i % 2 === 1 ? 'sm:order-2' : ''
 												}`}
 											>
