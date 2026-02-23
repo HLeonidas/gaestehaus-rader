@@ -5,7 +5,6 @@
 	import SeoHead from '$lib/components/SeoHead.svelte';
 	import {
 		activityFilters,
-		destinationCards,
 		experienceEvents as events,
 		experienceSeasonContent as content,
 		experienceSectionLinks as sectionLinks,
@@ -18,17 +17,12 @@
 	import { tweened } from 'svelte/motion';
 	import {
 		ArrowRight,
-		Bike,
 		BusFront,
-		CalendarDays,
 		ChevronRight,
-		Footprints,
-		Landmark,
 		List,
 		Mountain,
 		SlidersHorizontal,
-		TrainFront,
-		Utensils,
+		Waves,
 		X,
 	} from 'lucide-svelte';
 
@@ -110,51 +104,13 @@
 		return match?.labelKey ?? 'experiences.nav.title';
 	});
 
-	const filteredDestinationCards = $derived.by(() => {
-		const activity = selectedActivity;
-		if (!activity) return destinationCards;
-		const matches = destinationCards.filter((card) => card.activities.includes(activity));
-		return matches.length ? matches : destinationCards;
-	});
-
 	const guestCardLinks = {
 		benefitsOverview:
 			'https://www.nassfeld.at/de/Unterkunft-finden/Reise-planen/PREMIUM-Cards/GaesteCard-basic',
 		brochure: 'https://www.nassfeld.at/PDFs/NPS/Gaestekarten/BasisCard_Broschuere.pdf',
 	};
 
-	let isNassfeldModalOpen = $state(false);
-
-	const nassfeldFacts = [
-		'Kärntens größtes Skigebiet mit rund 110 Pistenkilometern.',
-		'Breites Angebot für Familien, Genießer und sportliche Fahrer.',
-		'Viele Hütten, Panorama-Spots und moderne Liftanlagen.',
-	];
-
-	const nassfeldTips = [
-		'Anfahrt ab Gästehaus: ca. 20-25 Minuten (Auto) oder gratis mit dem Shuttlebus zum Nassfeld.',
-		'Ideal als Tagesausflug im Winter und in der Übergangszeit.',
-		'Tipp: Früh starten für entspanntes Parken und ruhige erste Abfahrten.',
-	];
-
-	function openNassfeldModal() {
-		isNassfeldModalOpen = true;
-	}
-
-	function closeNassfeldModal() {
-		isNassfeldModalOpen = false;
-	}
-
-	function onNassfeldBackdropClick(event: MouseEvent) {
-		if (event.target === event.currentTarget) {
-			closeNassfeldModal();
-		}
-	}
-
 	function onWindowKeydown(event: KeyboardEvent) {
-		if (event.key === 'Escape' && isNassfeldModalOpen) {
-			closeNassfeldModal();
-		}
 		if (event.key === 'Escape' && isMobileFilterOpen) {
 			isMobileFilterOpen = false;
 		}
@@ -288,17 +244,6 @@
 		);
 		cards.forEach((card) => highlightObserver?.observe(card));
 	}
-
-	$effect(() => {
-		if (!isNassfeldModalOpen) return;
-
-		const previousOverflow = document.body.style.overflow;
-		document.body.style.overflow = 'hidden';
-
-		return () => {
-			document.body.style.overflow = previousOverflow;
-		};
-	});
 
 	$effect(() => {
 		if (isCompact) {
@@ -749,15 +694,6 @@
 										/>
 										<div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/22 to-transparent"></div>
 
-										{#if winterFeaturedEvent.id === 'winter-ski'}
-											<button
-												type="button"
-												class="absolute inset-0 z-10"
-												aria-label="Nassfeld Informationen öffnen"
-												onclick={openNassfeldModal}
-											></button>
-										{/if}
-
 										{#if winterFeaturedEvent.badgeKey}
 											<span
 												class="absolute right-5 top-5 rounded-full bg-brand px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white shadow-sm"
@@ -1062,321 +998,214 @@
 					</div>
 				</div>
 
-				<div class="anchor-target mt-10 pt-16" id="ausflugsideen">
-					<div class="mx-auto max-w-3xl text-center">
-						<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
-							{$t('experiences.destinations.kicker')}
-						</p>
-						<h2 class="mt-2 font-serif text-[2rem] leading-[0.98] text-slate-900 sm:text-4xl sm:leading-[0.95]">
-							{$t('experiences.destinations.popular')}
-						</h2>
-						<div class="mx-auto mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
-					</div>
-					<div class="mt-8 grid gap-4 sm:grid-cols-2">
-						{#each filteredDestinationCards as card}
-							{#if card.id === 'nassfeld'}
-								<button
-									type="button"
-									class="destination-card group text-left"
-									onclick={openNassfeldModal}
-									aria-haspopup="dialog"
-									aria-expanded={isNassfeldModalOpen}
-								>
-									<div class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">
-										<card.icon class="h-4 w-4" aria-hidden="true" />
-										{$t(card.kickerKey)}
-									</div>
-									<h3 class="mt-2 text-xl font-semibold leading-tight text-slate-900">
-										{$t(card.titleKey)}
-									</h3>
-									<p class="mt-2 text-sm leading-relaxed text-slate-600">
-										{$t(card.bodyKey)}
-									</p>
-									<div class="mt-4 flex flex-wrap gap-2">
-										{#each card.tagsBySeason[activeTab] as tag}
-											<span class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600">
-												{$t(tag)}
-											</span>
-										{/each}
-									</div>
-									<div class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-slate-800">
-										Mehr zu Nassfeld
-										<ArrowRight class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-									</div>
-								</button>
-							{:else}
-								<article class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg">
-									<div class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-brand">
-										<card.icon class="h-4 w-4" aria-hidden="true" />
-										{$t(card.kickerKey)}
-									</div>
-									<h3 class="mt-2 text-xl font-semibold leading-tight text-slate-900">
-										{$t(card.titleKey)}
-									</h3>
-									<p class="mt-2 text-sm leading-relaxed text-slate-600">
-										{$t(card.bodyKey)}
-									</p>
-									<div class="mt-4 flex flex-wrap gap-2">
-										{#each card.tagsBySeason[activeTab] as tag}
-											<span class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600">
-												{$t(tag)}
-											</span>
-										{/each}
-									</div>
-								</article>
-							{/if}
-						{/each}
-					</div>
-				</div>
 			</section>
 
 			<section class="anchor-target mt-12 sm:p-10" id="gaestecard">
-				<div class="mx-auto max-w-3xl">
-					<div class="rounded-2xl border border-slate-200 bg-white/70 p-5 text-left sm:border-0 sm:bg-transparent sm:p-0 sm:text-center">
-						<p class="text-xs font-semibold uppercase tracking-[0.28em] text-brand sm:tracking-[0.35em]">
-							{$t('guestcard.experiences.freeNote')}
-						</p>
-						<h2 class="mt-2 font-serif text-[2rem] leading-[0.98] text-slate-900 sm:mt-3 sm:text-4xl sm:leading-[0.95]">
-							{$t('guestcard.experiences.title')}
-						</h2>
-						<div class="mt-3 h-[3px] w-14 rounded-full bg-brand sm:mx-auto"></div>
-						<p class="mt-4 text-sm leading-relaxed text-slate-600 sm:text-base">
-							{$t('guestcard.experiences.subtitle')}
-						</p>
-						<a
-							href={guestCardLinks.benefitsOverview}
-							class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-700 underline decoration-slate-300 underline-offset-4 transition hover:text-brand sm:mt-2"
-							target="_blank"
-							rel="noreferrer"
-						>
-							{$t('guestcard.experiences.benefitsOverviewCta')}
-							<ArrowRight class="h-4 w-4" aria-hidden="true" />
-						</a>
-					</div>
-				</div>
 
-				<div class="mt-10 space-y-10">
-					<div>
-						<div class="flex items-center gap-3">
-							<span class="h-[2px] w-6 rounded-full bg-brand"></span>
-							<h3 class="text-base font-semibold text-slate-900">
-								{$t('guestcard.experiences.transport.title')}
-							</h3>
-						</div>
 
-						<div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-							<div class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
-								<div class="grid h-10 w-10 place-items-center rounded-full bg-brand/10 text-brand">
-									<BusFront class="h-5 w-5" aria-hidden="true" />
-								</div>
-								<h4 class="mt-4 text-sm font-semibold text-slate-900">
-									{$t('guestcard.experiences.transport.bus.title')}
-								</h4>
-								<p class="mt-2 text-xs leading-relaxed text-slate-500">
-									{$t('guestcard.experiences.transport.bus.body')}
+				
+
+				<div class="mx-auto max-w-6xl space-y-8 lg:space-y-10">
+					<div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8 lg:p-10">
+						<div class="grid gap-8 lg:grid-cols-[1.05fr,0.95fr] lg:items-center">
+							<div>
+								<p class="text-xs font-semibold uppercase tracking-[0.32em] text-brand">
+									GästeCard Basic inklusive
 								</p>
+								<h2 class="mt-3 font-serif text-3xl leading-[1.02] text-slate-900 sm:text-4xl">
+									Mehr erleben - ohne Auto.
+								</h2>
+								<p class="mt-4 max-w-xl text-sm leading-relaxed text-slate-600 sm:text-base">
+									Bei Ihrer Übernachtung im Gästehaus Rader ist die GästeCard Basic inklusive. Sie
+									starten direkt in Mobilität, Erholung und Naturerlebnisse - ohne zusätzliche Planung.
+								</p>
+								<ul class="mt-5 space-y-2 text-sm text-slate-700">
+									<li class="flex items-start gap-2">
+										<span class="mt-2 h-1.5 w-1.5 rounded-full bg-brand"></span>
+										Bus & Bahn in Kärnten gratis nutzen
+									</li>
+									<li class="flex items-start gap-2">
+										<span class="mt-2 h-1.5 w-1.5 rounded-full bg-brand"></span>
+										Viele Freizeitvorteile ab der ersten Nacht
+									</li>
+									<li class="flex items-start gap-2">
+										<span class="mt-2 h-1.5 w-1.5 rounded-full bg-brand"></span>
+										Mehr Zeit für Urlaub statt Organisation
+									</li>
+								</ul>
+								<div class="mt-6 flex flex-wrap items-center gap-3">
+									<a
+										href={guestCardLinks.benefitsOverview}
+										target="_blank"
+										rel="noreferrer"
+										class="inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 motion-reduce:transition-none"
+									>
+										Alle Vorteile ansehen
+										<ArrowRight class="h-4 w-4" aria-hidden="true" />
+									</a>
+									<a
+										href={guestCardLinks.brochure}
+										target="_blank"
+										rel="noreferrer"
+										class="inline-flex items-center gap-1 text-sm font-semibold text-slate-700 underline decoration-slate-300 underline-offset-4 transition hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 motion-reduce:transition-none"
+									>
+										Aktuelle Leistungsübersicht
+									</a>
+								</div>
 							</div>
 
-							<div class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
-								<div class="grid h-10 w-10 place-items-center rounded-full bg-brand/10 text-brand">
-									<TrainFront class="h-5 w-5" aria-hidden="true" />
-								</div>
-								<h4 class="mt-4 text-sm font-semibold text-slate-900">
-									{$t('guestcard.experiences.transport.sbahn.title')}
-								</h4>
-								<p class="mt-2 text-xs leading-relaxed text-slate-500">
-									{$t('guestcard.experiences.transport.sbahn.body')}
-								</p>
-							</div>
-
-							<div class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
-								<div class="grid h-10 w-10 place-items-center rounded-full bg-brand/10 text-brand">
-									<CalendarDays class="h-5 w-5" aria-hidden="true" />
-								</div>
-								<h4 class="mt-4 text-sm font-semibold text-slate-900">
-									{$t('guestcard.experiences.transport.arrival.title')}
-								</h4>
-								<p class="mt-2 text-xs leading-relaxed text-slate-500">
-									{$t('guestcard.experiences.transport.arrival.body')}
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div>
-						<div class="flex items-center gap-3">
-							<span class="h-[2px] w-6 rounded-full bg-brand"></span>
-							<h3 class="text-base font-semibold text-slate-900">
-								{$t('guestcard.experiences.wellness.title')}
-							</h3>
-						</div>
-
-						<div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-							<article class="group relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
-								<img
-									src={withAsset('/images/Umgebung/freibad.png')}
-									alt={$t('guestcard.experiences.wellness.card1.alt')}
-									class="h-44 w-full object-cover sm:h-40 lg:h-44"
-									loading="lazy"
-								/>
-								<div class="absolute inset-0 bg-gradient-to-t from-black/58 via-black/16 to-transparent"></div>
-								<div class="absolute bottom-0 left-0 right-0 p-4">
-									<p class="text-sm font-semibold text-white">
-										{$t('guestcard.experiences.wellness.card1.title')}
-									</p>
-									<p class="mt-1 text-xs text-white/85">
-										{$t('guestcard.experiences.wellness.card1.body')}
-									</p>
-								</div>
-							</article>
-
-							<article class="group relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
+							<div class="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 shadow-sm">
 								<img
 									src={withAsset('/images/Umgebung/summer-lake.png')}
-									alt={$t('guestcard.experiences.wellness.card2.alt')}
-									class="h-44 w-full object-cover sm:h-40 lg:h-44"
+									alt="Urlaubsgäste am See in Kärnten"
+									class="h-64 w-full object-cover sm:h-72 lg:h-[22rem]"
 									loading="lazy"
 								/>
-								<div class="absolute inset-0 bg-gradient-to-t from-black/58 via-black/16 to-transparent"></div>
-								<div class="absolute bottom-0 left-0 right-0 p-4">
-									<p class="text-sm font-semibold text-white">
-										{$t('guestcard.experiences.wellness.card2.title')}
-									</p>
-									<p class="mt-1 text-xs text-white/85">
-										{$t('guestcard.experiences.wellness.card2.body')}
+								<div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-black/0 to-transparent"></div>
+								<div class="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
+									<p class="inline-flex items-center rounded-full bg-white/90 px-3 py-1 text-xs font-semibold tracking-[0.18em] text-slate-800">
+										INKLUSIVE FÜR ÜBERNACHTUNGSGÄSTE
 									</p>
 								</div>
-							</article>
-
-							<article class="group relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
-								<img
-									src={withAsset('/images/Umgebung/sauna.png')}
-									alt={$t('guestcard.experiences.wellness.card3.alt')}
-									class="h-44 w-full object-cover sm:h-40 lg:h-44"
-									loading="lazy"
-								/>
-								<div class="absolute inset-0 bg-gradient-to-t from-black/58 via-black/16 to-transparent"></div>
-								<div class="absolute bottom-0 left-0 right-0 p-4">
-									<p class="text-sm font-semibold text-white">
-										{$t('guestcard.experiences.wellness.card3.title')}
-									</p>
-									<p class="mt-1 text-xs text-white/85">
-										{$t('guestcard.experiences.wellness.card3.body')}
-									</p>
-								</div>
-							</article>
+							</div>
 						</div>
 					</div>
 
-					<div>
-						<div class="flex items-center gap-3">
-							<span class="h-[2px] w-6 rounded-full bg-brand"></span>
-							<h3 class="text-base font-semibold text-slate-900">
-								{$t('guestcard.experiences.outdoor.title')}
-							</h3>
-						</div>
-
-						<div class="mt-4 grid gap-4 lg:grid-cols-4">
-							<div class="group rounded-2xl border border-brand/20 bg-[#fff4e6] p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/40 hover:shadow-md lg:col-span-2">
-								<div class="grid h-10 w-10 place-items-center rounded-full bg-brand/10 text-brand">
-									<Footprints class="h-5 w-5" aria-hidden="true" />
+					<div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+						<article class="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md motion-reduce:transform-none motion-reduce:transition-none">
+							<img
+								src={withAsset('/images/Umgebung/freibad.png')}
+								alt="Bus und Bahn als flexible Mobilität ohne Auto"
+								class="h-44 w-full object-cover"
+								loading="lazy"
+							/>
+							<div class="flex flex-1 flex-col p-5">
+								<div class="flex items-center gap-2">
+									<BusFront class="h-4 w-4 text-brand" aria-hidden="true" />
+									<h3 class="text-lg font-semibold text-slate-900">Flexibel unterwegs</h3>
 								</div>
-								<p class="mt-4 text-sm font-semibold text-slate-900">
-									{$t('guestcard.experiences.outdoor.feature.title')}
+								<p class="mt-2 text-sm leading-relaxed text-slate-600">
+									Kostenfreie Bus- und Bahnverbindungen bringen Sie bequem durch Kärnten - ideal für Ausflüge ohne Auto.
 								</p>
-								<p class="mt-2 text-xs leading-relaxed text-slate-600">
-									{$t('guestcard.experiences.outdoor.feature.body')}
-								</p>
-								<!-- <a
-									href={`${resolve('/erlebnisse/sommer')}#aktivitaeten`}
-									class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand"
+								<div class="mt-4 flex flex-wrap gap-2">
+									<span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-600">Bus & Bahn gratis</span>
+									<span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-600">Ohne Parkplatzsuche</span>
+								</div>
+								<a
+									href={guestCardLinks.benefitsOverview}
+									target="_blank"
+									rel="noreferrer"
+									class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-800 transition hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 motion-reduce:transition-none"
 								>
-									{$t('guestcard.experiences.outdoor.feature.cta')}
-									<ArrowRight class="h-4 w-4" aria-hidden="true" />
-								</a> -->
+									Mehr erfahren
+									<ArrowRight class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transform-none motion-reduce:transition-none" aria-hidden="true" />
+								</a>
 							</div>
+						</article>
 
-							<div class="group rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
-								<div class="mx-auto grid h-10 w-10 place-items-center rounded-full bg-brand/10 text-brand">
-									<Bike class="h-5 w-5" aria-hidden="true" />
+						<article class="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md motion-reduce:transform-none motion-reduce:transition-none">
+							<img
+								src={withAsset('/images/Umgebung/sauna.png')}
+								alt="Baden und Wellness mit Gästekarte-Vorteilen"
+								class="h-44 w-full object-cover"
+								loading="lazy"
+							/>
+							<div class="flex flex-1 flex-col p-5">
+								<div class="flex items-center gap-2">
+									<Waves class="h-4 w-4 text-brand" aria-hidden="true" />
+									<h3 class="text-lg font-semibold text-slate-900">Baden & Wellness</h3>
 								</div>
-								<p class="mt-3 text-sm font-semibold text-slate-900">
-									{$t('guestcard.experiences.outdoor.bike.title')}
+								<p class="mt-2 text-sm leading-relaxed text-slate-600">
+									Freibäder, Seen und ausgewählte Wellness-Angebote machen aus jedem Urlaubstag einen entspannten Genießertag.
 								</p>
-								<p class="mt-2 text-xs text-slate-500">
-									{$t('guestcard.experiences.outdoor.bike.body')}
-								</p>
+								<div class="mt-4 flex flex-wrap gap-2">
+									<span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-600">Freibäder & Seen</span>
+									<span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-600">Sauna-Vorteile</span>
+								</div>
+								<a
+									href={guestCardLinks.benefitsOverview}
+									target="_blank"
+									rel="noreferrer"
+									class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-800 transition hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 motion-reduce:transition-none"
+								>
+									Mehr erfahren
+									<ArrowRight class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transform-none motion-reduce:transition-none" aria-hidden="true" />
+								</a>
 							</div>
+						</article>
 
-							<div class="group rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
-								<div class="mx-auto grid h-10 w-10 place-items-center rounded-full bg-brand/10 text-brand">
-									<Mountain class="h-5 w-5" aria-hidden="true" />
+						<article class="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md motion-reduce:transform-none motion-reduce:transition-none">
+							<img
+								src={withAsset('/images/Umgebung/ski_nassfeld.jpg')}
+								alt="Aktiv in der Natur am Nassfeld und im Gailtal"
+								class="h-44 w-full object-cover"
+								loading="lazy"
+							/>
+							<div class="flex flex-1 flex-col p-5">
+								<div class="flex items-center gap-2">
+									<Mountain class="h-4 w-4 text-brand" aria-hidden="true" />
+									<h3 class="text-lg font-semibold text-slate-900">Aktiv & Natur</h3>
 								</div>
-								<p class="mt-3 text-sm font-semibold text-slate-900">
-									{$t('guestcard.experiences.outdoor.adventure.title')}
+								<p class="mt-2 text-sm leading-relaxed text-slate-600">
+									Von Nassfeld bis Gailtal: Radwege, Bergmomente und geführte Naturerlebnisse für aktive Urlaubstage.
 								</p>
-								<p class="mt-2 text-xs text-slate-500">
-									{$t('guestcard.experiences.outdoor.adventure.body')}
-								</p>
+								<div class="mt-4 flex flex-wrap gap-2">
+									<span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-600">Nassfeld Highlights</span>
+									<span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-600">Naturprogramme</span>
+								</div>
+								<a
+									href={guestCardLinks.benefitsOverview}
+									target="_blank"
+									rel="noreferrer"
+									class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-800 transition hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 motion-reduce:transition-none"
+								>
+									Mehr erfahren
+									<ArrowRight class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transform-none motion-reduce:transition-none" aria-hidden="true" />
+								</a>
 							</div>
-						</div>
+						</article>
 					</div>
 
-					<div>
-						<div class="flex items-center gap-3">
-							<span class="h-[2px] w-6 rounded-full bg-brand"></span>
-							<h3 class="text-base font-semibold text-slate-900">
-								{$t('guestcard.experiences.food.title')}
-							</h3>
-						</div>
-
-						<div class="mt-4">
-							<div class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
-								<div class="flex items-start gap-3">
-									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-brand/10 text-brand">
-										<Utensils class="h-5 w-5" aria-hidden="true" />
-									</div>
-									<div>
-										<p class="text-sm font-semibold text-slate-900">
-											{$t('guestcard.experiences.food.card.title')}
-										</p>
-										<p class="mt-1 text-xs leading-relaxed text-slate-500">
-											{$t('guestcard.experiences.food.card.body')}
-										</p>
-									</div>
-								</div>
+					<details class="group rounded-2xl border border-slate-200 bg-white/70 p-5 shadow-sm">
+						<summary class="flex cursor-pointer list-none items-center justify-between gap-3 text-left text-sm font-semibold text-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2">
+							<span>Alle Leistungen im Überblick</span>
+							<ArrowRight class="h-4 w-4 transition-transform duration-300 group-open:rotate-90 motion-reduce:transition-none" aria-hidden="true" />
+						</summary>
+						<div class="mt-4 grid gap-4 border-t border-slate-200 pt-4 sm:grid-cols-2">
+							<div>
+								<h3 class="text-sm font-semibold text-slate-900">Mobilität</h3>
+								<ul class="mt-2 space-y-1.5 text-sm text-slate-600">
+									<li>Regionale Buslinien im Gültigkeitsbereich inklusive</li>
+									<li>ÖBB S-Bahn in Kärnten kostenfrei nutzbar</li>
+									<li>Auch am An- und Abreisetag gültig</li>
+								</ul>
+							</div>
+							<div>
+								<h3 class="text-sm font-semibold text-slate-900">Wellness</h3>
+								<ul class="mt-2 space-y-1.5 text-sm text-slate-600">
+									<li>Ermäßigungen bei Freibädern in der Region</li>
+									<li>Vorteile bei ausgewählten Saunen</li>
+									<li>Seen und Naturbadeplätze schnell erreichbar</li>
+								</ul>
+							</div>
+							<div>
+								<h3 class="text-sm font-semibold text-slate-900">Draußen</h3>
+								<ul class="mt-2 space-y-1.5 text-sm text-slate-600">
+									<li>Vergünstigungen bei Berg- und Naturangeboten</li>
+									<li>Geführte Naturerlebnisse saisonal verfügbar</li>
+									<li>Rad- und Wandererlebnisse rund ums Gailtal</li>
+								</ul>
+							</div>
+							<div>
+								<h3 class="text-sm font-semibold text-slate-900">Kulinarik</h3>
+								<ul class="mt-2 space-y-1.5 text-sm text-slate-600">
+									<li>Vorteile bei regionalen Genuss-Partnern</li>
+									<li>Ausgewählte Produzenten und Hofläden entdecken</li>
+								</ul>
 							</div>
 						</div>
-					</div>
-
-					<div>
-						<div class="flex items-center gap-3">
-							<span class="h-[2px] w-6 rounded-full bg-brand"></span>
-							<h3 class="text-base font-semibold text-slate-900">
-								{$t('guestcard.experiences.culture.title')}
-							</h3>
-						</div>
-
-						<div class="mt-4">
-							<div class="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
-								<div class="flex items-start gap-3">
-									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-brand/10 text-brand">
-										<Landmark class="h-5 w-5" aria-hidden="true" />
-									</div>
-									<div>
-										<p class="text-sm font-semibold text-slate-900">
-											{$t('guestcard.experiences.culture.card.title')}
-										</p>
-										<p class="mt-1 text-xs leading-relaxed text-slate-500">
-											{$t('guestcard.experiences.culture.card.body')}
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+					</details>
 				</div>
-
 			</section>
 		</div>
 	</div>
@@ -1466,97 +1295,6 @@
 		</div>
 	{/if}
 
-	{#if isNassfeldModalOpen}
-		<div
-			class="fixed inset-0 z-[100] flex items-end justify-center bg-slate-950/65 p-2 backdrop-blur-[2px] sm:items-center sm:p-6"
-			role="presentation"
-			onclick={onNassfeldBackdropClick}
-		>
-			<div
-				role="dialog"
-				aria-modal="true"
-				aria-labelledby="nassfeld-modal-title"
-				class="w-full max-w-4xl max-h-[95dvh] overflow-y-auto overscroll-contain rounded-2xl border border-white/20 bg-white shadow-2xl sm:max-h-[90dvh] sm:rounded-3xl"
-			>
-				<div class="grid grid-rows-[auto,1fr] md:grid-cols-[1.05fr,0.95fr] md:grid-rows-1">
-					<div class="relative min-h-[210px] max-h-[34dvh] md:min-h-full md:max-h-none">
-						<img
-							src={withAsset('/images/Umgebung/ski_nassfeld.jpg')}
-							alt="Skifahren am Nassfeld"
-							class="h-full w-full object-cover object-center"
-						/>
-						<div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/45 to-transparent p-4 text-white sm:p-5">
-							<p class="text-xs font-semibold uppercase tracking-[0.22em] text-brand">Winter Highlight</p>
-							<h3 class="mt-1 text-xl font-semibold sm:text-2xl">Nassfeld: Sun Ski World</h3>
-						</div>
-					</div>
-
-					<div class="flex min-h-0 flex-col p-4 sm:p-7">
-						<div
-							class="sticky top-0 z-10 -mx-4 -mt-1 mb-2 flex items-start justify-between gap-3 border-b border-slate-100 bg-white/95 px-4 py-2 backdrop-blur-sm sm:static sm:m-0 sm:border-0 sm:bg-transparent sm:p-0"
-						>
-							<div>
-								<p class="text-xs font-semibold uppercase tracking-[0.22em] text-brand">Skigebiet</p>
-								<h2 id="nassfeld-modal-title" class="mt-1 text-2xl font-semibold leading-tight text-slate-900">
-									Nassfeld Informationen
-								</h2>
-							</div>
-							<button
-								type="button"
-								class="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-slate-200 text-slate-600 transition hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 sm:h-10 sm:w-10"
-								onclick={closeNassfeldModal}
-								aria-label="Modal schließen"
-							>
-								<X class="h-5 w-5" aria-hidden="true" />
-							</button>
-						</div>
-
-						<p class="mt-3 text-[15px] leading-relaxed text-slate-600 sm:mt-4 sm:text-sm">
-							Perfekt für einen aktiven Tag im Schnee: kurze Anfahrt, viele Pisten und starke Infrastruktur direkt im Grenzgebiet Kärnten/Tirol.
-						</p>
-
-						<div class="mt-4 space-y-4 sm:mt-5">
-							<div>
-								<p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">Highlights</p>
-								<ul class="mt-2 space-y-1.5 text-[15px] leading-7 text-slate-700 sm:text-sm sm:leading-relaxed">
-									{#each nassfeldFacts as fact}
-										<li>• {fact}</li>
-									{/each}
-								</ul>
-							</div>
-
-							<div>
-								<p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-500">Gut zu wissen</p>
-								<ul class="mt-2 space-y-1.5 text-[15px] leading-7 text-slate-700 sm:text-sm sm:leading-relaxed">
-									{#each nassfeldTips as tip}
-										<li>• {tip}</li>
-									{/each}
-								</ul>
-							</div>
-						</div>
-
-						<div class="mt-5 flex flex-col gap-2 sm:mt-6 sm:flex-row sm:flex-wrap sm:gap-3">
-							<a
-								href="https://www.nassfeld.at/"
-								target="_blank"
-								rel="noreferrer"
-								class="inline-flex items-center justify-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand/90 sm:justify-start"
-							>
-								Nassfeld Website
-								<ArrowRight class="h-4 w-4" aria-hidden="true" />
-							</a>
-							<a
-								href={resolve('/buchen')}
-								class="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-800 transition hover:bg-slate-50 sm:justify-start"
-							>
-								Unterkunft buchen
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	{/if}
 </main>
 
 <style>
@@ -1628,22 +1366,4 @@
 		background: radial-gradient(circle, rgba(255, 180, 0, 0.6), transparent 60%);
 	}
 
-	.destination-card {
-		width: 100%;
-		border-radius: 1rem;
-		border: 1px solid rgb(226 232 240);
-		background: white;
-		padding: 1.25rem;
-		box-shadow: 0 1px 2px 0 rgba(15, 23, 42, 0.08);
-		transition:
-			transform 300ms,
-			box-shadow 300ms,
-			border-color 300ms;
-	}
-
-	.destination-card:hover {
-		transform: translateY(-0.25rem);
-		border-color: rgba(247, 171, 0, 0.35);
-		box-shadow: 0 14px 28px -18px rgba(15, 23, 42, 0.34);
-	}
 </style>
