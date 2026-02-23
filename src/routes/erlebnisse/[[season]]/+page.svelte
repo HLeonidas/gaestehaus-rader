@@ -52,6 +52,7 @@
 	let showAllSeasons = $state(true);
 	let activeSectionId = $state('aktivitaeten');
 	let isMobileFilterOpen = $state(false);
+	let isMobileNavOpen = $state(false);
 	let navMode = $state<NavMode>('compact');
 	let navListEl = $state<HTMLDivElement | null>(null);
 	const btnEls = new Map<string, HTMLButtonElement>();
@@ -61,6 +62,11 @@
 	let scrollCollapseTimer: number | null = null;
 	let highlightObserver: IntersectionObserver | null = null;
 	let manualTabUntil = 0;
+	const ICON_SLOT = 'h-11 w-11 rounded-2xl grid place-items-center shrink-0';
+	const ICON_SIZE = 'h-5 w-5';
+	const ROW_BASE = 'w-full rounded-2xl transition duration-200';
+	const ROW_PEEK = 'min-h-[48px] px-3 py-2 flex items-center gap-3';
+	const ROW_COMPACT = 'mt-3 h-12 w-12 grid place-items-center';
 
 	const isPeek = $derived(navMode === 'peek');
 	const isCompact = $derived(navMode === 'compact');
@@ -105,6 +111,11 @@
 	const navActiveSectionId = $derived(activeSectionId === 'highlights' ? '' : activeSectionId);
 
 	const activeSectionLabelKey = $derived.by(() => {
+		if (activeSectionId === 'highlights') {
+			return activeHighlightsSeason === 'winter'
+				? 'experiences.nav.winter'
+				: 'experiences.nav.summer';
+		}
 		const match = sectionTrackingLinks.find((section) => section.id === activeSectionId);
 		return match?.labelKey ?? 'experiences.nav.title';
 	});
@@ -123,8 +134,9 @@
 	};
 
 	function onWindowKeydown(event: KeyboardEvent) {
-		if (event.key === 'Escape' && isMobileFilterOpen) {
-			isMobileFilterOpen = false;
+		if (event.key === 'Escape') {
+			if (isMobileFilterOpen) isMobileFilterOpen = false;
+			if (isMobileNavOpen) isMobileNavOpen = false;
 		}
 	}
 
@@ -132,6 +144,20 @@
 		const el = document.getElementById(id);
 		if (!el) return;
 		el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+	}
+
+	function openMobileNav() {
+		isMobileFilterOpen = false;
+		isMobileNavOpen = true;
+	}
+
+	function closeMobileNav() {
+		isMobileNavOpen = false;
+	}
+
+	function onMobileNavSelect(id: string) {
+		scrollToSection(id);
+		closeMobileNav();
 	}
 
 	function scrollToSeasonHighlightsFromUrl() {
@@ -321,13 +347,13 @@
 			onfocusout={onNavFocusOut}
 		>
 			<div class="relative rounded-2xl bg-white/70 backdrop-blur-md ring-1 ring-slate-200/70 shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-shadow duration-300 hover:shadow-[0_16px_38px_rgba(15,23,42,0.14)]">
-				<div class={`flex items-center ${isPeek ? 'gap-2 px-3 pt-3' : 'justify-center px-3 py-3'}`}>
+				<div class={`flex items-center ${isPeek ? 'gap-2 px-3 py-3' : 'justify-center px-3 py-3'}`}>
 					<button
 						type="button"
-						class={`group relative inline-flex h-11 w-11 items-center justify-center leading-none rounded-2xl transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 ${
+						class={`group relative grid ${isPeek ? 'h-12 w-12' : ROW_COMPACT} place-items-center leading-none rounded-2xl transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 ${
 							isPeek
-								? 'bg-white text-slate-900 ring-1 ring-brand/20 shadow-sm hover:-translate-y-0.5 hover:shadow-md'
-								: 'bg-white/80 text-slate-800 ring-1 ring-slate-200/80 hover:-translate-y-0.5 hover:bg-white hover:shadow-sm'
+								? 'bg-white text-slate-900 ring-1 ring-brand/20 shadow-sm hover:shadow-md'
+								: 'bg-white/80 text-slate-800 ring-1 ring-slate-200/80 hover:bg-white hover:shadow-sm'
 						}`}
 						aria-label={isPeek ? 'Navigation schließen' : 'Navigation öffnen'}
 						aria-expanded={isPeek}
@@ -344,7 +370,9 @@
 					</button>
 					<div
 						class={`min-w-0 transition-all duration-300 ease-out ${
-							isPeek ? 'translate-x-0 opacity-100' : 'pointer-events-none -translate-x-1 opacity-0'
+							isPeek
+								? 'translate-x-0 opacity-100'
+								: 'pointer-events-none w-0 -translate-x-1 overflow-hidden opacity-0'
 						}`}
 					>
 						<p class="truncate text-[10px] font-semibold uppercase tracking-[0.24em] text-slate-500">
@@ -371,14 +399,14 @@
 								<button
 									use:sectionBtn={section.id}
 									type="button"
-									class={`group flex w-full items-center rounded-xl transition duration-200 ${
-										isPeek ? 'gap-3 px-3 py-2.5' : 'justify-center p-1.5'
-									} ${
+									class={`group ${ROW_BASE} ${isPeek ? ROW_PEEK : ROW_COMPACT} ${
 										isPeek
 											? navActiveSectionId === section.id
-												? 'bg-white text-slate-900 ring-1 ring-brand/20 shadow-sm hover:-translate-y-0.5 hover:shadow-md'
-												: 'text-slate-700 hover:-translate-y-0.5 hover:bg-white/70'
-											: 'bg-transparent text-slate-700 hover:bg-white/50'
+												? 'bg-white text-slate-900 ring-1 ring-brand/20 shadow-sm'
+												: 'text-slate-700 hover:bg-white/70'
+											: navActiveSectionId === section.id
+												? 'bg-white text-slate-900 ring-1 ring-brand/20 shadow-sm'
+												: 'bg-transparent text-slate-700 hover:bg-white/60'
 									}`}
 									onclick={() => scrollToSection(section.id)}
 									aria-label={$t(section.labelKey)}
@@ -386,13 +414,13 @@
 									title={$t(section.labelKey)}
 								>
 									<span
-										class={`grid h-11 w-11 place-items-center rounded-2xl transition duration-200 group-hover:scale-[1.04] ${
+										class={`${ICON_SLOT} ${
 											navActiveSectionId === section.id
 												? 'bg-brand/12 text-brand ring-1 ring-brand/25 shadow-[0_6px_16px_rgba(15,23,42,0.10)]'
 												: 'bg-white/70 text-slate-700 ring-1 ring-slate-200/70 group-hover:bg-white'
 										}`}
 									>
-										<SectionIcon class="h-5 w-5" aria-hidden="true" />
+										<SectionIcon class={ICON_SIZE} aria-hidden="true" />
 									</span>
 
 									{#if isPeek}
@@ -403,65 +431,61 @@
 								</button>
 
 								{#if section.id === 'aktivitaeten'}
-									<div
-										class={`mb-1 mt-1 ${
-											isPeek ? 'space-y-1 pl-7 pr-0' : 'space-y-2 px-0'
-										}`}
-									>
+									<div class={`${isPeek ? 'pl-6 mt-1 space-y-2' : 'mt-1'}`}>
 										<button
 											type="button"
-											class={`group flex w-full items-center rounded-lg text-[12px] font-semibold transition duration-200 ${
-												isPeek ? 'px-2 py-1.5 text-left' : 'justify-center p-2'
-											} ${
+											class={`group ${ROW_BASE} ${isPeek ? ROW_PEEK : ROW_COMPACT} ${
 												isPeek
 													? activeSectionId === 'highlights' && activeHighlightsSeason === 'summer'
-														? 'bg-white text-slate-900 ring-1 ring-brand/20 shadow-sm hover:-translate-y-0.5 hover:shadow-md'
-														: 'text-slate-700 hover:-translate-y-0.5 hover:bg-white/70'
-													: 'bg-transparent text-slate-700 hover:bg-white/50'
+														? 'bg-white text-slate-900 ring-1 ring-brand/20 shadow-sm'
+														: 'text-slate-700 hover:bg-white/70'
+													: activeSectionId === 'highlights' && activeHighlightsSeason === 'summer'
+														? 'bg-white text-slate-900 ring-1 ring-brand/20 shadow-sm'
+														: 'bg-transparent text-slate-700 hover:bg-white/60'
 											}`}
 											onclick={() => scrollToSection('highlights-summer')}
 											aria-label={$t('experiences.nav.summer')}
 											title={$t('experiences.nav.summer')}
 										>
 											<span
-												class={`grid h-11 w-11 place-items-center rounded-2xl transition duration-200 group-hover:scale-[1.04] ${
+												class={`${ICON_SLOT} ${
 													activeSectionId === 'highlights' && activeHighlightsSeason === 'summer'
 														? 'bg-brand/12 text-brand ring-1 ring-brand/25 shadow-[0_6px_16px_rgba(15,23,42,0.10)]'
 														: 'bg-white/70 text-slate-700 ring-1 ring-slate-200/70 group-hover:bg-white'
 												}`}
 											>
-												<Sun class="h-5 w-5 shrink-0" aria-hidden="true" />
+												<Sun class={`${ICON_SIZE} shrink-0`} aria-hidden="true" />
 											</span>
 											{#if isPeek}
-												<span class="ml-2">{$t('experiences.nav.summer')}</span>
+												<span class="truncate text-[13px] font-semibold">{$t('experiences.nav.summer')}</span>
 											{/if}
 										</button>
 										<button
 											type="button"
-											class={`group flex w-full items-center rounded-lg text-[12px] font-semibold transition duration-200 ${
-												isPeek ? 'px-2 py-1.5 text-left' : 'justify-center p-2'
-											} ${
+											class={`group ${ROW_BASE} ${isPeek ? ROW_PEEK : ROW_COMPACT} ${
 												isPeek
 													? activeSectionId === 'highlights' && activeHighlightsSeason === 'winter'
-														? 'bg-white text-slate-900 ring-1 ring-brand/20 shadow-sm hover:-translate-y-0.5 hover:shadow-md'
-														: 'text-slate-700 hover:-translate-y-0.5 hover:bg-white/70'
-													: 'bg-transparent text-slate-700 hover:bg-white/50'
+														? 'bg-white text-slate-900 ring-1 ring-brand/20 shadow-sm'
+														: 'text-slate-700 hover:bg-white/70'
+													: activeSectionId === 'highlights' && activeHighlightsSeason === 'winter'
+														? 'bg-white text-slate-900 ring-1 ring-brand/20 shadow-sm'
+														: 'bg-transparent text-slate-700 hover:bg-white/60'
 											}`}
 											onclick={() => scrollToSection('highlights-winter')}
 											aria-label={$t('experiences.nav.winter')}
 											title={$t('experiences.nav.winter')}
 										>
 											<span
-												class={`grid h-11 w-11 place-items-center rounded-2xl transition duration-200 group-hover:scale-[1.04] ${
+												class={`${ICON_SLOT} ${
 													activeSectionId === 'highlights' && activeHighlightsSeason === 'winter'
 														? 'bg-brand/12 text-brand ring-1 ring-brand/25 shadow-[0_6px_16px_rgba(15,23,42,0.10)]'
 														: 'bg-white/70 text-slate-700 ring-1 ring-slate-200/70 group-hover:bg-white'
 												}`}
 											>
-												<Snowflake class="h-5 w-5 shrink-0" aria-hidden="true" />
+												<Snowflake class={`${ICON_SIZE} shrink-0`} aria-hidden="true" />
 											</span>
 											{#if isPeek}
-												<span class="ml-2">{$t('experiences.nav.winter')}</span>
+												<span class="truncate text-[13px] font-semibold">{$t('experiences.nav.winter')}</span>
 											{/if}
 										</button>
 									</div>
@@ -585,7 +609,7 @@
 											</span>
 										{/if}
 
-										<div class="absolute inset-x-0 bottom-0 p-3 sm:px-6 sm:pb-6 sm:pt-6">
+										<div class="hidden sm:absolute sm:inset-x-0 sm:bottom-0 sm:block sm:px-6 sm:pb-6 sm:pt-6">
 											<div class="relative max-w-[86%] rounded-2xl border border-white/25 bg-white/16 p-3 shadow-[0_10px_26px_rgba(15,23,42,0.16)] backdrop-blur-md sm:max-w-2xl sm:p-6">
 												<div class="overflow-visible pr-0 sm:overflow-visible sm:pr-0">
 													<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
@@ -610,6 +634,31 @@
 														</div>
 													{/if}
 												</div>
+											</div>
+										</div>
+										<div class="p-3 sm:hidden">
+											<div class="max-w-full rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm">
+												<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
+													<summerFeaturedEvent.icon class="h-4 w-4 text-brand" aria-hidden="true" />
+													{$t(summerFeaturedEvent.kickerKey)}
+												</p>
+												<h3 class={`mt-2 font-semibold text-slate-900 ${summerFeaturedEvent.titleSize ?? 'text-xl'}`}>
+													{$t(summerFeaturedEvent.titleKey)}
+												</h3>
+												{#if summerFeaturedEvent.descriptionKey}
+													<p class="mt-2 max-w-xl text-sm text-slate-600">
+														{$t(summerFeaturedEvent.descriptionKey)}
+													</p>
+												{/if}
+												{#if summerFeaturedEvent.metaKeys?.length}
+													<div class="mt-3 flex flex-wrap gap-2">
+														{#each summerFeaturedEvent.metaKeys as metaKey}
+															<span class="rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-700">
+																{$t(metaKey)}
+															</span>
+														{/each}
+													</div>
+												{/if}
 											</div>
 										</div>
 									</article>
@@ -720,7 +769,7 @@
 											</span>
 										{/if}
 
-										<div class="absolute inset-x-0 bottom-0 p-3 sm:px-6 sm:pb-6 sm:pt-6">
+										<div class="hidden sm:absolute sm:inset-x-0 sm:bottom-0 sm:block sm:px-6 sm:pb-6 sm:pt-6">
 											<div class="relative max-w-[86%] rounded-2xl border border-white/25 bg-white/16 p-3 shadow-[0_10px_26px_rgba(15,23,42,0.16)] backdrop-blur-md sm:max-w-2xl sm:p-6">
 												<div class="overflow-visible pr-0 sm:overflow-visible sm:pr-0">
 													<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
@@ -745,6 +794,31 @@
 														</div>
 													{/if}
 												</div>
+											</div>
+										</div>
+										<div class="p-3 sm:hidden">
+											<div class="max-w-full rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm">
+												<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
+													<winterFeaturedEvent.icon class="h-4 w-4 text-brand" aria-hidden="true" />
+													{$t(winterFeaturedEvent.kickerKey)}
+												</p>
+												<h3 class={`mt-2 font-semibold text-slate-900 ${winterFeaturedEvent.titleSize ?? 'text-xl'}`}>
+													{$t(winterFeaturedEvent.titleKey)}
+												</h3>
+												{#if winterFeaturedEvent.descriptionKey}
+													<p class="mt-2 max-w-xl text-sm text-slate-600">
+														{$t(winterFeaturedEvent.descriptionKey)}
+													</p>
+												{/if}
+												{#if winterFeaturedEvent.metaKeys?.length}
+													<div class="mt-3 flex flex-wrap gap-2">
+														{#each winterFeaturedEvent.metaKeys as metaKey}
+															<span class="rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-700">
+																{$t(metaKey)}
+															</span>
+														{/each}
+													</div>
+												{/if}
 											</div>
 										</div>
 									</article>
@@ -1254,7 +1328,7 @@
 				<button
 					type="button"
 					class="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold text-slate-900 hover:bg-white/70"
-					onclick={() => scrollToSection(activeSectionId)}
+					onclick={openMobileNav}
 				>
 					<List class="h-4 w-4 text-brand" aria-hidden="true" />
 					<span class="max-w-[55vw] truncate">{$t(activeSectionLabelKey)}</span>
@@ -1273,6 +1347,79 @@
 			</div>
 		</div>
 	</div>
+
+	{#if isMobileNavOpen}
+		<button
+			type="button"
+			class="fixed inset-0 z-[90] bg-slate-950/50 backdrop-blur-[2px]"
+			onclick={closeMobileNav}
+			aria-label="Navigation schließen"
+		></button>
+		<div
+			class="fixed inset-x-0 bottom-0 z-[100] rounded-t-3xl border border-white/20 bg-white p-4 shadow-2xl"
+		>
+			<div class="flex items-center justify-between">
+				<p class="text-sm font-semibold text-slate-900">{$t('experiences.nav.title')}</p>
+				<button
+					type="button"
+					class="grid h-10 w-10 place-items-center rounded-full border border-slate-200 text-slate-600"
+					onclick={closeMobileNav}
+					aria-label="Navigation schließen"
+				>
+					<X class="h-5 w-5" aria-hidden="true" />
+				</button>
+			</div>
+
+			<div class="mt-3 space-y-2">
+				{#each sectionLinks as section}
+					{@const SectionIcon = sectionIconById[section.id] ?? List}
+					<button
+						type="button"
+						class={`flex w-full items-center gap-3 rounded-2xl px-3 py-3 text-left text-sm font-semibold transition ${
+							navActiveSectionId === section.id
+								? 'bg-brand/10 text-slate-900 ring-1 ring-brand/25'
+								: 'bg-slate-50 text-slate-700 hover:bg-white'
+						}`}
+						onclick={() => onMobileNavSelect(section.id)}
+					>
+						<span class="grid h-9 w-9 place-items-center rounded-xl bg-white ring-1 ring-slate-200">
+							<SectionIcon class="h-4 w-4 text-brand" aria-hidden="true" />
+						</span>
+						{$t(section.labelKey)}
+					</button>
+
+					{#if section.id === 'aktivitaeten'}
+						<div class="space-y-2 pl-4">
+							<button
+								type="button"
+								class={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-semibold transition ${
+									activeSectionId === 'highlights' && activeHighlightsSeason === 'summer'
+										? 'bg-brand/10 text-slate-900 ring-1 ring-brand/25'
+										: 'bg-slate-50 text-slate-700 hover:bg-white'
+								}`}
+								onclick={() => onMobileNavSelect('highlights-summer')}
+							>
+								<Sun class="h-4 w-4 text-brand" aria-hidden="true" />
+								{$t('experiences.nav.summer')}
+							</button>
+							<button
+								type="button"
+								class={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-semibold transition ${
+									activeSectionId === 'highlights' && activeHighlightsSeason === 'winter'
+										? 'bg-brand/10 text-slate-900 ring-1 ring-brand/25'
+										: 'bg-slate-50 text-slate-700 hover:bg-white'
+								}`}
+								onclick={() => onMobileNavSelect('highlights-winter')}
+							>
+								<Snowflake class="h-4 w-4 text-brand" aria-hidden="true" />
+								{$t('experiences.nav.winter')}
+							</button>
+						</div>
+					{/if}
+				{/each}
+			</div>
+		</div>
+	{/if}
 
 	{#if isMobileFilterOpen}
 		<button
