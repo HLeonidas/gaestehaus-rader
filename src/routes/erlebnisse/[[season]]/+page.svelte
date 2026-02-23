@@ -601,10 +601,10 @@
 								{$t('experiences.nav.summer')}
 							</p>
 							{#if summerFeaturedEvent}
-								<div class="relative left-1/2 right-1/2 -mx-[50vw] w-screen px-4 sm:px-8 lg:px-10">
+								<div class="mx-auto w-full max-w-6xl px-0 sm:px-0 lg:px-0">
 									<article
 										data-season={summerFeaturedEvent.season}
-										class="group relative overflow-hidden rounded-3xl min-h-[420px] lg:h-[calc(100dvh-180px)] lg:min-h-[640px]"
+										class="group relative overflow-hidden rounded-3xl "
 									>
 										<img
 											src={withAsset(summerFeaturedEvent.image)}
@@ -731,10 +731,10 @@
 								{$t('experiences.nav.winter')}
 							</p>
 							{#if winterFeaturedEvent}
-								<div class="relative left-1/2 right-1/2 -mx-[50vw] w-screen px-4 sm:px-8 lg:px-10">
+								<div class="mx-auto w-full max-w-6xl px-0 sm:px-0 lg:px-0">
 									<article
 										data-season={winterFeaturedEvent.season}
-										class={`group relative overflow-hidden rounded-3xl min-h-[420px] lg:h-[calc(100dvh-180px)] lg:min-h-[640px] ${
+										class={`group relative overflow-hidden rounded-3xl min-h-[420px] lg:h-[min(72dvh,720px)] ${
 											winterFeaturedEvent.id === 'winter-ski' ? 'cursor-pointer' : ''
 										}`}
 									>
