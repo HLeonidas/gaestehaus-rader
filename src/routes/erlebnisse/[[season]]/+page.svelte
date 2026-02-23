@@ -18,10 +18,15 @@
 	import {
 		ArrowRight,
 		BusFront,
-		ChevronRight,
 		List,
+		Menu,
 		Mountain,
+		PartyPopper,
+		Snowflake,
+		Sparkles,
 		SlidersHorizontal,
+		Sun,
+		Ticket,
 		Waves,
 		X,
 	} from 'lucide-svelte';
@@ -47,7 +52,7 @@
 	let showAllSeasons = $state(true);
 	let activeSectionId = $state('aktivitaeten');
 	let isMobileFilterOpen = $state(false);
-	let navMode = $state<NavMode>('peek');
+	let navMode = $state<NavMode>('compact');
 	let navListEl = $state<HTMLDivElement | null>(null);
 	const btnEls = new Map<string, HTMLButtonElement>();
 	const indicatorTop = tweened(0, { duration: 420, easing: cubicOut });
@@ -110,6 +115,13 @@
 		brochure: 'https://www.nassfeld.at/PDFs/NPS/Gaestekarten/BasisCard_Broschuere.pdf',
 	};
 
+	const sectionIconById: Record<string, any> = {
+		aktivitaeten: Mountain,
+		highlights: Sparkles,
+		'traditionelle-feste': PartyPopper,
+		gaestecard: Ticket,
+	};
+
 	function onWindowKeydown(event: KeyboardEvent) {
 		if (event.key === 'Escape' && isMobileFilterOpen) {
 			isMobileFilterOpen = false;
@@ -143,7 +155,7 @@
 	}
 
 	function onNavLeave() {
-		setNavMode('peek');
+		setNavMode('compact');
 	}
 
 	function onNavFocusIn() {
@@ -151,12 +163,12 @@
 	}
 
 	function onNavFocusOut() {
-		setNavMode('peek');
+		setNavMode('compact');
 	}
 
 	function onWindowScroll() {
 		updateActiveSectionFromViewport();
-		setNavMode('peek');
+		setNavMode('compact');
 	}
 
 	function updateActiveSectionFromViewport() {
@@ -296,10 +308,10 @@
 <SeoHead titleKey={seo.titleKey} descriptionKey={seo.descriptionKey} image={currentContent.bg} />
 
 <aside class="hidden lg:block">
-	<div class="pointer-events-none fixed left-6 top-24 z-40">
+	<div class="pointer-events-none fixed left-6 top-36 z-40">
 		<div
 			class={`pointer-events-auto origin-top-left transition-all duration-300 ease-out ${
-				isPeek ? 'w-[240px]' : 'w-[150px]'
+				isPeek ? 'w-[240px]' : 'w-[60px]'
 			}`}
 			role="group"
 			aria-label={$t('experiences.nav.title')}
@@ -308,154 +320,160 @@
 			onfocusin={onNavFocusIn}
 			onfocusout={onNavFocusOut}
 		>
-			<div
-				class={`relative overflow-hidden rounded-3xl border shadow-[0_12px_34px_rgba(15,23,42,0.10)] backdrop-blur-xl ring-1 ring-white/30 ${
-					isPeek ? 'border-white/30 bg-white/22' : 'border-white/25 bg-white/18'
-				}`}
-			>
-				<div class="pointer-events-none absolute inset-0">
-					<div class="nav-glass-sheen"></div>
-				</div>
-				<div class={`relative flex items-center gap-2 ${isPeek ? 'px-4 pt-4' : 'px-3 pt-3'}`}>
+			<div class="relative rounded-2xl bg-white/70 backdrop-blur-md ring-1 ring-slate-200/70 shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-shadow duration-300 hover:shadow-[0_16px_38px_rgba(15,23,42,0.14)]">
+				<div class={`flex items-center ${isPeek ? 'gap-2 px-3 pt-3' : 'justify-center px-3 py-3'}`}>
+					<button
+						type="button"
+						class={`group relative inline-flex h-11 w-11 items-center justify-center leading-none rounded-2xl transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 ${
+							isPeek
+								? 'bg-white text-slate-900 ring-1 ring-brand/20 shadow-sm hover:-translate-y-0.5 hover:shadow-md'
+								: 'bg-white/80 text-slate-800 ring-1 ring-slate-200/80 hover:-translate-y-0.5 hover:bg-white hover:shadow-sm'
+						}`}
+						aria-label={isPeek ? 'Navigation schließen' : 'Navigation öffnen'}
+						aria-expanded={isPeek}
+						onclick={() => setNavMode(isPeek ? 'compact' : 'peek')}
+					>
+						{#if isPeek}
+							<span class="pointer-events-none absolute inset-0 rounded-2xl bg-brand/10"></span>
+						{/if}
+						{#if isPeek}
+							<X class="relative h-5 w-5" aria-hidden="true" />
+						{:else}
+							<Menu class="relative h-5 w-5" aria-hidden="true" />
+						{/if}
+					</button>
 					<div
-						class={`grid place-items-center rounded-2xl bg-brand/10 text-brand ${
-							isPeek ? 'h-9 w-9' : 'h-10 w-10'
+						class={`min-w-0 transition-all duration-300 ease-out ${
+							isPeek ? 'translate-x-0 opacity-100' : 'pointer-events-none -translate-x-1 opacity-0'
 						}`}
 					>
-						<List class="h-4 w-4" aria-hidden="true" />
+						<p class="truncate text-[10px] font-semibold uppercase tracking-[0.24em] text-slate-500">
+							{$t('experiences.nav.kicker')}
+						</p>
+						<p class="truncate text-[13px] font-semibold text-slate-900">
+							{$t('experiences.nav.title')}
+						</p>
 					</div>
-					{#if isPeek}
-						<div>
-							<p class="text-[10px] font-semibold uppercase tracking-[0.24em] text-slate-500">
-								{$t('experiences.nav.kicker')}
-							</p>
-							<p class="text-[13px] font-semibold text-slate-900">
-								{$t('experiences.nav.title')}
-							</p>
-						</div>
-					{/if}
 				</div>
-				{#if isCompact}
-					<div class="relative px-3 pb-3 pt-2">
-						<div class="rounded-2xl border border-white/30 bg-white/20 px-2.5 py-3">
-							<div class="flex items-center justify-center gap-2">
-								{#each sectionTrackingLinks as section}
-									<button
-										type="button"
-										class="group relative grid h-5 w-5 place-items-center rounded-full"
-										onclick={() => scrollToSection(section.id)}
-										aria-label={$t(section.labelKey)}
-										title={$t(section.labelKey)}
-									>
-										<span
-											class={`h-2 w-2 rounded-full transition ${
-												activeSectionId === section.id
-													? 'bg-brand'
-													: 'bg-slate-300 group-hover:bg-slate-400'
-											}`}
-										></span>
-									</button>
-								{/each}
-							</div>
-						</div>
-					</div>
-				{/if}
-				{#if isPeek}
-					<nav class="relative mt-3 px-2 pb-2">
-						<div bind:this={navListEl} class="relative">
-							{#if indicatorVisible}
-								<div
-									class="nav-indicator"
-									style={`transform: translateY(${$indicatorTop}px); height: ${$indicatorHeight}px;`}
-									aria-hidden="true"
-								></div>
-							{/if}
-							{#each sectionLinks as section}
-								<div class="relative z-10">
-									<button
-										use:sectionBtn={section.id}
-										type="button"
-										class={`group flex w-full items-center justify-between rounded-2xl px-3 py-2 text-left text-[13px] font-semibold transition ${
+
+				<nav class="relative mt-3 px-2 pb-2">
+					<div bind:this={navListEl} class={`relative ${isPeek ? 'pl-3' : ''}`}>
+						{#if indicatorVisible && isPeek}
+							<div
+								class="nav-indicator"
+								style={`transform: translateY(${$indicatorTop}px); height: ${$indicatorHeight}px;`}
+								aria-hidden="true"
+							></div>
+						{/if}
+						{#each sectionLinks as section}
+							{@const SectionIcon = sectionIconById[section.id] ?? List}
+							<div class="relative z-10">
+								<button
+									use:sectionBtn={section.id}
+									type="button"
+									class={`group flex w-full items-center rounded-xl transition duration-200 ${
+										isPeek ? 'gap-3 px-3 py-2.5' : 'justify-center p-1.5'
+									} ${
+										isPeek
+											? navActiveSectionId === section.id
+												? 'bg-white text-slate-900 ring-1 ring-brand/20 shadow-sm hover:-translate-y-0.5 hover:shadow-md'
+												: 'text-slate-700 hover:-translate-y-0.5 hover:bg-white/70'
+											: 'bg-transparent text-slate-700 hover:bg-white/50'
+									}`}
+									onclick={() => scrollToSection(section.id)}
+									aria-label={$t(section.labelKey)}
+									aria-current={navActiveSectionId === section.id ? 'page' : undefined}
+									title={$t(section.labelKey)}
+								>
+									<span
+										class={`grid h-11 w-11 place-items-center rounded-2xl transition duration-200 group-hover:scale-[1.04] ${
 											navActiveSectionId === section.id
-												? 'text-slate-900'
-												: 'text-slate-700 hover:bg-white/18'
+												? 'bg-brand/12 text-brand ring-1 ring-brand/25 shadow-[0_6px_16px_rgba(15,23,42,0.10)]'
+												: 'bg-white/70 text-slate-700 ring-1 ring-slate-200/70 group-hover:bg-white'
 										}`}
-										onclick={() => scrollToSection(section.id)}
 									>
-										<span class="flex items-center gap-2">
-										<span
-											class={`h-1.5 w-1.5 rounded-full ${
-												navActiveSectionId === section.id
-													? 'bg-brand'
-													: 'bg-slate-300 group-hover:bg-slate-400'
-											}`}
-											></span>
+										<SectionIcon class="h-5 w-5" aria-hidden="true" />
+									</span>
+
+									{#if isPeek}
+										<span class="truncate text-[13px] font-semibold">
 											{$t(section.labelKey)}
 										</span>
-										<ChevronRight
-											class="h-4 w-4 opacity-60 transition-transform duration-300 group-hover:translate-x-0.5"
-											aria-hidden="true"
-										/>
-									</button>
-									{#if section.id === 'aktivitaeten'}
-										<div class="mt-0.5 mb-1 pl-3 pr-0">
-											<button
-												type="button"
-												class={`group flex w-full items-center justify-between rounded-2xl px-3 py-2 text-left text-[13px] font-semibold transition ${
-													activeSectionId === 'highlights' && activeHighlightsSeason === 'summer'
-														? 'border border-white/28 bg-white/38 text-slate-900 shadow-[0_10px_26px_rgba(15,23,42,0.10)] backdrop-blur-[14px]'
-														: 'text-slate-700 hover:bg-white/18'
-												}`}
-												onclick={() => scrollToSection('highlights-summer')}
-											>
-												<span class="flex items-center gap-2">
-													<span
-														class={`h-1.5 w-1.5 rounded-full ${
-															activeSectionId === 'highlights' &&
-															activeHighlightsSeason === 'summer'
-																? 'bg-brand'
-																: 'bg-slate-300 group-hover:bg-slate-400'
-														}`}
-													></span>
-													{$t('experiences.nav.summer')}
-												</span>
-												<ChevronRight
-													class="h-4 w-4 opacity-50 transition-transform duration-300 group-hover:translate-x-0.5"
-													aria-hidden="true"
-												/>
-											</button>
-											<button
-												type="button"
-												class={`group mt-0.5 flex w-full items-center justify-between rounded-2xl px-3 py-2 text-left text-[13px] font-semibold transition ${
-													activeSectionId === 'highlights' && activeHighlightsSeason === 'winter'
-														? 'border border-white/28 bg-white/38 text-slate-900 shadow-[0_10px_26px_rgba(15,23,42,0.10)] backdrop-blur-[14px]'
-														: 'text-slate-700 hover:bg-white/18'
-												}`}
-												onclick={() => scrollToSection('highlights-winter')}
-											>
-												<span class="flex items-center gap-2">
-													<span
-														class={`h-1.5 w-1.5 rounded-full ${
-															activeSectionId === 'highlights' &&
-															activeHighlightsSeason === 'winter'
-																? 'bg-brand'
-																: 'bg-slate-300 group-hover:bg-slate-400'
-														}`}
-													></span>
-													{$t('experiences.nav.winter')}
-												</span>
-												<ChevronRight
-													class="h-4 w-4 opacity-50 transition-transform duration-300 group-hover:translate-x-0.5"
-													aria-hidden="true"
-												/>
-											</button>
-										</div>
 									{/if}
-								</div>
-							{/each}
-						</div>
-					</nav>
-					<div class="relative border-t border-white/35 px-4 py-4">
+								</button>
+
+								{#if section.id === 'aktivitaeten'}
+									<div
+										class={`mb-1 mt-1 ${
+											isPeek ? 'space-y-1 pl-7 pr-0' : 'space-y-2 px-0'
+										}`}
+									>
+										<button
+											type="button"
+											class={`group flex w-full items-center rounded-lg text-[12px] font-semibold transition duration-200 ${
+												isPeek ? 'px-2 py-1.5 text-left' : 'justify-center p-2'
+											} ${
+												isPeek
+													? activeSectionId === 'highlights' && activeHighlightsSeason === 'summer'
+														? 'bg-white text-slate-900 ring-1 ring-brand/20 shadow-sm hover:-translate-y-0.5 hover:shadow-md'
+														: 'text-slate-700 hover:-translate-y-0.5 hover:bg-white/70'
+													: 'bg-transparent text-slate-700 hover:bg-white/50'
+											}`}
+											onclick={() => scrollToSection('highlights-summer')}
+											aria-label={$t('experiences.nav.summer')}
+											title={$t('experiences.nav.summer')}
+										>
+											<span
+												class={`grid h-11 w-11 place-items-center rounded-2xl transition duration-200 group-hover:scale-[1.04] ${
+													activeSectionId === 'highlights' && activeHighlightsSeason === 'summer'
+														? 'bg-brand/12 text-brand ring-1 ring-brand/25 shadow-[0_6px_16px_rgba(15,23,42,0.10)]'
+														: 'bg-white/70 text-slate-700 ring-1 ring-slate-200/70 group-hover:bg-white'
+												}`}
+											>
+												<Sun class="h-5 w-5 shrink-0" aria-hidden="true" />
+											</span>
+											{#if isPeek}
+												<span class="ml-2">{$t('experiences.nav.summer')}</span>
+											{/if}
+										</button>
+										<button
+											type="button"
+											class={`group flex w-full items-center rounded-lg text-[12px] font-semibold transition duration-200 ${
+												isPeek ? 'px-2 py-1.5 text-left' : 'justify-center p-2'
+											} ${
+												isPeek
+													? activeSectionId === 'highlights' && activeHighlightsSeason === 'winter'
+														? 'bg-white text-slate-900 ring-1 ring-brand/20 shadow-sm hover:-translate-y-0.5 hover:shadow-md'
+														: 'text-slate-700 hover:-translate-y-0.5 hover:bg-white/70'
+													: 'bg-transparent text-slate-700 hover:bg-white/50'
+											}`}
+											onclick={() => scrollToSection('highlights-winter')}
+											aria-label={$t('experiences.nav.winter')}
+											title={$t('experiences.nav.winter')}
+										>
+											<span
+												class={`grid h-11 w-11 place-items-center rounded-2xl transition duration-200 group-hover:scale-[1.04] ${
+													activeSectionId === 'highlights' && activeHighlightsSeason === 'winter'
+														? 'bg-brand/12 text-brand ring-1 ring-brand/25 shadow-[0_6px_16px_rgba(15,23,42,0.10)]'
+														: 'bg-white/70 text-slate-700 ring-1 ring-slate-200/70 group-hover:bg-white'
+												}`}
+											>
+												<Snowflake class="h-5 w-5 shrink-0" aria-hidden="true" />
+											</span>
+											{#if isPeek}
+												<span class="ml-2">{$t('experiences.nav.winter')}</span>
+											{/if}
+										</button>
+									</div>
+								{/if}
+							</div>
+						{/each}
+					</div>
+
+				</nav>
+
+				{#if isPeek}
+					<div class="border-t border-black/5 px-4 py-4">
 						<div class="flex items-center justify-between">
 							<p class="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500">
 								{$t('experiences.nav.filters')}
@@ -470,14 +488,14 @@
 								</button>
 							{/if}
 						</div>
-						<div class="mt-2 flex flex-wrap gap-1.5">
+						<div class="mt-2 grid grid-cols-1 justify-items-start gap-1.5">
 							{#each activityFilters as filter}
 								<button
 									type="button"
-									class={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-[12px] font-semibold transition ${
+									class={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1.5 text-[11px] font-semibold transition duration-200 hover:-translate-y-0.5 ${
 										selectedActivity === filter.id
-											? 'bg-brand text-white shadow-sm'
-											: 'border border-white/35 bg-white/25 text-slate-700 hover:bg-white/35'
+											? 'border-brand bg-brand text-white shadow-sm'
+											: 'border-slate-200 bg-white/80 text-slate-700 hover:bg-slate-50 hover:border-brand/30 hover:shadow-sm'
 									}`}
 									onclick={() => (selectedActivity = selectedActivity === filter.id ? null : filter.id)}
 									aria-pressed={selectedActivity === filter.id}
@@ -567,8 +585,8 @@
 											</span>
 										{/if}
 
-										<div class="absolute inset-x-0 bottom-0 p-3 transition-[padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-6 sm:pb-4 sm:pt-6 sm:group-hover:pb-6 sm:group-focus-within:pb-6">
-											<div class="relative max-w-[86%] rounded-2xl border border-white/25 bg-white/16 p-3 backdrop-blur-md max-h-none overflow-visible transition-[background-color,border-color,backdrop-filter,box-shadow,padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-w-2xl sm:border-transparent sm:bg-transparent sm:backdrop-blur-0 sm:shadow-none sm:px-5 sm:pb-1 sm:pt-4 sm:group-hover:border-white/25 sm:group-hover:bg-white/16 sm:group-hover:backdrop-blur-md sm:group-hover:shadow-[0_10px_26px_rgba(15,23,42,0.16)] sm:group-hover:p-6 sm:group-focus-within:border-white/25 sm:group-focus-within:bg-white/16 sm:group-focus-within:backdrop-blur-md sm:group-focus-within:shadow-[0_10px_26px_rgba(15,23,42,0.16)] sm:group-focus-within:p-6">
+										<div class="absolute inset-x-0 bottom-0 p-3 sm:px-6 sm:pb-6 sm:pt-6">
+											<div class="relative max-w-[86%] rounded-2xl border border-white/25 bg-white/16 p-3 shadow-[0_10px_26px_rgba(15,23,42,0.16)] backdrop-blur-md sm:max-w-2xl sm:p-6">
 												<div class="overflow-visible pr-0 sm:overflow-visible sm:pr-0">
 													<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
 														<summerFeaturedEvent.icon class="h-4 w-4 text-brand" aria-hidden="true" />
@@ -578,12 +596,12 @@
 														{$t(summerFeaturedEvent.titleKey)}
 													</h3>
 													{#if summerFeaturedEvent.descriptionKey}
-														<p class="mt-2 hidden max-w-xl text-sm text-white/85 transition-[max-height,opacity,transform,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:block sm:max-h-0 sm:translate-y-1 sm:overflow-hidden sm:opacity-0 sm:blur-[2px] sm:group-hover:max-h-28 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-hover:blur-0 sm:group-focus-within:max-h-28 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100 sm:group-focus-within:blur-0">
+														<p class="mt-2 max-w-xl text-sm text-white/85">
 															{$t(summerFeaturedEvent.descriptionKey)}
 														</p>
 													{/if}
 													{#if summerFeaturedEvent.metaKeys?.length}
-														<div class="mt-3 hidden flex-wrap gap-2 transition-[max-height,opacity,transform,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:flex sm:max-h-0 sm:translate-y-1 sm:overflow-hidden sm:opacity-0 sm:blur-[2px] sm:delay-100 sm:group-hover:max-h-20 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-hover:blur-0 sm:group-focus-within:max-h-20 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100 sm:group-focus-within:blur-0">
+														<div class="mt-3 flex flex-wrap gap-2">
 															{#each summerFeaturedEvent.metaKeys as metaKey}
 																<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white sm:px-3 sm:text-xs">
 																	{$t(metaKey)}
@@ -702,8 +720,8 @@
 											</span>
 										{/if}
 
-										<div class="absolute inset-x-0 bottom-0 p-3 transition-[padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-6 sm:pb-4 sm:pt-6 sm:group-hover:pb-6 sm:group-focus-within:pb-6">
-											<div class="relative max-w-[86%] rounded-2xl border border-white/25 bg-white/16 p-3 backdrop-blur-md max-h-none overflow-visible transition-[background-color,border-color,backdrop-filter,box-shadow,padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-w-2xl sm:border-transparent sm:bg-transparent sm:backdrop-blur-0 sm:shadow-none sm:px-5 sm:pb-1 sm:pt-4 sm:group-hover:border-white/25 sm:group-hover:bg-white/16 sm:group-hover:backdrop-blur-md sm:group-hover:shadow-[0_10px_26px_rgba(15,23,42,0.16)] sm:group-hover:p-6 sm:group-focus-within:border-white/25 sm:group-focus-within:bg-white/16 sm:group-focus-within:backdrop-blur-md sm:group-focus-within:shadow-[0_10px_26px_rgba(15,23,42,0.16)] sm:group-focus-within:p-6">
+										<div class="absolute inset-x-0 bottom-0 p-3 sm:px-6 sm:pb-6 sm:pt-6">
+											<div class="relative max-w-[86%] rounded-2xl border border-white/25 bg-white/16 p-3 shadow-[0_10px_26px_rgba(15,23,42,0.16)] backdrop-blur-md sm:max-w-2xl sm:p-6">
 												<div class="overflow-visible pr-0 sm:overflow-visible sm:pr-0">
 													<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
 														<winterFeaturedEvent.icon class="h-4 w-4 text-brand" aria-hidden="true" />
@@ -713,12 +731,12 @@
 														{$t(winterFeaturedEvent.titleKey)}
 													</h3>
 													{#if winterFeaturedEvent.descriptionKey}
-														<p class="mt-2 hidden max-w-xl text-sm text-white/85 transition-[max-height,opacity,transform,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:block sm:max-h-0 sm:translate-y-1 sm:overflow-hidden sm:opacity-0 sm:blur-[2px] sm:group-hover:max-h-28 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-hover:blur-0 sm:group-focus-within:max-h-28 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100 sm:group-focus-within:blur-0">
+														<p class="mt-2 max-w-xl text-sm text-white/85">
 															{$t(winterFeaturedEvent.descriptionKey)}
 														</p>
 													{/if}
 													{#if winterFeaturedEvent.metaKeys?.length}
-														<div class="mt-3 hidden flex-wrap gap-2 transition-[max-height,opacity,transform,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:flex sm:max-h-0 sm:translate-y-1 sm:overflow-hidden sm:opacity-0 sm:blur-[2px] sm:delay-100 sm:group-hover:max-h-20 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-hover:blur-0 sm:group-focus-within:max-h-20 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100 sm:group-focus-within:blur-0">
+														<div class="mt-3 flex flex-wrap gap-2">
 															{#each winterFeaturedEvent.metaKeys as metaKey}
 																<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white sm:px-3 sm:text-xs">
 																	{$t(metaKey)}
@@ -1005,11 +1023,21 @@
 			</div>
 
 			<section class="anchor-target mt-12 sm:p-10" id="gaestecard">
+				<div class="mx-auto max-w-3xl text-center">
+					<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
+						INKLUSIVE FÜR ÜBERNACHTUNGSGÄSTE
+					</p>
+					<h2 class="mt-3 font-serif text-4xl leading-[0.95] text-slate-900 sm:text-5xl">
+						Urlaub genießen.<br />Mobil bleiben.<br />Alles inklusive.
+					</h2>
+					<div class="mx-auto mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
+					<p class="mt-4 text-sm leading-relaxed text-slate-600 sm:text-base">
+						Mit der GästeCard Basic nutzen Sie Bus & Bahn kostenlos und entdecken die Region flexibel -
+						ganz ohne Auto.
+					</p>
+				</div>
 
-
-				
-
-				<div class="mx-auto max-w-6xl space-y-8 lg:space-y-10">
+				<div class="mx-auto mt-10 max-w-6xl space-y-14">
 					<div class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
 						<div class="grid lg:grid-cols-[0.45fr_0.55fr]">
 							<div class="h-full">
@@ -1021,15 +1049,15 @@
 								/>
 							</div>
 
-							<div class="p-6 sm:p-8">
+							<div class="p-8 sm:p-10 lg:p-12">
 								<p class="text-xs font-semibold uppercase tracking-[0.32em] text-brand">
 									GästeCard Basic inklusive
 								</p>
-								<h2 class="mt-3 font-serif text-3xl leading-[1.02] text-slate-900 sm:text-4xl">
-									Mehr erleben - ohne Auto.
+								<h2 class="mt-4 font-serif text-3xl leading-[1.02] text-slate-900 sm:text-4xl">
+									Ihre Vorteile auf einen Blick
 								</h2>
 
-								<div class="mt-4 flex flex-wrap gap-2">
+								<div class="mt-5 flex flex-wrap gap-2">
 									<span class="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[11px] font-semibold text-slate-600">
 										Bus & Bahn gratis
 									</span>
@@ -1038,12 +1066,12 @@
 									</span>
 								</div>
 
-								<p class="mt-4 max-w-xl text-sm leading-relaxed text-slate-600 sm:text-base">
+								<p class="mt-6 max-w-xl text-sm leading-relaxed text-slate-600 sm:text-base">
 									Bei Ihrer Übernachtung im Gästehaus Rader ist die GästeCard Basic inklusive. Sie
 									starten direkt in Mobilität, Erholung und Naturerlebnisse - ohne zusätzliche Planung.
 								</p>
 
-								<ul class="mt-5 space-y-2 text-sm text-slate-700">
+								<ul class="mt-7 space-y-2 text-sm text-slate-700">
 									<li class="flex items-start gap-2">
 										<span class="mt-2 h-1.5 w-1.5 rounded-full bg-brand"></span>
 										Bus & Bahn in Kärnten gratis nutzen
@@ -1081,7 +1109,7 @@
 						</div>
 					</div>
 
-					<div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+					<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
 						<article class="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md motion-reduce:transform-none motion-reduce:transition-none">
 							<img
 								src={withAsset('/images/Umgebung/freibad.png')}
@@ -1308,25 +1336,12 @@
 </main>
 
 <style>
-	.nav-glass-sheen {
-		position: absolute;
-		inset: -40% -30%;
-		background:
-			radial-gradient(600px 380px at 20% 10%, rgba(255, 255, 255, 0.55), transparent 60%),
-			radial-gradient(520px 360px at 90% 30%, rgba(255, 255, 255, 0.25), transparent 55%);
-		transform: rotate(8deg);
-		opacity: 0.55;
-	}
-
 	.nav-indicator {
 		position: absolute;
-		left: 0;
-		right: 0;
-		border-radius: 16px;
-		background: rgba(255, 255, 255, 0.28);
-		border: 1px solid rgba(255, 255, 255, 0.28);
-		box-shadow: 0 10px 26px rgba(15, 23, 42, 0.1);
-		backdrop-filter: blur(14px);
+		left: 10px;
+		width: 3px;
+		border-radius: 999px;
+		background: rgba(247, 171, 0, 0.9);
 	}
 
 	.anchor-target {
