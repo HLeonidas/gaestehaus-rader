@@ -240,6 +240,25 @@
 		};
 	}
 
+	function reveal(node: HTMLElement, opts?: { once?: boolean; rootMargin?: string }) {
+		const once = opts?.once ?? true;
+		const io = new IntersectionObserver(
+			([entry]) => {
+				if (entry.isIntersecting) {
+					node.classList.add('is-revealed');
+					if (once) io.disconnect();
+				}
+			},
+			{ threshold: 0.12, rootMargin: opts?.rootMargin ?? '0px 0px -10% 0px' }
+		);
+		io.observe(node);
+		return {
+			destroy() {
+				io.disconnect();
+			},
+		};
+	}
+
 	function updateIndicator() {
 		if (!navListEl) return;
 		const el = btnEls.get(navActiveSectionId);
@@ -596,7 +615,7 @@
 										<img
 											src={withAsset(summerFeaturedEvent.image)}
 											alt={`${$t(summerFeaturedEvent.titleKey)} – ${$t(summerFeaturedEvent.kickerKey)}`}
-											class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+											class="h-full w-full scale-[1.05] object-cover object-center transition-transform duration-700 will-change-transform group-hover:scale-[1.07]"
 											loading="lazy"
 										/>
 										<div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/22 to-transparent"></div>
@@ -668,8 +687,10 @@
 								<div class="divide-y divide-slate-200/70">
 									{#each summerSecondaryEvents as event, i (event.id)}
 										<article
+											use:reveal
 											data-season={event.season}
-											class="group grid gap-6 py-8 sm:grid-cols-[240px,1fr] lg:grid-cols-[320px,1fr] lg:items-center"
+											class="reveal group grid gap-6 py-8 transition duration-300 hover:-translate-y-0.5 hover:drop-shadow-[0_18px_30px_rgba(15,23,42,0.10)] sm:grid-cols-[240px,1fr] lg:grid-cols-[320px,1fr] lg:items-center"
+											style={`--reveal-delay: ${i * 70}ms;`}
 										>
 											<div
 												class={`relative w-full overflow-hidden rounded-2xl bg-slate-100 aspect-[16/10] sm:aspect-[4/3] lg:aspect-[16/10] ${
@@ -679,10 +700,10 @@
 												<img
 													src={withAsset(event.image)}
 													alt={`${$t(event.titleKey)} – ${$t(event.kickerKey)}`}
-													class={`h-full w-full object-center transition-transform duration-700 ${
+													class={`h-full w-full object-center transition duration-700 will-change-transform ${
 														event.id === 'winter-hike'
-															? 'object-cover object-[center_58%] group-hover:scale-[1.01]'
-															: 'object-cover group-hover:scale-[1.04]'
+															? 'object-cover object-[center_58%] group-hover:scale-[1.02] group-hover:saturate-[1.06]'
+															: 'object-cover group-hover:scale-[1.03] group-hover:saturate-[1.06]'
 													}`}
 													loading="lazy"
 												/>
@@ -724,8 +745,11 @@
 
 												<div class="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-slate-800">
 													Mehr erfahren
-													<span class="grid h-8 w-8 place-items-center rounded-full bg-white shadow-sm ring-1 ring-slate-200 transition group-hover:translate-x-0.5">
-														<ArrowRight class="h-4 w-4" aria-hidden="true" />
+													<span class="grid h-8 w-8 place-items-center rounded-full bg-white shadow-sm ring-1 ring-slate-200 transition group-hover:translate-x-1 group-hover:shadow-md">
+														<ArrowRight
+															class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
+															aria-hidden="true"
+														/>
 													</span>
 												</div>
 											</div>
@@ -756,7 +780,7 @@
 										<img
 											src={withAsset(winterFeaturedEvent.image)}
 											alt={`${$t(winterFeaturedEvent.titleKey)} – ${$t(winterFeaturedEvent.kickerKey)}`}
-											class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+											class="h-full w-full scale-[1.05] object-cover object-center transition-transform duration-700 will-change-transform group-hover:scale-[1.07]"
 											loading="lazy"
 										/>
 										<div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/22 to-transparent"></div>
@@ -828,8 +852,10 @@
 								<div class="divide-y divide-slate-200/70">
 									{#each winterSecondaryEvents as event, i (event.id)}
 										<article
+											use:reveal
 											data-season={event.season}
-											class="group grid gap-6 py-8 sm:grid-cols-[240px,1fr] lg:grid-cols-[320px,1fr] lg:items-center"
+											class="reveal group grid gap-6 py-8 transition duration-300 hover:-translate-y-0.5 hover:drop-shadow-[0_18px_30px_rgba(15,23,42,0.10)] sm:grid-cols-[240px,1fr] lg:grid-cols-[320px,1fr] lg:items-center"
+											style={`--reveal-delay: ${i * 70}ms;`}
 										>
 											<div
 												class={`relative w-full overflow-hidden rounded-2xl bg-slate-100 aspect-[16/10] sm:aspect-[4/3] lg:aspect-[16/10] ${
@@ -839,10 +865,10 @@
 												<img
 													src={withAsset(event.image)}
 													alt={`${$t(event.titleKey)} – ${$t(event.kickerKey)}`}
-													class={`h-full w-full object-center transition-transform duration-700 ${
+													class={`h-full w-full object-center transition duration-700 will-change-transform ${
 														event.id === 'winter-hike'
-															? 'object-cover object-[center_58%] group-hover:scale-[1.01]'
-															: 'object-cover group-hover:scale-[1.04]'
+															? 'object-cover object-[center_58%] group-hover:scale-[1.02] group-hover:saturate-[1.06]'
+															: 'object-cover group-hover:scale-[1.03] group-hover:saturate-[1.06]'
 													}`}
 													loading="lazy"
 												/>
@@ -884,8 +910,11 @@
 
 												<div class="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-slate-800">
 													Mehr erfahren
-													<span class="grid h-8 w-8 place-items-center rounded-full bg-white shadow-sm ring-1 ring-slate-200 transition group-hover:translate-x-0.5">
-														<ArrowRight class="h-4 w-4" aria-hidden="true" />
+													<span class="grid h-8 w-8 place-items-center rounded-full bg-white shadow-sm ring-1 ring-slate-200 transition group-hover:translate-x-1 group-hover:shadow-md">
+														<ArrowRight
+															class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
+															aria-hidden="true"
+														/>
 													</span>
 												</div>
 											</div>
@@ -914,7 +943,9 @@
 
 						<div class="mt-10 grid gap-4 md:grid-cols-3">
 							<article
-								class="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white/80 p-6 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg"
+								use:reveal
+								class="reveal group relative overflow-hidden rounded-3xl border border-slate-200 bg-white/80 p-6 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg"
+								style="--reveal-delay: 0ms;"
 							>
 								<div class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
 									<div class="absolute -left-24 -top-24 h-48 w-48 rounded-full bg-brand/10 blur-2xl"></div>
@@ -961,7 +992,9 @@
 							</article>
 
 							<article
-								class="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white/80 p-6 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg"
+								use:reveal
+								class="reveal group relative overflow-hidden rounded-3xl border border-slate-200 bg-white/80 p-6 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg"
+								style="--reveal-delay: 90ms;"
 							>
 								<div class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
 									<div class="absolute -left-24 -top-24 h-48 w-48 rounded-full bg-emerald-200/30 blur-2xl"></div>
@@ -1008,7 +1041,9 @@
 							</article>
 
 							<article
-								class="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white/80 p-6 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg"
+								use:reveal
+								class="reveal group relative overflow-hidden rounded-3xl border border-slate-200 bg-white/80 p-6 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg"
+								style="--reveal-delay: 180ms;"
 							>
 								<div class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
 									<div class="absolute -left-24 -top-24 h-48 w-48 rounded-full bg-indigo-200/25 blur-2xl"></div>
@@ -1184,7 +1219,7 @@
 					</div>
 
 					<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-						<article class="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md motion-reduce:transform-none motion-reduce:transition-none">
+						<article use:reveal class="reveal group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md motion-reduce:transform-none motion-reduce:transition-none" style="--reveal-delay: 0ms;">
 							<img
 								src={withAsset('/images/Umgebung/freibad.png')}
 								alt="Bus und Bahn als flexible Mobilität ohne Auto"
@@ -1215,7 +1250,7 @@
 							</div>
 						</article>
 
-						<article class="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md motion-reduce:transform-none motion-reduce:transition-none">
+						<article use:reveal class="reveal group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md motion-reduce:transform-none motion-reduce:transition-none" style="--reveal-delay: 90ms;">
 							<img
 								src={withAsset('/images/Umgebung/sauna.png')}
 								alt="Baden und Wellness mit Gästekarte-Vorteilen"
@@ -1246,7 +1281,7 @@
 							</div>
 						</article>
 
-						<article class="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md motion-reduce:transform-none motion-reduce:transition-none">
+						<article use:reveal class="reveal group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md motion-reduce:transform-none motion-reduce:transition-none" style="--reveal-delay: 180ms;">
 							<img
 								src={withAsset('/images/Umgebung/ski_nassfeld.jpg')}
 								alt="Aktiv in der Natur am Nassfeld und im Gailtal"
@@ -1536,6 +1571,35 @@
 		filter: blur(10px);
 		opacity: 0.35;
 		background: radial-gradient(circle, rgba(255, 180, 0, 0.6), transparent 60%);
+	}
+
+	.reveal {
+		opacity: 0;
+		transform: translateY(12px);
+		filter: blur(2px);
+		transition:
+			opacity 600ms ease,
+			transform 600ms ease,
+			filter 600ms ease;
+		transition-delay: var(--reveal-delay, 0ms);
+		will-change: opacity, transform, filter;
+	}
+
+	.reveal.is-revealed {
+		opacity: 1;
+		transform: translateY(0);
+		filter: blur(0);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.reveal,
+		.reveal.is-revealed {
+			transition: none;
+			transform: none;
+			filter: none;
+			opacity: 1;
+		}
+
 	}
 
 </style>

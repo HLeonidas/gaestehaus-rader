@@ -98,8 +98,8 @@ export const accommodations: Accommodation[] = [
 					en: '3 nights',
 				},
 				extraPerson: {
-					de: '€ 10,- pro Nacht',
-					en: '€ 10,- per night',
+					de: '€ 15,- pro Nacht',
+					en: '€ 15,- per night',
 				},
 			},
 			{
@@ -117,8 +117,8 @@ export const accommodations: Accommodation[] = [
 					en: '3 nights',
 				},
 				extraPerson: {
-					de: '€ 10,- pro Nacht',
-					en: '€ 10,- per night',
+					de: '€ 15,- pro Nacht',
+					en: '€ 15,- per night',
 				},
 			},
 		],
@@ -214,8 +214,8 @@ export const accommodations: Accommodation[] = [
 					en: '3 nights',
 				},
 				extraPerson: {
-					de: '€ 10,- pro Nacht',
-					en: '€ 10,- per night',
+					de: '€ 15,- pro Nacht',
+					en: '€ 15,- per night',
 				},
 			},
 			{
@@ -233,8 +233,8 @@ export const accommodations: Accommodation[] = [
 					en: '3 nights',
 				},
 				extraPerson: {
-					de: '€ 10,- pro Nacht',
-					en: '€ 10,- per night',
+					de: '€ 15,- pro Nacht',
+					en: '€ 15,- per night',
 				},
 			},
 		],
