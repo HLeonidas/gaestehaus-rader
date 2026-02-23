@@ -1000,25 +1000,49 @@
 
 			</section>
 
+			<div class="mx-auto mt-10 w-full max-w-6xl px-1 sm:mt-14">
+				<div class="h-px w-full bg-gradient-to-r from-transparent via-brand/45 to-transparent"></div>
+			</div>
+
 			<section class="anchor-target mt-12 sm:p-10" id="gaestecard">
 
 
 				
 
 				<div class="mx-auto max-w-6xl space-y-8 lg:space-y-10">
-					<div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8 lg:p-10">
-						<div class="grid gap-8 lg:grid-cols-[1.05fr,0.95fr] lg:items-center">
-							<div>
+					<div class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+						<div class="grid lg:grid-cols-[0.45fr_0.55fr]">
+							<div class="h-full">
+								<img
+									src={withAsset('/images/Umgebung/summer-lift.png')}
+									alt="Bergbahn-Erlebnis in Kärnten mit GästeCard-Vorteilen"
+									class="aspect-[16/10] w-full rounded-none object-cover sm:aspect-[4/3] lg:h-full lg:aspect-auto"
+									loading="lazy"
+								/>
+							</div>
+
+							<div class="p-6 sm:p-8">
 								<p class="text-xs font-semibold uppercase tracking-[0.32em] text-brand">
 									GästeCard Basic inklusive
 								</p>
 								<h2 class="mt-3 font-serif text-3xl leading-[1.02] text-slate-900 sm:text-4xl">
 									Mehr erleben - ohne Auto.
 								</h2>
+
+								<div class="mt-4 flex flex-wrap gap-2">
+									<span class="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[11px] font-semibold text-slate-600">
+										Bus & Bahn gratis
+									</span>
+									<span class="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[11px] font-semibold text-slate-600">
+										Vorteile ab 1. Nacht
+									</span>
+								</div>
+
 								<p class="mt-4 max-w-xl text-sm leading-relaxed text-slate-600 sm:text-base">
 									Bei Ihrer Übernachtung im Gästehaus Rader ist die GästeCard Basic inklusive. Sie
 									starten direkt in Mobilität, Erholung und Naturerlebnisse - ohne zusätzliche Planung.
 								</p>
+
 								<ul class="mt-5 space-y-2 text-sm text-slate-700">
 									<li class="flex items-start gap-2">
 										<span class="mt-2 h-1.5 w-1.5 rounded-full bg-brand"></span>
@@ -1033,6 +1057,7 @@
 										Mehr Zeit für Urlaub statt Organisation
 									</li>
 								</ul>
+
 								<div class="mt-6 flex flex-wrap items-center gap-3">
 									<a
 										href={guestCardLinks.benefitsOverview}
@@ -1051,21 +1076,6 @@
 									>
 										Aktuelle Leistungsübersicht
 									</a>
-								</div>
-							</div>
-
-							<div class="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 shadow-sm">
-								<img
-									src={withAsset('/images/Umgebung/summer-lake.png')}
-									alt="Urlaubsgäste am See in Kärnten"
-									class="h-64 w-full object-cover sm:h-72 lg:h-[22rem]"
-									loading="lazy"
-								/>
-								<div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-black/0 to-transparent"></div>
-								<div class="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
-									<p class="inline-flex items-center rounded-full bg-white/90 px-3 py-1 text-xs font-semibold tracking-[0.18em] text-slate-800">
-										INKLUSIVE FÜR ÜBERNACHTUNGSGÄSTE
-									</p>
 								</div>
 							</div>
 						</div>
