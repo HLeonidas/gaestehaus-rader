@@ -25,6 +25,7 @@
 		Utensils,
 		Wifi,
 		Microwave,
+		Info,
 	} from 'lucide-svelte';
 
 	let { data } = $props();
@@ -637,8 +638,44 @@
 							<p class="mt-2 text-xs text-slate-500">{$t('room.detail.card.vatNote')}</p>
 						</div>
 
+						<!-- Aufschlsselung -->
+						<div class="mt-6 border-t border-slate-200 pt-4">
+							<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+								{$t('room.detail.card.breakdown.title')}
+							</p>
+
+							<div class="mt-3 space-y-2 text-sm text-slate-700">
+								<div class="flex items-center justify-between gap-4">
+									<span class="text-slate-600">{$t('room.detail.card.breakdown.nightLabel')}</span>
+									<span class="font-semibold text-slate-900">
+										{$t('room.detail.card.breakdown.nightFrom')} {accommodation.pricePerNightBase}&euro; /
+										{$t('price.night')}
+									</span>
+								</div>
+								<div class="flex items-center justify-between gap-4">
+									<span class="text-slate-600">{$t('room.detail.card.breakdown.cleaningLabel')}</span>
+									<span class="font-semibold text-slate-900">
+										{$t('room.detail.card.breakdown.cleaningValue')}
+									</span>
+								</div>
+								<div class="flex items-center justify-between gap-4">
+									<span class="text-slate-600">{$t('room.detail.card.breakdown.taxLabel')}</span>
+									<span class="font-semibold text-slate-900">
+										{$t('room.detail.card.breakdown.taxValue')}
+									</span>
+								</div>
+							</div>
+
+							<div class="mt-4 flex items-start gap-2 rounded-xl bg-slate-50 px-3 py-2 text-xs text-slate-600">
+								<Info class="mt-0.5 h-3.5 w-3.5 shrink-0 text-slate-500" aria-hidden="true" />
+								<span>
+								{$t('room.detail.card.breakdown.tip')}
+								</span>
+							</div>
+						</div>
+
 						<!-- Fakten -->
-						<div class="mt-6">
+						<div class="mt-6 border-t border-slate-200 pt-4">
 							<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
 								{$t('room.detail.card.facts.title')}
 							</p>
@@ -674,39 +711,6 @@
 										{$t('room.detail.card.facts.petsValue')}
 									</span>
 								</div>
-							</div>
-						</div>
-
-						<!-- Aufschlsselung -->
-						<div class="mt-6 border-t border-slate-200 pt-4">
-							<p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
-								{$t('room.detail.card.breakdown.title')}
-							</p>
-
-							<div class="mt-3 space-y-2 text-sm text-slate-700">
-								<div class="flex items-center justify-between gap-4">
-									<span class="text-slate-600">{$t('room.detail.card.breakdown.nightLabel')}</span>
-									<span class="font-semibold text-slate-900">
-										{$t('room.detail.card.breakdown.nightFrom')} {accommodation.pricePerNightBase}&euro; /
-										{$t('price.night')}
-									</span>
-								</div>
-								<div class="flex items-center justify-between gap-4">
-									<span class="text-slate-600">{$t('room.detail.card.breakdown.cleaningLabel')}</span>
-									<span class="font-semibold text-slate-900">
-										{$t('room.detail.card.breakdown.cleaningValue')}
-									</span>
-								</div>
-								<div class="flex items-center justify-between gap-4">
-									<span class="text-slate-600">{$t('room.detail.card.breakdown.taxLabel')}</span>
-									<span class="font-semibold text-slate-900">
-										{$t('room.detail.card.breakdown.taxValue')}
-									</span>
-								</div>
-							</div>
-
-							<div class="mt-4 rounded-xl bg-slate-50 px-3 py-2 text-xs text-slate-600">
-								{$t('room.detail.card.breakdown.tip')}
 							</div>
 						</div>
 
