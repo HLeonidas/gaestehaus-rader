@@ -561,7 +561,7 @@
 					<p class="mt-6 text-xs font-semibold uppercase tracking-[0.35em] text-brand sm:mt-7">
 						{$t('experiences.destinations.kicker')}
 					</p>
-					<h1 class="mt-3 font-serif text-4xl leading-[0.95] text-slate-900 sm:text-5xl lg:text-6xl">
+					<h1 class="mt-3 font-serif text-4xl leading-[0.95] text-slate-900 sm:text-5xl">
 						{$t('experiences.destinations.title')}
 					</h1>
 					<div class="mx-auto mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
@@ -622,10 +622,9 @@
 											</span>
 										{/if}
 
-										<div class="absolute inset-x-0 bottom-0 p-4 transition-[padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-6 sm:pb-4 sm:pt-6 sm:group-hover:pb-6 sm:group-focus-within:pb-6">
-											<div class="relative max-w-2xl rounded-2xl border border-white/25 bg-white/16 p-4 backdrop-blur-md max-h-[48%] overflow-hidden transition-[background-color,border-color,backdrop-filter,box-shadow,padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-h-none sm:border-transparent sm:bg-transparent sm:backdrop-blur-0 sm:shadow-none sm:px-5 sm:pb-1 sm:pt-4 sm:group-hover:border-white/25 sm:group-hover:bg-white/16 sm:group-hover:backdrop-blur-md sm:group-hover:shadow-[0_10px_26px_rgba(15,23,42,0.16)] sm:group-hover:p-6 sm:group-focus-within:border-white/25 sm:group-focus-within:bg-white/16 sm:group-focus-within:backdrop-blur-md sm:group-focus-within:shadow-[0_10px_26px_rgba(15,23,42,0.16)] sm:group-focus-within:p-6">
-												<div class="pointer-events-none absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-black/60 to-transparent sm:hidden" aria-hidden="true"></div>
-												<div class="overflow-auto pr-1 sm:overflow-visible sm:pr-0">
+										<div class="absolute inset-x-0 bottom-0 p-3 transition-[padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-6 sm:pb-4 sm:pt-6 sm:group-hover:pb-6 sm:group-focus-within:pb-6">
+											<div class="relative max-w-[86%] rounded-2xl border border-white/25 bg-white/16 p-3 backdrop-blur-md max-h-none overflow-visible transition-[background-color,border-color,backdrop-filter,box-shadow,padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-w-2xl sm:border-transparent sm:bg-transparent sm:backdrop-blur-0 sm:shadow-none sm:px-5 sm:pb-1 sm:pt-4 sm:group-hover:border-white/25 sm:group-hover:bg-white/16 sm:group-hover:backdrop-blur-md sm:group-hover:shadow-[0_10px_26px_rgba(15,23,42,0.16)] sm:group-hover:p-6 sm:group-focus-within:border-white/25 sm:group-focus-within:bg-white/16 sm:group-focus-within:backdrop-blur-md sm:group-focus-within:shadow-[0_10px_26px_rgba(15,23,42,0.16)] sm:group-focus-within:p-6">
+												<div class="overflow-visible pr-0 sm:overflow-visible sm:pr-0">
 													<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
 														<summerFeaturedEvent.icon class="h-4 w-4 text-brand" aria-hidden="true" />
 														{$t(summerFeaturedEvent.kickerKey)}
@@ -634,12 +633,12 @@
 														{$t(summerFeaturedEvent.titleKey)}
 													</h3>
 													{#if summerFeaturedEvent.descriptionKey}
-														<p class="mt-2 max-w-xl text-sm text-white/85 transition-[max-height,opacity,transform,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-h-0 sm:translate-y-1 sm:overflow-hidden sm:opacity-0 sm:blur-[2px] sm:group-hover:max-h-28 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-hover:blur-0 sm:group-focus-within:max-h-28 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100 sm:group-focus-within:blur-0">
+														<p class="mt-2 hidden max-w-xl text-sm text-white/85 transition-[max-height,opacity,transform,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:block sm:max-h-0 sm:translate-y-1 sm:overflow-hidden sm:opacity-0 sm:blur-[2px] sm:group-hover:max-h-28 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-hover:blur-0 sm:group-focus-within:max-h-28 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100 sm:group-focus-within:blur-0">
 															{$t(summerFeaturedEvent.descriptionKey)}
 														</p>
 													{/if}
 													{#if summerFeaturedEvent.metaKeys?.length}
-														<div class="mt-3 flex flex-wrap gap-2 transition-[max-height,opacity,transform,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-h-0 sm:translate-y-1 sm:overflow-hidden sm:opacity-0 sm:blur-[2px] sm:delay-100 sm:group-hover:max-h-20 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-hover:blur-0 sm:group-focus-within:max-h-20 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100 sm:group-focus-within:blur-0">
+														<div class="mt-3 hidden flex-wrap gap-2 transition-[max-height,opacity,transform,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:flex sm:max-h-0 sm:translate-y-1 sm:overflow-hidden sm:opacity-0 sm:blur-[2px] sm:delay-100 sm:group-hover:max-h-20 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-hover:blur-0 sm:group-focus-within:max-h-20 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100 sm:group-focus-within:blur-0">
 															{#each summerFeaturedEvent.metaKeys as metaKey}
 																<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white sm:px-3 sm:text-xs">
 																	{$t(metaKey)}
@@ -668,7 +667,11 @@
 												<img
 													src={withAsset(event.image)}
 													alt={`${$t(event.titleKey)} – ${$t(event.kickerKey)}`}
-													class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.04]"
+													class={`h-full w-full object-center transition-transform duration-700 ${
+														event.id === 'winter-hike'
+															? 'object-cover object-[center_58%] group-hover:scale-[1.01]'
+															: 'object-cover group-hover:scale-[1.04]'
+													}`}
 													loading="lazy"
 												/>
 												<div class="absolute inset-0 bg-gradient-to-t from-black/30 via-black/0 to-black/0"></div>
@@ -763,10 +766,9 @@
 											</span>
 										{/if}
 
-										<div class="absolute inset-x-0 bottom-0 p-4 transition-[padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-6 sm:pb-4 sm:pt-6 sm:group-hover:pb-6 sm:group-focus-within:pb-6">
-											<div class="relative max-w-2xl rounded-2xl border border-white/25 bg-white/16 p-4 backdrop-blur-md max-h-[48%] overflow-hidden transition-[background-color,border-color,backdrop-filter,box-shadow,padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-h-none sm:border-transparent sm:bg-transparent sm:backdrop-blur-0 sm:shadow-none sm:px-5 sm:pb-1 sm:pt-4 sm:group-hover:border-white/25 sm:group-hover:bg-white/16 sm:group-hover:backdrop-blur-md sm:group-hover:shadow-[0_10px_26px_rgba(15,23,42,0.16)] sm:group-hover:p-6 sm:group-focus-within:border-white/25 sm:group-focus-within:bg-white/16 sm:group-focus-within:backdrop-blur-md sm:group-focus-within:shadow-[0_10px_26px_rgba(15,23,42,0.16)] sm:group-focus-within:p-6">
-												<div class="pointer-events-none absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-black/60 to-transparent sm:hidden" aria-hidden="true"></div>
-												<div class="overflow-auto pr-1 sm:overflow-visible sm:pr-0">
+										<div class="absolute inset-x-0 bottom-0 p-3 transition-[padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-6 sm:pb-4 sm:pt-6 sm:group-hover:pb-6 sm:group-focus-within:pb-6">
+											<div class="relative max-w-[86%] rounded-2xl border border-white/25 bg-white/16 p-3 backdrop-blur-md max-h-none overflow-visible transition-[background-color,border-color,backdrop-filter,box-shadow,padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-w-2xl sm:border-transparent sm:bg-transparent sm:backdrop-blur-0 sm:shadow-none sm:px-5 sm:pb-1 sm:pt-4 sm:group-hover:border-white/25 sm:group-hover:bg-white/16 sm:group-hover:backdrop-blur-md sm:group-hover:shadow-[0_10px_26px_rgba(15,23,42,0.16)] sm:group-hover:p-6 sm:group-focus-within:border-white/25 sm:group-focus-within:bg-white/16 sm:group-focus-within:backdrop-blur-md sm:group-focus-within:shadow-[0_10px_26px_rgba(15,23,42,0.16)] sm:group-focus-within:p-6">
+												<div class="overflow-visible pr-0 sm:overflow-visible sm:pr-0">
 													<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
 														<winterFeaturedEvent.icon class="h-4 w-4 text-brand" aria-hidden="true" />
 														{$t(winterFeaturedEvent.kickerKey)}
@@ -775,12 +777,12 @@
 														{$t(winterFeaturedEvent.titleKey)}
 													</h3>
 													{#if winterFeaturedEvent.descriptionKey}
-														<p class="mt-2 max-w-xl text-sm text-white/85 transition-[max-height,opacity,transform,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-h-0 sm:translate-y-1 sm:overflow-hidden sm:opacity-0 sm:blur-[2px] sm:group-hover:max-h-28 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-hover:blur-0 sm:group-focus-within:max-h-28 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100 sm:group-focus-within:blur-0">
+														<p class="mt-2 hidden max-w-xl text-sm text-white/85 transition-[max-height,opacity,transform,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:block sm:max-h-0 sm:translate-y-1 sm:overflow-hidden sm:opacity-0 sm:blur-[2px] sm:group-hover:max-h-28 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-hover:blur-0 sm:group-focus-within:max-h-28 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100 sm:group-focus-within:blur-0">
 															{$t(winterFeaturedEvent.descriptionKey)}
 														</p>
 													{/if}
 													{#if winterFeaturedEvent.metaKeys?.length}
-														<div class="mt-3 flex flex-wrap gap-2 transition-[max-height,opacity,transform,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:max-h-0 sm:translate-y-1 sm:overflow-hidden sm:opacity-0 sm:blur-[2px] sm:delay-100 sm:group-hover:max-h-20 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-hover:blur-0 sm:group-focus-within:max-h-20 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100 sm:group-focus-within:blur-0">
+														<div class="mt-3 hidden flex-wrap gap-2 transition-[max-height,opacity,transform,filter] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:flex sm:max-h-0 sm:translate-y-1 sm:overflow-hidden sm:opacity-0 sm:blur-[2px] sm:delay-100 sm:group-hover:max-h-20 sm:group-hover:translate-y-0 sm:group-hover:opacity-100 sm:group-hover:blur-0 sm:group-focus-within:max-h-20 sm:group-focus-within:translate-y-0 sm:group-focus-within:opacity-100 sm:group-focus-within:blur-0">
 															{#each winterFeaturedEvent.metaKeys as metaKey}
 																<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white sm:px-3 sm:text-xs">
 																	{$t(metaKey)}
@@ -809,7 +811,11 @@
 												<img
 													src={withAsset(event.image)}
 													alt={`${$t(event.titleKey)} – ${$t(event.kickerKey)}`}
-													class="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.04]"
+													class={`h-full w-full object-center transition-transform duration-700 ${
+														event.id === 'winter-hike'
+															? 'object-cover object-[center_58%] group-hover:scale-[1.01]'
+															: 'object-cover group-hover:scale-[1.04]'
+													}`}
 													loading="lazy"
 												/>
 												<div class="absolute inset-0 bg-gradient-to-t from-black/30 via-black/0 to-black/0"></div>
@@ -862,6 +868,169 @@
 						</div>
 					{/if}
 				</div>
+
+				<section class="anchor-target bg-[#fbfaf7] py-14 sm:py-16" id="traditionelle-feste">
+					<div class="mx-auto w-full max-w-6xl px-4 sm:px-6">
+						<div class="mx-auto max-w-3xl text-center">
+							<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
+								Lokale Empfehlung
+							</p>
+							<h2 class="mt-3 font-serif text-4xl leading-[0.95] text-slate-900 sm:text-5xl">
+								Traditionelle Feste im Gitschtal
+							</h2>
+							<div class="mx-auto mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
+							<p class="mt-4 text-sm leading-relaxed text-slate-600 sm:text-base">
+								Erleben Sie, was vor Ort wirklich gelebt wird: echte Begegnungen, regionale Küche und gelebtes Brauchtum im Jahreslauf.
+							</p>
+						</div>
+
+						<div class="mt-10 grid gap-4 md:grid-cols-3">
+							<article
+								class="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white/80 p-6 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg"
+							>
+								<div class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+									<div class="absolute -left-24 -top-24 h-48 w-48 rounded-full bg-brand/10 blur-2xl"></div>
+									<div class="absolute -right-20 -bottom-20 h-48 w-48 rounded-full bg-amber-200/30 blur-2xl"></div>
+								</div>
+
+								<p class="relative text-[11px] font-semibold uppercase tracking-[0.28em] text-brand">
+									Dorffeste
+								</p>
+
+								<div class="relative mt-3 flex items-start gap-3">
+									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-brand/10 text-brand">
+										<span class="text-lg" aria-hidden="true">🎉</span>
+									</div>
+									<div class="min-w-0">
+										<h3 class="text-xl font-semibold leading-tight text-slate-900">Dorffeste</h3>
+										<p class="mt-2 text-sm leading-relaxed text-slate-600">
+											Kleine Feste mit Musik, Begegnungen und echter Dorfatmosphäre - ideal, um das Gitschtal abseits klassischer Ausflüge kennenzulernen.
+										</p>
+									</div>
+								</div>
+
+								<ul class="relative mt-5 space-y-2 text-sm text-slate-700">
+									<li class="flex items-start gap-2">
+										<span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand"></span>
+										Kuhfladentombola (Weißbriach) - Kult & Schmäh
+									</li>
+									<li class="flex items-start gap-2">
+										<span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand"></span>
+										Feuerwehrfest / Zeltfest - Musik & Stimmung
+									</li>
+									<li class="flex items-start gap-2">
+										<span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand"></span>
+										Frühschoppen - gemütlich, regional, echt
+									</li>
+								</ul>
+
+								<div class="relative mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-800">
+									Tipp: ideal im Sommer
+									<span class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600">
+										Juni-August
+									</span>
+								</div>
+							</article>
+
+							<article
+								class="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white/80 p-6 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg"
+							>
+								<div class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+									<div class="absolute -left-24 -top-24 h-48 w-48 rounded-full bg-emerald-200/30 blur-2xl"></div>
+									<div class="absolute -right-20 -bottom-20 h-48 w-48 rounded-full bg-brand/10 blur-2xl"></div>
+								</div>
+
+								<p class="relative text-[11px] font-semibold uppercase tracking-[0.28em] text-brand">
+									Kulinarische Feste
+								</p>
+
+								<div class="relative mt-3 flex items-start gap-3">
+									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-brand/10 text-brand">
+										<span class="text-lg" aria-hidden="true">🥬</span>
+									</div>
+									<div class="min-w-0">
+										<h3 class="text-xl font-semibold leading-tight text-slate-900">Kulinarische Feste</h3>
+										<p class="mt-2 text-sm leading-relaxed text-slate-600">
+											Regionale Spezialitäten, Produzenten aus der Umgebung und saisonale Genussmomente - vom Markt bis zur Festtafel.
+										</p>
+									</div>
+								</div>
+
+								<ul class="relative mt-5 space-y-2 text-sm text-slate-700">
+									<li class="flex items-start gap-2">
+										<span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand"></span>
+										Krautfest (Weißbriach) - regional & herzhaft
+									</li>
+									<li class="flex items-start gap-2">
+										<span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand"></span>
+										Bauern- & Handwerksstände - echte Produkte
+									</li>
+									<li class="flex items-start gap-2">
+										<span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand"></span>
+										Herbstgenuss - perfekt für Wanderer & Genießer
+									</li>
+								</ul>
+
+								<div class="relative mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-800">
+									Tipp: ideal im Herbst
+									<span class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600">
+										Sep-Okt
+									</span>
+								</div>
+							</article>
+
+							<article
+								class="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white/80 p-6 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg"
+							>
+								<div class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+									<div class="absolute -left-24 -top-24 h-48 w-48 rounded-full bg-indigo-200/25 blur-2xl"></div>
+									<div class="absolute -right-20 -bottom-20 h-48 w-48 rounded-full bg-brand/10 blur-2xl"></div>
+								</div>
+
+								<p class="relative text-[11px] font-semibold uppercase tracking-[0.28em] text-brand">
+									Tradition & Brauchtum
+								</p>
+
+								<div class="relative mt-3 flex items-start gap-3">
+									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-brand/10 text-brand">
+										<span class="text-lg" aria-hidden="true">🎺</span>
+									</div>
+									<div class="min-w-0">
+										<h3 class="text-xl font-semibold leading-tight text-slate-900">
+											Tradition & Brauchtum
+										</h3>
+										<p class="mt-2 text-sm leading-relaxed text-slate-600">
+											Alte Bräuche, Musik und gelebte Kultur machen den Aufenthalt besonders - und geben einen echten Einblick in die Region.
+										</p>
+									</div>
+								</div>
+
+								<ul class="relative mt-5 space-y-2 text-sm text-slate-700">
+									<li class="flex items-start gap-2">
+										<span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand"></span>
+										Kirchtag (Weißbriach) - Tracht, Musik & Tanz
+									</li>
+									<li class="flex items-start gap-2">
+										<span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand"></span>
+										Alm- & Almkirchtage - klein, urig, wunderschön
+									</li>
+									<li class="flex items-start gap-2">
+										<span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand"></span>
+										Advent im Tal - ruhig, stimmungsvoll, regional
+									</li>
+								</ul>
+
+								<div class="relative mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-800">
+									Tipp: das ganze Jahr
+									<span class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600">
+										Saisonabhängig
+									</span>
+								</div>
+							</article>
+						</div>
+
+					</div>
+				</section>
 
 				<div class="mt-10 rounded-2xl border border-brand/15 bg-[#fdf8f2] p-6 shadow-sm">
 					<div class="grid gap-6 md:grid-cols-[1.5fr,auto] md:items-center">
