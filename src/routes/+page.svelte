@@ -1063,7 +1063,7 @@
 				<div class="grid gap-8 lg:grid-cols-[1.1fr,0.9fr]">
 					<div class="order-2 relative h-[260px] sm:h-[320px] lg:order-1 lg:h-[670px]">
 						<img
-							src={withAsset('/images/Umgebung/ski_nassfeld.jpg')}
+							src={withAsset('/images/Umgebung/nassfeld-lift.jpg')}
 							alt={$t('guestcard.landing.imageAlt')}
 							class="h-full w-full object-cover"
 							loading="lazy"

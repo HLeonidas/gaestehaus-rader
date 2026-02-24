@@ -284,10 +284,10 @@ const translations: Record<Lang, Record<string, string>> = {
 		'experiences.event.summer.gorge.title': 'Garnitzenklamm',
 		'experiences.event.summer.gorge.description':
 			'Spektakuläre Schlucht mit Holzstegen und Wasserfällen, fotografisch extrem stark und perfekt für einen Tagesausflug.',
-		'experiences.event.summer.food.kicker': 'Panorama',
-		'experiences.event.summer.food.title': 'Goldeck Panorama',
+		'experiences.event.summer.food.kicker': 'Bergtour',
+		'experiences.event.summer.food.title': 'Golz (2.004 m)',
 		'experiences.event.summer.food.description':
-			'Aussicht über den Millstätter See, Panoramastraße und wenig überlaufen, ein Premium-Feeling für den Tagesausflug.',
+			'Markanter Aussichtsberg in den Gailtaler Alpen bei Hermagor: technisch unschwierig, aber konditionell fordernd. Beliebte Zustiege führen über Radnig/Radniger Alm oder vom Weißensee via Kohlröslhütte.',
 		'experiences.event.winter.ski.kicker': 'Skifahren',
 		'experiences.event.winter.ski.title': 'Nassfeld: Sun Ski World',
 		'experiences.event.winter.ski.description':
@@ -323,6 +323,8 @@ const translations: Record<Lang, Record<string, string>> = {
 		'experiences.meta.quiet': 'Ruhig',
 		'experiences.meta.panorama': 'Panorama',
 		'experiences.meta.panoramaroad': 'Panoramastraße',
+		'experiences.meta.altitude2004': '2.004 m Höhe',
+		'experiences.meta.elevation1300': 'ca. 1.300 hm',
 		'experiences.meta.sonnenalpe': 'Sonnenalpe Nassfeld',
 		'experiences.meta.tressdorferalm': 'Tressdorfer Alm',
 		'experiences.meta.litruns': 'Beleuchtete Rodelstrecken',
@@ -1358,10 +1360,10 @@ const translations: Record<Lang, Record<string, string>> = {
 		'experiences.event.summer.gorge.title': 'Garnitzenklamm Gorge',
 		'experiences.event.summer.gorge.description':
 			'A spectacular gorge with wooden walkways and waterfalls, highly photogenic and perfect for a day trip.',
-		'experiences.event.summer.food.kicker': 'Panorama',
-		'experiences.event.summer.food.title': 'Goldeck Panorama',
+		'experiences.event.summer.food.kicker': 'Mountain tour',
+		'experiences.event.summer.food.title': 'Golz (2,004 m)',
 		'experiences.event.summer.food.description':
-			'Views over Lake Millstatt, scenic mountain road, and usually less crowded, a premium day-trip feeling.',
+			'Distinctive viewpoint peak in the Gailtal Alps near Hermagor: technically easy but physically demanding. Popular routes start from Radnig/Radniger Alm or from Weissensee via Kohlroeslhuette.',
 		'experiences.event.winter.ski.kicker': 'Skiing',
 		'experiences.event.winter.ski.title': 'Nassfeld: Sun Ski World',
 		'experiences.event.winter.ski.description':
@@ -1397,6 +1399,8 @@ const translations: Record<Lang, Record<string, string>> = {
 		'experiences.meta.quiet': 'Quiet',
 		'experiences.meta.panorama': 'Panorama',
 		'experiences.meta.panoramaroad': 'Scenic road',
+		'experiences.meta.altitude2004': '2,004 m altitude',
+		'experiences.meta.elevation1300': 'about 1,300 m ascent',
 		'experiences.meta.sonnenalpe': 'Sonnenalpe Nassfeld',
 		'experiences.meta.tressdorferalm': 'Tressdorfer Alm',
 		'experiences.meta.litruns': 'Lit sledding runs',

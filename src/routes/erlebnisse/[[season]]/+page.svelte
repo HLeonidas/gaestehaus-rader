@@ -1194,7 +1194,7 @@
 						<div class="grid lg:grid-cols-[0.45fr_0.55fr]">
 							<div class="h-full">
 								<img
-									src={withAsset('/images/Umgebung/summer-lift.png')}
+									src={withAsset('/images/Umgebung/nassfeld-lift.jpg')}
 									alt="Bergbahn-Erlebnis in Kärnten mit GästeCard-Vorteilen"
 									class="aspect-[16/10] w-full rounded-none object-cover sm:aspect-[4/3] lg:h-full lg:aspect-auto"
 									loading="lazy"
@@ -1326,7 +1326,7 @@
 
 						<article use:reveal class="reveal group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md motion-reduce:transform-none motion-reduce:transition-none" style="--reveal-delay: 180ms;">
 							<img
-								src={withAsset('/images/Umgebung/ski_nassfeld.jpg')}
+								src={withAsset('/images/Umgebung/aussicht-vom-golz.jpg')}
 								alt="Aktiv in der Natur am Nassfeld und im Gailtal"
 								class="h-44 w-full object-cover"
 								loading="lazy"
