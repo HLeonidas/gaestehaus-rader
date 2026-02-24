@@ -10,6 +10,7 @@
 		experienceSectionLinks as sectionLinks,
 		experienceSectionTrackingLinks as sectionTrackingLinks,
 		type ActivityFilterKey,
+		type ExperienceEvent,
 		type SeasonKey,
 		type SectionLink,
 	} from '$lib/data/experience';
@@ -39,6 +40,32 @@
 
 	const withAsset = (path: string) => asset(path);
 	const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
+	const difficultyLabels: Record<'easy' | 'medium' | 'hard', LocalizedText> = {
+		easy: { de: 'Leicht', en: 'Easy' },
+		medium: { de: 'Mittel', en: 'Moderate' },
+		hard: { de: 'Schwer', en: 'Hard' },
+	};
+	const formatDistance = (km: number) => ($lang === 'de' ? `${km.toString().replace('.', ',')} km` : `${km} km`);
+	const buildMetaChips = (event: ExperienceEvent) => {
+		const chips: string[] = [];
+		if (event.driveMinutes != null) chips.push(`${event.driveMinutes} min`);
+		if (event.distanceKm != null) chips.push(formatDistance(event.distanceKm));
+		if (event.durationHours) chips.push(`${event.durationHours} h`);
+		if (event.difficulty) chips.push(localize(difficultyLabels[event.difficulty]));
+		if (event.elevationGainM != null) chips.push($lang === 'de' ? `+${event.elevationGainM} hm` : `+${event.elevationGainM} m`);
+		if (event.location) chips.push(localize(event.location));
+		if (event.seasonMonths) chips.push($lang === 'de' ? `Saison ${event.seasonMonths}` : `Season ${event.seasonMonths}`);
+		if (event.indoor != null) chips.push(event.indoor ? ($lang === 'de' ? 'Indoor' : 'Indoor') : ($lang === 'de' ? 'Outdoor' : 'Outdoor'));
+		if (event.meta?.length) chips.push(...event.meta.map((item) => localize(item)));
+		return chips.slice(0, 6);
+	};
+	const getEventHref = (event: ExperienceEvent) => event.detailsUrl ?? event.mapUrl ?? null;
+	const getEventTarget = (_event: ExperienceEvent) => '_blank';
+	const getEventRel = (_event: ExperienceEvent) => 'noreferrer';
+	const badgeClass = (tier?: 'top' | 'tip') =>
+		tier === 'top'
+			? 'border border-brand/30 bg-brand text-white'
+			: 'border border-white/45 bg-white/88 text-slate-900';
 
 	// get active tab from url param (default: summer)
 	const seoSeasonFromUrl = $derived.by(() => {
@@ -659,21 +686,32 @@
 							</p>
 							{#if summerFeaturedEvent}
 								<div class="mx-auto w-full max-w-6xl px-0 sm:px-0 lg:px-0">
-									<article
+									<svelte:element
+										this={getEventHref(summerFeaturedEvent) ? 'a' : 'article'}
+										href={getEventHref(summerFeaturedEvent) ?? undefined}
+										target={getEventHref(summerFeaturedEvent) ? getEventTarget(summerFeaturedEvent) : undefined}
+										rel={getEventHref(summerFeaturedEvent) ? getEventRel(summerFeaturedEvent) : undefined}
 										data-season={summerFeaturedEvent.season}
-										class="group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm"
+										class={`group block w-full overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm ${
+											getEventHref(summerFeaturedEvent) ? 'cursor-pointer no-underline' : ''
+										}`}
 									>
-										<div class="relative aspect-[16/10] sm:min-h-[420px] lg:h-[min(65dvh,650px)]">
+										<div class="relative aspect-[16/10] overflow-hidden rounded-3xl sm:min-h-[420px] lg:h-[min(65dvh,650px)]">
 											<img
 												src={withAsset(summerFeaturedEvent.image)}
 												alt={`${localize(summerFeaturedEvent.title)} – ${localize(summerFeaturedEvent.kicker)}`}
-												class={`absolute inset-0 block h-full w-full object-cover transition-transform duration-700 will-change-transform} object-left scale-[1.12] group-hover:scale-[1.14]`}
+												class={`absolute inset-0 block h-full w-full object-cover transition-transform duration-700 will-change-transform ${
+													summerFeaturedEvent.id === 'summer-hike'
+														? 'object-left scale-[1.12] group-hover:scale-[1.14]'
+														: 'object-center scale-[1.05] group-hover:scale-[1.07]'
+												}`}
 												loading="lazy"
-											/>											
+											/>
+											<div class="absolute inset-0 hidden bg-gradient-to-t from-black/78 via-black/38 to-black/8 sm:block"></div>
 
 											{#if summerFeaturedEvent.badge}
 												<span
-													class="absolute right-5 top-5 rounded-full bg-brand px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white shadow-sm"
+													class={`absolute right-5 top-5 rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] shadow-sm ${badgeClass(summerFeaturedEvent.badgeTier)}`}
 												>
 													{localize(summerFeaturedEvent.badge)}
 												</span>
@@ -702,13 +740,13 @@
 																{localize(summerFeaturedEvent.description)}
 															</p>
 														{/if}
-														{#if summerFeaturedEvent.meta?.length}
+														{#if buildMetaChips(summerFeaturedEvent).length}
 															<div class="mt-3 flex flex-wrap gap-2">
-																{#each summerFeaturedEvent.meta as meta}
+																{#each buildMetaChips(summerFeaturedEvent) as chip}
 																	<span
 																		class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white sm:px-3 sm:text-xs"
 																	>
-																		{localize(meta)}
+																		{chip}
 																	</span>
 																{/each}
 															</div>
@@ -735,29 +773,35 @@
 														{localize(summerFeaturedEvent.description)}
 													</p>
 												{/if}
-												{#if summerFeaturedEvent.meta?.length}
+												{#if buildMetaChips(summerFeaturedEvent).length}
 													<div class="mt-3 flex flex-wrap gap-2">
-														{#each summerFeaturedEvent.meta as meta}
+														{#each buildMetaChips(summerFeaturedEvent) as chip}
 															<span
 																class="rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-700"
 															>
-																{localize(meta)}
+																{chip}
 															</span>
 														{/each}
 													</div>
 												{/if}
 											</div>
 										</div>
-									</article>
+									</svelte:element>
 								</div>
 							{/if}
 							<div class="mt-6">
 								<div class="divide-y divide-slate-200/70">
 									{#each summerSecondaryEvents as event, i (event.id)}
-										<article
+										<svelte:element
+											this={getEventHref(event) ? 'a' : 'article'}
+											href={getEventHref(event) ?? undefined}
+											target={getEventHref(event) ? getEventTarget(event) : undefined}
+											rel={getEventHref(event) ? getEventRel(event) : undefined}
 											use:reveal
 											data-season={event.season}
-											class="reveal group grid gap-6 py-8 transition duration-300 hover:-translate-y-0.5 hover:drop-shadow-[0_18px_30px_rgba(15,23,42,0.10)] sm:grid-cols-[240px,1fr] lg:grid-cols-[320px,1fr] lg:items-center"
+											class={`reveal group grid gap-6 py-8 transition duration-300 hover:-translate-y-0.5 hover:drop-shadow-[0_18px_30px_rgba(15,23,42,0.10)] sm:grid-cols-[240px,1fr] lg:grid-cols-[320px,1fr] lg:items-center ${
+												getEventHref(event) ? 'cursor-pointer no-underline' : ''
+											}`}
 											style={`--reveal-delay: ${i * 70}ms;`}
 										>
 											<div
@@ -798,18 +842,18 @@
 												</h3>
 
 												{#if event.description}
-													<p class="mt-2 text-sm leading-relaxed text-slate-600">
+													<p class="mt-2 line-clamp-2 text-sm leading-relaxed text-slate-600">
 														{localize(event.description)}
 													</p>
 												{/if}
 
-												{#if event.meta?.length}
+												{#if buildMetaChips(event).length}
 													<div class="mt-3 flex flex-wrap gap-2">
-														{#each event.meta as meta}
+														{#each buildMetaChips(event) as chip}
 															<span
 																class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600"
 															>
-																{localize(meta)}
+																{chip}
 															</span>
 														{/each}
 													</div>
@@ -827,7 +871,7 @@
 													</span>
 												</div>
 											</div>
-										</article>
+										</svelte:element>
 									{/each}
 								</div>
 							</div>
@@ -845,23 +889,28 @@
 							</p>
 							{#if winterFeaturedEvent}
 								<div class="mx-auto w-full max-w-6xl px-0 sm:px-0 lg:px-0">
-									<article
+									<svelte:element
+										this={getEventHref(winterFeaturedEvent) ? 'a' : 'article'}
+										href={getEventHref(winterFeaturedEvent) ?? undefined}
+										target={getEventHref(winterFeaturedEvent) ? getEventTarget(winterFeaturedEvent) : undefined}
+										rel={getEventHref(winterFeaturedEvent) ? getEventRel(winterFeaturedEvent) : undefined}
 										data-season={winterFeaturedEvent.season}
-										class={`group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm ${
-											winterFeaturedEvent.id === 'winter-ski' ? 'cursor-pointer' : ''
+										class={`group block w-full overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm ${
+											getEventHref(winterFeaturedEvent) ? 'cursor-pointer no-underline' : ''
 										}`}
 									>
-										<div class="relative aspect-[16/10] sm:min-h-[420px] lg:h-[min(72dvh,720px)]">
+										<div class="relative aspect-[16/10] overflow-hidden rounded-3xl sm:min-h-[420px] lg:h-[min(72dvh,720px)]">
 											<img
 												src={withAsset(winterFeaturedEvent.image)}
 												alt={`${localize(winterFeaturedEvent.title)} – ${localize(winterFeaturedEvent.kicker)}`}
 												class="absolute inset-0 h-full w-full scale-[1.05] object-cover object-center transition-transform duration-700 will-change-transform group-hover:scale-[1.07]"
 												loading="lazy"
 											/>
+											<div class="absolute inset-0 hidden bg-gradient-to-t from-black/78 via-black/38 to-black/8 sm:block"></div>
 
 											{#if winterFeaturedEvent.badge}
 												<span
-													class="absolute right-5 top-5 rounded-full bg-brand px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white shadow-sm"
+													class={`absolute right-5 top-5 rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] shadow-sm ${badgeClass(winterFeaturedEvent.badgeTier)}`}
 												>
 													{localize(winterFeaturedEvent.badge)}
 												</span>
@@ -890,13 +939,13 @@
 																{localize(winterFeaturedEvent.description)}
 															</p>
 														{/if}
-														{#if winterFeaturedEvent.meta?.length}
+														{#if buildMetaChips(winterFeaturedEvent).length}
 															<div class="mt-3 flex flex-wrap gap-2">
-																{#each winterFeaturedEvent.meta as meta}
+																{#each buildMetaChips(winterFeaturedEvent) as chip}
 																	<span
 																		class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white sm:px-3 sm:text-xs"
 																	>
-																		{localize(meta)}
+																		{chip}
 																	</span>
 																{/each}
 															</div>
@@ -923,29 +972,35 @@
 														{localize(winterFeaturedEvent.description)}
 													</p>
 												{/if}
-												{#if winterFeaturedEvent.meta?.length}
+												{#if buildMetaChips(winterFeaturedEvent).length}
 													<div class="mt-3 flex flex-wrap gap-2">
-														{#each winterFeaturedEvent.meta as meta}
+														{#each buildMetaChips(winterFeaturedEvent) as chip}
 															<span
 																class="rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-700"
 															>
-																{localize(meta)}
+																{chip}
 															</span>
 														{/each}
 													</div>
 												{/if}
 											</div>
 										</div>
-									</article>
+									</svelte:element>
 								</div>
 							{/if}
 							<div class="mt-6">
 								<div class="divide-y divide-slate-200/70">
 									{#each winterSecondaryEvents as event, i (event.id)}
-										<article
+										<svelte:element
+											this={getEventHref(event) ? 'a' : 'article'}
+											href={getEventHref(event) ?? undefined}
+											target={getEventHref(event) ? getEventTarget(event) : undefined}
+											rel={getEventHref(event) ? getEventRel(event) : undefined}
 											use:reveal
 											data-season={event.season}
-											class="reveal group grid gap-6 py-8 transition duration-300 hover:-translate-y-0.5 hover:drop-shadow-[0_18px_30px_rgba(15,23,42,0.10)] sm:grid-cols-[240px,1fr] lg:grid-cols-[320px,1fr] lg:items-center"
+											class={`reveal group grid gap-6 py-8 transition duration-300 hover:-translate-y-0.5 hover:drop-shadow-[0_18px_30px_rgba(15,23,42,0.10)] sm:grid-cols-[240px,1fr] lg:grid-cols-[320px,1fr] lg:items-center ${
+												getEventHref(event) ? 'cursor-pointer no-underline' : ''
+											}`}
 											style={`--reveal-delay: ${i * 70}ms;`}
 										>
 											<div
@@ -989,18 +1044,18 @@
 												</h3>
 
 												{#if event.description}
-													<p class="mt-2 text-sm leading-relaxed text-slate-600">
+													<p class="mt-2 line-clamp-2 text-sm leading-relaxed text-slate-600">
 														{localize(event.description)}
 													</p>
 												{/if}
 
-												{#if event.meta?.length}
+												{#if buildMetaChips(event).length}
 													<div class="mt-3 flex flex-wrap gap-2">
-														{#each event.meta as meta}
+														{#each buildMetaChips(event) as chip}
 															<span
 																class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600"
 															>
-																{localize(meta)}
+																{chip}
 															</span>
 														{/each}
 													</div>
@@ -1018,7 +1073,7 @@
 													</span>
 												</div>
 											</div>
-										</article>
+										</svelte:element>
 									{/each}
 								</div>
 							</div>
@@ -1776,3 +1831,6 @@
 		}
 	}
 </style>
+
+
+
