@@ -1,4 +1,5 @@
 import type { ComponentType } from 'svelte';
+import type { Lang } from '$lib/i18n';
 import {
 	Bike,
 	CableCar,
@@ -12,21 +13,22 @@ import {
 
 export type SeasonKey = 'summer' | 'winter';
 export type ActivityFilterKey = 'hiking' | 'active' | 'winter' | 'family' | 'lakes' | 'culture';
+type LocalizedText = Record<Lang, string>;
 
 export type ExperienceEvent = {
 	id: string;
 	season: SeasonKey;
 	activities: ActivityFilterKey[];
 	icon: ComponentType;
-	kickerKey: string;
-	titleKey: string;
-	descriptionKey?: string;
+	kicker: LocalizedText;
+	title: LocalizedText;
+	description?: LocalizedText;
 	image: string;
 	className?: string;
-	badgeKey?: string;
+	badge?: LocalizedText;
 	titleSize?: string;
 	layout?: string;
-	metaKeys?: string[];
+	meta?: LocalizedText[];
 };
 
 export type DestinationCard = {
@@ -56,155 +58,218 @@ export const experienceEvents: ExperienceEvent[] = [
 		season: 'summer',
 		activities: ['hiking', 'family'],
 		icon: Mountain,
-		kickerKey: 'experiences.event.summer.hike.kicker',
-		titleKey: 'experiences.event.summer.hike.title',
-		descriptionKey: 'experiences.event.summer.hike.description',
+		kicker: { de: 'Wandern', en: 'Hiking' },
+		title: { de: 'Reißkofel & Almen', en: 'Reißkofel & alpine huts' },
+		description: {
+			de: 'Zwischen Weißbriach und den Karnischen Alpen warten aussichtsreiche Wege - von Genussrunden bis zur echten Gipfeltour.',
+			en: 'From scenic rounds to real summit hikes, beautiful trails run between Weißbriach and the Carnic Alps.',
+		},
 		image: '/images/Umgebung/napal-alm.jpg',
 		layout: 'summer',
 		className: 'c1',
 		titleSize: 'text-2xl',
-		metaKeys: ['experiences.event.summer.hike.meta1', 'experiences.event.summer.hike.meta2'],
+		meta: [
+			{ de: 'Viele Almwege in der Nähe', en: 'Many alpine trails nearby' },
+			{ de: 'Beste Zeit: Juni bis Oktober', en: 'Best season: June to October' },
+		],
 	},
 	{
 		id: 'summer-gorge',
 		season: 'summer',
 		activities: ['hiking', 'family'],
 		icon: Footprints,
-		kickerKey: 'experiences.event.summer.gorge.kicker',
-		titleKey: 'experiences.event.summer.gorge.title',
-		descriptionKey: 'experiences.event.summer.gorge.description',
+		kicker: { de: 'Natur-Highlight', en: 'Nature highlight' },
+		title: { de: 'Garnitzenklamm', en: 'Garnitzenklamm Gorge' },
+		description: {
+			de: 'Spektakuläre Schlucht mit Holzstegen und Wasserfällen, fotografisch extrem stark und perfekt für einen Tagesausflug.',
+			en: 'A spectacular gorge with wooden walkways and waterfalls, highly photogenic and perfect for a day trip.',
+		},
 		image: '/images/Umgebung/garnitzenklamm.jpg',
 		titleSize: 'text-xl',
-		metaKeys: ['experiences.meta.boardwalks', 'experiences.meta.waterfalls'],
-		badgeKey: 'experiences.badge.topExperience',
+		meta: [
+			{ de: 'Holzstege', en: 'Wooden walkways' },
+			{ de: 'Wasserfälle', en: 'Waterfalls' },
+		],
+		badge: { de: 'Top Erlebnis', en: 'Top experience' },
 	},
 	{
 		id: 'summer-lift',
 		season: 'summer',
 		activities: ['hiking', 'family'],
 		icon: CableCar,
-		kickerKey: 'experiences.event.summer.lift.kicker',
-		titleKey: 'experiences.event.summer.lift.title',
-		descriptionKey: 'experiences.event.summer.lift.description',
+		kicker: { de: 'Bergbahnen', en: 'Lifts' },
+		title: { de: 'Sommer am Nassfeld', en: 'Summer at Nassfeld' },
+		description: {
+			de: 'Mit der Bahn hinauf, Panorama atmen, und oben wartet die Hütte.',
+			en: 'Ride up by cable car, breathe in the panorama, and a mountain hut is waiting above.',
+		},
 		image: '/images/Umgebung/nassfeld-lift.jpg',
 		layout: 'summer',
 		className: 'c4',
 		titleSize: 'text-2xl',
-		metaKeys: ['experiences.event.summer.lift.meta1', 'experiences.event.summer.lift.meta2'],
+		meta: [
+			{ de: 'Panorama ohne langen Zustieg', en: 'Panorama without long ascents' },
+			{ de: 'Perfekt für Tagesausflüge', en: 'Perfect for day trips' },
+		],
 	},
 	{
 		id: 'summer-sunset',
 		season: 'summer',
 		activities: ['lakes', 'family'],
 		icon: Waves,
-		kickerKey: 'experiences.event.summer.sunset.kicker',
-		titleKey: 'experiences.event.summer.sunset.title',
-		descriptionKey: 'experiences.event.summer.sunset.description',
+		kicker: { de: 'Freibad', en: 'Outdoor pool' },
+		title: { de: 'Freibad in Weißbriach', en: 'Outdoor Pool in Weissbriach' },
+		description: {
+			de: 'Freibad mit Bergblick, Liegewiese und viel Platz für entspannte Sommertage mit der Familie.',
+			en: 'Outdoor pool with mountain views, sunbathing lawns, and plenty of space for relaxed summer days with the family.',
+		},
 		image: '/images/Umgebung/freibad.png',
 		titleSize: 'text-xl',
-		metaKeys: ['experiences.meta.cooling', 'experiences.meta.easy'],
-		badgeKey: 'experiences.badge.favorite',
+		meta: [
+			{ de: 'An heißen Tagen', en: 'Great on hot days' },
+			{ de: 'Kurz & erfrischend', en: 'Short and refreshing' },
+		],
+		badge: { de: 'Lieblingsspot', en: 'Favorite spot' },
 	},
 	{
 		id: 'summer-lake',
 		season: 'summer',
 		activities: ['lakes', 'family'],
 		icon: Waves,
-		kickerKey: 'experiences.event.summer.lake.kicker',
-		titleKey: 'experiences.event.summer.lake.title',
-		descriptionKey: 'experiences.event.summer.lake.description',
+		kicker: { de: 'Seen', en: 'Lakes' },
+		title: { de: 'Weißensee genießen', en: 'Enjoy Lake Weißensee' },
+		description: {
+			de: 'Türkisblaues Wasser, helle Holzstege und barfuß ins Glück am Ufer.',
+			en: 'Turquoise water, sunlit wooden piers, and bare feet at the shore.',
+		},
 		image: '/images/Umgebung/weissensee-lift.jpg',
 		layout: 'summer',
 		className: 'c2',
 		titleSize: 'text-xl',
-		metaKeys: ['experiences.event.summer.lake.meta1', 'experiences.event.summer.lake.meta2'],
+		meta: [
+			{ de: 'Badeplätze in kurzer Fahrzeit', en: 'Swimming spots within short drive' },
+			{ de: 'Ideal für Familien & Ruhetage', en: 'Great for families and relaxed days' },
+		],
 	},
 	{
 		id: 'summer-bike',
 		season: 'summer',
 		activities: ['active'],
 		icon: Bike,
-		kickerKey: 'experiences.event.summer.bike.kicker',
-		titleKey: 'experiences.event.summer.bike.title',
-		descriptionKey: 'experiences.event.summer.bike.description',
+		kicker: { de: 'Radfahren', en: 'Cycling' },
+		title: { de: 'Gailtalradweg R3', en: 'Gailtal cycle path R3' },
+		description: {
+			de: 'Ruhig rollen, Berge links und rechts, und zwischendurch ein Eis am Fluss.',
+			en: 'Roll easy with mountains on both sides, then grab an ice cream by the river.',
+		},
 		image: '/images/Umgebung/radfahren.jpg',
 		layout: 'summer',
 		className: 'c3',
 		titleSize: 'text-xl',
-		metaKeys: ['experiences.event.summer.bike.meta1', 'experiences.event.summer.bike.meta2'],
+		meta: [
+			{ de: 'Direkter Einstieg ins Radnetz', en: 'Direct access to bike routes' },
+			{ de: 'Genuss- und Sporttouren möglich', en: 'Leisure and sport tours available' },
+		],
 	},
 	{
 		id: 'summer-regional-food',
 		season: 'summer',
 		activities: ['culture', 'family'],
 		icon: Mountain,
-		kickerKey: 'experiences.event.summer.food.kicker',
-		titleKey: 'experiences.event.summer.food.title',
-		descriptionKey: 'experiences.event.summer.food.description',
+		kicker: { de: 'Bergtour', en: 'Mountain tour' },
+		title: { de: 'Golz (2.004 m)', en: 'Golz (2,004 m)' },
+		description: {
+			de: 'Markanter Aussichtsberg in den Gailtaler Alpen bei Hermagor: technisch unschwierig, aber konditionell fordernd. Beliebte Zustiege führen über Radnig/Radniger Alm oder vom Weißensee via Kohlröslhütte.',
+			en: 'Distinctive viewpoint peak in the Gailtal Alps near Hermagor: technically easy but physically demanding. Popular routes start from Radnig/Radniger Alm or from Weissensee via Kohlroeslhuette.',
+		},
 		image: '/images/Umgebung/aussicht-vom-golz.jpg',
 		titleSize: 'text-xl',
-		metaKeys: ['experiences.meta.altitude2004', 'experiences.meta.elevation1300'],
-		badgeKey: 'experiences.badge.insider',
+		meta: [
+			{ de: '2.004 m Höhe', en: '2,004 m altitude' },
+			{ de: 'ca. 1.300 hm', en: 'about 1,300 m ascent' },
+		],
+		badge: { de: 'Geheimtipp', en: 'Insider tip' },
 	},
 	{
 		id: 'winter-ski',
 		season: 'winter',
 		activities: ['winter', 'active', 'family'],
 		icon: Snowflake,
-		kickerKey: 'experiences.event.winter.ski.kicker',
-		titleKey: 'experiences.event.winter.ski.title',
-		descriptionKey: 'experiences.event.winter.ski.description',
+		kicker: { de: 'Skifahren', en: 'Skiing' },
+		title: { de: 'Nassfeld: Sun Ski World', en: 'Nassfeld: Sun Ski World' },
+		description: {
+			de: 'Kärntens größtes Skigebiet mit Schneesicherheit, modernen Liften sowie Hütten und Après-Ski, ideal als wichtigster Winter-Tagesausflug.',
+			en: 'Carinthia’s largest ski area with reliable snow, modern lifts, mountain huts and après-ski, your top winter day-trip choice.',
+		},
 		image: '/images/Umgebung/ski_nassfeld.jpg',
 		layout: 'winter',
 		className: 'c1',
 		titleSize: 'text-2xl',
-		metaKeys: ['experiences.event.winter.ski.meta1', 'experiences.event.winter.ski.meta2'],
-		badgeKey: 'experiences.badge.topExperience',
+		meta: [
+			{ de: 'Schneesicher & moderne Lifte', en: 'Snow-reliable & modern lifts' },
+			{ de: 'Hütten & Après-Ski', en: 'Huts & après-ski' },
+		],
+		badge: { de: 'Top Erlebnis', en: 'Top experience' },
 	},
 	{
 		id: 'winter-ice',
 		season: 'winter',
 		activities: ['winter', 'lakes', 'family'],
 		icon: Snowflake,
-		kickerKey: 'experiences.event.winter.ice.kicker',
-		titleKey: 'experiences.event.winter.ice.title',
-		descriptionKey: 'experiences.event.winter.ice.description',
+		kicker: { de: 'Eis', en: 'Ice' },
+		title: { de: 'Weißensee: Natureiswelt', en: 'Weißensee: Natural Ice World' },
+		description: {
+			de: 'Internationale Winterbühne mit Europas größter präparierter Natureisfläche, Eislaufen, Winterwandern und Langlauf direkt am See.',
+			en: 'International winter highlight with Europe’s largest prepared natural ice surface, plus skating, winter walking, and lakeside cross-country routes.',
+		},
 		image: '/images/Umgebung/eis.JPG',
 		layout: 'winter',
 		className: 'c2',
-		badgeKey: 'experiences.badge.popular',
+		badge: { de: 'Highlight', en: 'Highlight' },
 		titleSize: 'text-xl',
-		metaKeys: ['experiences.event.winter.ice.meta1', 'experiences.event.winter.ice.meta2'],
+		meta: [
+			{ de: 'Europas größte Natureisfläche', en: 'Europe’s largest natural ice area' },
+			{ de: 'Internationales Winter-Highlight', en: 'International winter highlight' },
+		],
 	},
 	{
 		id: 'winter-hike',
 		season: 'winter',
 		activities: ['winter', 'family', 'active'],
 		icon: Snowflake,
-		kickerKey: 'experiences.event.winter.hike.kicker',
-		titleKey: 'experiences.event.winter.hike.title',
-		descriptionKey: 'experiences.event.winter.hike.description',
+		kicker: { de: 'Skigebiet', en: 'Ski area' },
+		title: { de: 'Skigebiet Weißbriach', en: 'Weißbriach Ski Area' },
+		description: {
+			de: 'Klein, übersichtlich und familienfreundlich, perfekt für Anfänger und Kinder ohne Stress und lange Wartezeiten.',
+			en: 'Small, manageable, and family-friendly, perfect for beginners and kids without stress or long lift queues.',
+		},
 		image: '/images/Umgebung/skigebiet-weissbriach-2.jpg',
 		layout: 'winter',
 		className: 'c3',
 		titleSize: 'text-xl',
-		metaKeys: ['experiences.event.winter.hike.meta1', 'experiences.event.winter.hike.meta2'],
+		meta: [
+			{ de: 'Familienfreundliche Pisten', en: 'Family-friendly slopes' },
+			{ de: 'Keine langen Wartezeiten', en: 'No long queue times' },
+		],
 	},
 	{
 		id: 'winter-crosscountry',
 		season: 'winter',
 		activities: ['winter', 'active'],
 		icon: Mountain,
-		kickerKey: 'experiences.event.winter.crosscountry.kicker',
-		titleKey: 'experiences.event.winter.crosscountry.title',
-		descriptionKey: 'experiences.event.winter.crosscountry.description',
+		kicker: { de: 'Loipenregion', en: 'Trail region' },
+		title: { de: 'Gitschtaler Loipen', en: 'Gitschtal Trails' },
+		description: {
+			de: 'Weißbriach Loipe und Gitschtal Genussloipe in sonniger Tallage, ideal für ruhige Wintertage abseits des Trubels.',
+			en: 'Weißbriach trail and Gitschtal Genussloipe in a sunny valley setting, great for calm winter days away from crowds.',
+		},
 		image: '/images/Umgebung/weissbriach.jpg',
 		layout: 'winter',
 		className: 'c4',
 		titleSize: 'text-2xl',
-		metaKeys: [
-			'experiences.event.winter.crosscountry.meta1',
-			'experiences.event.winter.crosscountry.meta2',
+		meta: [
+			{ de: 'Weißbriach Loipe', en: 'Weißbriach trail' },
+			{ de: 'Gitschtal Genussloipe', en: 'Gitschtal Genussloipe' },
 		],
 	},
 	{
@@ -212,25 +277,37 @@ export const experienceEvents: ExperienceEvent[] = [
 		season: 'winter',
 		activities: ['winter', 'hiking'],
 		icon: Footprints,
-		kickerKey: 'experiences.event.winter.snowshoe.kicker',
-		titleKey: 'experiences.event.winter.snowshoe.title',
-		descriptionKey: 'experiences.event.winter.snowshoe.description',
+		kicker: { de: 'Schneeschuh am Nassfeld', en: 'Snowshoe at Nassfeld' },
+		title: { de: 'Schneeschuh am Nassfeld', en: 'Snowshoe at Nassfeld' },
+		description: {
+			de: 'Tressdorfer Alm, Sonnenalpe Nassfeld und Garnitzenalm Wintertour bieten Panorama, Ruhe und echte Winter-Natur.',
+			en: 'Tressdorfer Alm, Sonnenalpe Nassfeld, and the Garnitzenalm winter tour offer panorama, quiet, and true alpine winter nature.',
+		},
 		image: '/images/Umgebung/schnee-wanderung.jpg',
 		titleSize: 'text-xl',
-		metaKeys: ['experiences.meta.sonnenalpe', 'experiences.meta.tressdorferalm'],
-		badgeKey: 'experiences.badge.recommended',
+		meta: [
+			{ de: 'Sonnenalpe Nassfeld', en: 'Sonnenalpe Nassfeld' },
+			{ de: 'Tressdorfer Alm', en: 'Tressdorfer Alm' },
+		],
+		badge: { de: 'Empfohlen', en: 'Recommended' },
 	},
 	{
 		id: 'winter-sledding',
 		season: 'winter',
 		activities: ['winter', 'family'],
 		icon: Users,
-		kickerKey: 'experiences.event.winter.sledding.kicker',
-		titleKey: 'experiences.event.winter.sledding.title',
-		descriptionKey: 'experiences.event.winter.sledding.description',
+		kicker: { de: 'Rodeln', en: 'Sledding' },
+		title: { de: 'Rodeln: Nassfeld & Weißbriach', en: 'Sledding: Nassfeld & Weißbriach' },
+		description: {
+			de: 'Beleuchtete Rodelstrecken und Abendprogramm für Familien, kombiniert mit der ruhigen Winterstimmung im Gitschtal.',
+			en: 'Lit sledding runs and evening family programs, combined with the calm winter atmosphere of the Gitschtal valley.',
+		},
 		image: '/images/Umgebung/skigebiet-weissbriach.jpg',
 		titleSize: 'text-xl',
-		metaKeys: ['experiences.meta.litruns', 'experiences.meta.familyfun'],
+		meta: [
+			{ de: 'Beleuchtete Rodelstrecken', en: 'Lit sledding runs' },
+			{ de: 'Spaß für Familien', en: 'Family fun' },
+		],
 	},
 ];
 

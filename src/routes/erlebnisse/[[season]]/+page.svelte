@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { t } from '$lib/i18n';
+	import { lang, t } from '$lib/i18n';
 	import { asset, resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import SeoHead from '$lib/components/SeoHead.svelte';
@@ -35,8 +35,10 @@
 	import { cubicOut } from 'svelte/easing';
 
 	type NavMode = 'compact' | 'peek';
+	type LocalizedText = { de: string; en: string };
 
 	const withAsset = (path: string) => asset(path);
+	const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 
 	// get active tab from url param (default: summer)
 	const seoSeasonFromUrl = $derived.by(() => {
@@ -661,22 +663,19 @@
 										data-season={summerFeaturedEvent.season}
 										class="group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm"
 									>
-										<div class="relative aspect-[16/10] sm:min-h-[420px] lg:h-[min(72dvh,720px)]">
+										<div class="relative aspect-[16/10] sm:min-h-[420px] lg:h-[min(65dvh,650px)]">
 											<img
 												src={withAsset(summerFeaturedEvent.image)}
-												alt={`${$t(summerFeaturedEvent.titleKey)} – ${$t(summerFeaturedEvent.kickerKey)}`}
-												class="h-full w-full scale-[1.05] object-cover object-center transition-transform duration-700 will-change-transform group-hover:scale-[1.07]"
+												alt={`${localize(summerFeaturedEvent.title)} – ${localize(summerFeaturedEvent.kicker)}`}
+												class={`absolute inset-0 block h-full w-full object-cover transition-transform duration-700 will-change-transform} object-left scale-[1.12] group-hover:scale-[1.14]`}
 												loading="lazy"
-											/>
-											<div
-												class="absolute inset-0 hidden bg-gradient-to-t from-black/65 via-black/22 to-transparent sm:block"
-											></div>
+											/>											
 
-											{#if summerFeaturedEvent.badgeKey}
+											{#if summerFeaturedEvent.badge}
 												<span
 													class="absolute right-5 top-5 rounded-full bg-brand px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white shadow-sm"
 												>
-													{$t(summerFeaturedEvent.badgeKey)}
+													{localize(summerFeaturedEvent.badge)}
 												</span>
 											{/if}
 
@@ -691,25 +690,25 @@
 															class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand"
 														>
 															<summerFeaturedEvent.icon class="h-4 w-4 text-brand" aria-hidden="true" />
-															{$t(summerFeaturedEvent.kickerKey)}
+															{localize(summerFeaturedEvent.kicker)}
 														</p>
 														<h3
 															class={`mt-2 font-semibold text-white ${summerFeaturedEvent.titleSize ?? 'text-xl'}`}
 														>
-															{$t(summerFeaturedEvent.titleKey)}
+															{localize(summerFeaturedEvent.title)}
 														</h3>
-														{#if summerFeaturedEvent.descriptionKey}
+														{#if summerFeaturedEvent.description}
 															<p class="mt-2 max-w-xl text-sm text-white/85">
-																{$t(summerFeaturedEvent.descriptionKey)}
+																{localize(summerFeaturedEvent.description)}
 															</p>
 														{/if}
-														{#if summerFeaturedEvent.metaKeys?.length}
+														{#if summerFeaturedEvent.meta?.length}
 															<div class="mt-3 flex flex-wrap gap-2">
-																{#each summerFeaturedEvent.metaKeys as metaKey}
+																{#each summerFeaturedEvent.meta as meta}
 																	<span
 																		class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white sm:px-3 sm:text-xs"
 																	>
-																		{$t(metaKey)}
+																		{localize(meta)}
 																	</span>
 																{/each}
 															</div>
@@ -724,25 +723,25 @@
 													class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand"
 												>
 													<summerFeaturedEvent.icon class="h-4 w-4 text-brand" aria-hidden="true" />
-													{$t(summerFeaturedEvent.kickerKey)}
+													{localize(summerFeaturedEvent.kicker)}
 												</p>
 												<h3
 													class={`mt-2 font-semibold text-slate-900 ${summerFeaturedEvent.titleSize ?? 'text-xl'}`}
 												>
-													{$t(summerFeaturedEvent.titleKey)}
+													{localize(summerFeaturedEvent.title)}
 												</h3>
-												{#if summerFeaturedEvent.descriptionKey}
+												{#if summerFeaturedEvent.description}
 													<p class="mt-2 max-w-xl text-sm text-slate-600">
-														{$t(summerFeaturedEvent.descriptionKey)}
+														{localize(summerFeaturedEvent.description)}
 													</p>
 												{/if}
-												{#if summerFeaturedEvent.metaKeys?.length}
+												{#if summerFeaturedEvent.meta?.length}
 													<div class="mt-3 flex flex-wrap gap-2">
-														{#each summerFeaturedEvent.metaKeys as metaKey}
+														{#each summerFeaturedEvent.meta as meta}
 															<span
 																class="rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-700"
 															>
-																{$t(metaKey)}
+																{localize(meta)}
 															</span>
 														{/each}
 													</div>
@@ -768,22 +767,16 @@
 											>
 												<img
 													src={withAsset(event.image)}
-													alt={`${$t(event.titleKey)} – ${$t(event.kickerKey)}`}
-													class={`h-full w-full object-center transition duration-700 will-change-transform ${
-														event.id === 'winter-hike'
-															? 'object-cover object-[center_58%] group-hover:scale-[1.02] group-hover:saturate-[1.06]'
-															: 'object-cover group-hover:scale-[1.03] group-hover:saturate-[1.06]'
-													}`}
+													alt={`${localize(event.title)} – ${localize(event.kicker)}`}
+													class={`h-full w-full object-center transition duration-700 will-change-transform object-cover group-hover:scale-[1.03] group-hover:saturate-[1.06]`}
 													loading="lazy"
 												/>
-												<div
-													class="absolute inset-0 bg-gradient-to-t from-black/30 via-black/0 to-black/0"
-												></div>
-												{#if event.badgeKey}
+
+												{#if event.badge}
 													<span
 														class="absolute left-3 top-3 rounded-full bg-white/80 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-800 backdrop-blur"
 													>
-														{$t(event.badgeKey)}
+														{localize(event.badge)}
 													</span>
 												{/if}
 											</div>
@@ -793,30 +786,30 @@
 													class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand"
 												>
 													<event.icon class="h-4 w-4" aria-hidden="true" />
-													{$t(event.kickerKey)}
+													{localize(event.kicker)}
 												</p>
 
 												<h3 class="mt-1 text-xl font-semibold leading-tight text-slate-900">
 													<span
 														class="bg-gradient-to-r from-slate-900 to-slate-700 bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-300 group-hover:bg-[length:100%_2px]"
 													>
-														{$t(event.titleKey)}
+														{localize(event.title)}
 													</span>
 												</h3>
 
-												{#if event.descriptionKey}
+												{#if event.description}
 													<p class="mt-2 text-sm leading-relaxed text-slate-600">
-														{$t(event.descriptionKey)}
+														{localize(event.description)}
 													</p>
 												{/if}
 
-												{#if event.metaKeys?.length}
+												{#if event.meta?.length}
 													<div class="mt-3 flex flex-wrap gap-2">
-														{#each event.metaKeys as metaKey}
+														{#each event.meta as meta}
 															<span
 																class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600"
 															>
-																{$t(metaKey)}
+																{localize(meta)}
 															</span>
 														{/each}
 													</div>
@@ -861,19 +854,16 @@
 										<div class="relative aspect-[16/10] sm:min-h-[420px] lg:h-[min(72dvh,720px)]">
 											<img
 												src={withAsset(winterFeaturedEvent.image)}
-												alt={`${$t(winterFeaturedEvent.titleKey)} – ${$t(winterFeaturedEvent.kickerKey)}`}
-												class="h-full w-full scale-[1.05] object-cover object-center transition-transform duration-700 will-change-transform group-hover:scale-[1.07]"
+												alt={`${localize(winterFeaturedEvent.title)} – ${localize(winterFeaturedEvent.kicker)}`}
+												class="absolute inset-0 h-full w-full scale-[1.05] object-cover object-center transition-transform duration-700 will-change-transform group-hover:scale-[1.07]"
 												loading="lazy"
 											/>
-											<div
-												class="absolute inset-0 hidden bg-gradient-to-t from-black/65 via-black/22 to-transparent sm:block"
-											></div>
 
-											{#if winterFeaturedEvent.badgeKey}
+											{#if winterFeaturedEvent.badge}
 												<span
 													class="absolute right-5 top-5 rounded-full bg-brand px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white shadow-sm"
 												>
-													{$t(winterFeaturedEvent.badgeKey)}
+													{localize(winterFeaturedEvent.badge)}
 												</span>
 											{/if}
 
@@ -888,25 +878,25 @@
 															class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand"
 														>
 															<winterFeaturedEvent.icon class="h-4 w-4 text-brand" aria-hidden="true" />
-															{$t(winterFeaturedEvent.kickerKey)}
+															{localize(winterFeaturedEvent.kicker)}
 														</p>
 														<h3
 															class={`mt-2 font-semibold text-white ${winterFeaturedEvent.titleSize ?? 'text-xl'}`}
 														>
-															{$t(winterFeaturedEvent.titleKey)}
+															{localize(winterFeaturedEvent.title)}
 														</h3>
-														{#if winterFeaturedEvent.descriptionKey}
+														{#if winterFeaturedEvent.description}
 															<p class="mt-2 max-w-xl text-sm text-white/85">
-																{$t(winterFeaturedEvent.descriptionKey)}
+																{localize(winterFeaturedEvent.description)}
 															</p>
 														{/if}
-														{#if winterFeaturedEvent.metaKeys?.length}
+														{#if winterFeaturedEvent.meta?.length}
 															<div class="mt-3 flex flex-wrap gap-2">
-																{#each winterFeaturedEvent.metaKeys as metaKey}
+																{#each winterFeaturedEvent.meta as meta}
 																	<span
 																		class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white sm:px-3 sm:text-xs"
 																	>
-																		{$t(metaKey)}
+																		{localize(meta)}
 																	</span>
 																{/each}
 															</div>
@@ -921,25 +911,25 @@
 													class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand"
 												>
 													<winterFeaturedEvent.icon class="h-4 w-4 text-brand" aria-hidden="true" />
-													{$t(winterFeaturedEvent.kickerKey)}
+													{localize(winterFeaturedEvent.kicker)}
 												</p>
 												<h3
 													class={`mt-2 font-semibold text-slate-900 ${winterFeaturedEvent.titleSize ?? 'text-xl'}`}
 												>
-													{$t(winterFeaturedEvent.titleKey)}
+													{localize(winterFeaturedEvent.title)}
 												</h3>
-												{#if winterFeaturedEvent.descriptionKey}
+												{#if winterFeaturedEvent.description}
 													<p class="mt-2 max-w-xl text-sm text-slate-600">
-														{$t(winterFeaturedEvent.descriptionKey)}
+														{localize(winterFeaturedEvent.description)}
 													</p>
 												{/if}
-												{#if winterFeaturedEvent.metaKeys?.length}
+												{#if winterFeaturedEvent.meta?.length}
 													<div class="mt-3 flex flex-wrap gap-2">
-														{#each winterFeaturedEvent.metaKeys as metaKey}
+														{#each winterFeaturedEvent.meta as meta}
 															<span
 																class="rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-700"
 															>
-																{$t(metaKey)}
+																{localize(meta)}
 															</span>
 														{/each}
 													</div>
@@ -965,7 +955,7 @@
 											>
 												<img
 													src={withAsset(event.image)}
-													alt={`${$t(event.titleKey)} – ${$t(event.kickerKey)}`}
+													alt={`${localize(event.title)} – ${localize(event.kicker)}`}
 													class={`h-full w-full object-center transition duration-700 will-change-transform ${
 														event.id === 'winter-hike'
 															? 'object-cover object-[center_58%] group-hover:scale-[1.02] group-hover:saturate-[1.06]'
@@ -973,14 +963,11 @@
 													}`}
 													loading="lazy"
 												/>
-												<div
-													class="absolute inset-0 bg-gradient-to-t from-black/30 via-black/0 to-black/0"
-												></div>
-												{#if event.badgeKey}
+												{#if event.badge}
 													<span
 														class="absolute left-3 top-3 rounded-full bg-white/80 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-800 backdrop-blur"
 													>
-														{$t(event.badgeKey)}
+														{localize(event.badge)}
 													</span>
 												{/if}
 											</div>
@@ -990,30 +977,30 @@
 													class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand"
 												>
 													<event.icon class="h-4 w-4" aria-hidden="true" />
-													{$t(event.kickerKey)}
+													{localize(event.kicker)}
 												</p>
 
 												<h3 class="mt-1 text-xl font-semibold leading-tight text-slate-900">
 													<span
 														class="bg-gradient-to-r from-slate-900 to-slate-700 bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-300 group-hover:bg-[length:100%_2px]"
 													>
-														{$t(event.titleKey)}
+														{localize(event.title)}
 													</span>
 												</h3>
 
-												{#if event.descriptionKey}
+												{#if event.description}
 													<p class="mt-2 text-sm leading-relaxed text-slate-600">
-														{$t(event.descriptionKey)}
+														{localize(event.description)}
 													</p>
 												{/if}
 
-												{#if event.metaKeys?.length}
+												{#if event.meta?.length}
 													<div class="mt-3 flex flex-wrap gap-2">
-														{#each event.metaKeys as metaKey}
+														{#each event.meta as meta}
 															<span
 																class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600"
 															>
-																{$t(metaKey)}
+																{localize(meta)}
 															</span>
 														{/each}
 													</div>
