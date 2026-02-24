@@ -67,6 +67,7 @@
 	let indicatorVisible = $state(false);
 	let scrollCollapseTimer: number | null = null;
 	let highlightObserver: IntersectionObserver | null = null;
+	let lastMobileNavPointerAt = 0;
 	let manualTabUntil = 0;
 	const ICON_SLOT = 'h-11 w-11 rounded-2xl grid place-items-center shrink-0';
 	const ICON_SIZE = 'h-5 w-5';
@@ -153,10 +154,21 @@
 		}
 	}
 
-	function scrollToSection(id: string) {
-		const el = document.getElementById(id);
-		if (!el) return;
-		el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+	function scrollToSection(id: string, behavior: ScrollBehavior = 'smooth') {
+		const scrollNow = () => {
+			const el = document.getElementById(id);
+			if (!el) return false;
+			const topOffset = window.innerWidth < 1024 ? 92 : 28;
+			const y = Math.max(0, el.getBoundingClientRect().top + window.scrollY - topOffset);
+			window.scrollTo({ top: y, behavior });
+			return true;
+		};
+
+		if (scrollNow()) return true;
+		window.setTimeout(() => {
+			scrollNow();
+		}, 120);
+		return false;
 	}
 
 	function openMobileNav() {
@@ -171,13 +183,27 @@
 	function onMobileNavSelect(id: string) {
 		scrollToSection(id);
 		closeMobileNav();
+		window.setTimeout(() => {
+			scrollToSection(id);
+		}, 120);
+	}
+
+	function onMobileNavPointerUp(event: PointerEvent, id: string) {
+		event.preventDefault();
+		event.stopPropagation();
+		lastMobileNavPointerAt = Date.now();
+		onMobileNavSelect(id);
+	}
+
+	function onMobileNavClick(event: MouseEvent, id: string) {
+		if (Date.now() - lastMobileNavPointerAt < 350) return;
+		event.stopPropagation();
+		onMobileNavSelect(id);
 	}
 
 	function scrollToSeasonHighlightsFromUrl() {
 		const targetId = seasonFromUrl === 'winter' ? 'highlights-winter' : 'highlights-summer';
-		const target = document.getElementById(targetId);
-		if (!target) return;
-		target.scrollIntoView({ behavior: 'auto', block: 'start' });
+		scrollToSection(targetId, 'auto');
 	}
 
 	function setActiveTabManual(next: SeasonKey) {
@@ -623,15 +649,16 @@
 								<div class="mx-auto w-full max-w-6xl px-0 sm:px-0 lg:px-0">
 									<article
 										data-season={summerFeaturedEvent.season}
-										class="group relative overflow-hidden rounded-3xl "
+										class="group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm"
 									>
+										<div class="relative aspect-[16/10] sm:min-h-[420px] lg:h-[min(72dvh,720px)]">
 										<img
 											src={withAsset(summerFeaturedEvent.image)}
 											alt={`${$t(summerFeaturedEvent.titleKey)} – ${$t(summerFeaturedEvent.kickerKey)}`}
 											class="h-full w-full scale-[1.05] object-cover object-center transition-transform duration-700 will-change-transform group-hover:scale-[1.07]"
 											loading="lazy"
 										/>
-										<div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/22 to-transparent"></div>
+											<div class="absolute inset-0 hidden bg-gradient-to-t from-black/65 via-black/22 to-transparent sm:block"></div>
 
 										{#if summerFeaturedEvent.badgeKey}
 											<span
@@ -667,6 +694,7 @@
 													{/if}
 												</div>
 											</div>
+										</div>
 										</div>
 										<div class="p-3 sm:hidden">
 											<div class="max-w-full rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm">
@@ -786,17 +814,18 @@
 								<div class="mx-auto w-full max-w-6xl px-0 sm:px-0 lg:px-0">
 									<article
 										data-season={winterFeaturedEvent.season}
-										class={`group relative overflow-hidden rounded-3xl min-h-[420px] lg:h-[min(72dvh,720px)] ${
+										class={`group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm ${
 											winterFeaturedEvent.id === 'winter-ski' ? 'cursor-pointer' : ''
 										}`}
 									>
+										<div class="relative aspect-[16/10] sm:min-h-[420px] lg:h-[min(72dvh,720px)]">
 										<img
 											src={withAsset(winterFeaturedEvent.image)}
 											alt={`${$t(winterFeaturedEvent.titleKey)} – ${$t(winterFeaturedEvent.kickerKey)}`}
 											class="h-full w-full scale-[1.05] object-cover object-center transition-transform duration-700 will-change-transform group-hover:scale-[1.07]"
 											loading="lazy"
 										/>
-										<div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/22 to-transparent"></div>
+											<div class="absolute inset-0 hidden bg-gradient-to-t from-black/65 via-black/22 to-transparent sm:block"></div>
 
 										{#if winterFeaturedEvent.badgeKey}
 											<span
@@ -832,6 +861,7 @@
 													{/if}
 												</div>
 											</div>
+										</div>
 										</div>
 										<div class="p-3 sm:hidden">
 											<div class="max-w-full rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm">
@@ -1423,12 +1453,13 @@
 					{@const SectionIcon = sectionIconById[section.id] ?? List}
 					<button
 						type="button"
-						class={`flex w-full items-center gap-3 rounded-2xl px-3 py-3 text-left text-sm font-semibold transition ${
+						class={`touch-manipulation flex w-full items-center gap-3 rounded-2xl px-3 py-3 text-left text-sm font-semibold transition ${
 							navActiveSectionId === section.id
 								? 'bg-brand/10 text-slate-900 ring-1 ring-brand/25'
 								: 'bg-slate-50 text-slate-700 hover:bg-white'
 						}`}
-						onclick={() => onMobileNavSelect(section.id)}
+						onpointerup={(event) => onMobileNavPointerUp(event, section.id)}
+						onclick={(event) => onMobileNavClick(event, section.id)}
 					>
 						<span class="grid h-9 w-9 place-items-center rounded-xl bg-white ring-1 ring-slate-200">
 							<SectionIcon class="h-4 w-4 text-brand" aria-hidden="true" />
@@ -1440,24 +1471,26 @@
 						<div class="space-y-2 pl-4">
 							<button
 								type="button"
-								class={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-semibold transition ${
+								class={`touch-manipulation flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-semibold transition ${
 									activeSectionId === 'highlights' && activeHighlightsSeason === 'summer'
 										? 'bg-brand/10 text-slate-900 ring-1 ring-brand/25'
 										: 'bg-slate-50 text-slate-700 hover:bg-white'
 								}`}
-								onclick={() => onMobileNavSelect('highlights-summer')}
+								onpointerup={(event) => onMobileNavPointerUp(event, 'highlights-summer')}
+								onclick={(event) => onMobileNavClick(event, 'highlights-summer')}
 							>
 								<Sun class="h-4 w-4 text-brand" aria-hidden="true" />
 								{$t('experiences.nav.summer')}
 							</button>
 							<button
 								type="button"
-								class={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-semibold transition ${
+								class={`touch-manipulation flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm font-semibold transition ${
 									activeSectionId === 'highlights' && activeHighlightsSeason === 'winter'
 										? 'bg-brand/10 text-slate-900 ring-1 ring-brand/25'
 										: 'bg-slate-50 text-slate-700 hover:bg-white'
 								}`}
-								onclick={() => onMobileNavSelect('highlights-winter')}
+								onpointerup={(event) => onMobileNavPointerUp(event, 'highlights-winter')}
+								onclick={(event) => onMobileNavClick(event, 'highlights-winter')}
 							>
 								<Snowflake class="h-4 w-4 text-brand" aria-hidden="true" />
 								{$t('experiences.nav.winter')}
