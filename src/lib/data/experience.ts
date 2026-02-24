@@ -18,6 +18,12 @@ export type SeasonKey = 'summer' | 'winter';
 export type ActivityFilterKey = 'hiking' | 'active' | 'winter' | 'family' | 'lakes' | 'culture';
 type LocalizedText = Record<Lang, string>;
 export type Difficulty = 'easy' | 'medium' | 'hard';
+export type ExperienceLinkType = 'google' | 'nassfeld' | 'bergfex' | 'website';
+export type ExperienceLink = {
+	urlType: ExperienceLinkType;
+	url: string;
+	label?: LocalizedText;
+};
 
 export type ExperienceEvent = {
 	id: string;
@@ -41,8 +47,7 @@ export type ExperienceEvent = {
 	difficulty?: Difficulty;
 	elevationGainM?: number;
 	seasonMonths?: string;
-	mapUrl?: string;
-	detailsUrl?: string;
+	links?: ExperienceLink[];
 	indoor?: boolean;
 };
 
@@ -87,7 +92,7 @@ export const experienceEvents: ExperienceEvent[] = [
 		difficulty: 'medium',
 		elevationGainM: 1200,
 		seasonMonths: 'Jun-Oct',
-		mapUrl: 'https://www.google.com/maps/search/?api=1&query=Radniger+Alm',
+		links: [{ urlType: 'google', url: 'https://www.google.com/maps/search/?api=1&query=Radniger+Alm' }],
 		indoor: false,
 		layout: 'summer',
 		className: 'c1',
@@ -118,8 +123,10 @@ export const experienceEvents: ExperienceEvent[] = [
 		difficulty: 'medium',
 		elevationGainM: 863,
 		seasonMonths: 'May-Oct',
-		mapUrl: 'https://www.google.com/maps/search/?api=1&query=Garnitzenklamm',
-		detailsUrl: 'https://www.nassfeld.at/de/Tour/Wanderung-durch-die-Garnitzenklamm_t_35284',
+		links: [
+			{ urlType: 'nassfeld', url: 'https://www.nassfeld.at/de/Tour/Wanderung-durch-die-Garnitzenklamm_t_35284' },
+			{ urlType: 'google', url: 'https://www.google.com/maps/search/?api=1&query=Garnitzenklamm' },
+		],
 		indoor: false,
 		titleSize: 'text-xl',
 		meta: [
@@ -150,7 +157,7 @@ export const experienceEvents: ExperienceEvent[] = [
 		durationHours: '3-4',
 		difficulty: 'easy',
 		seasonMonths: 'Jun-Sep',
-		mapUrl: 'https://www.google.com/maps/search/?api=1&query=Nassfeld+Sommerbergbahnen',
+		links: [{ urlType: 'google', url: 'https://www.google.com/maps/search/?api=1&query=Nassfeld+Sommerbergbahnen' }],
 		indoor: false,
 		layout: 'summer',
 		className: 'c4',
@@ -181,7 +188,7 @@ export const experienceEvents: ExperienceEvent[] = [
 		durationHours: '2-4',
 		difficulty: 'easy',
 		seasonMonths: 'Jun-Sep',
-		mapUrl: 'https://www.google.com/maps/search/?api=1&query=Freibad+Weissbriach',
+		links: [{ urlType: 'google', url: 'https://www.google.com/maps/search/?api=1&query=Freibad+Weissbriach' }],
 		indoor: false,
 		titleSize: 'text-xl',
 		meta: [
@@ -212,7 +219,7 @@ export const experienceEvents: ExperienceEvent[] = [
 		durationHours: '2-6',
 		difficulty: 'easy',
 		seasonMonths: 'May-Sep',
-		mapUrl: 'https://www.google.com/maps/search/?api=1&query=Pressegger+See',
+		links: [{ urlType: 'google', url: 'https://www.google.com/maps/search/?api=1&query=Pressegger+See' }],
 		indoor: false,
 		layout: 'summer',
 		className: 'c2',
@@ -244,7 +251,7 @@ export const experienceEvents: ExperienceEvent[] = [
 		difficulty: 'easy',
 		elevationGainM: 107,
 		seasonMonths: 'Apr-Oct',
-		mapUrl: 'https://www.nassfeld.at/de/Tour/R3-Gailtalradweg_t_35036',
+		links: [{ urlType: 'nassfeld', url: 'https://www.nassfeld.at/de/Tour/R3-Gailtalradweg_t_35036' }],
 		indoor: false,
 		layout: 'summer',
 		className: 'c3',
@@ -276,7 +283,7 @@ export const experienceEvents: ExperienceEvent[] = [
 		difficulty: 'medium',
 		elevationGainM: 1300,
 		seasonMonths: 'Jun-Oct',
-		mapUrl: 'https://www.nassfeld.at/de/Tour/Golz-2004-m-uber-die-Radniger-Alm_t_35104',
+		links: [{ urlType: 'nassfeld', url: 'https://www.nassfeld.at/de/Tour/Golz-2004-m-uber-die-Radniger-Alm_t_35104' }],
 		indoor: false,
 		titleSize: 'text-xl',
 		meta: [
@@ -307,7 +314,7 @@ export const experienceEvents: ExperienceEvent[] = [
 		durationHours: '4-8',
 		difficulty: 'medium',
 		seasonMonths: 'Dec-Apr',
-		mapUrl: 'https://www.google.com/maps/search/?api=1&query=Nassfeld+Ski',
+		links: [{ urlType: 'google', url: 'https://www.google.com/maps/search/?api=1&query=Nassfeld+Ski' }],
 		indoor: false,
 		layout: 'winter',
 		className: 'c1',
@@ -340,7 +347,7 @@ export const experienceEvents: ExperienceEvent[] = [
 		durationHours: '2-5',
 		difficulty: 'easy',
 		seasonMonths: 'Jan-Feb',
-		mapUrl: 'https://www.google.com/maps/search/?api=1&query=Weissensee+Eislaufen',
+		links: [{ urlType: 'google', url: 'https://www.google.com/maps/search/?api=1&query=Weissensee+Eislaufen' }],
 		indoor: false,
 		layout: 'winter',
 		className: 'c2',
@@ -373,7 +380,7 @@ export const experienceEvents: ExperienceEvent[] = [
 		durationHours: '2-6',
 		difficulty: 'easy',
 		seasonMonths: 'Dec-Mar',
-		mapUrl: 'https://maps.app.goo.gl/rYn8wPFzfDwo5Phg6',
+		links: [{ urlType: 'google', url: 'https://maps.app.goo.gl/rYn8wPFzfDwo5Phg6' }],
 		indoor: false,
 		layout: 'winter',
 		className: 'c3',
@@ -404,7 +411,7 @@ export const experienceEvents: ExperienceEvent[] = [
 		durationHours: '1-3',
 		difficulty: 'medium',
 		seasonMonths: 'Dec-Mar',
-		mapUrl: 'https://www.bergfex.at/kaernten/langlaufen/gitschtal/loipenplan/',
+		links: [{ urlType: 'bergfex', url: 'https://www.bergfex.at/kaernten/langlaufen/gitschtal/loipenplan/' }],
 		indoor: false,
 		layout: 'winter',
 		className: 'c4',
@@ -436,7 +443,7 @@ export const experienceEvents: ExperienceEvent[] = [
 		difficulty: 'medium',
 		elevationGainM: 500,
 		seasonMonths: 'Dec-Mar',
-		mapUrl: 'https://maps.app.goo.gl/rYn8wPFzfDwo5Phg6',
+		links: [{ urlType: 'google', url: 'https://maps.app.goo.gl/rYn8wPFzfDwo5Phg6' }],
 		indoor: false,
 		titleSize: 'text-xl',
 		meta: [
@@ -466,8 +473,10 @@ export const experienceEvents: ExperienceEvent[] = [
 		durationHours: '1-3',
 		difficulty: 'easy',
 		seasonMonths: 'Dec-Mar',
-		mapUrl: 'https://maps.app.goo.gl/F7EhZWnqo8N3tZWi9',
-		detailsUrl: 'https://www.nassfeld.at/de/Winter-World/Outdoor-Relax-World/Rodeln/Rodelbahnen',
+		links: [
+			{ urlType: 'nassfeld', url: 'https://www.nassfeld.at/de/Winter-World/Outdoor-Relax-World/Rodeln/Rodelbahnen' },
+			{ urlType: 'google', url: 'https://maps.app.goo.gl/F7EhZWnqo8N3tZWi9' },
+		],
 		indoor: false,
 		titleSize: 'text-xl',
 		meta: [

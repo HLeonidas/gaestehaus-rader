@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { ComponentType } from 'svelte';
 	import { lang, t } from '$lib/i18n';
 	import { asset, resolve } from '$app/paths';
 	import { page } from '$app/state';
@@ -11,6 +12,7 @@
 		experienceSectionTrackingLinks as sectionTrackingLinks,
 		type ActivityFilterKey,
 		type ExperienceEvent,
+		type ExperienceLinkType,
 		type SeasonKey,
 		type SectionLink,
 	} from '$lib/data/experience';
@@ -19,10 +21,13 @@
 	import {
 		ArrowRight,
 		BusFront,
+		ExternalLink,
 		List,
+		MapPinned,
 		Menu,
 		Mountain,
 		PartyPopper,
+		Route,
 		Snowflake,
 		Sparkles,
 		SlidersHorizontal,
@@ -37,6 +42,7 @@
 
 	type NavMode = 'compact' | 'peek';
 	type LocalizedText = { de: string; en: string };
+	type LinkMeta = { label: LocalizedText; icon: ComponentType };
 
 	const withAsset = (path: string) => asset(path);
 	const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
@@ -59,9 +65,13 @@
 		if (event.meta?.length) chips.push(...event.meta.map((item) => localize(item)));
 		return chips.slice(0, 6);
 	};
-	const getEventHref = (event: ExperienceEvent) => event.detailsUrl ?? event.mapUrl ?? null;
-	const getEventTarget = (_event: ExperienceEvent) => '_blank';
-	const getEventRel = (_event: ExperienceEvent) => 'noreferrer';
+	const experienceLinkMeta: Record<ExperienceLinkType, LinkMeta> = {
+		google: { label: { de: 'Google Maps', en: 'Google Maps' }, icon: MapPinned },
+		nassfeld: { label: { de: 'Nassfeld', en: 'Nassfeld' }, icon: Mountain },
+		bergfex: { label: { de: 'Bergfex', en: 'Bergfex' }, icon: Route },
+		website: { label: { de: 'Website', en: 'Website' }, icon: ExternalLink },
+	};
+	const getEventLinks = (event: ExperienceEvent) => event.links ?? [];
 	const badgeClass = (tier?: 'top' | 'tip') =>
 		tier === 'top'
 			? 'border border-brand/30 bg-brand text-white'
@@ -84,6 +94,7 @@
 	let activeTab = $state<SeasonKey>('summer');
 	let activeHighlightsSeason = $state<SeasonKey>('summer');
 	let selectedActivity = $state<ActivityFilterKey | null>(null);
+	let activeExperience = $state<ExperienceEvent | null>(null);
 	let showAllSeasons = $state(true);
 	let activeSectionId = $state('aktivitaeten');
 	let isMobileFilterOpen = $state(false);
@@ -187,9 +198,20 @@
 
 	function onWindowKeydown(event: KeyboardEvent) {
 		if (event.key === 'Escape') {
+			if (activeExperience) activeExperience = null;
 			if (isMobileFilterOpen) isMobileFilterOpen = false;
 			if (isMobileNavOpen) isMobileNavOpen = false;
 		}
+	}
+
+	function openExperienceModal(event: ExperienceEvent) {
+		activeExperience = event;
+		isMobileFilterOpen = false;
+		isMobileNavOpen = false;
+	}
+
+	function closeExperienceModal() {
+		activeExperience = null;
 	}
 
 	function scrollToSection(id: string, behavior: ScrollBehavior = 'smooth') {
@@ -273,6 +295,14 @@
 		updateActiveSectionFromViewport();
 		setNavMode('compact');
 	}
+
+	$effect(() => {
+		if (typeof document === 'undefined') return;
+		document.body.style.overflow = activeExperience ? 'hidden' : '';
+		return () => {
+			document.body.style.overflow = '';
+		};
+	});
 
 	function updateActiveSectionFromViewport() {
 		const marker = window.innerHeight * 0.33;
@@ -686,15 +716,11 @@
 							</p>
 							{#if summerFeaturedEvent}
 								<div class="mx-auto w-full max-w-6xl px-0 sm:px-0 lg:px-0">
-									<svelte:element
-										this={getEventHref(summerFeaturedEvent) ? 'a' : 'article'}
-										href={getEventHref(summerFeaturedEvent) ?? undefined}
-										target={getEventHref(summerFeaturedEvent) ? getEventTarget(summerFeaturedEvent) : undefined}
-										rel={getEventHref(summerFeaturedEvent) ? getEventRel(summerFeaturedEvent) : undefined}
+									<button
+										type="button"
+										onclick={() => openExperienceModal(summerFeaturedEvent)}
 										data-season={summerFeaturedEvent.season}
-										class={`group block w-full overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm ${
-											getEventHref(summerFeaturedEvent) ? 'cursor-pointer no-underline' : ''
-										}`}
+										class="group block w-full cursor-pointer overflow-hidden rounded-3xl border border-slate-200 bg-white text-left shadow-sm"
 									>
 										<div class="relative aspect-[16/10] overflow-hidden rounded-3xl sm:min-h-[420px] lg:h-[min(65dvh,650px)]">
 											<img
@@ -786,22 +812,18 @@
 												{/if}
 											</div>
 										</div>
-									</svelte:element>
+									</button>
 								</div>
 							{/if}
 							<div class="mt-6">
 								<div class="divide-y divide-slate-200/70">
 									{#each summerSecondaryEvents as event, i (event.id)}
-										<svelte:element
-											this={getEventHref(event) ? 'a' : 'article'}
-											href={getEventHref(event) ?? undefined}
-											target={getEventHref(event) ? getEventTarget(event) : undefined}
-											rel={getEventHref(event) ? getEventRel(event) : undefined}
+										<button
+											type="button"
+											onclick={() => openExperienceModal(event)}
 											use:reveal
 											data-season={event.season}
-											class={`reveal group grid gap-6 py-8 transition duration-300 hover:-translate-y-0.5 hover:drop-shadow-[0_18px_30px_rgba(15,23,42,0.10)] sm:grid-cols-[240px,1fr] lg:grid-cols-[320px,1fr] lg:items-center ${
-												getEventHref(event) ? 'cursor-pointer no-underline' : ''
-											}`}
+											class="reveal group grid w-full cursor-pointer gap-6 py-8 text-left transition duration-300 hover:-translate-y-0.5 hover:drop-shadow-[0_18px_30px_rgba(15,23,42,0.10)] sm:grid-cols-[240px,1fr] lg:grid-cols-[320px,1fr] lg:items-center"
 											style={`--reveal-delay: ${i * 70}ms;`}
 										>
 											<div
@@ -871,7 +893,7 @@
 													</span>
 												</div>
 											</div>
-										</svelte:element>
+										</button>
 									{/each}
 								</div>
 							</div>
@@ -889,15 +911,11 @@
 							</p>
 							{#if winterFeaturedEvent}
 								<div class="mx-auto w-full max-w-6xl px-0 sm:px-0 lg:px-0">
-									<svelte:element
-										this={getEventHref(winterFeaturedEvent) ? 'a' : 'article'}
-										href={getEventHref(winterFeaturedEvent) ?? undefined}
-										target={getEventHref(winterFeaturedEvent) ? getEventTarget(winterFeaturedEvent) : undefined}
-										rel={getEventHref(winterFeaturedEvent) ? getEventRel(winterFeaturedEvent) : undefined}
+									<button
+										type="button"
+										onclick={() => openExperienceModal(winterFeaturedEvent)}
 										data-season={winterFeaturedEvent.season}
-										class={`group block w-full overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm ${
-											getEventHref(winterFeaturedEvent) ? 'cursor-pointer no-underline' : ''
-										}`}
+										class="group block w-full cursor-pointer overflow-hidden rounded-3xl border border-slate-200 bg-white text-left shadow-sm"
 									>
 										<div class="relative aspect-[16/10] overflow-hidden rounded-3xl sm:min-h-[420px] lg:h-[min(72dvh,720px)]">
 											<img
@@ -985,22 +1003,18 @@
 												{/if}
 											</div>
 										</div>
-									</svelte:element>
+									</button>
 								</div>
 							{/if}
 							<div class="mt-6">
 								<div class="divide-y divide-slate-200/70">
 									{#each winterSecondaryEvents as event, i (event.id)}
-										<svelte:element
-											this={getEventHref(event) ? 'a' : 'article'}
-											href={getEventHref(event) ?? undefined}
-											target={getEventHref(event) ? getEventTarget(event) : undefined}
-											rel={getEventHref(event) ? getEventRel(event) : undefined}
+										<button
+											type="button"
+											onclick={() => openExperienceModal(event)}
 											use:reveal
 											data-season={event.season}
-											class={`reveal group grid gap-6 py-8 transition duration-300 hover:-translate-y-0.5 hover:drop-shadow-[0_18px_30px_rgba(15,23,42,0.10)] sm:grid-cols-[240px,1fr] lg:grid-cols-[320px,1fr] lg:items-center ${
-												getEventHref(event) ? 'cursor-pointer no-underline' : ''
-											}`}
+											class="reveal group grid w-full cursor-pointer gap-6 py-8 text-left transition duration-300 hover:-translate-y-0.5 hover:drop-shadow-[0_18px_30px_rgba(15,23,42,0.10)] sm:grid-cols-[240px,1fr] lg:grid-cols-[320px,1fr] lg:items-center"
 											style={`--reveal-delay: ${i * 70}ms;`}
 										>
 											<div
@@ -1073,7 +1087,7 @@
 													</span>
 												</div>
 											</div>
-										</svelte:element>
+										</button>
 									{/each}
 								</div>
 							</div>
@@ -1582,6 +1596,96 @@
 			</section>
 		</div>
 	</div>
+
+	{#if activeExperience}
+		<div class="fixed inset-0 z-[130] p-3 sm:p-6">
+			<button
+				type="button"
+				class="absolute inset-0 bg-slate-950/60 backdrop-blur-[2px]"
+				onclick={closeExperienceModal}
+				aria-label="Details schließen"
+			></button>
+			<div class="pointer-events-none relative mx-auto flex h-full max-w-5xl items-end sm:items-center">
+				<div
+					role="dialog"
+					aria-modal="true"
+					aria-label={localize(activeExperience.title)}
+					class="pointer-events-auto relative w-full overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl"
+				>
+					<button
+						type="button"
+						class="absolute right-3 top-3 z-20 grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white/90 text-slate-600 shadow-sm transition hover:text-slate-900"
+						onclick={closeExperienceModal}
+						aria-label="Details schließen"
+					>
+						<X class="h-5 w-5" aria-hidden="true" />
+					</button>
+					<div class="grid max-h-[90vh] overflow-y-auto lg:grid-cols-[0.62fr,0.38fr]">
+						<div class="relative min-h-[300px] sm:min-h-[360px] lg:min-h-[520px]">
+							<img
+								src={withAsset(activeExperience.image)}
+								alt={`${localize(activeExperience.title)} – ${localize(activeExperience.kicker)}`}
+								class="h-full w-full object-cover"
+								loading="lazy"
+							/>
+							<div class="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent lg:hidden"></div>
+						</div>
+						<div class="p-5 sm:p-7">
+							<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
+								<activeExperience.icon class="h-4 w-4 text-brand" aria-hidden="true" />
+								{localize(activeExperience.kicker)}
+							</p>
+							<h3 class="mt-2 text-2xl font-semibold leading-tight text-slate-900">
+								{localize(activeExperience.title)}
+							</h3>
+							{#if activeExperience.description}
+								<p class="mt-3 text-sm leading-relaxed text-slate-600">
+									{localize(activeExperience.description)}
+								</p>
+							{/if}
+
+							{#if buildMetaChips(activeExperience).length}
+								<div class="mt-4 flex flex-wrap gap-2">
+									{#each buildMetaChips(activeExperience) as chip}
+										<span
+											class="rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-700"
+										>
+											{chip}
+										</span>
+									{/each}
+								</div>
+							{/if}
+
+							{#if getEventLinks(activeExperience).length}
+								<div class="mt-6">
+									<p class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
+										{$lang === 'de' ? 'Verfügbare Links' : 'Available links'}
+									</p>
+									<div class="mt-3 grid gap-2 sm:grid-cols-2">
+										{#each getEventLinks(activeExperience) as link}
+											{@const linkMeta = experienceLinkMeta[link.urlType]}
+											<a
+												href={link.url}
+												target="_blank"
+												rel="noreferrer"
+												class="inline-flex items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-800 transition hover:border-brand/30 hover:text-brand"
+											>
+												<span class="inline-flex items-center gap-2">
+													<linkMeta.icon class="h-4 w-4 text-brand" aria-hidden="true" />
+													{localize(link.label ?? linkMeta.label)}
+												</span>
+												<ExternalLink class="h-4 w-4 text-slate-500" aria-hidden="true" />
+											</a>
+										{/each}
+									</div>
+								</div>
+							{/if}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	{/if}
 
 	<div class="fixed inset-x-0 bottom-0 z-50 px-3 pb-3 lg:hidden">
 		<div
