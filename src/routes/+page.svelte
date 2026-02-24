@@ -347,6 +347,7 @@
 		// 5) Aktivität / Feature (locker, menschlich)
 		{ base: 'gaestehaus-tischtennis', altKey: 'home.gallery.imageAlt.tischtennis' },
 		{ base: 'nr2-hero', altKey: 'home.gallery.imageAlt.nr2Hero' },
+		{ base: 'nr2-living-room', altKey: 'home.gallery.imageAlt.nr2LivingRoom' },
 
 		// 6) Umgebung / Ort (context)
 		{ base: 'weissbriach-kirche', altKey: 'home.gallery.imageAlt.kirche' },
@@ -356,6 +357,8 @@
 
 		// 8) Winter-Atmosphäre (weitere Variation)
 		{ base: 'balkon-ausblick-winter', altKey: 'home.gallery.imageAlt.winterBalkon' },
+		{ base: 'weissbriach-dorfblick-winter', altKey: 'home.gallery.imageAlt.dorfblickWinter' },
+		// { base: 'weissbriach-kirche-winter', altKey: 'home.gallery.imageAlt.kircheWinter' },
 
 		// 9) Optional/zusätzliches Winterbild ans Ende (wenn’s eher „B-Roll“ ist)
 		{ base: 'gaestehaus-winter-ansicht', altKey: 'home.gallery.imageAlt.sliderWinter' },
