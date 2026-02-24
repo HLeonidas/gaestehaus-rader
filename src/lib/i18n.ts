@@ -334,6 +334,8 @@ const translations: Record<Lang, Record<string, string>> = {
 		'experiences.destinations.title': 'In der Umgebung entdecken',
 		'experiences.destinations.subtitle':
 			'In der Umgebung entdecken Sie vom Gästehaus Rader aus Seen, Berge und Ausflugsideen in kurzer Zeit - von Sommer-Erlebnissen bis Winter-Erlebnissen in Kärnten, passend zu Ihrem Urlaubsstil.',
+		'experiences.guestcard.imageAlt.summer': 'Bergbahn-Erlebnis in Kärnten mit GästeCard-Vorteilen',
+		'experiences.guestcard.imageAlt.winter': 'Skierlebnis in Kärnten mit GästeCard-Vorteilen',
 		'experiences.destinations.topHighlights': 'Highlights rund ums Gästehaus',
 		'experiences.destinations.popular': 'Weitere Ausflugsideen',
 		'experiences.interests.title': 'Urlaub nach Ihren Interessen',
@@ -1410,6 +1412,10 @@ const translations: Record<Lang, Record<string, string>> = {
 		'experiences.destinations.title': 'Explore nearby highlights',
 		'experiences.destinations.subtitle':
 			'Explore nearby highlights from Guesthouse Rader: lakes, mountains, and excursion spots are all within quick reach - from summer experiences to winter experiences in Carinthia, matched to season and travel style.',
+		'experiences.guestcard.imageAlt.summer':
+			'Cable car experience in Carinthia with Guest Card benefits',
+		'experiences.guestcard.imageAlt.winter':
+			'Ski experience in Carinthia with Guest Card benefits',
 		'experiences.destinations.topHighlights': 'Highlights around the guesthouse',
 		'experiences.destinations.popular': 'More excursion ideas',
 		'experiences.interests.title': 'Holiday by your interests',

@@ -55,11 +55,21 @@
 
 	const withAsset = (path: string) => asset(path);
 	const currentMonth = new Date().getMonth();
+	const isSummerSeason = currentMonth >= 4 && currentMonth <= 8;
 	const heroImagePath =
-		currentMonth >= 4 && currentMonth <= 8
+		isSummerSeason
 			? '/images/Galerie/gaestehaus-balkon-ausblick-1440.jpg'
 			: '/images/Umgebung/winter-balkon-ausblick-hero.jpg';
 	const heroImage = withAsset(heroImagePath);
+	const guestCardVisual = isSummerSeason
+		? {
+				src: '/images/Umgebung/nassfeld-lift.jpg',
+				altKey: 'experiences.guestcard.imageAlt.summer',
+			}
+		: {
+				src: '/images/Umgebung/ski_nassfeld.jpg',
+				altKey: 'experiences.guestcard.imageAlt.winter',
+			};
 
 	const rooms = accommodations;
 	const accommodationsBase = resolve('/unterkuenfte-preise');
@@ -1063,8 +1073,8 @@
 				<div class="grid gap-8 lg:grid-cols-[1.1fr,0.9fr]">
 					<div class="order-2 relative h-[260px] sm:h-[320px] lg:order-1 lg:h-[670px]">
 						<img
-							src={withAsset('/images/Umgebung/nassfeld-lift.jpg')}
-							alt={$t('guestcard.landing.imageAlt')}
+							src={withAsset(guestCardVisual.src)}
+							alt={$t(guestCardVisual.altKey)}
 							class="h-full w-full object-cover"
 							loading="lazy"
 						/>

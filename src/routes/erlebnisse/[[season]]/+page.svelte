@@ -126,9 +126,7 @@
 
 	const activeSectionLabelKey = $derived.by(() => {
 		if (activeSectionId === 'highlights') {
-			return activeHighlightsSeason === 'winter'
-				? 'experiences.nav.winter'
-				: 'experiences.nav.summer';
+			return activeHighlightsSeason === 'winter' ? 'experiences.nav.winter' : 'experiences.nav.summer';
 		}
 		const match = sectionTrackingLinks.find((section) => section.id === activeSectionId);
 		return match?.labelKey ?? 'experiences.nav.title';
@@ -139,6 +137,17 @@
 			'https://www.nassfeld.at/de/Unterkunft-finden/Reise-planen/PREMIUM-Cards/GaesteCard-basic',
 		brochure: 'https://www.nassfeld.at/PDFs/NPS/Gaestekarten/BasisCard_Broschuere.pdf',
 	};
+	const guestCardVisual = $derived.by(() =>
+		activeTab === 'winter'
+			? {
+					src: '/images/Umgebung/nassfeld-lift.jpg',
+					altKey: 'experiences.guestcard.imageAlt.winter',
+				}
+			: {
+					src: '/images/Umgebung/ski_nassfeld.jpg',
+					altKey: 'experiences.guestcard.imageAlt.summer',
+				}
+	);
 
 	const sectionIconById: Record<string, any> = {
 		aktivitaeten: Mountain,
@@ -404,7 +413,9 @@
 			onfocusin={onNavFocusIn}
 			onfocusout={onNavFocusOut}
 		>
-			<div class="relative rounded-2xl bg-white/70 backdrop-blur-md ring-1 ring-slate-200/70 shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-shadow duration-300 hover:shadow-[0_16px_38px_rgba(15,23,42,0.14)]">
+			<div
+				class="relative rounded-2xl bg-white/70 backdrop-blur-md ring-1 ring-slate-200/70 shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-shadow duration-300 hover:shadow-[0_16px_38px_rgba(15,23,42,0.14)]"
+			>
 				<div class={`flex items-center ${isPeek ? 'gap-2 px-3 py-3' : 'justify-center px-3 py-3'}`}>
 					<button
 						type="button"
@@ -551,7 +562,6 @@
 							</div>
 						{/each}
 					</div>
-
 				</nav>
 
 				{#if isPeek}
@@ -652,57 +662,73 @@
 										class="group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm"
 									>
 										<div class="relative aspect-[16/10] sm:min-h-[420px] lg:h-[min(72dvh,720px)]">
-										<img
-											src={withAsset(summerFeaturedEvent.image)}
-											alt={`${$t(summerFeaturedEvent.titleKey)} – ${$t(summerFeaturedEvent.kickerKey)}`}
-											class="h-full w-full scale-[1.05] object-cover object-center transition-transform duration-700 will-change-transform group-hover:scale-[1.07]"
-											loading="lazy"
-										/>
-											<div class="absolute inset-0 hidden bg-gradient-to-t from-black/65 via-black/22 to-transparent sm:block"></div>
+											<img
+												src={withAsset(summerFeaturedEvent.image)}
+												alt={`${$t(summerFeaturedEvent.titleKey)} – ${$t(summerFeaturedEvent.kickerKey)}`}
+												class="h-full w-full scale-[1.05] object-cover object-center transition-transform duration-700 will-change-transform group-hover:scale-[1.07]"
+												loading="lazy"
+											/>
+											<div
+												class="absolute inset-0 hidden bg-gradient-to-t from-black/65 via-black/22 to-transparent sm:block"
+											></div>
 
-										{#if summerFeaturedEvent.badgeKey}
-											<span
-												class="absolute right-5 top-5 rounded-full bg-brand px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white shadow-sm"
+											{#if summerFeaturedEvent.badgeKey}
+												<span
+													class="absolute right-5 top-5 rounded-full bg-brand px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white shadow-sm"
+												>
+													{$t(summerFeaturedEvent.badgeKey)}
+												</span>
+											{/if}
+
+											<div
+												class="hidden sm:absolute sm:inset-x-0 sm:bottom-0 sm:block sm:px-6 sm:pb-6 sm:pt-6"
 											>
-												{$t(summerFeaturedEvent.badgeKey)}
-											</span>
-										{/if}
-
-										<div class="hidden sm:absolute sm:inset-x-0 sm:bottom-0 sm:block sm:px-6 sm:pb-6 sm:pt-6">
-											<div class="relative max-w-[86%] rounded-2xl border border-white/25 bg-white/16 p-3 shadow-[0_10px_26px_rgba(15,23,42,0.16)] backdrop-blur-md sm:max-w-2xl sm:p-6">
-												<div class="overflow-visible pr-0 sm:overflow-visible sm:pr-0">
-													<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
-														<summerFeaturedEvent.icon class="h-4 w-4 text-brand" aria-hidden="true" />
-														{$t(summerFeaturedEvent.kickerKey)}
-													</p>
-													<h3 class={`mt-2 font-semibold text-white ${summerFeaturedEvent.titleSize ?? 'text-xl'}`}>
-														{$t(summerFeaturedEvent.titleKey)}
-													</h3>
-													{#if summerFeaturedEvent.descriptionKey}
-														<p class="mt-2 max-w-xl text-sm text-white/85">
-															{$t(summerFeaturedEvent.descriptionKey)}
+												<div
+													class="relative max-w-[86%] rounded-2xl border border-white/25 bg-white/16 p-3 shadow-[0_10px_26px_rgba(15,23,42,0.16)] backdrop-blur-md sm:max-w-2xl sm:p-6"
+												>
+													<div class="overflow-visible pr-0 sm:overflow-visible sm:pr-0">
+														<p
+															class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand"
+														>
+															<summerFeaturedEvent.icon class="h-4 w-4 text-brand" aria-hidden="true" />
+															{$t(summerFeaturedEvent.kickerKey)}
 														</p>
-													{/if}
-													{#if summerFeaturedEvent.metaKeys?.length}
-														<div class="mt-3 flex flex-wrap gap-2">
-															{#each summerFeaturedEvent.metaKeys as metaKey}
-																<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white sm:px-3 sm:text-xs">
-																	{$t(metaKey)}
-																</span>
-															{/each}
-														</div>
-													{/if}
+														<h3
+															class={`mt-2 font-semibold text-white ${summerFeaturedEvent.titleSize ?? 'text-xl'}`}
+														>
+															{$t(summerFeaturedEvent.titleKey)}
+														</h3>
+														{#if summerFeaturedEvent.descriptionKey}
+															<p class="mt-2 max-w-xl text-sm text-white/85">
+																{$t(summerFeaturedEvent.descriptionKey)}
+															</p>
+														{/if}
+														{#if summerFeaturedEvent.metaKeys?.length}
+															<div class="mt-3 flex flex-wrap gap-2">
+																{#each summerFeaturedEvent.metaKeys as metaKey}
+																	<span
+																		class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white sm:px-3 sm:text-xs"
+																	>
+																		{$t(metaKey)}
+																	</span>
+																{/each}
+															</div>
+														{/if}
+													</div>
 												</div>
 											</div>
 										</div>
-										</div>
 										<div class="p-3 sm:hidden">
 											<div class="max-w-full rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm">
-												<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
+												<p
+													class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand"
+												>
 													<summerFeaturedEvent.icon class="h-4 w-4 text-brand" aria-hidden="true" />
 													{$t(summerFeaturedEvent.kickerKey)}
 												</p>
-												<h3 class={`mt-2 font-semibold text-slate-900 ${summerFeaturedEvent.titleSize ?? 'text-xl'}`}>
+												<h3
+													class={`mt-2 font-semibold text-slate-900 ${summerFeaturedEvent.titleSize ?? 'text-xl'}`}
+												>
 													{$t(summerFeaturedEvent.titleKey)}
 												</h3>
 												{#if summerFeaturedEvent.descriptionKey}
@@ -713,7 +739,9 @@
 												{#if summerFeaturedEvent.metaKeys?.length}
 													<div class="mt-3 flex flex-wrap gap-2">
 														{#each summerFeaturedEvent.metaKeys as metaKey}
-															<span class="rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-700">
+															<span
+																class="rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-700"
+															>
 																{$t(metaKey)}
 															</span>
 														{/each}
@@ -748,22 +776,30 @@
 													}`}
 													loading="lazy"
 												/>
-												<div class="absolute inset-0 bg-gradient-to-t from-black/30 via-black/0 to-black/0"></div>
+												<div
+													class="absolute inset-0 bg-gradient-to-t from-black/30 via-black/0 to-black/0"
+												></div>
 												{#if event.badgeKey}
-													<span class="absolute left-3 top-3 rounded-full bg-white/80 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-800 backdrop-blur">
+													<span
+														class="absolute left-3 top-3 rounded-full bg-white/80 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-800 backdrop-blur"
+													>
 														{$t(event.badgeKey)}
 													</span>
 												{/if}
 											</div>
 
 											<div class={`min-w-0 ${i % 2 === 1 ? 'sm:pr-6' : 'sm:pl-6'}`}>
-												<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
+												<p
+													class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand"
+												>
 													<event.icon class="h-4 w-4" aria-hidden="true" />
 													{$t(event.kickerKey)}
 												</p>
 
 												<h3 class="mt-1 text-xl font-semibold leading-tight text-slate-900">
-													<span class="bg-gradient-to-r from-slate-900 to-slate-700 bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-300 group-hover:bg-[length:100%_2px]">
+													<span
+														class="bg-gradient-to-r from-slate-900 to-slate-700 bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-300 group-hover:bg-[length:100%_2px]"
+													>
 														{$t(event.titleKey)}
 													</span>
 												</h3>
@@ -777,7 +813,9 @@
 												{#if event.metaKeys?.length}
 													<div class="mt-3 flex flex-wrap gap-2">
 														{#each event.metaKeys as metaKey}
-															<span class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600">
+															<span
+																class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600"
+															>
 																{$t(metaKey)}
 															</span>
 														{/each}
@@ -786,7 +824,9 @@
 
 												<div class="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-slate-800">
 													Mehr erfahren
-													<span class="grid h-8 w-8 place-items-center rounded-full bg-white shadow-sm ring-1 ring-slate-200 transition group-hover:translate-x-1 group-hover:shadow-md">
+													<span
+														class="grid h-8 w-8 place-items-center rounded-full bg-white shadow-sm ring-1 ring-slate-200 transition group-hover:translate-x-1 group-hover:shadow-md"
+													>
 														<ArrowRight
 															class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
 															aria-hidden="true"
@@ -819,57 +859,73 @@
 										}`}
 									>
 										<div class="relative aspect-[16/10] sm:min-h-[420px] lg:h-[min(72dvh,720px)]">
-										<img
-											src={withAsset(winterFeaturedEvent.image)}
-											alt={`${$t(winterFeaturedEvent.titleKey)} – ${$t(winterFeaturedEvent.kickerKey)}`}
-											class="h-full w-full scale-[1.05] object-cover object-center transition-transform duration-700 will-change-transform group-hover:scale-[1.07]"
-											loading="lazy"
-										/>
-											<div class="absolute inset-0 hidden bg-gradient-to-t from-black/65 via-black/22 to-transparent sm:block"></div>
+											<img
+												src={withAsset(winterFeaturedEvent.image)}
+												alt={`${$t(winterFeaturedEvent.titleKey)} – ${$t(winterFeaturedEvent.kickerKey)}`}
+												class="h-full w-full scale-[1.05] object-cover object-center transition-transform duration-700 will-change-transform group-hover:scale-[1.07]"
+												loading="lazy"
+											/>
+											<div
+												class="absolute inset-0 hidden bg-gradient-to-t from-black/65 via-black/22 to-transparent sm:block"
+											></div>
 
-										{#if winterFeaturedEvent.badgeKey}
-											<span
-												class="absolute right-5 top-5 rounded-full bg-brand px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white shadow-sm"
+											{#if winterFeaturedEvent.badgeKey}
+												<span
+													class="absolute right-5 top-5 rounded-full bg-brand px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white shadow-sm"
+												>
+													{$t(winterFeaturedEvent.badgeKey)}
+												</span>
+											{/if}
+
+											<div
+												class="hidden sm:absolute sm:inset-x-0 sm:bottom-0 sm:block sm:px-6 sm:pb-6 sm:pt-6"
 											>
-												{$t(winterFeaturedEvent.badgeKey)}
-											</span>
-										{/if}
-
-										<div class="hidden sm:absolute sm:inset-x-0 sm:bottom-0 sm:block sm:px-6 sm:pb-6 sm:pt-6">
-											<div class="relative max-w-[86%] rounded-2xl border border-white/25 bg-white/16 p-3 shadow-[0_10px_26px_rgba(15,23,42,0.16)] backdrop-blur-md sm:max-w-2xl sm:p-6">
-												<div class="overflow-visible pr-0 sm:overflow-visible sm:pr-0">
-													<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
-														<winterFeaturedEvent.icon class="h-4 w-4 text-brand" aria-hidden="true" />
-														{$t(winterFeaturedEvent.kickerKey)}
-													</p>
-													<h3 class={`mt-2 font-semibold text-white ${winterFeaturedEvent.titleSize ?? 'text-xl'}`}>
-														{$t(winterFeaturedEvent.titleKey)}
-													</h3>
-													{#if winterFeaturedEvent.descriptionKey}
-														<p class="mt-2 max-w-xl text-sm text-white/85">
-															{$t(winterFeaturedEvent.descriptionKey)}
+												<div
+													class="relative max-w-[86%] rounded-2xl border border-white/25 bg-white/16 p-3 shadow-[0_10px_26px_rgba(15,23,42,0.16)] backdrop-blur-md sm:max-w-2xl sm:p-6"
+												>
+													<div class="overflow-visible pr-0 sm:overflow-visible sm:pr-0">
+														<p
+															class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand"
+														>
+															<winterFeaturedEvent.icon class="h-4 w-4 text-brand" aria-hidden="true" />
+															{$t(winterFeaturedEvent.kickerKey)}
 														</p>
-													{/if}
-													{#if winterFeaturedEvent.metaKeys?.length}
-														<div class="mt-3 flex flex-wrap gap-2">
-															{#each winterFeaturedEvent.metaKeys as metaKey}
-																<span class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white sm:px-3 sm:text-xs">
-																	{$t(metaKey)}
-																</span>
-															{/each}
-														</div>
-													{/if}
+														<h3
+															class={`mt-2 font-semibold text-white ${winterFeaturedEvent.titleSize ?? 'text-xl'}`}
+														>
+															{$t(winterFeaturedEvent.titleKey)}
+														</h3>
+														{#if winterFeaturedEvent.descriptionKey}
+															<p class="mt-2 max-w-xl text-sm text-white/85">
+																{$t(winterFeaturedEvent.descriptionKey)}
+															</p>
+														{/if}
+														{#if winterFeaturedEvent.metaKeys?.length}
+															<div class="mt-3 flex flex-wrap gap-2">
+																{#each winterFeaturedEvent.metaKeys as metaKey}
+																	<span
+																		class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white sm:px-3 sm:text-xs"
+																	>
+																		{$t(metaKey)}
+																	</span>
+																{/each}
+															</div>
+														{/if}
+													</div>
 												</div>
 											</div>
 										</div>
-										</div>
 										<div class="p-3 sm:hidden">
 											<div class="max-w-full rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm">
-												<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
+												<p
+													class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand"
+												>
 													<winterFeaturedEvent.icon class="h-4 w-4 text-brand" aria-hidden="true" />
 													{$t(winterFeaturedEvent.kickerKey)}
 												</p>
-												<h3 class={`mt-2 font-semibold text-slate-900 ${winterFeaturedEvent.titleSize ?? 'text-xl'}`}>
+												<h3
+													class={`mt-2 font-semibold text-slate-900 ${winterFeaturedEvent.titleSize ?? 'text-xl'}`}
+												>
 													{$t(winterFeaturedEvent.titleKey)}
 												</h3>
 												{#if winterFeaturedEvent.descriptionKey}
@@ -880,7 +936,9 @@
 												{#if winterFeaturedEvent.metaKeys?.length}
 													<div class="mt-3 flex flex-wrap gap-2">
 														{#each winterFeaturedEvent.metaKeys as metaKey}
-															<span class="rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-700">
+															<span
+																class="rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-700"
+															>
 																{$t(metaKey)}
 															</span>
 														{/each}
@@ -915,22 +973,30 @@
 													}`}
 													loading="lazy"
 												/>
-												<div class="absolute inset-0 bg-gradient-to-t from-black/30 via-black/0 to-black/0"></div>
+												<div
+													class="absolute inset-0 bg-gradient-to-t from-black/30 via-black/0 to-black/0"
+												></div>
 												{#if event.badgeKey}
-													<span class="absolute left-3 top-3 rounded-full bg-white/80 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-800 backdrop-blur">
+													<span
+														class="absolute left-3 top-3 rounded-full bg-white/80 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-800 backdrop-blur"
+													>
 														{$t(event.badgeKey)}
 													</span>
 												{/if}
 											</div>
 
 											<div class={`min-w-0 ${i % 2 === 1 ? 'sm:pr-6' : 'sm:pl-6'}`}>
-												<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
+												<p
+													class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand"
+												>
 													<event.icon class="h-4 w-4" aria-hidden="true" />
 													{$t(event.kickerKey)}
 												</p>
 
 												<h3 class="mt-1 text-xl font-semibold leading-tight text-slate-900">
-													<span class="bg-gradient-to-r from-slate-900 to-slate-700 bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-300 group-hover:bg-[length:100%_2px]">
+													<span
+														class="bg-gradient-to-r from-slate-900 to-slate-700 bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-300 group-hover:bg-[length:100%_2px]"
+													>
 														{$t(event.titleKey)}
 													</span>
 												</h3>
@@ -944,7 +1010,9 @@
 												{#if event.metaKeys?.length}
 													<div class="mt-3 flex flex-wrap gap-2">
 														{#each event.metaKeys as metaKey}
-															<span class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600">
+															<span
+																class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600"
+															>
 																{$t(metaKey)}
 															</span>
 														{/each}
@@ -953,7 +1021,9 @@
 
 												<div class="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-slate-800">
 													Mehr erfahren
-													<span class="grid h-8 w-8 place-items-center rounded-full bg-white shadow-sm ring-1 ring-slate-200 transition group-hover:translate-x-1 group-hover:shadow-md">
+													<span
+														class="grid h-8 w-8 place-items-center rounded-full bg-white shadow-sm ring-1 ring-slate-200 transition group-hover:translate-x-1 group-hover:shadow-md"
+													>
 														<ArrowRight
 															class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
 															aria-hidden="true"
@@ -972,15 +1042,14 @@
 				<section class="anchor-target bg-[#fbfaf7] py-14 sm:py-16" id="traditionelle-feste">
 					<div class="mx-auto w-full max-w-6xl px-4 sm:px-6">
 						<div class="mx-auto max-w-3xl text-center">
-							<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
-								Lokale Empfehlung
-							</p>
+							<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">Lokale Empfehlung</p>
 							<h2 class="mt-3 font-serif text-4xl leading-[0.95] text-slate-900 sm:text-5xl">
 								Traditionelle Feste im Gitschtal
 							</h2>
 							<div class="mx-auto mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
 							<p class="mt-4 text-sm leading-relaxed text-slate-600 sm:text-base">
-								Erleben Sie, was vor Ort wirklich gelebt wird: echte Begegnungen, regionale Küche und gelebtes Brauchtum im Jahreslauf.
+								Erleben Sie, was vor Ort wirklich gelebt wird: echte Begegnungen, regionale Küche und
+								gelebtes Brauchtum im Jahreslauf.
 							</p>
 						</div>
 
@@ -990,9 +1059,13 @@
 								class="reveal group relative overflow-hidden rounded-3xl border border-slate-200 bg-white/80 p-6 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg"
 								style="--reveal-delay: 0ms;"
 							>
-								<div class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+								<div
+									class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+								>
 									<div class="absolute -left-24 -top-24 h-48 w-48 rounded-full bg-brand/10 blur-2xl"></div>
-									<div class="absolute -right-20 -bottom-20 h-48 w-48 rounded-full bg-amber-200/30 blur-2xl"></div>
+									<div
+										class="absolute -right-20 -bottom-20 h-48 w-48 rounded-full bg-amber-200/30 blur-2xl"
+									></div>
 								</div>
 
 								<p class="relative text-[11px] font-semibold uppercase tracking-[0.28em] text-brand">
@@ -1006,7 +1079,8 @@
 									<div class="min-w-0">
 										<h3 class="text-xl font-semibold leading-tight text-slate-900">Dorffeste</h3>
 										<p class="mt-2 text-sm leading-relaxed text-slate-600">
-											Kleine Feste mit Musik, Begegnungen und echter Dorfatmosphäre - ideal, um das Gitschtal abseits klassischer Ausflüge kennenzulernen.
+											Kleine Feste mit Musik, Begegnungen und echter Dorfatmosphäre - ideal, um das Gitschtal
+											abseits klassischer Ausflüge kennenzulernen.
 										</p>
 									</div>
 								</div>
@@ -1026,9 +1100,13 @@
 									</li>
 								</ul>
 
-								<div class="relative mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-800">
+								<div
+									class="relative mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-800"
+								>
 									Tipp: ideal im Sommer
-									<span class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600">
+									<span
+										class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600"
+									>
 										Juni-August
 									</span>
 								</div>
@@ -1039,9 +1117,15 @@
 								class="reveal group relative overflow-hidden rounded-3xl border border-slate-200 bg-white/80 p-6 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg"
 								style="--reveal-delay: 90ms;"
 							>
-								<div class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-									<div class="absolute -left-24 -top-24 h-48 w-48 rounded-full bg-emerald-200/30 blur-2xl"></div>
-									<div class="absolute -right-20 -bottom-20 h-48 w-48 rounded-full bg-brand/10 blur-2xl"></div>
+								<div
+									class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+								>
+									<div
+										class="absolute -left-24 -top-24 h-48 w-48 rounded-full bg-emerald-200/30 blur-2xl"
+									></div>
+									<div
+										class="absolute -right-20 -bottom-20 h-48 w-48 rounded-full bg-brand/10 blur-2xl"
+									></div>
 								</div>
 
 								<p class="relative text-[11px] font-semibold uppercase tracking-[0.28em] text-brand">
@@ -1055,7 +1139,8 @@
 									<div class="min-w-0">
 										<h3 class="text-xl font-semibold leading-tight text-slate-900">Kulinarische Feste</h3>
 										<p class="mt-2 text-sm leading-relaxed text-slate-600">
-											Regionale Spezialitäten, Produzenten aus der Umgebung und saisonale Genussmomente - vom Markt bis zur Festtafel.
+											Regionale Spezialitäten, Produzenten aus der Umgebung und saisonale Genussmomente - vom
+											Markt bis zur Festtafel.
 										</p>
 									</div>
 								</div>
@@ -1075,9 +1160,13 @@
 									</li>
 								</ul>
 
-								<div class="relative mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-800">
+								<div
+									class="relative mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-800"
+								>
 									Tipp: ideal im Herbst
-									<span class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600">
+									<span
+										class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600"
+									>
 										Sep-Okt
 									</span>
 								</div>
@@ -1088,9 +1177,15 @@
 								class="reveal group relative overflow-hidden rounded-3xl border border-slate-200 bg-white/80 p-6 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg"
 								style="--reveal-delay: 180ms;"
 							>
-								<div class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-									<div class="absolute -left-24 -top-24 h-48 w-48 rounded-full bg-indigo-200/25 blur-2xl"></div>
-									<div class="absolute -right-20 -bottom-20 h-48 w-48 rounded-full bg-brand/10 blur-2xl"></div>
+								<div
+									class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+								>
+									<div
+										class="absolute -left-24 -top-24 h-48 w-48 rounded-full bg-indigo-200/25 blur-2xl"
+									></div>
+									<div
+										class="absolute -right-20 -bottom-20 h-48 w-48 rounded-full bg-brand/10 blur-2xl"
+									></div>
 								</div>
 
 								<p class="relative text-[11px] font-semibold uppercase tracking-[0.28em] text-brand">
@@ -1102,11 +1197,10 @@
 										<span class="text-lg" aria-hidden="true">🎺</span>
 									</div>
 									<div class="min-w-0">
-										<h3 class="text-xl font-semibold leading-tight text-slate-900">
-											Tradition & Brauchtum
-										</h3>
+										<h3 class="text-xl font-semibold leading-tight text-slate-900">Tradition & Brauchtum</h3>
 										<p class="mt-2 text-sm leading-relaxed text-slate-600">
-											Alte Bräuche, Musik und gelebte Kultur machen den Aufenthalt besonders - und geben einen echten Einblick in die Region.
+											Alte Bräuche, Musik und gelebte Kultur machen den Aufenthalt besonders - und geben einen
+											echten Einblick in die Region.
 										</p>
 									</div>
 								</div>
@@ -1126,15 +1220,18 @@
 									</li>
 								</ul>
 
-								<div class="relative mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-800">
+								<div
+									class="relative mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-800"
+								>
 									Tipp: das ganze Jahr
-									<span class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600">
+									<span
+										class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600"
+									>
 										Saisonabhängig
 									</span>
 								</div>
 							</article>
 						</div>
-
 					</div>
 				</section>
 
@@ -1167,7 +1264,6 @@
 						</div>
 					</div>
 				</div>
-
 			</section>
 
 			<div class="mx-auto mt-10 w-full max-w-6xl px-1 sm:mt-14">
@@ -1194,8 +1290,8 @@
 						<div class="grid lg:grid-cols-[0.45fr_0.55fr]">
 							<div class="h-full">
 								<img
-									src={withAsset('/images/Umgebung/nassfeld-lift.jpg')}
-									alt="Bergbahn-Erlebnis in Kärnten mit GästeCard-Vorteilen"
+									src={withAsset(guestCardVisual.src)}
+									alt={$t(guestCardVisual.altKey)}
 									class="aspect-[16/10] w-full rounded-none object-cover sm:aspect-[4/3] lg:h-full lg:aspect-auto"
 									loading="lazy"
 								/>
@@ -1210,17 +1306,21 @@
 								</h2>
 
 								<div class="mt-5 flex flex-wrap gap-2">
-									<span class="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[11px] font-semibold text-slate-600">
+									<span
+										class="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[11px] font-semibold text-slate-600"
+									>
 										Bus & Bahn gratis
 									</span>
-									<span class="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[11px] font-semibold text-slate-600">
+									<span
+										class="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[11px] font-semibold text-slate-600"
+									>
 										Vorteile ab 1. Nacht
 									</span>
 								</div>
 
 								<p class="mt-6 max-w-xl text-sm leading-relaxed text-slate-600 sm:text-base">
-									Bei Ihrer Übernachtung im Gästehaus Rader ist die GästeCard Basic inklusive. Sie
-									starten direkt in Mobilität, Erholung und Naturerlebnisse - ohne zusätzliche Planung.
+									Bei Ihrer Übernachtung im Gästehaus Rader ist die GästeCard Basic inklusive. Sie starten
+									direkt in Mobilität, Erholung und Naturerlebnisse - ohne zusätzliche Planung.
 								</p>
 
 								<ul class="mt-7 space-y-2 text-sm text-slate-700">
@@ -1262,7 +1362,11 @@
 					</div>
 
 					<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-						<article use:reveal class="reveal group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md motion-reduce:transform-none motion-reduce:transition-none" style="--reveal-delay: 0ms;">
+						<article
+							use:reveal
+							class="reveal group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md motion-reduce:transform-none motion-reduce:transition-none"
+							style="--reveal-delay: 0ms;"
+						>
 							<img
 								src={withAsset('/images/Umgebung/freibad.png')}
 								alt="Bus und Bahn als flexible Mobilität ohne Auto"
@@ -1275,11 +1379,16 @@
 									<h3 class="text-lg font-semibold text-slate-900">Flexibel unterwegs</h3>
 								</div>
 								<p class="mt-2 text-sm leading-relaxed text-slate-600">
-									Kostenfreie Bus- und Bahnverbindungen bringen Sie bequem durch Kärnten - ideal für Ausflüge ohne Auto.
+									Kostenfreie Bus- und Bahnverbindungen bringen Sie bequem durch Kärnten - ideal für Ausflüge
+									ohne Auto.
 								</p>
 								<div class="mt-4 flex flex-wrap gap-2">
-									<span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-600">Bus & Bahn gratis</span>
-									<span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-600">Ohne Parkplatzsuche</span>
+									<span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-600"
+										>Bus & Bahn gratis</span
+									>
+									<span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-600"
+										>Ohne Parkplatzsuche</span
+									>
 								</div>
 								<a
 									href={guestCardLinks.benefitsOverview}
@@ -1288,12 +1397,19 @@
 									class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-800 transition hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 motion-reduce:transition-none"
 								>
 									Mehr erfahren
-									<ArrowRight class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transform-none motion-reduce:transition-none" aria-hidden="true" />
+									<ArrowRight
+										class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transform-none motion-reduce:transition-none"
+										aria-hidden="true"
+									/>
 								</a>
 							</div>
 						</article>
 
-						<article use:reveal class="reveal group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md motion-reduce:transform-none motion-reduce:transition-none" style="--reveal-delay: 90ms;">
+						<article
+							use:reveal
+							class="reveal group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md motion-reduce:transform-none motion-reduce:transition-none"
+							style="--reveal-delay: 90ms;"
+						>
 							<img
 								src={withAsset('/images/Umgebung/sauna.png')}
 								alt="Baden und Wellness mit Gästekarte-Vorteilen"
@@ -1306,11 +1422,16 @@
 									<h3 class="text-lg font-semibold text-slate-900">Baden & Wellness</h3>
 								</div>
 								<p class="mt-2 text-sm leading-relaxed text-slate-600">
-									Freibäder, Seen und ausgewählte Wellness-Angebote machen aus jedem Urlaubstag einen entspannten Genießertag.
+									Freibäder, Seen und ausgewählte Wellness-Angebote machen aus jedem Urlaubstag einen
+									entspannten Genießertag.
 								</p>
 								<div class="mt-4 flex flex-wrap gap-2">
-									<span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-600">Freibäder & Seen</span>
-									<span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-600">Sauna-Vorteile</span>
+									<span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-600"
+										>Freibäder & Seen</span
+									>
+									<span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-600"
+										>Sauna-Vorteile</span
+									>
 								</div>
 								<a
 									href={guestCardLinks.benefitsOverview}
@@ -1319,12 +1440,19 @@
 									class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-800 transition hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 motion-reduce:transition-none"
 								>
 									Mehr erfahren
-									<ArrowRight class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transform-none motion-reduce:transition-none" aria-hidden="true" />
+									<ArrowRight
+										class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transform-none motion-reduce:transition-none"
+										aria-hidden="true"
+									/>
 								</a>
 							</div>
 						</article>
 
-						<article use:reveal class="reveal group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md motion-reduce:transform-none motion-reduce:transition-none" style="--reveal-delay: 180ms;">
+						<article
+							use:reveal
+							class="reveal group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md motion-reduce:transform-none motion-reduce:transition-none"
+							style="--reveal-delay: 180ms;"
+						>
 							<img
 								src={withAsset('/images/Umgebung/aussicht-vom-golz.jpg')}
 								alt="Aktiv in der Natur am Nassfeld und im Gailtal"
@@ -1337,11 +1465,16 @@
 									<h3 class="text-lg font-semibold text-slate-900">Aktiv & Natur</h3>
 								</div>
 								<p class="mt-2 text-sm leading-relaxed text-slate-600">
-									Von Nassfeld bis Gailtal: Radwege, Bergmomente und geführte Naturerlebnisse für aktive Urlaubstage.
+									Von Nassfeld bis Gailtal: Radwege, Bergmomente und geführte Naturerlebnisse für aktive
+									Urlaubstage.
 								</p>
 								<div class="mt-4 flex flex-wrap gap-2">
-									<span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-600">Nassfeld Highlights</span>
-									<span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-600">Naturprogramme</span>
+									<span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-600"
+										>Nassfeld Highlights</span
+									>
+									<span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-600"
+										>Naturprogramme</span
+									>
 								</div>
 								<a
 									href={guestCardLinks.benefitsOverview}
@@ -1350,16 +1483,24 @@
 									class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-800 transition hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 motion-reduce:transition-none"
 								>
 									Mehr erfahren
-									<ArrowRight class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transform-none motion-reduce:transition-none" aria-hidden="true" />
+									<ArrowRight
+										class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transform-none motion-reduce:transition-none"
+										aria-hidden="true"
+									/>
 								</a>
 							</div>
 						</article>
 					</div>
 
 					<details class="group rounded-2xl border border-slate-200 bg-white/70 p-5 shadow-sm">
-						<summary class="flex cursor-pointer list-none items-center justify-between gap-3 text-left text-sm font-semibold text-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2">
+						<summary
+							class="flex cursor-pointer list-none items-center justify-between gap-3 text-left text-sm font-semibold text-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
+						>
 							<span>Alle Leistungen im Überblick</span>
-							<ArrowRight class="h-4 w-4 transition-transform duration-300 group-open:rotate-90 motion-reduce:transition-none" aria-hidden="true" />
+							<ArrowRight
+								class="h-4 w-4 transition-transform duration-300 group-open:rotate-90 motion-reduce:transition-none"
+								aria-hidden="true"
+							/>
 						</summary>
 						<div class="mt-4 grid gap-4 border-t border-slate-200 pt-4 sm:grid-cols-2">
 							<div>
@@ -1401,7 +1542,9 @@
 	</div>
 
 	<div class="fixed inset-x-0 bottom-0 z-50 px-3 pb-3 lg:hidden">
-		<div class="rounded-2xl border border-white/40 bg-white/75 shadow-[0_18px_50px_rgba(15,23,42,0.22)] backdrop-blur-xl ring-1 ring-slate-200/60">
+		<div
+			class="rounded-2xl border border-white/40 bg-white/75 shadow-[0_18px_50px_rgba(15,23,42,0.22)] backdrop-blur-xl ring-1 ring-slate-200/60"
+		>
 			<div class="flex items-center justify-between px-3 py-2">
 				<button
 					type="button"
@@ -1560,7 +1703,6 @@
 			</div>
 		</div>
 	{/if}
-
 </main>
 
 <style>
@@ -1645,7 +1787,5 @@
 			filter: none;
 			opacity: 1;
 		}
-
 	}
-
 </style>
