@@ -110,14 +110,14 @@ export const experienceEvents: ExperienceEvent[] = [
 	{
 		id: 'summer-sunset',
 		season: 'summer',
-		activities: ['hiking', 'family'],
-		icon: Mountain,
+		activities: ['lakes', 'family'],
+		icon: Waves,
 		kickerKey: 'experiences.event.summer.sunset.kicker',
 		titleKey: 'experiences.event.summer.sunset.title',
 		descriptionKey: 'experiences.event.summer.sunset.description',
-		image: '/images/Umgebung/summer-hike.jpg',
+		image: '/images/Umgebung/freibad.png',
 		titleSize: 'text-xl',
-		metaKeys: ['experiences.meta.shortwalk', 'experiences.meta.goldenhour'],
+		metaKeys: ['experiences.meta.cooling', 'experiences.meta.easy'],
 		badgeKey: 'experiences.badge.favorite',
 	},
 	{

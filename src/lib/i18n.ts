@@ -233,6 +233,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'badge.popular': 'Beliebt',
 		'badge.exclusive': 'Exklusiv',
 		'experiences.title': 'Erlebnisse rund um das Gästehaus',
+		'experiences.seo.title': 'Erlebnisse im Gitschtal & in Kärnten | Gästehaus Rader',
+		'experiences.seo.description':
+			'Entdecken Sie das ganze Jahr über Erlebnisse rund um Weißbriach: Wandern, Seen, Ausflüge und Winteraktivitäten in Kärnten.',
 		'experiences.seo.summer.title': 'Sommer-Erlebnisse rund ums Gitschtal | Gästehaus Rader',
 		'experiences.seo.summer.description':
 			'Wandern, Radfahren und Badeseen: Entdecken Sie Sommer-Erlebnisse rund um Weißbriach - mit Ausflügen zum Weißensee, ins Gailtal und zu den Sommerbergbahnen am Nassfeld.',
@@ -273,10 +276,10 @@ const translations: Record<Lang, Record<string, string>> = {
 		'experiences.event.summer.lift.title': 'Sommer am Nassfeld',
 		'experiences.event.summer.lift.description':
 			'Mit der Bahn hinauf, Panorama atmen, und oben wartet die Hütte.',
-		'experiences.event.summer.sunset.kicker': 'Aussicht',
-		'experiences.event.summer.sunset.title': 'Golden Hour im Gitschtal',
+		'experiences.event.summer.sunset.kicker': 'Freibad',
+		'experiences.event.summer.sunset.title': 'Freibad in Weißbriach',
 		'experiences.event.summer.sunset.description':
-			'Kurzer Anstieg, weiches Licht und die Berge glühen bis zum letzten Sonnenstrahl.',
+			'Freibad mit Bergblick, Liegewiese und viel Platz für entspannte Sommertage mit der Familie.',
 		'experiences.event.summer.gorge.kicker': 'Natur-Highlight',
 		'experiences.event.summer.gorge.title': 'Garnitzenklamm',
 		'experiences.event.summer.gorge.description':
@@ -634,6 +637,19 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.sustainability.heating.body': 'Wärmeversorgung aus dem Dorf - effizient und verlässlich.',
 		'home.seasons.summer.imageAlt': 'Gästehaus im Sommer',
 		'home.seasons.winter.imageAlt': 'Gästehaus im Winter',
+		'home.workation.kicker': 'Extra',
+		'home.workation.title': 'Auch für Workation geeignet',
+		'home.workation.body':
+			'Unser Fokus bleibt Urlaub und Erholung. Wenn Sie zwischendurch arbeiten möchten, finden Sie bei uns auch dafür passende Bedingungen.',
+		'home.workation.bullet.wifi': 'Stabiles WLAN für den Arbeitsalltag',
+		'home.workation.bullet.workspace': 'Eigener Platz für Laptop und Calls',
+		'home.workation.bullet.quiet': 'Ruhige Lage für konzentriertes Arbeiten',
+		'home.workation.bullet.longstay': 'Ideal für Langzeitaufenthalte',
+		'home.workation.cta.primary': 'Workation-Infos',
+		'home.workation.cta.secondary': 'Kurz anfragen',
+		'home.workation.imageAlt': 'Workation mit Bergblick im Gästehaus Rader',
+		'home.workation.imageBadge': 'Workation als Zusatz',
+		'home.workation.imageSubline': 'Optional für Remote Work · Gitschtal',
 		'home.amenities.kicker': 'Ausstattung',
 		'home.amenities.title': 'Komfort in allen Appartements',
 		'home.amenities.subtitle':
@@ -703,6 +719,102 @@ const translations: Record<Lang, Record<string, string>> = {
 		'landing.weissbriach.body3':
 			'Ob Wandern, Radfahren, Skifahren oder entspannte Tage am See: Von hier erreichen Sie die schönsten Ziele Kärntens schnell und unkompliziert.',
 		'landing.weissbriach.cta': 'Verfügbarkeit prüfen',
+		'workation.seo.title': 'Workation in Kärnten – Remote Work im Gitschtal | Gästehaus Rader',
+		'workation.seo.description':
+			'Workation in Kärnten: Remote Work im Gitschtal mit stabilem WLAN, ruhiger Lage und Apartments mit Arbeitsplatz. Jetzt Verfügbarkeit anfragen.',
+		'workation.hero.kicker': 'Workation in Kärnten',
+		'workation.hero.title': 'Produktiv arbeiten, wo andere Urlaub machen',
+		'workation.hero.subtitle':
+			'Im Gästehaus Rader verbinden Sie fokussiertes Remote Work mit echter Erholung: ruhige Apartments, Natur direkt vor der Tür und ein Setup für lange Arbeitstage.',
+		'workation.hero.ctaPrimary': 'Jetzt anfragen',
+		'workation.hero.ctaSecondary': 'Verfügbarkeit prüfen',
+		'workation.hero.imageAlt': 'Workation mit Bergblick im Gästehaus Rader',
+		'workation.trust.wifi': 'Stabiles WLAN',
+		'workation.trust.quiet': 'Ruhige Lage',
+		'workation.trust.workspace': 'Eigener Arbeitsplatz',
+		'workation.trust.longstay': 'Langzeitaufenthalte',
+		'workation.fit.kicker': 'Für wen geeignet?',
+		'workation.fit.title': 'Ideal für Remote Worker, Freelancer und kleine Teams',
+		'workation.fit.subtitle':
+			'Ob Solo-Workation oder konzentrierte Teamtage: Unsere Apartments bieten Ihnen den passenden Rahmen für produktives Arbeiten in den Alpen.',
+		'workation.fit.remote.title': 'Remote Worker',
+		'workation.fit.remote.body':
+			'Für alle, die Arbeit und Natur verbinden möchten - mit Fokus tagsüber und Entspannung am Abend.',
+		'workation.fit.freelancer.title': 'Freelancer',
+		'workation.fit.freelancer.body':
+			'Ruhige Umgebung für Deep Work, klare Tagesstruktur und viel Raum für kreative Projekte.',
+		'workation.fit.teams.title': 'Kleine Teams',
+		'workation.fit.teams.body':
+			'Für Offsites im kleinen Rahmen, wenn Sie konzentriert arbeiten und gleichzeitig bewusst abschalten möchten.',
+		'workation.setup.kicker': 'Ausstattung fürs Arbeiten',
+		'workation.setup.title': 'Alles da, damit Remote Work reibungslos läuft',
+		'workation.setup.desk.title': 'Schreibtisch',
+		'workation.setup.desk.body': 'Praktischer Arbeitsplatz für Laptop, Notizen und Videocalls.',
+		'workation.setup.power.title': 'Viele Steckdosen',
+		'workation.setup.power.body': 'Kurze Wege zur nächsten Steckdose - auch für längere Sessions.',
+		'workation.setup.light.title': 'Gute Beleuchtung',
+		'workation.setup.light.body':
+			'Helle Räume für konzentriertes Arbeiten und angenehme Meetings.',
+		'workation.setup.coffee.title': 'Kaffee inklusive',
+		'workation.setup.coffee.body':
+			'Nespresso-Maschine im Apartment für Ihren produktiven Start in den Tag.',
+		'workation.setup.quiet.title': 'Ruhiges Umfeld',
+		'workation.setup.quiet.body':
+			'Weniger Ablenkung, mehr Fokus - perfekt für anspruchsvolle Aufgaben.',
+		'workation.internet.kicker': 'Internet & Setup',
+		'workation.internet.title': 'Verlässliche Verbindung für Ihren Arbeitsalltag',
+		'workation.internet.promiseLabel': 'WLAN-Versprechen',
+		'workation.internet.promiseBody':
+			'Unser WLAN ist auf stabiles Arbeiten ausgelegt - ideal für Calls, Cloud-Tools und tägliche Remote Work Routinen.',
+		'workation.internet.bullet1': 'Stabil auch bei mehreren Geräten gleichzeitig',
+		'workation.internet.bullet2': 'Geeignet für Video-Calls und Screen-Sharing',
+		'workation.internet.bullet3': 'Support direkt vor Ort bei Fragen zum Setup',
+		'workation.balance.kicker': 'Work-Life Balance',
+		'workation.balance.title': 'Nach dem Arbeitstag wartet die Natur',
+		'workation.balance.body':
+			'Nach Feierabend wechseln Sie direkt in den Erholungsmodus: Berge, Wege und ruhige Plätze beginnen praktisch vor der Haustür.',
+		'workation.balance.bullet1': 'Spaziergänge und kurze Wanderungen direkt ab Haus',
+		'workation.balance.bullet2': 'Frische Bergluft für einen klaren Kopf',
+		'workation.balance.bullet3': 'Seen, Skigebiete und Ausflugsziele schnell erreichbar',
+		'workation.longstay.kicker': 'Langzeitaufenthalt',
+		'workation.longstay.title': 'Mehr bleiben, entspannter arbeiten',
+		'workation.longstay.badge': 'Optional: Wochen- & Monatsvorteil',
+		'workation.longstay.bullet1':
+			'Planbar für 1-4 Wochen Workation mit klarer Tagesstruktur und viel Ruhe.',
+		'workation.longstay.bullet2':
+			'Praktisch für Projekte, Remote Sprints oder saisonale Aufenthalte.',
+		'workation.longstay.bullet3':
+			'Anfrage für Langzeitaufenthalt inkl. individueller Konditionen möglich.',
+		'workation.longstay.teaser':
+			'Senden Sie uns Ihre Wunschdauer - wir melden uns mit einem passenden Angebot.',
+		'workation.faq.kicker': 'FAQ',
+		'workation.faq.title': 'Häufige Fragen zur Workation',
+		'workation.faq.q1': 'Ist das WLAN für tägliche Video-Calls geeignet?',
+		'workation.faq.a1':
+			'Ja. Unsere Verbindung ist auf Remote Work ausgelegt und unterstützt in der Regel stabile Calls, Meetings und Cloud-Arbeit.',
+		'workation.faq.q2': 'Gibt es in den Apartments einen eigenen Arbeitsplatz?',
+		'workation.faq.a2':
+			'Ja. Sie haben einen praktischen Arbeitsplatz im Apartment mit guter Beleuchtung und Stromanschlüssen in Reichweite.',
+		'workation.faq.q3': 'Kann ich auch für mehrere Wochen bleiben?',
+		'workation.faq.a3':
+			'Ja, Langzeitaufenthalte sind möglich. Teilen Sie uns Ihren Zeitraum mit, dann erstellen wir ein individuelles Angebot.',
+		'workation.faq.q4': 'Ist die Lage ruhig genug für konzentriertes Arbeiten?',
+		'workation.faq.a4':
+			'Ja. Das Gästehaus liegt im ruhigen Gitschtal - ideal für Fokus am Tag und Erholung am Abend.',
+		'workation.faq.q5': 'Wie frage ich meine Workation am besten an?',
+		'workation.faq.a5':
+			'Über unsere Kontaktseite oder direkt über die Buchungsanfrage. Nennen Sie uns Reisedaten, Aufenthaltsdauer und Personenanzahl.',
+		'workation.cta.kicker': 'Ihre Workation starten',
+		'workation.cta.title': 'Sichern Sie sich Ihren Remote Work Rückzugsort in Kärnten',
+		'workation.cta.body':
+			'Schreiben Sie uns kurz Ihre Wunschdaten. Wir melden uns schnell mit einer passenden Option für Ihre Workation.',
+		'workation.cta.formTeaser':
+			'Microcopy fürs Formular: "Gewünschter Zeitraum, Personenzahl und Arbeitsbedarf - wir antworten innerhalb von 24 Stunden."',
+		'workation.cta.primary': 'Verfügbarkeit prüfen',
+		'workation.cta.secondary': 'Jetzt anfragen',
+		'workation.cta.apartments': 'Appartements ansehen',
+		'workation.mobileCta.kicker': 'Workation Anfrage',
+		'workation.mobileCta.button': 'Anfragen',
 		'footer.tagline': 'Ihr Rückzugsort in den Kärntner Alpen. Tradition trifft auf modernen Komfort.',
 		'footer.quicklinks': 'Schnellzugriff',
 		'footer.winter': 'Winterurlaub',
@@ -783,7 +895,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'imprint.copyright.title': 'Urheberrecht',
 		'imprint.copyright.body':
 			'Die Inhalte dieser Website unterliegen dem Urheberrecht. Die Verwendung von Bildern und Texten ist nur mit unserer ausdrücklichen Zustimmung gestattet.',
-		'imprint.webdesign.imageAlt': 'Webdesign Profil',
+		'imprint.webdesign.imageAlt': 'Leon Hueber',
 		'imprint.webdesign.kicker': 'Webdesign & Entwicklung',
 		'imprint.webdesign.name': 'Leon Hueber',
 		'imprint.webdesign.body':
@@ -1195,6 +1307,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'badge.popular': 'Popular',
 		'badge.exclusive': 'Exclusive',
 		'experiences.title': 'Experiences nearby',
+		'experiences.seo.title': 'Experiences in the Gitschtal & Carinthia | Guesthouse Rader',
+		'experiences.seo.description':
+			'Discover year-round experiences around Weissbriach: hiking, lakes, day trips, and winter activities in Carinthia.',
 		'experiences.seo.summer.title': 'Summer experiences around the Gitschtal | Guesthouse Rader',
 		'experiences.seo.summer.description':
 			'Hiking, cycling, and alpine lakes: discover summer experiences around Weißbriach, Lake Weißensee, the Gailtal valley, and the Nassfeld summer lifts.',
@@ -1235,10 +1350,10 @@ const translations: Record<Lang, Record<string, string>> = {
 		'experiences.event.summer.lift.title': 'Summer at Nassfeld',
 		'experiences.event.summer.lift.description':
 			'Ride up by cable car, breathe in the panorama, and a mountain hut is waiting above.',
-		'experiences.event.summer.sunset.kicker': 'Views',
-		'experiences.event.summer.sunset.title': 'Golden Hour in the Gitschtal',
+		'experiences.event.summer.sunset.kicker': 'Outdoor pool',
+		'experiences.event.summer.sunset.title': 'Outdoor Pool in Weissbriach',
 		'experiences.event.summer.sunset.description':
-			'A short walk up, soft light, and mountain peaks glowing until the last sunbeam.',
+			'Outdoor pool with mountain views, sunbathing lawns, and plenty of space for relaxed summer days with the family.',
 		'experiences.event.summer.gorge.kicker': 'Nature highlight',
 		'experiences.event.summer.gorge.title': 'Garnitzenklamm Gorge',
 		'experiences.event.summer.gorge.description':
@@ -1596,6 +1711,19 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.sustainability.heating.body': 'Heat supplied from the village - efficient and reliable.',
 		'home.seasons.summer.imageAlt': 'Guesthouse exterior in summer',
 		'home.seasons.winter.imageAlt': 'Guesthouse exterior in winter',
+		'home.workation.kicker': 'Extra',
+		'home.workation.title': 'Also suitable for workation',
+		'home.workation.body':
+			'Our primary focus remains holidays and recovery. If you need to work during your stay, we also provide the right conditions.',
+		'home.workation.bullet.wifi': 'Reliable Wi-Fi for daily work',
+		'home.workation.bullet.workspace': 'Dedicated spot for laptop and calls',
+		'home.workation.bullet.quiet': 'Quiet location for focused work',
+		'home.workation.bullet.longstay': 'Perfect for long stays',
+		'home.workation.cta.primary': 'Workation details',
+		'home.workation.cta.secondary': 'Quick inquiry',
+		'home.workation.imageAlt': 'Workation with mountain view at Guesthouse Rader',
+		'home.workation.imageBadge': 'Workation as an extra',
+		'home.workation.imageSubline': 'Optional for remote work · Gitschtal',
 		'home.amenities.kicker': 'Amenities',
 		'home.amenities.title': 'Comfort in every apartment',
 		'home.amenities.subtitle':
@@ -1657,6 +1785,97 @@ const translations: Record<Lang, Record<string, string>> = {
 		'landing.weissbriach.body3':
 			'Whether hiking, cycling, skiing, or relaxing by the lake, you can reach Carinthia’s best spots quickly and easily from here.',
 		'landing.weissbriach.cta': 'Check availability',
+		'workation.seo.title': 'Workation in Carinthia – Remote work in the Gitschtal | Guesthouse Rader',
+		'workation.seo.description':
+			'Workation in Carinthia with reliable Wi-Fi, quiet apartments, and dedicated workspaces in the Gitschtal. Ask now for availability.',
+		'workation.hero.kicker': 'Workation in Carinthia',
+		'workation.hero.title': 'Work productively where others go on holiday',
+		'workation.hero.subtitle':
+			'At Guesthouse Rader, focused remote work meets true recovery: quiet apartments, nature right outside, and a setup for long workdays.',
+		'workation.hero.ctaPrimary': 'Send inquiry now',
+		'workation.hero.ctaSecondary': 'Check availability',
+		'workation.hero.imageAlt': 'Workation with mountain view at Guesthouse Rader',
+		'workation.trust.wifi': 'Reliable Wi-Fi',
+		'workation.trust.quiet': 'Quiet location',
+		'workation.trust.workspace': 'Dedicated workspace',
+		'workation.trust.longstay': 'Long stays',
+		'workation.fit.kicker': 'Who is it for?',
+		'workation.fit.title': 'Great for remote workers, freelancers, and small teams',
+		'workation.fit.subtitle':
+			'From solo workation to focused team days, our apartments offer the right setting for productive work in the Alps.',
+		'workation.fit.remote.title': 'Remote workers',
+		'workation.fit.remote.body':
+			'For everyone who wants to combine work and nature, with focus during the day and recovery in the evening.',
+		'workation.fit.freelancer.title': 'Freelancers',
+		'workation.fit.freelancer.body':
+			'A calm setting for deep work, clear routines, and room for creative projects.',
+		'workation.fit.teams.title': 'Small teams',
+		'workation.fit.teams.body':
+			'Ideal for small offsites when you want focused work and intentional downtime.',
+		'workation.setup.kicker': 'Work setup',
+		'workation.setup.title': 'Everything you need for smooth remote work',
+		'workation.setup.desk.title': 'Desk workspace',
+		'workation.setup.desk.body': 'A practical setup for laptop work, notes, and video calls.',
+		'workation.setup.power.title': 'Power outlets',
+		'workation.setup.power.body': 'Convenient outlet access throughout the apartment.',
+		'workation.setup.light.title': 'Good lighting',
+		'workation.setup.light.body': 'Bright rooms for focused work and pleasant meetings.',
+		'workation.setup.coffee.title': 'Coffee included',
+		'workation.setup.coffee.body': 'Nespresso machine in the apartment for a productive start.',
+		'workation.setup.quiet.title': 'Quiet environment',
+		'workation.setup.quiet.body': 'Less distraction, more focus for demanding tasks.',
+		'workation.internet.kicker': 'Internet & setup',
+		'workation.internet.title': 'Reliable connection for your daily workflow',
+		'workation.internet.promiseLabel': 'Wi-Fi promise',
+		'workation.internet.promiseBody':
+			'Our Wi-Fi is designed for stable remote work, ideal for calls, cloud tools, and daily routines.',
+		'workation.internet.bullet1': 'Stable with multiple devices at the same time',
+		'workation.internet.bullet2': 'Suitable for video calls and screen sharing',
+		'workation.internet.bullet3': 'On-site support for setup questions',
+		'workation.balance.kicker': 'Work-life balance',
+		'workation.balance.title': 'Nature starts right after your workday',
+		'workation.balance.body':
+			'After work, switch directly into recovery mode: mountains, trails, and quiet spots are right outside the door.',
+		'workation.balance.bullet1': 'Walks and short hikes directly from the house',
+		'workation.balance.bullet2': 'Fresh mountain air for a clear mind',
+		'workation.balance.bullet3': 'Lakes, ski areas, and day trips within easy reach',
+		'workation.longstay.kicker': 'Long stay',
+		'workation.longstay.title': 'Stay longer and work with more ease',
+		'workation.longstay.badge': 'Optional: weekly & monthly benefit',
+		'workation.longstay.bullet1':
+			'Easy to plan for 1-4 week workation stays with clear daily structure.',
+		'workation.longstay.bullet2': 'Great for projects, remote sprints, or seasonal stays.',
+		'workation.longstay.bullet3': 'Long-stay inquiries with individual conditions are possible.',
+		'workation.longstay.teaser':
+			'Send us your preferred duration and we will get back with a suitable offer.',
+		'workation.faq.kicker': 'FAQ',
+		'workation.faq.title': 'Frequently asked questions about workation',
+		'workation.faq.q1': 'Is the Wi-Fi suitable for daily video calls?',
+		'workation.faq.a1':
+			'Yes. Our connection is set up for remote work and usually supports stable calls, meetings, and cloud work.',
+		'workation.faq.q2': 'Is there a dedicated workspace in the apartments?',
+		'workation.faq.a2':
+			'Yes. You have a practical workspace in the apartment with good lighting and nearby power outlets.',
+		'workation.faq.q3': 'Can I stay for several weeks?',
+		'workation.faq.a3':
+			'Yes, long stays are possible. Share your preferred period and we will prepare an individual offer.',
+		'workation.faq.q4': 'Is the location quiet enough for focused work?',
+		'workation.faq.a4':
+			'Yes. The guesthouse is in the quiet Gitschtal, ideal for focus during the day and recovery in the evening.',
+		'workation.faq.q5': 'How can I request my workation stay?',
+		'workation.faq.a5':
+			'Use our contact page or booking request and include travel dates, length of stay, and number of guests.',
+		'workation.cta.kicker': 'Start your workation',
+		'workation.cta.title': 'Secure your remote work retreat in Carinthia',
+		'workation.cta.body':
+			'Send us your preferred dates and we will quickly respond with a fitting option for your workation.',
+		'workation.cta.formTeaser':
+			'Form microcopy: "Preferred dates, number of guests, and work needs - we respond within 24 hours."',
+		'workation.cta.primary': 'Check availability',
+		'workation.cta.secondary': 'Send inquiry now',
+		'workation.cta.apartments': 'View apartments',
+		'workation.mobileCta.kicker': 'Workation inquiry',
+		'workation.mobileCta.button': 'Inquire',
 		'footer.tagline': 'Alpine guesthouse in the Gitschtal with warm apartments and personal service.',
 		'footer.quicklinks': 'Quick links',
 		'footer.winter': 'Winter getaway',
@@ -1737,7 +1956,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'imprint.copyright.title': 'Copyright',
 		'imprint.copyright.body':
 			'The content of this website is subject to copyright. Use of images and texts is permitted only with our express consent.',
-		'imprint.webdesign.imageAlt': 'Web design profile',
+		'imprint.webdesign.imageAlt': 'Leon Hueber',
 		'imprint.webdesign.kicker': 'Web design & development',
 		'imprint.webdesign.name': 'Leon Hueber',
 		'imprint.webdesign.body': 'Concept, design, and technical implementation of this website.',

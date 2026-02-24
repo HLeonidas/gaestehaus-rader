@@ -39,10 +39,16 @@
 	const withAsset = (path: string) => asset(path);
 
 	// get active tab from url param (default: summer)
-	const seasonFromUrl = $derived.by(() => {
+	const seoSeasonFromUrl = $derived.by(() => {
 		const season = page.params.season;
 		if (season === 'winter') return 'winter';
 		if (season === 'sommer' || season === 'summer') return 'summer';
+		return null;
+	});
+
+	const seasonFromUrl = $derived.by(() => {
+		const season = seoSeasonFromUrl;
+		if (season) return season;
 		return 'summer';
 	});
 
@@ -98,7 +104,14 @@
 
 	const currentContent = $derived(content[activeTab]);
 	const seo = $derived.by(() => {
-		const isWinter = seasonFromUrl === 'winter';
+		if (!seoSeasonFromUrl) {
+			return {
+				titleKey: 'experiences.seo.title',
+				descriptionKey: 'experiences.seo.description',
+			};
+		}
+
+		const isWinter = seoSeasonFromUrl === 'winter';
 
 		return {
 			titleKey: isWinter ? 'experiences.seo.winter.title' : 'experiences.seo.summer.title',

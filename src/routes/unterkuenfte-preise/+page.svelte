@@ -217,7 +217,7 @@
 
 			<!-- Inclusive services tiles -->
 			<div class="grid gap-3 sm:gap-6 sm:grid-cols-2 lg:grid-cols-5">
-				<div class="rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-sm sm:p-6 sm:text-center">
+				<div class="rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/20 hover:shadow-md sm:p-6 sm:text-center">
 					<div class="flex items-center gap-3 sm:block">
 					<div class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand sm:mx-auto sm:h-12 sm:w-12 sm:rounded-full">
 						<Lightbulb class="h-6 w-6" />
@@ -238,7 +238,7 @@
 					</div>
 				</div>
 
-				<div class="rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-sm sm:p-6 sm:text-center">
+				<div class="rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/20 hover:shadow-md sm:p-6 sm:text-center">
 					<div class="flex items-center gap-3 sm:block">
 					<div class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand sm:mx-auto sm:h-12 sm:w-12 sm:rounded-full">
 						<Wifi class="h-6 w-6" />
@@ -254,7 +254,7 @@
 					</div>
 				</div>
 
-				<div class="rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-sm sm:p-6 sm:text-center">
+				<div class="rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/20 hover:shadow-md sm:p-6 sm:text-center">
 					<div class="flex items-center gap-3 sm:block">
 					<div class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand sm:mx-auto sm:h-12 sm:w-12 sm:rounded-full">
 						<Baby class="h-6 w-6" />
@@ -270,7 +270,7 @@
 					</div>
 				</div>
 
-				<div class="rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-sm sm:p-6 sm:text-center">
+				<div class="rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/20 hover:shadow-md sm:p-6 sm:text-center">
 					<div class="flex items-center gap-3 sm:block">
 					<div class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand sm:mx-auto sm:h-12 sm:w-12 sm:rounded-full">
 						<SquareParking class="h-6 w-6" />
@@ -286,7 +286,7 @@
 					</div>
 				</div>
 
-				<div class="rounded-2xl border border-slate-200 bg-[#fff4e6] p-4 text-left shadow-sm sm:p-6 sm:text-center">
+				<div class="rounded-2xl border border-slate-200 bg-[#fff4e6] p-4 text-left shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md sm:p-6 sm:text-center">
 					<div class="flex items-center gap-3 sm:block">
 					<div class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand sm:mx-auto sm:h-12 sm:w-12 sm:rounded-full">
 						<Ticket class="h-6 w-6" />
