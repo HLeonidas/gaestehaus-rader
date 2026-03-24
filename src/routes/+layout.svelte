@@ -8,6 +8,7 @@
 	import { onMount } from 'svelte';
 	import '../app.css';
 	import { afterNavigate } from '$app/navigation';
+	import { fade } from 'svelte/transition';
 
 	let { children } = $props();
 
@@ -137,7 +138,7 @@
 				{#each navItems as item}
 					<a
 						href={item.href}
-						class={`transition-colors hover:text-brand px-4 py-3 ${
+						class={`transition-all hover:text-brand active:scale-[0.96] px-4 py-3 ${
 							isActive(item.href) ? 'text-brand' : 'text-slate-700'
 						}`}
 						aria-current={isActive(item.href) ? 'page' : undefined}
@@ -181,7 +182,7 @@
 
 				<a
 					href={bookingHref}
-					class="inline-flex items-center justify-center rounded-full bg-brand px-3.5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-brand/90 focus:outline-none focus:ring-2 focus:ring-brand/40 sm:px-5 sm:text-sm"
+					class="inline-flex items-center justify-center rounded-full bg-brand px-3.5 py-2 text-xs font-semibold text-white shadow-sm transition-all hover:bg-brand/90 active:scale-95 focus:outline-none focus:ring-2 focus:ring-brand/40 sm:px-5 sm:text-sm"
 					aria-label={$t('nav.booking')}
 					onclick={() => trackEvent('Booking: Jetzt buchen', { source: 'header' })}
 				>
@@ -214,7 +215,11 @@
 		id="main-content"
 		class={`w-full flex-1 ${isHome ? '' : isFullWidth ? '' : 'mx-auto max-w-6xl px-2 py-10 sm:px-6'}`}
 	>
-		{@render children()}
+		{#key page.url.pathname}
+			<div in:fade={{ duration: (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) ? 0 : 400, delay: 150 }} class="h-full">
+				{@render children()}
+			</div>
+		{/key}
 	</main>
 
 	<footer class="border-t border-slate-200 bg-white text-slate-800">

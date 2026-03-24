@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { reveal } from '$lib/actions/reveal';
 	import { asset, resolve } from '$app/paths';
 	import { lang, t } from '$lib/i18n';
 	import SeoHead from '$lib/components/SeoHead.svelte';
@@ -166,7 +167,7 @@
 
 <div class="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
 	<section
-		class="relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-900 px-6 py-10 text-white shadow-sm sm:px-10 sm:py-14"
+		use:reveal class="opacity-0 translate-y-8 transition-all duration-700 ease-out relative overflow-hidden rounded-3xl border border-slate-200 bg-slate-900 px-6 py-10 text-white shadow-sm sm:px-10 sm:py-14"
 	>
 		<img
 			src={withAsset('/images/Haus/gaestehaus-balkon-ausblick.jpg')}
@@ -205,7 +206,7 @@
 		</div>
 	</section>
 
-	<section class="mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+	<section use:reveal class="opacity-0 translate-y-8 transition-all duration-700 ease-out mt-8 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
 		<ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
 			{#each trustItems as item}
 				<li class="flex items-center gap-2 rounded-2xl bg-slate-50 px-4 py-3 text-sm text-slate-700">
@@ -216,7 +217,7 @@
 		</ul>
 	</section>
 
-	<section class="mt-12">
+	<section use:reveal class="opacity-0 translate-y-8 transition-all duration-700 ease-out mt-12">
 		<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
 			{$t('workation.fit.kicker')}
 		</p>
@@ -242,7 +243,7 @@
 		</div>
 	</section>
 
-	<section class="mt-12 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+	<section use:reveal class="opacity-0 translate-y-8 transition-all duration-700 ease-out mt-12 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
 		<div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
 			<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
 				{$t('workation.setup.kicker')}
@@ -303,7 +304,7 @@
 		</div>
 	</section>
 
-	<section class="mt-12 grid gap-6 md:grid-cols-2">
+	<section use:reveal class="opacity-0 translate-y-8 transition-all duration-700 ease-out mt-12 grid gap-6 md:grid-cols-2">
 		<article class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
 			<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
 				{$t('workation.balance.kicker')}
@@ -356,7 +357,7 @@
 		</article>
 	</section>
 
-	<section class="mt-12 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8" id="faq">
+	<section use:reveal class="opacity-0 translate-y-8 transition-all duration-700 ease-out mt-12 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8" id="faq">
 		<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
 			{$t('workation.faq.kicker')}
 		</p>
@@ -385,7 +386,7 @@
 	</section>
 
 	<section
-		class="mt-12 rounded-3xl border border-slate-200 bg-gradient-to-r from-brand/10 via-white to-slate-50 p-6 shadow-sm sm:p-10"
+		use:reveal class="opacity-0 translate-y-8 transition-all duration-700 ease-out mt-12 rounded-3xl border border-slate-200 bg-gradient-to-r from-brand/10 via-white to-slate-50 p-6 shadow-sm sm:p-10"
 	>
 		<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
 			{$t('workation.cta.kicker')}

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { reveal } from '$lib/actions/reveal';
 	import { lang, t } from '$lib/i18n';
 	import { asset, resolve } from '$app/paths';
 	import { accommodations } from '$lib/data/accommodations';
@@ -83,7 +84,7 @@
 <div class="mx-auto w-full max-w-4xl px-4 py-10 sm:px-6">
 	<div class="space-y-10">
 		<!-- Header / breadcrumb -->
-		<section class="space-y-4">
+		<section use:reveal class="opacity-0 translate-y-8 transition-all duration-700 ease-out space-y-4">
 			<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
 				{$t('rooms.page.breadcrumb')}
 			</p>
@@ -106,7 +107,7 @@
 			<div class="space-y-14 sm:space-y-16">
 				{#each rooms as room}
 					<article
-						class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+						use:reveal class="opacity-0 translate-y-8 transition-all duration-700 ease-out group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm hover:-translate-y-1 hover:shadow-lg"
 					>
 						<!-- Image -->
 						<div class="relative">
@@ -202,7 +203,7 @@
 		</section>
 
 		<!-- Bottom section -->
-		<section class="space-y-12 sm:space-y-14">
+		<section use:reveal class="opacity-0 translate-y-8 transition-all duration-700 ease-out space-y-12 sm:space-y-14">
 			<div class="space-y-3 pt-14 text-center sm:pt-16">
 				<p class="text-xs font-semibold tracking-[0.35em] uppercase text-brand">
 					{$t('rooms.page.inclusive.kicker')}

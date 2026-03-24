@@ -484,9 +484,7 @@
 	const prefersReducedMotion = () =>
 		browser && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-	function revealOnScroll(node: HTMLElement, options: RevealOptions = {}) {
-		return {};
-	}
+	import { reveal } from '$lib/actions/reveal';
 </script>
 
 <SeoHead
@@ -523,14 +521,14 @@
 		<div
 			class="relative flex min-h-[calc(100svh-var(--hero-header-offset,141px))] flex-col items-center justify-center px-6 pt-20 text-center text-white sm:px-10"
 		>
-			<h1 class="mx-auto max-w-3xl font-serif text-4xl font-semibold leading-[0.95] sm:text-6xl">
+			<h1 use:reveal class="opacity-0 translate-y-4 transition-all duration-700 ease-out delay-150 mx-auto max-w-3xl font-serif text-4xl font-semibold leading-[0.95] sm:text-6xl">
 				{$t('hero.title')}
 			</h1>
-			<p class="mx-auto mt-4 max-w-2xl text-sm text-white/85 sm:text-base">
+			<p use:reveal class="opacity-0 translate-y-4 transition-all duration-700 ease-out delay-300 mx-auto mt-4 max-w-2xl text-sm text-white/85 sm:text-base">
 				{$t('hero.subtitle')}
 			</p>
 
-			<div class="mt-8 flex flex-wrap justify-center gap-3 sm:gap-4">
+			<div use:reveal class="opacity-0 translate-y-4 transition-all duration-700 ease-out delay-500 mt-8 flex flex-wrap justify-center gap-3 sm:gap-4">
 				<a
 					href={resolve('/unterkuenfte-preise')}
 					class="inline-flex items-center justify-center rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90 focus:outline-none focus:ring-2 focus:ring-brand/60"
@@ -612,7 +610,7 @@
 	<div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
 		<div class="space-y-20">
 			<section
-				class="-mx-4 mt-1 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 scroll-pl-4 scroll-pr-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 sm:scroll-pl-0 sm:scroll-pr-0 lg:grid-cols-4"
+				use:reveal class="opacity-0 translate-y-8 transition-all duration-700 ease-out -mx-4 mt-1 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 scroll-pl-4 scroll-pr-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 sm:scroll-pl-0 sm:scroll-pr-0 lg:grid-cols-4"
 			>
 				{#each usps as item}
 					<div
@@ -635,7 +633,7 @@
 			</section>
 
 			<!-- ROOMS -->
-			<section class="mt-4 pt-2 sm:mt-0 sm:pt-4">
+			<section use:reveal class="opacity-0 translate-y-8 transition-all duration-700 ease-out mt-4 pt-2 sm:mt-0 sm:pt-4">
 				<div class="flex flex-wrap items-end justify-between gap-3 sm:gap-6">
 					<div class="pb-2 sm:pb-10">
 						<p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand">
@@ -727,7 +725,7 @@
 			</section>
 
 			<!-- TRUST -->
-			<section class="py-2 sm:py-4">
+			<section use:reveal class="opacity-0 translate-y-8 transition-all duration-700 ease-out py-2 sm:py-4">
 				<!-- Header row -->
 				<div class="flex flex-wrap items-start justify-between gap-3 sm:gap-6">
 					<div class="max-w-2xl">

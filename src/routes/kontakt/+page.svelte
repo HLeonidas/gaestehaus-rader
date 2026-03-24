@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { reveal } from '$lib/actions/reveal';
 	import { trackEvent } from '$lib/analytics/plausible';
 	import SeoHead from '$lib/components/SeoHead.svelte';
 	import { t } from '$lib/i18n';
@@ -44,21 +45,22 @@
 
 <div class="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
 	<section>
-		<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
-			{$t('brand.name')}
-		</p>
-		<h1 class="mt-4 font-serif text-5xl leading-[0.95] text-slate-900 sm:text-6xl">
-			{$t('contact.headingPrefix')} <span class="italic">{$t('contact.headingEmphasis')}</span>
-		</h1>
-		<div class="mt-4 h-[3px] w-14 rounded-full bg-brand"></div>
-		<p class="mt-4 max-w-2xl text-base leading-relaxed text-slate-600">
-			{$t('contact.subtitle')}
-		</p>
-
-		<div class="mt-10">
-			<p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-600">
-				{$t('contact.quick.title')}
+		<div use:reveal class="opacity-0 translate-y-4 transition-all duration-700 ease-out">
+			<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
+				{$t('brand.name')}
 			</p>
+			<h1 class="mt-4 font-serif text-5xl leading-[0.95] text-slate-900 sm:text-6xl">
+				{$t('contact.headingPrefix')} <span class="italic">{$t('contact.headingEmphasis')}</span>
+			</h1>
+			<div class="mt-4 h-[3px] w-14 rounded-full bg-brand"></div>
+			<p class="mt-4 max-w-2xl text-base leading-relaxed text-slate-600">
+				{$t('contact.subtitle')}
+			</p>
+
+			<div class="mt-10">
+				<p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-600">
+					{$t('contact.quick.title')}
+				</p>
 			<div class="mt-3 flex flex-wrap items-center gap-3">
 				<a
 					href="https://wa.me/436766246826"
@@ -78,8 +80,9 @@
 				</a>
 			</div>
 		</div>
+		</div>
 
-		<div class="mt-8 rounded-2xl border border-slate-200 bg-white p-5 sm:p-8">
+		<div use:reveal class="opacity-0 translate-y-8 transition-all duration-700 ease-out delay-150 mt-8 rounded-2xl border border-slate-200 bg-white p-5 sm:p-8">
 			<div class="grid gap-10 lg:grid-cols-[1fr,0.95fr]">
 				<div>
 				<p class="text-lg font-semibold text-slate-900">{$t('contact.card.title')}</p>

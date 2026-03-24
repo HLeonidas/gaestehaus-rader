@@ -1,0 +1,31 @@
+
+> gaestehaus-rader@0.0.1 check
+> svelte-kit sync && svelte-check --tsconfig ./tsconfig.json
+
+Loading svelte-check in workspace: c:\Users\hueberl\Private_Projects\gaestehaus-rader
+Getting Svelte diagnostics...
+
+c:\Users\hueberl\Private_Projects\gaestehaus-rader\[32msrc\routes\+page.svelte[39m:491:1
+[31mError[39m: A component can have a single top-level `<script>` element and/or a single top-level `<script module>` element
+https://svelte.dev/e/script_duplicate (svelte)
+[36m</script>
+[35m[36m<script lang="ts">
+	import { reveal } from '$lib/actions/reveal';[39m
+
+c:\Users\hueberl\Private_Projects\gaestehaus-rader\[32msrc\routes\+page.svelte[39m:491:1
+[31mError[39m: A component can have a single top-level `<script>` element and/or a single top-level `<script module>` element
+https://svelte.dev/e/script_duplicate (ts)
+[36m</script>
+[35m[36m<script lang="ts">
+	import { reveal } from '$lib/actions/reveal';[39m
+
+c:\Users\hueberl\Private_Projects\gaestehaus-rader\[32msrc\routes\kontakt\+page.svelte[39m:48:3
+[33mWarn[39m: This element is implicitly closed by the following `</section>`, which can cause an unexpected DOM structure. Add an explicit `</div>` to avoid surprises.
+https://svelte.dev/e/element_implicitly_closed (svelte)
+[36m	<section>
+		[35m<div use:reveal class="opacity-0 translate-y-4 transition-all duration-700 ease-out">[36m
+			<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">[39m
+
+====================================
+[31msvelte-check found 2 errors and 1 warning in 2 files
+[39m
