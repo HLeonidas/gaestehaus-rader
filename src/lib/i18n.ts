@@ -30,9 +30,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'nav.langEn': 'Sprache Englisch',
 		'accessibility.skip': 'Zum Inhalt springen',
 		'brand.name': 'Gästehaus Rader',
-		'hero.kicker': 'Alpine Ruhe · Kärnten',
-		'hero.title': 'Gästehaus Rader – Ferienwohnungen in Weißbriach im Gitschtal',
-		'hero.subtitle': 'Erleben Sie alpine Gelassenheit und kärntner Gastfreundschaft in ihrer schönsten Form.',
+		'hero.kicker': 'Gästehaus Rader • Kärnten',
+		'hero.title': 'Ihr Rückzugsort für alpine Gelassenheit',
+		'hero.subtitle': 'Entspannen Sie in unseren Ferienwohnungen in Weißbriach. Echte Kärntner Gastfreundschaft trifft auf unberührte Natur im Gitschtal.',
 		'seo.default.title':
 			'Ferienwohnungen Weißbriach / Gitschtal – Gästehaus Rader – Nähe Weissensee & Nassfeld',
 		'seo.default.description':
@@ -1107,10 +1107,10 @@ const translations: Record<Lang, Record<string, string>> = {
 		'nav.langEn': 'Language: English',
 		'accessibility.skip': 'Skip to content',
 		'brand.name': 'Gästehaus Rader',
-		'hero.kicker': 'Alpine calm · Carinthia',
-		'hero.title': 'Gästehaus Rader – Holiday apartments in Weissbriach / Gitschtal',
+		'hero.kicker': 'Guesthouse Rader • Carinthia',
+		'hero.title': 'Your retreat for alpine serenity',
 		'hero.subtitle':
-			'Experience alpine serenity and Carinthian hospitality at its finest.',
+			'Relax in our holiday apartments in Weissbriach. Authentic Carinthian hospitality meets untouched nature in the Gitschtal.',
 		'seo.default.title':
 			'Holiday apartments in Weissbriach / Gitschtal – Guesthouse Rader – near Weissensee & Nassfeld',
 		'seo.default.description':

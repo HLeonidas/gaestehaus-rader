@@ -509,11 +509,11 @@
 				aria-hidden="true"
 			></div>
 			<div
-				class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/35 to-black/15"
+				class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-black/10"
 				aria-hidden="true"
 			></div>
 			<div
-				class="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.2),_transparent_55%)]"
+				class="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.08),_transparent_60%)]"
 				aria-hidden="true"
 			></div>
 		</div>
@@ -521,23 +521,222 @@
 		<div
 			class="relative flex min-h-[calc(100svh-var(--hero-header-offset,141px))] flex-col items-center justify-center px-6 pt-20 text-center text-white sm:px-10"
 		>
-			<h1 use:reveal class="opacity-0 translate-y-4 transition-all duration-700 ease-out delay-150 mx-auto max-w-3xl font-serif text-4xl font-semibold leading-[0.95] sm:text-6xl">
+			<p use:reveal class="opacity-0 translate-y-4 transition-all duration-700 ease-out text-[11px] font-semibold uppercase tracking-[0.4em] text-white/90">
+				{$t('hero.kicker')}
+			</p>
+			<h1 use:reveal class="opacity-0 translate-y-4 transition-all duration-700 ease-out delay-150 mx-auto mt-5 max-w-4xl font-serif text-4xl font-medium leading-[1.05] text-shadow-sm sm:text-6xl sm:leading-[1.1]">
 				{$t('hero.title')}
 			</h1>
-			<p use:reveal class="opacity-0 translate-y-4 transition-all duration-700 ease-out delay-300 mx-auto mt-4 max-w-2xl text-sm text-white/85 sm:text-base">
+			<div use:reveal class="opacity-0 translate-y-4 transition-all duration-700 ease-out delay-300 mt-6 mx-auto h-[1px] w-16 bg-white/40"></div>
+			<p use:reveal class="opacity-0 translate-y-4 transition-all duration-700 ease-out delay-500 mx-auto mt-6 max-w-2xl text-sm font-light leading-relaxed text-white/95 sm:text-base">
 				{$t('hero.subtitle')}
 			</p>
 
-			<div use:reveal class="opacity-0 translate-y-4 transition-all duration-700 ease-out delay-500 mt-8 flex flex-wrap justify-center gap-3 sm:gap-4">
+			<div use:reveal class="opacity-0 translate-y-4 transition-all duration-700 ease-out delay-700 mt-10 flex flex-wrap justify-center gap-4 sm:gap-5">
 				<a
 					href={resolve('/unterkuenfte-preise')}
-					class="inline-flex items-center justify-center rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90 focus:outline-none focus:ring-2 focus:ring-brand/60"
+					class="inline-flex items-center justify-center rounded-full bg-brand px-8 py-3.5 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(206,126,90,0.25)] transition hover:-translate-y-0.5 hover:bg-[#c97451] hover:shadow-[0_12px_24px_rgba(206,126,90,0.3)] focus:outline-none focus:ring-2 focus:ring-brand/60"
 				>
 					{$t('hero.cta.primary')}
 				</a>
 				<a
 					href={resolve('/erlebnisse')}
-					class="inline-flex items-center justify-center rounded-full bg-white/15 px-6 py-3 text-sm font-semibold text-white ring-1 ring-white/20 backdrop-blur-sm transition hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/40"
+					class="inline-flex items-center justify-center rounded-full bg-white/15 px-8 py-3.5 text-sm font-semibold text-white ring-1 ring-white/20 backdrop-blur-md transition hover:-translate-y-0.5 hover:bg-white/25 hover:ring-white/40 focus:outline-none focus:ring-2 focus:ring-white/40"
+				>
+					{$t('hero.cta.secondary')}
+				</a>
+			</div>
+		</div>
+
+		<!-- <div class="absolute inset-x-0 -bottom-10 px-4 sm:px-6">
+			<div class="mx-auto max-w-5xl rounded-2xl bg-white p-4 shadow-2xl ring-1 ring-slate-200 sm:p-5">
+				<div class="grid gap-4 md:grid-cols-[1fr,1fr,1fr,auto] md:items-end">
+					<label class="grid gap-2">
+						<span class="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+							{$t('booking.bar.checkin')}
+						</span>
+						<div class="relative">
+							<input
+								type="date"
+								class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 pr-10 text-sm text-slate-800 shadow-sm outline-none transition focus:border-brand/50 focus:ring-2 focus:ring-brand/20"
+							/>
+							<Calendar
+								class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+							/>
+						</div>
+					</label>
+
+					<label class="grid gap-2">
+						<span class="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+							{$t('booking.bar.checkout')}
+						</span>
+						<div class="relative">
+							<input
+								type="date"
+								class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 pr-10 text-sm text-slate-800 shadow-sm outline-none transition focus:border-brand/50 focus:ring-2 focus:ring-brand/20"
+							/>
+							<Calendar
+								class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+							/>
+						</div>
+					</label>
+
+					<label class="grid gap-2">
+						<span class="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+							{$t('booking.bar.guests')}
+						</span>
+						<div class="relative">
+							<select
+								class="w-full appearance-none rounded-xl border border-slate-200 bg-white px-4 py-3 pr-10 text-sm text-slate-800 shadow-sm outline-none transition focus:border-brand/50 focus:ring-2 focus:ring-brand/20"
+							>
+								<option>2 Erwachsene</option>
+								<option>1 Erwachsener</option>
+								<option>3 Erwachsene</option>
+								<option>4 Erwachsene</option>
+							</select>
+							<Users
+								class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
+							/>
+						</div>
+					</label>
+
+					<button
+						type="button"
+						class="h-[46px] w-full rounded-xl bg-brand px-6 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90 focus:outline-none focus:ring-2 focus:ring-brand/30 md:w-auto"
+					>
+						{$t('booking.bar.cta')}
+					</button>
+		activeGalleryIndex = (activeGalleryIndex + 1) % galleryImages.length;
+	};
+
+	const handleGalleryKeydown = (event: KeyboardEvent) => {
+		if (!isGalleryOpen) return;
+		if (event.key === 'Escape') {
+			closeGallery();
+		}
+		if (event.key === 'ArrowLeft') {
+			showPrevGalleryImage();
+		}
+		if (event.key === 'ArrowRight') {
+			showNextGalleryImage();
+		}
+	};
+
+	onMount(() => {
+		if (!browser) return;
+		updateHeroHeaderOffset();
+
+		const header = document.getElementById('site-header');
+		const resizeObserver = header ? new ResizeObserver(updateHeroHeaderOffset) : null;
+		if (header && resizeObserver) {
+			resizeObserver.observe(header);
+		}
+
+		window.addEventListener('resize', updateHeroHeaderOffset);
+		window.addEventListener('keydown', handleGalleryKeydown);
+
+		return () => {
+			resizeObserver?.disconnect();
+			window.removeEventListener('resize', updateHeroHeaderOffset);
+			window.removeEventListener('keydown', handleGalleryKeydown);
+		};
+	});
+
+	let galleryTrack: HTMLDivElement | null = null;
+	const scrollGallery = (direction: 'prev' | 'next') => {
+		if (!galleryTrack) return;
+		const amount = galleryTrack.clientWidth * 0.8;
+		galleryTrack.scrollBy({
+			left: direction === 'prev' ? -amount : amount,
+			behavior: 'smooth',
+		});
+	};
+
+	const trustStars = Array.from({ length: 5 });
+	const googleProfileUrl = 'https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9';
+	const displayedTrustReviews = homeTrustReviews.filter((review) => [1, 2, 5].includes(review.id));
+	const formatReviewAge = (value: string | undefined, currentLang: 'de' | 'en') => {
+		if (!value) return '';
+		const parsed = new Date(value);
+		if (Number.isNaN(parsed.getTime())) return '';
+		const now = new Date();
+		let months =
+			(now.getFullYear() - parsed.getFullYear()) * 12 + (now.getMonth() - parsed.getMonth());
+		if (now.getDate() < parsed.getDate()) months -= 1;
+		if (months <= 1) return currentLang === 'de' ? 'vor einem Monat' : 'one month ago';
+		if (months < 12) return currentLang === 'de' ? `vor ${months} Monaten` : `${months} months ago`;
+		return currentLang === 'de' ? 'vor einem Jahr' : 'one year ago';
+	};
+
+	type RevealOptions = {
+		threshold?: number;
+		rootMargin?: string;
+		distance?: number;
+		duration?: number;
+		delay?: number;
+	};
+
+	const prefersReducedMotion = () =>
+		browser && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+	import { reveal } from '$lib/actions/reveal';
+</script>
+
+<SeoHead
+	titleKey="home.seo.title"
+	descriptionKey="home.seo.description"
+	image="/images/Haus/gaestehaus-sommer.jpg"
+/>
+
+<svelte:head>
+	{@html `<script type="application/ld+json">${homeJsonLd}</script>`}
+</svelte:head>
+
+<div class="space-y-20 pb-16">
+	<section
+		class="relative min-h-[calc(100lvh-var(--hero-header-offset,141px))]"
+		style={`--hero-header-offset: ${heroHeaderOffset};`}
+	>
+		<div class="absolute inset-0">
+			<div
+				class="h-full w-full bg-cover bg-center"
+				style={`background-image: url('${heroImage}');`}
+				aria-hidden="true"
+			></div>
+			<div
+				class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-black/10"
+				aria-hidden="true"
+			></div>
+			<div
+				class="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.08),_transparent_60%)]"
+				aria-hidden="true"
+			></div>
+		</div>
+
+		<div
+			class="relative flex min-h-[calc(100svh-var(--hero-header-offset,141px))] flex-col items-center justify-center px-6 pt-20 text-center text-white sm:px-10"
+		>
+			<p use:reveal class="opacity-0 translate-y-4 transition-all duration-700 ease-out text-[11px] font-semibold uppercase tracking-[0.4em] text-white/90">
+				{$t('hero.kicker')}
+			</p>
+			<h1 use:reveal class="opacity-0 translate-y-4 transition-all duration-700 ease-out delay-150 mx-auto mt-5 max-w-4xl font-serif text-4xl font-medium leading-[1.05] text-shadow-sm sm:text-6xl sm:leading-[1.1]">
+				{$t('hero.title')}
+			</h1>
+			<div use:reveal class="opacity-0 translate-y-4 transition-all duration-700 ease-out delay-300 mt-6 mx-auto h-[1px] w-16 bg-white/40"></div>
+			<p use:reveal class="opacity-0 translate-y-4 transition-all duration-700 ease-out delay-500 mx-auto mt-6 max-w-2xl text-sm font-light leading-relaxed text-white/95 sm:text-base">
+				{$t('hero.subtitle')}
+			</p>
+
+			<div use:reveal class="opacity-0 translate-y-4 transition-all duration-700 ease-out delay-700 mt-10 flex flex-wrap justify-center gap-4 sm:gap-5">
+				<a
+					href={resolve('/unterkuenfte-preise')}
+					class="inline-flex items-center justify-center rounded-full bg-brand px-8 py-3.5 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(206,126,90,0.25)] transition hover:-translate-y-0.5 hover:bg-[#c97451] hover:shadow-[0_12px_24px_rgba(206,126,90,0.3)] focus:outline-none focus:ring-2 focus:ring-brand/60"
+				>
+					{$t('hero.cta.primary')}
+				</a>
+				<a
+					href={resolve('/erlebnisse')}
+					class="inline-flex items-center justify-center rounded-full bg-white/15 px-8 py-3.5 text-sm font-semibold text-white ring-1 ring-white/20 backdrop-blur-md transition hover:-translate-y-0.5 hover:bg-white/25 hover:ring-white/40 focus:outline-none focus:ring-2 focus:ring-white/40"
 				>
 					{$t('hero.cta.secondary')}
 				</a>
@@ -607,7 +806,7 @@
 		</div> -->
 	</section>
 
-	<div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+	<div class="mx-auto w-full max-w-6xl px-4 pt-8 sm:px-6 sm:pt-14 lg:px-8">
 		<div class="space-y-20">
 			<section
 				use:reveal class="opacity-0 translate-y-8 transition-all duration-700 ease-out -mx-4 mt-1 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 scroll-pl-4 scroll-pr-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 sm:scroll-pl-0 sm:scroll-pr-0 lg:grid-cols-4"
@@ -619,7 +818,7 @@
 						<div
 							class="flex h-10 w-10 items-center justify-center rounded-full bg-brand/10 text-brand transition-all duration-300 group-hover:bg-brand group-hover:text-white"
 						>
-							<item.icon class="h-5 w-5" aria-hidden="true" />
+							<item.icon class="h-5 w-5" aria-hidden="true" strokeWidth={1.25} />
 						</div>
 						<h3 class="mt-4 text-base font-semibold text-slate-900">
 							{$t(`usp.${item.key}.title`)}
@@ -650,7 +849,7 @@
 						class="ml-auto inline-flex w-full items-center justify-end gap-2 pt-0 text-sm font-semibold text-brand/80 transition hover:text-brand sm:w-auto sm:pt-2"
 					>
 						{$t('rooms.section.cta')}
-						<ArrowRight class="h-4 w-4" aria-hidden="true" />
+						<ArrowRight class="h-4 w-4" aria-hidden="true" strokeWidth={1.25} />
 					</a>
 				</div>
 
@@ -669,7 +868,7 @@
 									<img
 										src={withAsset(r.images.main)}
 										alt={`${$t('home.rooms.card.imageAltPrefix')} ${r.title}`}
-										class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]"
+										class="h-full w-full object-cover transition duration-1000 ease-out group-hover:scale-105"
 										loading="lazy"
 									/>
 									<div
@@ -682,7 +881,7 @@
 										class="pointer-events-none absolute bottom-4 right-4 hidden items-center gap-2 rounded-full border border-white/35 bg-white/14 px-4 py-2 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(15,23,42,0.25)] ring-1 ring-white/20 backdrop-blur-md opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-focus-visible:opacity-100 group-focus-visible:translate-y-0 sm:inline-flex"
 									>
 										<!-- <span>{$t('rooms.page.detailsCta')}</span> -->
-										<ArrowRight class="h-4 w-4" aria-hidden="true" />
+										<ArrowRight class="h-4 w-4" aria-hidden="true" strokeWidth={1.25} />
 									</div>
 
 									<!-- Price pill -->
@@ -739,7 +938,7 @@
 					</div>
 
 					<div class="mt-2 flex items-center gap-2 text-sm font-medium text-slate-500 sm:mt-10">
-						<BadgeCheck class="h-4 w-4 text-brand" aria-hidden="true" />
+						<BadgeCheck class="h-4 w-4 text-brand" aria-hidden="true" strokeWidth={1.25} />
 						{$t('trust.verified')}
 					</div>
 				</div>
@@ -778,7 +977,7 @@
 
 						<div class="mt-3 flex items-center gap-1 text-amber-500">
 							{#each trustStars as _}
-								<Star class="h-4 w-4 fill-current" aria-hidden="true" />
+								<Star class="h-4 w-4 fill-current" aria-hidden="true" strokeWidth={1.25} />
 							{/each}
 						</div>
 
@@ -827,7 +1026,7 @@
 
 							<div class="flex items-center gap-1 text-amber-500">
 								{#each trustStars as _}
-									<Star class="h-4 w-4 fill-current" aria-hidden="true" />
+									<Star class="h-4 w-4 fill-current" aria-hidden="true" strokeWidth={1.25} />
 								{/each}
 							</div>
 
@@ -876,7 +1075,7 @@
 					>
 						<Home
 							class="h-4 w-4 text-slate-500 transition-colors group-hover:text-slate-800"
-							aria-hidden="true"
+							aria-hidden="true" strokeWidth={1.25}
 						/>
 						<span
 							class="text-slate-500 transition-colors group-hover:text-slate-800 group-hover:underline"
@@ -903,7 +1102,7 @@
 					>
 						<Building2
 							class="h-4 w-4 text-slate-500 transition-colors group-hover:text-slate-800"
-							aria-hidden="true"
+							aria-hidden="true" strokeWidth={1.25}
 						/>
 						<span
 							class="text-slate-500 transition-colors group-hover:text-slate-800 group-hover:underline"
@@ -928,7 +1127,7 @@
 			<section class="py-2 lg:py-8">
 				<div class="flex items-start gap-4">
 					<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-						<Sun class="h-5 w-5" aria-hidden="true" />
+						<Sun class="h-5 w-5" aria-hidden="true" strokeWidth={1.25} />
 					</div>
 					<div>
 						<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
@@ -952,7 +1151,7 @@
 						onclick={() => scrollGallery('prev')}
 						aria-label={$t('room.detail.gallery.prev')}
 					>
-						<ChevronLeft class="h-5 w-5" />
+						<ChevronLeft class="h-5 w-5" strokeWidth={1.25} />
 					</button>
 					<button
 						type="button"
@@ -960,7 +1159,7 @@
 						onclick={() => scrollGallery('next')}
 						aria-label={$t('room.detail.gallery.next')}
 					>
-						<ChevronRight class="h-5 w-5" />
+						<ChevronRight class="h-5 w-5" strokeWidth={1.25} />
 					</button>
 				</div>
 
@@ -1031,7 +1230,7 @@
 							onclick={showPrevGalleryImage}
 							aria-label={$t('room.detail.gallery.prev')}
 						>
-							<ChevronLeft class="h-5 w-5" />
+							<ChevronLeft class="h-5 w-5" strokeWidth={1.25} />
 						</button>
 
 						<button
@@ -1040,7 +1239,7 @@
 							onclick={showNextGalleryImage}
 							aria-label={$t('room.detail.gallery.next')}
 						>
-							<ChevronRight class="h-5 w-5" />
+							<ChevronRight class="h-5 w-5" strokeWidth={1.25} />
 						</button>
 
 						<div class="overflow-hidden rounded-3xl bg-white">
@@ -1100,7 +1299,7 @@
 								<span
 									class="mt-0.5 grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand/15 text-brand"
 								>
-									<BusFront class="h-5 w-5" aria-hidden="true" />
+									<BusFront class="h-5 w-5" aria-hidden="true" strokeWidth={1.25} />
 								</span>
 								<div>
 									<p class="text-sm font-semibold text-slate-900">
@@ -1115,7 +1314,7 @@
 								<span
 									class="mt-0.5 grid h-12 w-12 shrink-0 place-items-center rounded-full bg-brand/10 text-brand"
 								>
-									<Sparkles class="h-6 w-6" aria-hidden="true" />
+									<Sparkles class="h-6 w-6" aria-hidden="true" strokeWidth={1.25} />
 								</span>
 								<div>
 									<p class="text-sm font-semibold text-slate-900">
@@ -1130,7 +1329,7 @@
 								<span
 									class="mt-0.5 grid h-12 w-12 shrink-0 place-items-center rounded-full bg-brand/10 text-brand"
 								>
-									<CalendarDays class="h-6 w-6" aria-hidden="true" />
+									<CalendarDays class="h-6 w-6" aria-hidden="true" strokeWidth={1.25} />
 								</span>
 								<div>
 									<p class="text-sm font-semibold text-slate-900">
@@ -1150,7 +1349,7 @@
 								target="_blank"
 								rel="noreferrer"
 							>
-								<Info class="h-4 w-4" aria-hidden="true" />
+								<Info class="h-4 w-4" aria-hidden="true" strokeWidth={1.25} />
 								{$t('guestcard.cta.moreInfo')}
 							</a>
 						</div>
@@ -1170,11 +1369,12 @@
 			<section class="rounded-3xl px-0 py-0 sm:px-10 sm:py-14">
 				<div class="flex items-center gap-4">
 					<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-						<Sparkles class="h-5 w-5" aria-hidden="true" />
+						<Sparkles class="h-5 w-5" aria-hidden="true" strokeWidth={1.25} />
 					</div>
 					<div>
 						<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
 							{$t('home.amenities.kicker')}
+
 						</p>
 						<h2 class="mt-3 text-4xl font-serif font-medium leading-[0.95] text-slate-900">
 							{$t('home.amenities.title')}
