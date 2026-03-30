@@ -4,6 +4,7 @@
 	import { asset, resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import SeoHead from '$lib/components/SeoHead.svelte';
+	import { scrollPageToElement } from '$lib/scroll';
 	import {
 		activityFilters,
 		experienceEvents as events,
@@ -216,12 +217,11 @@
 
 	function scrollToSection(id: string, behavior: ScrollBehavior = 'smooth') {
 		const scrollNow = () => {
-			const el = document.getElementById(id);
-			if (!el) return false;
 			const topOffset = window.innerWidth < 1024 ? 92 : 28;
-			const y = Math.max(0, el.getBoundingClientRect().top + window.scrollY - topOffset);
-			window.scrollTo({ top: y, behavior });
-			return true;
+			return scrollPageToElement(id, {
+				behavior,
+				offset: -topOffset,
+			});
 		};
 
 		if (scrollNow()) return true;

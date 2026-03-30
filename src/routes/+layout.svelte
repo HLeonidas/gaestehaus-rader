@@ -3,8 +3,10 @@
 	import { asset, resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import { lang, setLang, t } from '$lib/i18n';
+	import { getLenisInstance, setLenisInstance } from '$lib/scroll';
 	import { trackEvent, trackPageview } from '$lib/analytics/plausible';
 	import { MessageCircle } from 'lucide-svelte';
+	import Lenis from 'lenis';
 	import { onMount } from 'svelte';
 	import '../app.css';
 	import { afterNavigate } from '$app/navigation';
@@ -43,11 +45,58 @@
 	let headerHidden = $state(false);
 
 	onMount(() => {
+		let lenis: Lenis | null = null;
+		let lenisRafId = 0;
 		let lastScrollY = window.scrollY;
 		const scrollDeltaThreshold = 8;
 		const topRevealThreshold = 20;
+		const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 		const isMobileViewport = () => window.matchMedia('(max-width: 1023px)').matches;
+		const lenisEasing = (value: number) => Math.min(1, 1.001 - Math.pow(2, -10 * value));
+
+		const stopLenis = () => {
+			if (lenisRafId) {
+				window.cancelAnimationFrame(lenisRafId);
+				lenisRafId = 0;
+			}
+
+			if (!lenis) return;
+
+			lenis.destroy();
+			lenis = null;
+			setLenisInstance(null);
+		};
+
+		const startLenis = () => {
+			if (reducedMotionQuery.matches || lenis) return;
+
+			lenis = new Lenis({
+				smoothWheel: true,
+				syncTouch: false,
+				duration: 1,
+				easing: lenisEasing,
+				anchors: true,
+				stopInertiaOnNavigate: true,
+			});
+			setLenisInstance(lenis);
+
+			const onAnimationFrame = (time: number) => {
+				lenis?.raf(time);
+				lenisRafId = window.requestAnimationFrame(onAnimationFrame);
+			};
+
+			lenisRafId = window.requestAnimationFrame(onAnimationFrame);
+		};
+
+		const syncLenis = () => {
+			if (reducedMotionQuery.matches) {
+				stopLenis();
+				return;
+			}
+
+			startLenis();
+		};
 
 		const onScroll = () => {
 			const currentScrollY = window.scrollY;
@@ -78,19 +127,36 @@
 			if (!isMobileViewport()) {
 				headerHidden = false;
 			}
+
+			lenis?.resize();
 		};
+
+		const onReducedMotionChange = () => {
+			syncLenis();
+		};
+
+		syncLenis();
 
 		window.addEventListener('scroll', onScroll, { passive: true });
 		window.addEventListener('resize', onResize);
+		reducedMotionQuery.addEventListener('change', onReducedMotionChange);
 
 		return () => {
 			window.removeEventListener('scroll', onScroll);
 			window.removeEventListener('resize', onResize);
+			reducedMotionQuery.removeEventListener('change', onReducedMotionChange);
+			stopLenis();
 		};
 	});
 
 	afterNavigate(({ to }) => {
 		trackPageview(to?.url.href ?? page.url.href);
+
+		if (typeof window !== 'undefined') {
+			window.requestAnimationFrame(() => {
+				getLenisInstance()?.resize();
+			});
+		}
 	});
 </script>
 
