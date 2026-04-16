@@ -19,7 +19,7 @@ export type Accommodation = {
 		guests: Localized<string>;
 	};
 	amenities: string[];
-	floorplanImage: string;
+	floorplanImage?: string;
 	pricePerNightBase: number;
 	priceMatrix: Array<{
 		season: Localized<string>;

@@ -51,10 +51,41 @@
 		parking: SquareParking,
 	} as const;
 
-	const galleryImages = $derived.by(() => [
-		accommodation.images.main,
-		...(accommodation.images.gallery ?? []),
-	]);
+	const roomImageAlt = $derived.by(() => `${accommodation.title} – ${accommodation.subtitle[$lang]}`);
+	const floorplanAlt = $derived.by(
+		() => `${$t('room.detail.sections.floorplan')} – ${accommodation.title}`
+	);
+
+	type GalleryItem = {
+		src: string;
+		alt: string;
+		kind: 'photo' | 'floorplan';
+	};
+
+	const galleryItems = $derived.by<GalleryItem[]>(() => {
+		const items: GalleryItem[] = [
+			{
+				src: accommodation.images.main,
+				alt: roomImageAlt,
+				kind: 'photo',
+			},
+			...(accommodation.images.gallery ?? []).map((src) => ({
+				src,
+				alt: roomImageAlt,
+				kind: 'photo' as const,
+			})),
+		];
+
+		if (accommodation.floorplanImage) {
+			items.push({
+				src: accommodation.floorplanImage,
+				alt: floorplanAlt,
+				kind: 'floorplan',
+			});
+		}
+
+		return items;
+	});
 	const geoCoordinates = {
 		'@type': 'GeoCoordinates',
 		latitude: 46.688407,
@@ -88,12 +119,18 @@
 	};
 	const isIsoDate = (value: string | undefined) => Boolean(value?.match(/^\d{4}-\d{2}-\d{2}$/));
 	const buildVacationImages = (paths: string[]) => {
-		const allPaths = [...paths, ...fallbackVacationImagePaths];
-		const absoluteImages = Array.from(
-			new Set(allPaths.map((path) => new URL(withAsset(path), siteUrl).toString()))
+		const explicitImages = Array.from(
+			new Set(paths.map((path) => new URL(withAsset(path), siteUrl).toString()))
 		);
+		const fallbackImages = Array.from(
+			new Set(fallbackVacationImagePaths.map((path) => new URL(withAsset(path), siteUrl).toString()))
+		).filter((path) => !explicitImages.includes(path));
+		const absoluteImages = [...explicitImages];
 		const minImages = 8;
-		if (absoluteImages.length >= minImages) return absoluteImages.slice(0, minImages);
+		for (const fallbackImage of fallbackImages) {
+			if (absoluteImages.length >= minImages) break;
+			absoluteImages.push(fallbackImage);
+		}
 		while (absoluteImages.length < minImages && absoluteImages.length > 0) {
 			absoluteImages.push(absoluteImages[absoluteImages.length - 1]);
 		}
@@ -139,10 +176,6 @@
 	const amenityLabels = $derived.by(() =>
 		accommodation.amenities.map((amenity) => $t(`amenity.${amenity}`))
 	);
-	const roomImageAlt = $derived.by(() => `${accommodation.title} – ${accommodation.subtitle[$lang]}`);
-	const floorplanAlt = $derived.by(
-		() => `${$t('room.detail.sections.floorplan')} – ${accommodation.title}`
-	);
 	const roomJsonLd = $derived.by(() =>
 		JSON.stringify((() => {
 			const maxGuests = parseGuestCapacity(accommodation.attributes.guests[$lang]);
@@ -158,7 +191,7 @@
 				mainEntityOfPage: roomUrl,
 				identifier: accommodation.slug,
 				additionalType: 'Apartment',
-				image: buildVacationImages([accommodation.images.main, ...(accommodation.images.gallery ?? [])]),
+				image: buildVacationImages(galleryItems.map((item) => item.src)),
 				geo: geoCoordinates,
 				containsPlace: {
 					'@type': 'Accommodation',
@@ -199,8 +232,10 @@
 		})())
 	);
 
+	const galleryPreviewItems = $derived.by(() => galleryItems.slice(0, 3));
+
 	// helper for "+X Bilder" overlay
-	const galleryCount = $derived.by(() => accommodation?.images?.gallery?.length ?? 0);
+	const galleryCount = $derived.by(() => Math.max(0, galleryItems.length - 1));
 	const overlayMore = $derived.by(() => Math.max(0, galleryCount - 2));
 
 	// reviews carousel UI-only
@@ -220,9 +255,8 @@
 	let galleryOpen = $state(false);
 	let galleryIndex = $state(0);
 	const canGalleryPrev = $derived.by(() => galleryIndex > 0);
-	const canGalleryNext = $derived.by(() => galleryIndex < galleryImages.length - 1);
+	const canGalleryNext = $derived.by(() => galleryIndex < galleryItems.length - 1);
 	let shareStatus = $state<'idle' | 'copied' | 'error'>('idle');
-	let floorplanOpen = $state(false);
 	let priceSectionEl: HTMLElement | null = null;
 	let priceSectionTracked = false;
 	let mainBookingCtaEl: HTMLAnchorElement | null = null;
@@ -237,14 +271,6 @@
 
 	const closeGallery = () => {
 		galleryOpen = false;
-	};
-
-	const openFloorplan = () => {
-		floorplanOpen = true;
-	};
-
-	const closeFloorplan = () => {
-		floorplanOpen = false;
 	};
 
 	onMount(() => {
@@ -351,26 +377,36 @@
 					onclick={() => openGallery(0)}
 				>
 					<img
-						src={withAsset(accommodation.images.main)}
-						alt={roomImageAlt}
-						class="h-[260px] w-full object-cover transition duration-700 group-hover:scale-[1.02] sm:h-[360px] lg:h-[480px]"
+						src={withAsset((galleryPreviewItems[0] ?? galleryItems[0]).src)}
+						alt={(galleryPreviewItems[0] ?? galleryItems[0]).alt}
+						class={`h-[260px] w-full transition duration-700 group-hover:scale-[1.02] sm:h-[360px] lg:h-[480px] ${(galleryPreviewItems[0] ?? galleryItems[0]).kind === 'floorplan' ? 'object-contain bg-white p-4 sm:p-6' : 'object-cover'}`}
 						loading="lazy"
 					/>
+					{#if (galleryPreviewItems[0] ?? galleryItems[0]).kind === 'floorplan'}
+						<span class="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-900 shadow-sm">
+							{$t('room.detail.gallery.floorplanBadge')}
+						</span>
+					{/if}
 				</button>
 
 				<!-- Right stack -->
 				<div class="grid gap-4 grid-cols-2 lg:grid-cols-1">
 					<button
 						type="button"
-						class="overflow-hidden rounded-3xl transition hover:opacity-90"
+						class="relative overflow-hidden rounded-3xl transition hover:opacity-90"
 						onclick={() => openGallery(1)}
 					>
 						<img
-							src={withAsset(accommodation.images.gallery?.[0] ?? accommodation.images.main)}
-							alt={roomImageAlt}
-							class="h-[120px] w-full object-cover sm:h-[160px] lg:h-[230px]"
+							src={withAsset((galleryPreviewItems[1] ?? galleryItems[0]).src)}
+							alt={(galleryPreviewItems[1] ?? galleryItems[0]).alt}
+							class={`h-[120px] w-full sm:h-[160px] lg:h-[230px] ${(galleryPreviewItems[1] ?? galleryItems[0]).kind === 'floorplan' ? 'object-contain bg-white p-3' : 'object-cover'}`}
 							loading="lazy"
 						/>
+						{#if (galleryPreviewItems[1] ?? galleryItems[0]).kind === 'floorplan'}
+							<span class="pointer-events-none absolute left-3 top-3 rounded-full bg-white/95 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-900 shadow-sm">
+								{$t('room.detail.gallery.floorplanBadge')}
+							</span>
+						{/if}
 					</button>
 
 					<button
@@ -379,11 +415,16 @@
 						onclick={() => openGallery(2)}
 					>
 						<img
-							src={withAsset(accommodation.images.gallery?.[1] ?? accommodation.images.main)}
-							alt={roomImageAlt}
-							class="h-[120px] w-full object-cover sm:h-[160px] lg:h-[230px]"
+							src={withAsset((galleryPreviewItems[2] ?? galleryItems[0]).src)}
+							alt={(galleryPreviewItems[2] ?? galleryItems[0]).alt}
+							class={`h-[120px] w-full sm:h-[160px] lg:h-[230px] ${(galleryPreviewItems[2] ?? galleryItems[0]).kind === 'floorplan' ? 'object-contain bg-white p-3' : 'object-cover'}`}
 							loading="lazy"
 						/>
+						{#if (galleryPreviewItems[2] ?? galleryItems[0]).kind === 'floorplan'}
+							<span class="pointer-events-none absolute left-3 top-3 rounded-full bg-white/95 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-900 shadow-sm">
+								{$t('room.detail.gallery.floorplanBadge')}
+							</span>
+						{/if}
 
 						{#if overlayMore > 0}
 							<div class="absolute inset-0 bg-black/35"></div>
@@ -467,23 +508,6 @@
 									</div>
 								{/if}
 							{/each}
-						</div>
-					</section>
-
-					<!-- Floorplan -->
-					<section>
-						<h2 class="text-2xl font-serif text-slate-900">{$t('room.detail.sections.floorplan')}</h2>
-						<div
-							class="mt-5 overflow-hidden rounded-3xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6"
-						>
-							<button type="button" class="w-full" onclick={openFloorplan}>
-								<img
-									src={withAsset(accommodation.floorplanImage)}
-									alt={floorplanAlt}
-									class="h-72 w-full object-contain sm:h-80"
-									loading="lazy"
-								/>
-							</button>
 						</div>
 					</section>
 
@@ -781,11 +805,16 @@
 
 			<div class="overflow-hidden rounded-3xl bg-white shadow-xl">
 				<img
-					src={withAsset(galleryImages[galleryIndex])}
-					alt={roomImageAlt}
-					class="h-[60vh] max-h-[520px] w-full object-contain bg-white sm:object-cover"
+					src={withAsset(galleryItems[galleryIndex].src)}
+					alt={galleryItems[galleryIndex].alt}
+					class={`h-[60vh] max-h-[520px] w-full bg-white ${galleryItems[galleryIndex].kind === 'floorplan' ? 'object-contain' : 'object-contain sm:object-cover'}`}
 				/>
 			</div>
+			{#if galleryItems[galleryIndex].kind === 'floorplan'}
+				<p class="mt-3 text-center text-sm font-semibold text-white">
+					{$t('room.detail.gallery.floorplanCaption')}
+				</p>
+			{/if}
 
 			<div class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 				<button
@@ -798,19 +827,24 @@
 					‹ {$t('room.detail.gallery.prev')}
 				</button>
 				<div class="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0">
-					{#each galleryImages as img, i}
+					{#each galleryItems as item, i}
 						<button
 							type="button"
-							class={`h-12 w-16 overflow-hidden rounded-xl border ${
+							class={`relative h-12 w-16 overflow-hidden rounded-xl border ${
 								i === galleryIndex ? 'border-brand' : 'border-transparent'
 							}`}
 							onclick={() => (galleryIndex = i)}
 						>
 							<img
-								src={withAsset(img)}
-								alt={roomImageAlt}
-								class="h-full w-full object-contain bg-white sm:object-cover"
+								src={withAsset(item.src)}
+								alt={item.alt}
+								class={`h-full w-full bg-white ${item.kind === 'floorplan' ? 'object-contain p-1' : 'object-contain sm:object-cover'}`}
 							/>
+							{#if item.kind === 'floorplan'}
+								<span class="absolute inset-x-1 bottom-1 rounded bg-white/95 px-1 py-0.5 text-[8px] font-semibold uppercase tracking-[0.08em] text-slate-900">
+									{$t('room.detail.gallery.floorplanBadge')}
+								</span>
+							{/if}
 						</button>
 					{/each}
 				</div>
@@ -819,7 +853,7 @@
 					class={`rounded-full bg-white/90 px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm ${
 						!canGalleryNext ? 'opacity-40 pointer-events-none' : ''
 					}`}
-					onclick={() => (galleryIndex = Math.min(galleryImages.length - 1, galleryIndex + 1))}
+					onclick={() => (galleryIndex = Math.min(galleryItems.length - 1, galleryIndex + 1))}
 				>
 					{$t('room.detail.gallery.next')} >
 				</button>
@@ -828,30 +862,6 @@
 	</div>
 {/if}
 
-{#if floorplanOpen}
-	<div
-		class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 sm:p-6"
-		role="dialog"
-		aria-modal="true"
-	>
-		<div class="relative w-full max-w-5xl">
-			<button
-				type="button"
-				class="absolute right-3 top-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm sm:-top-10 sm:right-0"
-				onclick={closeFloorplan}
-				aria-label="{$t('room.detail.gallery.close')}"
-			>{$t('room.detail.gallery.close')}</button>
-
-			<div class="overflow-hidden rounded-3xl bg-white shadow-xl">
-				<img
-					src={withAsset(accommodation.floorplanImage)}
-					alt={floorplanAlt}
-					class="h-[70vh] max-h-[560px] w-full object-contain bg-white"
-				/>
-			</div>
-		</div>
-	</div>
-{/if}
 
 <style>
 	.booking-card {
