@@ -1,0 +1,86 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Derive Pages build environment
+        shell: bash
+        env:
+          PAGES_BASE_PATH_OVERRIDE: ${{ vars.PAGES_BASE_PATH }}
+        run: |
+          repo_name="${GITHUB_REPOSITORY#*/}"
+          owner_lower="$(printf '%s' "${GITHUB_REPOSITORY_OWNER}" | tr '[:upper:]' '[:lower:]')"
+          repo_name_lower="$(printf '%s' "${repo_name}" | tr '[:upper:]' '[:lower:]')"
+
+          if [ -n "${PAGES_BASE_PATH_OVERRIDE:-}" ]; then
+            base_path="${PAGES_BASE_PATH_OVERRIDE}"
+          elif [ "${repo_name_lower}" = "${owner_lower}.github.io" ]; then
+            base_path=""
+          else
+            base_path="/${repo_name}"
+          fi
+
+          if [ -n "${base_path}" ]; then
+            site_origin="https://${owner_lower}.github.io${base_path}"
+          else
+            site_origin="https://${owner_lower}.github.io"
+          fi
+
+          echo "BASE_PATH=${base_path}" >> "${GITHUB_ENV}"
+          echo "PUBLIC_SITE_ORIGIN=${site_origin}" >> "${GITHUB_ENV}"
+          echo "PUBLIC_IS_PREVIEW=true" >> "${GITHUB_ENV}"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build
+
+      - name: Add .nojekyll marker
+        run: touch build/.nojekyll
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

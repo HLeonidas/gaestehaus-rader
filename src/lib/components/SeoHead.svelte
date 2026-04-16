@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { env } from '$env/dynamic/public';
 	import { asset } from '$app/paths';
 	import { page } from '$app/state';
 	import { t } from '$lib/i18n';
@@ -20,6 +21,7 @@
 
 	const defaultTitleKey = 'seo.default.title';
 	const defaultDescriptionKey = 'seo.default.description';
+	const isPreview = env.PUBLIC_IS_PREVIEW === 'true';
 
 	const canonicalUrl = $derived.by(() => new URL(page.url.pathname, SITE_ORIGIN).toString());
 
@@ -60,4 +62,7 @@
 	<meta name="twitter:title" content={resolvedTitle} />
 	<meta name="twitter:description" content={resolvedDescription} />
 	<meta name="twitter:image" content={resolvedImageUrl} />
+	{#if isPreview}
+		<meta name="robots" content="noindex, nofollow" />
+	{/if}
 </svelte:head>
