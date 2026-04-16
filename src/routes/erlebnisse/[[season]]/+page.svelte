@@ -11,6 +11,7 @@
 		experienceSeasonContent as content,
 		experienceSectionLinks as sectionLinks,
 		experienceSectionTrackingLinks as sectionTrackingLinks,
+		experienceFestivalSection,
 		type ActivityFilterKey,
 		type ExperienceEvent,
 		type ExperienceLinkType,
@@ -189,6 +190,7 @@
 					altKey: 'experiences.guestcard.imageAlt.summer',
 				}
 	);
+	const festivalSection = experienceFestivalSection;
 
 	const sectionIconById: Record<string, any> = {
 		aktivitaeten: Mountain,
@@ -1098,195 +1100,68 @@
 				<section class="anchor-target bg-[#fbfaf7] py-14 sm:py-16" id="traditionelle-feste">
 					<div class="mx-auto w-full max-w-6xl px-4 sm:px-6">
 						<div class="mx-auto max-w-3xl text-center">
-							<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">Lokale Empfehlung</p>
+							<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
+								{localize(festivalSection.kicker)}
+							</p>
 							<h2 class="mt-3 font-serif text-4xl leading-[0.95] text-slate-900 sm:text-5xl">
-								Traditionelle Feste im Gitschtal
+								{localize(festivalSection.title)}
 							</h2>
 							<div class="mx-auto mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
 							<p class="mt-4 text-sm leading-relaxed text-slate-600 sm:text-base">
-								Erleben Sie, was vor Ort wirklich gelebt wird: echte Begegnungen, regionale Küche und
-								gelebtes Brauchtum im Jahreslauf.
+								{localize(festivalSection.intro)}
+							</p>
+							<p class="mt-4 inline-flex rounded-full border border-brand/15 bg-white/80 px-4 py-2 text-xs font-medium text-slate-600 shadow-sm backdrop-blur">
+								{localize(festivalSection.note)}
 							</p>
 						</div>
 
 						<div class="mt-10 grid gap-4 md:grid-cols-3">
-							<article
-								use:reveal
-								class="reveal group relative overflow-hidden rounded-3xl border border-slate-200 bg-white/80 p-6 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg"
-								style="--reveal-delay: 0ms;"
-							>
-								<div
-									class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+							{#each festivalSection.cards as card, index}
+								<article
+									use:reveal
+									class="reveal group relative overflow-hidden rounded-3xl border border-slate-200 bg-white/80 p-6 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg"
+									style={`--reveal-delay: ${index * 90}ms;`}
 								>
-									<div class="absolute -left-24 -top-24 h-48 w-48 rounded-full bg-brand/10 blur-2xl"></div>
 									<div
-										class="absolute -right-20 -bottom-20 h-48 w-48 rounded-full bg-amber-200/30 blur-2xl"
-									></div>
-								</div>
-
-								<p class="relative text-[11px] font-semibold uppercase tracking-[0.28em] text-brand">
-									Dorffeste
-								</p>
-
-								<div class="relative mt-3 flex items-start gap-3">
-									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-brand/10 text-brand">
-										<span class="text-lg" aria-hidden="true">🎉</span>
-									</div>
-									<div class="min-w-0">
-										<h3 class="text-xl font-semibold leading-tight text-slate-900">Dorffeste</h3>
-										<p class="mt-2 text-sm leading-relaxed text-slate-600">
-											Kleine Feste mit Musik, Begegnungen und echter Dorfatmosphäre - ideal, um das Gitschtal
-											abseits klassischer Ausflüge kennenzulernen.
-										</p>
-									</div>
-								</div>
-
-								<ul class="relative mt-5 space-y-2 text-sm text-slate-700">
-									<li class="flex items-start gap-2">
-										<span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand"></span>
-										Kuhfladentombola (Weißbriach) - Kult & Schmäh
-									</li>
-									<li class="flex items-start gap-2">
-										<span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand"></span>
-										Feuerwehrfest / Zeltfest - Musik & Stimmung
-									</li>
-									<li class="flex items-start gap-2">
-										<span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand"></span>
-										Frühschoppen - gemütlich, regional, echt
-									</li>
-								</ul>
-
-								<div
-									class="relative mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-800"
-								>
-									Tipp: ideal im Sommer
-									<span
-										class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600"
+										class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
 									>
-										Juni-August
-									</span>
-								</div>
-							</article>
-
-							<article
-								use:reveal
-								class="reveal group relative overflow-hidden rounded-3xl border border-slate-200 bg-white/80 p-6 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg"
-								style="--reveal-delay: 90ms;"
-							>
-								<div
-									class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-								>
-									<div
-										class="absolute -left-24 -top-24 h-48 w-48 rounded-full bg-emerald-200/30 blur-2xl"
-									></div>
-									<div
-										class="absolute -right-20 -bottom-20 h-48 w-48 rounded-full bg-brand/10 blur-2xl"
-									></div>
-								</div>
-
-								<p class="relative text-[11px] font-semibold uppercase tracking-[0.28em] text-brand">
-									Kulinarische Feste
-								</p>
-
-								<div class="relative mt-3 flex items-start gap-3">
-									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-brand/10 text-brand">
-										<span class="text-lg" aria-hidden="true">🥬</span>
+										<div class="absolute -left-24 -top-24 h-48 w-48 rounded-full bg-brand/10 blur-2xl"></div>
+										<div class={`absolute -right-20 -bottom-20 h-48 w-48 rounded-full blur-2xl ${card.accentClass}`}></div>
 									</div>
-									<div class="min-w-0">
-										<h3 class="text-xl font-semibold leading-tight text-slate-900">Kulinarische Feste</h3>
-										<p class="mt-2 text-sm leading-relaxed text-slate-600">
-											Regionale Spezialitäten, Produzenten aus der Umgebung und saisonale Genussmomente - vom
-											Markt bis zur Festtafel.
-										</p>
+
+									<p class="relative text-[11px] font-semibold uppercase tracking-[0.28em] text-brand">
+										{localize(card.kicker)}
+									</p>
+
+									<div class="relative mt-3 flex items-start gap-3">
+										<div class="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-brand/10 text-brand">
+											<span class="text-lg" aria-hidden="true">{card.icon}</span>
+										</div>
+										<div class="min-w-0">
+											<h3 class="text-xl font-semibold leading-tight text-slate-900">{localize(card.title)}</h3>
+											<p class="mt-2 text-sm leading-relaxed text-slate-600">
+												{localize(card.body)}
+											</p>
+										</div>
 									</div>
-								</div>
 
-								<ul class="relative mt-5 space-y-2 text-sm text-slate-700">
-									<li class="flex items-start gap-2">
-										<span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand"></span>
-										Krautfest (Weißbriach) - regional & herzhaft
-									</li>
-									<li class="flex items-start gap-2">
-										<span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand"></span>
-										Bauern- & Handwerksstände - echte Produkte
-									</li>
-									<li class="flex items-start gap-2">
-										<span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand"></span>
-										Herbstgenuss - perfekt für Wanderer & Genießer
-									</li>
-								</ul>
+									<ul class="relative mt-5 space-y-2 text-sm text-slate-700">
+										{#each card.highlights as highlight}
+											<li class="flex items-start gap-2">
+												<span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand"></span>
+												{localize(highlight)}
+											</li>
+										{/each}
+									</ul>
 
-								<div
-									class="relative mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-800"
-								>
-									Tipp: ideal im Herbst
-									<span
-										class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600"
-									>
-										Sep-Okt
-									</span>
-								</div>
-							</article>
-
-							<article
-								use:reveal
-								class="reveal group relative overflow-hidden rounded-3xl border border-slate-200 bg-white/80 p-6 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg"
-								style="--reveal-delay: 180ms;"
-							>
-								<div
-									class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-								>
-									<div
-										class="absolute -left-24 -top-24 h-48 w-48 rounded-full bg-indigo-200/25 blur-2xl"
-									></div>
-									<div
-										class="absolute -right-20 -bottom-20 h-48 w-48 rounded-full bg-brand/10 blur-2xl"
-									></div>
-								</div>
-
-								<p class="relative text-[11px] font-semibold uppercase tracking-[0.28em] text-brand">
-									Tradition & Brauchtum
-								</p>
-
-								<div class="relative mt-3 flex items-start gap-3">
-									<div class="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-brand/10 text-brand">
-										<span class="text-lg" aria-hidden="true">🎺</span>
+									<div class="relative mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-800">
+										{localize(card.tipLabel)}
+										<span class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600">
+											{localize(card.seasonBadge)}
+										</span>
 									</div>
-									<div class="min-w-0">
-										<h3 class="text-xl font-semibold leading-tight text-slate-900">Tradition & Brauchtum</h3>
-										<p class="mt-2 text-sm leading-relaxed text-slate-600">
-											Alte Bräuche, Musik und gelebte Kultur machen den Aufenthalt besonders - und geben einen
-											echten Einblick in die Region.
-										</p>
-									</div>
-								</div>
-
-								<ul class="relative mt-5 space-y-2 text-sm text-slate-700">
-									<li class="flex items-start gap-2">
-										<span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand"></span>
-										Kirchtag (Weißbriach) - Tracht, Musik & Tanz
-									</li>
-									<li class="flex items-start gap-2">
-										<span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand"></span>
-										Alm- & Almkirchtage - klein, urig, wunderschön
-									</li>
-									<li class="flex items-start gap-2">
-										<span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand"></span>
-										Advent im Tal - ruhig, stimmungsvoll, regional
-									</li>
-								</ul>
-
-								<div
-									class="relative mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-800"
-								>
-									Tipp: das ganze Jahr
-									<span
-										class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600"
-									>
-										Saisonabhängig
-									</span>
-								</div>
-							</article>
+								</article>
+							{/each}
 						</div>
 					</div>
 				</section>
