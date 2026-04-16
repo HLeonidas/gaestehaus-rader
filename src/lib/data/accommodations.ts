@@ -2,6 +2,26 @@ import type { Lang } from '$lib/i18n';
 
 type Localized<T> = Record<Lang, T>;
 
+export type AccommodationImageCategory =
+	| 'living'
+	| 'sleeping'
+	| 'kitchen'
+	| 'dining'
+	| 'balcony'
+	| 'view'
+	| 'bathroom'
+	| 'wc'
+	| 'shower'
+	| 'sink'
+	| 'wellness'
+	| 'other';
+
+export type AccommodationGalleryImage = {
+	src: string;
+	category: AccommodationImageCategory;
+	alt: Localized<string>;
+};
+
 export type Accommodation = {
 	key: number;
 	slug: string;
@@ -10,7 +30,7 @@ export type Accommodation = {
 	description: Localized<string[]>;
 	images: {
 		main: string;
-		gallery: string[];
+		gallery: AccommodationGalleryImage[];
 	};
 	attributes: {
 		size: string;
@@ -36,6 +56,32 @@ export type Accommodation = {
 	detailBody: Localized<string>;
 };
 
+const galleryCategorySortOrder: Record<AccommodationImageCategory, number> = {
+	living: 10,
+	sleeping: 20,
+	kitchen: 30,
+	dining: 40,
+	balcony: 50,
+	view: 60,
+	bathroom: 70,
+	wc: 71,
+	shower: 72,
+	sink: 73,
+	wellness: 74,
+	other: 90,
+};
+
+export const getSortedAccommodationGallery = (accommodation: Accommodation) =>
+	(accommodation.images.gallery ?? []).slice().sort((left, right) => {
+		const categoryOrder =
+			galleryCategorySortOrder[left.category] - galleryCategorySortOrder[right.category];
+		if (categoryOrder !== 0) return categoryOrder;
+		return left.src.localeCompare(right.src);
+	});
+
+export const getAccommodationGallerySources = (accommodation: Accommodation) =>
+	getSortedAccommodationGallery(accommodation).map((image) => image.src);
+
 export const accommodations: Accommodation[] = [
 	{
 		key: 3,
@@ -60,11 +106,46 @@ export const accommodations: Accommodation[] = [
 		images: {
 			main: '/images/Nr1/main.jpg',
 			gallery: [
-				'/images/Nr1/dining-room.jpg',
-				'/images/Nr1/living-room.jpg',
-				'/images/Nr1/balcony.jpg',
-				'/images/Nr1/balcony-seating.jpg',
-				'/images/Nr1/bedroom.jpg',
+				{
+					src: '/images/Nr1/living-room.jpg',
+					category: 'living',
+					alt: {
+						de: 'Wohnbereich im Appartement Nº 1',
+						en: 'Living area in Apartment Nº 1',
+					},
+				},
+				{
+					src: '/images/Nr1/bedroom.jpg',
+					category: 'sleeping',
+					alt: {
+						de: 'Schlafbereich im Appartement Nº 1',
+						en: 'Sleeping area in Apartment Nº 1',
+					},
+				},
+				{
+					src: '/images/Nr1/dining-room.jpg',
+					category: 'dining',
+					alt: {
+						de: 'Essbereich im Appartement Nº 1',
+						en: 'Dining area in Apartment Nº 1',
+					},
+				},
+				{
+					src: '/images/Nr1/balcony.jpg',
+					category: 'balcony',
+					alt: {
+						de: 'Balkon im Appartement Nº 1',
+						en: 'Balcony in Apartment Nº 1',
+					},
+				},
+				{
+					src: '/images/Nr1/balcony-seating.jpg',
+					category: 'balcony',
+					alt: {
+						de: 'Sitzplatz am Balkon im Appartement Nº 1',
+						en: 'Balcony seating in Apartment Nº 1',
+					},
+				},
 			],
 		},
 		attributes: {
@@ -172,15 +253,62 @@ export const accommodations: Accommodation[] = [
 		images: {
 			main: '/images/Nr2/nr2-bedroom-double-bright.jpg',
 			gallery: [
-				'/images/Nr2/nr2-bedroom-overview-bright.jpg',
-				'/images/Nr2/nr2-living-room.jpg',
-				'/images/Nr2/nr2-kitchen-living.jpg',
-				'/images/Nr2/nr2-living-dining-bright.jpg',
-				// '/images/Nr2/nr2-entry-hall.jpg',
-				'/images/Haus/weissbriach-dorfblick-winter.jpg',
-				'/images/Nr2/nr2-balcony-seating.jpg',
-				// '/images/Nr2/nr2-balcony.jpg',
-				'/images/Nr2/nr2-bathroom.jpg',
+				{
+					src: '/images/Nr2/nr2-living-room.jpg',
+					category: 'living',
+					alt: {
+						de: 'Wohnbereich im Appartement Nº 2',
+						en: 'Living area in Apartment Nº 2',
+					},
+				},
+				{
+					src: '/images/Nr2/nr2-bedroom-overview-bright.jpg',
+					category: 'sleeping',
+					alt: {
+						de: 'Schlafbereich im Appartement Nº 2',
+						en: 'Sleeping area in Apartment Nº 2',
+					},
+				},
+				{
+					src: '/images/Nr2/nr2-kitchen-living.jpg',
+					category: 'kitchen',
+					alt: {
+						de: 'Küchenbereich im Appartement Nº 2',
+						en: 'Kitchen area in Apartment Nº 2',
+					},
+				},
+				{
+					src: '/images/Nr2/nr2-living-dining-bright.jpg',
+					category: 'dining',
+					alt: {
+						de: 'Wohn- und Essbereich im Appartement Nº 2',
+						en: 'Living and dining area in Apartment Nº 2',
+					},
+				},
+				{
+					src: '/images/Nr2/nr2-balcony-seating.jpg',
+					category: 'balcony',
+					alt: {
+						de: 'Balkon mit Sitzplatz im Appartement Nº 2',
+						en: 'Balcony seating in Apartment Nº 2',
+					},
+				},
+				{
+					src: '/images/Haus/weissbriach-dorfblick-winter.jpg',
+					category: 'view',
+					alt: {
+						de: 'Winterlicher Ausblick bei Appartement Nº 2',
+						en: 'Winter view near Apartment Nº 2',
+					},
+				},
+				{
+					src: '/images/Nr2/nr2-bathroom.jpg',
+					category: 'bathroom',
+					alt: {
+						de: 'Badezimmer im Appartement Nº 2',
+						en: 'Bathroom in Apartment Nº 2',
+					},
+				},
 			],
 		},
 		attributes: {
@@ -288,11 +416,46 @@ export const accommodations: Accommodation[] = [
 		images: {
 			main: '/images/Nr3/main.jpg',
 			gallery: [
-				'/images/Nr3/view.jpeg',
-				'/images/Nr3/kitchen-tools.jpeg',
-				'/images/Nr3/sofa.jpeg',
-				'/images/Nr3/bed.jpeg',
-				'/images/Nr3/shoe-rack.jpeg',
+				{
+					src: '/images/Nr3/sofa.jpeg',
+					category: 'living',
+					alt: {
+						de: 'Wohnbereich im Appartement Nº 3',
+						en: 'Living area in Apartment Nº 3',
+					},
+				},
+				{
+					src: '/images/Nr3/bed.jpeg',
+					category: 'sleeping',
+					alt: {
+						de: 'Schlafbereich im Appartement Nº 3',
+						en: 'Sleeping area in Apartment Nº 3',
+					},
+				},
+				{
+					src: '/images/Nr3/kitchen-tools.jpeg',
+					category: 'kitchen',
+					alt: {
+						de: 'Küchenbereich im Appartement Nº 3',
+						en: 'Kitchen area in Apartment Nº 3',
+					},
+				},
+				{
+					src: '/images/Nr3/view.jpeg',
+					category: 'view',
+					alt: {
+						de: 'Ausblick vom Appartement Nº 3',
+						en: 'View from Apartment Nº 3',
+					},
+				},
+				{
+					src: '/images/Nr3/shoe-rack.jpeg',
+					category: 'other',
+					alt: {
+						de: 'Eingangsbereich im Appartement Nº 3',
+						en: 'Entry area in Apartment Nº 3',
+					},
+				},
 			],
 		},
 		attributes: {
@@ -381,5 +544,3 @@ export const accommodations: Accommodation[] = [
 
 export const accommodationBySlug = (slug: string) =>
 	accommodations.find((accommodation) => accommodation.slug === slug);
-
-

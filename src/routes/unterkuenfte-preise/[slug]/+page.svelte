@@ -2,6 +2,7 @@
 	import { browser } from '$app/environment';
 	import { asset, resolve } from '$app/paths';
 	import { lang, t } from '$lib/i18n';
+	import { getSortedAccommodationGallery } from '$lib/data/accommodations';
 	import { trackEvent } from '$lib/analytics/plausible';
 	import SeoHead from '$lib/components/SeoHead.svelte';
 	import { SITE_ORIGIN } from '$lib/seo';
@@ -52,6 +53,7 @@
 	} as const;
 
 	const roomImageAlt = $derived.by(() => `${accommodation.title} – ${accommodation.subtitle[$lang]}`);
+	const sortedGalleryImages = $derived.by(() => getSortedAccommodationGallery(accommodation));
 	const floorplanAlt = $derived.by(
 		() => `${$t('room.detail.sections.floorplan')} – ${accommodation.title}`
 	);
@@ -63,20 +65,26 @@
 	};
 
 	const galleryItems = $derived.by<GalleryItem[]>(() => {
-		const items: GalleryItem[] = [
-			{
-				src: accommodation.images.main,
-				alt: roomImageAlt,
-				kind: 'photo',
-			},
-			...(accommodation.images.gallery ?? []).map((src) => ({
-				src,
-				alt: roomImageAlt,
-				kind: 'photo' as const,
-			})),
-		];
+		const seen = new Set<string>();
+		const items: GalleryItem[] = [];
 
-		if (accommodation.floorplanImage) {
+		const pushPhoto = (src: string, alt: string) => {
+			if (seen.has(src)) return;
+			seen.add(src);
+			items.push({
+				src,
+				alt,
+				kind: 'photo',
+			});
+		};
+
+		pushPhoto(accommodation.images.main, roomImageAlt);
+
+		for (const image of sortedGalleryImages) {
+			pushPhoto(image.src, image.alt[$lang]);
+		}
+
+		if (accommodation.floorplanImage && !seen.has(accommodation.floorplanImage)) {
 			items.push({
 				src: accommodation.floorplanImage,
 				alt: floorplanAlt,

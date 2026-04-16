@@ -3,7 +3,7 @@
 	import { lang, t } from '$lib/i18n';
 	import { asset, resolve } from '$app/paths';
 	import { browser } from '$app/environment';
-	import { accommodations } from '$lib/data/accommodations';
+	import { accommodations, getAccommodationGallerySources } from '$lib/data/accommodations';
 	import { homeTrustReviews } from '$lib/data/reviews';
 	import { trackEvent } from '$lib/analytics/plausible';
 	import SeoHead from '$lib/components/SeoHead.svelte';
@@ -206,7 +206,7 @@
 				description: room.subtitle[$lang],
 				url: roomUrl,
 				identifier: room.slug,
-				image: buildVacationImages([room.images.main, ...(room.images.gallery ?? [])]),
+				image: buildVacationImages([room.images.main, ...getAccommodationGallerySources(room)]),
 				geo: geoCoordinates,
 				containsPlace: {
 					'@type': 'Accommodation',
