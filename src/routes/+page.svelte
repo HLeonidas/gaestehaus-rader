@@ -348,7 +348,6 @@
 		// Starker erster Eindruck vom Haus, dann direkt den Pavillon als Außen-Highlight zeigen
 		{ base: 'gaestehaus-sommer', altKey: 'home.gallery.imageAlt.sommer' },
 		{ base: 'gaestehaus-pavillon', altKey: 'home.gallery.imageAlt.pavillon' },
-		{ base: 'nr1-living-room', altKey: 'home.gallery.imageAlt.nr1LivingRoom' },
 		{ base: 'nr2-hero', altKey: 'home.gallery.imageAlt.nr2Hero' },
 		{ base: 'nr3-sofa', altKey: 'home.gallery.imageAlt.nr3Sofa' },
 		{ base: 'nr2-living-room', altKey: 'home.gallery.imageAlt.nr2LivingRoom' },
