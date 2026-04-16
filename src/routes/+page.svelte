@@ -345,34 +345,23 @@
 
 	const galleryImageSizes = '(min-width: 640px) 360px, 260px';
 	const destinationImages = [
-		// 2) Ankommen / Haus: das Objekt zeigen
+		// Starker erster Eindruck vom Haus, dann früh in die Apartments hineinführen
 		{ base: 'gaestehaus-sommer', altKey: 'home.gallery.imageAlt.sommer' },
-				// 4) Außenbereich / Garten-Feeling
-		{ base: 'gaestehaus-pavillon', altKey: 'home.gallery.imageAlt.pavillon' },
-				// 3) Wohlfühl-Detail / Innen- oder Detailshot (wenn gastgeber das ist)
-		{ base: 'familie-hueber', altKey: 'home.gallery.imageAlt.view' },
-		// 1) Hero / USP: Ausblick (macht sofort Lust)
-		{ base: 'gaestehaus-balkon-ausblick', altKey: 'home.gallery.imageAlt.balkon' },
-
-		// 5) Aktivität / Feature (locker, menschlich)
-		{ base: 'gaestehaus-tischtennis', altKey: 'home.gallery.imageAlt.tischtennis' },
+		{ base: 'nr1-living-room', altKey: 'home.gallery.imageAlt.nr1LivingRoom' },
 		{ base: 'nr2-hero', altKey: 'home.gallery.imageAlt.nr2Hero' },
+		{ base: 'nr3-sofa', altKey: 'home.gallery.imageAlt.nr3Sofa' },
 		{ base: 'nr2-living-room', altKey: 'home.gallery.imageAlt.nr2LivingRoom' },
+		{ base: 'nr1-bedroom', altKey: 'home.gallery.imageAlt.nr1Bedroom' },
+		{ base: 'nr3-bed', altKey: 'home.gallery.imageAlt.nr3Bed' },
 
-		// 6) Umgebung / Ort (context)
+		// Danach weiter mit Hausgefühl und Umgebung zur Einordnung
+		{ base: 'gaestehaus-balkon-ausblick', altKey: 'home.gallery.imageAlt.balkon' },
+		{ base: 'gaestehaus-pavillon', altKey: 'home.gallery.imageAlt.pavillon' },
+		{ base: 'familie-hueber', altKey: 'home.gallery.imageAlt.view' },
 		{ base: 'weissbriach-kirche', altKey: 'home.gallery.imageAlt.kirche' },
-
-		// 7) Winter-Teaser: einmal „wow“ Winter
 		{ base: 'gaestehaus-winter', altKey: 'home.gallery.imageAlt.winter' },
-
-		// 8) Winter-Atmosphäre (weitere Variation)
 		{ base: 'balkon-ausblick-winter', altKey: 'home.gallery.imageAlt.winterBalkon' },
-		{ base: 'weissbriach-dorfblick-winter', altKey: 'home.gallery.imageAlt.dorfblickWinter' },
-		// { base: 'weissbriach-kirche-winter', altKey: 'home.gallery.imageAlt.kircheWinter' },
-
-		// 9) Optional/zusätzliches Winterbild ans Ende (wenn’s eher „B-Roll“ ist)
 		{ base: 'gaestehaus-winter-ansicht', altKey: 'home.gallery.imageAlt.sliderWinter' },
-
 		{
 			base: 'nassfeld-ski',
 			altKey: 'home.gallery.imageAlt.nassfeldSki',
