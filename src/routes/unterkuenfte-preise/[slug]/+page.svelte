@@ -818,11 +818,6 @@
 					class={`h-[60vh] max-h-[520px] w-full bg-white ${galleryItems[galleryIndex].kind === 'floorplan' ? 'object-contain' : 'object-contain sm:object-cover'}`}
 				/>
 			</div>
-			{#if galleryItems[galleryIndex].kind === 'floorplan'}
-				<p class="mt-3 text-center text-sm font-semibold text-white">
-					{$t('room.detail.gallery.floorplanCaption')}
-				</p>
-			{/if}
 
 			<div class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 				<button
