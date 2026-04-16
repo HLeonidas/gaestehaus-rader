@@ -345,8 +345,9 @@
 
 	const galleryImageSizes = '(min-width: 640px) 360px, 260px';
 	const destinationImages = [
-		// Starker erster Eindruck vom Haus, dann früh in die Apartments hineinführen
+		// Starker erster Eindruck vom Haus, dann direkt den Pavillon als Außen-Highlight zeigen
 		{ base: 'gaestehaus-sommer', altKey: 'home.gallery.imageAlt.sommer' },
+		{ base: 'gaestehaus-pavillon', altKey: 'home.gallery.imageAlt.pavillon' },
 		{ base: 'nr1-living-room', altKey: 'home.gallery.imageAlt.nr1LivingRoom' },
 		{ base: 'nr2-hero', altKey: 'home.gallery.imageAlt.nr2Hero' },
 		{ base: 'nr3-sofa', altKey: 'home.gallery.imageAlt.nr3Sofa' },
@@ -356,7 +357,6 @@
 
 		// Danach weiter mit Hausgefühl und Umgebung zur Einordnung
 		{ base: 'gaestehaus-balkon-ausblick', altKey: 'home.gallery.imageAlt.balkon' },
-		{ base: 'gaestehaus-pavillon', altKey: 'home.gallery.imageAlt.pavillon' },
 		{ base: 'familie-hueber', altKey: 'home.gallery.imageAlt.view' },
 		{ base: 'weissbriach-kirche', altKey: 'home.gallery.imageAlt.kirche' },
 		{ base: 'gaestehaus-winter', altKey: 'home.gallery.imageAlt.winter' },
