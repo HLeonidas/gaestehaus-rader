@@ -27,6 +27,10 @@ export type Accommodation = {
 	slug: string;
 	title: string;
 	subtitle: Localized<string>;
+	seoTitle: Localized<string>;
+	seoDescription: Localized<string>;
+	detailHeading: Localized<string>;
+	detailIntro: Localized<string>;
 	description: Localized<string[]>;
 	images: {
 		main: string;
@@ -91,16 +95,32 @@ export const accommodations: Accommodation[] = [
 			de: 'Helle Ferienwohnung mit Balkon und Morgensonne',
 			en: 'Bright apartment with balcony and morning sun',
 		},
+		seoTitle: {
+			de: 'Ferienwohnung in Weißbriach für 1–3 Gäste mit Balkon | Gästehaus Rader',
+			en: 'Apartment in Weissbriach for 1–3 guests with balcony | Guesthouse Rader',
+		},
+		seoDescription: {
+			de: 'Ruhige Ferienwohnung in Weißbriach im Gitschtal für 1–3 Gäste mit Balkon, Morgensonne und Küche. Ideal für Urlaub nahe Weissensee und Nassfeld – jetzt Aufenthalt anfragen.',
+			en: 'Quiet apartment in Weissbriach in the Gitschtal for 1–3 guests with balcony, morning sun and kitchen. A great base near Lake Weissensee and Nassfeld – enquire now.',
+		},
+		detailHeading: {
+			de: 'Ferienwohnung in Weißbriach für 1–3 Gäste mit Balkon',
+			en: 'Apartment in Weissbriach for 1–3 guests with balcony',
+		},
+		detailIntro: {
+			de: 'Appartement Nº 1 ist eine ruhige Ferienwohnung im Gästehaus Rader in Weißbriach im Gitschtal – ideal für Paare oder kleine Familien, die nahe Weissensee und Nassfeld wohnen und direkt buchen möchten.',
+			en: 'Apartment No. 1 is a quiet holiday apartment at Guesthouse Rader in Weissbriach in the Gitschtal – ideal for couples or small families who want to stay near Lake Weissensee and Nassfeld and book directly.',
+		},
 		description: {
 			de: [
-				'Genießen Sie erholsame Tage in unserem liebevoll eingerichteten Appartement mit Balkon und herrlicher Aussicht.',
-				'Ideal für Paare oder Alleinreisende, die Ruhe suchen und neue Energie tanken möchten.',
-				'Das Appartement verfügt über eine voll ausgestattete Küche mit gemütlicher Sitzecke, ein Badezimmer mit Dusche und WC sowie einen sonnigen Balkon mit Blick nach Osten. Geeignet für 1–3 Personen.',
+				'Die helle Ferienwohnung kombiniert ruhige Lage, Morgensonne und einen privaten Balkon für entspannte Urlaubstage in Weißbriach.',
+				'Sie eignet sich für 1–3 Gäste, die das Gitschtal als entspannte Basis für Ausflüge zum Weissensee, nach Nassfeld oder in die umliegende Bergwelt nutzen möchten.',
+				'Zur Ausstattung gehören eine voll ausgestattete Küche mit Sitzecke, ein Badezimmer mit Dusche und WC sowie ein Ostbalkon mit freundlichem Ausblick.',
 			],
 			en: [
-				'Enjoy relaxing days in our lovingly furnished apartment with balcony and a beautiful view.',
-				'Ideal for couples or solo travelers seeking peace and a chance to recharge.',
-				'The apartment features a fully equipped kitchen with a cozy dining nook, a bathroom with shower and toilet, and a sunny balcony facing east. Suitable for 1-3 guests.',
+				'This bright apartment combines a quiet setting, morning sun and a private balcony for relaxing holidays in Weissbriach.',
+				'It suits 1–3 guests looking for a calm base in the Gitschtal with easy access to Lake Weissensee, Nassfeld and the surrounding mountains.',
+				'Inside you will find a fully equipped kitchen with dining nook, a bathroom with shower and toilet, and an east-facing balcony with a pleasant view.',
 			],
 		},
 		images: {
@@ -226,8 +246,8 @@ export const accommodations: Accommodation[] = [
 			en: '35 m² · 1-3 guests · East',
 		},
 		detailBody: {
-			de: 'Helle Ferienwohnung mit Balkon und Morgensonne - Küche mit Sitzecke - Bad mit Dusche und WC - Balkon mit Blick nach Osten (1-3 Personen).',
-			en: 'Bright apartment with balcony and morning sun - kitchen with dining nook - bathroom with shower and toilet - east-facing balcony (1-3 guests).',
+			de: 'Ruhige Ferienwohnung in Weißbriach im Gitschtal mit Balkon und Morgensonne, Küche mit Sitzecke sowie Bad mit Dusche und WC – ideal für 1–3 Gäste nahe Weissensee und Nassfeld.',
+			en: 'Quiet apartment in Weissbriach in the Gitschtal with balcony, morning sun, kitchen with dining nook and bathroom with shower and toilet – ideal for 1–3 guests near Lake Weissensee and Nassfeld.',
 		},
 	},
 	{
@@ -238,16 +258,32 @@ export const accommodations: Accommodation[] = [
 			de: 'Charmante Dachgeschosswohnung mit Balkon',
 			en: 'Charming top-floor apartment with balcony',
 		},
+		seoTitle: {
+			de: 'Dachgeschoss-Appartement in Weißbriach mit Balkon für 1–3 Gäste | Gästehaus Rader',
+			en: 'Top-floor apartment in Weissbriach with balcony for 1–3 guests | Guesthouse Rader',
+		},
+		seoDescription: {
+			de: 'Gemütliches Dachgeschoss-Appartement in Weißbriach im Gitschtal für 1–3 Gäste mit Balkon, ruhiger Lage und Ost-West-Ausblick. Perfekt für Urlaub nahe Weissensee und Nassfeld.',
+			en: 'Cozy top-floor apartment in Weissbriach in the Gitschtal for 1–3 guests with balcony, quiet setting and east-west views. Perfect for stays near Lake Weissensee and Nassfeld.',
+		},
+		detailHeading: {
+			de: 'Dachgeschoss-Appartement in Weißbriach mit Balkon für 1–3 Gäste',
+			en: 'Top-floor apartment in Weissbriach with balcony for 1–3 guests',
+		},
+		detailIntro: {
+			de: 'Appartement Nº 2 ist ein ruhiges Dachgeschoss-Appartement im Gästehaus Rader in Weißbriach – ideal für Gäste, die zwischen Gitschtal, Weissensee und Nassfeld komfortabel wohnen und direkt anfragen möchten.',
+			en: 'Apartment No. 2 is a quiet top-floor apartment at Guesthouse Rader in Weissbriach – ideal for guests who want a comfortable base between the Gitschtal, Lake Weissensee and Nassfeld and prefer to book direct.',
+		},
 		description: {
 			de: [
-				'Unser gemütliches Dachgeschoss-Appartement verbindet alpine Behaglichkeit mit lichtdurchfluteten Räumen.',
-				'Genießen Sie morgens die Sonne aus Osten und abends den Blick Richtung Westen – direkt vom Balkon aus.',
-				'Die Wohnung verfügt über eine voll ausgestattete Küche mit Sitzecke, ein Badezimmer mit Dusche und WC sowie zwei gemütliche Schlafbereiche. Ideal für 1–3 Personen, die Komfort und Ruhe schätzen.',
+				'Das Dachgeschoss-Appartement verbindet alpine Gemütlichkeit mit lichtdurchfluteten Räumen und einem Balkon für entspannte Tage in ruhiger Lage.',
+				'Dank Ausrichtung nach Osten und Westen genießen 1–3 Gäste Sonne zu verschiedenen Tageszeiten und einen angenehmen Ausgangspunkt für Urlaub im Gitschtal nahe Weissensee und Nassfeld.',
+				'Zur Wohnung gehören eine voll ausgestattete Küche mit Sitzecke, ein Badezimmer mit Dusche und WC sowie zwei gemütliche Schlafbereiche.',
 			],
 			en: [
-				'Our cozy top-floor apartment blends alpine comfort with light-filled rooms.',
-				'Enjoy morning sun from the east and evening views to the west right from the balcony.',
-				'The apartment features a fully equipped kitchen with dining nook, a bathroom with shower and toilet, and two cozy sleeping areas. Ideal for 1-3 guests who value comfort and quiet.',
+				'This top-floor apartment combines alpine comfort with light-filled rooms and a balcony for relaxed days in a quiet setting.',
+				'With east and west exposure, 1–3 guests enjoy sun at different times of day and an easy-going base in the Gitschtal close to Lake Weissensee and Nassfeld.',
+				'The apartment includes a fully equipped kitchen with dining nook, a bathroom with shower and toilet, and two cosy sleeping areas.',
 			],
 		},
 		images: {
@@ -389,8 +425,8 @@ export const accommodations: Accommodation[] = [
 			en: '35 m² · 1-3 guests · East/West',
 		},
 		detailBody: {
-			de: 'Helle Ferienwohnung mit Balkon und Panoramaausblick - Küche mit Sitzecke - Bad mit Dusche und WC - Sicht nach Osten und Westen (1-3 Personen).',
-			en: 'Bright apartment with balcony and panoramic view - kitchen with dining nook - bathroom with shower and toilet - east and west views (1-3 guests).',
+			de: 'Gemütliches Dachgeschoss-Appartement in Weißbriach im Gitschtal mit Balkon, Ost-West-Ausblick, Küche mit Sitzecke und Bad mit Dusche und WC – ideal für 1–3 Gäste nahe Weissensee und Nassfeld.',
+			en: 'Cozy top-floor apartment in Weissbriach in the Gitschtal with balcony, east-west views, kitchen with dining nook and bathroom with shower and toilet – ideal for 1–3 guests near Lake Weissensee and Nassfeld.',
 		},
 	},
 	{
@@ -401,16 +437,32 @@ export const accommodations: Accommodation[] = [
 			de: 'Sonnige Ferienwohnung mit Südbalkon und Gartenblick',
 			en: 'Sunny apartment with south-facing balcony and garden view',
 		},
+		seoTitle: {
+			de: 'Ferienwohnung in Weißbriach für 1–2 Gäste mit Südbalkon | Gästehaus Rader',
+			en: 'Apartment in Weissbriach for 1–2 guests with south-facing balcony | Guesthouse Rader',
+		},
+		seoDescription: {
+			de: 'Sonnige Ferienwohnung in Weißbriach im Gitschtal für 1–2 Gäste mit Südbalkon, Gartenblick und ruhiger Lage. Ideal für Paarurlaub nahe Weissensee und Nassfeld.',
+			en: 'Sunny apartment in Weissbriach in the Gitschtal for 1–2 guests with south-facing balcony, garden view and quiet setting. Ideal for couples near Lake Weissensee and Nassfeld.',
+		},
+		detailHeading: {
+			de: 'Ferienwohnung in Weißbriach für 1–2 Gäste mit Südbalkon',
+			en: 'Apartment in Weissbriach for 1–2 guests with south-facing balcony',
+		},
+		detailIntro: {
+			de: 'Appartement Nº 3 ist eine sonnige Ferienwohnung im Gästehaus Rader in Weißbriach – perfekt für Paare oder zwei Gäste, die ruhig wohnen und Ausflüge zum Weissensee oder nach Nassfeld flexibel planen möchten.',
+			en: 'Apartment No. 3 is a sunny holiday apartment at Guesthouse Rader in Weissbriach – perfect for couples or two guests who want a quiet stay with easy trips to Lake Weissensee or Nassfeld.',
+		},
 		description: {
 			de: [
-				'Dieses helle Appartement bietet viel Raum zum Entspannen und Wohlfühlen.',
-				'Durch die Südausrichtung genießen Sie den ganzen Tag Sonne und einen schönen Blick in den Garten.',
-				'Mit voll ausgestatteter Küche, gemütlicher Sitzecke, Bad mit Dusche/WC und Balkon ist die Wohnung ideal für 1–2 Personen.',
+				'Diese Ferienwohnung ist ideal für 1–2 Gäste, die in Weißbriach ruhig wohnen und dennoch schnell in der Region unterwegs sein möchten.',
+				'Der Südbalkon bringt viel Sonne, der Gartenblick sorgt für entspannte Stimmung und das Gitschtal bietet einen angenehmen Ausgangspunkt für Urlaub nahe Weissensee und Nassfeld.',
+				'Mit voll ausgestatteter Küche, gemütlicher Sitzecke und Bad mit Dusche/WC ist das Appartement besonders für Paarurlaub oder einen kompakten Alpenaufenthalt geeignet.',
 			],
 			en: [
-				'This bright apartment offers plenty of space to relax and unwind.',
-				'Thanks to the south-facing orientation, you can enjoy sunshine all day and a lovely garden view.',
-				'With a fully equipped kitchen, cozy dining nook, bathroom with shower/toilet, and a balcony, the apartment is ideal for 1-2 guests.',
+				'This apartment is ideal for 1–2 guests who want a quiet stay in Weissbriach while remaining well connected to the region.',
+				'The south-facing balcony brings in plenty of sun, the garden view adds a relaxed feel, and the Gitschtal is a pleasant base near Lake Weissensee and Nassfeld.',
+				'With a fully equipped kitchen, cosy dining nook and bathroom with shower/toilet, the apartment works especially well for couples or a compact alpine getaway.',
 			],
 		},
 		images: {
@@ -536,8 +588,8 @@ export const accommodations: Accommodation[] = [
 			en: '28 m² · 1-2 guests · South',
 		},
 		detailBody: {
-			de: 'Sonnige Ferienwohnung mit Südbalkon und Gartenblick - Küche mit Sitzecke - Bad mit Dusche und WC - Südausrichtung (1-2 Personen).',
-			en: 'Sunny apartment with south-facing balcony and garden view - kitchen with dining nook - bathroom with shower and toilet - south-facing (1-2 guests).',
+			de: 'Sonnige Ferienwohnung in Weißbriach im Gitschtal mit Südbalkon, Gartenblick, Küche mit Sitzecke und Bad mit Dusche/WC – ideal für 1–2 Gäste in ruhiger Lage nahe Weissensee und Nassfeld.',
+			en: 'Sunny apartment in Weissbriach in the Gitschtal with south-facing balcony, garden view, kitchen with dining nook and bathroom with shower/toilet – ideal for 1–2 guests in a quiet setting near Lake Weissensee and Nassfeld.',
 		},
 	},
 ];

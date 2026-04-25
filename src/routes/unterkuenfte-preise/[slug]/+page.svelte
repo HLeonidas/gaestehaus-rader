@@ -61,7 +61,7 @@ import { localizePath } from '$lib/routing';
 		parking: SquareParking,
 	} as const;
 
-	const roomImageAlt = $derived.by(() => `${accommodation.title} – ${accommodation.subtitle[$lang]}`);
+	const roomImageAlt = $derived.by(() => `${accommodation.detailHeading[$lang]} – ${accommodation.subtitle[$lang]}`);
 	const sortedGalleryImages = $derived.by(() => getSortedAccommodationGallery(accommodation));
 	const floorplanAlt = $derived.by(
 		() => `${$t('room.detail.sections.floorplan')} – ${accommodation.title}`
@@ -109,8 +109,10 @@ import { localizePath } from '$lib/routing';
 	const ogImage = $derived.by(() =>
 		new URL(withAsset(accommodation.images.main), siteUrl).toString()
 	);
-	const seoTitle = $derived.by(() => `${accommodation.title} – ${$t('rooms.page.title')}`);
-	const seoDescription = $derived.by(() => accommodation.subtitle[$lang]);
+	const seoTitle = $derived.by(() => accommodation.seoTitle[$lang]);
+	const seoDescription = $derived.by(() => accommodation.seoDescription[$lang]);
+	const detailHeading = $derived.by(() => accommodation.detailHeading[$lang]);
+	const detailIntro = $derived.by(() => accommodation.detailIntro[$lang]);
 	const amenityLabels = $derived.by(() =>
 		accommodation.amenities.map((amenity) => $t(`amenity.${amenity}`))
 	);
@@ -355,13 +357,15 @@ import { localizePath } from '$lib/routing';
 			<!-- HEADER + SHARE -->
 			<div class="mt-8 flex items-start justify-between gap-6">
 				<div class="min-w-0">
-					<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand pb-3">{$t('brand.name')}</p>
+					<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand pb-3">
+						{$t('brand.name')} · {accommodation.title}
+					</p>
 					<h1 class="font-serif text-3xl leading-[0.95] text-slate-900 sm:text-5xl">
-						{accommodation.title}
+						{detailHeading}
 					</h1>
 					<div class="mt-4 h-[3px] w-14 rounded-full bg-brand"></div>
-					<p class="mt-3 max-w-2xl text-sm text-slate-600 sm:text-base">
-						{accommodation.subtitle[$lang]}
+					<p class="mt-3 max-w-3xl text-sm text-slate-600 sm:text-base">
+						{detailIntro}
 					</p>
 				</div>
 
