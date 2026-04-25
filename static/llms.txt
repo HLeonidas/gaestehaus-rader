@@ -37,6 +37,7 @@ Key pages:
 - Home: https://rader-gitschtal.at/
 - Apartments & prices: https://rader-gitschtal.at/unterkuenfte-preise/
 - Apartment detail pages: https://rader-gitschtal.at/unterkuenfte-preise/{slug}
+- Facts & FAQ: https://rader-gitschtal.at/fakten/
 - Experiences: https://rader-gitschtal.at/erlebnisse/
 - About us: https://rader-gitschtal.at/ueber-uns/
 - Contact: https://rader-gitschtal.at/kontakt/
@@ -46,6 +47,7 @@ Key pages:
 - Privacy: https://rader-gitschtal.at/datenschutz/
 
 Data sources:
+- Structured facts and Q&A: /fakten/
 - Prices, amenities, and apartment details: /unterkuenfte-preise/
 - Contact and address: /kontakt/
 - Policies and FAQs: /faq/
