@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { ComponentType } from 'svelte';
 	import { lang, t } from '$lib/i18n';
-	import { resolve } from '$app/paths';
+	import { asset, resolve } from '$app/paths';
 	import { page } from '$app/state';
 import { localizePath } from '$lib/routing';
 	import { imageAttrs, largestImageUrl } from '$lib/images';
@@ -1302,9 +1302,9 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 							style="--reveal-delay: 0ms;"
 						>
 							<img
-								{...imageAttrs('/images/Umgebung/freibad.png', '(max-width: 1024px) 100vw, 360px')}
-								alt="Bus und Bahn als flexible Mobilität ohne Auto"
-								class="h-44 w-full object-cover"
+								src={asset('/images/Logo/gaestecard.jpg')}
+								alt="GästeCard Basic für flexible Mobilität und Urlaubsvorteile in Kärnten"
+								class="h-44 w-full bg-slate-50 p-4 object-contain"
 								loading="lazy"
 								decoding="async"
 							/>
