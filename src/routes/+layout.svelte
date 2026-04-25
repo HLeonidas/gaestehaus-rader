@@ -1,8 +1,10 @@
 <script lang="ts">
 	import favicon from '$lib/assets/favicon.ico';
-	import { asset, resolve } from '$app/paths';
+	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
-	import { lang, setLang, t } from '$lib/i18n';
+	import { lang, setLang, t, type Lang } from '$lib/i18n';
+	import { imageAttrs } from '$lib/images';
+	import { localizePath, samePathOtherLocale, toGermanPath } from '$lib/routing';
 	import { getLenisInstance, setLenisInstance } from '$lib/scroll';
 	import { trackEvent, trackPageview } from '$lib/analytics/plausible';
 	import { MessageCircle } from 'lucide-svelte';
@@ -12,17 +14,27 @@
 	import { afterNavigate } from '$app/navigation';
 	import { fade } from 'svelte/transition';
 
-	let { children } = $props();
+	let { children, data } = $props();
+	const currentLocale = $derived(data.locale);
 
-	const navItems = [
-		{ href: resolve('/unterkuenfte-preise'), key: 'nav.roomsShort' },
-		{ href: resolve('/erlebnisse'), key: 'nav.experiences' },
-		{ href: resolve('/ueber-uns'), key: 'nav.about' },
-		{ href: resolve('/kontakt'), key: 'nav.contact' },
-	];
+	// svelte-ignore state_referenced_locally
+	setLang(currentLocale);
 
-	const withAsset = (path: string) => asset(path);
-	const bookingHref = resolve('/buchen');
+	$effect(() => {
+		setLang(currentLocale);
+	});
+
+	const localizedHref = (path: string) => localizePath(path, page.url.pathname);
+	const localeSwitchHref = (targetLocale: Lang) => samePathOtherLocale(page.url.pathname, targetLocale);
+
+	const navItems = $derived([
+		{ href: localizedHref('/unterkuenfte-preise'), key: 'nav.roomsShort' },
+		{ href: localizedHref('/erlebnisse'), key: 'nav.experiences' },
+		{ href: localizedHref('/ueber-uns'), key: 'nav.about' },
+		{ href: localizedHref('/kontakt'), key: 'nav.contact' },
+	]);
+
+	const bookingHref = $derived(localizedHref('/buchen'));
 
 	const normalizePath = (path: string) => (path === '/' ? '/' : path.replace(/\/+$/, ''));
 	const isActive = (href: string) => {
@@ -33,13 +45,12 @@
 	};
 
 	// Keep ONLY for max-width control
-	const isHome = $derived(page.url.pathname === resolve('/'));
-	const isFullWidth = $derived(page.url.pathname.startsWith(resolve('/buchen')));
+	const isHome = $derived(toGermanPath(page.url.pathname) === '/');
+	const isFullWidth = $derived(toGermanPath(page.url.pathname).startsWith('/buchen'));
 
-	const trackLanguage = (nextLang: 'de' | 'en') => {
+	const trackLanguage = (nextLang: Lang) => {
 		if ($lang === nextLang) return;
 		void trackEvent('Filter: Language Change', { lang: nextLang });
-		setLang(nextLang);
 	};
 
 	let headerHidden = $state(false);
@@ -181,7 +192,7 @@
 	>
 		<div class="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-4 py-4 sm:px-6">
 			<a
-				href={resolve('/')}
+				href={localizedHref('/')}
 				class="flex items-center rounded-xl focus:outline-none focus:ring-2 focus:ring-brand/40"
 				aria-label="Gästehaus Rader - Startseite"
 			>
@@ -189,10 +200,11 @@
 					class="flex h-16 w-32 items-center justify-center rounded-xl bg-white shadow-sm sm:h-20 sm:w-52"
 				>
 					<img
-						src={withAsset('/images/Logo/logo-rader-gitschtal.jpg')}
+						{...imageAttrs('/images/Logo/logo-rader-gitschtal.jpg', '(max-width: 640px) 128px, 208px')}
 						alt="Gästehaus Rader"
 						class="h-12 w-auto object-contain sm:h-14"
-						loading="lazy"
+						loading="eager"
+						fetchpriority="high"
 					/>
 				</div>
 			</a>
@@ -218,32 +230,32 @@
 				<div
 					class="flex items-center rounded-full border border-slate-200/80 bg-slate-50 p-0.5 text-[10px] font-medium sm:text-[11px]"
 				>
-					<button
-						type="button"
+					<a
+						href={localeSwitchHref('de')}
 						class={`rounded-full px-2 py-1 transition sm:px-2.5 ${
 							$lang === 'de'
 								? 'bg-white text-slate-700 ring-1 ring-slate-200'
 								: 'text-slate-500 hover:bg-white/80 hover:text-slate-700'
 						}`}
 						onclick={() => trackLanguage('de')}
-						aria-pressed={$lang === 'de'}
+						aria-current={$lang === 'de' ? 'page' : undefined}
 						aria-label={$t('nav.langDe')}
 					>
 						DE
-					</button>
-					<button
-						type="button"
+					</a>
+					<a
+						href={localeSwitchHref('en')}
 						class={`rounded-full px-2 py-1 transition sm:px-2.5 ${
 							$lang === 'en'
 								? 'bg-white text-slate-700 ring-1 ring-slate-200'
 								: 'text-slate-500 hover:bg-white/80 hover:text-slate-700'
 						}`}
 						onclick={() => trackLanguage('en')}
-						aria-pressed={$lang === 'en'}
+						aria-current={$lang === 'en' ? 'page' : undefined}
 						aria-label={$t('nav.langEn')}
 					>
 						EN
-					</button>
+					</a>
 				</div>
 
 				<a
@@ -295,10 +307,11 @@
 					<div class="flex items-center gap-3">
 						<div class="flex items-center justify-center rounded-lg shadow-sm">
 							<img
-								src={withAsset('/images/Logo/logo-rader-gitschtal.jpg')}
+								{...imageAttrs('/images/Logo/logo-rader-gitschtal.jpg', '(max-width: 640px) 128px, 224px')}
 								alt="Gästehaus Rader"
 								class="h-12 w-auto object-contain sm:h-14"
 								loading="lazy"
+								decoding="async"
 							/>
 						</div>
 					</div>
@@ -316,10 +329,11 @@
 							onclick={() => trackEvent('Outbound: Partner Click', { source: 'footer', partner: 'nassfeld' })}
 						>
 							<img
-								src={withAsset('/images/Logo/nassfeld-logo.png')}
+								{...imageAttrs('/images/Logo/nassfeld-logo.png', '189px')}
 								alt="Nassfeld"
 								class="h-10 w-auto object-contain sm:h-12"
 								loading="lazy"
+								decoding="async"
 							/>
 						</a>
 						<a
@@ -330,10 +344,11 @@
 							onclick={() => trackEvent('Outbound: Partner Click', { source: 'footer', partner: 'kaernten' })}
 						>
 							<img
-								src={withAsset('/images/Logo/kaernten-logo.png')}
+								{...imageAttrs('/images/Logo/kaernten-logo.png', '277px')}
 								alt="Kärnten"
 								class="h-10 w-auto object-contain sm:h-12"
 								loading="lazy"
+								decoding="async"
 							/>
 						</a>
 					</div>
@@ -345,29 +360,29 @@
 					</p>
 					<ul class="mt-4 space-y-3 text-sm text-slate-600">
 						<li>
-							<a class="hover:text-slate-900" href={resolve('/unterkuenfte-preise')}>
+							<a class="hover:text-slate-900" href={localizedHref('/unterkuenfte-preise')}>
 								{$t('nav.roomsShort')}
 							</a>
 						</li>
 						<li>
-							<a class="hover:text-slate-900" href={resolve('/erlebnisse')}>
+							<a class="hover:text-slate-900" href={localizedHref('/erlebnisse')}>
 								{$t('nav.experiences')}
 							</a>
 						</li>
 						<li>
-							<a class="hover:text-slate-900" href={resolve('/ueber-uns')}>
+							<a class="hover:text-slate-900" href={localizedHref('/ueber-uns')}>
 								{$t('nav.about')}
 							</a>
 						</li>
 						<li>
-							<a class="hover:text-slate-900" href={resolve('/kontakt')}>
+							<a class="hover:text-slate-900" href={localizedHref('/kontakt')}>
 								{$t('nav.contact')}
 							</a>
 						</li>
 						<li>
 							<a
 								class="hover:text-slate-900"
-								href={resolve('/faq')}
+								href={localizedHref('/faq')}
 								onclick={() => trackEvent('Trust: FAQ Click', { source: 'footer' })}
 							>
 								{$t('footer.faq')}
@@ -434,13 +449,13 @@
 					© {new Date().getFullYear()} Gästehaus Rader. {$t('footer.rights')}
 				</p>
 				<div class="flex flex-wrap gap-x-6 gap-y-2">
-					<a href={resolve('/impressum')} class="hover:text-slate-900">{$t('footer.imprint')}</a>
-					<a href={resolve('/datenschutz')} class="hover:text-slate-900">{$t('footer.privacy')}</a>
-					<a href={resolve('/agb')} class="hover:text-slate-900">{$t('footer.terms')}</a>
-					<a href={resolve('/barrierefreiheit')} class="hover:text-slate-900">
+					<a href={localizedHref('/impressum')} class="hover:text-slate-900">{$t('footer.imprint')}</a>
+					<a href={localizedHref('/datenschutz')} class="hover:text-slate-900">{$t('footer.privacy')}</a>
+					<a href={localizedHref('/agb')} class="hover:text-slate-900">{$t('footer.terms')}</a>
+					<a href={localizedHref('/barrierefreiheit')} class="hover:text-slate-900">
 						{$t('footer.accessibility')}
 					</a>
-					<a href={resolve('/bildnachweise')} class="hover:text-slate-900">
+					<a href={localizedHref('/bildnachweise')} class="hover:text-slate-900">
 						{$t('footer.credits')}
 					</a>
 				</div>

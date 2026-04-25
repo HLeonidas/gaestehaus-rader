@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
+import { page } from '$app/state';
 	import { reveal } from '$lib/actions/reveal';
 	import SeoHead from '$lib/components/SeoHead.svelte';
 	import { accommodations } from '$lib/data/accommodations';
 	import { guesthouseFacts } from '$lib/data/facts';
 	import { lang } from '$lib/i18n';
 	import { SITE_ORIGIN } from '$lib/seo';
+import { localizePath } from '$lib/routing';
 	import {
 		ArrowRight,
 		CarFront,
@@ -21,15 +23,16 @@
 		Wifi,
 	} from 'lucide-svelte';
 
-	const locale = $derived.by(() => ($lang === 'en' ? 'en' : 'de'));
+	const localizedHref = (path: string) => localizePath(path, page.url.pathname);
+const locale = $derived.by(() => ($lang === 'en' ? 'en' : 'de'));
 	const pageCopy = guesthouseFacts.page;
 	const facts = guesthouseFacts.facts;
 	const locationFacts = guesthouseFacts.locationFacts;
 	const highlights = $derived.by(() => guesthouseFacts.highlights[locale]);
 	const faqItems = guesthouseFacts.faq;
-	const pageUrl = new URL(resolve('/fakten'), SITE_ORIGIN).toString();
-	const bookingUrl = resolve('/buchen');
-	const contactUrl = resolve('/kontakt');
+	const pageUrl = $derived.by(() => new URL(localizedHref('/fakten'), SITE_ORIGIN).toString());
+	const bookingUrl = $derived.by(() => localizedHref('/buchen'));
+	const contactUrl = $derived.by(() => localizedHref('/kontakt'));
 	const factsJsonLd = $derived.by(() =>
 		JSON.stringify({
 			'@context': 'https://schema.org',

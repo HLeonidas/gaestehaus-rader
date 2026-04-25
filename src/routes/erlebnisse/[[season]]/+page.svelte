@@ -1,8 +1,10 @@
 <script lang="ts">
 	import type { ComponentType } from 'svelte';
 	import { lang, t } from '$lib/i18n';
-	import { asset, resolve } from '$app/paths';
+	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
+import { localizePath } from '$lib/routing';
+	import { imageAttrs, largestImageUrl } from '$lib/images';
 	import SeoHead from '$lib/components/SeoHead.svelte';
 	import { scrollPageToElement } from '$lib/scroll';
 	import {
@@ -46,8 +48,8 @@
 	type LocalizedText = { de: string; en: string };
 	type LinkMeta = { label: LocalizedText; icon: ComponentType };
 
-	const withAsset = (path: string) => asset(path);
-	const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
+	const localizedHref = (path: string) => localizePath(path, page.url.pathname);
+const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 	const difficultyLabels: Record<'easy' | 'medium' | 'hard', LocalizedText> = {
 		easy: { de: 'Leicht', en: 'Easy' },
 		medium: { de: 'Mittel', en: 'Moderate' },
@@ -726,7 +728,7 @@
 									>
 										<div class="relative aspect-[16/10] overflow-hidden rounded-3xl sm:min-h-[420px] lg:h-[min(65dvh,650px)]">
 											<img
-												src={withAsset(summerFeaturedEvent.image)}
+												{...imageAttrs(summerFeaturedEvent.image, '(max-width: 1024px) 100vw, 1200px')}
 												alt={`${localize(summerFeaturedEvent.title)} – ${localize(summerFeaturedEvent.kicker)}`}
 												class={`absolute inset-0 block h-full w-full object-cover transition-transform duration-700 will-change-transform ${
 													summerFeaturedEvent.id === 'summer-hike'
@@ -734,6 +736,7 @@
 														: 'object-center scale-[1.05] group-hover:scale-[1.07]'
 												}`}
 												loading="lazy"
+												decoding="async"
 											/>
 											<div class="absolute inset-0 hidden bg-gradient-to-t from-black/78 via-black/38 to-black/8 sm:block"></div>
 
@@ -832,10 +835,11 @@
 												}`}
 											>
 												<img
-													src={withAsset(event.image)}
+													{...imageAttrs(event.image, '(max-width: 640px) 100vw, 320px')}
 													alt={`${localize(event.title)} – ${localize(event.kicker)}`}
 													class={`h-full w-full object-center transition duration-700 will-change-transform object-cover group-hover:scale-[1.03] group-hover:saturate-[1.06]`}
 													loading="lazy"
+													decoding="async"
 												/>
 
 												{#if event.badge}
@@ -919,10 +923,11 @@
 									>
 										<div class="relative aspect-[16/10] overflow-hidden rounded-3xl sm:min-h-[420px] lg:h-[min(72dvh,720px)]">
 											<img
-												src={withAsset(winterFeaturedEvent.image)}
+												{...imageAttrs(winterFeaturedEvent.image, '(max-width: 1024px) 100vw, 1200px')}
 												alt={`${localize(winterFeaturedEvent.title)} – ${localize(winterFeaturedEvent.kicker)}`}
 												class="absolute inset-0 h-full w-full scale-[1.05] object-cover object-center transition-transform duration-700 will-change-transform group-hover:scale-[1.07]"
 												loading="lazy"
+												decoding="async"
 											/>
 											<div class="absolute inset-0 hidden bg-gradient-to-t from-black/78 via-black/38 to-black/8 sm:block"></div>
 
@@ -1021,7 +1026,7 @@
 												}`}
 											>
 												<img
-													src={withAsset(event.image)}
+													{...imageAttrs(event.image, '(max-width: 640px) 100vw, 320px')}
 													alt={`${localize(event.title)} – ${localize(event.kicker)}`}
 													class={`h-full w-full object-center transition duration-700 will-change-transform ${
 														event.id === 'winter-hike'
@@ -1029,6 +1034,7 @@
 															: 'object-cover group-hover:scale-[1.03] group-hover:saturate-[1.06]'
 													}`}
 													loading="lazy"
+													decoding="async"
 												/>
 												{#if event.badge}
 													<span
@@ -1177,13 +1183,13 @@
 						</div>
 						<div class="flex flex-wrap gap-3 md:flex-col md:justify-center">
 							<a
-								href={resolve('/unterkuenfte-preise')}
+								href={localizedHref('/unterkuenfte-preise')}
 								class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-800 transition hover:bg-slate-50"
 							>
 								{$t('experiences.base.cta.rooms')}
 							</a>
 							<a
-								href={resolve('/buchen')}
+								href={localizedHref('/buchen')}
 								class="inline-flex items-center justify-center rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand/90"
 							>
 								{$t('experiences.base.cta.booking')}
@@ -1217,10 +1223,11 @@
 						<div class="grid lg:grid-cols-[0.45fr_0.55fr]">
 							<div class="h-full">
 								<img
-									src={withAsset(guestCardVisual.src)}
+									{...imageAttrs(guestCardVisual.src, '(max-width: 1024px) 100vw, 45vw')}
 									alt={$t(guestCardVisual.altKey)}
 									class="aspect-[16/10] w-full rounded-none object-cover sm:aspect-[4/3] lg:h-full lg:aspect-auto"
 									loading="lazy"
+									decoding="async"
 								/>
 							</div>
 
@@ -1295,10 +1302,11 @@
 							style="--reveal-delay: 0ms;"
 						>
 							<img
-								src={withAsset('/images/Umgebung/freibad.png')}
+								{...imageAttrs('/images/Umgebung/freibad.png', '(max-width: 1024px) 100vw, 360px')}
 								alt="Bus und Bahn als flexible Mobilität ohne Auto"
 								class="h-44 w-full object-cover"
 								loading="lazy"
+								decoding="async"
 							/>
 							<div class="flex flex-1 flex-col p-5">
 								<div class="flex items-center gap-2">
@@ -1338,10 +1346,11 @@
 							style="--reveal-delay: 90ms;"
 						>
 							<img
-								src={withAsset('/images/Umgebung/sauna.png')}
+								{...imageAttrs('/images/Umgebung/sauna.png', '(max-width: 1024px) 100vw, 360px')}
 								alt="Baden und Wellness mit Gästekarte-Vorteilen"
 								class="h-44 w-full object-cover"
 								loading="lazy"
+								decoding="async"
 							/>
 							<div class="flex flex-1 flex-col p-5">
 								<div class="flex items-center gap-2">
@@ -1381,10 +1390,11 @@
 							style="--reveal-delay: 180ms;"
 						>
 							<img
-								src={withAsset('/images/Umgebung/aussicht-vom-golz.jpg')}
+								{...imageAttrs('/images/Umgebung/aussicht-vom-golz.jpg', '(max-width: 1024px) 100vw, 360px')}
 								alt="Aktiv in der Natur am Nassfeld und im Gailtal"
 								class="h-44 w-full object-cover"
 								loading="lazy"
+								decoding="async"
 							/>
 							<div class="flex flex-1 flex-col p-5">
 								<div class="flex items-center gap-2">
@@ -1494,10 +1504,9 @@
 					<div class="grid max-h-[90vh] overflow-y-auto lg:grid-cols-[0.62fr,0.38fr]">
 						<div class="relative min-h-[300px] sm:min-h-[360px] lg:min-h-[520px]">
 							<img
-								src={withAsset(activeExperience.image)}
+								src={largestImageUrl(activeExperience.image)}
 								alt={`${localize(activeExperience.title)} – ${localize(activeExperience.kicker)}`}
 								class="h-full w-full object-cover"
-								loading="lazy"
 							/>
 							<div class="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent lg:hidden"></div>
 						</div>

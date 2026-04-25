@@ -3,6 +3,7 @@
 	import { asset } from '$app/paths';
 	import { page } from '$app/state';
 	import { t } from '$lib/i18n';
+	import { translatePathname } from '$lib/routing';
 	import { DEFAULT_OG_IMAGE, SITE_ORIGIN } from '$lib/seo';
 
 	let {
@@ -24,6 +25,8 @@
 	const isPreview = env.PUBLIC_IS_PREVIEW === 'true';
 
 	const canonicalUrl = $derived.by(() => new URL(page.url.pathname, SITE_ORIGIN).toString());
+	const germanUrl = $derived.by(() => new URL(translatePathname(page.url.pathname, 'de'), SITE_ORIGIN).toString());
+	const englishUrl = $derived.by(() => new URL(translatePathname(page.url.pathname, 'en'), SITE_ORIGIN).toString());
 
 	const resolveTranslation = (key: string | null, fallbackKey: string) => {
 		if (!key) return $t(fallbackKey);
@@ -58,6 +61,9 @@
 	<meta property="og:url" content={canonicalUrl} />
 	<meta property="og:image" content={resolvedImageUrl} />
 	<meta property="og:site_name" content={$t('brand.name')} />
+	<link rel="alternate" hreflang="de-AT" href={germanUrl} />
+	<link rel="alternate" hreflang="en" href={englishUrl} />
+	<link rel="alternate" hreflang="x-default" href={germanUrl} />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content={resolvedTitle} />
 	<meta name="twitter:description" content={resolvedDescription} />

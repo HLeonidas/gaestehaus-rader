@@ -1,7 +1,11 @@
 <script lang="ts">
 	import { t } from '$lib/i18n';
 	import { resolve } from '$app/paths';
+	import { page } from '$app/state';
 	import SeoHead from '$lib/components/SeoHead.svelte';
+	import { localizePath } from '$lib/routing';
+
+	const localizedHref = (path: string) => localizePath(path, page.url.pathname);
 </script>
 
 <SeoHead titleKey="accessibility.seo.title" descriptionKey="accessibility.seo.description" />
@@ -42,7 +46,7 @@
 					</a>.
 				</p>
 				<p class="mt-2">
-					<a class="text-brand hover:opacity-90" href={resolve('/kontakt')}>
+					<a class="text-brand hover:opacity-90" href={localizedHref('/kontakt')}>
 						{$t('accessibility.feedback.cta')}
 					</a>
 				</p>

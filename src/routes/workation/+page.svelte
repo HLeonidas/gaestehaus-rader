@@ -1,9 +1,11 @@
 <script lang="ts">
 	import { reveal } from '$lib/actions/reveal';
 	import { asset, resolve } from '$app/paths';
+import { page } from '$app/state';
 	import { lang, t } from '$lib/i18n';
 	import SeoHead from '$lib/components/SeoHead.svelte';
 	import { SITE_ORIGIN } from '$lib/seo';
+import { localizePath } from '$lib/routing';
 	import {
 		Wifi,
 		Trees,
@@ -21,11 +23,12 @@
 	} from 'lucide-svelte';
 
 	const withAsset = (path: string) => asset(path);
+	const localizedHref = (path: string) => localizePath(path, page.url.pathname);
 
 	// Adjust if routes change.
-	const BOOKING_URL = resolve('/buchen');
-	const CONTACT_URL = resolve('/kontakt');
-	const APARTMENTS_URL = resolve('/unterkuenfte-preise');
+	const BOOKING_URL = $derived.by(() => localizedHref('/buchen'));
+	const CONTACT_URL = $derived.by(() => localizedHref('/kontakt'));
+	const APARTMENTS_URL = $derived.by(() => localizedHref('/unterkuenfte-preise'));
 	const WORKATION_WIFI_MBPS = 100;
 
 	const trustItems = [
@@ -89,7 +92,7 @@
 		{ q: 'workation.faq.q5', a: 'workation.faq.a5' },
 	] as const;
 
-	const pageUrl = new URL(resolve('/workation'), SITE_ORIGIN).toString();
+	const pageUrl = $derived.by(() => new URL(localizedHref('/workation'), SITE_ORIGIN).toString());
 	const imageUrl = new URL(withAsset('/images/Haus/gaestehaus-balkon-ausblick.jpg'), SITE_ORIGIN).toString();
 
 	const faqMainEntity = $derived.by(() =>

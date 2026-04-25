@@ -1,12 +1,14 @@
 import { browser } from '$app/environment';
 import { derived, writable } from 'svelte/store';
+import { getLocaleFromPathname } from '$lib/routing';
 
 export type Lang = 'de' | 'en';
 
 const defaultLang: Lang = 'de';
+const browserLang = browser ? getLocaleFromPathname(window.location.pathname) : null;
 const storedLang = browser ? (localStorage.getItem('lang') as Lang | null) : null;
 
-export const lang = writable<Lang>(storedLang ?? defaultLang);
+export const lang = writable<Lang>(browserLang ?? storedLang ?? defaultLang);
 
 if (browser) {
 	lang.subscribe((value) => {
