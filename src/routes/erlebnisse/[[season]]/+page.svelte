@@ -783,36 +783,34 @@
 												</div>
 											</div>
 										</div>
-										<div class="p-3 sm:hidden">
-											<div class="max-w-full rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm">
-												<p
-													class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand"
-												>
-													<summerFeaturedEvent.icon class="h-4 w-4 text-brand" aria-hidden="true" />
-													{localize(summerFeaturedEvent.kicker)}
+										<div class="border-t border-slate-200/80 p-4 sm:hidden">
+											<p
+												class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand"
+											>
+												<summerFeaturedEvent.icon class="h-4 w-4 text-brand" aria-hidden="true" />
+												{localize(summerFeaturedEvent.kicker)}
+											</p>
+											<h3
+												class={`mt-2 font-semibold text-slate-900 ${summerFeaturedEvent.titleSize ?? 'text-xl'}`}
+											>
+												{localize(summerFeaturedEvent.title)}
+											</h3>
+											{#if summerFeaturedEvent.description}
+												<p class="mt-2 max-w-xl text-sm text-slate-600">
+													{localize(summerFeaturedEvent.description)}
 												</p>
-												<h3
-													class={`mt-2 font-semibold text-slate-900 ${summerFeaturedEvent.titleSize ?? 'text-xl'}`}
-												>
-													{localize(summerFeaturedEvent.title)}
-												</h3>
-												{#if summerFeaturedEvent.description}
-													<p class="mt-2 max-w-xl text-sm text-slate-600">
-														{localize(summerFeaturedEvent.description)}
-													</p>
-												{/if}
-												{#if buildMetaChips(summerFeaturedEvent).length}
-													<div class="mt-3 flex flex-wrap gap-2">
-														{#each buildMetaChips(summerFeaturedEvent) as chip}
-															<span
-																class="rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-700"
-															>
-																{chip}
-															</span>
-														{/each}
-													</div>
-												{/if}
-											</div>
+											{/if}
+											{#if buildMetaChips(summerFeaturedEvent).length}
+												<div class="mt-3 flex flex-wrap gap-2">
+													{#each buildMetaChips(summerFeaturedEvent) as chip}
+														<span
+															class="rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-700"
+														>
+															{chip}
+														</span>
+													{/each}
+												</div>
+											{/if}
 										</div>
 									</button>
 								</div>
@@ -974,36 +972,34 @@
 												</div>
 											</div>
 										</div>
-										<div class="p-3 sm:hidden">
-											<div class="max-w-full rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm">
-												<p
-													class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand"
-												>
-													<winterFeaturedEvent.icon class="h-4 w-4 text-brand" aria-hidden="true" />
-													{localize(winterFeaturedEvent.kicker)}
+										<div class="border-t border-slate-200/80 p-4 sm:hidden">
+											<p
+												class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand"
+											>
+												<winterFeaturedEvent.icon class="h-4 w-4 text-brand" aria-hidden="true" />
+												{localize(winterFeaturedEvent.kicker)}
+											</p>
+											<h3
+												class={`mt-2 font-semibold text-slate-900 ${winterFeaturedEvent.titleSize ?? 'text-xl'}`}
+											>
+												{localize(winterFeaturedEvent.title)}
+											</h3>
+											{#if winterFeaturedEvent.description}
+												<p class="mt-2 max-w-xl text-sm text-slate-600">
+													{localize(winterFeaturedEvent.description)}
 												</p>
-												<h3
-													class={`mt-2 font-semibold text-slate-900 ${winterFeaturedEvent.titleSize ?? 'text-xl'}`}
-												>
-													{localize(winterFeaturedEvent.title)}
-												</h3>
-												{#if winterFeaturedEvent.description}
-													<p class="mt-2 max-w-xl text-sm text-slate-600">
-														{localize(winterFeaturedEvent.description)}
-													</p>
-												{/if}
-												{#if buildMetaChips(winterFeaturedEvent).length}
-													<div class="mt-3 flex flex-wrap gap-2">
-														{#each buildMetaChips(winterFeaturedEvent) as chip}
-															<span
-																class="rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-700"
-															>
-																{chip}
-															</span>
-														{/each}
-													</div>
-												{/if}
-											</div>
+											{/if}
+											{#if buildMetaChips(winterFeaturedEvent).length}
+												<div class="mt-3 flex flex-wrap gap-2">
+													{#each buildMetaChips(winterFeaturedEvent) as chip}
+														<span
+															class="rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-700"
+														>
+															{chip}
+														</span>
+													{/each}
+												</div>
+											{/if}
 										</div>
 									</button>
 								</div>
