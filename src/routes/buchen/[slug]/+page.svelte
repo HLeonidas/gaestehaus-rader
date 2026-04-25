@@ -1,71 +1,52 @@
 <script lang="ts">
-	import { asset, resolve } from '$app/paths';
+	import { resolve } from '$app/paths';
+import { page } from '$app/state';
 	import { onMount } from 'svelte';
 	import { lang, t } from '$lib/i18n';
+	import { cleanupDeskline, mountDeskline } from '$lib/deskline';
+	import { imageAttrs } from '$lib/images';
 	import SeoHead from '$lib/components/SeoHead.svelte';
+import { localizePath } from '$lib/routing';
+	import { SITE_ORIGIN } from '$lib/seo';
+	import { buildBreadcrumbListSchema, buildJsonLdGraph } from '$lib/structured-data';
 	import { ArrowRight, CalendarDays, Star, Users, Wifi, Utensils, Mountain } from 'lucide-svelte';
 
 	let { data } = $props();
+const localizedHref = (path: string) => localizePath(path, page.url.pathname);
 	const accommodation = $derived.by(() => data.accommodation);
 	const seoTitle = $derived.by(() => `${accommodation.title} – ${$t('booking.title')}`);
 	const seoDescription = $derived.by(() => accommodation.subtitle?.[$lang] ?? $t('booking.seo.description'));
-
-	const withAsset = (path: string) => asset(path);
+	const bookingJsonLd = $derived.by(() =>
+		buildJsonLdGraph([
+			buildBreadcrumbListSchema(
+				[
+					{ name: $t('nav.home'), path: '/' },
+					{ name: $t('rooms.page.title'), path: localizedHref('/unterkuenfte-preise') },
+					{ name: accommodation.title, path: localizedHref(`/unterkuenfte-preise/${accommodation.slug}`) },
+					{ name: $t('booking.title'), path: page.url.pathname },
+				],
+				SITE_ORIGIN
+			),
+		])
+	);
 
 	onMount(() => {
-		const win = window as Window & {
-			dw?: ((...args: unknown[]) => void) & { q?: unknown[][] };
-		};
+		const container = document.getElementById('deskline-container') as HTMLDivElement | null;
+		if (!container) return;
 
-		type DwFn = ((...args: unknown[]) => void) & { q?: unknown[][] };
-		const dwFn: DwFn = function (...args: unknown[]) {
-			dwFn.q = dwFn.q || [];
-			dwFn.q.push(args);
-		};
-		win.dw = dwFn;
+		mountDeskline(container, $lang ?? 'de');
 
-		const container = document.getElementById('deskline-container');
-		if (container) {
-			container.innerHTML = '';
-		}
-
-		dwFn('settings', 'fa73de04-c8e1-4b05-b4a8-5697e2d52a1c', {
-			context: {
-				serviceIds: [],
-				productIds: [],
-			},
-			lang: 'de',
-		});
-
-		const existingScript = document.getElementById('deskline-script');
-		if (existingScript?.parentNode) {
-			existingScript.parentNode.removeChild(existingScript);
-		}
-
-		const script = document.createElement('script');
-		script.id = 'deskline-script';
-		script.async = true;
-		script.src =
-			'https://web5.deskline.net/start/ACCOKTN/fa73de04-c8e1-4b05-b4a8-5697e2d52a1c/index.js';
-		if (container) {
-			container.appendChild(script);
-		} else {
-			document.body.appendChild(script);
-		}
 		return () => {
-			const scriptEl = document.getElementById('deskline-script');
-			if (scriptEl?.parentNode) {
-				scriptEl.parentNode.removeChild(scriptEl);
-			}
-			if (container) {
-				container.innerHTML = '';
-			}
-			delete win.dw;
+			cleanupDeskline(container);
 		};
 	});
 </script>
 
 <SeoHead title={seoTitle} description={seoDescription} image={accommodation.images.main} />
+
+<svelte:head>
+	{@html `<script type="application/ld+json">${bookingJsonLd}</script>`}
+</svelte:head>
 
 <main class="bg-[#fbfaf7]">
 	<div class="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
@@ -73,9 +54,9 @@
 			<div class="space-y-10">
 				<div class="space-y-4">
 					<p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-500">
-						<a href={resolve('/')} class="hover:text-slate-700">Home</a>
+						<a href={localizedHref('/')} class="hover:text-slate-700">Home</a>
 						<span class="mx-2 text-slate-300">›</span>
-						<a href={resolve('/unterkuenfte-preise')} class="hover:text-slate-700">Unterkünfte</a>
+						<a href={localizedHref('/unterkuenfte-preise')} class="hover:text-slate-700">Unterkünfte</a>
 						<span class="mx-2 text-slate-300">›</span>
 						Buchung
 					</p>
@@ -214,11 +195,13 @@
 			</div>
 
 			<div class="relative overflow-hidden rounded-[32px] border border-slate-200">
-				<div
-					class="absolute inset-0 bg-cover bg-center"
-					style={`background-image: url('${withAsset(accommodation.images.main)}');`}
-					aria-hidden="true"
-				></div>
+				<img
+					{...imageAttrs(accommodation.images.main, '(max-width: 1024px) 100vw, 40vw')}
+					alt={accommodation.title}
+					class="absolute inset-0 h-full w-full object-cover"
+					loading="eager"
+					fetchpriority="high"
+				/>
 				<div class="absolute inset-0 bg-gradient-to-t from-black/35 via-black/10 to-transparent"></div>
 
 				<div class="relative flex min-h-[680px] items-end justify-center p-8">

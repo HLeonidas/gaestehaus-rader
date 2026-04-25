@@ -3,11 +3,15 @@
 	import { lang, t } from '$lib/i18n';
 	import { asset, resolve } from '$app/paths';
 	import { browser } from '$app/environment';
+import { page } from '$app/state';
 	import { accommodations, getAccommodationGallerySources } from '$lib/data/accommodations';
+	import { imageAttrs, largestImageUrl } from '$lib/images';
 	import { homeTrustReviews } from '$lib/data/reviews';
 	import { trackEvent } from '$lib/analytics/plausible';
 	import SeoHead from '$lib/components/SeoHead.svelte';
 	import { SITE_ORIGIN } from '$lib/seo';
+import { localizePath } from '$lib/routing';
+	import { buildJsonLdGraph, buildOfferSchema, buildVacationRentalSchema } from '$lib/structured-data';
 	import { onMount } from 'svelte';
 	import {
 		Mountain,
@@ -54,13 +58,13 @@
 	];
 
 	const withAsset = (path: string) => asset(path);
+	const localizedHref = (path: string) => localizePath(path, page.url.pathname);
 	const currentMonth = new Date().getMonth();
 	const isSummerSeason = currentMonth >= 4 && currentMonth <= 8;
 	const heroImagePath =
 		isSummerSeason
-			? '/images/Galerie/gaestehaus-balkon-ausblick-1440.jpg'
+			? '/images/Haus/gaestehaus-balkon-ausblick.jpg'
 			: '/images/Umgebung/winter-balkon-ausblick-hero.jpg';
-	const heroImage = withAsset(heroImagePath);
 	const guestCardVisual = isSummerSeason
 		? {
 				src: '/images/Umgebung/nassfeld-lift.jpg',
@@ -72,13 +76,13 @@
 			};
 
 	const rooms = accommodations;
-	const accommodationsBase = resolve('/unterkuenfte-preise');
+	const accommodationsBase = $derived.by(() => localizedHref('/unterkuenfte-preise'));
 	const siteUrl = SITE_ORIGIN;
 	const lodgingImages = [
-		new URL(withAsset('/images/Haus/gaestehaus-sommer.jpg'), siteUrl).toString(),
-		new URL(withAsset('/images/Haus/balkon-ausblick-winter.jpg'), siteUrl).toString(),
-		new URL(withAsset('/images/Haus/gaestehaus-balkon-ausblick.jpg'), siteUrl).toString(),
-		new URL(withAsset('/images/Haus/familie-hueber.jpg'), siteUrl).toString(),
+		new URL(largestImageUrl('/images/Haus/gaestehaus-sommer.jpg'), siteUrl).toString(),
+		new URL(largestImageUrl('/images/Haus/balkon-ausblick-winter.jpg'), siteUrl).toString(),
+		new URL(largestImageUrl('/images/Haus/gaestehaus-balkon-ausblick.jpg'), siteUrl).toString(),
+		new URL(largestImageUrl('/images/Haus/familie-hueber.jpg'), siteUrl).toString(),
 	];
 	const amenityFeatures = $derived.by(() => {
 		const amenities = Array.from(new Set(rooms.flatMap((room) => room.amenities ?? [])));
@@ -113,76 +117,6 @@
 		latitude: 46.688407,
 		longitude: 13.2549914,
 	} as const;
-	const fallbackVacationImagePaths = [
-		'/images/Haus/gaestehaus-sommer.jpg',
-		'/images/Haus/balkon-ausblick-winter.jpg',
-		'/images/Haus/gaestehaus-balkon-ausblick.jpg',
-		'/images/Haus/familie-hueber.jpg',
-		'/images/Haus/weissbriach-kirche.jpg',
-		'/images/Haus/gaestehaus-pavillon.jpg',
-		'/images/Haus/gaestehaus-winter-ansicht.jpg',
-		'/images/Haus/gaestehaus-tischtennis.jpg',
-		'/images/Haus/gaestehaus-winter.png',
-	];
-	const parseGuestCapacity = (guestText: string) => {
-		const rangeMatch = guestText.match(/(\d+)\s*-\s*(\d+)/);
-		if (rangeMatch) {
-			return {
-				minValue: Number.parseInt(rangeMatch[1], 10),
-				maxValue: Number.parseInt(rangeMatch[2], 10),
-			};
-		}
-		const singleMatch = guestText.match(/(\d+)/);
-		if (singleMatch) {
-			const value = Number.parseInt(singleMatch[1], 10);
-			return { minValue: value, maxValue: value };
-		}
-		return null;
-	};
-	const isIsoDate = (value: string | undefined) => Boolean(value?.match(/^\d{4}-\d{2}-\d{2}$/));
-	const buildVacationImages = (paths: string[]) => {
-		const allPaths = [...paths, ...fallbackVacationImagePaths];
-		const absoluteImages = Array.from(
-			new Set(allPaths.map((path) => new URL(withAsset(path), siteUrl).toString()))
-		);
-		const minImages = 8;
-		if (absoluteImages.length >= minImages) return absoluteImages.slice(0, minImages);
-		while (absoluteImages.length < minImages && absoluteImages.length > 0) {
-			absoluteImages.push(absoluteImages[absoluteImages.length - 1]);
-		}
-		return absoluteImages;
-	};
-	const buildAggregateRating = (ratings: number[]) => {
-		if (!ratings.length) return undefined;
-		const ratingValue = Number(
-			(ratings.reduce((sum, value) => sum + value, 0) / ratings.length).toFixed(1)
-		);
-		return {
-			'@type': 'AggregateRating',
-			ratingValue,
-			reviewCount: ratings.length,
-		};
-	};
-	const buildReviews = (
-		reviews: Array<{ name: string; rating: number; text: string; date?: string }>
-	) =>
-		reviews
-			.filter((review) => isIsoDate(review.date))
-			.map((review) => ({
-				'@type': 'Review',
-				reviewBody: review.text,
-				author: {
-					'@type': 'Person',
-					name: review.name,
-				},
-				reviewRating: {
-					'@type': 'Rating',
-					ratingValue: review.rating,
-					bestRating: 5,
-					worstRating: 1,
-				},
-				datePublished: review.date,
-			}));
 	const lodgingId = `${siteUrl}/#lodging`;
 	const hotelId = `${siteUrl}/#hotel`;
 	const destinationId = `${siteUrl}/#destination-gitschtal`;
@@ -192,137 +126,107 @@
 		'https://www.airbnb.at/users/profile/1470215552721931790',
 		'https://nlw.at/de/Unterkunft-finden/Reise-planen/Unterkuenfte/unterkuenfte/KTN/ee29ea3d-3203-4fc3-8e2a-2b996f9f66a1/gaestehaus-rader---fam--herold-hueber',
 	];
-	const containsPlaces = $derived.by(() =>
+	const roomStructuredData = $derived.by(() =>
 		rooms.map((room) => {
-			const maxGuests = parseGuestCapacity(room.attributes.guests[$lang]);
-			const reviewsWithDate = room.reviews.filter((review) => isIsoDate(review.date));
-			const reviewRatings = reviewsWithDate.map((review) => review.rating);
-			const roomUrl = new URL(`${resolve('/unterkuenfte-preise')}/${room.slug}`, siteUrl).toString();
-			const roomId = `${roomUrl}#vacation-rental`;
-			return {
-				'@type': 'VacationRental',
-				'@id': roomId,
-				name: room.title,
+			const roomUrl = new URL(`${localizedHref('/unterkuenfte-preise')}${room.slug}/`, siteUrl).toString();
+			const amenityLabels = (room.amenities ?? []).map((amenity) => $t(`amenity.${amenity}`));
+			return buildVacationRentalSchema({
+				accommodation: room,
+				locale: $lang,
+				pageUrl: roomUrl,
+				siteOrigin: siteUrl,
+				imagePaths: [room.images.main, ...getAccommodationGallerySources(room)],
+				amenityLabels,
 				description: room.subtitle[$lang],
-				url: roomUrl,
-				identifier: room.slug,
-				image: buildVacationImages([room.images.main, ...getAccommodationGallerySources(room)]),
-				geo: geoCoordinates,
-				containsPlace: {
-					'@type': 'Accommodation',
-					name: room.title,
-					accommodationCategory: 'Apartment',
-					floorLevel: room.attributes.floor,
-					occupancy: maxGuests
-						? {
-								'@type': 'QuantitativeValue',
-								value: maxGuests.maxValue,
-							}
-						: undefined,
-					amenityFeature: (room.amenities ?? []).map((amenity) => ({
-						'@type': 'LocationFeatureSpecification',
-						name: $t(`amenity.${amenity}`),
-						value: true,
-					})),
-					floorSize: {
-						'@type': 'QuantitativeValue',
-						value: Number.parseFloat(room.attributes.size.replace(',', '.')),
-						unitCode: 'MTK',
-					},
-				},
-				aggregateRating: buildAggregateRating(reviewRatings),
-				review: buildReviews(reviewsWithDate),
-				amenityFeature: (room.amenities ?? []).map((amenity) => ({
-					'@type': 'LocationFeatureSpecification',
-					name: $t(`amenity.${amenity}`),
-					value: true,
-				})),
-			};
+			});
 		})
 	);
 	const lodgingOffers = $derived.by(() =>
 		rooms.map((room) => {
-			const roomUrl = new URL(`${resolve('/unterkuenfte-preise')}/${room.slug}`, siteUrl).toString();
-			const roomId = `${roomUrl}#vacation-rental`;
-			return {
-				'@type': 'Offer',
-				priceCurrency: 'EUR',
+			const roomUrl = new URL(`${localizedHref('/unterkuenfte-preise')}${room.slug}/`, siteUrl).toString();
+			return buildOfferSchema({
+				id: `${roomUrl}#lodging-offer`,
 				url: roomUrl,
-				itemOffered: {
-					'@id': roomId,
-				},
-			};
+				itemOfferedId: `${roomUrl}#vacation-rental`,
+			});
 		})
 	);
 	const homeJsonLd = $derived.by(() =>
-		JSON.stringify({
-			'@context': 'https://schema.org',
-			'@graph': [
-				{
-					'@type': 'LodgingBusiness',
+		buildJsonLdGraph([
+			{
+				'@type': 'LodgingBusiness',
+				'@id': lodgingId,
+				name: 'Gästehaus Rader',
+				url: siteUrl,
+				additionalType: 'https://schema.org/Hotel',
+				image: lodgingImages,
+				description: $t('home.seo.description'),
+				priceRange: '€€',
+				address: {
+					'@type': 'PostalAddress',
+					streetAddress: 'Weißbriach 92',
+					postalCode: '9622',
+					addressLocality: 'Weißbriach',
+					addressRegion: 'Kärnten',
+					addressCountry: 'AT',
+				},
+				geo: geoCoordinates,
+				sameAs: businessSameAs,
+				hasMap: 'https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9',
+				amenityFeature: amenityFeatures,
+				containsPlace: roomStructuredData.map((room) => ({
+					'@id': room.vacationRentalId,
+				})),
+				makesOffer: lodgingOffers.map((offer) => ({
+					'@id': offer['@id'] as string,
+				})),
+				telephone: ['+43 676 6246826', '+43 4286 222'],
+				email: 'info@rader-gitschtal.at',
+			},
+			{
+				'@type': 'Hotel',
+				'@id': hotelId,
+				name: 'Gästehaus Rader',
+				url: siteUrl,
+				description: $t('home.seo.description'),
+				image: lodgingImages,
+				parentOrganization: {
 					'@id': lodgingId,
-					name: 'Gästehaus Rader',
-					url: siteUrl,
-					additionalType: 'https://schema.org/Hotel',
-					image: lodgingImages,
-					description: $t('home.seo.description'),
-					priceRange: '€€',
-					address: {
-						'@type': 'PostalAddress',
-						streetAddress: 'Weißbriach 92',
-						postalCode: '9622',
-						addressLocality: 'Weißbriach',
-						addressRegion: 'Kärnten',
-						addressCountry: 'AT',
-					},
-					geo: geoCoordinates,
-					sameAs: businessSameAs,
-					hasMap: 'https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9',
-					amenityFeature: amenityFeatures,
-					containsPlace: containsPlaces,
-					makesOffer: lodgingOffers,
-					telephone: ['+43 676 6246826', '+43 4286 222'],
-					email: 'info@rader-gitschtal.at',
 				},
-				{
-					'@type': 'Hotel',
+				address: {
+					'@type': 'PostalAddress',
+					streetAddress: 'Weißbriach 92',
+					postalCode: '9622',
+					addressLocality: 'Weißbriach',
+					addressRegion: 'Kärnten',
+					addressCountry: 'AT',
+				},
+				geo: geoCoordinates,
+				telephone: ['+43 676 6246826', '+43 4286 222'],
+				email: 'info@rader-gitschtal.at',
+				sameAs: businessSameAs,
+				amenityFeature: amenityFeatures,
+				offers: {
+					'@type': 'Offer',
+					priceCurrency: 'EUR',
+					url: new URL(localizedHref('/unterkuenfte-preise'), siteUrl).toString(),
+				},
+			},
+			{
+				'@type': 'TouristDestination',
+				'@id': destinationId,
+				name: 'Gitschtal',
+				containsPlace: {
 					'@id': hotelId,
-					name: 'Gästehaus Rader',
-					url: siteUrl,
-					description: $t('home.seo.description'),
-					image: lodgingImages,
-					parentOrganization: {
-						'@id': lodgingId,
-					},
-					address: {
-						'@type': 'PostalAddress',
-						streetAddress: 'Weißbriach 92',
-						postalCode: '9622',
-						addressLocality: 'Weißbriach',
-						addressRegion: 'Kärnten',
-						addressCountry: 'AT',
-					},
-					geo: geoCoordinates,
-					telephone: ['+43 676 6246826', '+43 4286 222'],
-					email: 'info@rader-gitschtal.at',
-					sameAs: businessSameAs,
-					amenityFeature: amenityFeatures,
-					offers: {
-						'@type': 'Offer',
-						priceCurrency: 'EUR',
-						url: new URL(resolve('/unterkuenfte-preise'), siteUrl).toString(),
-					},
 				},
-				{
-					'@type': 'TouristDestination',
-					'@id': destinationId,
-					name: 'Gitschtal',
-					containsPlace: {
-						'@id': hotelId,
-					},
-				},
-			],
-		})
+			},
+			...roomStructuredData.flatMap((room) => [
+				room.vacationRentalNode,
+				room.accommodationNode,
+				room.offerNode,
+			]),
+			...lodgingOffers,
+		])
 	);
 
 	const amenityIcons = {
@@ -491,11 +395,15 @@
 		style={`--hero-header-offset: ${heroHeaderOffset};`}
 	>
 		<div class="absolute inset-0">
-			<div
-				class="h-full w-full bg-cover bg-center"
-				style={`background-image: url('${heroImage}');`}
+			<img
+				{...imageAttrs(heroImagePath, '100vw')}
+				alt=""
+				class="h-full w-full object-cover"
+				loading="eager"
+				fetchpriority="high"
+				decoding="sync"
 				aria-hidden="true"
-			></div>
+			/>
 			<div
 				class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-black/10"
 				aria-hidden="true"
@@ -522,13 +430,13 @@
 
 			<div use:reveal class="opacity-0 translate-y-4 transition-all duration-700 ease-out delay-700 mt-10 flex flex-wrap justify-center gap-4 sm:gap-5">
 				<a
-					href={resolve('/unterkuenfte-preise')}
+					href={localizedHref('/unterkuenfte-preise')}
 					class="inline-flex items-center justify-center rounded-full bg-brand px-8 py-3.5 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(206,126,90,0.25)] transition hover:-translate-y-0.5 hover:bg-[#c97451] hover:shadow-[0_12px_24px_rgba(206,126,90,0.3)] focus:outline-none focus:ring-2 focus:ring-brand/60"
 				>
 					{$t('hero.cta.primary')}
 				</a>
 				<a
-					href={resolve('/erlebnisse')}
+					href={localizedHref('/erlebnisse')}
 					class="inline-flex items-center justify-center rounded-full bg-white/15 px-8 py-3.5 text-sm font-semibold text-white ring-1 ring-white/20 backdrop-blur-md transition hover:-translate-y-0.5 hover:bg-white/25 hover:ring-white/40 focus:outline-none focus:ring-2 focus:ring-white/40"
 				>
 					{$t('hero.cta.secondary')}
@@ -686,11 +594,15 @@
 		style={`--hero-header-offset: ${heroHeaderOffset};`}
 	>
 		<div class="absolute inset-0">
-			<div
-				class="h-full w-full bg-cover bg-center"
-				style={`background-image: url('${heroImage}');`}
+			<img
+				{...imageAttrs(heroImagePath, '100vw')}
+				alt=""
+				class="h-full w-full object-cover"
+				loading="eager"
+				fetchpriority="high"
+				decoding="sync"
 				aria-hidden="true"
-			></div>
+			/>
 			<div
 				class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/40 to-black/10"
 				aria-hidden="true"
@@ -717,13 +629,13 @@
 
 			<div use:reveal class="opacity-0 translate-y-4 transition-all duration-700 ease-out delay-700 mt-10 flex flex-wrap justify-center gap-4 sm:gap-5">
 				<a
-					href={resolve('/unterkuenfte-preise')}
+					href={localizedHref('/unterkuenfte-preise')}
 					class="inline-flex items-center justify-center rounded-full bg-brand px-8 py-3.5 text-sm font-semibold text-white shadow-[0_8px_20px_rgba(206,126,90,0.25)] transition hover:-translate-y-0.5 hover:bg-[#c97451] hover:shadow-[0_12px_24px_rgba(206,126,90,0.3)] focus:outline-none focus:ring-2 focus:ring-brand/60"
 				>
 					{$t('hero.cta.primary')}
 				</a>
 				<a
-					href={resolve('/erlebnisse')}
+					href={localizedHref('/erlebnisse')}
 					class="inline-flex items-center justify-center rounded-full bg-white/15 px-8 py-3.5 text-sm font-semibold text-white ring-1 ring-white/20 backdrop-blur-md transition hover:-translate-y-0.5 hover:bg-white/25 hover:ring-white/40 focus:outline-none focus:ring-2 focus:ring-white/40"
 				>
 					{$t('hero.cta.secondary')}
@@ -833,7 +745,7 @@
 					</div>
 
 					<a
-						href={resolve('/unterkuenfte-preise')}
+						href={localizedHref('/unterkuenfte-preise')}
 						class="ml-auto inline-flex w-full items-center justify-end gap-2 pt-0 text-sm font-semibold text-brand/80 transition hover:text-brand sm:w-auto sm:pt-2"
 					>
 						{$t('rooms.section.cta')}
@@ -847,17 +759,18 @@
 					>
 						{#each rooms as r}
 							<a
-								href={`${accommodationsBase}/${r.slug}`}
+								href={`${accommodationsBase}${r.slug}/`}
 								class="group relative w-[280px] shrink-0 snap-start overflow-hidden rounded-3xl border border-slate-200/70 bg-white shadow-sm transition-all duration-300 hover:shadow-lg sm:w-[340px] sm:hover:-translate-y-1 motion-reduce:transform-none motion-reduce:transition-none"
 								onclick={() => trackEvent('Content: Room Card Click', { source: 'home', room: r.slug })}
 							>
 								<!-- Image -->
 								<div class="relative aspect-[4/3] overflow-hidden">
 									<img
-										src={withAsset(r.images.main)}
+										{...imageAttrs(r.images.main, '(max-width: 640px) 78vw, 340px')}
 										alt={`${$t('home.rooms.card.imageAltPrefix')} ${r.title}`}
 										class="h-full w-full object-cover transition duration-1000 ease-out group-hover:scale-105"
 										loading="lazy"
+										decoding="async"
 									/>
 									<div
 										class="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/10 to-transparent"
@@ -1258,10 +1171,11 @@
 				<div class="grid gap-8 lg:grid-cols-[1.1fr,0.9fr]">
 					<div class="order-2 relative h-[260px] sm:h-[320px] lg:order-1 lg:h-[670px]">
 						<img
-							src={withAsset(guestCardVisual.src)}
+							{...imageAttrs(guestCardVisual.src, '(max-width: 1024px) 100vw, 45vw')}
 							alt={$t(guestCardVisual.altKey)}
 							class="h-full w-full object-cover"
 							loading="lazy"
+							decoding="async"
 						/>
 						<div
 							class="absolute inset-0 bg-gradient-to-r from-black/10 via-transparent to-transparent"
@@ -1893,14 +1807,15 @@
 
 				<div class="mt-8 grid gap-6 lg:grid-cols-[1.3fr_0.9fr]">
 					<a
-						href={resolve('/erlebnisse/sommer')}
+						href={localizedHref('/erlebnisse/sommer')}
 						class="group relative overflow-hidden rounded-3xl border border-white/20 bg-white/10 ring-1 ring-black/5 shadow-none transition-all duration-500 hover:-translate-y-1 hover:shadow-xl"
 					>
 						<img
-							src={withAsset('/images/Haus/gaestehaus-sommer.jpg')}
+							{...imageAttrs('/images/Haus/gaestehaus-sommer.jpg', '(max-width: 1024px) 100vw, 800px')}
 							alt={$t('home.seasons.summer.imageAlt')}
 							class="h-72 w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] sm:h-[420px]"
 							loading="lazy"
+							decoding="async"
 						/>
 						<div
 							class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent transition-colors duration-500 group-hover:from-black/80 group-hover:via-black/50"
@@ -1925,14 +1840,15 @@
 					</a>
 
 					<a
-						href={resolve('/erlebnisse/winter')}
+						href={localizedHref('/erlebnisse/winter')}
 						class="group relative overflow-hidden rounded-3xl border border-white/20 bg-white/10 ring-1 ring-black/5 shadow-none transition-all duration-500 hover:-translate-y-1 hover:shadow-xl"
 					>
 						<img
-							src={withAsset('/images/Haus/gaestehaus-winter.png')}
+							{...imageAttrs('/images/Haus/gaestehaus-winter.png', '(max-width: 1024px) 100vw, 800px')}
 							alt={$t('home.seasons.winter.imageAlt')}
 							class="h-72 w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] sm:h-[420px]"
 							loading="lazy"
+							decoding="async"
 						/>
 						<div
 							class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent transition-colors duration-500 group-hover:from-black/80 group-hover:via-black/50"
@@ -1969,10 +1885,11 @@
 					<div class="relative">
 						<div class="relative overflow-hidden rounded-3xl">
 							<img
-								src={withAsset('/images/Drohne/solar.png')}
+								{...imageAttrs('/images/Drohne/solar.png', '(max-width: 1024px) 100vw, 760px')}
 								alt={$t('home.sustainability.imageAlt')}
 								class="h-[320px] w-full object-cover sm:h-[380px]"
 								loading="lazy"
+								decoding="async"
 							/>
 							<div
 								class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/10 via-transparent to-transparent"
@@ -2090,14 +2007,14 @@
 
 					<div class="mt-5 flex flex-wrap gap-3">
 						<a
-							href={resolve('/workation')}
+							href={localizedHref('/workation')}
 							class="inline-flex items-center gap-2 rounded-full border border-brand/30 bg-brand/10 px-5 py-2.5 text-sm font-semibold text-brand-dark transition hover:bg-brand/15"
 						>
 							{$t('home.workation.cta.primary')}
 							<ArrowRight class="h-4 w-4" aria-hidden="true" />
 						</a>
 						<a
-							href={resolve('/kontakt')}
+							href={localizedHref('/kontakt')}
 							class="inline-flex items-center gap-2 rounded-full border border-slate-300 px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-100"
 						>
 							{$t('home.workation.cta.secondary')}
@@ -2106,7 +2023,7 @@
 				</div>
 
 				<a
-					href={resolve('/workation')}
+					href={localizedHref('/workation')}
 					class="group relative overflow-hidden rounded-2xl border border-slate-200"
 				>
 					<img
@@ -2142,14 +2059,14 @@
 
 			<div class="mt-6 flex flex-wrap gap-3">
 				<a
-					href={resolve('/buchen')}
+					href={localizedHref('/buchen')}
 					class="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-white/90"
 					onclick={() => trackEvent('Booking: Jetzt buchen', { source: 'home-cta' })}
 				>
 					{$t('cta.primary')}
 				</a>
 				<a
-					href={resolve('/unterkuenfte-preise')}
+					href={localizedHref('/unterkuenfte-preise')}
 					class="inline-flex items-center justify-center rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white/95 transition hover:bg-white/10"
 				>
 					{$t('cta.secondary')}

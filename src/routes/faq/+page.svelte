@@ -1,6 +1,9 @@
 <script lang="ts">
-	import { t } from '$lib/i18n';
+	import { page } from '$app/state';
+	import { lang, t } from '$lib/i18n';
 	import SeoHead from '$lib/components/SeoHead.svelte';
+	import { SITE_ORIGIN } from '$lib/seo';
+	import { buildBreadcrumbListSchema, buildFaqPageSchema, buildJsonLdGraph } from '$lib/structured-data';
 
 	const faqItems = [
 		{ question: 'faq.q1', answer: 'faq.a1' },
@@ -15,9 +18,34 @@
 		{ question: 'faq.q10', answer: 'faq.a10' },
 		{ question: 'faq.q11', answer: 'faq.a11' },
 	];
+
+	const faqUrl = $derived.by(() => new URL(page.url.pathname, SITE_ORIGIN).toString());
+	const faqJsonLd = $derived.by(() =>
+		buildJsonLdGraph([
+			buildBreadcrumbListSchema(
+				[
+					{ name: $t('nav.home'), path: '/' },
+					{ name: $t('faq.title'), path: page.url.pathname },
+				],
+				SITE_ORIGIN
+			),
+			buildFaqPageSchema(
+				faqUrl,
+				$lang,
+				faqItems.map((item) => ({
+					question: $t(item.question),
+					answer: $t(item.answer),
+				}))
+			),
+		])
+	);
 </script>
 
 <SeoHead titleKey="faq.seo.title" descriptionKey="faq.seo.description" />
+
+<svelte:head>
+	{@html `<script type="application/ld+json">${faqJsonLd}</script>`}
+</svelte:head>
 
 <div class="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
 	<section class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm sm:p-10 lg:p-12">

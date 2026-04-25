@@ -1,11 +1,19 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
+import { page } from '$app/state';
 	import { asset, resolve } from '$app/paths';
 	import { lang, t } from '$lib/i18n';
 	import { getSortedAccommodationGallery } from '$lib/data/accommodations';
+	import { imageAttrs, largestImageUrl } from '$lib/images';
 	import { trackEvent } from '$lib/analytics/plausible';
 	import SeoHead from '$lib/components/SeoHead.svelte';
 	import { SITE_ORIGIN } from '$lib/seo';
+import { localizePath } from '$lib/routing';
+	import {
+		buildBreadcrumbListSchema,
+		buildJsonLdGraph,
+		buildVacationRentalSchema,
+	} from '$lib/structured-data';
 	import { onMount } from 'svelte';
 	import {
 		ArrowLeft,
@@ -33,6 +41,7 @@
 	const accommodation = $derived.by(() => data.accommodation);
 
 	const withAsset = (path: string) => asset(path);
+	const localizedHref = (path: string) => localizePath(path, page.url.pathname);
 	const siteUrl = SITE_ORIGIN;
 
 	const amenityIcons = {
@@ -94,87 +103,8 @@
 
 		return items;
 	});
-	const geoCoordinates = {
-		'@type': 'GeoCoordinates',
-		latitude: 46.688407,
-		longitude: 13.2549914,
-	} as const;
-	const fallbackVacationImagePaths = [
-		'/images/Haus/gaestehaus-sommer.jpg',
-		'/images/Haus/balkon-ausblick-winter.jpg',
-		'/images/Haus/gaestehaus-balkon-ausblick.jpg',
-		'/images/Haus/familie-hueber.jpg',
-		'/images/Haus/weissbriach-kirche.jpg',
-		'/images/Haus/gaestehaus-pavillon.jpg',
-		'/images/Haus/gaestehaus-winter-ansicht.jpg',
-		'/images/Haus/gaestehaus-tischtennis.jpg',
-		'/images/Haus/gaestehaus-winter.png',
-	];
-	const parseGuestCapacity = (guestText: string) => {
-		const rangeMatch = guestText.match(/(\d+)\s*-\s*(\d+)/);
-		if (rangeMatch) {
-			return {
-				minValue: Number.parseInt(rangeMatch[1], 10),
-				maxValue: Number.parseInt(rangeMatch[2], 10),
-			};
-		}
-		const singleMatch = guestText.match(/(\d+)/);
-		if (singleMatch) {
-			const value = Number.parseInt(singleMatch[1], 10);
-			return { minValue: value, maxValue: value };
-		}
-		return null;
-	};
-	const isIsoDate = (value: string | undefined) => Boolean(value?.match(/^\d{4}-\d{2}-\d{2}$/));
-	const buildVacationImages = (paths: string[]) => {
-		const explicitImages = Array.from(
-			new Set(paths.map((path) => new URL(withAsset(path), siteUrl).toString()))
-		);
-		const fallbackImages = Array.from(
-			new Set(fallbackVacationImagePaths.map((path) => new URL(withAsset(path), siteUrl).toString()))
-		).filter((path) => !explicitImages.includes(path));
-		const absoluteImages = [...explicitImages];
-		const minImages = 8;
-		for (const fallbackImage of fallbackImages) {
-			if (absoluteImages.length >= minImages) break;
-			absoluteImages.push(fallbackImage);
-		}
-		while (absoluteImages.length < minImages && absoluteImages.length > 0) {
-			absoluteImages.push(absoluteImages[absoluteImages.length - 1]);
-		}
-		return absoluteImages;
-	};
-	const buildAggregateRating = (ratings: number[]) => {
-		if (!ratings.length) return undefined;
-		const ratingValue = Number((ratings.reduce((sum, value) => sum + value, 0) / ratings.length).toFixed(1));
-		return {
-			'@type': 'AggregateRating',
-			ratingValue,
-			reviewCount: ratings.length,
-		};
-	};
-	const buildReviews = (
-		reviews: Array<{ name: string; rating: number; text: string; date?: string }>
-	) =>
-		reviews
-			.filter((review) => isIsoDate(review.date))
-			.map((review) => ({
-			'@type': 'Review',
-			reviewBody: review.text,
-			author: {
-				'@type': 'Person',
-				name: review.name,
-			},
-			reviewRating: {
-				'@type': 'Rating',
-				ratingValue: review.rating,
-				bestRating: 5,
-				worstRating: 1,
-			},
-			datePublished: review.date,
-		}));
 	const roomUrl = $derived.by(() =>
-		new URL(`${resolve('/unterkuenfte-preise')}/${accommodation.slug}`, siteUrl).toString()
+		new URL(`${localizedHref('/unterkuenfte-preise')}${accommodation.slug}/`, siteUrl).toString()
 	);
 	const ogImage = $derived.by(() =>
 		new URL(withAsset(accommodation.images.main), siteUrl).toString()
@@ -184,61 +114,32 @@
 	const amenityLabels = $derived.by(() =>
 		accommodation.amenities.map((amenity) => $t(`amenity.${amenity}`))
 	);
-	const roomJsonLd = $derived.by(() =>
-		JSON.stringify((() => {
-			const maxGuests = parseGuestCapacity(accommodation.attributes.guests[$lang]);
-			const reviewsWithDate = accommodation.reviews.filter((review) => isIsoDate(review.date));
-			const reviewRatings = reviewsWithDate.map((review) => review.rating);
-			return {
-				'@context': 'https://schema.org',
-				'@type': 'VacationRental',
-				'@id': `${roomUrl}#vacation-rental`,
-				name: accommodation.title,
-				description: accommodation.detailBody[$lang],
-				url: roomUrl,
-				mainEntityOfPage: roomUrl,
-				identifier: accommodation.slug,
-				additionalType: 'Apartment',
-				image: buildVacationImages(galleryItems.map((item) => item.src)),
-				geo: geoCoordinates,
-				containsPlace: {
-					'@type': 'Accommodation',
-					name: accommodation.title,
-					floorLevel: accommodation.attributes.floor,
-					occupancy: maxGuests
-						? {
-								'@type': 'QuantitativeValue',
-								value: maxGuests.maxValue,
-							}
-						: undefined,
-					amenityFeature: amenityLabels.map((name) => ({
-						'@type': 'LocationFeatureSpecification',
-						name,
-						value: true,
-					})),
-					floorSize: {
-						'@type': 'QuantitativeValue',
-						value: Number.parseFloat(accommodation.attributes.size.replace(',', '.')),
-						unitCode: 'MTK',
-					},
-				},
-				aggregateRating: buildAggregateRating(reviewRatings),
-				review: buildReviews(reviewsWithDate),
-				offers: {
-					'@type': 'Offer',
-					price: accommodation.pricePerNightBase,
-					priceCurrency: 'EUR',
-					url: roomUrl,
-					availability: 'https://schema.org/InStock',
-				},
-				amenityFeature: amenityLabels.map((name) => ({
-					'@type': 'LocationFeatureSpecification',
-					name,
-					value: true,
-				})),
-			};
-		})())
-	);
+	const roomJsonLd = $derived.by(() => {
+		const roomSchema = buildVacationRentalSchema({
+			accommodation,
+			locale: $lang,
+			pageUrl: roomUrl,
+			siteOrigin: siteUrl,
+			imagePaths: galleryItems.map((item) => item.src),
+			amenityLabels,
+			description: accommodation.detailBody[$lang],
+			mainEntityOfPage: roomUrl,
+		});
+
+		return buildJsonLdGraph([
+			buildBreadcrumbListSchema(
+				[
+					{ name: $t('nav.home'), path: '/' },
+					{ name: $t('rooms.page.title'), path: localizedHref('/unterkuenfte-preise') },
+					{ name: accommodation.title, path: page.url.pathname },
+				],
+				siteUrl
+			),
+			roomSchema.vacationRentalNode,
+			roomSchema.accommodationNode,
+			roomSchema.offerNode,
+		]);
+	});
 
 	const galleryPreviewItems = $derived.by(() => galleryItems.slice(0, 3));
 
@@ -371,7 +272,7 @@
 		<section class="rounded-3xl bg-transparent">
 			<!-- Back -->
 			<a
-				href={resolve('/unterkuenfte-preise')}
+				href={localizedHref('/unterkuenfte-preise')}
 				class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-brand hover:opacity-90"
 			>
 				<ArrowLeft class="h-4 w-4" />{$t('room.detail.back')}</a>
@@ -385,10 +286,11 @@
 					onclick={() => openGallery(0)}
 				>
 					<img
-						src={withAsset((galleryPreviewItems[0] ?? galleryItems[0]).src)}
+						{...imageAttrs((galleryPreviewItems[0] ?? galleryItems[0]).src, '(max-width: 1024px) 100vw, 900px')}
 						alt={(galleryPreviewItems[0] ?? galleryItems[0]).alt}
 						class={`h-[260px] w-full transition duration-700 group-hover:scale-[1.02] sm:h-[360px] lg:h-[480px] ${(galleryPreviewItems[0] ?? galleryItems[0]).kind === 'floorplan' ? 'object-contain bg-white p-4 sm:p-6' : 'object-cover'}`}
-						loading="lazy"
+						loading="eager"
+						fetchpriority="high"
 					/>
 					{#if (galleryPreviewItems[0] ?? galleryItems[0]).kind === 'floorplan'}
 						<span class="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-900 shadow-sm">
@@ -405,10 +307,11 @@
 						onclick={() => openGallery(1)}
 					>
 						<img
-							src={withAsset((galleryPreviewItems[1] ?? galleryItems[0]).src)}
+							{...imageAttrs((galleryPreviewItems[1] ?? galleryItems[0]).src, '(max-width: 1024px) 50vw, 340px')}
 							alt={(galleryPreviewItems[1] ?? galleryItems[0]).alt}
 							class={`h-[120px] w-full sm:h-[160px] lg:h-[230px] ${(galleryPreviewItems[1] ?? galleryItems[0]).kind === 'floorplan' ? 'object-contain bg-white p-3' : 'object-cover'}`}
 							loading="lazy"
+							decoding="async"
 						/>
 						{#if (galleryPreviewItems[1] ?? galleryItems[0]).kind === 'floorplan'}
 							<span class="pointer-events-none absolute left-3 top-3 rounded-full bg-white/95 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-900 shadow-sm">
@@ -423,10 +326,11 @@
 						onclick={() => openGallery(2)}
 					>
 						<img
-							src={withAsset((galleryPreviewItems[2] ?? galleryItems[0]).src)}
+							{...imageAttrs((galleryPreviewItems[2] ?? galleryItems[0]).src, '(max-width: 1024px) 50vw, 340px')}
 							alt={(galleryPreviewItems[2] ?? galleryItems[0]).alt}
 							class={`h-[120px] w-full sm:h-[160px] lg:h-[230px] ${(galleryPreviewItems[2] ?? galleryItems[0]).kind === 'floorplan' ? 'object-contain bg-white p-3' : 'object-cover'}`}
 							loading="lazy"
+							decoding="async"
 						/>
 						{#if (galleryPreviewItems[2] ?? galleryItems[0]).kind === 'floorplan'}
 							<span class="pointer-events-none absolute left-3 top-3 rounded-full bg-white/95 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-slate-900 shadow-sm">
@@ -748,7 +652,7 @@
 
 						<!-- CTA -->
 						<a
-							href={resolve('/buchen')}
+							href={localizedHref('/buchen')}
 							bind:this={mainBookingCtaEl}
 							class="mt-5 inline-flex w-full items-center justify-center rounded-xl bg-brand px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:brightness-110 focus:outline-none focus:ring-4 focus:ring-brand/25"
 							onclick={() =>
@@ -786,7 +690,7 @@
 				</p>
 			</div>
 			<a
-				href={resolve('/buchen')}
+				href={localizedHref('/buchen')}
 				class="inline-flex h-11 shrink-0 items-center justify-center rounded-xl bg-brand px-4 text-sm font-semibold text-white transition hover:bg-brand/90"
 				onclick={() =>
 					trackEvent('Booking: Jetzt buchen', { source: 'room-detail-sticky', room: accommodation.slug })}
@@ -813,7 +717,7 @@
 
 			<div class="overflow-hidden rounded-3xl bg-white shadow-xl">
 				<img
-					src={withAsset(galleryItems[galleryIndex].src)}
+					src={largestImageUrl(galleryItems[galleryIndex].src)}
 					alt={galleryItems[galleryIndex].alt}
 					class={`h-[60vh] max-h-[520px] w-full bg-white ${galleryItems[galleryIndex].kind === 'floorplan' ? 'object-contain' : 'object-contain sm:object-cover'}`}
 				/>
@@ -839,9 +743,11 @@
 							onclick={() => (galleryIndex = i)}
 						>
 							<img
-								src={withAsset(item.src)}
+								{...imageAttrs(item.src, '64px')}
 								alt={item.alt}
 								class={`h-full w-full bg-white ${item.kind === 'floorplan' ? 'object-contain p-1' : 'object-contain sm:object-cover'}`}
+								loading="lazy"
+								decoding="async"
 							/>
 							{#if item.kind === 'floorplan'}
 								<span class="absolute inset-x-1 bottom-1 rounded bg-white/95 px-1 py-0.5 text-[8px] font-semibold uppercase tracking-[0.08em] text-slate-900">

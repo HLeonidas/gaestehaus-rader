@@ -1,10 +1,15 @@
 <script lang="ts">
 	import { reveal } from '$lib/actions/reveal';
 	import { lang, t } from '$lib/i18n';
-	import { asset, resolve } from '$app/paths';
+	import { resolve } from '$app/paths';
+import { page } from '$app/state';
 	import { accommodations } from '$lib/data/accommodations';
+	import { imageAttrs } from '$lib/images';
 	import { trackEvent } from '$lib/analytics/plausible';
 	import SeoHead from '$lib/components/SeoHead.svelte';
+import { localizePath } from '$lib/routing';
+	import { SITE_ORIGIN } from '$lib/seo';
+	import { buildBreadcrumbListSchema, buildJsonLdGraph } from '$lib/structured-data';
 	import {
 		Lightbulb,
 		Wifi,
@@ -45,22 +50,31 @@
 		parking: SquareParking,
 	};
 
-	const withAsset = (path: string) => asset(path);
+
+	const localizedHref = (path: string) => localizePath(path, page.url.pathname);
 
 	const rooms = accommodations;
-	const accommodationsBase = resolve('/unterkuenfte-preise');
-	const siteUrl = 'https://rader-gitschtal.at';
+	const accommodationsBase = $derived.by(() => localizedHref('/unterkuenfte-preise'));
+	const siteUrl = SITE_ORIGIN;
 	const roomsJsonLd = $derived.by(() =>
-		JSON.stringify({
-			'@context': 'https://schema.org',
-			'@type': 'ItemList',
-			itemListElement: rooms.map((room, index) => ({
-				'@type': 'ListItem',
-				position: index + 1,
-				name: room.title,
-				url: new URL(`${accommodationsBase}/${room.slug}`, siteUrl).toString(),
-			})),
-		})
+		buildJsonLdGraph([
+			buildBreadcrumbListSchema(
+				[
+					{ name: $t('nav.home'), path: '/' },
+					{ name: $t('rooms.page.title'), path: page.url.pathname },
+				],
+				siteUrl
+			),
+			{
+				'@type': 'ItemList',
+				itemListElement: rooms.map((room, index) => ({
+					'@type': 'ListItem',
+					position: index + 1,
+					name: room.title,
+					url: new URL(`${accommodationsBase}${room.slug}/`, siteUrl).toString(),
+				})),
+			},
+		])
 	);
 
 	function badgeClasses(badgeLabel: string) {
@@ -111,12 +125,13 @@
 					>
 						<!-- Image -->
 						<div class="relative">
-							<a href={`${accommodationsBase}/${room.slug}`}>
+							<a href={`${accommodationsBase}${room.slug}/`}>
 								<img
-									src={withAsset(room.images.main)}
+									{...imageAttrs(room.images.main, '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 720px')}
 									alt={`${room.title} – ${room.subtitle[$lang]}`}
 									class="h-[38vh] min-h-48 max-h-72 w-full object-cover object-center sm:h-80 sm:max-h-none lg:h-[26rem]"
 									loading="lazy"
+									decoding="async"
 								/>
 							</a>
 							{#if room.badgeLabel}
@@ -138,7 +153,7 @@
 							<!-- Left: title + meta -->
 							<div class="md:pr-10">
 								<h2 class="text-lg font-semibold text-slate-900 sm:text-xl">
-									<a href={`${accommodationsBase}/${room.slug}`} class="hover:opacity-90">
+									<a href={`${accommodationsBase}${room.slug}/`} class="hover:opacity-90">
 										{room.title}
 									</a>
 								</h2>
@@ -182,7 +197,7 @@
 
 								<div class="flex w-full flex-col gap-4 md:w-auto md:items-end">
 									<a
-										href={resolve('/buchen')}
+										href={localizedHref('/buchen')}
 										class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-brand/90 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-brand/30 md:w-auto md:min-w-[180px]"
 										onclick={() => trackEvent('Booking: Jetzt buchen', { source: 'rooms-list' })}
 									>
