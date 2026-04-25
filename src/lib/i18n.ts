@@ -250,11 +250,11 @@ const translations: Record<Lang, Record<string, string>> = {
 		'experiences.season.summer.kicker': 'Sommer im Gitschtal',
 		'experiences.season.summer.title': 'Berge, Seen & genussvolle Auszeiten',
 		'experiences.season.summer.subtitle':
-			'Erleben Sie aktive Sommertage rund um Weißbriach: Wandern im Gitschtal, Radeln durchs Gailtal, Baden am Weißensee - und Panoramafahrten mit den Sommerbergbahnen am Nassfeld.',
+			'Erleben Sie aktive Sommertage rund um Weißbriach: Wandern im Gitschtal, Radeln durchs Gailtal, Baden am Weißensee und aktuelle Sommer-Ausflugsideen vom Freibad bis zu den Sommerbergbahnen am Nassfeld.',
 		'experiences.season.winter.kicker': 'Winter in Kärnten',
 		'experiences.season.winter.title': 'Sonne, Schnee & Ruhe danach',
 		'experiences.season.winter.subtitle':
-			'Genießen Sie Wintertage in der Region: Skifahren am Nassfeld, Eislaufen am Weißensee und Langlaufen in Weißbriach - mit einem warmen Platz zum Ankommen am Ende des Tages.',
+			'Genießen Sie Wintertage in der Region: Skifahren am Nassfeld, Eislaufen am Weißensee, Langlaufen in Weißbriach und ruhige Wintertipps, die wir saisonal für unsere Gäste im Blick behalten.',
 		'experiences.badge.includedCard': 'Inklusive Card',
 		'experiences.badge.popular': 'Highlight',
 		'experiences.badge.favorite': 'Lieblingsspot',
@@ -495,13 +495,13 @@ const translations: Record<Lang, Record<string, string>> = {
 		'guestcard.landing.kicker': 'Exklusiv für unsere Gäste',
 		'guestcard.landing.title': 'GästeCard Basic inklusive',
 		'guestcard.landing.body':
-			'Erleben Sie maximale Freiheit in Ihrem Kärnten-Urlaub. Die GästeCard ist Ihr kostenloser Schlüssel zu den schönsten Erlebnissen der Region.',
+			'Erleben Sie maximale Freiheit in Ihrem Kärnten-Urlaub. Die GästeCard Basic ist Ihr kostenloser Schlüssel zu Mobilität, Ausflügen und aktuell gepflegten Vorteilen in der Region.',
 		'guestcard.landing.item1.title': 'Kostenloser öffentlicher Verkehr',
 		'guestcard.landing.item1.body':
 			'Freie Fahrt mit Bus & ÖBB S-Bahn in ganz Kärnten während Ihres gesamten Aufenthalts.',
 		'guestcard.landing.item2.title': '40+ Vorteile',
 		'guestcard.landing.item2.body':
-			'Zahlreiche Ermäßigungen und ausgewählte kostenlose Eintritte ab der 1. Übernachtung genießen.',
+			'Zahlreiche Ermäßigungen und ausgewählte kostenlose Eintritte ab der 1. Übernachtung - mit regelmäßig geprüfter Vorteilsübersicht.',
 		'guestcard.landing.item3.title': 'Gültig inkl. An- & Abreisetag',
 		'guestcard.landing.item3.body':
 			'Ihre Mobilitätsgarantie vom Moment des Check-ins bis zur letzten Urlaubsminute.',
@@ -551,7 +551,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'guestcard.experiences.kicker': 'Exklusiv für Sie',
 		'guestcard.experiences.title': 'GästeCard Basic inklusive',
 		'guestcard.experiences.subtitle':
-			'Mit der GästeCard Basic sind Sie ohne Auto flexibel unterwegs - und nutzen zusätzlich zahlreiche Ermäßigungen und Vorteile in der Region.',
+			'Mit der GästeCard Basic sind Sie ohne Auto flexibel unterwegs - und nutzen zusätzlich zahlreiche, saisonal überprüfte Ermäßigungen und Vorteile in der Region.',
 		'guestcard.experiences.freeNote': 'Kostenlos für unsere Übernachtungsgäste',
 		'guestcard.experiences.brochure.cta': 'Alle Vorteile in der Broschüre ansehen',
 		'guestcard.experiences.benefitsOverviewCta': 'Aktuelle Leistungsübersicht',
@@ -1066,7 +1066,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'faq.guestcard.kicker': 'GästeCard Basic',
 		'faq.guestcard.title': 'GästeCard Basic im Überblick',
 		'faq.guestcard.subtitle':
-			'Alles Wichtige zur Karte: Ausgabe, Gültigkeit, Nutzung und Regeln für alle Gäste.',
+			'Alles Wichtige zur Karte: Ausgabe, Gültigkeit, Nutzung, Regeln und Hinweise zur aktuell gepflegten Vorteilsübersicht für unsere Gäste.',
 		'faq.guestcard.q1': 'Wer bekommt die GästeCard Basic?',
 		'faq.guestcard.a1':
 			'Jeder Gast, der in der Region übernachtet, erhält die GästeCard Basic. Pro Person wird eine Card ausgestellt.',
@@ -1333,11 +1333,11 @@ const translations: Record<Lang, Record<string, string>> = {
 		'experiences.season.summer.kicker': 'Summer in the Gitschtal',
 		'experiences.season.summer.title': 'Mountains, lakes, and laid-back escapes',
 		'experiences.season.summer.subtitle':
-			'Enjoy active summer days around Weißbriach: hiking in the Gitschtal, cycling through the Gailtal, swimming at Lake Weißensee, and panoramic rides with the Nassfeld summer lifts.',
+			'Enjoy active summer days around Weißbriach: hiking in the Gitschtal, cycling through the Gailtal, swimming at Lake Weißensee, and current warm-season ideas from the outdoor pool to the Nassfeld summer lifts.',
 		'experiences.season.winter.kicker': 'Winter in Carinthia',
 		'experiences.season.winter.title': 'Sun, snow, and calm afterwards',
 		'experiences.season.winter.subtitle':
-			'Enjoy winter days in the region: skiing at Nassfeld, ice skating on Lake Weißensee, and cross-country skiing in Weißbriach - with a warm place to return to at the end of the day.',
+			'Enjoy winter days in the region: skiing at Nassfeld, ice skating on Lake Weißensee, cross-country skiing in Weißbriach, and seasonal winter tips we keep current for our guests.',
 		'experiences.badge.includedCard': 'Included card',
 		'experiences.badge.popular': 'Highlight',
 		'experiences.badge.favorite': 'Favorite spot',
@@ -1580,13 +1580,13 @@ const translations: Record<Lang, Record<string, string>> = {
 		'guestcard.landing.kicker': 'Exclusive for our guests',
 		'guestcard.landing.title': 'Guest Card Basic included',
 		'guestcard.landing.body':
-			'Enjoy maximum freedom on your Carinthia getaway. The benefit card is your free key to the region’s best experiences.',
+			'Enjoy maximum freedom on your Carinthia getaway. The Guest Card Basic is your free key to mobility, outings, and regularly reviewed regional benefits.',
 		'guestcard.landing.item1.title': 'Free public transport',
 		'guestcard.landing.item1.body':
 			'Ride regional buses and ÖBB S-Bahn across Carinthia throughout your stay.',
 		'guestcard.landing.item2.title': '40+ benefits',
 		'guestcard.landing.item2.body':
-			'Enjoy many discounts and selected free admissions from the first night.',
+			'Enjoy many discounts and selected free admissions from the first night, backed by a benefits overview we review regularly.',
 		'guestcard.landing.item3.title': 'Valid incl. arrival & departure',
 		'guestcard.landing.item3.body':
 			'Your mobility guarantee from check-in to the final minute of your holiday.',
@@ -1636,7 +1636,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'guestcard.experiences.kicker': 'Exclusive for you',
 		'guestcard.experiences.title': 'Guest Card Basic included',
 		'guestcard.experiences.subtitle':
-			'With the Guest Card Basic, you can get around comfortably without a car - plus enjoy many regional discounts and perks.',
+			'With the Guest Card Basic, you can get around comfortably without a car - plus enjoy many regionally relevant discounts and perks that we review seasonally.',
 		'guestcard.experiences.freeNote': 'Free for our overnight guests',
 		'guestcard.experiences.brochure.cta': 'See all benefits in the brochure',
 		'guestcard.experiences.benefitsOverviewCta': 'Current benefits overview',
@@ -2137,7 +2137,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'faq.guestcard.kicker': 'Guest Card Basic',
 		'faq.guestcard.title': 'Guest Card Basic at a glance',
 		'faq.guestcard.subtitle':
-			'Key details about issuance, validity, usage, and rules for all guests.',
+			'Key details about issuance, validity, usage, rules, and the currently maintained benefits overview for all guests.',
 		'faq.guestcard.q1': 'Who receives the Guest Card Basic?',
 		'faq.guestcard.a1':
 			'Every guest staying in the region receives the Guest Card Basic. One card is issued per person.',

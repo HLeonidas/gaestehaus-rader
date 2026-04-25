@@ -667,8 +667,8 @@ export const experienceFestivalSection: FestivalSection = {
 		en: 'If you want to do more than just see the Gitschtal, local festivals, church fairs, and small village celebrations offer the most personal way to experience the valley.',
 	},
 	note: {
-		de: 'Viele Termine sind saisonabhängig. Gerne sagen wir Ihnen vor Ihrem Aufenthalt, was während Ihres Urlaubs gerade stattfindet.',
-		en: 'Many dates depend on the season and the local calendar. We are happy to tell you what is happening during your stay.',
+		de: 'Viele Termine sind saisonabhängig. Wir prüfen diese Hinweise regelmäßig und sagen Ihnen vor Ihrem Aufenthalt gerne, was während Ihres Urlaubs gerade gut passt.',
+		en: 'Many dates depend on the season and the local calendar. We review these pointers regularly and are happy to tell you what fits best during your stay.',
 	},
 	cards: [
 		{
