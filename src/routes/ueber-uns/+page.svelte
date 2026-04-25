@@ -1,9 +1,7 @@
 <script lang="ts">
 	import { t } from '$lib/i18n';
-	import { asset } from '$app/paths';
+	import { imageAttrs } from '$lib/images';
 	import SeoHead from '$lib/components/SeoHead.svelte';
-
-	const withAsset = (path: string) => asset(path);
 </script>
 
 <SeoHead
@@ -31,9 +29,11 @@
 				>
 					<!-- Replace src with your image -->
 					<img
-						src={withAsset('/images/Haus/familie-hueber.jpg')}
+						{...imageAttrs('/images/Haus/familie-hueber.jpg', '(max-width: 1024px) 100vw, 50vw')}
 						alt="Gästehaus Rader"
 						class="h-full w-full object-cover"
+						loading="eager"
+						fetchpriority="high"
 					/>
 					<!-- subtle overlay to match design softness -->
 				</div>

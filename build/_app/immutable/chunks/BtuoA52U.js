@@ -1,0 +1,1 @@
+import{i as d,u,j as n,_ as c,a7 as i}from"./CWs7nUy5.js";function _(s,o,r){d(()=>{var a=u(()=>o(s,r?.())||{});if(r&&a?.update){var t=!1,f={};n(()=>{var e=r();c(e),t&&i(f,e)&&(f=e,a.update(e))}),t=!0}if(a?.destroy)return()=>a.destroy()})}export{_ as a};

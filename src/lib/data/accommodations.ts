@@ -166,6 +166,14 @@ export const accommodations: Accommodation[] = [
 						en: 'Balcony seating in Apartment Nº 1',
 					},
 				},
+				{
+					src: '/images/Nr1/nr1-wc.png',
+					category: 'wc',
+					alt: {
+						de: 'WC im Appartement Nº 1',
+						en: 'Toilet in Apartment Nº 1',
+					},
+				},
 			],
 		},
 		attributes: {
@@ -506,6 +514,14 @@ export const accommodations: Accommodation[] = [
 					alt: {
 						de: 'Eingangsbereich im Appartement Nº 3',
 						en: 'Entry area in Apartment Nº 3',
+					},
+				},
+				{
+					src: '/images/Nr3/bathroom.jpeg',
+					category: 'bathroom',
+					alt: {
+						de: 'Badezimmer im Appartement Nº 3',
+						en: 'Bathroom in Apartment Nº 3',
 					},
 				},
 			],

@@ -1,71 +1,311 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-	<url>
-		<loc>https://rader-gitschtal.at/</loc>
-		<lastmod>2026-01-22</lastmod>
-	</url>
-	<url>
-		<loc>https://rader-gitschtal.at/unterkuenfte-preise/</loc>
-		<lastmod>2026-01-22</lastmod>
-	</url>
-	<url>
-		<loc>https://rader-gitschtal.at/unterkuenfte-preise/nr-1/</loc>
-		<lastmod>2026-01-22</lastmod>
-	</url>
-	<url>
-		<loc>https://rader-gitschtal.at/unterkuenfte-preise/nr-2/</loc>
-		<lastmod>2026-01-22</lastmod>
-	</url>
-	<url>
-		<loc>https://rader-gitschtal.at/unterkuenfte-preise/nr-3/</loc>
-		<lastmod>2026-01-22</lastmod>
-	</url>
-	<url>
-		<loc>https://rader-gitschtal.at/erlebnisse/</loc>
-		<lastmod>2026-01-22</lastmod>
-	</url>
-	<url>
-		<loc>https://rader-gitschtal.at/erlebnisse/sommer/</loc>
-		<lastmod>2026-01-22</lastmod>
-	</url>
-	<url>
-		<loc>https://rader-gitschtal.at/erlebnisse/winter/</loc>
-		<lastmod>2026-01-22</lastmod>
-	</url>
-	<url>
-		<loc>https://rader-gitschtal.at/faq/</loc>
-		<lastmod>2026-01-22</lastmod>
-	</url>
-	<url>
-		<loc>https://rader-gitschtal.at/ueber-uns/</loc>
-		<lastmod>2026-01-22</lastmod>
-	</url>
-	<url>
-		<loc>https://rader-gitschtal.at/kontakt/</loc>
-		<lastmod>2026-01-22</lastmod>
-	</url>
-	<url>
-		<loc>https://rader-gitschtal.at/buchen/</loc>
-		<lastmod>2026-01-22</lastmod>
-	</url>
-	<url>
-		<loc>https://rader-gitschtal.at/impressum/</loc>
-		<lastmod>2026-01-22</lastmod>
-	</url>
-	<url>
-		<loc>https://rader-gitschtal.at/datenschutz/</loc>
-		<lastmod>2026-01-22</lastmod>
-	</url>
-	<url>
-		<loc>https://rader-gitschtal.at/agb/</loc>
-		<lastmod>2026-01-22</lastmod>
-	</url>
-	<url>
-		<loc>https://rader-gitschtal.at/barrierefreiheit/</loc>
-		<lastmod>2026-01-22</lastmod>
-	</url>
-	<url>
-		<loc>https://rader-gitschtal.at/bildnachweise/</loc>
-		<lastmod>2026-01-22</lastmod>
-	</url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://rader-gitschtal.at/</loc>
+    <lastmod>2026-04-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/en/</loc>
+    <lastmod>2026-04-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/unterkuenfte-preise/</loc>
+    <lastmod>2026-04-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/unterkuenfte-preise/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/accommodations-prices/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/unterkuenfte-preise/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/en/accommodations-prices/</loc>
+    <lastmod>2026-04-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/unterkuenfte-preise/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/accommodations-prices/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/unterkuenfte-preise/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/erlebnisse/</loc>
+    <lastmod>2026-04-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/erlebnisse/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/experiences/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/erlebnisse/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/en/experiences/</loc>
+    <lastmod>2026-04-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/erlebnisse/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/experiences/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/erlebnisse/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/erlebnisse/sommer/</loc>
+    <lastmod>2026-04-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/erlebnisse/sommer/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/experiences/summer/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/erlebnisse/sommer/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/en/experiences/summer/</loc>
+    <lastmod>2026-04-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/erlebnisse/sommer/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/experiences/summer/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/erlebnisse/sommer/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/erlebnisse/winter/</loc>
+    <lastmod>2026-04-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/erlebnisse/winter/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/experiences/winter/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/erlebnisse/winter/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/en/experiences/winter/</loc>
+    <lastmod>2026-04-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/erlebnisse/winter/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/experiences/winter/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/erlebnisse/winter/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/faq/</loc>
+    <lastmod>2026-04-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/faq/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/faq/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/faq/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/en/faq/</loc>
+    <lastmod>2026-04-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/faq/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/faq/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/faq/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/ueber-uns/</loc>
+    <lastmod>2026-02-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/ueber-uns/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/about/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/ueber-uns/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/en/about/</loc>
+    <lastmod>2026-02-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/ueber-uns/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/about/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/ueber-uns/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/kontakt/</loc>
+    <lastmod>2026-03-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/kontakt/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/contact/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/kontakt/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/en/contact/</loc>
+    <lastmod>2026-03-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/kontakt/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/contact/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/kontakt/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/buchen/</loc>
+    <lastmod>2026-01-22</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/buchen/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/book/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/buchen/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/en/book/</loc>
+    <lastmod>2026-01-22</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/buchen/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/book/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/buchen/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/fakten/</loc>
+    <lastmod>2026-04-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/fakten/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/facts/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/fakten/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/en/facts/</loc>
+    <lastmod>2026-04-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/fakten/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/facts/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/fakten/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/workation/</loc>
+    <lastmod>2026-03-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/workation/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/workation/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/workation/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/en/workation/</loc>
+    <lastmod>2026-03-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/workation/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/workation/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/workation/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/impressum/</loc>
+    <lastmod>2026-02-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/impressum/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/imprint/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/impressum/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/en/imprint/</loc>
+    <lastmod>2026-02-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/impressum/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/imprint/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/impressum/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/datenschutz/</loc>
+    <lastmod>2026-02-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/datenschutz/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/privacy/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/datenschutz/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/en/privacy/</loc>
+    <lastmod>2026-02-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/datenschutz/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/privacy/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/datenschutz/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/agb/</loc>
+    <lastmod>2026-01-22</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/agb/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/terms/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/agb/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/en/terms/</loc>
+    <lastmod>2026-01-22</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/agb/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/terms/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/agb/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/barrierefreiheit/</loc>
+    <lastmod>2026-01-22</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/barrierefreiheit/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/accessibility/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/barrierefreiheit/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/en/accessibility/</loc>
+    <lastmod>2026-01-22</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/barrierefreiheit/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/accessibility/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/barrierefreiheit/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/bildnachweise/</loc>
+    <lastmod>2026-02-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/bildnachweise/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/image-credits/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/bildnachweise/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/en/image-credits/</loc>
+    <lastmod>2026-02-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/bildnachweise/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/image-credits/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/bildnachweise/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/unterkuenfte-preise/nr-1/</loc>
+    <lastmod>2026-04-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/unterkuenfte-preise/nr-1/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/accommodations-prices/nr-1/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/unterkuenfte-preise/nr-1/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/en/accommodations-prices/nr-1/</loc>
+    <lastmod>2026-04-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/unterkuenfte-preise/nr-1/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/accommodations-prices/nr-1/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/unterkuenfte-preise/nr-1/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/buchen/nr-1/</loc>
+    <lastmod>2026-04-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/buchen/nr-1/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/book/nr-1/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/buchen/nr-1/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/en/book/nr-1/</loc>
+    <lastmod>2026-04-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/buchen/nr-1/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/book/nr-1/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/buchen/nr-1/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/unterkuenfte-preise/nr-2/</loc>
+    <lastmod>2026-04-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/unterkuenfte-preise/nr-2/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/accommodations-prices/nr-2/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/unterkuenfte-preise/nr-2/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/en/accommodations-prices/nr-2/</loc>
+    <lastmod>2026-04-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/unterkuenfte-preise/nr-2/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/accommodations-prices/nr-2/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/unterkuenfte-preise/nr-2/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/buchen/nr-2/</loc>
+    <lastmod>2026-04-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/buchen/nr-2/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/book/nr-2/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/buchen/nr-2/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/en/book/nr-2/</loc>
+    <lastmod>2026-04-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/buchen/nr-2/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/book/nr-2/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/buchen/nr-2/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/unterkuenfte-preise/nr-3/</loc>
+    <lastmod>2026-04-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/unterkuenfte-preise/nr-3/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/accommodations-prices/nr-3/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/unterkuenfte-preise/nr-3/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/en/accommodations-prices/nr-3/</loc>
+    <lastmod>2026-04-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/unterkuenfte-preise/nr-3/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/accommodations-prices/nr-3/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/unterkuenfte-preise/nr-3/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/buchen/nr-3/</loc>
+    <lastmod>2026-04-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/buchen/nr-3/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/book/nr-3/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/buchen/nr-3/" />
+  </url>
+  <url>
+    <loc>https://rader-gitschtal.at/en/book/nr-3/</loc>
+    <lastmod>2026-04-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/buchen/nr-3/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/book/nr-3/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/buchen/nr-3/" />
+  </url>
 </urlset>
