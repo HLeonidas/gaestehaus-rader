@@ -1,3 +1,4 @@
+import { base as appBase, resolve } from '$app/paths';
 import type { Lang } from '$lib/i18n';
 
 export const DEFAULT_LOCALE: Lang = 'de';
@@ -40,11 +41,21 @@ export const withTrailingSlash = (pathname: string) => {
 	return normalized === '/' ? '/' : `${normalized}/`;
 };
 
-export const getLocaleFromPathname = (pathname: string): Lang =>
-	normalizePathname(pathname) === '/en' || normalizePathname(pathname).startsWith('/en/') ? 'en' : 'de';
+export const stripBasePrefix = (pathname: string) => {
+	const normalized = normalizePathname(pathname);
+	if (!appBase) return normalized;
+	if (normalized === appBase) return '/';
+	if (normalized.startsWith(`${appBase}/`)) return normalized.slice(appBase.length) || '/';
+	return normalized;
+};
+
+export const getLocaleFromPathname = (pathname: string): Lang => {
+	const normalized = stripBasePrefix(pathname);
+	return normalized === '/en' || normalized.startsWith('/en/') ? 'en' : 'de';
+};
 
 export const stripLocalePrefix = (pathname: string) => {
-	const normalized = normalizePathname(pathname);
+	const normalized = stripBasePrefix(pathname);
 	if (normalized === '/en') return '/';
 	if (normalized.startsWith('/en/')) return normalized.slice(3) || '/';
 	return normalized;
@@ -84,7 +95,7 @@ export const translatePathname = (pathname: string, targetLocale: Lang) => {
 };
 
 export const localizePath = (basePath: string, currentPathname: string) =>
-	translatePathname(basePath, getLocaleFromPathname(currentPathname));
+	resolve(translatePathname(basePath, getLocaleFromPathname(currentPathname)));
 
 export const samePathOtherLocale = (currentPathname: string, targetLocale: Lang) =>
-	translatePathname(currentPathname, targetLocale);
+	resolve(translatePathname(currentPathname, targetLocale));
