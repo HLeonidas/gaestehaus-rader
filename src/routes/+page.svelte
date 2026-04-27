@@ -11,7 +11,13 @@ import { page } from '$app/state';
 	import SeoHead from '$lib/components/SeoHead.svelte';
 	import { SITE_ORIGIN } from '$lib/seo';
 import { localizePath } from '$lib/routing';
-	import { buildJsonLdGraph, buildOfferSchema, buildVacationRentalSchema } from '$lib/structured-data';
+	import {
+		BUSINESS_SAME_AS,
+		LODGING_BUSINESS_CORE,
+		buildJsonLdGraph,
+		buildOfferSchema,
+		buildVacationRentalSchema,
+	} from '$lib/structured-data';
 	import { onMount } from 'svelte';
 	import {
 		Mountain,
@@ -120,12 +126,7 @@ import { localizePath } from '$lib/routing';
 	const lodgingId = `${siteUrl}/#lodging`;
 	const hotelId = `${siteUrl}/#hotel`;
 	const destinationId = `${siteUrl}/#destination-gitschtal`;
-	const businessSameAs = [
-		'https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9',
-		'https://www.booking.com/Share-deqca7p',
-		'https://www.airbnb.at/users/profile/1470215552721931790',
-		'https://nlw.at/de/Unterkunft-finden/Reise-planen/Unterkuenfte/unterkuenfte/KTN/ee29ea3d-3203-4fc3-8e2a-2b996f9f66a1/gaestehaus-rader---fam--herold-hueber',
-	];
+	const businessSameAs = BUSINESS_SAME_AS;
 	const roomStructuredData = $derived.by(() =>
 		rooms.map((room) => {
 			const roomUrl = new URL(`${localizedHref('/unterkuenfte-preise')}${room.slug}/`, siteUrl).toString();
@@ -159,9 +160,9 @@ import { localizePath } from '$lib/routing';
 				name: 'Gästehaus Rader',
 				url: siteUrl,
 				additionalType: 'https://schema.org/Hotel',
+				...LODGING_BUSINESS_CORE,
 				image: lodgingImages,
 				description: $t('home.seo.description'),
-				priceRange: '€€',
 				address: {
 					'@type': 'PostalAddress',
 					streetAddress: 'Weißbriach 92',
@@ -189,6 +190,7 @@ import { localizePath } from '$lib/routing';
 				name: 'Gästehaus Rader',
 				url: siteUrl,
 				description: $t('home.seo.description'),
+				...LODGING_BUSINESS_CORE,
 				image: lodgingImages,
 				parentOrganization: {
 					'@id': lodgingId,
@@ -205,6 +207,7 @@ import { localizePath } from '$lib/routing';
 				telephone: ['+43 676 6246826', '+43 4286 222'],
 				email: 'info@rader-gitschtal.at',
 				sameAs: businessSameAs,
+				hasMap: 'https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9',
 				amenityFeature: amenityFeatures,
 				offers: {
 					'@type': 'Offer',

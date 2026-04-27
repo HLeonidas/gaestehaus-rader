@@ -5,7 +5,8 @@ import { page } from '$app/state';
 	import { lang, t } from '$lib/i18n';
 	import SeoHead from '$lib/components/SeoHead.svelte';
 	import { SITE_ORIGIN } from '$lib/seo';
-import { localizePath } from '$lib/routing';
+	import { BUSINESS_SAME_AS, LODGING_BUSINESS_CORE } from '$lib/structured-data';
+	import { localizePath } from '$lib/routing';
 	import {
 		Wifi,
 		Trees,
@@ -124,6 +125,9 @@ import { localizePath } from '$lib/routing';
 					additionalType: 'https://schema.org/Hotel',
 					name: $t('brand.name'),
 					url: SITE_ORIGIN,
+					...LODGING_BUSINESS_CORE,
+					sameAs: BUSINESS_SAME_AS,
+					hasMap: 'https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9',
 					image: [
 						imageUrl,
 						new URL(withAsset('/images/Haus/gaestehaus-sommer.jpg'), SITE_ORIGIN).toString(),

@@ -7,7 +7,8 @@ import { page } from '$app/state';
 	import { guesthouseFacts } from '$lib/data/facts';
 	import { lang } from '$lib/i18n';
 	import { SITE_ORIGIN } from '$lib/seo';
-import { localizePath } from '$lib/routing';
+	import { BUSINESS_SAME_AS, LODGING_BUSINESS_CORE } from '$lib/structured-data';
+	import { localizePath } from '$lib/routing';
 	import {
 		ArrowRight,
 		CarFront,
@@ -51,15 +52,19 @@ const locale = $derived.by(() => ($lang === 'en' ? 'en' : 'de'));
 				{
 					'@type': 'LodgingBusiness',
 					'@id': `${SITE_ORIGIN}/#lodging`,
+					additionalType: 'https://schema.org/Hotel',
 					name: guesthouseFacts.name,
 					url: SITE_ORIGIN,
+					...LODGING_BUSINESS_CORE,
 					email: guesthouseFacts.email,
-					telephone: guesthouseFacts.phones[0],
+					telephone: guesthouseFacts.phones,
+					sameAs: BUSINESS_SAME_AS,
+					hasMap: guesthouseFacts.mapUrl,
 					contactPoint: guesthouseFacts.phones.map((phone) => ({
 						'@type': 'ContactPoint',
 						telephone: phone,
 						contactType: 'customer service',
-						availableLanguage: ['German', 'English'],
+						availableLanguage: LODGING_BUSINESS_CORE.availableLanguage,
 					})),
 					address: {
 						'@type': 'PostalAddress',
@@ -73,9 +78,6 @@ const locale = $derived.by(() => ($lang === 'en' ? 'en' : 'de'));
 						latitude: guesthouseFacts.geo.latitude,
 						longitude: guesthouseFacts.geo.longitude,
 					},
-					checkinTime: '14:00',
-					checkoutTime: '10:00',
-					petsAllowed: false,
 					amenityFeature: [
 						{ '@type': 'LocationFeatureSpecification', name: 'High-speed Wi-Fi', value: true },
 						{ '@type': 'LocationFeatureSpecification', name: 'Parking', value: true },

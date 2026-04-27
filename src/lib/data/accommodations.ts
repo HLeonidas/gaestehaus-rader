@@ -135,14 +135,6 @@ export const accommodations: Accommodation[] = [
 					},
 				},
 				{
-					src: '/images/Nr1/bedroom.jpg',
-					category: 'sleeping',
-					alt: {
-						de: 'Schlafbereich im Appartement Nº 1',
-						en: 'Sleeping area in Apartment Nº 1',
-					},
-				},
-				{
 					src: '/images/Nr1/dining-room.jpg',
 					category: 'dining',
 					alt: {

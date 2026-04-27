@@ -6,9 +6,13 @@ Family-run guesthouse offering 3 holiday apartments in Weißbriach (Gitschtal, C
 Key facts:
 - Business type: LodgingBusiness / Guesthouse / Holiday apartments
 - Location: Weißbriach 92, 9622 Weißbriach, Austria
+- Geo coordinates: 46.688407, 13.2549914
+- Area served: Weißbriach, Gitschtal, Carinthia, Lake Weissensee, Nassfeld
 - Languages: German (de), English (en)
 - Phone: +43 676 6246826, +43 4286 222
 - Email: info@rader-gitschtal.at
+- Currency: EUR
+- Payment: cash on site, or bank transfer by arrangement
 
 Amenities (selection):
 - Free Wi‑Fi in all apartments
@@ -35,21 +39,32 @@ Booking:
 
 Key pages:
 - Home: https://rader-gitschtal.at/
+- English home: https://rader-gitschtal.at/en/
 - Apartments & prices: https://rader-gitschtal.at/unterkuenfte-preise/
+- Apartments & prices (English): https://rader-gitschtal.at/en/accommodations-prices/
 - Apartment detail pages: https://rader-gitschtal.at/unterkuenfte-preise/{slug}
+- Apartment detail pages (English): https://rader-gitschtal.at/en/accommodations-prices/{slug}
 - Facts & FAQ: https://rader-gitschtal.at/fakten/
+- Facts & FAQ (English): https://rader-gitschtal.at/en/facts/
 - Experiences: https://rader-gitschtal.at/erlebnisse/
+- Experiences (English): https://rader-gitschtal.at/en/experiences/
 - About us: https://rader-gitschtal.at/ueber-uns/
+- About us (English): https://rader-gitschtal.at/en/about/
 - Contact: https://rader-gitschtal.at/kontakt/
+- Contact (English): https://rader-gitschtal.at/en/contact/
 - FAQ: https://rader-gitschtal.at/faq/
+- FAQ (English): https://rader-gitschtal.at/en/faq/
 - Accessibility: https://rader-gitschtal.at/barrierefreiheit/
 - Imprint: https://rader-gitschtal.at/impressum/
 - Privacy: https://rader-gitschtal.at/datenschutz/
+- Sitemap: https://rader-gitschtal.at/sitemap.xml
 
 Data sources:
 - Structured facts and Q&A: /fakten/
+- Structured facts and Q&A (English): /en/facts/
 - Prices, amenities, and apartment details: /unterkuenfte-preise/
+- Prices, amenities, and apartment details (English): /en/accommodations-prices/
 - Contact and address: /kontakt/
 - Policies and FAQs: /faq/
 
-Last updated: 2026-01-22
+Last updated: 2026-04-27

@@ -1302,9 +1302,9 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 							style="--reveal-delay: 0ms;"
 						>
 							<img
-								src={asset('/images/Logo/gaestecard.jpg')}
-								alt="GästeCard Basic für flexible Mobilität und Urlaubsvorteile in Kärnten"
-								class="h-44 w-full bg-slate-50 p-4 object-contain"
+								src={asset('/images/Umgebung/train.png')}
+								alt="Zugverbindung durch Kärnten für Ausflüge ohne Auto"
+								class="h-44 w-full object-cover"
 								loading="lazy"
 								decoding="async"
 							/>

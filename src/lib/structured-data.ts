@@ -24,6 +24,32 @@ const geoCoordinates = {
 	longitude: 13.2549914,
 } as const;
 
+export const BUSINESS_SAME_AS = [
+	'https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9',
+	'https://www.booking.com/Share-deqca7p',
+	'https://www.airbnb.at/users/profile/1470215552721931790',
+	'https://nlw.at/de/Unterkunft-finden/Reise-planen/Unterkuenfte/unterkuenfte/KTN/ee29ea3d-3203-4fc3-8e2a-2b996f9f66a1/gaestehaus-rader---fam--herold-hueber',
+];
+
+export const BUSINESS_AREA_SERVED = [
+	{ '@type': 'Place', name: 'Weißbriach' },
+	{ '@type': 'Place', name: 'Gitschtal' },
+	{ '@type': 'Place', name: 'Kärnten' },
+	{ '@type': 'Place', name: 'Lake Weissensee' },
+	{ '@type': 'Place', name: 'Nassfeld' },
+] as const;
+
+export const LODGING_BUSINESS_CORE = {
+	priceRange: '€€',
+	currenciesAccepted: 'EUR',
+	paymentAccepted: 'Cash, bank transfer',
+	availableLanguage: ['German', 'English'],
+	areaServed: BUSINESS_AREA_SERVED,
+	checkinTime: '14:00',
+	checkoutTime: '10:00',
+	petsAllowed: false,
+} as const;
+
 type BreadcrumbItem = {
 	name: string;
 	path: string;
@@ -77,6 +103,11 @@ const buildAmenityFeatures = (amenityLabels: string[]) =>
 		name,
 		value: true,
 	}));
+
+const accommodationName = (accommodation: Accommodation, locale: Lang) =>
+	locale === 'de'
+		? `${accommodation.title} – ${accommodation.typeLabel[locale]} im Gästehaus Rader`
+		: `${accommodation.title} – ${accommodation.typeLabel[locale]} at Guesthouse Rader`;
 
 const buildVacationImages = (paths: string[], siteOrigin: string) => {
 	const explicitImages = Array.from(new Set(paths.map((path) => toAbsoluteUrl(path, siteOrigin))));
@@ -174,7 +205,7 @@ export const buildVacationRentalSchema = ({
 	const accommodationNode = {
 		'@type': 'Accommodation',
 		'@id': accommodationId,
-		name: `${accommodation.title} – ${accommodation.typeLabel[locale]} im Gästehaus Rader`,
+		name: accommodationName(accommodation, locale),
 		accommodationCategory: accommodation.typeLabel[locale],
 		floorLevel: accommodation.attributes.floor,
 		...(guestCapacity
@@ -204,7 +235,7 @@ export const buildVacationRentalSchema = ({
 	const vacationRentalNode = {
 		'@type': 'VacationRental',
 		'@id': vacationRentalId,
-		name: `${accommodation.title} – ${accommodation.typeLabel[locale]} im Gästehaus Rader`,
+		name: accommodationName(accommodation, locale),
 		description,
 		url: pageUrl,
 		...(mainEntityOfPage ? { mainEntityOfPage } : {}),
