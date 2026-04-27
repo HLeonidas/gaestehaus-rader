@@ -64,7 +64,7 @@ import { localizePath } from '$lib/routing';
 	const heroImagePath =
 		isSummerSeason
 			? '/images/Haus/gaestehaus-balkon-ausblick.jpg'
-			: '/images/Umgebung/winter-balkon-ausblick-hero.jpg';
+			: '/images/Haus/balkon-ausblick-winter.jpg';
 	const guestCardVisual = isSummerSeason
 		? {
 				src: '/images/Umgebung/nassfeld-lift.jpg',
@@ -396,7 +396,7 @@ import { localizePath } from '$lib/routing';
 	>
 		<div class="absolute inset-0">
 			<img
-				{...imageAttrs(heroImagePath, '100vw')}
+				src={withAsset(heroImagePath)}
 				alt=""
 				class="h-full w-full object-cover"
 				loading="eager"
@@ -595,7 +595,7 @@ import { localizePath } from '$lib/routing';
 	>
 		<div class="absolute inset-0">
 			<img
-				{...imageAttrs(heroImagePath, '100vw')}
+				src={withAsset(heroImagePath)}
 				alt=""
 				class="h-full w-full object-cover"
 				loading="eager"
@@ -766,7 +766,7 @@ import { localizePath } from '$lib/routing';
 								<!-- Image -->
 								<div class="relative aspect-[4/3] overflow-hidden">
 									<img
-										{...imageAttrs(r.images.main, '(max-width: 640px) 78vw, 340px')}
+										src={withAsset(r.images.main)}
 										alt={`${$t('home.rooms.card.imageAltPrefix')} ${r.title}`}
 										class="h-full w-full object-cover transition duration-1000 ease-out group-hover:scale-105"
 										loading="lazy"
