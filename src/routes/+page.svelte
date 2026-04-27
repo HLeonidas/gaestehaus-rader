@@ -253,7 +253,6 @@ import { localizePath } from '$lib/routing';
 		{ base: 'gaestehaus-sommer', altKey: 'home.gallery.imageAlt.sommer' },
 		{ base: 'gaestehaus-pavillon', altKey: 'home.gallery.imageAlt.pavillon' },
 		{ base: 'nr2-hero', altKey: 'home.gallery.imageAlt.nr2Hero' },
-		{ base: 'nr3-sofa', altKey: 'home.gallery.imageAlt.nr3Sofa' },
 		{ base: 'nr2-living-room', altKey: 'home.gallery.imageAlt.nr2LivingRoom' },
 		{ base: 'nr1-bedroom', altKey: 'home.gallery.imageAlt.nr1Bedroom' },
 		{ base: 'nr3-bed', altKey: 'home.gallery.imageAlt.nr3Bed' },

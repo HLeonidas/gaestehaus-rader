@@ -1,4 +1,4 @@
-import { base as appBase, resolve } from '$app/paths';
+import { base as appBase } from '$app/paths';
 import type { Lang } from '$lib/i18n';
 
 export const DEFAULT_LOCALE: Lang = 'de';
@@ -94,8 +94,10 @@ export const translatePathname = (pathname: string, targetLocale: Lang) => {
 	return withTrailingSlash(`${EN_LOCALE_PREFIX}${translated === '/' ? '' : translated}`);
 };
 
+const resolvePathname = (pathname: string) => `${appBase}${pathname}`;
+
 export const localizePath = (basePath: string, currentPathname: string) =>
-	resolve(translatePathname(basePath, getLocaleFromPathname(currentPathname)));
+	resolvePathname(translatePathname(basePath, getLocaleFromPathname(currentPathname)));
 
 export const samePathOtherLocale = (currentPathname: string, targetLocale: Lang) =>
-	resolve(translatePathname(currentPathname, targetLocale));
+	resolvePathname(translatePathname(currentPathname, targetLocale));
