@@ -82,20 +82,62 @@ const toAbsoluteUrl = (pathOrUrl: string, siteOrigin: string) => {
 const parseGuestCapacity = (guestText: string) => {
 	const rangeMatch = guestText.match(/(\d+)\s*-\s*(\d+)/);
 	if (rangeMatch) {
+		const minValue = Number.parseInt(rangeMatch[1], 10);
+		const maxValue = Number.parseInt(rangeMatch[2], 10);
 		return {
-			minValue: Number.parseInt(rangeMatch[1], 10),
-			maxValue: Number.parseInt(rangeMatch[2], 10),
+			minValue,
+			maxValue,
+			value: maxValue,
 		};
 	}
 
 	const singleMatch = guestText.match(/(\d+)/);
 	if (singleMatch) {
 		const value = Number.parseInt(singleMatch[1], 10);
-		return { minValue: value, maxValue: value };
+		return { minValue: value, maxValue: value, value };
 	}
 
 	return null;
 };
+
+const buildAccommodationReviewSchemas = (accommodation: Accommodation) =>
+	accommodation.reviews.map((review) => ({
+		'@type': 'Review',
+		author: {
+			'@type': 'Person',
+			name: review.name,
+		},
+		reviewBody: review.text,
+		...(review.date ? { datePublished: review.date } : {}),
+		reviewRating: {
+			'@type': 'Rating',
+			ratingValue: review.rating,
+			bestRating: 5,
+			worstRating: 1,
+		},
+	}));
+
+const buildAccommodationAggregateRating = (accommodation: Accommodation) => {
+	const ratings = accommodation.reviews.map((review) => review.rating).filter((rating) => rating > 0);
+
+	if (ratings.length === 0) return null;
+
+	const ratingValue = ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length;
+
+	return {
+		'@type': 'AggregateRating',
+		ratingValue: Number(ratingValue.toFixed(1)),
+		reviewCount: ratings.length,
+		bestRating: 5,
+		worstRating: 1,
+	};
+};
+
+const countGalleryCategory = (
+	accommodation: Accommodation,
+	categories: Array<Accommodation['images']['gallery'][number]['category']>
+) =>
+	accommodation.images.gallery.filter((image) => categories.includes(image.category)).length;
 
 const buildAmenityFeatures = (amenityLabels: string[]) =>
 	amenityLabels.map((name) => ({
@@ -198,6 +240,11 @@ export const buildVacationRentalSchema = ({
 }: VacationRentalSchemaOptions) => {
 	const guestCapacity = parseGuestCapacity(accommodation.attributes.guests[locale]);
 	const amenityFeatures = buildAmenityFeatures(amenityLabels);
+	const reviews = buildAccommodationReviewSchemas(accommodation);
+	const aggregateRating = buildAccommodationAggregateRating(accommodation);
+	const bedrooms = Math.max(1, countGalleryCategory(accommodation, ['sleeping']));
+	const bathrooms = Math.max(1, countGalleryCategory(accommodation, ['bathroom', 'wc', 'shower']));
+	const beds = guestCapacity?.maxValue ?? 1;
 	const accommodationId = `${pageUrl}#accommodation`;
 	const offerId = `${pageUrl}#offer`;
 	const vacationRentalId = `${pageUrl}#vacation-rental`;
@@ -205,13 +252,21 @@ export const buildVacationRentalSchema = ({
 	const accommodationNode = {
 		'@type': 'Accommodation',
 		'@id': accommodationId,
+		additionalType: 'https://schema.org/Apartment',
 		name: accommodationName(accommodation, locale),
 		accommodationCategory: accommodation.typeLabel[locale],
 		floorLevel: accommodation.attributes.floor,
+		bed: {
+			'@type': 'BedDetails',
+			numberOfBeds: beds,
+		},
+		numberOfBedrooms: bedrooms,
+		numberOfBathroomsTotal: bathrooms,
 		...(guestCapacity
 			? {
 				occupancy: {
 					'@type': 'QuantitativeValue',
+					value: guestCapacity.value,
 					minValue: guestCapacity.minValue,
 					maxValue: guestCapacity.maxValue,
 				},
@@ -223,6 +278,8 @@ export const buildVacationRentalSchema = ({
 			value: Number.parseFloat(accommodation.attributes.size.replace(',', '.')),
 			unitCode: 'MTK',
 		},
+		...(reviews.length > 0 ? { review: reviews } : {}),
+		...(aggregateRating ? { aggregateRating } : {}),
 	};
 
 	const offerNode = buildOfferSchema({
@@ -235,6 +292,7 @@ export const buildVacationRentalSchema = ({
 	const vacationRentalNode = {
 		'@type': 'VacationRental',
 		'@id': vacationRentalId,
+		additionalType: 'https://schema.org/Apartment',
 		name: accommodationName(accommodation, locale),
 		description,
 		url: pageUrl,
@@ -252,6 +310,8 @@ export const buildVacationRentalSchema = ({
 		offers: {
 			'@id': offerId,
 		},
+		...(reviews.length > 0 ? { review: reviews } : {}),
+		...(aggregateRating ? { aggregateRating } : {}),
 	};
 
 	return {
