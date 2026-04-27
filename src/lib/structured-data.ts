@@ -100,39 +100,6 @@ const parseGuestCapacity = (guestText: string) => {
 	return null;
 };
 
-const buildAccommodationReviewSchemas = (accommodation: Accommodation) =>
-	accommodation.reviews.map((review) => ({
-		'@type': 'Review',
-		author: {
-			'@type': 'Person',
-			name: review.name,
-		},
-		reviewBody: review.text,
-		...(review.date ? { datePublished: review.date } : {}),
-		reviewRating: {
-			'@type': 'Rating',
-			ratingValue: review.rating,
-			bestRating: 5,
-			worstRating: 1,
-		},
-	}));
-
-const buildAccommodationAggregateRating = (accommodation: Accommodation) => {
-	const ratings = accommodation.reviews.map((review) => review.rating).filter((rating) => rating > 0);
-
-	if (ratings.length === 0) return null;
-
-	const ratingValue = ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length;
-
-	return {
-		'@type': 'AggregateRating',
-		ratingValue: Number(ratingValue.toFixed(1)),
-		reviewCount: ratings.length,
-		bestRating: 5,
-		worstRating: 1,
-	};
-};
-
 const countGalleryCategory = (
 	accommodation: Accommodation,
 	categories: Array<Accommodation['images']['gallery'][number]['category']>
@@ -240,8 +207,6 @@ export const buildVacationRentalSchema = ({
 }: VacationRentalSchemaOptions) => {
 	const guestCapacity = parseGuestCapacity(accommodation.attributes.guests[locale]);
 	const amenityFeatures = buildAmenityFeatures(amenityLabels);
-	const reviews = buildAccommodationReviewSchemas(accommodation);
-	const aggregateRating = buildAccommodationAggregateRating(accommodation);
 	const bedrooms = Math.max(1, countGalleryCategory(accommodation, ['sleeping']));
 	const bathrooms = Math.max(1, countGalleryCategory(accommodation, ['bathroom', 'wc', 'shower']));
 	const beds = guestCapacity?.maxValue ?? 1;
@@ -278,8 +243,6 @@ export const buildVacationRentalSchema = ({
 			value: Number.parseFloat(accommodation.attributes.size.replace(',', '.')),
 			unitCode: 'MTK',
 		},
-		...(reviews.length > 0 ? { review: reviews } : {}),
-		...(aggregateRating ? { aggregateRating } : {}),
 	};
 
 	const offerNode = buildOfferSchema({
@@ -310,8 +273,6 @@ export const buildVacationRentalSchema = ({
 		offers: {
 			'@id': offerId,
 		},
-		...(reviews.length > 0 ? { review: reviews } : {}),
-		...(aggregateRating ? { aggregateRating } : {}),
 	};
 
 	return {
