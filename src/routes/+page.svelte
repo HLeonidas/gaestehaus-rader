@@ -69,7 +69,7 @@ import { localizePath } from '$lib/routing';
 	const isSummerSeason = currentMonth >= 4 && currentMonth <= 8;
 	const heroImagePath =
 		isSummerSeason
-			? '/images/Haus/gaestehaus-balkon-ausblick.jpg'
+			? '/images/Haus/gaestehaus-sommer.jpg'
 			: '/images/Haus/balkon-ausblick-winter.jpg';
 	const guestCardVisual = isSummerSeason
 		? {
