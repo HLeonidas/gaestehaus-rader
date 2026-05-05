@@ -42,7 +42,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.seo.title':
 			'Ferienwohnungen in Weißbriach – Gästehaus Rader – Nähe Weissensee & Nassfeld',
 		'home.seo.description':
-			'Gästehaus Rader – gemütliche Ferienwohnungen in Weißbriach im Gitschtal, Kärnten. Sommer- und Winterurlaub in den Alpen. Jetzt Unterkunft buchen!',
+			'Gästehaus Rader – gemütliche Ferienwohnungen in Weißbriach im Gitschtal, Kärnten. Urlaub zwischen Bergen, Seen und regionaler Genusskultur. Jetzt Unterkunft buchen!',
 		'hero.cta.primary': 'Appartements entdecken',
 		'hero.cta.secondary': 'Region erkunden',
 		'booking.bar.checkin': 'Anreise',
@@ -238,10 +238,10 @@ const translations: Record<Lang, Record<string, string>> = {
 		'experiences.title': 'Erlebnisse rund um das Gästehaus',
 		'experiences.seo.title': 'Erlebnisse im Gitschtal & in Kärnten | Gästehaus Rader',
 		'experiences.seo.description':
-			'Entdecken Sie das ganze Jahr über Erlebnisse rund um Weißbriach: Wandern, Seen, Ausflüge und Winteraktivitäten in Kärnten.',
+			'Entdecken Sie Erlebnisse rund um Weißbriach: Wandern, Seen, Winteraktivitäten und regionale Genusskultur mit Gailtaler Speck, Almkäse, Kasnudeln und saisonalen Festen.',
 		'experiences.seo.summer.title': 'Sommer-Erlebnisse rund ums Gitschtal | Gästehaus Rader',
 		'experiences.seo.summer.description':
-			'Wandern, Radfahren und Badeseen: Entdecken Sie Sommer-Erlebnisse rund um Weißbriach - mit Ausflügen zum Weißensee, ins Gailtal und zu den Sommerbergbahnen am Nassfeld.',
+			'Wandern, Radfahren, Badeseen und echter regionaler Genuss: Sommer-Erlebnisse rund um Weißbriach mit Almen, Bauernmärkten, Gailtaler Speck und Kärntner Kasnudeln.',
 		'experiences.seo.winter.title': 'Winter-Erlebnisse in Kärnten | Gästehaus Rader',
 		'experiences.seo.winter.description':
 			'Skifahren am Nassfeld, Eislaufen am Weißensee und Langlaufen in Weißbriach: Winter-Erlebnisse rund um das Gästehaus Rader im Gitschtal.',
@@ -421,7 +421,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'experiences.destinations.genussregion.kicker': 'Kultur & Genuss',
 		'experiences.destinations.genussregion.title': 'Genussregion',
 		'experiences.destinations.genussregion.body':
-			'Regionale Küche, Bauernmärkte und Slow-Food-Erlebnisse zwischen Gailtal und Weißensee - Kärnten zum Genießen.',
+			'Gailtaler Speck, Almkäse, Kärntner Kasnudeln, Reindling und saisonale Märkte zeigen, wie eng Landwirtschaft, Almen und Dorfkultur hier zusammengehören.',
 		'experiences.destinations.tags.summer': 'Sommer',
 		'experiences.destinations.tags.winter': 'Winter',
 		'experiences.destinations.tags.panorama': 'Panorama',
@@ -617,12 +617,12 @@ const translations: Record<Lang, Record<string, string>> = {
 		'experiences.card.4.body': 'Naturspielplätze und regionale Kulinarik.',
 		'seasons.title': 'Jahreszeiten entdecken',
 		'seasons.subtitle':
-			'Sommerfrische am See oder Wintertage im Schnee - hier findet jede Jahreszeit ihren Moment.',
+			'Sommerfrische am See, Wintertage im Schnee und regionale Spezialitäten vom Almkäse bis zum Reindling - hier hat jede Jahreszeit ihren eigenen Geschmack.',
 		'seasons.summer.title': 'Sommer im Gitschtal',
-		'seasons.summer.body': 'Wandern, Seen, Radwege und lange Abende in der Natur.',
+		'seasons.summer.body': 'Wandern, Seen, Radwege und danach Almhütten, Bauernmärkte, Gailtaler Speck und Käse aus der Region.',
 		'seasons.summer.cta': 'Sommer erleben',
 		'seasons.winter.title': 'Winterzeit in Kärnten',
-		'seasons.winter.body': 'Skifahren, Langlaufen und ruhige Wintertage.',
+		'seasons.winter.body': 'Skifahren, Langlaufen, ruhige Wintertage und wärmende Kärntner Klassiker wie Kasnudeln oder Kirchtagssuppe.',
 		'seasons.winter.cta': 'Winter entdecken',
 		'seasons.kicker': 'Jahreszeiten',
 		'home.rooms.card.imageAltPrefix': 'Foto von',
@@ -947,8 +947,8 @@ const translations: Record<Lang, Record<string, string>> = {
 		'about.traditionSince': 'Tradition seit',
 		'about.headingPrefix': 'Über',
 		'about.headingEmphasis': 'uns',
-		'about.paragraphOne': 'Unser Haus befindet sich mitten im Ort und doch nur wenige Schritte vom Waldrand entfernt. Die charakteristische Dorfstruktur mit viel Wiesenfläche und alten Brunnen zwischen den Gehöften ist bei uns noch erhalten.',
-		'about.paragraphTwo': 'Auf Wandertour gehen oder vor dem Haus auf der großen Wiese faulenzen, so lässt es sich im Urlaub leben. Seit Generationen pflegen wir die Gastfreundschaft in den österreichischen Alpen und freuen uns darauf, Ihnen ein Stück unserer Heimat näher zu bringen.',
+		'about.paragraphOne': 'Unser Haus befindet sich mitten im Ort und doch nur wenige Schritte vom Waldrand entfernt. Die charakteristische Dorfstruktur mit viel Wiesenfläche, alten Brunnen und kurzen Wegen zu gelebter Dorfkultur ist bei uns noch erhalten.',
+		'about.paragraphTwo': 'Auf Wandertour gehen, vor dem Haus auf der großen Wiese faulenzen oder bei Festen, Märkten und Almhütten Gailtaler Speck, Almkäse, Kärntner Kasnudeln und Reindling kennenlernen - so lässt es sich im Urlaub leben. Seit Generationen pflegen wir die Gastfreundschaft in den österreichischen Alpen und freuen uns darauf, Ihnen ein Stück unserer Heimat näher zu bringen.',
 		'about.signature': 'Ihre Gastgeber',
 		'about.card.1.title': 'Gastgeber mit Herz',
 		'about.card.1.body':
@@ -1125,7 +1125,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.seo.title':
 			'Holiday apartments in Weissbriach / Gitschtal – Guesthouse Rader – near Weissensee & Nassfeld',
 		'home.seo.description':
-			'Guesthouse Rader – cozy holiday apartments in Weissbriach, Gitschtal, Carinthia. Summer and winter breaks in the Alps. Book your stay now!',
+			'Guesthouse Rader – cozy holiday apartments in Weissbriach, Gitschtal, Carinthia. Alpine holidays with lakes, mountains, and regional food culture. Book your stay now!',
 		'hero.cta.primary': 'Discover apartments',
 		'hero.cta.secondary': 'Explore the region',
 		'booking.bar.checkin': 'Check-in',
@@ -1321,10 +1321,10 @@ const translations: Record<Lang, Record<string, string>> = {
 		'experiences.title': 'Experiences nearby',
 		'experiences.seo.title': 'Experiences in the Gitschtal & Carinthia | Guesthouse Rader',
 		'experiences.seo.description':
-			'Discover year-round experiences around Weissbriach: hiking, lakes, day trips, and winter activities in Carinthia.',
+			'Discover experiences around Weissbriach: hiking, lakes, winter activities, and regional food culture with Gailtaler Speck, alpine cheese, Kasnudeln, and seasonal festivals.',
 		'experiences.seo.summer.title': 'Summer experiences around the Gitschtal | Guesthouse Rader',
 		'experiences.seo.summer.description':
-			'Hiking, cycling, and alpine lakes: discover summer experiences around Weißbriach, Lake Weißensee, the Gailtal valley, and the Nassfeld summer lifts.',
+			'Hiking, cycling, alpine lakes, and authentic local flavors: summer around Weissbriach with alpine huts, farmers markets, Gailtaler Speck, and Carinthian Kasnudeln.',
 		'experiences.seo.winter.title': 'Winter experiences in Carinthia | Guesthouse Rader',
 		'experiences.seo.winter.description':
 			'Skiing at Nassfeld, ice skating on Lake Weißensee, and cross-country trails in Weißbriach: winter experiences around Guesthouse Rader in the Gitschtal.',
@@ -1506,7 +1506,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'experiences.destinations.genussregion.kicker': 'Culture & flavors',
 		'experiences.destinations.genussregion.title': 'Culinary region',
 		'experiences.destinations.genussregion.body':
-			'Regional cuisine, farmers markets, and Slow Food experiences between the Gailtal and Lake Weißensee - Carinthia at its most enjoyable.',
+			'Gailtaler Speck, alpine cheese, Carinthian Kasnudeln, Reindling, and seasonal markets show how closely farming, alpine pastures, and village culture belong together here.',
 		'experiences.destinations.tags.summer': 'Summer',
 		'experiences.destinations.tags.winter': 'Winter',
 		'experiences.destinations.tags.panorama': 'Panorama',
@@ -1702,12 +1702,12 @@ const translations: Record<Lang, Record<string, string>> = {
 		'experiences.card.4.body': 'Nature playgrounds and local cuisine.',
 		'seasons.title': 'Explore the seasons',
 		'seasons.subtitle':
-			'Lake summers and snowy winters - every season has its own magic here.',
+			'Lake summers, snowy winters, and regional specialties from alpine cheese to Reindling - every season has its own taste here.',
 		'seasons.summer.title': 'Summer in the valley',
-		'seasons.summer.body': 'Hikes, lakes, cycling routes, and long evenings outdoors.',
+		'seasons.summer.body': 'Hikes, lakes, cycling routes, then alpine huts, farmers markets, Gailtaler Speck, and regional cheese.',
 		'seasons.summer.cta': 'Explore summer',
 		'seasons.winter.title': 'Winter in Carinthia',
-		'seasons.winter.body': 'Skiing, cross-country trails, and quiet snowy days.',
+		'seasons.winter.body': 'Skiing, cross-country trails, quiet snowy days, and warming Carinthian classics such as Kasnudeln or church-fair soup.',
 		'seasons.winter.cta': 'Discover winter',
 		'seasons.kicker': 'Seasons',
 		'home.rooms.card.imageAltPrefix': 'Photo of',
@@ -2018,8 +2018,8 @@ const translations: Record<Lang, Record<string, string>> = {
 		'about.traditionSince': 'Tradition since',
 		'about.headingPrefix': 'About',
 		'about.headingEmphasis': 'us',
-		'about.paragraphOne': 'Our house sits in the heart of the village yet just steps from the forest edge. The characteristic layout with meadows and traditional wells between the farmsteads is still preserved here.',
-		'about.paragraphTwo': 'Head out on hiking tours or relax on the large meadow in front of the house—this is what a holiday in the Alps should feel like. For generations we have fostered genuine hospitality in the Austrian Alps and look forward to showing you a piece of our homeland.',
+		'about.paragraphOne': 'Our house sits in the heart of the village yet just steps from the forest edge. The characteristic layout with meadows, traditional wells, and short paths into lived village culture is still preserved here.',
+		'about.paragraphTwo': 'Head out on hiking tours, relax on the large meadow in front of the house, or discover Gailtaler Speck, alpine cheese, Carinthian Kasnudeln, and Reindling at festivals, markets, and mountain huts. For generations we have fostered genuine hospitality in the Austrian Alps and look forward to showing you a piece of our homeland.',
 		'about.signature': 'Your hosts',
 		'about.card.1.title': 'Hosts with heart',
 		'about.card.1.body':
