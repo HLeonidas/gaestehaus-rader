@@ -203,7 +203,7 @@ export const experienceEvents: ExperienceEvent[] = [
 			de: 'Freibad mit Bergblick, Liegewiese und viel Platz für entspannte Sommertage mit der Familie.',
 			en: 'Outdoor pool with mountain views, sunbathing lawns, and plenty of space for relaxed summer days with the family.',
 		},
-		image: '/images/Umgebung/freibad.png',
+		image: '/images/Umgebung/freibad-weissbriach.jpg',
 		location: { de: 'Weißbriach', en: 'Weissbriach' },
 		driveMinutes: 3,
 		distanceKm: 1,

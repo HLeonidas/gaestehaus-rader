@@ -278,6 +278,32 @@ export const responsiveImages = {
       }
     ]
   },
+  "/images/Umgebung/freibad-weissbriach.jpg": {
+    "width": 3840,
+    "height": 2160,
+    "variants": [
+      {
+        "width": 480,
+        "height": 270,
+        "src": "/images/optimized/Umgebung/freibad-weissbriach-480.webp"
+      },
+      {
+        "width": 768,
+        "height": 432,
+        "src": "/images/optimized/Umgebung/freibad-weissbriach-768.webp"
+      },
+      {
+        "width": 1280,
+        "height": 720,
+        "src": "/images/optimized/Umgebung/freibad-weissbriach-1280.webp"
+      },
+      {
+        "width": 1600,
+        "height": 900,
+        "src": "/images/optimized/Umgebung/freibad-weissbriach-1600.webp"
+      }
+    ]
+  },
   "/images/Umgebung/freibad.png": {
     "width": 1024,
     "height": 1024,

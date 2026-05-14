@@ -1171,9 +1171,10 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 								href={festivalSection.eventInfoUrl}
 								target="_blank"
 								rel="noreferrer"
-								class="mt-2 inline-flex items-center justify-center rounded-full border border-brand/15 bg-white/80 px-4 py-2 text-brand shadow-sm transition hover:border-brand/30 hover:bg-white"
+								class="mt-3 inline-flex items-center justify-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 motion-reduce:transition-none"
 							>
-								👉 {festivalSection.eventInfoUrl}
+								{$lang === 'de' ? 'Nassfeld Eventkalender' : 'Nassfeld event calendar'}
+								<ExternalLink class="h-4 w-4" aria-hidden="true" />
 							</a>
 						</div>
 					</div>
@@ -1826,5 +1827,4 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 		}
 	}
 </style>
-
 
