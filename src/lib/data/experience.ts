@@ -89,6 +89,8 @@ export type FestivalSection = {
 	title: LocalizedText;
 	intro: LocalizedText;
 	note: LocalizedText;
+	eventInfo: LocalizedText;
+	eventInfoUrl: string;
 	cards: FestivalCard[];
 };
 
@@ -699,6 +701,11 @@ export const experienceFestivalSection: FestivalSection = {
 		de: 'Viele Termine sind saisonabhängig. Wir prüfen diese Hinweise regelmäßig und sagen Ihnen vor Ihrem Aufenthalt gerne, was während Ihres Urlaubs gerade gut passt.',
 		en: 'Many dates depend on the season and the local calendar. We review these pointers regularly and are happy to tell you what fits best during your stay.',
 	},
+	eventInfo: {
+		de: 'Nähere Informationen zu den einzelnen Veranstaltungen findet ihr unter:',
+		en: 'You can find more information about individual events at:',
+	},
+	eventInfoUrl: 'https://www.nassfeld.at/de/Service/Events',
 	cards: [
 		{
 			id: 'village-festivals',

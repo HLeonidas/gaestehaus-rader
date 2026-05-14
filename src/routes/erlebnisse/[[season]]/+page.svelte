@@ -1165,6 +1165,17 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 								</article>
 							{/each}
 						</div>
+						<div class="mt-8 text-center text-sm font-medium leading-relaxed text-slate-600">
+							<p>{localize(festivalSection.eventInfo)}</p>
+							<a
+								href={festivalSection.eventInfoUrl}
+								target="_blank"
+								rel="noreferrer"
+								class="mt-2 inline-flex items-center justify-center rounded-full border border-brand/15 bg-white/80 px-4 py-2 text-brand shadow-sm transition hover:border-brand/30 hover:bg-white"
+							>
+								👉 {festivalSection.eventInfoUrl}
+							</a>
+						</div>
 					</div>
 				</section>
 
@@ -1815,6 +1826,5 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 		}
 	}
 </style>
-
 
 
