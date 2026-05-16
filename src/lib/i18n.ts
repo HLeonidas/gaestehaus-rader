@@ -627,6 +627,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'seasons.summer.highlight.1': 'Wanderwege und Almwiesen rund um Weißbriach',
 		'seasons.summer.highlight.2': 'Badeseen, Freibad und warme Tage am Wasser',
 		'seasons.summer.highlight.3': 'Radwege, Almhütten und regionale Märkte',
+		'seasons.summer.feature.hiking': 'Wandern',
+		'seasons.summer.feature.lakes': 'Badeseen',
+		'seasons.summer.feature.bike': 'Radwege',
 		'seasons.summer.cta': 'Sommer erleben',
 		'seasons.winter.title': 'Winterzeit in Kärnten',
 		'seasons.winter.body': 'Skifahren, Langlaufen, ruhige Wintertage und wärmende Kärntner Klassiker wie Kasnudeln oder Kirchtagssuppe.',
@@ -635,6 +638,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'seasons.winter.highlight.1': 'Skifahren am Nassfeld und in Weißbriach',
 		'seasons.winter.highlight.2': 'Langlaufloipe im Tal und Winterwanderwege',
 		'seasons.winter.highlight.3': 'Schneeruhe, warme Küche und kurze Wege zurück',
+		'seasons.winter.feature.ski': 'Skifahren',
+		'seasons.winter.feature.crosscountry': 'Langlaufen',
+		'seasons.winter.feature.snow': 'Schneetage',
 		'seasons.winter.cta': 'Winter entdecken',
 		'seasons.kicker': 'Jahreszeiten',
 		'home.rooms.card.imageAltPrefix': 'Foto von',
@@ -1739,6 +1745,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'seasons.summer.highlight.1': 'Hiking paths and alpine meadows around Weissbriach',
 		'seasons.summer.highlight.2': 'Swimming lakes, outdoor pool, and warm days by the water',
 		'seasons.summer.highlight.3': 'Cycling routes, alpine huts, and local markets',
+		'seasons.summer.feature.hiking': 'Hiking',
+		'seasons.summer.feature.lakes': 'Lakes',
+		'seasons.summer.feature.bike': 'Cycling',
 		'seasons.summer.cta': 'Explore summer',
 		'seasons.winter.title': 'Winter in Carinthia',
 		'seasons.winter.body': 'Skiing, cross-country trails, quiet snowy days, and warming Carinthian classics such as Kasnudeln or church-fair soup.',
@@ -1747,6 +1756,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'seasons.winter.highlight.1': 'Skiing at Nassfeld and in Weissbriach',
 		'seasons.winter.highlight.2': 'Valley cross-country trail and winter walking paths',
 		'seasons.winter.highlight.3': 'Snowy calm, warming food, and quick routes back',
+		'seasons.winter.feature.ski': 'Skiing',
+		'seasons.winter.feature.crosscountry': 'Nordic',
+		'seasons.winter.feature.snow': 'Snow days',
 		'seasons.winter.cta': 'Discover winter',
 		'seasons.kicker': 'Seasons',
 		'home.rooms.card.imageAltPrefix': 'Photo of',
@@ -2231,7 +2243,6 @@ export const t = derived(lang, ($lang) => {
 });
 
 export const setLang = (value: Lang) => lang.set(value);
-
 
 
 

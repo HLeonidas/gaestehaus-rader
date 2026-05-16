@@ -54,6 +54,10 @@ import { localizePath } from '$lib/routing';
 		BadgeCheck,
 		Home,
 		Building2,
+		Waves,
+		Bike,
+		MountainSnow,
+		Footprints,
 	} from 'lucide-svelte';
 
 	const usps = [
@@ -80,6 +84,10 @@ import { localizePath } from '$lib/routing';
 				src: '/images/Umgebung/ski_nassfeld.jpg',
 				altKey: 'experiences.guestcard.imageAlt.winter',
 			};
+	const guestCardDesktopVisual = {
+		src: '/images/Umgebung/nassfeld_gaestecard_basic_summer.png',
+		altKey: 'experiences.guestcard.imageAlt.summer',
+	};
 
 	const rooms = accommodations;
 	const accommodationsBase = $derived.by(() => localizedHref('/unterkuenfte-preise'));
@@ -343,15 +351,14 @@ import { localizePath } from '$lib/routing';
 			href: '/erlebnisse/sommer',
 			icon: Sun,
 			kickerKey: 'seasons.summer.kicker',
-			highlights: [
-				'seasons.summer.highlight.1',
-				'seasons.summer.highlight.2',
-				'seasons.summer.highlight.3',
+			features: [
+				{ labelKey: 'seasons.summer.feature.hiking', icon: Mountain },
+				{ labelKey: 'seasons.summer.feature.lakes', icon: Waves },
+				{ labelKey: 'seasons.summer.feature.bike', icon: Bike },
 			],
 			panelClass: 'bg-[#f8f1e5]',
 			kickerClass: 'text-brand',
 			iconClass: 'bg-brand text-white',
-			chipClass: 'bg-white/70 text-slate-700 ring-[#e7d6bd]',
 			buttonClass: 'bg-brand text-white hover:bg-brand-dark',
 		},
 		{
@@ -363,20 +370,19 @@ import { localizePath } from '$lib/routing';
 			floatingImages: [
 				{ src: '/images/Umgebung/langlaufloipe-weissbriach.png', altKey: 'home.seasons.winter.crosscountryAlt' },
 				{ src: '/images/Umgebung/ski_weißbriach.JPG', altKey: 'home.seasons.winter.skiAlt' },
-				{ src: '/images/Umgebung/winter-ice.jpg', altKey: 'home.seasons.winter.iceAlt' },
+				{ src: '/images/Haus/balkon-ausblick-winter.jpg', altKey: 'home.gallery.imageAlt.winterBalkon' },
 			],
 			href: '/erlebnisse/winter',
 			icon: Snowflake,
 			kickerKey: 'seasons.winter.kicker',
-			highlights: [
-				'seasons.winter.highlight.1',
-				'seasons.winter.highlight.2',
-				'seasons.winter.highlight.3',
+			features: [
+				{ labelKey: 'seasons.winter.feature.ski', icon: MountainSnow },
+				{ labelKey: 'seasons.winter.feature.crosscountry', icon: Footprints },
+				{ labelKey: 'seasons.winter.feature.snow', icon: Snowflake },
 			],
 			panelClass: 'bg-[#edf4f7]',
 			kickerClass: 'text-sky-700',
 			iconClass: 'bg-sky-700 text-white',
-			chipClass: 'bg-white/75 text-slate-700 ring-sky-100',
 			buttonClass: 'bg-slate-900 text-white hover:bg-slate-700',
 		},
 	];
@@ -1303,13 +1309,19 @@ import { localizePath } from '$lib/routing';
 			<section class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:shadow-[0_24px_48px_-18px_rgba(245,146,0,0.35)]">
 				<div class="grid lg:grid-cols-[1.08fr,0.92fr]">
 					<div class="relative min-h-[330px] sm:min-h-[430px] lg:min-h-[670px]">
-						<img
-							{...imageAttrs(guestCardVisual.src, '(max-width: 1024px) 100vw, 45vw')}
-							alt={$t(guestCardVisual.altKey)}
-							class="absolute inset-0 h-full w-full object-cover"
-							loading="lazy"
-							decoding="async"
-						/>
+						<picture>
+							<source
+								media="(min-width: 1024px)"
+								srcset={withAsset(guestCardDesktopVisual.src)}
+							/>
+							<img
+								{...imageAttrs(guestCardVisual.src, '(max-width: 1024px) 100vw, 45vw')}
+								alt={$t(guestCardVisual.altKey)}
+								class="absolute inset-0 h-full w-full object-cover"
+								loading="lazy"
+								decoding="async"
+							/>
+						</picture>
 						<div
 							class="absolute inset-0 bg-gradient-to-b from-slate-950/85 via-slate-950/65 to-slate-950/25 lg:bg-gradient-to-r lg:from-slate-950/20 lg:via-transparent lg:to-transparent"
 						></div>
@@ -1532,7 +1544,7 @@ import { localizePath } from '$lib/routing';
 					</section>
 
 			<!-- SEASONS -->
-			<section class="relative py-10 sm:py-12">
+			<section id="jahreszeiten" class="relative left-1/2 w-screen max-w-[1380px] -translate-x-1/2 px-4 py-10 sm:px-6 sm:py-12">
 				<div class="text-center">
 					<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
 						{$t('seasons.kicker')}
@@ -1546,32 +1558,33 @@ import { localizePath } from '$lib/routing';
 					</p>
 				</div>
 
-				<div class="mt-10 space-y-7">
+				<div class="mt-10 space-y-5 lg:space-y-6">
 					{#each seasonPanels as season}
 						<article
-							class={`season-row overflow-hidden rounded-[1.75rem] border border-slate-200/80 ${season.panelClass} shadow-sm ring-1 ring-black/5`}
+							class={`season-row ${season.reverse ? 'season-row--reverse' : ''} overflow-visible rounded-[1.5rem] border border-slate-200/80 ${season.panelClass} shadow-sm ring-1 ring-black/5`}
 						>
-							<div class={`grid lg:items-stretch ${season.reverse ? 'lg:grid-cols-[1.52fr_0.48fr]' : 'lg:grid-cols-[0.48fr_1.52fr]'}`}>
-								<div class={`flex flex-col justify-center p-6 sm:p-8 lg:p-7 ${season.reverse ? 'lg:order-2' : 'lg:order-1'}`}>
+							<div class={`season-stage grid lg:min-h-[455px] lg:items-stretch ${season.reverse ? 'lg:grid-cols-[1.34fr_1fr]' : 'lg:grid-cols-[0.72fr_1.58fr]'}`}>
+								<div class={`season-copy relative z-10 flex flex-col justify-center p-6 sm:p-8 lg:px-8 lg:py-10 xl:px-10 xl:py-12 ${season.reverse ? 'lg:order-2' : 'lg:order-1'}`}>
 									<div
-										class={`inline-flex w-fit items-center gap-2 rounded-full bg-white/80 px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] shadow-sm ring-1 ring-white/70 ${season.kickerClass}`}
+										class={`season-kicker inline-flex w-fit items-center gap-3 text-xs font-semibold uppercase tracking-[0.18em] ${season.kickerClass}`}
 									>
-										<span class={`grid h-8 w-8 place-items-center rounded-full ${season.iconClass}`}>
-											<season.icon class="h-4 w-4" aria-hidden="true" strokeWidth={1.5} />
+										<span class={`grid h-9 w-9 place-items-center rounded-full bg-transparent ${season.kickerClass}`}>
+											<season.icon class="h-6 w-6" aria-hidden="true" strokeWidth={1.45} />
 										</span>
 										{$t(season.kickerKey)}
 									</div>
+									<div class={`mt-3 h-[2px] w-7 rounded-full ${season.reverse ? 'bg-sky-700/55' : 'bg-brand/70'}`}></div>
 
-									<h3 class="mt-5 text-2xl font-semibold leading-tight text-slate-900 sm:text-3xl">
+									<h3 class="mt-5 max-w-[13ch] text-3xl font-serif font-semibold leading-[0.98] text-slate-900 sm:text-4xl lg:text-5xl">
 										{$t(season.titleKey)}
 									</h3>
-									<p class="mt-3 max-w-[24ch] text-sm leading-relaxed text-slate-600 sm:text-base">
+									<p class="mt-5 max-w-[25ch] text-base leading-relaxed text-slate-600">
 										{$t(season.teaserKey)}
 									</p>
 
 									<a
 										href={localizedHref(season.href)}
-										class={`group mt-6 inline-flex w-fit items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold shadow-sm transition ${season.buttonClass}`}
+										class={`group mt-7 inline-flex w-fit items-center gap-3 rounded-xl px-6 py-3 text-sm font-semibold shadow-sm transition ${season.buttonClass}`}
 									>
 										{$t(season.ctaKey)}
 										<ArrowRight
@@ -1579,12 +1592,23 @@ import { localizePath } from '$lib/routing';
 											aria-hidden="true"
 										/>
 									</a>
+
+									<ul class="season-features mt-9 grid max-w-[300px] grid-cols-3 gap-0 text-center">
+										{#each season.features as feature}
+											<li class={`season-feature ${season.reverse ? 'text-sky-700' : 'text-slate-600'}`}>
+												<feature.icon class="mx-auto h-7 w-7" aria-hidden="true" strokeWidth={1.35} />
+												<span class="mt-2 block text-[11px] font-semibold text-slate-700">
+													{$t(feature.labelKey)}
+												</span>
+											</li>
+										{/each}
+									</ul>
 								</div>
 
-								<div class={`season-visual relative min-h-[430px] overflow-hidden p-3 sm:min-h-[520px] lg:min-h-[520px] ${season.reverse ? 'lg:order-1' : 'lg:order-2'}`}>
-									<div class="season-house-image relative h-full min-h-[330px] overflow-hidden rounded-[1.35rem] bg-slate-200 shadow-sm ring-1 ring-black/5 sm:min-h-[390px] lg:min-h-[494px]">
+								<div class={`season-visual relative min-h-[390px] overflow-visible sm:min-h-[500px] lg:min-h-[455px] ${season.reverse ? 'lg:order-1' : 'lg:order-2'}`}>
+									<div class="season-house-image relative h-full min-h-[390px] overflow-hidden bg-slate-200 sm:min-h-[500px] lg:min-h-[455px]">
 										<img
-											{...imageAttrs(season.heroImage.src, '(max-width: 1024px) 100vw, 720px')}
+											{...imageAttrs(season.heroImage.src, '(max-width: 1024px) 100vw, 980px')}
 											alt={$t(season.heroImage.altKey)}
 											class="h-full w-full object-cover transition duration-700 ease-out motion-reduce:transform-none"
 											loading="lazy"
@@ -1597,10 +1621,10 @@ import { localizePath } from '$lib/routing';
 
 									{#each season.floatingImages as image, index}
 										<div
-											class={`season-floater season-floater-${index} group/image absolute overflow-hidden rounded-[1rem] bg-slate-200 shadow-[0_18px_40px_-24px_rgba(15,23,42,0.55)] ring-1 ring-white/80`}
+											class={`season-floater season-floater-${index} group/image absolute overflow-hidden rounded-xl bg-slate-200 shadow-[0_20px_42px_-22px_rgba(15,23,42,0.72)] ring-2 ring-white/80`}
 										>
 											<img
-												{...imageAttrs(image.src, '(max-width: 1024px) 42vw, 260px')}
+												{...imageAttrs(image.src, '(max-width: 1024px) 56vw, 460px')}
 												alt={$t(image.altKey)}
 												class="h-full w-full object-cover transition duration-700 ease-out group-hover/image:scale-[1.04] motion-reduce:transform-none"
 												loading="lazy"
@@ -1853,16 +1877,40 @@ import { localizePath } from '$lib/routing';
 	}
 
 	.season-house-image {
-		transition: width 620ms cubic-bezier(0.22, 1, 0.36, 1);
+		transition: filter 620ms cubic-bezier(0.22, 1, 0.36, 1);
 	}
 
 	.season-row:hover .season-house-image img {
-		transform: scale(1.025);
+		transform: scale(1.035);
+	}
+
+	.season-row {
+		isolation: isolate;
+	}
+
+	.season-copy {
+		border-bottom-left-radius: 1.5rem;
+		border-top-left-radius: 1.5rem;
+		background:
+			linear-gradient(110deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 84%, rgba(255, 255, 255, 0) 84.25%);
+	}
+
+	.season-row--reverse .season-copy {
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 1.5rem;
+		border-top-left-radius: 0;
+		border-top-right-radius: 1.5rem;
+		background:
+			linear-gradient(120deg, rgba(248, 252, 255, 0.98) 0%, rgba(248, 252, 255, 0.96) 100%);
+	}
+
+	.season-feature + .season-feature {
+		border-left: 1px solid rgba(148, 163, 184, 0.28);
 	}
 
 	.season-floater {
-		height: 8rem;
-		width: 46%;
+		height: 7.4rem;
+		width: 39%;
 		transition:
 			left 620ms cubic-bezier(0.22, 1, 0.36, 1),
 			right 620ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -1871,126 +1919,166 @@ import { localizePath } from '$lib/routing';
 			width 620ms cubic-bezier(0.22, 1, 0.36, 1),
 			height 620ms cubic-bezier(0.22, 1, 0.36, 1),
 			transform 620ms cubic-bezier(0.22, 1, 0.36, 1),
+			opacity 400ms ease,
 			box-shadow 620ms ease;
 	}
 
 	.season-floater-0 {
-		left: 1.25rem;
-		top: 0.65rem;
-		transform: rotate(-4deg);
+		right: 1rem;
+		top: 1rem;
+		transform: rotate(-2deg);
 	}
 
 	.season-floater-1 {
 		right: 0.8rem;
-		top: 42%;
-		transform: rotate(3deg);
+		top: 37%;
+		transform: rotate(1.5deg);
 	}
 
 	.season-floater-2 {
-		left: 12%;
-		bottom: 0.7rem;
-		transform: rotate(2deg);
+		right: 1.2rem;
+		bottom: 1rem;
+		transform: rotate(-1.5deg);
 	}
 
 	.season-row:hover .season-floater {
-		box-shadow: 0 22px 48px -26px rgba(15, 23, 42, 0.68);
-		transform: rotate(0deg);
+		box-shadow: 0 24px 54px -26px rgba(15, 23, 42, 0.78);
+		transform: rotate(0deg) translateX(-0.25rem);
 	}
 
 	.season-floater:hover {
 		z-index: 20;
-		height: 11rem;
-		width: 56%;
-		box-shadow: 0 24px 56px -26px rgba(15, 23, 42, 0.75);
-		transform: rotate(0deg) scale(1.03);
+		height: 9.5rem;
+		width: 48%;
+		box-shadow: 0 28px 64px -26px rgba(15, 23, 42, 0.82);
+		transform: rotate(0deg) translateX(-0.35rem) scale(1.035);
 	}
 
 	.season-row:hover .season-floater-0 {
-		left: 1rem;
+		right: 1rem;
 		top: 1rem;
-		width: calc(33.333% - 1rem);
 	}
 
 	.season-row:hover .season-floater-1 {
-		left: 33.333%;
-		right: auto;
-		top: 1rem;
-		width: calc(33.333% - 1rem);
+		right: 1rem;
+		top: 36%;
 	}
 
 	.season-row:hover .season-floater-2 {
-		left: calc(66.666% - 0.5rem);
-		bottom: auto;
-		top: 1rem;
-		width: calc(33.333% - 1rem);
+		right: 1rem;
+		bottom: 1rem;
 	}
 
 	@media (min-width: 640px) {
 		.season-floater {
-			height: 10rem;
-			width: 38%;
+			height: 8.2rem;
+			width: 31%;
 		}
 	}
 
 	@media (min-width: 1024px) {
+		.season-row:not(.season-row--reverse) .season-visual {
+			margin-left: -4.5rem;
+		}
+
+		.season-row:not(.season-row--reverse) .season-house-image {
+			border-bottom-right-radius: 1.5rem;
+			border-top-right-radius: 1.5rem;
+		}
+
+		.season-row--reverse .season-visual {
+			margin-right: -1rem;
+		}
+
+		.season-row--reverse .season-house-image {
+			border-bottom-left-radius: 1.5rem;
+			border-top-left-radius: 1.5rem;
+		}
+
 		.season-house-image {
-			width: 84%;
+			width: 100%;
 		}
 
 		.season-floater {
-			height: 9rem;
-			width: 24%;
+			height: 7.8rem;
+			width: 23%;
 		}
 
 		.season-floater-0 {
 			left: auto;
-			right: 4.8rem;
-			top: 1.65rem;
+			right: 2.1rem;
+			top: 2rem;
 		}
 
 		.season-floater-1 {
-			right: 0.85rem;
-			top: 37%;
+			right: 2.1rem;
+			top: calc(50% - 3.9rem);
 		}
 
 		.season-floater-2 {
 			left: auto;
-			right: 5.9rem;
-			bottom: 1.35rem;
+			right: 2.1rem;
+			bottom: 2rem;
 		}
 
-		.season-row:hover .season-house-image {
-			width: 72%;
+		.season-row--reverse .season-floater {
+			right: 1.35rem;
+			width: 24%;
+		}
+
+		.season-row--reverse .season-floater:hover {
+			width: 30%;
 		}
 
 		.season-row:hover .season-floater {
-			height: calc((100% - 3.5rem) / 3);
+			height: calc((100% - 5.5rem) / 3);
+			width: 24%;
+		}
+
+		.season-row--reverse:hover .season-floater {
 			width: 25%;
 		}
 
 		.season-row:hover .season-floater:hover {
-			height: calc((100% - 3.5rem) / 2.5);
+			height: calc((100% - 5.5rem) / 2.55);
+			width: 30%;
+			transform: translateX(-0.65rem) scale(1.035);
+		}
+
+		.season-row--reverse:hover .season-floater:hover {
 			width: 32%;
-			transform: translateX(-0.5rem) scale(1.03);
 		}
 
 		.season-row:hover .season-floater-0 {
 			left: auto;
-			right: 1rem;
-			top: 1rem;
+			right: 1.6rem;
+			top: 1.4rem;
 		}
 
 		.season-row:hover .season-floater-1 {
 			left: auto;
-			right: 1rem;
-			top: calc(1.75rem + ((100% - 3.5rem) / 3));
+			right: 1.6rem;
+			top: calc(2.75rem + ((100% - 5.5rem) / 3));
 		}
 
 		.season-row:hover .season-floater-2 {
 			left: auto;
-			right: 1rem;
-			top: calc(2.5rem + 2 * ((100% - 3.5rem) / 3));
+			right: 1.6rem;
+			top: calc(4.1rem + 2 * ((100% - 5.5rem) / 3));
 			bottom: auto;
+		}
+	}
+
+	@media (max-width: 1023px) {
+		.season-copy {
+			border-bottom-left-radius: 0;
+			border-top-right-radius: 1.5rem;
+			background: rgba(255, 255, 255, 0.94);
+		}
+
+		.season-house-image {
+			border-bottom-left-radius: 1.5rem;
+			border-bottom-right-radius: 1.5rem;
 		}
 	}
 
