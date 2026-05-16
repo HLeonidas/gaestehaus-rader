@@ -622,6 +622,7 @@ const translations: Record<Lang, Record<string, string>> = {
 			'Sommerfrische am See, Wintertage im Schnee und regionale Spezialitäten vom Almkäse bis zum Reindling - hier hat jede Jahreszeit ihren eigenen Geschmack.',
 		'seasons.summer.title': 'Sommer im Gitschtal',
 		'seasons.summer.body': 'Wandern, Seen, Radwege und danach Almhütten, Bauernmärkte, Gailtaler Speck und Käse aus der Region.',
+		'seasons.summer.teaser': 'Wandern, Seen und Radwege direkt vor der Tür.',
 		'seasons.summer.kicker': 'Sommer',
 		'seasons.summer.highlight.1': 'Wanderwege und Almwiesen rund um Weißbriach',
 		'seasons.summer.highlight.2': 'Badeseen, Freibad und warme Tage am Wasser',
@@ -629,6 +630,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'seasons.summer.cta': 'Sommer erleben',
 		'seasons.winter.title': 'Winterzeit in Kärnten',
 		'seasons.winter.body': 'Skifahren, Langlaufen, ruhige Wintertage und wärmende Kärntner Klassiker wie Kasnudeln oder Kirchtagssuppe.',
+		'seasons.winter.teaser': 'Skifahren, Langlaufen und ruhige Schneetage.',
 		'seasons.winter.kicker': 'Winter',
 		'seasons.winter.highlight.1': 'Skifahren am Nassfeld und in Weißbriach',
 		'seasons.winter.highlight.2': 'Langlaufloipe im Tal und Winterwanderwege',
@@ -653,7 +655,14 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.sustainability.heating.title': 'Heizung mit Fernwärme',
 		'home.sustainability.heating.body': 'Wärmeversorgung aus dem Dorf - effizient und verlässlich.',
 		'home.seasons.summer.imageAlt': 'Gästehaus im Sommer',
+		'home.seasons.summer.liftAlt': 'Sommerbergbahn am Nassfeld mit Bergpanorama',
+		'home.seasons.summer.lakeAlt': 'Badesee in Kärnten im Sommer',
+		'home.seasons.summer.bikeAlt': 'Radfahren in der Sommerlandschaft rund um Weißbriach',
+		'home.seasons.summer.panoramaAlt': 'Sommerlicher Panoramablick über die Berge des Gitschtals',
 		'home.seasons.winter.imageAlt': 'Gästehaus im Winter',
+		'home.seasons.winter.crosscountryAlt': 'Langlaufloipe in Weißbriach im Winter',
+		'home.seasons.winter.skiAlt': 'Skipiste in Weißbriach im Winter',
+		'home.seasons.winter.iceAlt': 'Eislaufen am winterlichen Weißensee',
 		'home.workation.kicker': 'Extra',
 		'home.workation.title': 'Auch für Workation geeignet',
 		'home.workation.body':
@@ -683,7 +692,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.amenities.basic.towels.body':
 			'Extra flauschige Handtücher für Ihren Aufenthalt.',
 		'home.amenities.basic.care.title': 'Pflegeprodukte',
-		'home.amenities.basic.care.body': 'Nachhaltige Seifen.',
+		'home.amenities.basic.care.body': 'Handseife',
 		'home.amenities.kitchen.title': 'Küche',
 		'home.amenities.kitchen.summary':
 			'Voll ausgestattete Küchenzeile mit modernen Geräten.',
@@ -691,11 +700,10 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.amenities.kitchen.kitchenette.title': 'Küchenzeile',
 		'home.amenities.kitchen.kitchenette.body':
 			'Voll ausgestattet mit Herd und Mikrowelle.',
-		'home.amenities.kitchen.espresso.title': 'Kaffeemaschinen',
-		'home.amenities.kitchen.espresso.body':
-			'Senseo-Padmaschine ohne Pads und Kaffee-Filtermaschine ohne Kaffeepulver.',
+		'home.amenities.kitchen.espresso.title': 'Senseo Pad Maschine',
+		'home.amenities.kitchen.espresso.body': 'Kaffee Filtermaschine',
 		'home.amenities.kitchen.kettle.title': 'Wasserkocher',
-		'home.amenities.kitchen.kettle.body': 'Ohne Teesortiment.',
+		'home.amenities.kitchen.kettle.body': '',
 		'home.amenities.kitchen.dishes.title': 'Geschirr-Set',
 		'home.amenities.kitchen.dishes.body':
 			'Vollständiges Set für 4 Personen inklusive Weingläsern.',
@@ -1726,6 +1734,7 @@ const translations: Record<Lang, Record<string, string>> = {
 			'Lake summers, snowy winters, and regional specialties from alpine cheese to Reindling - every season has its own taste here.',
 		'seasons.summer.title': 'Summer in the valley',
 		'seasons.summer.body': 'Hikes, lakes, cycling routes, then alpine huts, farmers markets, Gailtaler Speck, and regional cheese.',
+		'seasons.summer.teaser': 'Hikes, lakes, and cycling routes right outside.',
 		'seasons.summer.kicker': 'Summer',
 		'seasons.summer.highlight.1': 'Hiking paths and alpine meadows around Weissbriach',
 		'seasons.summer.highlight.2': 'Swimming lakes, outdoor pool, and warm days by the water',
@@ -1733,6 +1742,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'seasons.summer.cta': 'Explore summer',
 		'seasons.winter.title': 'Winter in Carinthia',
 		'seasons.winter.body': 'Skiing, cross-country trails, quiet snowy days, and warming Carinthian classics such as Kasnudeln or church-fair soup.',
+		'seasons.winter.teaser': 'Skiing, cross-country trails, and quiet snowy days.',
 		'seasons.winter.kicker': 'Winter',
 		'seasons.winter.highlight.1': 'Skiing at Nassfeld and in Weissbriach',
 		'seasons.winter.highlight.2': 'Valley cross-country trail and winter walking paths',
@@ -1757,7 +1767,14 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.sustainability.heating.title': 'District heating',
 		'home.sustainability.heating.body': 'Heat supplied from the village - efficient and reliable.',
 		'home.seasons.summer.imageAlt': 'Guesthouse exterior in summer',
+		'home.seasons.summer.liftAlt': 'Summer cable car at Nassfeld with mountain panorama',
+		'home.seasons.summer.lakeAlt': 'Swimming lake in Carinthia in summer',
+		'home.seasons.summer.bikeAlt': 'Cycling through the summer landscape around Weissbriach',
+		'home.seasons.summer.panoramaAlt': 'Summer panoramic view across the mountains of the Gitschtal',
 		'home.seasons.winter.imageAlt': 'Guesthouse exterior in winter',
+		'home.seasons.winter.crosscountryAlt': 'Cross-country ski trail in Weissbriach in winter',
+		'home.seasons.winter.skiAlt': 'Ski slope in Weissbriach in winter',
+		'home.seasons.winter.iceAlt': 'Ice skating on wintry Lake Weissensee',
 		'home.workation.kicker': 'Extra',
 		'home.workation.title': 'Also suitable for workation',
 		'home.workation.body':
@@ -1784,17 +1801,16 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.amenities.basic.towels.title': 'Fresh towels',
 		'home.amenities.basic.towels.body': 'Extra fluffy towels for your stay.',
 		'home.amenities.basic.care.title': 'Care products',
-		'home.amenities.basic.care.body': 'Sustainable soaps.',
+		'home.amenities.basic.care.body': 'Hand soap',
 		'home.amenities.kitchen.title': 'Kitchen',
 		'home.amenities.kitchen.summary': 'Fully equipped kitchenette with modern appliances.',
 		'home.amenities.kitchen.imageAlt': 'Kitchenette in an apartment at Guesthouse Rader',
 		'home.amenities.kitchen.kitchenette.title': 'Kitchenette',
 		'home.amenities.kitchen.kitchenette.body': 'Fully equipped with stove and microwave.',
-		'home.amenities.kitchen.espresso.title': 'Coffee machines',
-		'home.amenities.kitchen.espresso.body':
-			'Senseo pad machine without pads and filter coffee machine without coffee grounds.',
+		'home.amenities.kitchen.espresso.title': 'Senseo pad machine',
+		'home.amenities.kitchen.espresso.body': 'Filter coffee machine',
 		'home.amenities.kitchen.kettle.title': 'Kettle',
-		'home.amenities.kitchen.kettle.body': 'No tea selection included.',
+		'home.amenities.kitchen.kettle.body': '',
 		'home.amenities.kitchen.dishes.title': 'Dish set',
 		'home.amenities.kitchen.dishes.body': 'Complete set for 4 people including wine glasses.',
 		'home.amenities.kitchen.toaster.title': 'Toaster',
@@ -2215,16 +2231,6 @@ export const t = derived(lang, ($lang) => {
 });
 
 export const setLang = (value: Lang) => lang.set(value);
-
-
-
-
-
-
-
-
-
-
 
 
 
