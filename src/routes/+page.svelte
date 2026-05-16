@@ -1293,7 +1293,7 @@ import { localizePath } from '$lib/routing';
 			<!-- GUEST CARD -->
 			<section class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:shadow-[0_24px_48px_-18px_rgba(245,146,0,0.35)]">
 				<div class="grid lg:grid-cols-[1.08fr,0.92fr]">
-					<div class="relative min-h-[380px] sm:min-h-[430px] lg:min-h-[670px]">
+					<div class="relative min-h-[330px] sm:min-h-[430px] lg:min-h-[670px]">
 						<img
 							{...imageAttrs(guestCardVisual.src, '(max-width: 1024px) 100vw, 45vw')}
 							alt={$t(guestCardVisual.altKey)}
@@ -1420,7 +1420,7 @@ import { localizePath } from '$lib/routing';
 							</p>
 						</div>
 
-							<div class="space-y-4 md:hidden">
+							<div class="space-y-10 md:hidden">
 								{#each amenityCards as card}
 									<details
 										class="group mt-7 overflow-visible rounded-[1.35rem] border border-slate-200/80 bg-white shadow-sm transition open:border-brand/30 open:shadow-md"
