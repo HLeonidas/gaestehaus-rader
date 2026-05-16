@@ -670,16 +670,16 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.amenities.basic.towels.body':
 			'Extra flauschige Handtücher für Ihren Aufenthalt.',
 		'home.amenities.basic.care.title': 'Pflegeprodukte',
-		'home.amenities.basic.care.body': 'Nachhaltige Seifen und Shampoos.',
+		'home.amenities.basic.care.body': 'Nachhaltige Seifen.',
 		'home.amenities.kitchen.title': 'Küche',
 		'home.amenities.kitchen.kitchenette.title': 'Küchenzeile',
 		'home.amenities.kitchen.kitchenette.body':
 			'Voll ausgestattet mit Herd und Mikrowelle.',
-		'home.amenities.kitchen.espresso.title': 'Nespresso-Maschine',
+		'home.amenities.kitchen.espresso.title': 'Kaffeemaschinen',
 		'home.amenities.kitchen.espresso.body':
-			'Inklusive einer Auswahl an Premium-Kaffeekapseln.',
+			'Senseo-Padmaschine ohne Pads und Kaffee-Filtermaschine ohne Kaffeepulver.',
 		'home.amenities.kitchen.kettle.title': 'Wasserkocher',
-		'home.amenities.kitchen.kettle.body': 'Sowie ein Teesortiment für gemütliche Abende.',
+		'home.amenities.kitchen.kettle.body': 'Ohne Teesortiment.',
 		'home.amenities.kitchen.dishes.title': 'Geschirr-Set',
 		'home.amenities.kitchen.dishes.body':
 			'Vollständiges Set für 4 Personen inklusive Weingläsern.',
@@ -1753,14 +1753,15 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.amenities.basic.towels.title': 'Fresh towels',
 		'home.amenities.basic.towels.body': 'Extra fluffy towels for your stay.',
 		'home.amenities.basic.care.title': 'Care products',
-		'home.amenities.basic.care.body': 'Sustainable soaps and shampoos.',
+		'home.amenities.basic.care.body': 'Sustainable soaps.',
 		'home.amenities.kitchen.title': 'Kitchen',
 		'home.amenities.kitchen.kitchenette.title': 'Kitchenette',
 		'home.amenities.kitchen.kitchenette.body': 'Fully equipped with stove and microwave.',
-		'home.amenities.kitchen.espresso.title': 'Nespresso machine',
-		'home.amenities.kitchen.espresso.body': 'Includes a selection of premium coffee capsules.',
+		'home.amenities.kitchen.espresso.title': 'Coffee machines',
+		'home.amenities.kitchen.espresso.body':
+			'Senseo pad machine without pads and filter coffee machine without coffee grounds.',
 		'home.amenities.kitchen.kettle.title': 'Kettle',
-		'home.amenities.kitchen.kettle.body': 'Plus a tea selection for cozy evenings.',
+		'home.amenities.kitchen.kettle.body': 'No tea selection included.',
 		'home.amenities.kitchen.dishes.title': 'Dish set',
 		'home.amenities.kitchen.dishes.body': 'Complete set for 4 people including wine glasses.',
 		'home.amenities.kitchen.toaster.title': 'Toaster',
@@ -2178,8 +2179,6 @@ export const t = derived(lang, ($lang) => {
 });
 
 export const setLang = (value: Lang) => lang.set(value);
-
-
 
 
 
