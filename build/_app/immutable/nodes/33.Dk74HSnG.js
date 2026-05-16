@@ -1,0 +1,1 @@
+import{r as e}from"../chunks/Brj4ZZ7j.js";import{r}from"../chunks/DS3W6yMW.js";const o=!0,t=()=>{throw e(308,r("/unterkuenfte-preise"))},a=Object.freeze(Object.defineProperty({__proto__:null,load:t,prerender:o},Symbol.toStringTag,{value:"Module"}));export{a as universal};

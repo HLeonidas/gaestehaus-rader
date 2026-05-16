@@ -126,33 +126,21 @@
 <div class="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
 	<section
 		use:reveal
-		class="relative overflow-hidden rounded-3xl border border-slate-200 bg-white px-6 py-10 shadow-[0_24px_70px_rgba(15,23,42,0.08)] opacity-0 translate-y-4 transition-all duration-700 ease-out sm:px-10 sm:py-14 lg:px-16"
+		class="opacity-0 translate-y-4 py-4 transition-all duration-700 ease-out sm:py-8"
 	>
-		<div class="absolute inset-y-0 right-0 hidden w-[58%] overflow-hidden lg:block" aria-hidden="true">
-			<img
-				src={withAsset('/images/Haus/gaestehaus-balkon-ausblick.jpg')}
-				alt=""
-				class="h-full w-full object-cover opacity-[0.12]"
-				loading="lazy"
-				decoding="async"
-			/>
-			<div class="absolute inset-0 bg-gradient-to-r from-white via-white/70 to-white/30"></div>
-			<div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white to-transparent"></div>
-		</div>
-
-		<div class="relative max-w-2xl">
+		<div class="max-w-2xl">
 			<p class="text-xs font-semibold uppercase tracking-[0.42em] text-brand">
 				{$t('contact.hero.kicker')}
 			</p>
-			<h1 class="mt-4 font-serif text-5xl font-semibold leading-[0.92] text-slate-950 sm:text-7xl">
+			<h1 class="mt-4 font-serif text-4xl leading-[0.95] text-slate-900 sm:text-5xl">
 				{$t('contact.title')}
 			</h1>
-			<div class="mt-6 h-[3px] w-14 rounded-full bg-brand"></div>
-			<p class="mt-6 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">
+			<div class="mt-4 h-[3px] w-14 rounded-full bg-brand"></div>
+			<p class="mt-5 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">
 				{$t('contact.subtitle')}
 			</p>
 
-			<div class="mt-10">
+			<div class="mt-8">
 				<p class="text-sm font-semibold text-slate-900">{$t('contact.quick.title')}</p>
 				<div class="mt-4 flex flex-wrap items-center gap-3">
 					<a
@@ -290,23 +278,29 @@
 							src={mapSrc}
 						></iframe>
 					{:else}
-						<div class="contact-map-preview absolute inset-0">
-							<div class="absolute left-[14%] top-[6%] h-[112%] w-10 -rotate-[17deg] rounded-full bg-slate-400/30"></div>
-							<div class="absolute left-[48%] top-[-8%] h-[116%] w-8 rotate-[28deg] rounded-full bg-slate-400/25"></div>
-							<div class="absolute left-[6%] top-[58%] h-4 w-[92%] -rotate-[10deg] rounded-full bg-sky-200/70"></div>
-							<div class="absolute left-[18%] top-[18%] rounded-xl bg-white/95 p-4 shadow-xl ring-1 ring-slate-200">
-								<p class="text-sm font-semibold text-slate-950">{$t('contact.address.line1')}</p>
-								<p class="mt-1 text-xs text-slate-600">{$t('contact.address.line2')}</p>
-							</div>
-							<div class="absolute left-[50%] top-[38%] -translate-x-1/2 -translate-y-1/2">
-								<div class="relative">
-									<div class="h-12 w-12 rounded-full bg-red-500 shadow-xl ring-4 ring-white"></div>
-									<div class="absolute left-1/2 top-[34px] h-6 w-6 -translate-x-1/2 rotate-45 rounded-sm bg-red-500"></div>
+						<div class="absolute inset-0 bg-slate-900">
+							<img
+								src={withAsset('/images/Haus/gaestehaus-sommer.jpg')}
+								alt=""
+								class="h-full w-full object-cover opacity-80"
+								loading="lazy"
+								decoding="async"
+							/>
+							<div class="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-slate-950/25 to-white/10"></div>
+							<div class="absolute left-5 top-5 rounded-2xl bg-white/95 p-4 shadow-xl ring-1 ring-slate-200 sm:left-7 sm:top-7">
+								<div class="flex items-start gap-3">
+									<span class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-brand text-white shadow-sm">
+										<MapPin class="h-5 w-5" aria-hidden="true" />
+									</span>
+									<span>
+										<span class="block text-sm font-semibold text-slate-950">{$t('contact.address.line1')}</span>
+										<span class="mt-1 block text-xs text-slate-600">{$t('contact.address.line2')}</span>
+									</span>
 								</div>
 							</div>
 							<button
 								type="button"
-								class="absolute inset-x-6 bottom-6 rounded-2xl bg-white/95 p-5 text-left shadow-xl ring-1 ring-slate-200 transition hover:bg-white sm:inset-x-auto sm:left-6 sm:w-[360px]"
+								class="absolute inset-x-5 bottom-5 rounded-2xl bg-white/95 p-5 text-left shadow-xl ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:bg-white hover:shadow-2xl sm:inset-x-auto sm:left-7 sm:w-[360px]"
 								onclick={enableMap}
 							>
 								<p class="text-xs font-semibold uppercase tracking-[0.28em] text-brand">
@@ -314,6 +308,10 @@
 								</p>
 								<p class="mt-2 text-lg font-semibold text-slate-950">{$t('contact.map.load')}</p>
 								<p class="mt-2 text-sm leading-relaxed text-slate-600">{$t('contact.map.tip')}</p>
+								<span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand">
+									<Navigation class="h-4 w-4" aria-hidden="true" />
+									{$t('contact.route.cta')}
+								</span>
 							</button>
 						</div>
 					{/if}
@@ -392,13 +390,3 @@
 		</div>
 	</section>
 </div>
-
-<style>
-	.contact-map-preview {
-		background:
-			linear-gradient(135deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.2)),
-			radial-gradient(circle at 20% 18%, rgba(255, 255, 255, 0.92), transparent 28%),
-			radial-gradient(circle at 86% 20%, rgba(187, 247, 208, 0.8), transparent 32%),
-			linear-gradient(145deg, #eef7f2 0%, #f8fafc 48%, #e4f7ec 100%);
-	}
-</style>
