@@ -187,12 +187,25 @@
 	>
 		{$t('accessibility.skip')}
 	</a>
-	<header
-		id="site-header"
-		class={`sticky top-0 z-40 w-full border-b border-slate-200 bg-white/90 backdrop-blur transition-transform duration-300 will-change-transform ${
-			headerHidden ? '-translate-y-full' : 'translate-y-0'
-		}`}
-	>
+	<div class="sticky top-0 z-50">
+		{#if isPreviewDeployment}
+			<div class="border-b border-amber-300 bg-amber-100 px-4 py-2 text-center text-xs font-semibold leading-snug text-amber-950 sm:text-sm">
+				{$t('deployment.previewNotice')}
+				<a
+					class="underline decoration-amber-500 underline-offset-2 hover:text-amber-800"
+					href={productionSiteOrigin}
+				>
+					{productionSiteOrigin.replace(/^https?:\/\//, '')}
+				</a>.
+			</div>
+		{/if}
+
+		<header
+			id="site-header"
+			class={`w-full border-b border-slate-200 bg-white/90 backdrop-blur transition-transform duration-300 will-change-transform ${
+				headerHidden ? '-translate-y-full' : 'translate-y-0'
+			}`}
+		>
 		<div class="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-4 py-4 sm:px-6">
 			<a
 				href={localizedHref('/')}
@@ -289,7 +302,8 @@
 				{/each}
 			</div>
 		</nav>
-	</header>
+		</header>
+	</div>
 
 	<!-- ONLY remaining isHome logic: max-width behavior -->
 	<main
@@ -445,20 +459,6 @@
 				</div>
 			</div>
 
-			{#if isPreviewDeployment}
-				<div
-					class="mt-10 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-relaxed text-amber-950"
-				>
-					{$t('footer.previewNotice')}
-					<a
-						class="font-semibold underline decoration-amber-400 underline-offset-2 hover:text-amber-800"
-						href={productionSiteOrigin}
-					>
-						{productionSiteOrigin.replace(/^https?:\/\//, '')}
-					</a>.
-				</div>
-			{/if}
-
 			<div
 				class="mt-10 flex flex-col gap-4 border-t border-slate-200 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between"
 			>
@@ -480,4 +480,3 @@
 		</div>
 	</footer>
 </div>
-

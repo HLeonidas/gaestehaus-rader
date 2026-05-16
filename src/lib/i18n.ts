@@ -31,6 +31,8 @@ const translations: Record<Lang, Record<string, string>> = {
 		'nav.langDe': 'Sprache Deutsch',
 		'nav.langEn': 'Sprache Englisch',
 		'accessibility.skip': 'Zum Inhalt springen',
+		'deployment.previewNotice':
+			'Testversion auf GitHub Pages. Die offizielle Produktionsseite ist ',
 		'brand.name': 'Gästehaus Rader',
 		'hero.kicker': 'Gästehaus Rader • Kärnten',
 		'hero.title': 'Ihr Rückzugsort für alpine Gelassenheit',
@@ -841,8 +843,6 @@ const translations: Record<Lang, Record<string, string>> = {
 		'footer.accessibility': 'Barrierefreiheit',
 		'footer.credits': 'Bild- & Lizenznachweise',
 		'footer.faq': 'FAQ',
-		'footer.previewNotice':
-			'Diese GitHub-Pages-Version dient nur Testzwecken. Die offizielle Produktionsseite ist ',
 		'credits.title': 'Bild- & Lizenznachweise',
 		'credits.seo.title': 'Bild- & Lizenznachweise – Gästehaus Rader',
 		'credits.seo.description':
@@ -1115,6 +1115,8 @@ const translations: Record<Lang, Record<string, string>> = {
 		'nav.langDe': 'Language: German',
 		'nav.langEn': 'Language: English',
 		'accessibility.skip': 'Skip to content',
+		'deployment.previewNotice':
+			'Test version on GitHub Pages. The official production site is ',
 		'brand.name': 'Gästehaus Rader',
 		'hero.kicker': 'Guesthouse Rader • Carinthia',
 		'hero.title': 'Your retreat for alpine serenity',
@@ -1916,8 +1918,6 @@ const translations: Record<Lang, Record<string, string>> = {
 		'footer.accessibility': 'Accessibility',
 		'footer.credits': 'Image & license credits',
 		'footer.faq': 'FAQ',
-		'footer.previewNotice':
-			'This GitHub Pages version is for testing only. The official production site is ',
 		'credits.title': 'Image & license credits',
 		'credits.seo.title': 'Image & license credits – Guesthouse Rader',
 		'credits.seo.description':
@@ -2183,7 +2183,6 @@ export const t = derived(lang, ($lang) => {
 });
 
 export const setLang = (value: Lang) => lang.set(value);
-
 
 
 
