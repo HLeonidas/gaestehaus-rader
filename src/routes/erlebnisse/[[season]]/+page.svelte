@@ -1122,7 +1122,7 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 
 				<section class="anchor-target bg-[#fbfaf7] py-14 sm:py-16" id="traditionelle-feste">
 					<div class="mx-auto w-full max-w-6xl px-4 sm:px-6">
-						<div class="mx-auto max-w-3xl text-center">
+						<div class="mx-auto max-w-2xl text-center">
 							<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
 								{localize(festivalSection.kicker)}
 							</p>
@@ -1133,66 +1133,72 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 							<p class="mt-4 text-sm leading-relaxed text-slate-600 sm:text-base">
 								{localize(festivalSection.intro)}
 							</p>
-							<p class="mt-4 inline-flex rounded-full border border-brand/15 bg-white/80 px-4 py-2 text-xs font-medium text-slate-600 shadow-sm backdrop-blur">
-								{localize(festivalSection.note)}
-							</p>
 						</div>
 
-						<div class="mt-10 grid gap-4 md:grid-cols-3">
+						<div class="mt-9 grid gap-5 md:grid-cols-3">
 							{#each festivalSection.cards as card, index}
 								<article
 									use:reveal
-									class="reveal group relative overflow-hidden rounded-3xl border border-slate-200 bg-white/80 p-6 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg"
+									class="reveal group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/25 hover:shadow-md"
 									style={`--reveal-delay: ${index * 90}ms;`}
 								>
-									<div
-										class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-									>
-										<div class="absolute -left-24 -top-24 h-48 w-48 rounded-full bg-brand/10 blur-2xl"></div>
-										<div class={`absolute -right-20 -bottom-20 h-48 w-48 rounded-full blur-2xl ${card.accentClass}`}></div>
-									</div>
-
-									<p class="relative text-[11px] font-semibold uppercase tracking-[0.28em] text-brand">
-										{localize(card.kicker)}
-									</p>
-
-									<div class="relative mt-3 flex items-start gap-3">
-										<div class="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-brand/10 text-brand">
-											<span class="text-lg" aria-hidden="true">{card.icon}</span>
-										</div>
-										<div class="min-w-0">
-											<h3 class="text-xl font-semibold leading-tight text-slate-900">{localize(card.title)}</h3>
-											<p class="mt-2 text-sm leading-relaxed text-slate-600">
-												{localize(card.body)}
+									<div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
+										<img
+											{...imageAttrs(card.image, '(max-width: 768px) 100vw, 360px')}
+											alt={localize(card.title)}
+											class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.035]"
+											loading="lazy"
+											decoding="async"
+										/>
+										<div class="absolute inset-0 bg-gradient-to-t from-slate-950/55 via-transparent to-transparent"></div>
+										<div class="absolute bottom-4 left-4 right-4">
+											<p class="text-[11px] font-semibold uppercase tracking-[0.28em] text-white/80">
+												{localize(card.kicker)}
 											</p>
+											<h3 class="mt-1 text-xl font-semibold leading-tight text-white">
+												{localize(card.title)}
+											</h3>
 										</div>
 									</div>
 
-									<ul class="relative mt-5 space-y-2 text-sm text-slate-700">
-										{#each card.highlights as highlight}
-											<li class="flex items-start gap-2">
-												<span class="mt-1 h-1.5 w-1.5 rounded-full bg-brand"></span>
-												{localize(highlight)}
-											</li>
-										{/each}
-									</ul>
+									<div class="p-5">
+										<div class="flex items-start gap-3">
+											<div class="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-brand/10 text-brand">
+											<span class="text-lg" aria-hidden="true">{card.icon}</span>
+											</div>
+											<div class="min-w-0">
+												<p class="text-sm leading-relaxed text-slate-600">
+													{localize(card.body)}
+												</p>
+											</div>
+										</div>
 
-									<div class="relative mt-5 inline-flex items-center gap-2 text-sm font-semibold text-slate-800">
-										{localize(card.tipLabel)}
-										<span class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600">
-											{localize(card.seasonBadge)}
-										</span>
+										<ul class="mt-5 space-y-2 text-sm text-slate-700">
+											{#each card.highlights as highlight}
+												<li class="flex items-start gap-2">
+													<span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand"></span>
+													<span>{localize(highlight)}</span>
+												</li>
+											{/each}
+										</ul>
+
+										<div class="mt-5 flex flex-wrap items-center gap-2 text-sm font-semibold text-slate-800">
+											<span>{localize(card.tipLabel)}</span>
+											<span class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600">
+												{localize(card.seasonBadge)}
+											</span>
+										</div>
 									</div>
 								</article>
 							{/each}
 						</div>
-						<div class="mt-8 text-center text-sm font-medium leading-relaxed text-slate-600">
-							<p>{localize(festivalSection.eventInfo)}</p>
+						<div class="mx-auto mt-8 flex max-w-3xl flex-col items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white/70 px-4 py-4 text-center text-sm font-medium leading-relaxed text-slate-600 sm:flex-row sm:text-left">
+							<p>{localize(festivalSection.note)}</p>
 							<a
 								href={festivalSection.eventInfoUrl}
 								target="_blank"
 								rel="noreferrer"
-								class="mt-3 inline-flex items-center justify-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 motion-reduce:transition-none"
+								class="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 motion-reduce:transition-none"
 							>
 								{$lang === 'de' ? 'Nassfeld Eventkalender' : 'Nassfeld event calendar'}
 								<ExternalLink class="h-4 w-4" aria-hidden="true" />

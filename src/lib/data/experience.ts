@@ -75,6 +75,7 @@ export type SectionLink = {
 export type FestivalCard = {
 	id: string;
 	icon: string;
+	image: string;
 	accentClass: string;
 	kicker: LocalizedText;
 	title: LocalizedText;
@@ -665,12 +666,12 @@ export const experienceFestivalSection: FestivalSection = {
 		en: 'Traditional festivals in the Gitschtal',
 	},
 	intro: {
-		de: 'Wer das Gitschtal nicht nur sehen, sondern auch schmecken möchte, erlebt bei Festen, Kirchtagen und kleinen Dorfveranstaltungen Gailtaler Speck, Almkäse, Kasnudeln, Reindling und saisonale Produkte dort, wo sie zur Region gehören.',
-		en: 'If you want to do more than just see the Gitschtal, local festivals, church fairs, and small village gatherings let you taste Gailtaler Speck, alpine cheese, Kasnudeln, Reindling, and seasonal products where they belong.',
+		de: 'Kleine Dorffeste, regionale Spezialitäten und gelebtes Brauchtum - passend zur Jahreszeit.',
+		en: 'Small village festivals, regional food, and living traditions - depending on the season.',
 	},
 	note: {
-		de: 'Viele Termine sind saisonabhängig. Wir prüfen diese Hinweise regelmäßig und sagen Ihnen vor Ihrem Aufenthalt gerne, was während Ihres Urlaubs gerade gut passt.',
-		en: 'Many dates depend on the season and the local calendar. We review these pointers regularly and are happy to tell you what fits best during your stay.',
+		de: 'Viele Termine sind saisonabhängig. Wir sagen Ihnen gerne, was während Ihres Aufenthalts gerade passt.',
+		en: 'Many dates depend on the season. We are happy to tell you what fits during your stay.',
 	},
 	eventInfo: {
 		de: 'Nähere Informationen zu den einzelnen Veranstaltungen findet ihr unter:',
@@ -681,17 +682,17 @@ export const experienceFestivalSection: FestivalSection = {
 		{
 			id: 'village-festivals',
 			icon: '🎉',
+			image: '/images/Haus/weissbriach-kirche.jpg',
 			accentClass: 'bg-amber-200/30',
 			kicker: { de: 'Dorffeste', en: 'Village festivals' },
-			title: { de: 'Dorffeste mit echter Nähe', en: 'Village festivals with real local warmth' },
+			title: { de: 'Dorffeste & Kirchtage', en: 'Village festivals & church fairs' },
 			body: {
-				de: 'Hier sitzt man nicht anonym am Rand, sondern mittendrin: mit Musik, Gesprächen, regionalen Getränken und kleinen Speisen, die einen Sommerabend in Weißbriach besonders machen.',
-				en: 'You are not just watching from the sidelines here. With music, conversation, regional drinks, and simple local food, these gatherings turn a summer evening in Weissbriach into something memorable.',
+				de: 'Musik, Begegnungen und echtes Dorfleben rund um Weißbriach.',
+				en: 'Music, local encounters, and real village life around Weissbriach.',
 			},
 			highlights: [
-				{ de: 'Kuhfladentombola in Weißbriach, kultig und mit viel Schmäh', en: 'The Kuhfladentombola in Weissbriach, quirky, local, and full of humour' },
-				{ de: 'Feuerwehrfeste und Zeltfeste mit Musik, Begegnungen und echter Stimmung', en: 'Fire brigade and marquee festivals with music, friendly encounters, and a genuine local mood' },
-				{ de: 'Frühschoppen, wenn der Vormittag mit Musik, Getränken und regionalen Kleinigkeiten in Geselligkeit übergeht', en: 'Traditional Frühschoppen gatherings where music, drinks, and regional bites turn the morning into an easy local social experience' },
+				{ de: 'Kirchtage, Frühschoppen und kleine Dorffeste', en: 'Church fairs, morning gatherings, and small village festivals' },
+				{ de: 'Musik, Gespräche und regionale Kleinigkeiten', en: 'Music, conversation, and simple regional bites' },
 			],
 			tipLabel: { de: 'Besonders schön im Sommer', en: 'Especially lovely in summer' },
 			seasonBadge: { de: 'Juni bis August', en: 'June to August' },
@@ -699,17 +700,17 @@ export const experienceFestivalSection: FestivalSection = {
 		{
 			id: 'culinary-festivals',
 			icon: '🥬',
+			image: '/images/Umgebung/napal-alm.jpg',
 			accentClass: 'bg-emerald-200/30',
-			kicker: { de: 'Kulinarische Feste', en: 'Culinary festivals' },
-			title: { de: 'Regionaler Genuss mit Jahreszeit', en: 'Seasonal food with a strong regional feel' },
+			kicker: { de: 'Kulinarik', en: 'Food culture' },
+			title: { de: 'Gailtaler Geschmack', en: 'A taste of the Gailtal' },
 			body: {
-				de: 'Wenn Bauern, Vereine und Produzenten gemeinsam auftischen, schmeckt man, wie eng Küche und Landschaft hier zusammengehören: Gailtaler Speck, Almkäse, Kraut, Kasnudeln und Süßes wie Reindling erzählen viel über die Region.',
-				en: 'When farmers, local clubs, and producers come together, you can taste how closely food and landscape belong together here: Gailtaler Speck, alpine cheese, cabbage, Kasnudeln, and sweet Reindling tell a lot about the region.',
+				de: 'Speck, Almkäse, Kasnudeln und Reindling dort probieren, wo sie zuhause sind.',
+				en: 'Taste bacon, alpine cheese, Kasnudeln, and Reindling where they belong.',
 			},
 			highlights: [
-				{ de: 'Krautfest in Weißbriach mit Krautgerichten, regionalen Spezialitäten und viel Dorfleben', en: 'The Krautfest in Weissbriach with cabbage dishes, regional specialities, and plenty of village life' },
-				{ de: 'Bauern- und Handwerksstände mit Speck, Käse, Säften, Schnäpsen und Produkten, die wirklich aus der Region kommen', en: 'Farm and craft stalls with bacon, cheese, juices, schnapps, and products that genuinely come from the region' },
-				{ de: 'Herbstliche Genussfeste, ideal nach Wanderungen oder als ruhiger Urlaubstag', en: 'Autumn food festivals that fit perfectly after a hike or as part of a slower holiday day' },
+				{ de: 'Krautfest und saisonale Genussfeste', en: 'Cabbage festival and seasonal food events' },
+				{ de: 'Bauernstände mit regionalen Produkten', en: 'Farm stalls with regional products' },
 			],
 			tipLabel: { de: 'Ideal für den Herbsturlaub', en: 'Ideal for an autumn stay' },
 			seasonBadge: { de: 'September bis Oktober', en: 'September to October' },
@@ -717,17 +718,17 @@ export const experienceFestivalSection: FestivalSection = {
 		{
 			id: 'tradition-customs',
 			icon: '🎺',
+			image: '/images/Haus/familie-hueber.jpg',
 			accentClass: 'bg-indigo-200/25',
 			kicker: { de: 'Tradition & Brauchtum', en: 'Tradition & customs' },
-			title: { de: 'Bräuche, die wirklich gelebt werden', en: 'Traditions that are still genuinely lived' },
+			title: { de: 'Brauchtum im Tal', en: 'Traditions in the valley' },
 			body: {
-				de: 'Kirchtage, Musik und kleine Brauchtumsveranstaltungen zeigen eine Seite des Gitschtals, die man nicht planen kann wie einen klassischen Ausflug. Zur Kultur gehören dabei auch Kirchtagssuppe, Tracht, Tanz und das gemeinsame Essen.',
-				en: 'Church fairs, brass bands, and smaller customs-based events reveal a side of the Gitschtal that standard sightseeing cannot offer. Church-fair soup, traditional dress, dancing, and shared meals are all part of it.',
+				de: 'Tracht, Musik, gemeinsames Essen und kleine Veranstaltungen mit viel Charakter.',
+				en: 'Traditional dress, music, shared meals, and small events with real character.',
 			},
 			highlights: [
-				{ de: 'Kirchtag in Weißbriach mit Tracht, Musik, Tanz und traditioneller Kirchtagssuppe', en: 'The Kirchtag in Weissbriach with traditional dress, music, dancing, and church-fair soup' },
-				{ de: 'Alm- und Almkirchtage, klein, bodenständig und besonders stimmungsvoll', en: 'Alpine hut festivals that feel small-scale, grounded, and especially atmospheric' },
-				{ de: 'Advent im Tal mit Reindling, warmen Getränken und ruhiger winterlicher Stimmung', en: 'Advent in the valley with Reindling, warm drinks, and a quiet winter atmosphere' },
+				{ de: 'Tracht, Tanz und traditionelle Kirchtagssuppe', en: 'Traditional dress, dancing, and church-fair soup' },
+				{ de: 'Advent im Tal mit Reindling und warmen Getränken', en: 'Advent in the valley with Reindling and warm drinks' },
 			],
 			tipLabel: { de: 'Je nach Saison verschieden', en: 'Different depending on the season' },
 			seasonBadge: { de: 'Über das Jahr verteilt', en: 'Throughout the year' },

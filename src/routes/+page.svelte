@@ -1290,9 +1290,8 @@ import { localizePath } from '$lib/routing';
 			></div>
 
 			<!-- GUEST CARD -->
-			<section class="group/guestcard relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition-all duration-500 hover:-translate-y-1 hover:border-brand/30 hover:shadow-[0_34px_78px_-30px_rgba(245,146,0,0.55)] focus-within:border-brand/30 focus-within:shadow-[0_34px_78px_-30px_rgba(245,146,0,0.55)] motion-reduce:transform-none motion-reduce:transition-none">
-				<div class="pointer-events-none absolute inset-0 z-20 rounded-3xl opacity-0 ring-2 ring-brand/25 transition-opacity duration-500 group-hover/guestcard:opacity-100 group-focus-within/guestcard:opacity-100"></div>
-				<div class="pointer-events-none absolute -right-24 -top-24 z-10 h-56 w-56 rounded-full bg-brand/20 opacity-0 blur-3xl transition-opacity duration-700 group-hover/guestcard:opacity-100 group-focus-within/guestcard:opacity-100"></div>
+			<section class="group/guestcard relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition-all duration-500 hover:-translate-y-0.5 hover:border-brand/25 hover:shadow-[0_22px_54px_-34px_rgba(15,23,42,0.42)] focus-within:border-brand/25 focus-within:shadow-[0_22px_54px_-34px_rgba(15,23,42,0.42)] motion-reduce:transform-none motion-reduce:transition-none">
+				<div class="pointer-events-none absolute inset-0 z-20 rounded-3xl opacity-0 ring-1 ring-brand/20 transition-opacity duration-500 group-hover/guestcard:opacity-100 group-focus-within/guestcard:opacity-100"></div>
 				<div class="grid lg:grid-cols-[1.08fr,0.92fr]">
 					<div class="relative min-h-[330px] sm:min-h-[430px] lg:min-h-[670px]">
 						<picture>
@@ -1303,13 +1302,13 @@ import { localizePath } from '$lib/routing';
 							<img
 								{...imageAttrs(guestCardVisual.src, '(max-width: 1024px) 100vw, 45vw')}
 								alt={$t(guestCardVisual.altKey)}
-								class="absolute inset-0 h-full w-full object-cover transition duration-700 ease-out group-hover/guestcard:scale-[1.035] group-focus-within/guestcard:scale-[1.035] motion-reduce:transform-none motion-reduce:transition-none"
+								class="absolute inset-0 h-full w-full object-cover transition duration-700 ease-out group-hover/guestcard:scale-[1.025] group-focus-within/guestcard:scale-[1.025] motion-reduce:transform-none motion-reduce:transition-none"
 								loading="lazy"
 								decoding="async"
 							/>
 						</picture>
 						<div
-							class="absolute inset-0 bg-gradient-to-b from-slate-950/85 via-slate-950/65 to-slate-950/25 transition duration-500 group-hover/guestcard:from-slate-950/75 group-hover/guestcard:via-slate-950/52 lg:bg-gradient-to-r lg:from-slate-950/20 lg:via-transparent lg:to-transparent lg:group-hover/guestcard:from-brand/18"
+							class="absolute inset-0 bg-gradient-to-b from-slate-950/85 via-slate-950/65 to-slate-950/25 transition duration-500 group-hover/guestcard:from-slate-950/78 group-hover/guestcard:via-slate-950/56 lg:bg-gradient-to-r lg:from-slate-950/20 lg:via-transparent lg:to-transparent lg:group-hover/guestcard:from-slate-950/12"
 						></div>
 						<div class="absolute inset-x-0 top-0 p-6 pt-7 text-white sm:p-8 lg:hidden">
 							<p class="text-[11px] font-semibold uppercase tracking-[0.32em] text-[#ffb14a]">
@@ -1390,7 +1389,7 @@ import { localizePath } from '$lib/routing';
 						<div class="mt-5 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center lg:mt-6">
 							<a
 								href="https://www.nassfeld.at/de/Unterkunft-finden/Reise-planen/PREMIUM-Cards/GaesteCard-basic"
-								class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-6 py-3 text-sm font-semibold text-white shadow-sm transition duration-300 hover:bg-brand/90 group-hover/guestcard:shadow-[0_16px_34px_-18px_rgba(245,146,0,0.9)] sm:w-auto"
+								class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-6 py-3 text-sm font-semibold text-white shadow-sm transition duration-300 hover:bg-brand/90 group-hover/guestcard:shadow-md sm:w-auto"
 								target="_blank"
 								rel="noreferrer"
 							>
@@ -2095,12 +2094,33 @@ import { localizePath } from '$lib/routing';
 		.season-row {
 			border-radius: 1.35rem;
 			overflow: hidden;
+			background: #ffffff;
 		}
 
-		.season-copy {
-			border-top-left-radius: 1.35rem;
-			border-top-right-radius: 1.35rem;
-			padding-bottom: 1.55rem;
+		.season-stage {
+			display: block;
+			min-height: 560px;
+			position: relative;
+		}
+
+		.season-visual {
+			inset: 0;
+			min-height: 560px;
+			position: absolute;
+			z-index: 0;
+		}
+
+		.season-copy,
+		.season-row--reverse .season-copy {
+			background:
+				linear-gradient(180deg, rgba(15, 23, 42, 0.24) 0%, rgba(15, 23, 42, 0.34) 36%, rgba(15, 23, 42, 0.78) 77%, rgba(15, 23, 42, 0.88) 100%);
+			border-radius: 1.35rem;
+			display: flex;
+			justify-content: flex-start;
+			min-height: 560px;
+			padding: 1.35rem 1.45rem 7.7rem;
+			position: relative;
+			z-index: 2;
 		}
 
 		.season-kicker {
@@ -2119,54 +2139,94 @@ import { localizePath } from '$lib/routing';
 			width: 1.25rem;
 		}
 
+		.season-copy h3 {
+			color: #ffffff;
+			font-size: 2.45rem;
+			line-height: 0.96;
+			margin-top: 9.2rem;
+			text-shadow: 0 2px 18px rgba(15, 23, 42, 0.38);
+		}
+
+		.season-copy p {
+			color: rgba(255, 255, 255, 0.92);
+			font-size: 0.98rem;
+			line-height: 1.55;
+			max-width: 19rem;
+			text-shadow: 0 1px 12px rgba(15, 23, 42, 0.32);
+		}
+
+		.season-copy a {
+			box-shadow: 0 16px 34px -22px rgba(0, 0, 0, 0.7);
+			margin-bottom: 0;
+		}
+
 		.season-features {
+			background: #ffffff;
+			border-radius: 1.25rem 1.25rem 0 0;
+			bottom: 0;
+			box-shadow: 0 -16px 40px -30px rgba(15, 23, 42, 0.72);
+			left: 0;
+			margin-top: 0;
 			max-width: 100%;
+			padding: 1.35rem 0.8rem 1.25rem;
+			position: absolute;
+			right: 0;
 		}
 
 		.season-feature :global(svg) {
-			height: 1.45rem;
-			width: 1.45rem;
+			color: #f59200;
+			height: 1.55rem;
+			width: 1.55rem;
 		}
 
 		.season-feature span {
-			font-size: 0.66rem;
+			color: #111827;
+			font-size: 0.72rem;
 		}
 
 		.season-house-image {
-			border-bottom-left-radius: 1.35rem;
-			border-bottom-right-radius: 1.35rem;
+			border-radius: 1.35rem;
+			height: 100%;
+			min-height: 560px;
+		}
+
+		.season-house-image::after {
+			background:
+				linear-gradient(90deg, rgba(15, 23, 42, 0.2), transparent 54%),
+				linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.08) 42%, rgba(15, 23, 42, 0.66) 100%);
+			content: '';
+			inset: 0;
+			pointer-events: none;
+			position: absolute;
 		}
 
 		.season-house-image img {
+			height: 100%;
 			object-position: 38% center;
 		}
 
 		.season-floater {
-			right: 0.75rem;
-			width: min(34vw, 10.5rem);
-			height: clamp(4.85rem, 18vw, 6.35rem);
-			border-width: 2px;
-			border-radius: 0.85rem;
-			box-shadow: 0 18px 38px -24px rgba(15, 23, 42, 0.82);
+			display: none;
 		}
 
 		.season-floater-0 {
+			display: block;
+			height: 9.75rem;
+			right: 1rem;
 			top: 1rem;
-		}
-
-		.season-floater-1 {
-			top: calc(50% - clamp(2.4rem, 9vw, 3.15rem));
-		}
-
-		.season-floater-2 {
-			bottom: 1rem;
+			width: min(31vw, 8.7rem);
+			border-width: 2px;
+			border-radius: 1rem;
+			box-shadow: 0 20px 44px -24px rgba(15, 23, 42, 0.92);
+			transform: rotate(1.5deg);
+			z-index: 3;
 		}
 
 		.season-row:hover .season-floater,
 		.season-floater:hover {
-			width: min(37vw, 11.5rem);
-			height: clamp(5.1rem, 19vw, 6.8rem);
-			transform: rotate(0deg) translateX(-0.15rem);
+			height: 10.25rem;
+			width: min(34vw, 9.3rem);
+			transform: rotate(0deg) translateX(-0.1rem);
 		}
 	}
 
