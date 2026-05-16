@@ -36,6 +36,7 @@ jobs:
         shell: bash
         env:
           PAGES_BASE_PATH_OVERRIDE: ${{ vars.PAGES_BASE_PATH }}
+          PRODUCTION_SITE_ORIGIN_OVERRIDE: ${{ vars.PRODUCTION_SITE_ORIGIN }}
         run: |
           repo_name="${GITHUB_REPOSITORY#*/}"
           owner_lower="$(printf '%s' "${GITHUB_REPOSITORY_OWNER}" | tr '[:upper:]' '[:lower:]')"
@@ -58,6 +59,7 @@ jobs:
           echo "BASE_PATH=${base_path}" >> "${GITHUB_ENV}"
           echo "PUBLIC_SITE_ORIGIN=${site_origin}" >> "${GITHUB_ENV}"
           echo "PUBLIC_IS_PREVIEW=true" >> "${GITHUB_ENV}"
+          echo "PUBLIC_PRODUCTION_SITE_ORIGIN=${PRODUCTION_SITE_ORIGIN_OVERRIDE:-https://rader-gitschtal.at}" >> "${GITHUB_ENV}"
 
       - name: Install dependencies
         run: npm ci

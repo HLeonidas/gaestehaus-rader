@@ -1,5 +1,6 @@
 <script lang="ts">
 	import favicon from '$lib/assets/favicon.ico';
+	import { env } from '$env/dynamic/public';
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import { lang, setLang, t, type Lang } from '$lib/i18n';
@@ -35,6 +36,8 @@
 	]);
 
 	const bookingHref = $derived(localizedHref('/buchen'));
+	const isPreviewDeployment = env.PUBLIC_IS_PREVIEW === 'true';
+	const productionSiteOrigin = env.PUBLIC_PRODUCTION_SITE_ORIGIN || 'https://rader-gitschtal.at';
 
 	const normalizePath = (path: string) => (path === '/' ? '/' : path.replace(/\/+$/, ''));
 	const isActive = (href: string) => {
@@ -442,6 +445,20 @@
 				</div>
 			</div>
 
+			{#if isPreviewDeployment}
+				<div
+					class="mt-10 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-relaxed text-amber-950"
+				>
+					{$t('footer.previewNotice')}
+					<a
+						class="font-semibold underline decoration-amber-400 underline-offset-2 hover:text-amber-800"
+						href={productionSiteOrigin}
+					>
+						{productionSiteOrigin.replace(/^https?:\/\//, '')}
+					</a>.
+				</div>
+			{/if}
+
 			<div
 				class="mt-10 flex flex-col gap-4 border-t border-slate-200 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between"
 			>
@@ -463,5 +480,4 @@
 		</div>
 	</footer>
 </div>
-
 
