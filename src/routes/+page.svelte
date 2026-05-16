@@ -1302,17 +1302,17 @@ import { localizePath } from '$lib/routing';
 							decoding="async"
 						/>
 						<div
-							class="absolute inset-0 bg-gradient-to-b from-slate-950/75 via-slate-950/35 to-slate-950/10 lg:bg-gradient-to-r lg:from-slate-950/20 lg:via-transparent lg:to-transparent"
+							class="absolute inset-0 bg-gradient-to-b from-slate-950/85 via-slate-950/65 to-slate-950/25 lg:bg-gradient-to-r lg:from-slate-950/20 lg:via-transparent lg:to-transparent"
 						></div>
 						<div class="absolute inset-x-0 top-0 p-6 pt-7 text-white sm:p-8 lg:hidden">
 							<p class="text-[11px] font-semibold uppercase tracking-[0.32em] text-[#ffb14a]">
 								{$t('guestcard.landing.kicker')}
 							</p>
-							<h2 class="mt-3 max-w-[11ch] text-4xl font-serif font-medium leading-[0.95] sm:text-5xl">
+							<h2 class="mt-3 max-w-[11ch] text-4xl font-serif font-medium leading-[0.95] drop-shadow-sm sm:text-5xl">
 								{$t('guestcard.landing.title')}
 							</h2>
 							<div class="mt-4 h-[3px] w-14 rounded-full bg-brand"></div>
-							<p class="mt-4 max-w-[29ch] text-sm leading-relaxed text-white/90 sm:text-base">
+							<p class="mt-4 max-w-[29ch] text-[13px] leading-[1.55] text-white drop-shadow-sm sm:text-base sm:leading-relaxed">
 								{$t('guestcard.landing.body')}
 							</p>
 						</div>
