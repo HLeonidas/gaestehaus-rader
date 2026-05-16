@@ -426,7 +426,7 @@ export const experienceEvents: ExperienceEvent[] = [
 			de: 'Weißbriach Loipe und Gitschtal Genussloipe in sonniger Tallage, ideal für ruhige Wintertage abseits des Trubels.',
 			en: 'Weissbriach trail and Gitschtal Genussloipe in a sunny valley setting, great for calm winter days away from crowds.',
 		},
-		image: '/images/Umgebung/weissbriach.jpg',
+		image: '/images/Umgebung/langlaufloipe-weissbriach.png',
 		location: { de: 'Gitschtal', en: 'Gitschtal valley' },
 		driveMinutes: 5,
 		distanceKm: 3,
