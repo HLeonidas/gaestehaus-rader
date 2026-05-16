@@ -339,6 +339,7 @@ import { localizePath } from '$lib/routing';
 
 	const seasonPanels = [
 		{
+			seasonKey: 'summer',
 			titleKey: 'seasons.summer.title',
 			teaserKey: 'seasons.summer.teaser',
 			ctaKey: 'seasons.summer.cta',
@@ -362,6 +363,7 @@ import { localizePath } from '$lib/routing';
 			buttonClass: 'bg-brand text-white hover:bg-brand-dark',
 		},
 		{
+			seasonKey: 'winter',
 			titleKey: 'seasons.winter.title',
 			teaserKey: 'seasons.winter.teaser',
 			ctaKey: 'seasons.winter.cta',
@@ -386,6 +388,25 @@ import { localizePath } from '$lib/routing';
 			buttonClass: 'bg-slate-900 text-white hover:bg-slate-700',
 		},
 	];
+
+	const seasonGalleryImages = {
+		summer: [
+			{ src: '/images/Haus/gaestehaus-sommer.jpg', altKey: 'home.seasons.summer.imageAlt' },
+			{ src: '/images/Umgebung/nassfeld-lift.jpg', altKey: 'home.seasons.summer.liftAlt' },
+			{ src: '/images/Umgebung/presseggersee.jpg', altKey: 'home.seasons.summer.lakeAlt' },
+			{ src: '/images/Umgebung/aussicht-vom-poludnig.jpg', altKey: 'home.seasons.summer.panoramaAlt' },
+			{ src: '/images/Umgebung/freibad-weissbriach.jpg', altKey: 'home.seasons.summer.poolAlt' },
+			{ src: '/images/Umgebung/garnitzenklamm.jpg', altKey: 'home.seasons.summer.gorgeAlt' },
+		],
+		winter: [
+			{ src: '/images/Haus/gaestehaus-winter.png', altKey: 'home.seasons.winter.imageAlt' },
+			{ src: '/images/Umgebung/langlaufloipe-weissbriach.png', altKey: 'home.seasons.winter.crosscountryAlt' },
+			{ src: '/images/Umgebung/ski_weißbriach.JPG', altKey: 'home.seasons.winter.skiAlt' },
+			{ src: '/images/Haus/balkon-ausblick-winter.jpg', altKey: 'home.gallery.imageAlt.winterBalkon' },
+			{ src: '/images/Haus/weissbriach-dorfblick-winter.jpg', altKey: 'home.seasons.winter.villageAlt' },
+			{ src: '/images/Umgebung/schnee-wanderung.jpg', altKey: 'home.seasons.winter.walkAlt' },
+		],
+	};
 
 	const galleryImageSizes = '(min-width: 640px) 360px, 260px';
 	const destinationImages = [
@@ -415,6 +436,11 @@ import { localizePath } from '$lib/routing';
 	let heroHeaderOffset = $state('113px');
 	let isGalleryOpen = $state(false);
 	let activeGalleryIndex = $state(0);
+	let activeSeasonGallery = $state<'summer' | 'winter' | null>(null);
+	let activeSeasonGalleryIndex = $state(0);
+	const activeSeasonGalleryImages = $derived(
+		activeSeasonGallery ? seasonGalleryImages[activeSeasonGallery] : []
+	);
 
 	const getHeroOffsetFallback = () =>
 		browser && window.matchMedia('(min-width: 640px)').matches ? 112 : 141;
@@ -435,6 +461,28 @@ import { localizePath } from '$lib/routing';
 		isGalleryOpen = false;
 	};
 
+	const openSeasonGallery = (seasonKey: string, index = 0) => {
+		if (seasonKey !== 'summer' && seasonKey !== 'winter') return;
+		activeSeasonGallery = seasonKey;
+		activeSeasonGalleryIndex = index;
+	};
+
+	const closeSeasonGallery = () => {
+		activeSeasonGallery = null;
+	};
+
+	const showPrevSeasonGalleryImage = () => {
+		if (!activeSeasonGalleryImages.length) return;
+		activeSeasonGalleryIndex =
+			(activeSeasonGalleryIndex - 1 + activeSeasonGalleryImages.length) %
+			activeSeasonGalleryImages.length;
+	};
+
+	const showNextSeasonGalleryImage = () => {
+		if (!activeSeasonGalleryImages.length) return;
+		activeSeasonGalleryIndex = (activeSeasonGalleryIndex + 1) % activeSeasonGalleryImages.length;
+	};
+
 	const showPrevGalleryImage = () => {
 		if (!galleryImages.length) return;
 		activeGalleryIndex = (activeGalleryIndex - 1 + galleryImages.length) % galleryImages.length;
@@ -446,6 +494,19 @@ import { localizePath } from '$lib/routing';
 	};
 
 	const handleGalleryKeydown = (event: KeyboardEvent) => {
+		if (activeSeasonGallery) {
+			if (event.key === 'Escape') {
+				closeSeasonGallery();
+			}
+			if (event.key === 'ArrowLeft' && activeSeasonGalleryImages.length) {
+				showPrevSeasonGalleryImage();
+			}
+			if (event.key === 'ArrowRight' && activeSeasonGalleryImages.length) {
+				showNextSeasonGalleryImage();
+			}
+			return;
+		}
+
 		if (!isGalleryOpen) return;
 		if (event.key === 'Escape') {
 			closeGallery();
@@ -1606,7 +1667,12 @@ import { localizePath } from '$lib/routing';
 								</div>
 
 								<div class={`season-visual relative min-h-[390px] overflow-visible sm:min-h-[500px] lg:min-h-[455px] ${season.reverse ? 'lg:order-1' : 'lg:order-2'}`}>
-									<div class="season-house-image relative h-full min-h-[390px] overflow-hidden bg-slate-200 sm:min-h-[500px] lg:min-h-[455px]">
+									<button
+										type="button"
+										class="season-house-image relative block h-full min-h-[390px] w-full overflow-hidden bg-slate-200 text-left sm:min-h-[500px] lg:min-h-[455px]"
+										onclick={() => openSeasonGallery(season.seasonKey, 0)}
+										aria-label={`${$t(season.kickerKey)} Galerie öffnen: ${$t(season.heroImage.altKey)}`}
+									>
 										<img
 											{...imageAttrs(season.heroImage.src, '(max-width: 1024px) 100vw, 980px')}
 											alt={$t(season.heroImage.altKey)}
@@ -1617,11 +1683,14 @@ import { localizePath } from '$lib/routing';
 										<div
 											class="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-white/5"
 										></div>
-									</div>
+									</button>
 
 									{#each season.floatingImages as image, index}
-										<div
+										<button
+											type="button"
 											class={`season-floater season-floater-${index} group/image absolute overflow-hidden rounded-xl bg-slate-200 shadow-[0_20px_42px_-22px_rgba(15,23,42,0.72)] ring-2 ring-white/80`}
+											onclick={() => openSeasonGallery(season.seasonKey, index + 1)}
+											aria-label={`${$t(season.kickerKey)} Galerie öffnen: ${$t(image.altKey)}`}
 										>
 											<img
 												{...imageAttrs(image.src, '(max-width: 1024px) 56vw, 460px')}
@@ -1633,7 +1702,7 @@ import { localizePath } from '$lib/routing';
 											<div
 												class="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/30 via-transparent to-white/5 opacity-75 transition-opacity duration-500 group-hover/image:opacity-40"
 											></div>
-										</div>
+										</button>
 									{/each}
 								</div>
 							</div>
@@ -1641,6 +1710,89 @@ import { localizePath } from '$lib/routing';
 					{/each}
 				</div>
 			</section>
+
+			{#if activeSeasonGallery && activeSeasonGalleryImages.length}
+				<div
+					class="fixed inset-0 z-[120] flex items-center justify-center bg-slate-950/82 p-4 backdrop-blur-sm"
+					role="dialog"
+					aria-modal="true"
+					aria-label={activeSeasonGallery === 'summer' ? $t('seasons.summer.title') : $t('seasons.winter.title')}
+					tabindex="-1"
+				>
+					<button
+						type="button"
+						class="absolute inset-0"
+						onclick={closeSeasonGallery}
+						aria-label="Close gallery"
+					></button>
+
+					<div class="relative z-10 w-full max-w-6xl">
+						<button
+							type="button"
+							class="absolute right-3 top-3 z-20 grid h-10 w-10 place-items-center rounded-full bg-white/90 text-slate-800 shadow-sm transition hover:bg-white"
+							onclick={closeSeasonGallery}
+							aria-label="Close gallery"
+						>
+							<span class="text-xl leading-none">×</span>
+						</button>
+
+						<button
+							type="button"
+							class="absolute left-3 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-slate-800 shadow-sm transition hover:bg-white"
+							onclick={showPrevSeasonGalleryImage}
+							aria-label={$t('room.detail.gallery.prev')}
+						>
+							<ChevronLeft class="h-5 w-5" strokeWidth={1.25} />
+						</button>
+
+						<button
+							type="button"
+							class="absolute right-3 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-slate-800 shadow-sm transition hover:bg-white"
+							onclick={showNextSeasonGalleryImage}
+							aria-label={$t('room.detail.gallery.next')}
+						>
+							<ChevronRight class="h-5 w-5" strokeWidth={1.25} />
+						</button>
+
+						<div class="overflow-hidden rounded-3xl bg-white shadow-2xl">
+							<img
+								{...imageAttrs(activeSeasonGalleryImages[activeSeasonGalleryIndex].src, '(max-width: 1024px) 100vw, 1100px')}
+								alt={$t(activeSeasonGalleryImages[activeSeasonGalleryIndex].altKey)}
+								class="h-auto max-h-[72vh] w-full bg-slate-100 object-contain"
+							/>
+							<div class="border-t border-slate-200 px-4 py-3 sm:px-5">
+								<div class="flex items-center justify-between gap-4 text-sm text-slate-600">
+									<p class="font-medium text-slate-800">
+										{$t(activeSeasonGalleryImages[activeSeasonGalleryIndex].altKey)}
+									</p>
+									<p class="shrink-0 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
+										{activeSeasonGalleryIndex + 1} / {activeSeasonGalleryImages.length}
+									</p>
+								</div>
+
+								<div class="mt-3 flex gap-2 overflow-x-auto pb-1">
+									{#each activeSeasonGalleryImages as image, index}
+										<button
+											type="button"
+											class={`h-16 w-24 shrink-0 overflow-hidden rounded-xl border transition sm:h-20 sm:w-28 ${index === activeSeasonGalleryIndex ? 'border-brand ring-2 ring-brand/25' : 'border-slate-200 opacity-75 hover:opacity-100'}`}
+											onclick={() => (activeSeasonGalleryIndex = index)}
+											aria-label={$t(image.altKey)}
+										>
+											<img
+												{...imageAttrs(image.src, '112px')}
+												alt=""
+												class="h-full w-full object-cover"
+												loading="lazy"
+												decoding="async"
+											/>
+										</button>
+									{/each}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			{/if}
 		</div>
 	</div>
 
@@ -1911,6 +2063,7 @@ import { localizePath } from '$lib/routing';
 	.season-floater {
 		height: 7.4rem;
 		width: 39%;
+		border: 2px solid rgba(255, 255, 255, 0.86);
 		transition:
 			left 620ms cubic-bezier(0.22, 1, 0.36, 1),
 			right 620ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -1919,6 +2072,7 @@ import { localizePath } from '$lib/routing';
 			width 620ms cubic-bezier(0.22, 1, 0.36, 1),
 			height 620ms cubic-bezier(0.22, 1, 0.36, 1),
 			transform 620ms cubic-bezier(0.22, 1, 0.36, 1),
+			border-color 260ms ease,
 			opacity 400ms ease,
 			box-shadow 620ms ease;
 	}
@@ -1948,6 +2102,7 @@ import { localizePath } from '$lib/routing';
 
 	.season-floater:hover {
 		z-index: 20;
+		border-color: rgba(255, 255, 255, 1);
 		height: 9.5rem;
 		width: 48%;
 		box-shadow: 0 28px 64px -26px rgba(15, 23, 42, 0.82);

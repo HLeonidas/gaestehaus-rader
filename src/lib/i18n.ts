@@ -499,16 +499,16 @@ const translations: Record<Lang, Record<string, string>> = {
 		'guestcard.landing.kicker': 'Exklusiv für unsere Gäste',
 		'guestcard.landing.title': 'GästeCard Basic inklusive',
 		'guestcard.landing.body':
-			'Erleben Sie maximale Freiheit in Ihrem Kärnten-Urlaub. Die GästeCard Basic ist Ihr kostenloser Schlüssel zu Mobilität, Ausflügen und aktuell gepflegten Vorteilen in der Region.',
+			'Kostenlos mobil sein und regionale Vorteile nutzen - automatisch inklusive während Ihres Aufenthalts.',
 		'guestcard.landing.item1.title': 'Kostenloser öffentlicher Verkehr',
 		'guestcard.landing.item1.body':
-			'Freie Fahrt mit Bus & ÖBB S-Bahn in ganz Kärnten während Ihres gesamten Aufenthalts.',
+			'Bus & ÖBB S-Bahn in Kärnten frei nutzen.',
 		'guestcard.landing.item2.title': '40+ Vorteile',
 		'guestcard.landing.item2.body':
-			'Zahlreiche Ermäßigungen und ausgewählte kostenlose Eintritte ab der 1. Übernachtung - mit regelmäßig geprüfter Vorteilsübersicht.',
+			'Ermäßigungen und ausgewählte kostenlose Eintritte.',
 		'guestcard.landing.item3.title': 'Gültig inkl. An- & Abreisetag',
 		'guestcard.landing.item3.body':
-			'Ihre Mobilitätsgarantie vom Moment des Check-ins bis zur letzten Urlaubsminute.',
+			'Vom Check-in bis zur Abreise gültig.',
 		'guestcard.landing.imageAlt': 'Zugreise durch die Kärntner Berge',
 		'guestcard.page.kicker': 'GästeCard',
 		'guestcard.page.title': 'GästeCard Basic',
@@ -665,10 +665,14 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.seasons.summer.lakeAlt': 'Badesee in Kärnten im Sommer',
 		'home.seasons.summer.bikeAlt': 'Radfahren in der Sommerlandschaft rund um Weißbriach',
 		'home.seasons.summer.panoramaAlt': 'Sommerlicher Panoramablick über die Berge des Gitschtals',
+		'home.seasons.summer.poolAlt': 'Freibad in Weißbriach mit Bergblick',
+		'home.seasons.summer.gorgeAlt': 'Garnitzenklamm im Sommer',
 		'home.seasons.winter.imageAlt': 'Gästehaus im Winter',
 		'home.seasons.winter.crosscountryAlt': 'Langlaufloipe in Weißbriach im Winter',
 		'home.seasons.winter.skiAlt': 'Skipiste in Weißbriach im Winter',
 		'home.seasons.winter.iceAlt': 'Eislaufen am winterlichen Weißensee',
+		'home.seasons.winter.villageAlt': 'Winterlicher Dorfblick in Weißbriach',
+		'home.seasons.winter.walkAlt': 'Schneewanderung in der Winterlandschaft',
 		'home.workation.kicker': 'Extra',
 		'home.workation.title': 'Auch für Workation geeignet',
 		'home.workation.body':
@@ -1617,16 +1621,16 @@ const translations: Record<Lang, Record<string, string>> = {
 		'guestcard.landing.kicker': 'Exclusive for our guests',
 		'guestcard.landing.title': 'Guest Card Basic included',
 		'guestcard.landing.body':
-			'Enjoy maximum freedom on your Carinthia getaway. The Guest Card Basic is your free key to mobility, outings, and regularly reviewed regional benefits.',
+			'Free mobility and regional benefits - automatically included throughout your stay.',
 		'guestcard.landing.item1.title': 'Free public transport',
 		'guestcard.landing.item1.body':
-			'Ride regional buses and ÖBB S-Bahn across Carinthia throughout your stay.',
+			'Use buses and ÖBB S-Bahn in Carinthia for free.',
 		'guestcard.landing.item2.title': '40+ benefits',
 		'guestcard.landing.item2.body':
-			'Enjoy many discounts and selected free admissions from the first night, backed by a benefits overview we review regularly.',
+			'Discounts and selected free admissions.',
 		'guestcard.landing.item3.title': 'Valid incl. arrival & departure',
 		'guestcard.landing.item3.body':
-			'Your mobility guarantee from check-in to the final minute of your holiday.',
+			'Valid from check-in until departure.',
 		'guestcard.landing.imageAlt': 'Train ride through the Carinthian mountains',
 		'guestcard.page.kicker': 'Guest Card',
 		'guestcard.page.title': 'Guest Card Basic',
@@ -1783,10 +1787,14 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.seasons.summer.lakeAlt': 'Swimming lake in Carinthia in summer',
 		'home.seasons.summer.bikeAlt': 'Cycling through the summer landscape around Weissbriach',
 		'home.seasons.summer.panoramaAlt': 'Summer panoramic view across the mountains of the Gitschtal',
+		'home.seasons.summer.poolAlt': 'Outdoor pool in Weissbriach with mountain views',
+		'home.seasons.summer.gorgeAlt': 'Garnitzenklamm gorge in summer',
 		'home.seasons.winter.imageAlt': 'Guesthouse exterior in winter',
 		'home.seasons.winter.crosscountryAlt': 'Cross-country ski trail in Weissbriach in winter',
 		'home.seasons.winter.skiAlt': 'Ski slope in Weissbriach in winter',
 		'home.seasons.winter.iceAlt': 'Ice skating on wintry Lake Weissensee',
+		'home.seasons.winter.villageAlt': 'Wintry village view in Weissbriach',
+		'home.seasons.winter.walkAlt': 'Snow walk through the winter landscape',
 		'home.workation.kicker': 'Extra',
 		'home.workation.title': 'Also suitable for workation',
 		'home.workation.body':
@@ -2243,8 +2251,6 @@ export const t = derived(lang, ($lang) => {
 });
 
 export const setLang = (value: Lang) => lang.set(value);
-
-
 
 
 

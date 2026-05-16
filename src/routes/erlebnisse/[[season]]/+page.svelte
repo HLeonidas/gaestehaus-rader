@@ -111,6 +111,7 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 	let indicatorVisible = $state(false);
 	let scrollCollapseTimer: number | null = null;
 	let highlightObserver: IntersectionObserver | null = null;
+	let seasonScrollTimers: number[] = [];
 	let lastMobileNavPointerAt = 0;
 	let manualTabUntil = 0;
 	const ICON_SLOT = 'h-11 w-11 rounded-2xl grid place-items-center shrink-0';
@@ -265,9 +266,27 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 		onMobileNavSelect(id);
 	}
 
-	function scrollToSeasonHighlightsFromUrl() {
-		const targetId = seasonFromUrl === 'winter' ? 'highlights-winter' : 'highlights-summer';
-		scrollToSection(targetId, 'auto');
+	function clearSeasonScrollTimers() {
+		seasonScrollTimers.forEach((timer) => clearTimeout(timer));
+		seasonScrollTimers = [];
+	}
+
+	function scrollToSeasonHighlightsFromUrl(behavior: ScrollBehavior = 'auto') {
+		if (!seoSeasonFromUrl) return;
+		const targetId = seoSeasonFromUrl === 'winter' ? 'highlights-winter' : 'highlights-summer';
+		activeSectionId = 'highlights';
+		activeHighlightsSeason = seoSeasonFromUrl;
+		scrollToSection(targetId, behavior);
+	}
+
+	function scheduleSeasonHighlightsScroll() {
+		if (!seoSeasonFromUrl) return;
+		clearSeasonScrollTimers();
+		for (const delay of [0, 120, 420, 900]) {
+			seasonScrollTimers.push(
+				window.setTimeout(() => scrollToSeasonHighlightsFromUrl('auto'), delay)
+			);
+		}
 	}
 
 	function setActiveTabManual(next: SeasonKey) {
@@ -430,18 +449,19 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 	});
 
 	$effect(() => {
-		seasonFromUrl;
-		queueMicrotask(scrollToSeasonHighlightsFromUrl);
+		seoSeasonFromUrl;
+		queueMicrotask(scheduleSeasonHighlightsScroll);
 	});
 
 	onMount(() => {
 		updateActiveSectionFromViewport();
 		window.addEventListener('scroll', onWindowScroll, { passive: true });
 		window.addEventListener('resize', updateActiveSectionFromViewport);
-		queueMicrotask(scrollToSeasonHighlightsFromUrl);
+		queueMicrotask(scheduleSeasonHighlightsScroll);
 		return () => {
 			window.removeEventListener('scroll', onWindowScroll);
 			window.removeEventListener('resize', updateActiveSectionFromViewport);
+			clearSeasonScrollTimers();
 		};
 	});
 
@@ -456,6 +476,7 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 	onDestroy(() => {
 		highlightObserver?.disconnect();
 		if (scrollCollapseTimer) window.clearTimeout(scrollCollapseTimer);
+		clearSeasonScrollTimers();
 	});
 </script>
 
@@ -1827,4 +1848,3 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 		}
 	}
 </style>
-
