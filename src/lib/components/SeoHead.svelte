@@ -12,12 +12,16 @@
 		title = null,
 		description = null,
 		image = null,
+		noindex = false,
+		nofollow = false,
 	} = $props<{
 		titleKey?: string | null;
 		descriptionKey?: string | null;
 		title?: string | null;
 		description?: string | null;
 		image?: string | null;
+		noindex?: boolean;
+		nofollow?: boolean;
 	}>();
 
 	const defaultTitleKey = 'seo.default.title';
@@ -39,6 +43,11 @@
 	);
 	const resolvedDescription = $derived.by(() =>
 		description ?? resolveTranslation(descriptionKey, defaultDescriptionKey)
+	);
+	const shouldNoindex = $derived(isPreview || noindex);
+	const shouldNofollow = $derived(isPreview || nofollow);
+	const robotsContent = $derived(
+		`${shouldNoindex ? 'noindex' : 'index'}, ${shouldNofollow ? 'nofollow' : 'follow'}`
 	);
 
 	const resolvedImageUrl = $derived.by(() => {
@@ -68,7 +77,7 @@
 	<meta name="twitter:title" content={resolvedTitle} />
 	<meta name="twitter:description" content={resolvedDescription} />
 	<meta name="twitter:image" content={resolvedImageUrl} />
-	{#if isPreview}
-		<meta name="robots" content="noindex, nofollow" />
+	{#if shouldNoindex || shouldNofollow}
+		<meta name="robots" content={robotsContent} />
 	{/if}
 </svelte:head>

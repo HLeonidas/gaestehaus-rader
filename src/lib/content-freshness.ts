@@ -70,11 +70,6 @@ const staticFreshnessEntries: Record<string, ContentFreshnessEntry> = {
 		reviewGroup: 'trust',
 		notes: 'Facts layer and machine-readable entity information reviewed.',
 	},
-	'/workation': {
-		lastModified: '2026-03-25',
-		reviewGroup: 'core',
-		notes: 'Workation positioning page.',
-	},
 	'/impressum': {
 		lastModified: '2026-02-21',
 		reviewGroup: 'legal',

@@ -4,8 +4,9 @@ import { page } from '$app/state';
 	import { asset, resolve } from '$app/paths';
 	import { lang, t } from '$lib/i18n';
 	import { getSortedAccommodationGallery } from '$lib/data/accommodations';
-	import { imageAttrs, largestImageUrl } from '$lib/images';
+	import { imageAttrs } from '$lib/images';
 	import { trackEvent } from '$lib/analytics/plausible';
+	import GalleryLightbox, { type GalleryLightboxItem } from '$lib/components/GalleryLightbox.svelte';
 	import SeoHead from '$lib/components/SeoHead.svelte';
 	import { SITE_ORIGIN } from '$lib/seo';
 import { localizePath } from '$lib/routing';
@@ -103,6 +104,15 @@ import { localizePath } from '$lib/routing';
 
 		return items;
 	});
+	const galleryLightboxItems = $derived.by<GalleryLightboxItem[]>(() =>
+		galleryItems.map((item) => ({
+			src: item.src,
+			alt: item.alt,
+			title: item.alt,
+			badge: item.kind === 'floorplan' ? $t('room.detail.gallery.floorplanBadge') : undefined,
+			contain: item.kind === 'floorplan',
+		}))
+	);
 	const roomUrl = $derived.by(() =>
 		new URL(`${localizedHref('/unterkuenfte-preise')}${accommodation.slug}/`, siteUrl).toString()
 	);
@@ -165,8 +175,6 @@ import { localizePath } from '$lib/routing';
 
 	let galleryOpen = $state(false);
 	let galleryIndex = $state(0);
-	const canGalleryPrev = $derived.by(() => galleryIndex > 0);
-	const canGalleryNext = $derived.by(() => galleryIndex < galleryItems.length - 1);
 	let shareStatus = $state<'idle' | 'copied' | 'error'>('idle');
 	let priceSectionEl: HTMLElement | null = null;
 	let priceSectionTracked = false;
@@ -705,75 +713,17 @@ import { localizePath } from '$lib/routing';
 	</div>
 </div>
 
-{#if galleryOpen}
-	<div
-		class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 sm:p-6"
-		role="dialog"
-		aria-modal="true"
-	>
-		<div class="relative w-full max-w-5xl">
-			<button
-				type="button"
-				class="absolute right-3 top-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm sm:-top-10 sm:right-0"
-				onclick={closeGallery}
-				aria-label="{$t('room.detail.gallery.close')}"
-			>{$t('room.detail.gallery.close')}</button>
-
-			<div class="overflow-hidden rounded-3xl bg-white shadow-xl">
-				<img
-					src={largestImageUrl(galleryItems[galleryIndex].src)}
-					alt={galleryItems[galleryIndex].alt}
-					class={`h-[60vh] max-h-[520px] w-full bg-white ${galleryItems[galleryIndex].kind === 'floorplan' ? 'object-contain' : 'object-contain sm:object-cover'}`}
-				/>
-			</div>
-
-			<div class="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-				<button
-					type="button"
-					class={`rounded-full bg-white/90 px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm ${
-						!canGalleryPrev ? 'opacity-40 pointer-events-none' : ''
-					}`}
-					onclick={() => (galleryIndex = Math.max(0, galleryIndex - 1))}
-				>
-					‹ {$t('room.detail.gallery.prev')}
-				</button>
-				<div class="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0">
-					{#each galleryItems as item, i}
-						<button
-							type="button"
-							class={`relative h-12 w-16 overflow-hidden rounded-xl border ${
-								i === galleryIndex ? 'border-brand' : 'border-transparent'
-							}`}
-							onclick={() => (galleryIndex = i)}
-						>
-							<img
-								{...imageAttrs(item.src, '64px')}
-								alt={item.alt}
-								class={`h-full w-full bg-white ${item.kind === 'floorplan' ? 'object-contain p-1' : 'object-contain sm:object-cover'}`}
-								loading="lazy"
-								decoding="async"
-							/>
-							{#if item.kind === 'floorplan'}
-								<span class="absolute inset-x-1 bottom-1 rounded bg-white/95 px-1 py-0.5 text-[8px] font-semibold uppercase tracking-[0.08em] text-slate-900">
-									{$t('room.detail.gallery.floorplanBadge')}
-								</span>
-							{/if}
-						</button>
-					{/each}
-				</div>
-				<button
-					type="button"
-					class={`rounded-full bg-white/90 px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm ${
-						!canGalleryNext ? 'opacity-40 pointer-events-none' : ''
-					}`}
-					onclick={() => (galleryIndex = Math.min(galleryItems.length - 1, galleryIndex + 1))}
-				>
-					{$t('room.detail.gallery.next')} >
-				</button>
-			</div>
-		</div>
-	</div>
-{/if}
+<GalleryLightbox
+	open={galleryOpen}
+	items={galleryLightboxItems}
+	index={galleryIndex}
+	title={accommodation.title}
+	closeLabel={$t('room.detail.gallery.close')}
+	prevLabel={$t('room.detail.gallery.prev')}
+	nextLabel={$t('room.detail.gallery.next')}
+	onClose={closeGallery}
+	onIndexChange={(nextIndex) => (galleryIndex = nextIndex)}
+/>
 
 
 <style>
@@ -797,8 +747,6 @@ import { localizePath } from '$lib/routing';
 		opacity: 1;
 	}
 </style>
-
-
 
 
 

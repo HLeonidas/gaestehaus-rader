@@ -670,6 +670,8 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.seasons.winter.imageAlt': 'Gästehaus im Winter',
 		'home.seasons.winter.crosscountryAlt': 'Langlaufloipe in Weißbriach im Winter',
 		'home.seasons.winter.skiAlt': 'Skipiste in Weißbriach im Winter',
+		'home.seasons.winter.riverAlt': 'Verschneiter Gail-Blick an einem klaren Wintertag',
+		'home.seasons.winter.slopeAlt': 'Sonnige Skipiste im Skigebiet Weißbriach',
 		'home.seasons.winter.iceAlt': 'Eislaufen am winterlichen Weißensee',
 		'home.seasons.winter.villageAlt': 'Winterlicher Dorfblick in Weißbriach',
 		'home.seasons.winter.walkAlt': 'Schneewanderung in der Winterlandschaft',
@@ -1011,6 +1013,7 @@ const translations: Record<Lang, Record<string, string>> = {
 			'Adresse in Weißbriach, Telefon, E-Mail und Anreiseinfos für Ihren Urlaub im Gitschtal.',
 		'contact.body':
 			'Kontaktformular, Lageplan, Anreiseinfos und direkte Kontaktmöglichkeiten.',
+		'contact.hero.kicker': 'Wir sind für Sie da',
 		'contact.headingPrefix': 'Kontaktieren',
 		'contact.headingEmphasis': 'Sie uns',
 		'contact.subtitle':
@@ -1026,7 +1029,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'contact.quick.title': 'Schnellkontakt',
 		'contact.card.title': 'Kontakt',
 		'contact.methods.title': 'Kontaktmöglichkeiten',
+		'contact.methods.mobile': 'Mobil',
 		'contact.methods.landline': 'Festnetz',
+		'contact.methods.email': 'E-Mail',
 		'contact.methods.more': 'Weitere Kontakte',
 		'contact.address.title': 'Anschrift',
 		'contact.address.name': 'Familie Herold-Hueber',
@@ -1792,6 +1797,8 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.seasons.winter.imageAlt': 'Guesthouse exterior in winter',
 		'home.seasons.winter.crosscountryAlt': 'Cross-country ski trail in Weissbriach in winter',
 		'home.seasons.winter.skiAlt': 'Ski slope in Weissbriach in winter',
+		'home.seasons.winter.riverAlt': 'Snow-covered Gail river view on a clear winter day',
+		'home.seasons.winter.slopeAlt': 'Sunny ski slope in the Weissbriach ski area',
 		'home.seasons.winter.iceAlt': 'Ice skating on wintry Lake Weissensee',
 		'home.seasons.winter.villageAlt': 'Wintry village view in Weissbriach',
 		'home.seasons.winter.walkAlt': 'Snow walk through the winter landscape',
@@ -2118,6 +2125,7 @@ const translations: Record<Lang, Record<string, string>> = {
 			'Get in touch for stays in Weissbriach with address, phone numbers, email, and travel info.',
 		'contact.body':
 			'Contact form, map, travel information, and direct ways to reach us.',
+		'contact.hero.kicker': 'We are here for you',
 		'contact.headingPrefix': 'Get in',
 		'contact.headingEmphasis': 'touch',
 		'contact.subtitle':
@@ -2133,7 +2141,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'contact.quick.title': 'Quick contact',
 		'contact.card.title': 'Contact',
 		'contact.methods.title': 'Contact options',
+		'contact.methods.mobile': 'Mobile',
 		'contact.methods.landline': 'Landline',
+		'contact.methods.email': 'Email',
 		'contact.methods.more': 'More contacts',
 		'contact.address.title': 'Address',
 		'contact.address.name': 'Herold-Hueber family',
@@ -2251,9 +2261,6 @@ export const t = derived(lang, ($lang) => {
 });
 
 export const setLang = (value: Lang) => lang.set(value);
-
-
-
 
 
 

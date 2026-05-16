@@ -4,8 +4,6 @@
 import { page } from '$app/state';
 	import { lang, t } from '$lib/i18n';
 	import SeoHead from '$lib/components/SeoHead.svelte';
-	import { SITE_ORIGIN } from '$lib/seo';
-	import { BUSINESS_SAME_AS, LODGING_BUSINESS_CORE } from '$lib/structured-data';
 	import { localizePath } from '$lib/routing';
 	import {
 		Wifi,
@@ -93,84 +91,15 @@ import { page } from '$app/state';
 		{ q: 'workation.faq.q5', a: 'workation.faq.a5' },
 	] as const;
 
-	const pageUrl = $derived.by(() => new URL(localizedHref('/workation'), SITE_ORIGIN).toString());
-	const imageUrl = new URL(withAsset('/images/Haus/gaestehaus-balkon-ausblick.jpg'), SITE_ORIGIN).toString();
-
-	const faqMainEntity = $derived.by(() =>
-		faqItems.map((item) => ({
-			'@type': 'Question',
-			name: $t(item.q),
-			acceptedAnswer: {
-				'@type': 'Answer',
-				text: $t(item.a),
-			},
-		}))
-	);
-
-	const workationJsonLd = $derived.by(() =>
-		JSON.stringify({
-			'@context': 'https://schema.org',
-			'@graph': [
-				{
-					'@type': 'WebPage',
-					'@id': `${pageUrl}#webpage`,
-					url: pageUrl,
-					name: $t('workation.seo.title'),
-					description: $t('workation.seo.description'),
-					inLanguage: $lang === 'de' ? 'de-AT' : 'en',
-				},
-				{
-					'@type': 'LodgingBusiness',
-					'@id': `${SITE_ORIGIN}/#lodging`,
-					additionalType: 'https://schema.org/Hotel',
-					name: $t('brand.name'),
-					url: SITE_ORIGIN,
-					...LODGING_BUSINESS_CORE,
-					sameAs: BUSINESS_SAME_AS,
-					hasMap: 'https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9',
-					image: [
-						imageUrl,
-						new URL(withAsset('/images/Haus/gaestehaus-sommer.jpg'), SITE_ORIGIN).toString(),
-					],
-					amenityFeature: [
-						{
-							'@type': 'LocationFeatureSpecification',
-							name: `WLAN >= ${WORKATION_WIFI_MBPS} Mbit/s`,
-							value: true,
-						},
-						{
-							'@type': 'LocationFeatureSpecification',
-							name: 'Desk workspace',
-							value: true,
-						},
-						{
-							'@type': 'LocationFeatureSpecification',
-							name: 'Quiet location',
-							value: true,
-						},
-					],
-				},
-				{
-					'@type': 'FAQPage',
-					'@id': `${pageUrl}#faq`,
-					url: `${pageUrl}#faq`,
-					inLanguage: $lang === 'de' ? 'de-AT' : 'en',
-					mainEntity: faqMainEntity,
-				},
-			],
-		})
-	);
 </script>
 
 <SeoHead
 	titleKey="workation.seo.title"
 	descriptionKey="workation.seo.description"
 	image="/images/Haus/gaestehaus-balkon-ausblick.jpg"
+	noindex
+	nofollow
 />
-
-{#if workationJsonLd}
-	{@html `<script type="application/ld+json">${workationJsonLd}</script>`}
-{/if}
 
 <div class="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
 	<section

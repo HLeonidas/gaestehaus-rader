@@ -8,6 +8,7 @@ import { page } from '$app/state';
 	import { imageAttrs, largestImageUrl } from '$lib/images';
 	import { homeTrustReviews } from '$lib/data/reviews';
 	import { trackEvent } from '$lib/analytics/plausible';
+	import GalleryLightbox, { type GalleryLightboxItem } from '$lib/components/GalleryLightbox.svelte';
 	import SeoHead from '$lib/components/SeoHead.svelte';
 	import { SITE_ORIGIN } from '$lib/seo';
 import { localizePath } from '$lib/routing';
@@ -370,9 +371,9 @@ import { localizePath } from '$lib/routing';
 			reverse: true,
 			heroImage: { src: '/images/Haus/gaestehaus-winter.png', altKey: 'home.seasons.winter.imageAlt' },
 			floatingImages: [
-				{ src: '/images/Umgebung/langlaufloipe-weissbriach.png', altKey: 'home.seasons.winter.crosscountryAlt' },
+				{ src: '/images/Umgebung/gail-winter.jpg', altKey: 'home.seasons.winter.riverAlt' },
 				{ src: '/images/Umgebung/ski_weißbriach.JPG', altKey: 'home.seasons.winter.skiAlt' },
-				{ src: '/images/Haus/balkon-ausblick-winter.jpg', altKey: 'home.gallery.imageAlt.winterBalkon' },
+				{ src: '/images/Umgebung/skigebiet-weissbriach-2.jpg', altKey: 'home.seasons.winter.slopeAlt' },
 			],
 			href: '/erlebnisse/winter',
 			icon: Snowflake,
@@ -400,9 +401,9 @@ import { localizePath } from '$lib/routing';
 		],
 		winter: [
 			{ src: '/images/Haus/gaestehaus-winter.png', altKey: 'home.seasons.winter.imageAlt' },
-			{ src: '/images/Umgebung/langlaufloipe-weissbriach.png', altKey: 'home.seasons.winter.crosscountryAlt' },
+			{ src: '/images/Umgebung/gail-winter.jpg', altKey: 'home.seasons.winter.riverAlt' },
 			{ src: '/images/Umgebung/ski_weißbriach.JPG', altKey: 'home.seasons.winter.skiAlt' },
-			{ src: '/images/Haus/balkon-ausblick-winter.jpg', altKey: 'home.gallery.imageAlt.winterBalkon' },
+			{ src: '/images/Umgebung/skigebiet-weissbriach-2.jpg', altKey: 'home.seasons.winter.slopeAlt' },
 			{ src: '/images/Haus/weissbriach-dorfblick-winter.jpg', altKey: 'home.seasons.winter.villageAlt' },
 			{ src: '/images/Umgebung/schnee-wanderung.jpg', altKey: 'home.seasons.winter.walkAlt' },
 		],
@@ -441,6 +442,27 @@ import { localizePath } from '$lib/routing';
 	const activeSeasonGalleryImages = $derived(
 		activeSeasonGallery ? seasonGalleryImages[activeSeasonGallery] : []
 	);
+	const galleryLightboxItems = $derived.by<GalleryLightboxItem[]>(() =>
+		galleryImages.map((image) => ({
+			src: `/images/Galerie/${image.base}-1440.jpg`,
+			alt: $t(image.altKey),
+			title: $t(image.altKey),
+		}))
+	);
+	const activeSeasonGalleryTitle = $derived(
+		activeSeasonGallery === 'summer'
+			? $t('seasons.summer.title')
+			: activeSeasonGallery === 'winter'
+				? $t('seasons.winter.title')
+				: $t('home.gallery.title')
+	);
+	const activeSeasonGalleryLightboxItems = $derived.by<GalleryLightboxItem[]>(() =>
+		activeSeasonGalleryImages.map((image) => ({
+			src: image.src,
+			alt: $t(image.altKey),
+			title: $t(image.altKey),
+		}))
+	);
 
 	const getHeroOffsetFallback = () =>
 		browser && window.matchMedia('(min-width: 640px)').matches ? 112 : 141;
@@ -471,54 +493,6 @@ import { localizePath } from '$lib/routing';
 		activeSeasonGallery = null;
 	};
 
-	const showPrevSeasonGalleryImage = () => {
-		if (!activeSeasonGalleryImages.length) return;
-		activeSeasonGalleryIndex =
-			(activeSeasonGalleryIndex - 1 + activeSeasonGalleryImages.length) %
-			activeSeasonGalleryImages.length;
-	};
-
-	const showNextSeasonGalleryImage = () => {
-		if (!activeSeasonGalleryImages.length) return;
-		activeSeasonGalleryIndex = (activeSeasonGalleryIndex + 1) % activeSeasonGalleryImages.length;
-	};
-
-	const showPrevGalleryImage = () => {
-		if (!galleryImages.length) return;
-		activeGalleryIndex = (activeGalleryIndex - 1 + galleryImages.length) % galleryImages.length;
-	};
-
-	const showNextGalleryImage = () => {
-		if (!galleryImages.length) return;
-		activeGalleryIndex = (activeGalleryIndex + 1) % galleryImages.length;
-	};
-
-	const handleGalleryKeydown = (event: KeyboardEvent) => {
-		if (activeSeasonGallery) {
-			if (event.key === 'Escape') {
-				closeSeasonGallery();
-			}
-			if (event.key === 'ArrowLeft' && activeSeasonGalleryImages.length) {
-				showPrevSeasonGalleryImage();
-			}
-			if (event.key === 'ArrowRight' && activeSeasonGalleryImages.length) {
-				showNextSeasonGalleryImage();
-			}
-			return;
-		}
-
-		if (!isGalleryOpen) return;
-		if (event.key === 'Escape') {
-			closeGallery();
-		}
-		if (event.key === 'ArrowLeft') {
-			showPrevGalleryImage();
-		}
-		if (event.key === 'ArrowRight') {
-			showNextGalleryImage();
-		}
-	};
-
 	onMount(() => {
 		if (!browser) return;
 		updateHeroHeaderOffset();
@@ -530,12 +504,10 @@ import { localizePath } from '$lib/routing';
 		}
 
 		window.addEventListener('resize', updateHeroHeaderOffset);
-		window.addEventListener('keydown', handleGalleryKeydown);
 
 		return () => {
 			resizeObserver?.disconnect();
 			window.removeEventListener('resize', updateHeroHeaderOffset);
-			window.removeEventListener('keydown', handleGalleryKeydown);
 		};
 	});
 
@@ -1301,66 +1273,17 @@ import { localizePath } from '$lib/routing';
 				</div>
 			</section>
 
-			{#if isGalleryOpen}
-				<div
-					class="fixed inset-0 z-[120] flex items-center justify-center bg-slate-950/80 p-4 backdrop-blur-sm"
-					role="dialog"
-					aria-modal="true"
-					aria-label={$t('home.gallery.title')}
-					tabindex="-1"
-				>
-					<button
-						type="button"
-						class="absolute inset-0"
-						onclick={closeGallery}
-						aria-label="Close gallery"
-					></button>
-					<div class="relative z-10 w-full max-w-6xl">
-						<button
-							type="button"
-							class="absolute right-3 top-3 z-10 grid h-10 w-10 place-items-center rounded-full bg-white/90 text-slate-800 shadow-sm transition hover:bg-white"
-							onclick={closeGallery}
-							aria-label="Close gallery"
-						>
-							<span class="text-xl leading-none">×</span>
-						</button>
-
-						<button
-							type="button"
-							class="absolute left-3 top-1/2 z-10 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-slate-800 shadow-sm transition hover:bg-white"
-							onclick={showPrevGalleryImage}
-							aria-label={$t('room.detail.gallery.prev')}
-						>
-							<ChevronLeft class="h-5 w-5" strokeWidth={1.25} />
-						</button>
-
-						<button
-							type="button"
-							class="absolute right-3 top-1/2 z-10 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-slate-800 shadow-sm transition hover:bg-white"
-							onclick={showNextGalleryImage}
-							aria-label={$t('room.detail.gallery.next')}
-						>
-							<ChevronRight class="h-5 w-5" strokeWidth={1.25} />
-						</button>
-
-						<div class="overflow-hidden rounded-3xl bg-white">
-							<img
-								src={withAsset(`/images/Galerie/${galleryImages[activeGalleryIndex].base}-1440.jpg`)}
-								alt={$t(galleryImages[activeGalleryIndex].altKey)}
-								class="h-auto max-h-[78vh] w-full object-contain"
-							/>
-							<div
-								class="flex items-center justify-between gap-4 border-t border-slate-200 px-5 py-3 text-sm text-slate-600"
-							>
-								<p class="font-medium text-slate-800">{$t(galleryImages[activeGalleryIndex].altKey)}</p>
-								<p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
-									{activeGalleryIndex + 1} / {galleryImages.length}
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			{/if}
+			<GalleryLightbox
+				open={isGalleryOpen}
+				items={galleryLightboxItems}
+				index={activeGalleryIndex}
+				title={$t('home.gallery.title')}
+				closeLabel={$t('room.detail.gallery.close')}
+				prevLabel={$t('room.detail.gallery.prev')}
+				nextLabel={$t('room.detail.gallery.next')}
+				onClose={closeGallery}
+				onIndexChange={(nextIndex) => (activeGalleryIndex = nextIndex)}
+			/>
 
 			<div
 				class="mx-auto my-12 h-px w-full bg-gradient-to-r from-transparent via-slate-200/80 to-transparent sm:my-16"
@@ -1711,88 +1634,17 @@ import { localizePath } from '$lib/routing';
 				</div>
 			</section>
 
-			{#if activeSeasonGallery && activeSeasonGalleryImages.length}
-				<div
-					class="fixed inset-0 z-[120] flex items-center justify-center bg-slate-950/82 p-4 backdrop-blur-sm"
-					role="dialog"
-					aria-modal="true"
-					aria-label={activeSeasonGallery === 'summer' ? $t('seasons.summer.title') : $t('seasons.winter.title')}
-					tabindex="-1"
-				>
-					<button
-						type="button"
-						class="absolute inset-0"
-						onclick={closeSeasonGallery}
-						aria-label="Close gallery"
-					></button>
-
-					<div class="relative z-10 w-full max-w-6xl">
-						<button
-							type="button"
-							class="absolute right-3 top-3 z-20 grid h-10 w-10 place-items-center rounded-full bg-white/90 text-slate-800 shadow-sm transition hover:bg-white"
-							onclick={closeSeasonGallery}
-							aria-label="Close gallery"
-						>
-							<span class="text-xl leading-none">×</span>
-						</button>
-
-						<button
-							type="button"
-							class="absolute left-3 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-slate-800 shadow-sm transition hover:bg-white"
-							onclick={showPrevSeasonGalleryImage}
-							aria-label={$t('room.detail.gallery.prev')}
-						>
-							<ChevronLeft class="h-5 w-5" strokeWidth={1.25} />
-						</button>
-
-						<button
-							type="button"
-							class="absolute right-3 top-1/2 z-20 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full bg-white/90 text-slate-800 shadow-sm transition hover:bg-white"
-							onclick={showNextSeasonGalleryImage}
-							aria-label={$t('room.detail.gallery.next')}
-						>
-							<ChevronRight class="h-5 w-5" strokeWidth={1.25} />
-						</button>
-
-						<div class="overflow-hidden rounded-3xl bg-white shadow-2xl">
-							<img
-								{...imageAttrs(activeSeasonGalleryImages[activeSeasonGalleryIndex].src, '(max-width: 1024px) 100vw, 1100px')}
-								alt={$t(activeSeasonGalleryImages[activeSeasonGalleryIndex].altKey)}
-								class="h-auto max-h-[72vh] w-full bg-slate-100 object-contain"
-							/>
-							<div class="border-t border-slate-200 px-4 py-3 sm:px-5">
-								<div class="flex items-center justify-between gap-4 text-sm text-slate-600">
-									<p class="font-medium text-slate-800">
-										{$t(activeSeasonGalleryImages[activeSeasonGalleryIndex].altKey)}
-									</p>
-									<p class="shrink-0 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
-										{activeSeasonGalleryIndex + 1} / {activeSeasonGalleryImages.length}
-									</p>
-								</div>
-
-								<div class="mt-3 flex gap-2 overflow-x-auto pb-1">
-									{#each activeSeasonGalleryImages as image, index}
-										<button
-											type="button"
-											class={`h-16 w-24 shrink-0 overflow-hidden rounded-xl border transition sm:h-20 sm:w-28 ${index === activeSeasonGalleryIndex ? 'border-brand ring-2 ring-brand/25' : 'border-slate-200 opacity-75 hover:opacity-100'}`}
-											onclick={() => (activeSeasonGalleryIndex = index)}
-											aria-label={$t(image.altKey)}
-										>
-											<img
-												{...imageAttrs(image.src, '112px')}
-												alt=""
-												class="h-full w-full object-cover"
-												loading="lazy"
-												decoding="async"
-											/>
-										</button>
-									{/each}
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			{/if}
+			<GalleryLightbox
+				open={Boolean(activeSeasonGallery)}
+				items={activeSeasonGalleryLightboxItems}
+				index={activeSeasonGalleryIndex}
+				title={activeSeasonGalleryTitle}
+				closeLabel={$t('room.detail.gallery.close')}
+				prevLabel={$t('room.detail.gallery.prev')}
+				nextLabel={$t('room.detail.gallery.next')}
+				onClose={closeSeasonGallery}
+				onIndexChange={(nextIndex) => (activeSeasonGalleryIndex = nextIndex)}
+			/>
 		</div>
 	</div>
 

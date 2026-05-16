@@ -1,14 +1,43 @@
 <script lang="ts">
+	import { asset } from '$app/paths';
 	import { reveal } from '$lib/actions/reveal';
 	import { trackEvent } from '$lib/analytics/plausible';
 	import SeoHead from '$lib/components/SeoHead.svelte';
 	import { t } from '$lib/i18n';
-	import { Check, ChevronRight, Copy, Mail, MessageCircle, Phone, PhoneCall } from 'lucide-svelte';
+	import {
+		Check,
+		ChevronRight,
+		Clock3,
+		Copy,
+		Globe2,
+		Mail,
+		MapPin,
+		MessageCircle,
+		MessageSquare,
+		Navigation,
+		Phone,
+		PhoneCall,
+		SquareParking,
+	} from 'lucide-svelte';
 
 	let ibanCopied = false;
 	let bicCopied = false;
 	let ibanTimer: ReturnType<typeof setTimeout> | null = null;
 	let bicTimer: ReturnType<typeof setTimeout> | null = null;
+
+	const withAsset = (path: string) => asset(path);
+	const mapSrc =
+		'https://www.google.com/maps?q=Weissbriach%2092%2C%209622%20Weissbriach%2C%20Austria&output=embed';
+	const mapLink = 'https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9';
+	const iban = 'AT86 3936 4001 0361 6109';
+	const bic = 'RZKTAT2K364';
+
+	let mapEnabled = false;
+
+	const enableMap = () => {
+		mapEnabled = true;
+		void trackEvent('Map: Loaded', { source: 'contact' });
+	};
 
 	const copyToClipboard = async (value: string, type: 'iban' | 'bic') => {
 		if (!navigator?.clipboard) return;
@@ -30,73 +59,162 @@
 		}, 2000);
 	};
 
-	const mapSrc =
-		'https://www.google.com/maps?q=Weissbriach%2092%2C%209622%20Weissbriach%2C%20Austria&output=embed';
-	const mapLink = 'https://maps.app.goo.gl/cXgd5iJbYPmSx2ad9';
-	let mapEnabled = false;
+	const contactMethods = [
+		{
+			labelKey: 'contact.cta.whatsapp',
+			value: '+43 676 6246826',
+			href: 'https://wa.me/436766246826',
+			icon: MessageCircle,
+			color: 'text-emerald-600',
+			bg: 'bg-emerald-50',
+			external: true,
+			event: () =>
+				trackEvent('Contact: WhatsApp Click', { source: 'contact', placement: 'methods-action' }),
+		},
+		{
+			labelKey: 'contact.methods.mobile',
+			value: '+43 676 6246826',
+			href: 'tel:+436766246826',
+			icon: Phone,
+			color: 'text-brand',
+			bg: 'bg-brand/10',
+			external: false,
+			event: () =>
+				trackEvent('Contact: Phone Click', {
+					source: 'contact',
+					line: 'mobile',
+					placement: 'methods-action',
+				}),
+		},
+		{
+			labelKey: 'contact.methods.landline',
+			value: '+43 4286 222',
+			href: 'tel:+434286222',
+			icon: PhoneCall,
+			color: 'text-brand',
+			bg: 'bg-brand/10',
+			external: false,
+			event: () =>
+				trackEvent('Contact: Phone Click', {
+					source: 'contact',
+					line: 'landline',
+					placement: 'methods-action',
+				}),
+		},
+		{
+			labelKey: 'contact.methods.email',
+			value: 'info@rader-gitschtal.at',
+			href: 'mailto:info@rader-gitschtal.at',
+			icon: Mail,
+			color: 'text-brand',
+			bg: 'bg-brand/10',
+			external: false,
+			event: () => trackEvent('Contact: Email Click', { source: 'contact', placement: 'methods-action' }),
+		},
+	] as const;
 
-	const enableMap = () => {
-		mapEnabled = true;
-		void trackEvent('Map: Loaded', { source: 'contact' });
-	};
+	const trustItems = [
+		{ textKey: 'contact.trust.responseShort', icon: MessageSquare },
+		{ textKey: 'contact.trust.languagesShort', icon: Globe2 },
+		{ textKey: 'contact.trust.checkinShort', icon: Clock3 },
+		{ textKey: 'contact.trust.parkingShort', icon: SquareParking },
+	] as const;
 </script>
 
 <SeoHead titleKey="contact.seo.title" descriptionKey="contact.seo.description" />
 
 <div class="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
-	<section>
-		<div use:reveal class="opacity-0 translate-y-4 transition-all duration-700 ease-out">
-			<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
-				{$t('brand.name')}
+	<section
+		use:reveal
+		class="relative overflow-hidden rounded-3xl border border-slate-200 bg-white px-6 py-10 shadow-[0_24px_70px_rgba(15,23,42,0.08)] opacity-0 translate-y-4 transition-all duration-700 ease-out sm:px-10 sm:py-14 lg:px-16"
+	>
+		<div class="absolute inset-y-0 right-0 hidden w-[58%] overflow-hidden lg:block" aria-hidden="true">
+			<img
+				src={withAsset('/images/Haus/gaestehaus-balkon-ausblick.jpg')}
+				alt=""
+				class="h-full w-full object-cover opacity-[0.12]"
+				loading="lazy"
+				decoding="async"
+			/>
+			<div class="absolute inset-0 bg-gradient-to-r from-white via-white/70 to-white/30"></div>
+			<div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white to-transparent"></div>
+		</div>
+
+		<div class="relative max-w-2xl">
+			<p class="text-xs font-semibold uppercase tracking-[0.42em] text-brand">
+				{$t('contact.hero.kicker')}
 			</p>
-			<h1 class="mt-4 font-serif text-5xl leading-[0.95] text-slate-900 sm:text-6xl">
-				{$t('contact.headingPrefix')} <span class="italic">{$t('contact.headingEmphasis')}</span>
+			<h1 class="mt-4 font-serif text-5xl font-semibold leading-[0.92] text-slate-950 sm:text-7xl">
+				{$t('contact.title')}
 			</h1>
-			<div class="mt-4 h-[3px] w-14 rounded-full bg-brand"></div>
-			<p class="mt-4 max-w-2xl text-base leading-relaxed text-slate-600">
+			<div class="mt-6 h-[3px] w-14 rounded-full bg-brand"></div>
+			<p class="mt-6 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">
 				{$t('contact.subtitle')}
 			</p>
 
 			<div class="mt-10">
-				<p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-600">
-					{$t('contact.quick.title')}
-				</p>
-			<div class="mt-3 flex flex-wrap items-center gap-3">
-				<a
-					href="https://wa.me/436766246826"
-					target="_blank"
-					rel="noopener noreferrer"
-					class="inline-flex items-center justify-center rounded-full bg-brand px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand/90"
-					onclick={() => trackEvent('Contact: WhatsApp Click', { source: 'contact', placement: 'quick' })}
-				>
-					{$t('contact.cta.whatsapp')}
-				</a>
-				<a
-					href="tel:+436766246826"
-					class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-800 transition hover:bg-slate-50"
-					onclick={() => trackEvent('Contact: Phone Click', { source: 'contact', line: 'mobile', placement: 'quick' })}
-				>
-					{$t('contact.cta.callNow')}
-				</a>
+				<p class="text-sm font-semibold text-slate-900">{$t('contact.quick.title')}</p>
+				<div class="mt-4 flex flex-wrap items-center gap-3">
+					<a
+						href="https://wa.me/436766246826"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="inline-flex items-center justify-center gap-2 rounded-xl bg-brand px-6 py-3 text-sm font-semibold text-white shadow-[0_14px_30px_rgba(245,146,0,0.25)] transition hover:bg-brand-dark"
+						onclick={() =>
+							trackEvent('Contact: WhatsApp Click', { source: 'contact', placement: 'quick' })}
+					>
+						<MessageCircle class="h-4 w-4" aria-hidden="true" />
+						{$t('contact.cta.whatsapp')}
+					</a>
+					<a
+						href="tel:+436766246826"
+						class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50"
+						onclick={() =>
+							trackEvent('Contact: Phone Click', {
+								source: 'contact',
+								line: 'mobile',
+								placement: 'quick',
+							})}
+					>
+						<Phone class="h-4 w-4" aria-hidden="true" />
+						{$t('contact.cta.callNow')}
+					</a>
+				</div>
 			</div>
 		</div>
-		</div>
+	</section>
 
-		<div use:reveal class="opacity-0 translate-y-8 transition-all duration-700 ease-out delay-150 mt-8 rounded-2xl border border-slate-200 bg-white p-5 sm:p-8">
-			<div class="grid gap-10 lg:grid-cols-[1fr,0.95fr]">
-				<div>
-				<p class="text-lg font-semibold text-slate-900">{$t('contact.card.title')}</p>
-				<div class="mt-6">
+	<div class="mt-6 grid gap-6 lg:grid-cols-[1fr,1.03fr]">
+		<section
+			use:reveal
+			class="rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_18px_50px_rgba(15,23,42,0.06)] opacity-0 translate-y-8 transition-all duration-700 ease-out sm:p-8"
+		>
+			<div>
+				<h2 class="font-serif text-2xl font-semibold text-slate-950">{$t('contact.card.title')}</h2>
+				<div class="mt-3 h-[2px] w-10 rounded-full bg-brand"></div>
+			</div>
+
+			<div class="mt-8 flex gap-4">
+				<div
+					class="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-slate-100 text-slate-900 ring-1 ring-slate-200"
+				>
+					<MapPin class="h-5 w-5" aria-hidden="true" />
+				</div>
+				<div class="min-w-0">
 					<p class="text-sm font-semibold text-slate-900">{$t('contact.address.title')}</p>
-					<div class="mt-3 space-y-1 text-sm text-slate-600">
-						<p class="font-semibold text-slate-800">{$t('contact.address.name')}</p>
+					<div class="mt-3 space-y-1 text-sm leading-relaxed text-slate-600">
+						<p class="font-semibold text-slate-900">{$t('contact.address.name')}</p>
 						<p>
 							<a
-								class="font-medium text-slate-800 underline decoration-slate-300 underline-offset-2 hover:text-slate-900"
+								class="font-medium text-slate-800 underline decoration-slate-300 underline-offset-2 hover:text-slate-950"
 								href={mapLink}
 								target="_blank"
 								rel="noopener noreferrer"
-								onclick={() => trackEvent('Map: Open External', { source: 'contact', placement: 'address-line1' })}
+								onclick={() =>
+									trackEvent('Map: Open External', {
+										source: 'contact',
+										placement: 'address-line1',
+									})}
 							>
 								{$t('contact.address.line1')}
 							</a>
@@ -104,92 +222,65 @@
 						<p>{$t('contact.address.line2')}</p>
 					</div>
 				</div>
-				<div class="my-6 h-px bg-slate-200"></div>
-				<div>
-					<p class="text-sm font-semibold text-slate-900">{$t('contact.methods.title')}</p>
-					<div class="mt-3 divide-y divide-slate-100 text-sm text-slate-600">
-						<div class="flex items-center justify-between gap-4 py-3">
-							<div class="flex min-w-0 items-center gap-3">
-								<MessageCircle class="h-4 w-4 text-emerald-600" aria-hidden="true" />
-								<span class="font-semibold text-slate-900">{$t('contact.cta.whatsapp')}</span>
-								<span class="select-text text-slate-600">+43 676 6246826</span>
-							</div>
-							<a
-								class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition hover:border-brand/40 hover:text-slate-900"
-								href="https://wa.me/436766246826"
-								target="_blank"
-								rel="noopener noreferrer"
-								aria-label="WhatsApp schreiben"
-								onclick={() => trackEvent('Contact: WhatsApp Click', { source: 'contact', placement: 'methods-action' })}
-							>
-								<ChevronRight class="h-4 w-4" aria-hidden="true" />
-							</a>
-						</div>
-						<div class="flex items-center justify-between gap-4 py-3">
-							<div class="flex min-w-0 items-center gap-3">
-								<Phone class="h-4 w-4 text-brand" aria-hidden="true" />
-								<span class="font-semibold text-slate-900">Mobil</span>
-								<span class="select-text text-slate-600">+43 676 6246826</span>
-							</div>
-							<a
-								class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition hover:border-brand/40 hover:text-slate-900"
-								href="tel:+436766246826"
-								aria-label="Mobil anrufen"
-								onclick={() => trackEvent('Contact: Phone Click', { source: 'contact', line: 'mobile', placement: 'methods-action' })}
-							>
-								<ChevronRight class="h-4 w-4" aria-hidden="true" />
-							</a>
-						</div>
-						<div class="flex items-center justify-between gap-4 py-3">
-							<div class="flex min-w-0 items-center gap-3">
-								<PhoneCall class="h-4 w-4 text-brand" aria-hidden="true" />
-								<span class="font-semibold text-slate-900">{$t('contact.methods.landline')}</span>
-								<span class="select-text text-slate-600">+43 4286 222</span>
-							</div>
-							<a
-								class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition hover:border-brand/40 hover:text-slate-900"
-								href="tel:+434286222"
-								aria-label="Festnetz anrufen"
-								onclick={() => trackEvent('Contact: Phone Click', { source: 'contact', line: 'landline', placement: 'methods-action' })}
-							>
-								<ChevronRight class="h-4 w-4" aria-hidden="true" />
-							</a>
-						</div>
-						<div class="flex items-center justify-between gap-4 py-3">
-							<div class="flex min-w-0 items-center gap-3">
-								<Mail class="h-4 w-4 text-brand" aria-hidden="true" />
-								<span class="font-semibold text-slate-900">E-Mail</span>
-								<span class="select-text text-slate-600">info@rader-gitschtal.at</span>
-							</div>
-							<a
-								class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition hover:border-brand/40 hover:text-slate-900"
-								href="mailto:info@rader-gitschtal.at"
-								aria-label="E-Mail schreiben"
-								onclick={() => trackEvent('Contact: Email Click', { source: 'contact', placement: 'methods-action' })}
-							>
-								<ChevronRight class="h-4 w-4" aria-hidden="true" />
-							</a>
-						</div>
-					</div>
-				</div>
-				</div>
+			</div>
 
-				<div class="flex h-full flex-col">
-				<div class="flex flex-wrap items-center justify-between gap-3">
-					<p class="text-sm font-semibold text-slate-900">{$t('contact.map.title')}</p>
-					<a
-						class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-800 transition hover:bg-slate-50"
-						href={mapLink}
-						target="_blank"
-						rel="noopener noreferrer"
-						onclick={() => trackEvent('Map: Open External', { source: 'contact', placement: 'map-header' })}
-					>
-						{$t('contact.route.cta')}
-					</a>
+			<div class="my-8 h-px bg-slate-200"></div>
+
+			<div>
+				<p class="text-sm font-semibold text-slate-900">{$t('contact.methods.title')}</p>
+				<div class="mt-5 divide-y divide-slate-200">
+					{#each contactMethods as method}
+						<a
+							href={method.href}
+							target={method.external ? '_blank' : undefined}
+							rel={method.external ? 'noopener noreferrer' : undefined}
+							class="group flex items-center justify-between gap-4 py-4"
+							onclick={method.event}
+						>
+							<div class="flex min-w-0 items-center gap-4">
+								<div
+									class={`grid h-12 w-12 shrink-0 place-items-center rounded-full ${method.bg} ${method.color}`}
+								>
+									<method.icon class="h-5 w-5" aria-hidden="true" />
+								</div>
+								<div class="min-w-0">
+									<p class="text-sm font-semibold text-slate-950">{$t(method.labelKey)}</p>
+									<p class="mt-0.5 break-words text-sm text-slate-600">{method.value}</p>
+								</div>
+							</div>
+							<ChevronRight
+								class="h-4 w-4 shrink-0 text-slate-400 transition group-hover:translate-x-0.5 group-hover:text-brand"
+								aria-hidden="true"
+							/>
+						</a>
+					{/each}
 				</div>
-				<div
-					class="relative mt-4 h-[320px] min-h-[320px] flex-1 overflow-hidden rounded-2xl border border-slate-200 bg-white sm:h-[360px] sm:min-h-[360px] lg:h-full"
+			</div>
+		</section>
+
+		<section
+			use:reveal
+			class="flex flex-col rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_18px_50px_rgba(15,23,42,0.06)] opacity-0 translate-y-8 transition-all duration-700 ease-out delay-100 sm:p-8"
+		>
+			<div class="flex flex-wrap items-start justify-between gap-4">
+				<div>
+					<h2 class="font-serif text-2xl font-semibold text-slate-950">{$t('contact.map.title')}</h2>
+					<div class="mt-3 h-[2px] w-10 rounded-full bg-brand"></div>
+				</div>
+				<a
+					class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50"
+					href={mapLink}
+					target="_blank"
+					rel="noopener noreferrer"
+					onclick={() => trackEvent('Map: Open External', { source: 'contact', placement: 'map-header' })}
 				>
+					<Navigation class="h-4 w-4" aria-hidden="true" />
+					{$t('contact.route.cta')}
+				</a>
+			</div>
+
+			<div class="mt-6 flex-1 overflow-hidden rounded-2xl border border-slate-200 bg-slate-100">
+				<div class="relative h-full min-h-[430px]">
 					{#if mapEnabled}
 						<iframe
 							title={$t('contact.map.iframeTitle')}
@@ -199,118 +290,115 @@
 							src={mapSrc}
 						></iframe>
 					{:else}
-						<div class="grid h-full place-items-center px-4 py-6">
-							<div class="max-w-sm text-center">
-								<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
+						<div class="contact-map-preview absolute inset-0">
+							<div class="absolute left-[14%] top-[6%] h-[112%] w-10 -rotate-[17deg] rounded-full bg-slate-400/30"></div>
+							<div class="absolute left-[48%] top-[-8%] h-[116%] w-8 rotate-[28deg] rounded-full bg-slate-400/25"></div>
+							<div class="absolute left-[6%] top-[58%] h-4 w-[92%] -rotate-[10deg] rounded-full bg-sky-200/70"></div>
+							<div class="absolute left-[18%] top-[18%] rounded-xl bg-white/95 p-4 shadow-xl ring-1 ring-slate-200">
+								<p class="text-sm font-semibold text-slate-950">{$t('contact.address.line1')}</p>
+								<p class="mt-1 text-xs text-slate-600">{$t('contact.address.line2')}</p>
+							</div>
+							<div class="absolute left-[50%] top-[38%] -translate-x-1/2 -translate-y-1/2">
+								<div class="relative">
+									<div class="h-12 w-12 rounded-full bg-red-500 shadow-xl ring-4 ring-white"></div>
+									<div class="absolute left-1/2 top-[34px] h-6 w-6 -translate-x-1/2 rotate-45 rounded-sm bg-red-500"></div>
+								</div>
+							</div>
+							<button
+								type="button"
+								class="absolute inset-x-6 bottom-6 rounded-2xl bg-white/95 p-5 text-left shadow-xl ring-1 ring-slate-200 transition hover:bg-white sm:inset-x-auto sm:left-6 sm:w-[360px]"
+								onclick={enableMap}
+							>
+								<p class="text-xs font-semibold uppercase tracking-[0.28em] text-brand">
 									{$t('contact.map.label')}
 								</p>
-								<h3 class="mt-3 text-lg font-semibold text-slate-900">
-									{$t('contact.map.title')}
-								</h3>
-
-								<div class="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row">
-									<button
-										type="button"
-										class="inline-flex items-center justify-center rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:brightness-110"
-										onclick={enableMap}
-									>
-										{$t('contact.map.load')}
-									</button>
-
-									<a
-										class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-800 shadow-sm transition hover:bg-slate-50"
-										href={mapLink}
-										target="_blank"
-										rel="noopener noreferrer"
-										onclick={() => trackEvent('Map: Open External', { source: 'contact', placement: 'map-placeholder' })}
-									>
-										{$t('contact.map.open')}
-									</a>
-								</div>
-
-								<p class="mt-4 text-[12px] text-slate-500">
-									{$t('contact.map.tip')}
-								</p>
-							</div>
+								<p class="mt-2 text-lg font-semibold text-slate-950">{$t('contact.map.load')}</p>
+								<p class="mt-2 text-sm leading-relaxed text-slate-600">{$t('contact.map.tip')}</p>
+							</button>
 						</div>
 					{/if}
 				</div>
 			</div>
+		</section>
+	</div>
 
-			</div>
-
-			<div class="mt-10 space-y-8 border-t border-slate-200 pt-8">
-				<div>
-				<p class="text-sm font-semibold text-slate-900">{$t('contact.payment.title')}</p>
-				<p class="mt-1 text-xs text-slate-500">{$t('contact.payment.subtitle')}</p>
-				<div class="mt-4 grid gap-4 sm:grid-cols-2">
+	<section
+		use:reveal
+		class="mt-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_18px_50px_rgba(15,23,42,0.06)] opacity-0 translate-y-8 transition-all duration-700 ease-out sm:p-8"
+	>
+		<div class="grid gap-8 lg:grid-cols-[0.95fr,1fr] lg:divide-x lg:divide-slate-200">
+			<div class="lg:pr-10">
+				<h2 class="text-lg font-semibold text-slate-950">{$t('contact.payment.title')}</h2>
+				<p class="mt-2 text-sm text-slate-500">{$t('contact.payment.subtitle')}</p>
+				<div class="mt-7 grid gap-6 sm:grid-cols-2">
 					<div>
-						<p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">IBAN</p>
-						<div class="mt-2 flex flex-wrap items-center gap-2">
-							<span class="font-mono text-sm font-semibold text-slate-800 sm:text-base">
-								AT86 3936 4001 0361 6109
-							</span>
-							<button
-								type="button"
-								class="inline-flex items-center gap-2 rounded-lg bg-white px-3 py-2 text-xs font-semibold text-slate-700 ring-1 ring-slate-200 transition hover:ring-brand/30"
-								onclick={() => copyToClipboard('AT86 3936 4001 0361 6109', 'iban')}
-								aria-label={$t('contact.payment.copyIban')}
-							>
-								{#if ibanCopied}
-									<Check class="h-4 w-4 text-emerald-600" />
-									<span aria-live="polite">{$t('contact.payment.copied')}</span>
-								{:else}
-									<Copy class="h-4 w-4 text-slate-500" />
-									<span>{$t('contact.payment.copy')}</span>
-								{/if}
-							</button>
-						</div>
+						<p class="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500">IBAN</p>
+						<p class="mt-3 font-mono text-sm font-semibold tracking-wide text-slate-950 sm:text-base">
+							{iban}
+						</p>
+						<button
+							type="button"
+							class="mt-4 inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-50"
+							onclick={() => copyToClipboard(iban, 'iban')}
+							aria-label={$t('contact.payment.copyIban')}
+						>
+							{#if ibanCopied}
+								<Check class="h-4 w-4 text-emerald-600" />
+								<span aria-live="polite">{$t('contact.payment.copied')}</span>
+							{:else}
+								<Copy class="h-4 w-4 text-slate-500" />
+								<span>{$t('contact.payment.copy')}</span>
+							{/if}
+						</button>
 					</div>
 					<div>
-						<p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">BIC</p>
-						<div class="mt-2 flex flex-wrap items-center gap-2">
-							<span class="font-mono text-sm font-semibold text-slate-800 sm:text-base">
-								RZKTAT2K364
-							</span>
-							<button
-								type="button"
-								class="inline-flex items-center gap-2 rounded-lg bg-white px-3 py-2 text-xs font-semibold text-slate-700 ring-1 ring-slate-200 transition hover:ring-brand/30"
-								onclick={() => copyToClipboard('RZKTAT2K364', 'bic')}
-								aria-label={$t('contact.payment.copyBic')}
-							>
-								{#if bicCopied}
-									<Check class="h-4 w-4 text-emerald-600" />
-									<span aria-live="polite">{$t('contact.payment.copied')}</span>
-								{:else}
-									<Copy class="h-4 w-4 text-slate-500" />
-									<span>{$t('contact.payment.copy')}</span>
-								{/if}
-							</button>
-						</div>
+						<p class="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500">BIC</p>
+						<p class="mt-3 font-mono text-sm font-semibold tracking-wide text-slate-950 sm:text-base">
+							{bic}
+						</p>
+						<button
+							type="button"
+							class="mt-4 inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-50"
+							onclick={() => copyToClipboard(bic, 'bic')}
+							aria-label={$t('contact.payment.copyBic')}
+						>
+							{#if bicCopied}
+								<Check class="h-4 w-4 text-emerald-600" />
+								<span aria-live="polite">{$t('contact.payment.copied')}</span>
+							{:else}
+								<Copy class="h-4 w-4 text-slate-500" />
+								<span>{$t('contact.payment.copy')}</span>
+							{/if}
+						</button>
 					</div>
 				</div>
-				</div>
+			</div>
 
-				<div class="h-px w-full bg-slate-200"></div>
-
-				<div>
-				<p class="text-sm font-semibold text-slate-900">{$t('contact.trust.title')}</p>
-				<div class="mt-3 flex flex-wrap gap-2">
-					<span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
-						{$t('contact.trust.responseShort')}
-					</span>
-					<span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
-						{$t('contact.trust.languagesShort')}
-					</span>
-					<span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
-						{$t('contact.trust.checkinShort')}
-					</span>
-					<span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
-						{$t('contact.trust.parkingShort')}
-					</span>
+			<div class="lg:pl-10">
+				<h2 class="text-lg font-semibold text-slate-950">{$t('contact.trust.title')}</h2>
+				<div class="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+					{#each trustItems as item}
+						<div class="text-center sm:text-left lg:text-center">
+							<div
+								class="mx-auto grid h-12 w-12 place-items-center rounded-full bg-slate-50 text-slate-600 ring-1 ring-slate-200 sm:mx-0 lg:mx-auto"
+							>
+								<item.icon class="h-5 w-5" aria-hidden="true" />
+							</div>
+							<p class="mt-3 text-sm font-medium leading-snug text-slate-700">{$t(item.textKey)}</p>
+						</div>
+					{/each}
 				</div>
 			</div>
-		</div>
 		</div>
 	</section>
 </div>
+
+<style>
+	.contact-map-preview {
+		background:
+			linear-gradient(135deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.2)),
+			radial-gradient(circle at 20% 18%, rgba(255, 255, 255, 0.92), transparent 28%),
+			radial-gradient(circle at 86% 20%, rgba(187, 247, 208, 0.8), transparent 32%),
+			linear-gradient(145deg, #eef7f2 0%, #f8fafc 48%, #e4f7ec 100%);
+	}
+</style>

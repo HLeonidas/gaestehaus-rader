@@ -17,7 +17,6 @@ const staticGermanPaths = [
 	'/kontakt',
 	'/buchen',
 	'/fakten',
-	'/workation',
 	'/impressum',
 	'/datenschutz',
 	'/agb',

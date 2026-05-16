@@ -141,20 +141,6 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/fakten/" />
   </url>
   <url>
-    <loc>https://rader-gitschtal.at/workation/</loc>
-    <lastmod>2026-03-25</lastmod>
-    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/workation/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/workation/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/workation/" />
-  </url>
-  <url>
-    <loc>https://rader-gitschtal.at/en/workation/</loc>
-    <lastmod>2026-03-25</lastmod>
-    <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/workation/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://rader-gitschtal.at/en/workation/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://rader-gitschtal.at/workation/" />
-  </url>
-  <url>
     <loc>https://rader-gitschtal.at/impressum/</loc>
     <lastmod>2026-02-21</lastmod>
     <xhtml:link rel="alternate" hreflang="de-AT" href="https://rader-gitschtal.at/impressum/" />
