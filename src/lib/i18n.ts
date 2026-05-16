@@ -622,9 +622,17 @@ const translations: Record<Lang, Record<string, string>> = {
 			'Sommerfrische am See, Wintertage im Schnee und regionale Spezialitäten vom Almkäse bis zum Reindling - hier hat jede Jahreszeit ihren eigenen Geschmack.',
 		'seasons.summer.title': 'Sommer im Gitschtal',
 		'seasons.summer.body': 'Wandern, Seen, Radwege und danach Almhütten, Bauernmärkte, Gailtaler Speck und Käse aus der Region.',
+		'seasons.summer.kicker': 'Sommer',
+		'seasons.summer.highlight.1': 'Wanderwege und Almwiesen rund um Weißbriach',
+		'seasons.summer.highlight.2': 'Badeseen, Freibad und warme Tage am Wasser',
+		'seasons.summer.highlight.3': 'Radwege, Almhütten und regionale Märkte',
 		'seasons.summer.cta': 'Sommer erleben',
 		'seasons.winter.title': 'Winterzeit in Kärnten',
 		'seasons.winter.body': 'Skifahren, Langlaufen, ruhige Wintertage und wärmende Kärntner Klassiker wie Kasnudeln oder Kirchtagssuppe.',
+		'seasons.winter.kicker': 'Winter',
+		'seasons.winter.highlight.1': 'Skifahren am Nassfeld und in Weißbriach',
+		'seasons.winter.highlight.2': 'Langlaufloipe im Tal und Winterwanderwege',
+		'seasons.winter.highlight.3': 'Schneeruhe, warme Küche und kurze Wege zurück',
 		'seasons.winter.cta': 'Winter entdecken',
 		'seasons.kicker': 'Jahreszeiten',
 		'home.rooms.card.imageAltPrefix': 'Foto von',
@@ -665,6 +673,9 @@ const translations: Record<Lang, Record<string, string>> = {
 			'Alles, was Sie für einen entspannten Aufenthalt brauchen - von Basis-Komfort über Küche bis zur Haus-Ausstattung. Ohne Aufpreis, in jedem Appartement.',
 		'home.amenities.itemsLabel': 'Leistungen',
 		'home.amenities.basic.title': 'Basis-Komfort',
+		'home.amenities.basic.summary':
+			'Hochwertige Bettwäsche, frische Handtücher und Pflegeprodukte.',
+		'home.amenities.basic.imageAlt': 'Helles Schlafzimmer mit Doppelbett im Gästehaus Rader',
 		'home.amenities.basic.bedding.title': 'Hochwertige Bettwäsche',
 		'home.amenities.basic.bedding.body':
 			'Angenehm weiche Bettwäsche für einen erholsamen Schlaf.',
@@ -674,6 +685,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.amenities.basic.care.title': 'Pflegeprodukte',
 		'home.amenities.basic.care.body': 'Nachhaltige Seifen.',
 		'home.amenities.kitchen.title': 'Küche',
+		'home.amenities.kitchen.summary':
+			'Voll ausgestattete Küchenzeile mit modernen Geräten.',
+		'home.amenities.kitchen.imageAlt': 'Küchenzeile in einem Appartement im Gästehaus Rader',
 		'home.amenities.kitchen.kitchenette.title': 'Küchenzeile',
 		'home.amenities.kitchen.kitchenette.body':
 			'Voll ausgestattet mit Herd und Mikrowelle.',
@@ -688,6 +702,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.amenities.kitchen.toaster.title': 'Toaster',
 		'home.amenities.kitchen.toaster.body': 'Moderner Toaster für Ihr perfektes Berg-Frühstück.',
 		'home.amenities.house.title': 'Haus-Ausstattung',
+		'home.amenities.house.summary':
+			'WLAN, Skiraum und privater Parkplatz direkt beim Haus.',
+		'home.amenities.house.imageAlt': 'Bergblick vom Gästehaus Rader in Weißbriach',
 		'home.amenities.house.wifi.title': 'High-Speed WLAN',
 		'home.amenities.house.wifi.body':
 			'Kostenloses Glasfaser-Internet im gesamten Resort für Ihre Verbindung zur Welt.',
@@ -1709,9 +1726,17 @@ const translations: Record<Lang, Record<string, string>> = {
 			'Lake summers, snowy winters, and regional specialties from alpine cheese to Reindling - every season has its own taste here.',
 		'seasons.summer.title': 'Summer in the valley',
 		'seasons.summer.body': 'Hikes, lakes, cycling routes, then alpine huts, farmers markets, Gailtaler Speck, and regional cheese.',
+		'seasons.summer.kicker': 'Summer',
+		'seasons.summer.highlight.1': 'Hiking paths and alpine meadows around Weissbriach',
+		'seasons.summer.highlight.2': 'Swimming lakes, outdoor pool, and warm days by the water',
+		'seasons.summer.highlight.3': 'Cycling routes, alpine huts, and local markets',
 		'seasons.summer.cta': 'Explore summer',
 		'seasons.winter.title': 'Winter in Carinthia',
 		'seasons.winter.body': 'Skiing, cross-country trails, quiet snowy days, and warming Carinthian classics such as Kasnudeln or church-fair soup.',
+		'seasons.winter.kicker': 'Winter',
+		'seasons.winter.highlight.1': 'Skiing at Nassfeld and in Weissbriach',
+		'seasons.winter.highlight.2': 'Valley cross-country trail and winter walking paths',
+		'seasons.winter.highlight.3': 'Snowy calm, warming food, and quick routes back',
 		'seasons.winter.cta': 'Discover winter',
 		'seasons.kicker': 'Seasons',
 		'home.rooms.card.imageAltPrefix': 'Photo of',
@@ -1752,6 +1777,8 @@ const translations: Record<Lang, Record<string, string>> = {
 			'Everything you need for a relaxing stay - from basic comforts and the kitchen to house amenities. Included, in every apartment.',
 		'home.amenities.itemsLabel': 'items',
 		'home.amenities.basic.title': 'Basic comforts',
+		'home.amenities.basic.summary': 'Premium bedding, fresh towels and care products.',
+		'home.amenities.basic.imageAlt': 'Bright bedroom with double bed at Guesthouse Rader',
 		'home.amenities.basic.bedding.title': 'Premium bedding',
 		'home.amenities.basic.bedding.body': 'High-quality, soft bed linen for restful sleep.',
 		'home.amenities.basic.towels.title': 'Fresh towels',
@@ -1759,6 +1786,8 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.amenities.basic.care.title': 'Care products',
 		'home.amenities.basic.care.body': 'Sustainable soaps.',
 		'home.amenities.kitchen.title': 'Kitchen',
+		'home.amenities.kitchen.summary': 'Fully equipped kitchenette with modern appliances.',
+		'home.amenities.kitchen.imageAlt': 'Kitchenette in an apartment at Guesthouse Rader',
 		'home.amenities.kitchen.kitchenette.title': 'Kitchenette',
 		'home.amenities.kitchen.kitchenette.body': 'Fully equipped with stove and microwave.',
 		'home.amenities.kitchen.espresso.title': 'Coffee machines',
@@ -1771,6 +1800,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.amenities.kitchen.toaster.title': 'Toaster',
 		'home.amenities.kitchen.toaster.body': 'Modern toaster for your perfect mountain breakfast.',
 		'home.amenities.house.title': 'House amenities',
+		'home.amenities.house.summary':
+			'Wi-Fi, ski room and private parking directly at the house.',
+		'home.amenities.house.imageAlt': 'Mountain view from Guesthouse Rader in Weissbriach',
 		'home.amenities.house.wifi.title': 'High-speed Wi-Fi',
 		'home.amenities.house.wifi.body': 'Free fiber internet throughout the property for staying connected.',
 		'home.amenities.house.parking.title': 'Private parking',
@@ -2183,9 +2215,6 @@ export const t = derived(lang, ($lang) => {
 });
 
 export const setLang = (value: Lang) => lang.set(value);
-
-
-
 
 
 

@@ -250,6 +250,128 @@ import { localizePath } from '$lib/routing';
 	} as const;
 	type AmenityKey = keyof typeof amenityIcons;
 
+	const amenityCards = [
+		{
+			titleKey: 'home.amenities.basic.title',
+			summaryKey: 'home.amenities.basic.summary',
+			icon: BedDouble,
+			details: [
+				{
+					titleKey: 'home.amenities.basic.bedding.title',
+					bodyKey: 'home.amenities.basic.bedding.body',
+					icon: Bed,
+				},
+				{
+					titleKey: 'home.amenities.basic.towels.title',
+					bodyKey: 'home.amenities.basic.towels.body',
+					icon: ShowerHead,
+				},
+				{
+					titleKey: 'home.amenities.basic.care.title',
+					bodyKey: 'home.amenities.basic.care.body',
+					icon: Leaf,
+				},
+			],
+		},
+		{
+			titleKey: 'home.amenities.kitchen.title',
+			summaryKey: 'home.amenities.kitchen.summary',
+			icon: CookingPot,
+			details: [
+				{
+					titleKey: 'home.amenities.kitchen.kitchenette.title',
+					bodyKey: 'home.amenities.kitchen.kitchenette.body',
+					icon: Microwave,
+				},
+				{
+					titleKey: 'home.amenities.kitchen.espresso.title',
+					bodyKey: 'home.amenities.kitchen.espresso.body',
+					icon: Coffee,
+				},
+				{
+					titleKey: 'home.amenities.kitchen.kettle.title',
+					bodyKey: 'home.amenities.kitchen.kettle.body',
+					icon: CupSoda,
+				},
+				{
+					titleKey: 'home.amenities.kitchen.dishes.title',
+					bodyKey: 'home.amenities.kitchen.dishes.body',
+					icon: Utensils,
+				},
+				{
+					titleKey: 'home.amenities.kitchen.toaster.title',
+					bodyKey: 'home.amenities.kitchen.toaster.body',
+					icon: Sandwich,
+				},
+			],
+		},
+		{
+			titleKey: 'home.amenities.house.title',
+			summaryKey: 'home.amenities.house.summary',
+			icon: House,
+			details: [
+				{
+					titleKey: 'home.amenities.house.wifi.title',
+					bodyKey: 'home.amenities.house.wifi.body',
+					icon: Wifi,
+				},
+				{
+					titleKey: 'home.amenities.house.parking.title',
+					bodyKey: 'home.amenities.house.parking.body',
+					icon: SquareParking,
+				},
+				{
+					titleKey: 'home.amenities.house.ski.title',
+					bodyKey: 'home.amenities.house.ski.body',
+					icon: Snowflake,
+				},
+			],
+		},
+	];
+
+	const seasonPanels = [
+		{
+			titleKey: 'seasons.summer.title',
+			bodyKey: 'seasons.summer.body',
+			ctaKey: 'seasons.summer.cta',
+			image: '/images/Haus/gaestehaus-sommer.jpg',
+			imageAltKey: 'home.seasons.summer.imageAlt',
+			href: '/erlebnisse/sommer',
+			icon: Sun,
+			kickerKey: 'seasons.summer.kicker',
+			highlights: [
+				'seasons.summer.highlight.1',
+				'seasons.summer.highlight.2',
+				'seasons.summer.highlight.3',
+			],
+			panelClass: 'bg-[#f8f1e5]',
+			kickerClass: 'text-brand',
+			iconClass: 'bg-brand text-white',
+			chipClass: 'bg-white/70 text-slate-700 ring-[#e7d6bd]',
+			buttonClass: 'bg-brand text-white hover:bg-brand-dark',
+		},
+		{
+			titleKey: 'seasons.winter.title',
+			bodyKey: 'seasons.winter.body',
+			ctaKey: 'seasons.winter.cta',
+			image: '/images/Haus/gaestehaus-winter.png',
+			imageAltKey: 'home.seasons.winter.imageAlt',
+			href: '/erlebnisse/winter',
+			icon: Snowflake,
+			kickerKey: 'seasons.winter.kicker',
+			highlights: [
+				'seasons.winter.highlight.1',
+				'seasons.winter.highlight.2',
+				'seasons.winter.highlight.3',
+			],
+			panelClass: 'bg-[#edf4f7]',
+			kickerClass: 'text-sky-700',
+			iconClass: 'bg-sky-700 text-white',
+			chipClass: 'bg-white/75 text-slate-700 ring-sky-100',
+			buttonClass: 'bg-slate-900 text-white hover:bg-slate-700',
+		},
+	];
+
 	const galleryImageSizes = '(min-width: 640px) 360px, 260px';
 	const destinationImages = [
 		// Starker erster Eindruck vom Haus, dann direkt den Pavillon als Außen-Highlight zeigen
@@ -1169,23 +1291,35 @@ import { localizePath } from '$lib/routing';
 			></div>
 
 			<!-- GUEST CARD -->
-			<section class="group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_-18px_rgba(245,146,0,0.45)]">
-				<div class="grid gap-8 lg:grid-cols-[1.1fr,0.9fr]">
-					<div class="order-2 relative h-[260px] sm:h-[320px] lg:order-1 lg:h-[670px]">
+			<section class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:shadow-[0_24px_48px_-18px_rgba(245,146,0,0.35)]">
+				<div class="grid lg:grid-cols-[1.08fr,0.92fr]">
+					<div class="relative min-h-[380px] sm:min-h-[430px] lg:min-h-[670px]">
 						<img
 							{...imageAttrs(guestCardVisual.src, '(max-width: 1024px) 100vw, 45vw')}
 							alt={$t(guestCardVisual.altKey)}
-							class="h-full w-full object-cover"
+							class="absolute inset-0 h-full w-full object-cover"
 							loading="lazy"
 							decoding="async"
 						/>
 						<div
-							class="absolute inset-0 bg-gradient-to-r from-black/10 via-transparent to-transparent"
+							class="absolute inset-0 bg-gradient-to-b from-slate-950/75 via-slate-950/35 to-slate-950/10 lg:bg-gradient-to-r lg:from-slate-950/20 lg:via-transparent lg:to-transparent"
 						></div>
+						<div class="absolute inset-x-0 top-0 p-6 pt-7 text-white sm:p-8 lg:hidden">
+							<p class="text-[11px] font-semibold uppercase tracking-[0.32em] text-[#ffb14a]">
+								{$t('guestcard.landing.kicker')}
+							</p>
+							<h2 class="mt-3 max-w-[11ch] text-4xl font-serif font-medium leading-[0.95] sm:text-5xl">
+								{$t('guestcard.landing.title')}
+							</h2>
+							<div class="mt-4 h-[3px] w-14 rounded-full bg-brand"></div>
+							<p class="mt-4 max-w-[29ch] text-sm leading-relaxed text-white/90 sm:text-base">
+								{$t('guestcard.landing.body')}
+							</p>
+						</div>
 					</div>
 
-					<div class="order-1 flex flex-col justify-center space-y-6 px-6 py-7 sm:px-10 sm:py-10 lg:order-2">
-						<div>
+					<div class="relative z-10 -mt-8 flex flex-col justify-center rounded-t-[2rem] bg-white px-5 py-5 sm:px-7 sm:py-6 lg:mt-0 lg:rounded-none lg:px-10 lg:py-10">
+						<div class="hidden lg:block">
 							<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
 								{$t('guestcard.landing.kicker')}
 							</p>
@@ -1198,55 +1332,55 @@ import { localizePath } from '$lib/routing';
 							</p>
 						</div>
 
-						<ul class="space-y-4 text-sm text-slate-600 sm:text-base">
-							<li class="flex items-start gap-3 rounded-xl border border-brand/20 bg-brand/5 p-3">
+						<ul class="space-y-3 text-sm text-slate-600 sm:text-base lg:mt-6 lg:space-y-4">
+							<li class="flex items-start gap-2.5 rounded-2xl border border-brand/20 bg-brand/5 p-2.5 sm:gap-4 sm:p-3">
 								<span
-									class="mt-0.5 grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand/15 text-brand"
+									class="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-brand/15 text-brand sm:h-11 sm:w-11 lg:h-12 lg:w-12"
 								>
 									<BusFront class="h-5 w-5" aria-hidden="true" strokeWidth={1.25} />
 								</span>
 								<div>
-									<p class="text-sm font-semibold text-slate-900">
+									<p class="text-[13px] font-semibold leading-snug text-slate-900 sm:text-sm">
 										{$t('guestcard.landing.item1.title')}
 									</p>
-									<p class="mt-1 text-xs leading-relaxed text-slate-500">
+									<p class="mt-1 text-xs leading-snug text-slate-500 sm:leading-relaxed">
 										{$t('guestcard.landing.item1.body')}
 									</p>
 								</div>
 							</li>
-							<li class="flex items-start gap-3">
+							<li class="flex items-start gap-2.5 border-t border-slate-200/80 pt-3 sm:gap-4 lg:pt-4">
 								<span
-									class="mt-0.5 grid h-12 w-12 shrink-0 place-items-center rounded-full bg-brand/10 text-brand"
+									class="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-brand/10 text-brand sm:h-11 sm:w-11 lg:h-12 lg:w-12"
 								>
-									<Sparkles class="h-6 w-6" aria-hidden="true" strokeWidth={1.25} />
+									<Sparkles class="h-5 w-5 sm:h-6 sm:w-6" aria-hidden="true" strokeWidth={1.25} />
 								</span>
 								<div>
-									<p class="text-sm font-semibold text-slate-900">
+									<p class="text-[13px] font-semibold leading-snug text-slate-900 sm:text-sm">
 										{$t('guestcard.landing.item2.title')}
 									</p>
-									<p class="mt-1 text-xs leading-relaxed text-slate-500">
+									<p class="mt-1 text-xs leading-snug text-slate-500 sm:leading-relaxed">
 										{$t('guestcard.landing.item2.body')}
 									</p>
 								</div>
 							</li>
-							<li class="flex items-start gap-3">
+							<li class="flex items-start gap-2.5 border-t border-slate-200/80 pt-3 sm:gap-4 lg:pt-4">
 								<span
-									class="mt-0.5 grid h-12 w-12 shrink-0 place-items-center rounded-full bg-brand/10 text-brand"
+									class="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-brand/10 text-brand sm:h-11 sm:w-11 lg:h-12 lg:w-12"
 								>
-									<CalendarDays class="h-6 w-6" aria-hidden="true" strokeWidth={1.25} />
+									<CalendarDays class="h-5 w-5 sm:h-6 sm:w-6" aria-hidden="true" strokeWidth={1.25} />
 								</span>
 								<div>
-									<p class="text-sm font-semibold text-slate-900">
+									<p class="text-[13px] font-semibold leading-snug text-slate-900 sm:text-sm">
 										{$t('guestcard.landing.item3.title')}
 									</p>
-									<p class="mt-1 text-xs leading-relaxed text-slate-500">
+									<p class="mt-1 text-xs leading-snug text-slate-500 sm:leading-relaxed">
 										{$t('guestcard.landing.item3.body')}
 									</p>
 								</div>
 							</li>
 						</ul>
 
-						<div class="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
+						<div class="mt-5 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center lg:mt-6">
 							<a
 								href="https://www.nassfeld.at/de/Unterkunft-finden/Reise-planen/PREMIUM-Cards/GaesteCard-basic"
 								class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90 sm:w-auto"
@@ -1255,6 +1389,7 @@ import { localizePath } from '$lib/routing';
 							>
 								<Info class="h-4 w-4" aria-hidden="true" strokeWidth={1.25} />
 								{$t('guestcard.cta.moreInfo')}
+								<ArrowRight class="ml-auto h-4 w-4 sm:ml-0" aria-hidden="true" strokeWidth={1.25} />
 							</a>
 						</div>
 					</div>
@@ -1269,528 +1404,119 @@ import { localizePath } from '$lib/routing';
 
 	<div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
 		<div class="space-y-16">
-			<!-- AUSSTATTUNG -->
-			<section class="rounded-3xl px-0 py-0 sm:px-10 sm:py-14">
-				<div class="flex items-center gap-4">
-					<div class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-						<Sparkles class="h-5 w-5" aria-hidden="true" strokeWidth={1.25} />
-					</div>
-					<div>
-						<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
-							{$t('home.amenities.kicker')}
-
-						</p>
-						<h2 class="mt-3 text-4xl font-serif font-medium leading-[0.95] text-slate-900">
-							{$t('home.amenities.title')}
-						</h2>
-						<div class="mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
-					</div>
-				</div>
-
-				<p class="mt-4 max-w-3xl text-sm leading-relaxed text-slate-600 sm:text-base">
-					{$t('home.amenities.subtitle')}
-				</p>
-
-				<div class="mt-8 space-y-6 sm:mt-10 sm:space-y-12">
-					<!-- Mobile accordion -->
-					<div class="space-y-4 sm:hidden">
-						<details
-							class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition open:border-brand/30 open:shadow-md"
-						>
-							<summary
-								class="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-4 transition group-open:bg-white"
-							>
-								<div class="flex min-w-0 items-center gap-3">
-									<div
-										class="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-[#f7efe4] text-brand transition group-open:rounded-full group-open:bg-brand group-open:text-white"
-									>
-										<BedDouble class="h-5 w-5" aria-hidden="true" />
-									</div>
-									<div class="min-w-0">
-										<div class="flex items-center gap-2">
-											<p class="truncate text-sm font-semibold text-slate-900">
-												{$t('home.amenities.basic.title')}
-											</p>
-											<span
-												class="shrink-0 rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600 transition group-open:bg-brand/10 group-open:text-brand"
-												>3</span
-											>
-										</div>
-										<div class="mt-1 flex items-center gap-1.5 text-slate-400">
-											<Bed class="h-3.5 w-3.5" aria-hidden="true" />
-											<ShowerHead class="h-3.5 w-3.5" aria-hidden="true" />
-											<Leaf class="h-3.5 w-3.5" aria-hidden="true" />
-										</div>
-									</div>
-								</div>
-								<span
-									class="grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-500 transition group-open:bg-[#f7efe4] group-open:text-brand"
-								>
-									<ChevronRight class="h-4 w-4 transition group-open:-rotate-90" />
-								</span>
-							</summary>
-							<div class="border-t border-slate-200 bg-white">
-								<ul class="divide-y divide-slate-200/70 bg-white">
-									<li class="flex gap-3 p-4">
-										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-											<Bed class="h-5 w-5" aria-hidden="true" />
-										</div>
-										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">
-												{$t('home.amenities.basic.bedding.title')}
-											</p>
-											<p class="mt-1 text-[13px] leading-snug text-slate-600">
-												{$t('home.amenities.basic.bedding.body')}
-											</p>
-										</div>
-									</li>
-									<li class="flex gap-3 p-4">
-										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-											<ShowerHead class="h-5 w-5" aria-hidden="true" />
-										</div>
-										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">
-												{$t('home.amenities.basic.towels.title')}
-											</p>
-											<p class="mt-1 text-[13px] leading-snug text-slate-600">
-												{$t('home.amenities.basic.towels.body')}
-											</p>
-										</div>
-									</li>
-									<li class="flex gap-3 p-4">
-										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-											<Leaf class="h-5 w-5" aria-hidden="true" />
-										</div>
-										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">
-												{$t('home.amenities.basic.care.title')}
-											</p>
-											<p class="mt-1 text-[13px] leading-snug text-slate-600">
-												{$t('home.amenities.basic.care.body')}
-											</p>
-										</div>
-									</li>
-								</ul>
-							</div>
-						</details>
-
-						<details
-							class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition open:border-brand/30 open:shadow-md"
-						>
-							<summary
-								class="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-4 transition group-open:bg-white"
-							>
-								<div class="flex min-w-0 items-center gap-3">
-									<div
-										class="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-[#f7efe4] text-brand transition group-open:rounded-full group-open:bg-brand group-open:text-white"
-									>
-										<Microwave class="h-5 w-5" aria-hidden="true" />
-									</div>
-									<div class="min-w-0">
-										<div class="flex items-center gap-2">
-											<p class="truncate text-sm font-semibold text-slate-900">
-												{$t('home.amenities.kitchen.title')}
-											</p>
-											<span
-												class="shrink-0 rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600 transition group-open:bg-brand/10 group-open:text-brand"
-												>5</span
-											>
-										</div>
-										<div class="mt-1 flex items-center gap-1.5 text-slate-400">
-											<Microwave class="h-3.5 w-3.5" aria-hidden="true" />
-											<Coffee class="h-3.5 w-3.5" aria-hidden="true" />
-											<CupSoda class="h-3.5 w-3.5" aria-hidden="true" />
-											<Utensils class="h-3.5 w-3.5" aria-hidden="true" />
-											<Sandwich class="h-3.5 w-3.5" aria-hidden="true" />
-										</div>
-									</div>
-								</div>
-								<span
-									class="grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-500 transition group-open:bg-[#f7efe4] group-open:text-brand"
-								>
-									<ChevronRight class="h-4 w-4 transition group-open:-rotate-90" />
-								</span>
-							</summary>
-							<div class="border-t border-slate-200 bg-white">
-								<ul class="divide-y divide-slate-200/70 bg-white">
-									<li class="flex gap-3 p-4">
-										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-											<Microwave class="h-5 w-5" aria-hidden="true" />
-										</div>
-										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">
-												{$t('home.amenities.kitchen.kitchenette.title')}
-											</p>
-											<p class="mt-1 text-[13px] leading-snug text-slate-600">
-												{$t('home.amenities.kitchen.kitchenette.body')}
-											</p>
-										</div>
-									</li>
-									<li class="flex gap-3 p-4">
-										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-											<Coffee class="h-5 w-5" aria-hidden="true" />
-										</div>
-										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">
-												{$t('home.amenities.kitchen.espresso.title')}
-											</p>
-											<p class="mt-1 text-[13px] leading-snug text-slate-600">
-												{$t('home.amenities.kitchen.espresso.body')}
-											</p>
-										</div>
-									</li>
-									<li class="flex gap-3 p-4">
-										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-											<CupSoda class="h-5 w-5" aria-hidden="true" />
-										</div>
-										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">
-												{$t('home.amenities.kitchen.kettle.title')}
-											</p>
-											<p class="mt-1 text-[13px] leading-snug text-slate-600">
-												{$t('home.amenities.kitchen.kettle.body')}
-											</p>
-										</div>
-									</li>
-									<li class="flex gap-3 p-4">
-										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-											<Utensils class="h-5 w-5" aria-hidden="true" />
-										</div>
-										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">
-												{$t('home.amenities.kitchen.dishes.title')}
-											</p>
-											<p class="mt-1 text-[13px] leading-snug text-slate-600">
-												{$t('home.amenities.kitchen.dishes.body')}
-											</p>
-										</div>
-									</li>
-									<li class="flex gap-3 p-4">
-										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-											<Sandwich class="h-5 w-5" aria-hidden="true" />
-										</div>
-										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">
-												{$t('home.amenities.kitchen.toaster.title')}
-											</p>
-											<p class="mt-1 text-[13px] leading-snug text-slate-600">
-												{$t('home.amenities.kitchen.toaster.body')}
-											</p>
-										</div>
-									</li>
-								</ul>
-							</div>
-						</details>
-
-						<details
-							class="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition open:border-brand/30 open:shadow-md"
-						>
-							<summary
-								class="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-4 transition group-open:bg-white"
-							>
-								<div class="flex min-w-0 items-center gap-3">
-									<div
-										class="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-[#f7efe4] text-brand transition group-open:rounded-full group-open:bg-brand group-open:text-white"
-									>
-										<House class="h-5 w-5" aria-hidden="true" />
-									</div>
-									<div class="min-w-0">
-										<div class="flex items-center gap-2">
-											<p class="truncate text-sm font-semibold text-slate-900">
-												{$t('home.amenities.house.title')}
-											</p>
-											<span
-												class="shrink-0 rounded-full bg-slate-100 px-2 py-0.5 text-[11px] font-semibold text-slate-600 transition group-open:bg-brand/10 group-open:text-brand"
-												>3</span
-											>
-										</div>
-										<div class="mt-1 flex items-center gap-1.5 text-slate-400">
-											<Wifi class="h-3.5 w-3.5" aria-hidden="true" />
-											<SquareParking class="h-3.5 w-3.5" aria-hidden="true" />
-											<Snowflake class="h-3.5 w-3.5" aria-hidden="true" />
-										</div>
-									</div>
-								</div>
-								<span
-									class="grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-500 transition group-open:bg-[#f7efe4] group-open:text-brand"
-								>
-									<ChevronRight class="h-4 w-4 transition group-open:-rotate-90" />
-								</span>
-							</summary>
-							<div class="border-t border-slate-200 bg-white">
-								<ul class="divide-y divide-slate-200/70 bg-white">
-									<li class="flex gap-3 p-4">
-										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-											<Wifi class="h-5 w-5" aria-hidden="true" />
-										</div>
-										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">
-												{$t('home.amenities.house.wifi.title')}
-											</p>
-											<p class="mt-1 text-[13px] leading-snug text-slate-600">
-												{$t('home.amenities.house.wifi.body')}
-											</p>
-										</div>
-									</li>
-									<li class="flex gap-3 p-4">
-										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-											<SquareParking class="h-5 w-5" aria-hidden="true" />
-										</div>
-										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">
-												{$t('home.amenities.house.parking.title')}
-											</p>
-											<p class="mt-1 text-[13px] leading-snug text-slate-600">
-												{$t('home.amenities.house.parking.body')}
-											</p>
-										</div>
-									</li>
-									<li class="flex gap-3 p-4">
-										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-											<Snowflake class="h-5 w-5" aria-hidden="true" />
-										</div>
-										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">
-												{$t('home.amenities.house.ski.title')}
-											</p>
-											<p class="mt-1 text-[13px] leading-snug text-slate-600">
-												{$t('home.amenities.house.ski.body')}
-											</p>
-										</div>
-									</li>
-								</ul>
-							</div>
-						</details>
-					</div>
-
-					<!-- Desktop lists -->
-					<div class="hidden space-y-12 sm:block">
-						<!-- Basis-Komfort -->
-						<div class="space-y-4">
-							<div class="flex items-center justify-between gap-3 border-b border-slate-200 pb-3">
-								<div class="flex items-center gap-2">
-									<div class="text-brand">
-										<BedDouble class="h-5 w-5" aria-hidden="true" />
-									</div>
-									<h3 class="text-base font-semibold text-slate-900">
-										{$t('home.amenities.basic.title')}
-									</h3>
-								</div>
-							</div>
-
-							<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
-									<div class="flex items-start gap-3">
-										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-											<Bed class="h-5 w-5" aria-hidden="true" />
-										</div>
-										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">
-												{$t('home.amenities.basic.bedding.title')}
-											</p>
-											<p class="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-500">
-												{$t('home.amenities.basic.bedding.body')}
-											</p>
-										</div>
-									</div>
-								</div>
-
-								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
-									<div class="flex items-start gap-3">
-										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-											<ShowerHead class="h-5 w-5" aria-hidden="true" />
-										</div>
-										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">
-												{$t('home.amenities.basic.towels.title')}
-											</p>
-											<p class="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-500">
-												{$t('home.amenities.basic.towels.body')}
-											</p>
-										</div>
-									</div>
-								</div>
-
-								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
-									<div class="flex items-start gap-3">
-										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-											<Leaf class="h-5 w-5" aria-hidden="true" />
-										</div>
-										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">
-												{$t('home.amenities.basic.care.title')}
-											</p>
-											<p class="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-500">
-												{$t('home.amenities.basic.care.body')}
-											</p>
-										</div>
-									</div>
-								</div>
-							</div>
+				<!-- AUSSTATTUNG -->
+				<section class="py-4 sm:py-10">
+					<div class="grid gap-8 lg:grid-cols-[0.82fr_2.18fr] lg:items-start">
+						<div class="max-w-sm">
+							<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
+								{$t('home.amenities.kicker')}
+							</p>
+							<h2 class="mt-3 text-3xl font-serif font-medium leading-[0.98] text-slate-900 sm:text-4xl">
+								{$t('home.amenities.title')}
+							</h2>
+							<div class="mt-4 h-[3px] w-14 rounded-full bg-brand"></div>
+							<p class="mt-6 text-sm leading-relaxed text-slate-600 sm:text-base lg:max-w-[30ch]">
+								{$t('home.amenities.subtitle')}
+							</p>
 						</div>
 
-						<!-- Küche -->
-						<div class="space-y-4">
-							<div class="flex items-center justify-between gap-3 border-b border-slate-200 pb-3">
-								<div class="flex items-center gap-2">
-									<div class="text-brand">
-										<Microwave class="h-5 w-5" aria-hidden="true" />
-									</div>
-									<h3 class="text-base font-semibold text-slate-900">
-										{$t('home.amenities.kitchen.title')}
-									</h3>
-								</div>
+							<div class="space-y-4 md:hidden">
+								{#each amenityCards as card}
+									<details
+										class="group mt-7 overflow-visible rounded-[1.35rem] border border-slate-200/80 bg-white shadow-sm transition open:border-brand/30 open:shadow-md"
+									>
+										<summary class="cursor-pointer list-none outline-none [&::-webkit-details-marker]:hidden">
+											<div class="relative px-5 pb-5 pt-9">
+												<div
+													class="absolute -top-7 left-5 grid h-14 w-14 place-items-center rounded-full border border-slate-200 bg-[#faf9f6] text-slate-700 shadow-[0_10px_24px_rgba(15,23,42,0.12)] transition group-open:-translate-y-0.5 group-open:bg-white group-open:text-brand"
+												>
+													<card.icon class="h-6 w-6" aria-hidden="true" strokeWidth={1.25} />
+												</div>
+												<span
+													class="absolute right-5 top-5 grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white text-slate-500 shadow-sm transition group-open:border-brand/25 group-open:bg-brand/10 group-open:text-brand"
+													aria-hidden="true"
+												>
+													<ChevronRight class="h-4 w-4 transition-transform duration-300 group-open:rotate-90" strokeWidth={1.5} />
+												</span>
+
+												<h3 class="pr-12 text-base font-semibold text-slate-900">
+													{$t(card.titleKey)}
+												</h3>
+												<p class="mt-3 pr-8 text-sm leading-relaxed text-slate-600">
+													{$t(card.summaryKey)}
+												</p>
+											</div>
+										</summary>
+
+										<div class="px-5 pb-5">
+											<ul class="space-y-3 border-t border-slate-200/80 pt-4">
+												{#each card.details as detail}
+													<li class="flex gap-3">
+														<span
+															class="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full bg-brand/10 text-brand"
+														>
+															<detail.icon class="h-4 w-4" aria-hidden="true" strokeWidth={1.25} />
+														</span>
+														<span class="min-w-0">
+															<span class="block text-sm font-semibold leading-snug text-slate-900">
+																{$t(detail.titleKey)}
+															</span>
+															<span class="mt-1 block text-xs leading-relaxed text-slate-500">
+																{$t(detail.bodyKey)}
+															</span>
+														</span>
+													</li>
+												{/each}
+											</ul>
+										</div>
+									</details>
+								{/each}
 							</div>
 
-							<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
-									<div class="flex items-start gap-3">
-										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-											<Microwave class="h-5 w-5" aria-hidden="true" />
-										</div>
-										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">
-												{$t('home.amenities.kitchen.kitchenette.title')}
-											</p>
-											<p class="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-500">
-												{$t('home.amenities.kitchen.kitchenette.body')}
-											</p>
-										</div>
-									</div>
-								</div>
+							<div class="hidden items-start gap-5 md:grid md:grid-cols-3">
+								{#each amenityCards as card}
+									<article
+										class="group mt-7 flex flex-col overflow-visible rounded-[1.35rem] border border-slate-200/80 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/25 hover:shadow-[0_22px_50px_-28px_rgba(15,23,42,0.35)] motion-reduce:transform-none motion-reduce:transition-none"
+									>
+										<div class="relative flex flex-col px-5 pb-5 pt-9">
+											<div
+												class="absolute -top-7 left-5 grid h-14 w-14 place-items-center rounded-full border border-slate-200 bg-[#faf9f6] text-slate-700 shadow-[0_10px_24px_rgba(15,23,42,0.12)] transition group-hover:-translate-y-1 group-hover:bg-white group-hover:text-brand"
+											>
+												<card.icon class="h-6 w-6" aria-hidden="true" strokeWidth={1.25} />
+											</div>
 
-								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
-									<div class="flex items-start gap-3">
-										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-											<Coffee class="h-5 w-5" aria-hidden="true" />
-										</div>
-										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">
-												{$t('home.amenities.kitchen.espresso.title')}
+											<h3 class="text-base font-semibold text-slate-900">
+												{$t(card.titleKey)}
+											</h3>
+											<p class="mt-3 text-sm leading-relaxed text-slate-600">
+												{$t(card.summaryKey)}
 											</p>
-											<p class="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-500">
-												{$t('home.amenities.kitchen.espresso.body')}
-											</p>
-										</div>
-									</div>
-								</div>
 
-								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
-									<div class="flex items-start gap-3">
-										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-											<CupSoda class="h-5 w-5" aria-hidden="true" />
+											<ul class="mt-5 space-y-3 border-t border-slate-200/80 pt-4">
+												{#each card.details as detail}
+													<li class="flex gap-3">
+														<span
+															class="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full bg-brand/10 text-brand"
+														>
+															<detail.icon class="h-4 w-4" aria-hidden="true" strokeWidth={1.25} />
+														</span>
+														<span class="min-w-0">
+															<span class="block text-sm font-semibold leading-snug text-slate-900">
+																{$t(detail.titleKey)}
+															</span>
+															<span class="mt-1 block text-xs leading-relaxed text-slate-500">
+																{$t(detail.bodyKey)}
+															</span>
+														</span>
+													</li>
+												{/each}
+											</ul>
 										</div>
-										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">
-												{$t('home.amenities.kitchen.kettle.title')}
-											</p>
-											<p class="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-500">
-												{$t('home.amenities.kitchen.kettle.body')}
-											</p>
-										</div>
-									</div>
-								</div>
-
-								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
-									<div class="flex items-start gap-3">
-										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-											<Utensils class="h-5 w-5" aria-hidden="true" />
-										</div>
-										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">
-												{$t('home.amenities.kitchen.dishes.title')}
-											</p>
-											<p class="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-500">
-												{$t('home.amenities.kitchen.dishes.body')}
-											</p>
-										</div>
-									</div>
-								</div>
-
-								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
-									<div class="flex items-start gap-3">
-										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-											<Sandwich class="h-5 w-5" aria-hidden="true" />
-										</div>
-										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">
-												{$t('home.amenities.kitchen.toaster.title')}
-											</p>
-											<p class="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-500">
-												{$t('home.amenities.kitchen.toaster.body')}
-											</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- Haus-Ausstattung -->
-						<div class="space-y-4">
-							<div class="flex items-center justify-between gap-3 border-b border-slate-200 pb-3">
-								<div class="flex items-center gap-2">
-									<div class="text-brand">
-										<House class="h-5 w-5" aria-hidden="true" />
-									</div>
-									<h3 class="text-base font-semibold text-slate-900">
-										{$t('home.amenities.house.title')}
-									</h3>
-								</div>
-							</div>
-
-							<div class="grid gap-4 sm:grid-cols-2">
-								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
-									<div class="flex items-start gap-3">
-										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-											<Wifi class="h-5 w-5" aria-hidden="true" />
-										</div>
-										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">
-												{$t('home.amenities.house.wifi.title')}
-											</p>
-											<p class="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-500">
-												{$t('home.amenities.house.wifi.body')}
-											</p>
-										</div>
-									</div>
-								</div>
-
-								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
-									<div class="flex items-start gap-3">
-										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-											<SquareParking class="h-5 w-5" aria-hidden="true" />
-										</div>
-										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">
-												{$t('home.amenities.house.parking.title')}
-											</p>
-											<p class="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-500">
-												{$t('home.amenities.house.parking.body')}
-											</p>
-										</div>
-									</div>
-								</div>
-
-								<div class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-md">
-									<div class="flex items-start gap-3">
-										<div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand">
-											<Snowflake class="h-5 w-5" aria-hidden="true" />
-										</div>
-										<div class="min-w-0">
-											<p class="text-sm font-semibold leading-snug text-slate-900">
-												{$t('home.amenities.house.ski.title')}
-											</p>
-											<p class="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-500">
-												{$t('home.amenities.house.ski.body')}
-											</p>
-										</div>
-									</div>
-								</div>
+									</article>
+								{/each}
 							</div>
 						</div>
-					</div>
-				</div>
-			</section>
+					</section>
 
 			<!-- SEASONS -->
 			<section class="relative py-10 sm:py-12">
@@ -1807,72 +1533,63 @@ import { localizePath } from '$lib/routing';
 					</p>
 				</div>
 
-				<div class="mt-8 grid gap-6 lg:grid-cols-[1.3fr_0.9fr]">
-					<a
-						href={localizedHref('/erlebnisse/sommer')}
-						class="group relative overflow-hidden rounded-3xl border border-white/20 bg-white/10 ring-1 ring-black/5 shadow-none transition-all duration-500 hover:-translate-y-1 hover:shadow-xl"
-					>
-						<img
-							{...imageAttrs('/images/Haus/gaestehaus-sommer.jpg', '(max-width: 1024px) 100vw, 800px')}
-							alt={$t('home.seasons.summer.imageAlt')}
-							class="h-72 w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] sm:h-[420px]"
-							loading="lazy"
-							decoding="async"
-						/>
-						<div
-							class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent transition-colors duration-500 group-hover:from-black/80 group-hover:via-black/50"
-						></div>
-						<div class="absolute bottom-0 left-0 right-0 p-6">
-							<h3 class="text-2xl font-semibold text-white sm:text-3xl">
-								{$t('seasons.summer.title')}
-							</h3>
-							<p class="mt-2 max-w-[34ch] text-sm text-white/90 sm:text-base">
-								{$t('seasons.summer.body')}
-							</p>
-							<span
-								class="mt-5 inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/14 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(15,23,42,0.25)] ring-1 ring-white/20 backdrop-blur-md transition group-hover:bg-white/20 group-hover:shadow-[0_12px_28px_rgba(15,23,42,0.3)]"
-							>
-								{$t('seasons.summer.cta')}
-								<ArrowRight
-									class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
-									aria-hidden="true"
-								/>
-							</span>
-						</div>
-					</a>
+				<div class="mt-8 grid gap-6 lg:grid-cols-2">
+					{#each seasonPanels as season}
+						<article
+							class={`overflow-hidden rounded-[1.75rem] border border-slate-200/80 ${season.panelClass} shadow-sm ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl motion-reduce:transform-none`}
+						>
+							<a href={localizedHref(season.href)} class="group block h-full">
+								<div class="relative h-72 overflow-hidden sm:h-80">
+									<img
+										{...imageAttrs(season.image, '(max-width: 1024px) 100vw, 680px')}
+										alt={$t(season.imageAltKey)}
+										class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+										loading="lazy"
+										decoding="async"
+									/>
+									<div class="absolute inset-0 bg-gradient-to-t from-slate-950/45 via-slate-950/10 to-transparent"></div>
+									<div
+										class={`absolute left-5 top-5 inline-flex items-center gap-2 rounded-full bg-white/90 px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] shadow-sm ring-1 ring-white/60 ${season.kickerClass}`}
+									>
+										<span class={`grid h-8 w-8 place-items-center rounded-full ${season.iconClass}`}>
+											<season.icon class="h-4 w-4" aria-hidden="true" strokeWidth={1.5} />
+										</span>
+										{$t(season.kickerKey)}
+									</div>
+								</div>
 
-					<a
-						href={localizedHref('/erlebnisse/winter')}
-						class="group relative overflow-hidden rounded-3xl border border-white/20 bg-white/10 ring-1 ring-black/5 shadow-none transition-all duration-500 hover:-translate-y-1 hover:shadow-xl"
-					>
-						<img
-							{...imageAttrs('/images/Haus/gaestehaus-winter.png', '(max-width: 1024px) 100vw, 800px')}
-							alt={$t('home.seasons.winter.imageAlt')}
-							class="h-72 w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] sm:h-[420px]"
-							loading="lazy"
-							decoding="async"
-						/>
-						<div
-							class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent transition-colors duration-500 group-hover:from-black/80 group-hover:via-black/50"
-						></div>
-						<div class="absolute bottom-0 left-0 right-0 p-6">
-							<h3 class="text-2xl font-semibold text-white sm:text-3xl">
-								{$t('seasons.winter.title')}
-							</h3>
-							<p class="mt-2 max-w-[34ch] text-sm text-white/90 sm:text-base">
-								{$t('seasons.winter.body')}
-							</p>
-							<span
-								class="mt-5 inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/14 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(15,23,42,0.25)] ring-1 ring-white/20 backdrop-blur-md transition group-hover:bg-white/20 group-hover:shadow-[0_12px_28px_rgba(15,23,42,0.3)]"
-							>
-								{$t('seasons.winter.cta')}
-								<ArrowRight
-									class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
-									aria-hidden="true"
-								/>
-							</span>
-						</div>
-					</a>
+								<div class="p-6 sm:p-7">
+									<h3 class="text-2xl font-semibold leading-tight text-slate-900 sm:text-3xl">
+										{$t(season.titleKey)}
+									</h3>
+									<p class="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
+										{$t(season.bodyKey)}
+									</p>
+
+									<ul class="mt-5 grid gap-2">
+										{#each season.highlights as highlight}
+											<li
+												class={`inline-flex items-start gap-2 rounded-2xl px-3 py-2 text-sm ring-1 ${season.chipClass}`}
+											>
+												<Check class="mt-0.5 h-4 w-4 shrink-0 text-brand" aria-hidden="true" strokeWidth={1.75} />
+												<span>{$t(highlight)}</span>
+											</li>
+										{/each}
+									</ul>
+
+									<span
+										class={`mt-6 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold shadow-sm transition ${season.buttonClass}`}
+									>
+										{$t(season.ctaKey)}
+										<ArrowRight
+											class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
+											aria-hidden="true"
+										/>
+									</span>
+								</div>
+							</a>
+						</article>
+					{/each}
 				</div>
 			</section>
 		</div>
@@ -2104,9 +1821,3 @@ import { localizePath } from '$lib/routing';
 		</div>
 	</section>
 </div>
-
-
-
-
-
-
