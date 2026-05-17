@@ -13,7 +13,6 @@
 		Mail,
 		MapPin,
 		MessageCircle,
-		MessageSquare,
 		Navigation,
 		Phone,
 		PhoneCall,
@@ -114,7 +113,6 @@
 	] as const;
 
 	const trustItems = [
-		{ textKey: 'contact.trust.responseShort', icon: MessageSquare },
 		{ textKey: 'contact.trust.languagesShort', icon: Globe2 },
 		{ textKey: 'contact.trust.checkinShort', icon: Clock3 },
 		{ textKey: 'contact.trust.parkingShort', icon: SquareParking },
@@ -287,9 +285,18 @@
 								decoding="async"
 							/>
 							<div class="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-slate-950/25 to-white/10"></div>
-							<div class="absolute left-5 top-5 rounded-2xl bg-white/95 p-4 shadow-xl ring-1 ring-slate-200 sm:left-7 sm:top-7">
+							<a
+								href={mapLink}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="group/address absolute left-5 top-5 rounded-2xl bg-white/95 p-4 shadow-xl ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:bg-white hover:shadow-2xl sm:left-7 sm:top-7"
+								onclick={() =>
+									trackEvent('Map: Open External', { source: 'contact', placement: 'map-address' })}
+							>
 								<div class="flex items-start gap-3">
-									<span class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-brand text-white shadow-sm">
+									<span
+										class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-brand text-white shadow-sm transition group-hover/address:scale-105"
+									>
 										<MapPin class="h-5 w-5" aria-hidden="true" />
 									</span>
 									<span>
@@ -297,7 +304,7 @@
 										<span class="mt-1 block text-xs text-slate-600">{$t('contact.address.line2')}</span>
 									</span>
 								</div>
-							</div>
+							</a>
 							<button
 								type="button"
 								class="absolute inset-x-5 bottom-5 rounded-2xl bg-white/95 p-5 text-left shadow-xl ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:bg-white hover:shadow-2xl sm:inset-x-auto sm:left-7 sm:w-[360px]"
@@ -324,19 +331,26 @@
 		use:reveal
 		class="mt-6 rounded-3xl border border-slate-200 bg-white p-6 shadow-[0_18px_50px_rgba(15,23,42,0.06)] opacity-0 translate-y-8 transition-all duration-700 ease-out sm:p-8"
 	>
-		<div class="grid gap-8 lg:grid-cols-[0.95fr,1fr] lg:divide-x lg:divide-slate-200">
+		<div class="grid gap-8 lg:grid-cols-[1.08fr,0.92fr] lg:divide-x lg:divide-slate-200">
 			<div class="lg:pr-10">
 				<h2 class="text-lg font-semibold text-slate-950">{$t('contact.payment.title')}</h2>
 				<p class="mt-2 text-sm text-slate-500">{$t('contact.payment.subtitle')}</p>
-				<div class="mt-7 grid gap-6 sm:grid-cols-2">
-					<div>
+				<div class="mt-6 grid gap-4 sm:grid-cols-2">
+					<div
+						class="group/payment rounded-2xl border border-slate-200 bg-slate-50/70 p-4 transition hover:border-brand/25 hover:bg-white hover:shadow-sm"
+					>
 						<p class="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500">IBAN</p>
-						<p class="mt-3 font-mono text-sm font-semibold tracking-wide text-slate-950 sm:text-base">
-							{iban}
-						</p>
 						<button
 							type="button"
-							class="mt-4 inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-50"
+							class="mt-3 block w-full rounded-lg text-left font-mono text-base font-semibold leading-relaxed tracking-wide text-slate-950 transition hover:text-brand focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 sm:text-lg"
+							onclick={() => copyToClipboard(iban, 'iban')}
+							aria-label={$t('contact.payment.copyIban')}
+						>
+							{iban}
+						</button>
+						<button
+							type="button"
+							class="mt-4 inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold text-slate-700 shadow-sm transition group-hover/payment:border-brand/30 group-hover/payment:bg-brand/5 group-hover/payment:text-brand hover:border-brand/30 hover:bg-brand/5 hover:text-brand"
 							onclick={() => copyToClipboard(iban, 'iban')}
 							aria-label={$t('contact.payment.copyIban')}
 						>
@@ -349,14 +363,21 @@
 							{/if}
 						</button>
 					</div>
-					<div>
+					<div
+						class="group/payment rounded-2xl border border-slate-200 bg-slate-50/70 p-4 transition hover:border-brand/25 hover:bg-white hover:shadow-sm"
+					>
 						<p class="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500">BIC</p>
-						<p class="mt-3 font-mono text-sm font-semibold tracking-wide text-slate-950 sm:text-base">
-							{bic}
-						</p>
 						<button
 							type="button"
-							class="mt-4 inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-50"
+							class="mt-3 block w-full rounded-lg text-left font-mono text-base font-semibold leading-relaxed tracking-wide text-slate-950 transition hover:text-brand focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 sm:text-lg"
+							onclick={() => copyToClipboard(bic, 'bic')}
+							aria-label={$t('contact.payment.copyBic')}
+						>
+							{bic}
+						</button>
+						<button
+							type="button"
+							class="mt-4 inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-semibold text-slate-700 shadow-sm transition group-hover/payment:border-brand/30 group-hover/payment:bg-brand/5 group-hover/payment:text-brand hover:border-brand/30 hover:bg-brand/5 hover:text-brand"
 							onclick={() => copyToClipboard(bic, 'bic')}
 							aria-label={$t('contact.payment.copyBic')}
 						>
@@ -372,17 +393,17 @@
 				</div>
 			</div>
 
-			<div class="lg:pl-10">
+			<div class="border-t border-slate-100 pt-8 lg:border-t-0 lg:pl-10 lg:pt-0">
 				<h2 class="text-lg font-semibold text-slate-950">{$t('contact.trust.title')}</h2>
-				<div class="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+				<div class="mt-6 grid gap-3 sm:grid-cols-3">
 					{#each trustItems as item}
-						<div class="text-center sm:text-left lg:text-center">
+						<div class="rounded-2xl border border-slate-200 bg-slate-50/70 p-4 text-center">
 							<div
-								class="mx-auto grid h-12 w-12 place-items-center rounded-full bg-slate-50 text-slate-600 ring-1 ring-slate-200 sm:mx-0 lg:mx-auto"
+								class="mx-auto grid h-11 w-11 place-items-center rounded-full bg-white text-slate-600 shadow-sm ring-1 ring-slate-200"
 							>
 								<item.icon class="h-5 w-5" aria-hidden="true" />
 							</div>
-							<p class="mt-3 text-sm font-medium leading-snug text-slate-700">{$t(item.textKey)}</p>
+							<p class="mt-3 text-sm font-semibold leading-snug text-slate-700">{$t(item.textKey)}</p>
 						</div>
 					{/each}
 				</div>
