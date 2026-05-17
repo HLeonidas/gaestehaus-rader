@@ -327,8 +327,8 @@ export const experienceEvents: ExperienceEvent[] = [
 		kicker: { de: 'Skifahren', en: 'Skiing' },
 		title: { de: 'Nassfeld: Sun Ski World', en: 'Nassfeld: Sun Ski World' },
 		description: {
-			de: 'Kärntens größtes Skigebiet mit Schneesicherheit, modernen Liften sowie Hütten und Après-Ski, ideal als wichtigster Winter-Tagesausflug.',
-			en: 'Carinthia’s largest ski area with reliable snow, modern lifts, mountain huts and après-ski, your top winter day-trip choice.',
+			de: 'Kärntens größtes Skigebiet mit Schneesicherheit, komfortablen Liften sowie Hütten und Après-Ski, ideal als wichtigster Winter-Tagesausflug.',
+			en: 'Carinthia’s largest ski area with reliable snow, comfortable lifts, mountain huts and après-ski, your top winter day-trip choice.',
 		},
 		image: '/images/Umgebung/ski_nassfeld.jpg',
 		location: { de: 'Nassfeld', en: 'Nassfeld' },

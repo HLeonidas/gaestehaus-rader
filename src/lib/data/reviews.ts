@@ -24,8 +24,8 @@ export const homeTrustReviews: HomeTrustReview[] = [
 			en: '1 year ago',
 		},
 		quote: {
-			de: 'Die Wohnung ist gemütlich, warm und komplett ausgestattet. Der Vermieter ist sehr nett und hilfsbereit.',
-			en: 'The apartment is cozy, warm, and fully equipped. The host is very kind and helpful.',
+			de: 'Die Wohnung ist gemütlich, warm und hatte alles, was wir gebraucht haben. Der Vermieter ist sehr nett und hilfsbereit.',
+			en: 'The apartment is cozy, warm, and had everything we needed. The host is very kind and helpful.',
 		},
 		url: 'https://maps.app.goo.gl/PqN21BcSHtFLULMDA',
 		rating: 5,
@@ -88,8 +88,8 @@ export const homeTrustReviews: HomeTrustReview[] = [
 			en: 'about one month ago',
 		},
 		quote: {
-			de: 'Eine sehr angenehme Pension, alles sauber und ordentlich, das Apartment komplett ausgestattet. Die Gastgeber waren sehr freundlich und überraschten uns mit Keksen zur Begrüßung und einem kleinen Neujahrsgeschenk.',
-			en: 'A very pleasant guesthouse, everything clean and tidy, and the apartment fully equipped. The hosts were very friendly and surprised us with cookies on arrival and a small New Year gift.',
+			de: 'Eine sehr angenehme Pension, alles sauber und ordentlich, das Apartment hatte alles, was wir gebraucht haben. Die Gastgeber waren sehr freundlich und überraschten uns mit Keksen zur Begrüßung und einem kleinen Neujahrsgeschenk.',
+			en: 'A very pleasant guesthouse, everything clean and tidy, and the apartment had everything we needed. The hosts were very friendly and surprised us with cookies on arrival and a small New Year gift.',
 		},
 		url: 'https://maps.app.goo.gl/of4g3yyWQ4bvjuba8',
 		rating: 5,

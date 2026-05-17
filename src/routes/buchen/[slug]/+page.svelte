@@ -64,7 +64,7 @@ const localizedHref = (path: string) => localizePath(path, page.url.pathname);
 						Book Your Alpine Escape (Mock)
 					</h1>
 					<p class="max-w-xl text-sm leading-relaxed text-slate-600 sm:text-base">
-						Experience premium hospitality in the heart of the Austrian Alps.
+						Experience warm, family-run hospitality in the heart of the Austrian Alps.
 					</p>
 				</div>
 

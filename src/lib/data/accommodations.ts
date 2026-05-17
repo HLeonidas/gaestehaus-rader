@@ -115,12 +115,12 @@ export const accommodations: Accommodation[] = [
 			de: [
 				'Die helle Ferienwohnung kombiniert ruhige Lage, Morgensonne und einen privaten Balkon für entspannte Urlaubstage in Weißbriach.',
 				'Sie eignet sich für 1–3 Gäste, die das Gitschtal als entspannte Basis für Ausflüge zum Weissensee, nach Nassfeld oder in die umliegende Bergwelt nutzen möchten.',
-				'Zur Ausstattung gehören eine voll ausgestattete Küche mit Sitzecke, ein Badezimmer mit Dusche und WC sowie ein Ostbalkon mit freundlichem Ausblick.',
+				'Zur Ausstattung gehören eine praktische Küche mit Sitzecke, ein Badezimmer mit Dusche und WC sowie ein Ostbalkon mit freundlichem Ausblick.',
 			],
 			en: [
 				'This bright apartment combines a quiet setting, morning sun and a private balcony for relaxing holidays in Weissbriach.',
 				'It suits 1–3 guests looking for a calm base in the Gitschtal with easy access to Lake Weissensee, Nassfeld and the surrounding mountains.',
-				'Inside you will find a fully equipped kitchen with dining nook, a bathroom with shower and toilet, and an east-facing balcony with a pleasant view.',
+				'Inside you will find a practical kitchen with dining nook, a bathroom with shower and toilet, and an east-facing balcony with a pleasant view.',
 			],
 		},
 		images: {
@@ -278,12 +278,12 @@ export const accommodations: Accommodation[] = [
 			de: [
 				'Das Dachgeschoss-Appartement verbindet alpine Gemütlichkeit mit lichtdurchfluteten Räumen und einem Balkon für entspannte Tage in ruhiger Lage.',
 				'Dank Ausrichtung nach Osten und Westen genießen 1–3 Gäste Sonne zu verschiedenen Tageszeiten und einen angenehmen Ausgangspunkt für Urlaub im Gitschtal nahe Weissensee und Nassfeld.',
-				'Zur Wohnung gehören eine voll ausgestattete Küche mit Sitzecke, ein Badezimmer mit Dusche und WC sowie zwei gemütliche Schlafbereiche.',
+				'Zur Wohnung gehören eine praktische Küche mit Sitzecke, ein Badezimmer mit Dusche und WC sowie zwei gemütliche Schlafbereiche.',
 			],
 			en: [
 				'This top-floor apartment combines alpine comfort with light-filled rooms and a balcony for relaxed days in a quiet setting.',
 				'With east and west exposure, 1–3 guests enjoy sun at different times of day and an easy-going base in the Gitschtal close to Lake Weissensee and Nassfeld.',
-				'The apartment includes a fully equipped kitchen with dining nook, a bathroom with shower and toilet, and two cosy sleeping areas.',
+				'The apartment includes a practical kitchen with dining nook, a bathroom with shower and toilet, and two cosy sleeping areas.',
 			],
 		},
 		images: {
@@ -457,12 +457,12 @@ export const accommodations: Accommodation[] = [
 			de: [
 				'Diese Ferienwohnung ist ideal für 1–2 Gäste, die in Weißbriach ruhig wohnen und dennoch schnell in der Region unterwegs sein möchten.',
 				'Der Südbalkon bringt viel Sonne, der Gartenblick sorgt für entspannte Stimmung und das Gitschtal bietet einen angenehmen Ausgangspunkt für Urlaub nahe Weissensee und Nassfeld.',
-				'Mit voll ausgestatteter Küche, gemütlicher Sitzecke und Bad mit Dusche/WC ist das Appartement besonders für Paarurlaub oder einen kompakten Alpenaufenthalt geeignet.',
+				'Mit praktischer Küche, gemütlicher Sitzecke und Bad mit Dusche/WC ist das Appartement besonders für Paarurlaub oder einen kompakten Alpenaufenthalt geeignet.',
 			],
 			en: [
 				'This apartment is ideal for 1–2 guests who want a quiet stay in Weissbriach while remaining well connected to the region.',
 				'The south-facing balcony brings in plenty of sun, the garden view adds a relaxed feel, and the Gitschtal is a pleasant base near Lake Weissensee and Nassfeld.',
-				'With a fully equipped kitchen, cosy dining nook and bathroom with shower/toilet, the apartment works especially well for couples or a compact alpine getaway.',
+				'With a practical kitchen, cosy dining nook and bathroom with shower/toilet, the apartment works especially well for couples or a compact alpine getaway.',
 			],
 		},
 		images: {

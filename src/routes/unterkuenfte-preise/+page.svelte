@@ -78,7 +78,7 @@ import { localizePath } from '$lib/routing';
 	);
 
 	function badgeClasses(badgeLabel: string) {
-		if (badgeLabel === 'Exklusiv') {
+		if (badgeLabel === 'Besonders ruhig' || badgeLabel === 'Especially quiet') {
 			return 'bg-brand text-white';
 		}
 		return 'bg-slate-800/90 text-white';

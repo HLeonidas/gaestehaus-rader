@@ -67,14 +67,14 @@ const translations: Record<Lang, Record<string, string>> = {
 		'rooms.card.1.meta': '45 m² · 2–4 Gäste · Bergblick',
 		'rooms.card.1.price': '150',
 		'rooms.card.2.title': 'Nº 2',
-		'rooms.card.2.body': 'Ruhig gelegen, hochwertig ausgestattet, viel Privatsphäre.',
+		'rooms.card.2.body': 'Ruhig gelegen, sorgfältig ausgestattet, viel Privatsphäre.',
 		'rooms.card.2.meta': '32 m² · 2 Gäste · Talblick',
 		'rooms.card.2.price': '120',
 		'rooms.card.3.title': 'Nº 1',
 		'rooms.card.3.body': 'Gemütlich, perfekt für Paare oder kleine Familien.',
 		'rooms.card.3.meta': '28 m² · 1–2 Gäste · Waldblick',
 		'rooms.card.3.price': '110',
-		'rooms.section.kicker': 'Exklusive Auswahl',
+		'rooms.section.kicker': 'Kleine feine Auswahl',
 		'rooms.section.title': 'Unsere Appartements',
 		'rooms.section.cta': 'Alle Appartements ansehen',
 		'home.trustbar.family': 'Familiengeführt',
@@ -84,7 +84,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'rooms.card.cta': 'Details ansehen',
 		'rooms.page.title': 'Unsere Appartements',
 		'rooms.page.subtitle':
-			'Erleben Sie alpinen Komfort und moderne Ausstattung im Herzen der österreichischen Alpen.',
+			'Freuen Sie sich auf alpine Gemütlichkeit und durchdachte Ausstattung im Herzen der österreichischen Alpen.',
 		'rooms.seo.title': 'Unterkünfte & Preise – Gästehaus Rader',
 		'rooms.seo.description':
 			'Vergleichen Sie unsere Ferienwohnungen in Weißbriach: Ausstattung, Größen und Preise auf einen Blick.',
@@ -236,7 +236,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'amenity.kitchen': 'Küche',
 		'amenity.parking': 'Parkplatz',
 		'badge.popular': 'Beliebt',
-		'badge.exclusive': 'Exklusiv',
+		'badge.exclusive': 'Besonders ruhig',
 		'experiences.title': 'Erlebnisse rund um das Gästehaus',
 		'experiences.seo.title': 'Erlebnisse im Gitschtal & in Kärnten | Gästehaus Rader',
 		'experiences.seo.description':
@@ -296,7 +296,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'experiences.event.winter.ski.kicker': 'Skifahren',
 		'experiences.event.winter.ski.title': 'Nassfeld: Sun Ski World',
 		'experiences.event.winter.ski.description':
-			'Kärntens größtes Skigebiet mit Schneesicherheit, modernen Liften sowie Hütten und Après-Ski, ideal als wichtigster Winter-Tagesausflug.',
+			'Kärntens größtes Skigebiet mit Schneesicherheit, komfortablen Liften sowie Hütten und Après-Ski, ideal als wichtigster Winter-Tagesausflug.',
 		'experiences.event.winter.ice.kicker': 'Eis',
 		'experiences.event.winter.ice.title': 'Weißensee: Natureiswelt',
 		'experiences.event.winter.ice.description':
@@ -392,7 +392,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'experiences.event.summer.bike.meta2': 'Genuss- und Sporttouren möglich',
 		'experiences.event.summer.lift.meta1': 'Panorama ohne langen Zustieg',
 		'experiences.event.summer.lift.meta2': 'Perfekt für Tagesausflüge',
-		'experiences.event.winter.ski.meta1': 'Schneesicher & moderne Lifte',
+		'experiences.event.winter.ski.meta1': 'Schneesicher & komfortable Lifte',
 		'experiences.event.winter.ski.meta2': 'Hütten & Après-Ski',
 		'experiences.event.winter.ice.meta1': 'Europas größte Natureisfläche',
 		'experiences.event.winter.ice.meta2': 'Internationales Winter-Highlight',
@@ -458,7 +458,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'trust.ratingMeta': 'Basierend auf 24 Rezensionen',
 		'trust.verified': 'Verifizierte Bewertungen',
 		'trust.review.1':
-			'Die Wohnung ist gemütlich, warm und komplett ausgestattet. Der Vermieter ist sehr nett und hilfsbereit.',
+			'Die Wohnung ist gemütlich, warm und hatte alles, was wir gebraucht haben. Der Vermieter ist sehr nett und hilfsbereit.',
 		'trust.review.1.name': 'Antonella C.',
 		'trust.review.1.initials': 'AC',
 		'trust.review.1.meta': 'vor einem Jahr',
@@ -497,7 +497,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'guestcard.cta.moreInfo': 'Mehr Infos',
 		'guestcard.cta.moreInfoBasic': 'Mehr Infos zur GästeCard Basic',
 		'guestcard.cta.pdf': 'PDF herunterladen',
-		'guestcard.landing.kicker': 'Exklusiv für unsere Gäste',
+		'guestcard.landing.kicker': 'Für unsere Gäste inklusive',
 		'guestcard.landing.title': 'GästeCard Basic inklusive',
 		'guestcard.landing.body':
 			'Kostenlos mobil sein und regionale Vorteile nutzen - automatisch inklusive während Ihres Aufenthalts.',
@@ -553,7 +553,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'guestcard.page.cta.body': 'Bei Ankunft erhalten Sie die GästeCard Basic automatisch.',
 		'guestcard.page.cta.primary': 'Jetzt buchen',
 		'guestcard.page.cta.secondary': 'FAQ zur GästeCard',
-		'guestcard.experiences.kicker': 'Exklusiv für Sie',
+		'guestcard.experiences.kicker': 'Für Sie inklusive',
 		'guestcard.experiences.title': 'GästeCard Basic inklusive',
 		'guestcard.experiences.subtitle':
 			'Mit der GästeCard Basic sind Sie ohne Auto flexibel unterwegs - und nutzen zusätzlich zahlreiche, saisonal überprüfte Ermäßigungen und Vorteile in der Region.',
@@ -655,7 +655,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.sustainability.body1':
 			'Im Gästehaus Rader gehen unsere Liebe zu den Bergen und unser Einsatz für ihren Schutz Hand in Hand. Wir glauben, echte Gastfreundschaft bedeutet, Verantwortung für die Umwelt zu übernehmen, die uns beherbergt.',
 		'home.sustainability.body2':
-			'Zum Schutz der alpinen Natur erzeugen wir unseren eigenen grünen Strom mit hocheffizienten Solarpaneelen vor Ort. So nutzen wir die Kraft der Kärntner Sonne, reduzieren unseren CO2-Fußabdruck und bieten Ihnen modernen, unbeschwerten Komfort.',
+			'Zum Schutz der alpinen Natur erzeugen wir unseren eigenen grünen Strom mit hocheffizienten Solarpaneelen vor Ort. So nutzen wir die Kraft der Kärntner Sonne, reduzieren unseren CO2-Fußabdruck und bieten Ihnen einen angenehmen, unbeschwerten Aufenthalt.',
 		'home.sustainability.imageAlt': 'Solarmodule auf dem Dach des Gästehauses',
 		'home.sustainability.solar.title': 'Solar & Photovoltaik',
 		'home.sustainability.solar.body': 'Eigenstrom vom Dach - direkt vor Ort genutzt.',
@@ -696,9 +696,9 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.amenities.itemsLabel': 'Leistungen',
 		'home.amenities.basic.title': 'Basis-Komfort',
 		'home.amenities.basic.summary':
-			'Hochwertige Bettwäsche, frische Handtücher und Pflegeprodukte.',
+			'Angenehme Bettwäsche, frische Handtücher und Pflegeprodukte.',
 		'home.amenities.basic.imageAlt': 'Helles Schlafzimmer mit Doppelbett im Gästehaus Rader',
-		'home.amenities.basic.bedding.title': 'Hochwertige Bettwäsche',
+		'home.amenities.basic.bedding.title': 'Angenehme Bettwäsche',
 		'home.amenities.basic.bedding.body':
 			'Angenehm weiche Bettwäsche für einen erholsamen Schlaf.',
 		'home.amenities.basic.towels.title': 'Frische Handtücher',
@@ -708,11 +708,11 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.amenities.basic.care.body': 'Handseife',
 		'home.amenities.kitchen.title': 'Küche',
 		'home.amenities.kitchen.summary':
-			'Voll ausgestattete Küchenzeile mit modernen Geräten.',
+			'Praktische Küchenzeile für Frühstück und einfache Mahlzeiten.',
 		'home.amenities.kitchen.imageAlt': 'Küchenzeile in einem Appartement im Gästehaus Rader',
 		'home.amenities.kitchen.kitchenette.title': 'Küchenzeile',
 		'home.amenities.kitchen.kitchenette.body':
-			'Voll ausgestattet mit Herd und Mikrowelle.',
+			'Mit Herd und Mikrowelle für die schnelle Urlaubsküche.',
 		'home.amenities.kitchen.espresso.title': 'Senseo Pad Maschine',
 		'home.amenities.kitchen.espresso.body': 'Kaffee Filtermaschine',
 		'home.amenities.kitchen.kettle.title': 'Wasserkocher',
@@ -721,7 +721,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.amenities.kitchen.dishes.body':
 			'Vollständiges Set für 4 Personen inklusive Weingläsern.',
 		'home.amenities.kitchen.toaster.title': 'Toaster',
-		'home.amenities.kitchen.toaster.body': 'Moderner Toaster für Ihr perfektes Berg-Frühstück.',
+		'home.amenities.kitchen.toaster.body': 'Toaster für Ihr gemütliches Berg-Frühstück.',
 		'home.amenities.house.title': 'Haus-Ausstattung',
 		'home.amenities.house.summary':
 			'WLAN, Skiraum und privater Parkplatz direkt beim Haus.',
@@ -766,7 +766,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'landing.weissbriach.body1':
 			'Mitten im Gitschtal, nur wenige Schritte vom Ortskern Weißbriachs entfernt, liegt das Gästehaus Rader – Ihre ruhige Basis für Sommer- und Winterurlaub.',
 		'landing.weissbriach.body2':
-			'Unsere drei Appartements bieten Platz für Paare und Familien, mit Balkon, moderner Ausstattung und viel Raum zum Ankommen.',
+			'Unsere drei Appartements bieten Platz für Paare und Familien, mit Balkon, guter Ausstattung und viel Raum zum Ankommen.',
 		'landing.weissbriach.body3':
 			'Ob Wandern, Radfahren, Skifahren oder entspannte Tage am See: Von hier erreichen Sie die schönsten Ziele Kärntens schnell und unkompliziert.',
 		'landing.weissbriach.cta': 'Verfügbarkeit prüfen',
@@ -866,7 +866,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'workation.cta.apartments': 'Appartements ansehen',
 		'workation.mobileCta.kicker': 'Workation Anfrage',
 		'workation.mobileCta.button': 'Anfragen',
-		'footer.tagline': 'Ihr Rückzugsort in den Kärntner Alpen. Tradition trifft auf modernen Komfort.',
+		'footer.tagline': 'Ihr Rückzugsort in den Kärntner Alpen. Tradition trifft auf herzliche Gastlichkeit.',
 		'footer.quicklinks': 'Schnellzugriff',
 		'footer.winter': 'Winterurlaub',
 		'footer.contact': 'Kontakt',
@@ -995,7 +995,7 @@ const translations: Record<Lang, Record<string, string>> = {
 			'Wir setzen auf persönliche Betreuung, regionale Empfehlungen und flexible Lösungen.',
 		'about.card.2.title': 'Qualität & Details',
 		'about.card.2.body':
-			'Hochwertige Materialien, ruhige Farben und eine Atmosphäre zum Abschalten.',
+			'Angenehme Materialien, ruhige Farben und eine Atmosphäre zum Abschalten.',
 		'about.card.3.title': 'Ganzjährig attraktiv',
 		'about.card.3.body':
 			'Schneereiche Winter, klare Seen im Sommer und Naturerlebnisse im Herbst.',
@@ -1193,7 +1193,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'rooms.card.1.meta': '45 m² · 2–4 guests · mountain view',
 		'rooms.card.1.price': '150',
 		'rooms.card.2.title': 'Mountain View Apartment',
-		'rooms.card.2.body': 'Quiet setting, premium finishes, lots of privacy.',
+		'rooms.card.2.body': 'Quiet setting, thoughtful amenities, plenty of privacy.',
 		'rooms.card.2.meta': '32 m² · 2 guests · valley view',
 		'rooms.card.2.price': '120',
 		'rooms.card.3.title': 'Valley View Apartment',
@@ -1210,7 +1210,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'rooms.card.cta': 'View details',
 		'rooms.page.title': 'Our apartments',
 		'rooms.page.subtitle':
-			'Experience alpine comfort and modern design in the heart of the Austrian Alps.',
+			'Enjoy alpine comfort and thoughtful amenities in the heart of the Austrian Alps.',
 		'rooms.seo.title': 'Apartments & prices – Guesthouse Rader',
 		'rooms.seo.description':
 			'Compare our holiday apartments in Weissbriach with amenities, sizes, and pricing at a glance.',
@@ -1362,7 +1362,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'amenity.kitchen': 'Kitchen',
 		'amenity.parking': 'Parking',
 		'badge.popular': 'Popular',
-		'badge.exclusive': 'Exclusive',
+		'badge.exclusive': 'Especially quiet',
 		'experiences.title': 'Experiences nearby',
 		'experiences.seo.title': 'Experiences in the Gitschtal & Carinthia | Guesthouse Rader',
 		'experiences.seo.description':
@@ -1422,7 +1422,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'experiences.event.winter.ski.kicker': 'Skiing',
 		'experiences.event.winter.ski.title': 'Nassfeld: Sun Ski World',
 		'experiences.event.winter.ski.description':
-			'Carinthia’s largest ski area with reliable snow, modern lifts, mountain huts and après-ski, your top winter day-trip choice.',
+			'Carinthia’s largest ski area with reliable snow, comfortable lifts, mountain huts and après-ski, your top winter day-trip choice.',
 		'experiences.event.winter.ice.kicker': 'Ice',
 		'experiences.event.winter.ice.title': 'Weißensee: Natural Ice World',
 		'experiences.event.winter.ice.description':
@@ -1520,7 +1520,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'experiences.event.summer.bike.meta2': 'Leisure and sport tours available',
 		'experiences.event.summer.lift.meta1': 'Panorama without long ascents',
 		'experiences.event.summer.lift.meta2': 'Perfect for day trips',
-		'experiences.event.winter.ski.meta1': 'Snow-reliable & modern lifts',
+		'experiences.event.winter.ski.meta1': 'Reliable snow & comfortable lifts',
 		'experiences.event.winter.ski.meta2': 'Huts & après-ski',
 		'experiences.event.winter.ice.meta1': 'Europe’s largest natural ice area',
 		'experiences.event.winter.ice.meta2': 'International winter highlight',
@@ -1586,7 +1586,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'trust.ratingMeta': 'Based on 24 reviews',
 		'trust.verified': 'Verified reviews',
 		'trust.review.1':
-			'The apartment is cozy, warm, and fully equipped. The host is very kind and helpful.',
+			'The apartment is cozy, warm, and had everything we needed. The host is very kind and helpful.',
 		'trust.review.1.name': 'Antonella C.',
 		'trust.review.1.initials': 'AC',
 		'trust.review.1.meta': '1 year ago',
@@ -1625,7 +1625,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'guestcard.cta.moreInfo': 'More info',
 		'guestcard.cta.moreInfoBasic': 'More about the Guest Card Basic',
 		'guestcard.cta.pdf': 'Download PDF',
-		'guestcard.landing.kicker': 'Exclusive for our guests',
+		'guestcard.landing.kicker': 'Included for our guests',
 		'guestcard.landing.title': 'Guest Card Basic included',
 		'guestcard.landing.body':
 			'Free mobility and regional benefits - automatically included throughout your stay.',
@@ -1681,7 +1681,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'guestcard.page.cta.body': 'You automatically receive the Guest Card Basic upon arrival.',
 		'guestcard.page.cta.primary': 'Book now',
 		'guestcard.page.cta.secondary': 'Guest card FAQ',
-		'guestcard.experiences.kicker': 'Exclusive for you',
+		'guestcard.experiences.kicker': 'Included for you',
 		'guestcard.experiences.title': 'Guest Card Basic included',
 		'guestcard.experiences.subtitle':
 			'With the Guest Card Basic, you can get around comfortably without a car - plus enjoy many regionally relevant discounts and perks that we review seasonally.',
@@ -1783,7 +1783,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.sustainability.body1':
 			'At Gästehaus Rader, our love for the mountains goes hand in hand with our commitment to protecting them. We believe true hospitality means taking responsibility for the environment that hosts us.',
 		'home.sustainability.body2':
-			'To protect the pristine alpine environment, we generate our own green energy with high-efficiency solar panels on site. By harnessing the Carinthian sun, we reduce our carbon footprint while offering modern, worry-free comfort.',
+			'To protect the pristine alpine environment, we generate our own green energy with high-efficiency solar panels on site. By harnessing the Carinthian sun, we reduce our carbon footprint while offering an easy, worry-free stay.',
 		'home.sustainability.imageAlt': 'Solar panels on the guesthouse roof',
 		'home.sustainability.solar.title': 'Solar & photovoltaics',
 		'home.sustainability.solar.body': 'On-site power from the roof, used right here.',
@@ -1823,19 +1823,19 @@ const translations: Record<Lang, Record<string, string>> = {
 			'Everything you need for a relaxing stay - from basic comforts and the kitchen to house amenities. Included, in every apartment.',
 		'home.amenities.itemsLabel': 'items',
 		'home.amenities.basic.title': 'Basic comforts',
-		'home.amenities.basic.summary': 'Premium bedding, fresh towels and care products.',
+		'home.amenities.basic.summary': 'Soft bedding, fresh towels and care products.',
 		'home.amenities.basic.imageAlt': 'Bright bedroom with double bed at Guesthouse Rader',
-		'home.amenities.basic.bedding.title': 'Premium bedding',
-		'home.amenities.basic.bedding.body': 'High-quality, soft bed linen for restful sleep.',
+		'home.amenities.basic.bedding.title': 'Soft bedding',
+		'home.amenities.basic.bedding.body': 'Soft bed linen for restful sleep.',
 		'home.amenities.basic.towels.title': 'Fresh towels',
 		'home.amenities.basic.towels.body': 'Extra fluffy towels for your stay.',
 		'home.amenities.basic.care.title': 'Care products',
 		'home.amenities.basic.care.body': 'Hand soap',
 		'home.amenities.kitchen.title': 'Kitchen',
-		'home.amenities.kitchen.summary': 'Fully equipped kitchenette with modern appliances.',
+		'home.amenities.kitchen.summary': 'Practical kitchenette for breakfast and simple meals.',
 		'home.amenities.kitchen.imageAlt': 'Kitchenette in an apartment at Guesthouse Rader',
 		'home.amenities.kitchen.kitchenette.title': 'Kitchenette',
-		'home.amenities.kitchen.kitchenette.body': 'Fully equipped with stove and microwave.',
+		'home.amenities.kitchen.kitchenette.body': 'With stove and microwave for easy holiday meals.',
 		'home.amenities.kitchen.espresso.title': 'Senseo pad machine',
 		'home.amenities.kitchen.espresso.body': 'Filter coffee machine',
 		'home.amenities.kitchen.kettle.title': 'Kettle',
@@ -1843,7 +1843,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.amenities.kitchen.dishes.title': 'Dish set',
 		'home.amenities.kitchen.dishes.body': 'Complete set for 4 people including wine glasses.',
 		'home.amenities.kitchen.toaster.title': 'Toaster',
-		'home.amenities.kitchen.toaster.body': 'Modern toaster for your perfect mountain breakfast.',
+		'home.amenities.kitchen.toaster.body': 'Toaster for a relaxed mountain breakfast.',
 		'home.amenities.house.title': 'House amenities',
 		'home.amenities.house.summary':
 			'Wi-Fi, ski room and private parking directly at the house.',
@@ -1885,7 +1885,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'landing.weissbriach.body1':
 			'In the heart of the Gitschtal, just steps from the village center of Weissbriach, Guesthouse Rader is your quiet base for summer and winter stays.',
 		'landing.weissbriach.body2':
-			'Our three apartments are ideal for couples and families, with balconies, modern amenities, and plenty of space to settle in.',
+			'Our three apartments are ideal for couples and families, with balconies, practical amenities, and plenty of space to settle in.',
 		'landing.weissbriach.body3':
 			'Whether hiking, cycling, skiing, or relaxing by the lake, you can reach Carinthia’s best spots quickly and easily from here.',
 		'landing.weissbriach.cta': 'Check availability',
@@ -2108,7 +2108,7 @@ const translations: Record<Lang, Record<string, string>> = {
 			'Personal care, local recommendations, and flexible solutions tailored to you.',
 		'about.card.2.title': 'Quality & details',
 		'about.card.2.body':
-			'Premium materials, calm tones, and an atmosphere made for unwinding.',
+			'Pleasant materials, calm tones, and an atmosphere made for unwinding.',
 		'about.card.3.title': 'Great all year',
 		'about.card.3.body':
 			'Snowy winters, clear summer lakes, and nature escapes every season.',

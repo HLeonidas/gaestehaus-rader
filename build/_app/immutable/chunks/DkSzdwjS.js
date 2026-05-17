@@ -1,1 +1,0 @@
-import{e as d,u,r as n,Z as c,$ as p}from"./Bpc31iRa.js";function y(s,o,r){d(()=>{var a=u(()=>o(s,r?.())||{});if(r&&a?.update){var t=!1,f={};n(()=>{var e=r();c(e),t&&p(f,e)&&(f=e,a.update(e))}),t=!0}if(a?.destroy)return()=>a.destroy()})}export{y as a};
