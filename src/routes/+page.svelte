@@ -1290,10 +1290,10 @@ import { localizePath } from '$lib/routing';
 			></div>
 
 			<!-- GUEST CARD -->
-			<section class="group/guestcard relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition-all duration-500 hover:-translate-y-0.5 hover:border-brand/25 hover:shadow-[0_22px_54px_-34px_rgba(15,23,42,0.42)] focus-within:border-brand/25 focus-within:shadow-[0_22px_54px_-34px_rgba(15,23,42,0.42)] motion-reduce:transform-none motion-reduce:transition-none">
-				<div class="pointer-events-none absolute inset-0 z-20 rounded-3xl opacity-0 ring-1 ring-brand/20 transition-opacity duration-500 group-hover/guestcard:opacity-100 group-focus-within/guestcard:opacity-100"></div>
+			<section class="group/guestcard relative overflow-hidden rounded-[1.6rem] border border-slate-200 bg-[#fffdf9] shadow-sm transition-all duration-500 hover:-translate-y-0.5 hover:border-brand/25 hover:shadow-[0_22px_54px_-34px_rgba(15,23,42,0.42)] focus-within:border-brand/25 focus-within:shadow-[0_22px_54px_-34px_rgba(15,23,42,0.42)] motion-reduce:transform-none motion-reduce:transition-none lg:rounded-3xl lg:bg-white">
+				<div class="pointer-events-none absolute inset-0 z-20 rounded-[1.6rem] opacity-0 ring-1 ring-brand/20 transition-opacity duration-500 group-hover/guestcard:opacity-100 group-focus-within/guestcard:opacity-100 lg:rounded-3xl"></div>
 				<div class="grid lg:grid-cols-[1.08fr,0.92fr]">
-					<div class="relative min-h-[330px] sm:min-h-[430px] lg:min-h-[670px]">
+					<div class="guestcard-mobile-hero relative min-h-[320px] sm:min-h-[430px] lg:min-h-[670px]">
 						<picture>
 							<source
 								media="(min-width: 1024px)"
@@ -1308,23 +1308,35 @@ import { localizePath } from '$lib/routing';
 							/>
 						</picture>
 						<div
-							class="absolute inset-0 bg-gradient-to-b from-slate-950/85 via-slate-950/65 to-slate-950/25 transition duration-500 group-hover/guestcard:from-slate-950/78 group-hover/guestcard:via-slate-950/56 lg:bg-gradient-to-r lg:from-slate-950/20 lg:via-transparent lg:to-transparent lg:group-hover/guestcard:from-slate-950/12"
+							class="absolute inset-0 bg-[linear-gradient(135deg,rgba(15,23,42,0.56)_0%,rgba(15,23,42,0.34)_28%,rgba(15,23,42,0.12)_58%,rgba(15,23,42,0.04)_100%)] transition duration-500 group-hover/guestcard:opacity-90 lg:bg-gradient-to-r lg:from-slate-950/20 lg:via-transparent lg:to-transparent lg:group-hover/guestcard:from-slate-950/12"
 						></div>
-						<div class="absolute inset-x-0 top-0 p-6 pt-7 text-white sm:p-8 lg:hidden">
-							<p class="text-[11px] font-semibold uppercase tracking-[0.32em] text-[#ffb14a]">
+						<div class="absolute inset-x-0 top-0 z-10 p-5 pt-6 text-white sm:p-8 lg:hidden">
+							<p class="sr-only">
 								{$t('guestcard.landing.kicker')}
 							</p>
-							<h2 class="mt-3 max-w-[11ch] text-4xl font-serif font-medium leading-[0.95] drop-shadow-sm sm:text-5xl">
+							<h2 class="max-w-[9ch] text-[2.45rem] font-serif font-medium leading-[0.92] drop-shadow-sm sm:text-5xl">
 								{$t('guestcard.landing.title')}
 							</h2>
-							<div class="mt-4 h-[3px] w-14 rounded-full bg-brand"></div>
-							<p class="mt-4 max-w-[29ch] text-[13px] leading-[1.55] text-white drop-shadow-sm sm:text-base sm:leading-relaxed">
-								{$t('guestcard.landing.body')}
-							</p>
+							<div class="mt-5 h-[3px] w-14 rounded-full bg-brand"></div>
 						</div>
 					</div>
 
-					<div class="relative z-10 -mt-8 flex flex-col justify-center rounded-t-[2rem] bg-white px-5 py-5 sm:px-7 sm:py-6 lg:mt-0 lg:rounded-none lg:px-10 lg:py-10">
+					<div class="relative z-10 isolate -mt-12 flex flex-col justify-center rounded-t-[2.75rem] bg-[#fffdf9] px-5 pb-5 pt-[12.75rem] sm:px-7 sm:pb-6 sm:pt-[12.75rem] lg:mt-0 lg:rounded-none lg:bg-white lg:px-10 lg:py-10">
+						<div
+							class="pointer-events-none absolute left-1/2 top-0 z-0 h-[11.8rem] w-[11.8rem] -translate-x-1/2 -translate-y-[8%] rounded-full bg-[#f59b00] lg:hidden"
+							aria-hidden="true"
+						></div>
+						<div
+							class="guestcard-mobile-card pointer-events-none absolute left-1/2 top-0 z-10 h-[13.6rem] w-[8.1rem] -translate-x-1/2 -translate-y-[30%] rotate-[8deg] overflow-hidden rounded-[1.18rem] bg-[#fff8ee] shadow-[0_22px_34px_-18px_rgba(48,34,19,0.72)] ring-1 ring-black/5 lg:hidden"
+							aria-hidden="true"
+						>
+							<img
+								src={withAsset(guestCardDesktopVisual.src)}
+								alt=""
+								class="absolute z-10 h-auto max-w-none"
+								decoding="async"
+							/>
+						</div>
 						<div class="hidden lg:block">
 							<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
 								{$t('guestcard.landing.kicker')}
@@ -1338,63 +1350,67 @@ import { localizePath } from '$lib/routing';
 							</p>
 						</div>
 
-						<ul class="space-y-3 text-sm text-slate-600 sm:text-base lg:mt-6 lg:space-y-4">
-							<li class="flex items-start gap-2.5 rounded-2xl border border-brand/20 bg-brand/5 p-2.5 transition duration-300 group-hover/guestcard:border-brand/35 group-hover/guestcard:bg-brand/10 sm:gap-4 sm:p-3">
+						<ul class="relative z-20 space-y-0 text-sm text-slate-600 sm:text-base lg:mt-6 lg:space-y-4">
+							<li class="flex items-start gap-3 border-b border-slate-200/80 py-4 transition duration-300 group-hover/guestcard:border-brand/35 sm:gap-4 lg:rounded-2xl lg:border lg:border-brand/20 lg:bg-brand/5 lg:p-3 lg:group-hover/guestcard:bg-brand/10">
 								<span
-									class="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-brand/15 text-brand transition duration-300 group-hover/guestcard:scale-105 group-hover/guestcard:bg-brand group-hover/guestcard:text-white sm:h-11 sm:w-11 lg:h-12 lg:w-12"
+									class="mt-0.5 grid h-11 w-11 shrink-0 place-items-center rounded-full border border-brand/35 bg-white text-brand transition duration-300 group-hover/guestcard:scale-105 group-hover/guestcard:bg-brand/15 sm:h-11 sm:w-11 lg:h-12 lg:w-12 lg:border-0 lg:bg-brand/15 lg:group-hover/guestcard:bg-brand lg:group-hover/guestcard:text-white"
 								>
 									<BusFront class="h-5 w-5" aria-hidden="true" strokeWidth={1.25} />
 								</span>
-								<div>
-									<p class="text-[13px] font-semibold leading-snug text-slate-900 sm:text-sm">
+								<div class="min-w-0 flex-1">
+									<p class="text-sm font-bold leading-snug text-slate-900">
 										{$t('guestcard.landing.item1.title')}
 									</p>
-									<p class="mt-1 text-xs leading-snug text-slate-500 sm:leading-relaxed">
+									<p class="mt-1 text-[13px] leading-snug text-slate-500 sm:leading-relaxed lg:text-xs">
 										{$t('guestcard.landing.item1.body')}
 									</p>
 								</div>
+								<ChevronRight class="ml-auto mt-3 h-4 w-4 shrink-0 text-brand lg:hidden" aria-hidden="true" strokeWidth={1.6} />
 							</li>
-							<li class="flex items-start gap-2.5 border-t border-slate-200/80 pt-3 sm:gap-4 lg:pt-4">
+							<li class="flex items-start gap-3 border-b border-slate-200/80 py-4 sm:gap-4 lg:border-t lg:border-b-0 lg:pt-4">
 								<span
-									class="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-brand/10 text-brand transition duration-300 group-hover/guestcard:bg-brand/15 sm:h-11 sm:w-11 lg:h-12 lg:w-12"
+									class="mt-0.5 grid h-11 w-11 shrink-0 place-items-center rounded-full border border-brand/35 bg-white text-brand transition duration-300 group-hover/guestcard:bg-brand/15 sm:h-11 sm:w-11 lg:h-12 lg:w-12 lg:border-0 lg:bg-brand/10"
 								>
 									<Sparkles class="h-5 w-5 sm:h-6 sm:w-6" aria-hidden="true" strokeWidth={1.25} />
 								</span>
-								<div>
-									<p class="text-[13px] font-semibold leading-snug text-slate-900 sm:text-sm">
+								<div class="min-w-0 flex-1">
+									<p class="text-sm font-bold leading-snug text-slate-900">
 										{$t('guestcard.landing.item2.title')}
 									</p>
-									<p class="mt-1 text-xs leading-snug text-slate-500 sm:leading-relaxed">
+									<p class="mt-1 text-[13px] leading-snug text-slate-500 sm:leading-relaxed lg:text-xs">
 										{$t('guestcard.landing.item2.body')}
 									</p>
 								</div>
+								<ChevronRight class="ml-auto mt-3 h-4 w-4 shrink-0 text-brand lg:hidden" aria-hidden="true" strokeWidth={1.6} />
 							</li>
-							<li class="flex items-start gap-2.5 border-t border-slate-200/80 pt-3 sm:gap-4 lg:pt-4">
+							<li class="flex items-start gap-3 py-4 sm:gap-4 lg:border-t lg:border-slate-200/80 lg:pt-4">
 								<span
-									class="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-brand/10 text-brand transition duration-300 group-hover/guestcard:bg-brand/15 sm:h-11 sm:w-11 lg:h-12 lg:w-12"
+									class="mt-0.5 grid h-11 w-11 shrink-0 place-items-center rounded-full border border-brand/35 bg-white text-brand transition duration-300 group-hover/guestcard:bg-brand/15 sm:h-11 sm:w-11 lg:h-12 lg:w-12 lg:border-0 lg:bg-brand/10"
 								>
 									<CalendarDays class="h-5 w-5 sm:h-6 sm:w-6" aria-hidden="true" strokeWidth={1.25} />
 								</span>
-								<div>
-									<p class="text-[13px] font-semibold leading-snug text-slate-900 sm:text-sm">
+								<div class="min-w-0 flex-1">
+									<p class="text-sm font-bold leading-snug text-slate-900">
 										{$t('guestcard.landing.item3.title')}
 									</p>
-									<p class="mt-1 text-xs leading-snug text-slate-500 sm:leading-relaxed">
+									<p class="mt-1 text-[13px] leading-snug text-slate-500 sm:leading-relaxed lg:text-xs">
 										{$t('guestcard.landing.item3.body')}
 									</p>
 								</div>
+								<ChevronRight class="ml-auto mt-3 h-4 w-4 shrink-0 text-brand lg:hidden" aria-hidden="true" strokeWidth={1.6} />
 							</li>
 						</ul>
 
-						<div class="mt-5 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center lg:mt-6">
+						<div class="relative z-20 mt-3 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center lg:mt-6">
 							<a
 								href="https://www.nassfeld.at/de/Unterkunft-finden/Reise-planen/PREMIUM-Cards/GaesteCard-basic"
-								class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-6 py-3 text-sm font-semibold text-white shadow-sm transition duration-300 hover:bg-brand/90 group-hover/guestcard:shadow-md sm:w-auto"
+								class="inline-flex w-full items-center justify-center gap-2 rounded-[1rem] bg-[#f59200] px-5 py-3.5 text-[13px] font-bold text-white shadow-[0_14px_26px_-18px_rgba(245,146,0,0.8)] transition duration-300 hover:bg-brand/90 group-hover/guestcard:shadow-md sm:w-auto sm:text-sm lg:rounded-xl lg:bg-brand lg:px-6 lg:py-3"
 								target="_blank"
 								rel="noreferrer"
 							>
-								<Info class="h-4 w-4" aria-hidden="true" strokeWidth={1.25} />
-								{$t('guestcard.cta.moreInfo')}
+								<Info class="hidden h-4 w-4 lg:block" aria-hidden="true" strokeWidth={1.25} />
+								<span class="lg:hidden">{$t('guestcard.cta.moreInfoBasic')}</span>
+								<span class="hidden lg:inline">{$t('guestcard.cta.moreInfo')}</span>
 								<ArrowRight class="ml-auto h-4 w-4 transition-transform duration-300 group-hover/guestcard:translate-x-1 sm:ml-0" aria-hidden="true" strokeWidth={1.25} />
 							</a>
 						</div>
@@ -1877,6 +1893,18 @@ import { localizePath } from '$lib/routing';
 </div>
 
 <style>
+	.guestcard-mobile-card img {
+		left: -142.5%;
+		top: -37.2%;
+		width: 385%;
+	}
+
+	@media (max-width: 1023px) {
+		.guestcard-mobile-hero {
+			overflow: hidden;
+		}
+	}
+
 	.season-house-image img {
 		transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
 	}
