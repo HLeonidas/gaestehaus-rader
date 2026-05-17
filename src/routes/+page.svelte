@@ -86,7 +86,7 @@ import { localizePath } from '$lib/routing';
 				altKey: 'experiences.guestcard.imageAlt.winter',
 			};
 	const guestCardCardVisual = {
-		src: '/images/Umgebung/gaestecard_basic_standalone_cropped.png',
+		src: '/images/Umgebung/nassfeld_gaestecard_basic_summer.png',
 	};
 
 	const rooms = accommodations;
@@ -1303,13 +1303,13 @@ import { localizePath } from '$lib/routing';
 							class="absolute inset-0 bg-[linear-gradient(135deg,rgba(15,23,42,0.56)_0%,rgba(15,23,42,0.34)_28%,rgba(15,23,42,0.12)_58%,rgba(15,23,42,0.04)_100%)] transition duration-500 group-hover/guestcard:opacity-90 lg:bg-gradient-to-r lg:from-slate-950/20 lg:via-transparent lg:to-transparent lg:group-hover/guestcard:from-slate-950/12"
 						></div>
 						<div
-							class="guestcard-desktop-card pointer-events-none absolute left-1/2 top-1/2 z-10 hidden h-[24.5rem] w-[15.55rem] overflow-hidden rounded-[1.7rem] bg-[#fff8ee] shadow-[0_30px_58px_-26px_rgba(28,24,18,0.72)] ring-1 ring-black/5 lg:block"
+							class="guestcard-desktop-card pointer-events-none absolute left-1/2 top-1/2 z-10 hidden h-[24.5rem] w-[14.65rem] overflow-hidden rounded-[1.7rem] bg-[#fff8ee] shadow-[0_30px_58px_-26px_rgba(28,24,18,0.72)] ring-1 ring-black/5 lg:block"
 							aria-hidden="true"
 						>
 							<img
 								src={withAsset(guestCardCardVisual.src)}
 								alt=""
-								class="absolute inset-0 z-10 h-full w-full object-contain"
+								class="guestcard-card-crop absolute z-10 h-auto max-w-none"
 								decoding="async"
 							/>
 						</div>
@@ -1330,13 +1330,13 @@ import { localizePath } from '$lib/routing';
 							aria-hidden="true"
 						></div>
 						<div
-							class="guestcard-mobile-card pointer-events-none absolute left-1/2 top-0 z-10 h-[14.6rem] w-[9.25rem] -translate-x-1/2 -translate-y-[33%] rotate-[8deg] overflow-hidden rounded-[1.25rem] bg-[#fff8ee] shadow-[0_22px_34px_-18px_rgba(48,34,19,0.72)] ring-1 ring-black/5 lg:hidden"
+							class="guestcard-mobile-card pointer-events-none absolute left-1/2 top-0 z-10 h-[14.6rem] w-[8.7rem] -translate-x-1/2 -translate-y-[33%] rotate-[8deg] overflow-hidden rounded-[1.25rem] bg-[#fff8ee] shadow-[0_22px_34px_-18px_rgba(48,34,19,0.72)] ring-1 ring-black/5 lg:hidden"
 							aria-hidden="true"
 						>
 							<img
 								src={withAsset(guestCardCardVisual.src)}
 								alt=""
-								class="absolute inset-0 z-10 h-full w-full object-contain"
+								class="guestcard-card-crop absolute z-10 h-auto max-w-none"
 								decoding="async"
 							/>
 						</div>
@@ -1356,7 +1356,7 @@ import { localizePath } from '$lib/routing';
 						<ul class="relative z-20 space-y-0 text-sm text-slate-600 sm:text-base lg:mt-6 lg:space-y-4">
 							<li class="flex items-start gap-3 border-b border-slate-200/80 py-4 transition duration-300 group-hover/guestcard:border-brand/35 sm:gap-4 lg:rounded-2xl lg:border lg:border-brand/20 lg:bg-brand/5 lg:p-3 lg:group-hover/guestcard:bg-brand/10">
 								<span
-									class="mt-0.5 grid h-11 w-11 shrink-0 place-items-center rounded-full border border-brand/35 bg-white text-brand transition duration-300 group-hover/guestcard:scale-105 group-hover/guestcard:bg-brand/15 sm:h-11 sm:w-11 lg:h-12 lg:w-12 lg:border-0 lg:bg-brand/15 lg:group-hover/guestcard:bg-brand lg:group-hover/guestcard:text-white"
+									class="mt-0.5 grid h-11 w-11 shrink-0 place-items-center rounded-full border border-brand/35 bg-white text-brand transition duration-300 sm:h-11 sm:w-11 lg:h-12 lg:w-12 lg:border-0 lg:bg-brand/15 lg:group-hover/guestcard:scale-105 lg:group-hover/guestcard:bg-brand lg:group-hover/guestcard:text-white"
 								>
 									<BusFront class="h-5 w-5" aria-hidden="true" strokeWidth={1.25} />
 								</span>
@@ -1371,7 +1371,7 @@ import { localizePath } from '$lib/routing';
 							</li>
 							<li class="flex items-start gap-3 border-b border-slate-200/80 py-4 sm:gap-4 lg:border-t lg:border-b-0 lg:pt-4">
 								<span
-									class="mt-0.5 grid h-11 w-11 shrink-0 place-items-center rounded-full border border-brand/35 bg-white text-brand transition duration-300 group-hover/guestcard:bg-brand/15 sm:h-11 sm:w-11 lg:h-12 lg:w-12 lg:border-0 lg:bg-brand/10"
+									class="mt-0.5 grid h-11 w-11 shrink-0 place-items-center rounded-full border border-brand/35 bg-white text-brand transition duration-300 sm:h-11 sm:w-11 lg:h-12 lg:w-12 lg:border-0 lg:bg-brand/10"
 								>
 									<Sparkles class="h-5 w-5 sm:h-6 sm:w-6" aria-hidden="true" strokeWidth={1.25} />
 								</span>
@@ -1386,7 +1386,7 @@ import { localizePath } from '$lib/routing';
 							</li>
 							<li class="flex items-start gap-3 py-4 sm:gap-4 lg:border-t lg:border-slate-200/80 lg:pt-4">
 								<span
-									class="mt-0.5 grid h-11 w-11 shrink-0 place-items-center rounded-full border border-brand/35 bg-white text-brand transition duration-300 group-hover/guestcard:bg-brand/15 sm:h-11 sm:w-11 lg:h-12 lg:w-12 lg:border-0 lg:bg-brand/10"
+									class="mt-0.5 grid h-11 w-11 shrink-0 place-items-center rounded-full border border-brand/35 bg-white text-brand transition duration-300 sm:h-11 sm:w-11 lg:h-12 lg:w-12 lg:border-0 lg:bg-brand/10"
 								>
 									<CalendarDays class="h-5 w-5 sm:h-6 sm:w-6" aria-hidden="true" strokeWidth={1.25} />
 								</span>
@@ -1628,7 +1628,7 @@ import { localizePath } from '$lib/routing';
 									{#each season.floatingImages as image, index}
 										<button
 											type="button"
-											class={`season-floater season-floater-${index} group/image absolute overflow-hidden rounded-xl bg-slate-200 shadow-[0_20px_42px_-22px_rgba(15,23,42,0.72)] ring-2 ring-white/80`}
+											class={`season-floater season-floater-${index} group/image absolute overflow-hidden rounded-xl bg-slate-200 shadow-[0_20px_42px_-22px_rgba(15,23,42,0.72)]`}
 											onclick={() => openSeasonGallery(season.seasonKey, index + 1)}
 											aria-label={`${$t(season.kickerKey)} Galerie öffnen: ${$t(image.altKey)}`}
 										>
@@ -1893,6 +1893,12 @@ import { localizePath } from '$lib/routing';
 </div>
 
 <style>
+	.guestcard-card-crop {
+		left: -142.5%;
+		top: -37.2%;
+		width: 385%;
+	}
+
 	@media (max-width: 1023px) {
 		.guestcard-mobile-hero {
 			overflow: hidden;
@@ -2038,7 +2044,7 @@ import { localizePath } from '$lib/routing';
 	.season-floater {
 		height: 7.4rem;
 		width: 39%;
-		border: 2px solid rgba(255, 255, 255, 0.86);
+		border: 1px solid rgba(255, 255, 255, 0.68);
 		transition:
 			left 620ms cubic-bezier(0.22, 1, 0.36, 1),
 			right 620ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -2241,29 +2247,28 @@ import { localizePath } from '$lib/routing';
 
 		.season-stage {
 			border-radius: inherit;
-			display: block;
-			min-height: 560px;
+			display: flex;
+			flex-direction: column;
 			overflow: hidden;
-			position: relative;
 		}
 
 		.season-visual {
-			inset: 0;
-			min-height: 560px;
-			position: absolute;
+			min-height: clamp(22rem, 92vw, 25rem);
+			order: 1;
+			position: relative;
 			z-index: 1;
 		}
 
 		.season-copy,
 		.season-row--reverse .season-copy {
-			background:
-				linear-gradient(180deg, transparent 0%, transparent 42%, rgba(15, 23, 42, 0.32) 74%, rgba(15, 23, 42, 0.66) 100%);
-			border-radius: 1.35rem;
+			background: #ffffff;
+			border-radius: 0 0 1.35rem 1.35rem;
 			display: flex;
 			justify-content: flex-end;
-			min-height: 560px;
-			padding: 1.2rem 1.25rem 8.25rem;
-			pointer-events: none;
+			min-height: 0;
+			order: 2;
+			padding: 1.25rem 1.25rem 1.15rem;
+			pointer-events: auto;
 			position: relative;
 			z-index: 2;
 		}
@@ -2277,25 +2282,25 @@ import { localizePath } from '$lib/routing';
 		}
 
 		.season-copy h3 {
-			color: #ffffff;
-			font-size: 2.08rem;
+			color: #0f172a;
+			font-size: 2rem;
 			line-height: 0.98;
 			margin-top: 0;
-			max-width: 10.5ch;
-			text-shadow: 0 2px 18px rgba(15, 23, 42, 0.58);
+			max-width: 12ch;
+			text-shadow: none;
 		}
 
 		.season-copy p {
-			color: rgba(255, 255, 255, 0.94);
+			color: #475569;
 			font-size: 0.9rem;
 			line-height: 1.45;
 			margin-top: 0.75rem;
-			max-width: 13.5rem;
-			text-shadow: 0 1px 12px rgba(15, 23, 42, 0.46);
+			max-width: 18rem;
+			text-shadow: none;
 		}
 
 		.season-copy a {
-			box-shadow: 0 16px 34px -22px rgba(0, 0, 0, 0.7);
+			box-shadow: 0 14px 28px -22px rgba(15, 23, 42, 0.56);
 			margin-top: 1.15rem;
 			margin-bottom: 0;
 			pointer-events: auto;
@@ -2303,16 +2308,14 @@ import { localizePath } from '$lib/routing';
 
 		.season-features {
 			background: #ffffff;
-			border-radius: 1.25rem 1.25rem 0 0;
-			bottom: 0;
-			box-shadow: 0 -16px 40px -30px rgba(15, 23, 42, 0.72);
-			left: 0;
-			margin-top: 0;
+			border-top: 1px solid rgba(226, 232, 240, 0.9);
+			border-radius: 0;
+			box-shadow: none;
+			margin-top: 1.3rem;
 			max-width: 100%;
-			padding: 1.35rem 0.8rem 1.25rem;
+			padding: 1.05rem 0 0;
 			pointer-events: auto;
-			position: absolute;
-			right: 0;
+			position: static;
 		}
 
 		.season-feature :global(svg) {
@@ -2327,9 +2330,9 @@ import { localizePath } from '$lib/routing';
 		}
 
 		.season-house-image {
-			border-radius: 1.35rem;
-			height: 100%;
-			min-height: 560px;
+			border-radius: 1.35rem 1.35rem 0 0;
+			height: clamp(22rem, 92vw, 25rem);
+			min-height: 0;
 		}
 
 		.season-house-image::after {
@@ -2349,7 +2352,7 @@ import { localizePath } from '$lib/routing';
 
 		.season-floater {
 			border-radius: 1.05rem;
-			border-width: 2px;
+			border-width: 1px;
 			bottom: auto;
 			box-shadow: 0 18px 38px -22px rgba(15, 23, 42, 0.92);
 			display: block;
