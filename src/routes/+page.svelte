@@ -1260,9 +1260,8 @@ import { localizePath } from '$lib/routing';
 								class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-black/10 to-transparent"
 							></div>
 							<div class="pointer-events-none absolute bottom-4 left-4 right-4">
-								<p class="text-sm font-semibold text-white">{$t(image.altKey)}</p>
-								<p class="mt-1 text-[11px] font-medium uppercase tracking-[0.18em] text-white/80">
-									{$t(image.locationTagKey ?? 'home.gallery.locationTag')}
+								<p class="text-[11px] font-medium uppercase tracking-[0.18em] text-white/85">
+									{$t(image.altKey)}
 								</p>
 							</div>
 							<div
@@ -1290,7 +1289,7 @@ import { localizePath } from '$lib/routing';
 			></div>
 
 			<!-- GUEST CARD -->
-			<section class="group/guestcard relative overflow-hidden rounded-[1.6rem] border border-slate-200 bg-[#fffdf9] shadow-sm transition-all duration-500 hover:-translate-y-0.5 hover:border-brand/25 hover:shadow-[0_22px_54px_-34px_rgba(15,23,42,0.42)] focus-within:border-brand/25 focus-within:shadow-[0_22px_54px_-34px_rgba(15,23,42,0.42)] motion-reduce:transform-none motion-reduce:transition-none lg:rounded-3xl lg:bg-white">
+			<section class="guestcard-section group/guestcard relative overflow-hidden rounded-[1.6rem] border border-slate-200 bg-[#fffdf9] shadow-sm transition-all duration-500 hover:-translate-y-0.5 hover:border-brand/25 hover:shadow-[0_22px_54px_-34px_rgba(15,23,42,0.42)] focus-within:border-brand/25 focus-within:shadow-[0_22px_54px_-34px_rgba(15,23,42,0.42)] motion-reduce:transform-none motion-reduce:transition-none lg:rounded-3xl lg:bg-white">
 				<div class="pointer-events-none absolute inset-0 z-20 rounded-[1.6rem] opacity-0 ring-1 ring-brand/20 transition-opacity duration-500 group-hover/guestcard:opacity-100 group-focus-within/guestcard:opacity-100 lg:rounded-3xl"></div>
 				<div class="grid lg:grid-cols-[1.08fr,0.92fr]">
 					<div class="guestcard-mobile-hero relative min-h-[320px] sm:min-h-[430px] lg:min-h-[670px]">
@@ -1323,11 +1322,11 @@ import { localizePath } from '$lib/routing';
 
 					<div class="relative z-10 isolate -mt-12 flex flex-col justify-center rounded-t-[2.75rem] bg-[#fffdf9] px-5 pb-5 pt-[12.75rem] sm:px-7 sm:pb-6 sm:pt-[12.75rem] lg:mt-0 lg:rounded-none lg:bg-white lg:px-10 lg:py-10">
 						<div
-							class="pointer-events-none absolute left-1/2 top-0 z-0 h-[11.8rem] w-[11.8rem] -translate-x-1/2 -translate-y-[8%] rounded-full bg-[#f59b00] lg:hidden"
+							class="guestcard-mobile-orbit pointer-events-none absolute left-1/2 top-0 z-0 h-[11.8rem] w-[11.8rem] -translate-x-1/2 -translate-y-[8%] rounded-full bg-[#f59b00] lg:hidden"
 							aria-hidden="true"
 						></div>
 						<div
-							class="guestcard-mobile-card pointer-events-none absolute left-1/2 top-0 z-10 h-[13.6rem] w-[8.1rem] -translate-x-1/2 -translate-y-[30%] rotate-[8deg] overflow-hidden rounded-[1.18rem] bg-[#fff8ee] shadow-[0_22px_34px_-18px_rgba(48,34,19,0.72)] ring-1 ring-black/5 lg:hidden"
+							class="guestcard-mobile-card pointer-events-none absolute left-1/2 top-0 z-10 h-[14.6rem] w-[8.7rem] -translate-x-1/2 -translate-y-[33%] rotate-[8deg] overflow-hidden rounded-[1.25rem] bg-[#fff8ee] shadow-[0_22px_34px_-18px_rgba(48,34,19,0.72)] ring-1 ring-black/5 lg:hidden"
 							aria-hidden="true"
 						>
 							<img
@@ -1365,7 +1364,6 @@ import { localizePath } from '$lib/routing';
 										{$t('guestcard.landing.item1.body')}
 									</p>
 								</div>
-								<ChevronRight class="ml-auto mt-3 h-4 w-4 shrink-0 text-brand lg:hidden" aria-hidden="true" strokeWidth={1.6} />
 							</li>
 							<li class="flex items-start gap-3 border-b border-slate-200/80 py-4 sm:gap-4 lg:border-t lg:border-b-0 lg:pt-4">
 								<span
@@ -1381,7 +1379,6 @@ import { localizePath } from '$lib/routing';
 										{$t('guestcard.landing.item2.body')}
 									</p>
 								</div>
-								<ChevronRight class="ml-auto mt-3 h-4 w-4 shrink-0 text-brand lg:hidden" aria-hidden="true" strokeWidth={1.6} />
 							</li>
 							<li class="flex items-start gap-3 py-4 sm:gap-4 lg:border-t lg:border-slate-200/80 lg:pt-4">
 								<span
@@ -1397,7 +1394,6 @@ import { localizePath } from '$lib/routing';
 										{$t('guestcard.landing.item3.body')}
 									</p>
 								</div>
-								<ChevronRight class="ml-auto mt-3 h-4 w-4 shrink-0 text-brand lg:hidden" aria-hidden="true" strokeWidth={1.6} />
 							</li>
 						</ul>
 
@@ -1567,14 +1563,14 @@ import { localizePath } from '$lib/routing';
 							<div class={`season-stage grid lg:min-h-[455px] lg:items-stretch ${season.reverse ? 'lg:grid-cols-[1.34fr_1fr]' : 'lg:grid-cols-[0.72fr_1.58fr]'}`}>
 								<div class={`season-copy relative z-10 flex flex-col justify-center p-5 sm:p-8 lg:px-8 lg:py-10 xl:px-10 xl:py-12 ${season.reverse ? 'lg:order-2' : 'lg:order-1'}`}>
 									<div
-										class={`season-kicker inline-flex w-fit items-center gap-3 text-xs font-semibold uppercase tracking-[0.18em] ${season.kickerClass}`}
+										class={`season-kicker hidden w-fit items-center gap-3 text-xs font-semibold uppercase tracking-[0.18em] sm:inline-flex ${season.kickerClass}`}
 									>
 										<span class={`grid h-9 w-9 place-items-center rounded-full bg-transparent ${season.kickerClass}`}>
 											<season.icon class="h-6 w-6" aria-hidden="true" strokeWidth={1.45} />
 										</span>
 										{$t(season.kickerKey)}
 									</div>
-									<div class={`mt-3 h-[2px] w-7 rounded-full ${season.reverse ? 'bg-sky-700/55' : 'bg-brand/70'}`}></div>
+									<div class={`season-divider mt-3 hidden h-[2px] w-7 rounded-full sm:block ${season.reverse ? 'bg-sky-700/55' : 'bg-brand/70'}`}></div>
 
 									<h3 class="mt-4 max-w-[13ch] text-3xl font-serif font-semibold leading-[0.98] text-slate-900 sm:mt-5 sm:text-4xl lg:text-5xl">
 										{$t(season.titleKey)}
@@ -1903,6 +1899,63 @@ import { localizePath } from '$lib/routing';
 		.guestcard-mobile-hero {
 			overflow: hidden;
 		}
+
+		.guestcard-mobile-card {
+			transform: translate(-50%, -33%) rotate(8deg) scale(1);
+			transform-origin: 52% 88%;
+			transition:
+				transform 520ms cubic-bezier(0.22, 1, 0.36, 1),
+				box-shadow 520ms cubic-bezier(0.22, 1, 0.36, 1);
+		}
+
+		.guestcard-mobile-card::after {
+			background: linear-gradient(
+				115deg,
+				transparent 0%,
+				rgba(255, 255, 255, 0) 36%,
+				rgba(255, 255, 255, 0.56) 48%,
+				rgba(255, 255, 255, 0.12) 58%,
+				transparent 70%
+			);
+			content: '';
+			inset: -18% -90%;
+			opacity: 0;
+			pointer-events: none;
+			position: absolute;
+			transform: translateX(-42%) skewX(-16deg);
+			transition:
+				opacity 220ms ease,
+				transform 680ms cubic-bezier(0.22, 1, 0.36, 1);
+			z-index: 30;
+		}
+
+		.guestcard-mobile-orbit {
+			transform: translate(-50%, -8%) scale(1);
+			transition:
+				box-shadow 520ms cubic-bezier(0.22, 1, 0.36, 1),
+				transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+		}
+
+		.guestcard-section:hover .guestcard-mobile-card,
+		.guestcard-section:active .guestcard-mobile-card,
+		.guestcard-section:focus-within .guestcard-mobile-card {
+			box-shadow: 0 32px 46px -22px rgba(48, 34, 19, 0.8);
+			transform: translate(-50%, -40%) rotate(3deg) scale(1.035);
+		}
+
+		.guestcard-section:hover .guestcard-mobile-card::after,
+		.guestcard-section:active .guestcard-mobile-card::after,
+		.guestcard-section:focus-within .guestcard-mobile-card::after {
+			opacity: 1;
+			transform: translateX(42%) skewX(-16deg);
+		}
+
+		.guestcard-section:hover .guestcard-mobile-orbit,
+		.guestcard-section:active .guestcard-mobile-orbit,
+		.guestcard-section:focus-within .guestcard-mobile-orbit {
+			box-shadow: 0 20px 38px -28px rgba(245, 146, 0, 0.72);
+			transform: translate(-50%, -8%) scale(1.045);
+		}
 	}
 
 	.season-house-image img {
@@ -2163,52 +2216,46 @@ import { localizePath } from '$lib/routing';
 		.season-copy,
 		.season-row--reverse .season-copy {
 			background:
-				linear-gradient(90deg, rgba(15, 23, 42, 0.24) 0%, rgba(15, 23, 42, 0.12) 42%, transparent 78%),
-				linear-gradient(180deg, rgba(15, 23, 42, 0.08) 0%, rgba(15, 23, 42, 0.1) 42%, rgba(15, 23, 42, 0.58) 76%, rgba(15, 23, 42, 0.78) 100%);
+				linear-gradient(180deg, transparent 0%, transparent 42%, rgba(15, 23, 42, 0.32) 74%, rgba(15, 23, 42, 0.66) 100%);
 			border-radius: 1.35rem;
 			display: flex;
-			justify-content: flex-start;
+			justify-content: flex-end;
 			min-height: 560px;
-			padding: 1.35rem 1.45rem 7.7rem;
+			padding: 1.2rem 1.25rem 8.25rem;
 			pointer-events: none;
 			position: relative;
 			z-index: 2;
 		}
 
 		.season-kicker {
-			font-size: 0.68rem;
-			gap: 0.55rem;
-			letter-spacing: 0.16em;
+			display: none;
 		}
 
-		.season-kicker span {
-			height: 2rem;
-			width: 2rem;
-		}
-
-		.season-kicker :global(svg) {
-			height: 1.25rem;
-			width: 1.25rem;
+		.season-divider {
+			display: none;
 		}
 
 		.season-copy h3 {
 			color: #ffffff;
-			font-size: 2.45rem;
-			line-height: 0.96;
-			margin-top: 9.2rem;
-			text-shadow: 0 2px 18px rgba(15, 23, 42, 0.38);
+			font-size: 2.08rem;
+			line-height: 0.98;
+			margin-top: 0;
+			max-width: 10.5ch;
+			text-shadow: 0 2px 18px rgba(15, 23, 42, 0.58);
 		}
 
 		.season-copy p {
-			color: rgba(255, 255, 255, 0.92);
-			font-size: 0.98rem;
-			line-height: 1.55;
-			max-width: 19rem;
-			text-shadow: 0 1px 12px rgba(15, 23, 42, 0.32);
+			color: rgba(255, 255, 255, 0.94);
+			font-size: 0.9rem;
+			line-height: 1.45;
+			margin-top: 0.75rem;
+			max-width: 13.5rem;
+			text-shadow: 0 1px 12px rgba(15, 23, 42, 0.46);
 		}
 
 		.season-copy a {
 			box-shadow: 0 16px 34px -22px rgba(0, 0, 0, 0.7);
+			margin-top: 1.15rem;
 			margin-bottom: 0;
 			pointer-events: auto;
 		}
@@ -2246,8 +2293,8 @@ import { localizePath } from '$lib/routing';
 
 		.season-house-image::after {
 			background:
-				linear-gradient(90deg, rgba(15, 23, 42, 0.08), transparent 58%),
-				linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.04) 48%, rgba(15, 23, 42, 0.34) 100%);
+				linear-gradient(90deg, rgba(15, 23, 42, 0.04), transparent 52%),
+				linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.02) 58%, rgba(15, 23, 42, 0.18) 100%);
 			content: '';
 			inset: 0;
 			pointer-events: none;
@@ -2293,17 +2340,46 @@ import { localizePath } from '$lib/routing';
 
 		.season-row:hover .season-floater-0,
 		.season-floater-0:hover {
+			bottom: auto;
+			height: clamp(6.2rem, 24vw, 7.8rem);
+			right: 0.75rem;
+			top: 1rem;
 			transform: rotate(3deg) translateX(0.1rem);
+			width: clamp(7.4rem, 32vw, 9.6rem);
+			z-index: 6;
 		}
 
 		.season-row:hover .season-floater-1,
 		.season-floater-1:hover {
+			bottom: auto;
+			height: clamp(6.2rem, 24vw, 7.8rem);
+			right: 1.05rem;
+			top: clamp(6.75rem, 25vw, 8.2rem);
 			transform: rotate(-2.5deg) translateX(-0.15rem);
+			width: clamp(7.4rem, 32vw, 9.6rem);
+			z-index: 5;
 		}
 
 		.season-row:hover .season-floater-2,
 		.season-floater-2:hover {
+			bottom: auto;
+			height: clamp(6.2rem, 24vw, 7.8rem);
+			right: 0.65rem;
+			top: clamp(12.45rem, 46vw, 15.4rem);
 			transform: rotate(2deg) translateX(0.25rem);
+			width: clamp(7.4rem, 32vw, 9.6rem);
+			z-index: 4;
+		}
+
+		.season-row:hover .season-house-image img,
+		.season-floater:hover img {
+			transform: none !important;
+		}
+
+		.season-row:hover .season-floater,
+		.season-floater:hover {
+			border-color: rgba(255, 255, 255, 0.86);
+			box-shadow: 0 18px 38px -22px rgba(15, 23, 42, 0.92);
 		}
 	}
 
