@@ -727,7 +727,7 @@ const translations: Record<Lang, Record<string, string>> = {
 		'home.amenities.house.imageAlt': 'Bergblick vom Gästehaus Rader in Weißbriach',
 		'home.amenities.house.wifi.title': 'High-Speed WLAN',
 		'home.amenities.house.wifi.body':
-			'Kostenloses Glasfaser-Internet im gesamten Resort für Ihre Verbindung zur Welt.',
+			'Kostenloses Glasfaser-Internet im ganzen Haus für Ihre Verbindung zur Welt.',
 		'home.amenities.house.parking.title': 'Privater Parkplatz',
 		'home.amenities.house.parking.body':
 			'Sicherer Parkplatz direkt vor dem Haupteingang.',
@@ -2261,7 +2261,6 @@ export const t = derived(lang, ($lang) => {
 });
 
 export const setLang = (value: Lang) => lang.set(value);
-
 
 
 

@@ -335,7 +335,7 @@
 			<div class="lg:pr-10">
 				<h2 class="text-lg font-semibold text-slate-950">{$t('contact.payment.title')}</h2>
 				<p class="mt-2 text-sm text-slate-500">{$t('contact.payment.subtitle')}</p>
-				<div class="mt-6 grid gap-4 sm:grid-cols-2">
+				<div class="mt-6 grid gap-4 md:grid-cols-2">
 					<div
 						class="group/payment rounded-2xl border border-slate-200 bg-slate-50/70 p-4 transition hover:border-brand/25 hover:bg-white hover:shadow-sm"
 					>

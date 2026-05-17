@@ -1543,7 +1543,7 @@ import { localizePath } from '$lib/routing';
 					</p>
 				</div>
 
-				<div class="mt-10 space-y-5 lg:space-y-6">
+				<div class="mt-10 space-y-8 sm:space-y-5 lg:space-y-6">
 					{#each seasonPanels as season}
 						<article
 							class={`season-row ${season.reverse ? 'season-row--reverse' : ''} overflow-visible rounded-[1.5rem] border border-slate-200/80 ${season.panelClass} shadow-sm ring-1 ring-black/5`}
@@ -2093,13 +2093,35 @@ import { localizePath } from '$lib/routing';
 	@media (max-width: 639px) {
 		.season-row {
 			border-radius: 1.35rem;
-			overflow: hidden;
+			overflow: visible;
 			background: #ffffff;
 		}
 
+		.season-row + .season-row {
+			margin-top: 3.75rem !important;
+			position: relative;
+		}
+
+		.season-row + .season-row::before {
+			background: linear-gradient(
+				90deg,
+				transparent,
+				rgba(148, 163, 184, 0.34),
+				transparent
+			);
+			content: '';
+			height: 1px;
+			left: 12%;
+			position: absolute;
+			right: 12%;
+			top: -1.9rem;
+		}
+
 		.season-stage {
+			border-radius: inherit;
 			display: block;
 			min-height: 560px;
+			overflow: hidden;
 			position: relative;
 		}
 
@@ -2107,18 +2129,20 @@ import { localizePath } from '$lib/routing';
 			inset: 0;
 			min-height: 560px;
 			position: absolute;
-			z-index: 0;
+			z-index: 1;
 		}
 
 		.season-copy,
 		.season-row--reverse .season-copy {
 			background:
-				linear-gradient(180deg, rgba(15, 23, 42, 0.24) 0%, rgba(15, 23, 42, 0.34) 36%, rgba(15, 23, 42, 0.78) 77%, rgba(15, 23, 42, 0.88) 100%);
+				linear-gradient(90deg, rgba(15, 23, 42, 0.24) 0%, rgba(15, 23, 42, 0.12) 42%, transparent 78%),
+				linear-gradient(180deg, rgba(15, 23, 42, 0.08) 0%, rgba(15, 23, 42, 0.1) 42%, rgba(15, 23, 42, 0.58) 76%, rgba(15, 23, 42, 0.78) 100%);
 			border-radius: 1.35rem;
 			display: flex;
 			justify-content: flex-start;
 			min-height: 560px;
 			padding: 1.35rem 1.45rem 7.7rem;
+			pointer-events: none;
 			position: relative;
 			z-index: 2;
 		}
@@ -2158,6 +2182,7 @@ import { localizePath } from '$lib/routing';
 		.season-copy a {
 			box-shadow: 0 16px 34px -22px rgba(0, 0, 0, 0.7);
 			margin-bottom: 0;
+			pointer-events: auto;
 		}
 
 		.season-features {
@@ -2169,6 +2194,7 @@ import { localizePath } from '$lib/routing';
 			margin-top: 0;
 			max-width: 100%;
 			padding: 1.35rem 0.8rem 1.25rem;
+			pointer-events: auto;
 			position: absolute;
 			right: 0;
 		}
@@ -2192,8 +2218,8 @@ import { localizePath } from '$lib/routing';
 
 		.season-house-image::after {
 			background:
-				linear-gradient(90deg, rgba(15, 23, 42, 0.2), transparent 54%),
-				linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.08) 42%, rgba(15, 23, 42, 0.66) 100%);
+				linear-gradient(90deg, rgba(15, 23, 42, 0.08), transparent 58%),
+				linear-gradient(180deg, transparent 0%, rgba(15, 23, 42, 0.04) 48%, rgba(15, 23, 42, 0.34) 100%);
 			content: '';
 			inset: 0;
 			pointer-events: none;
@@ -2206,27 +2232,50 @@ import { localizePath } from '$lib/routing';
 		}
 
 		.season-floater {
-			display: none;
-		}
-
-		.season-floater-0 {
-			display: block;
-			height: 9.75rem;
-			right: 1rem;
-			top: 1rem;
-			width: min(31vw, 8.7rem);
+			border-radius: 1.05rem;
 			border-width: 2px;
-			border-radius: 1rem;
-			box-shadow: 0 20px 44px -24px rgba(15, 23, 42, 0.92);
-			transform: rotate(1.5deg);
+			bottom: auto;
+			box-shadow: 0 18px 38px -22px rgba(15, 23, 42, 0.92);
+			display: block;
+			height: clamp(6.2rem, 24vw, 7.8rem);
+			right: 0.75rem;
+			width: clamp(7.4rem, 32vw, 9.6rem);
 			z-index: 3;
 		}
 
-		.season-row:hover .season-floater,
-		.season-floater:hover {
-			height: 10.25rem;
-			width: min(34vw, 9.3rem);
-			transform: rotate(0deg) translateX(-0.1rem);
+		.season-floater-0 {
+			top: 1rem;
+			transform: rotate(3deg) translateX(0.1rem);
+			z-index: 6;
+		}
+
+		.season-floater-1 {
+			right: 1.05rem;
+			top: clamp(6.75rem, 25vw, 8.2rem);
+			transform: rotate(-2.5deg) translateX(-0.15rem);
+			z-index: 5;
+		}
+
+		.season-floater-2 {
+			right: 0.65rem;
+			top: clamp(12.45rem, 46vw, 15.4rem);
+			transform: rotate(2deg) translateX(0.25rem);
+			z-index: 4;
+		}
+
+		.season-row:hover .season-floater-0,
+		.season-floater-0:hover {
+			transform: rotate(3deg) translateX(0.1rem);
+		}
+
+		.season-row:hover .season-floater-1,
+		.season-floater-1:hover {
+			transform: rotate(-2.5deg) translateX(-0.15rem);
+		}
+
+		.season-row:hover .season-floater-2,
+		.season-floater-2:hover {
+			transform: rotate(2deg) translateX(0.25rem);
 		}
 	}
 
