@@ -85,9 +85,8 @@ import { localizePath } from '$lib/routing';
 				src: '/images/Umgebung/ski_nassfeld.jpg',
 				altKey: 'experiences.guestcard.imageAlt.winter',
 			};
-	const guestCardDesktopVisual = {
-		src: '/images/Umgebung/nassfeld_gaestecard_basic_summer.png',
-		altKey: 'experiences.guestcard.imageAlt.summer',
+	const guestCardCardVisual = {
+		src: '/images/Umgebung/gaestecard_basic_standalone_cropped.png',
 	};
 
 	const rooms = accommodations;
@@ -1293,22 +1292,27 @@ import { localizePath } from '$lib/routing';
 				<div class="pointer-events-none absolute inset-0 z-20 rounded-[1.6rem] opacity-0 ring-1 ring-brand/20 transition-opacity duration-500 group-hover/guestcard:opacity-100 group-focus-within/guestcard:opacity-100 lg:rounded-3xl"></div>
 				<div class="grid lg:grid-cols-[1.08fr,0.92fr]">
 					<div class="guestcard-mobile-hero relative min-h-[320px] sm:min-h-[430px] lg:min-h-[670px]">
-						<picture>
-							<source
-								media="(min-width: 1024px)"
-								srcset={withAsset(guestCardDesktopVisual.src)}
-							/>
-							<img
-								{...imageAttrs(guestCardVisual.src, '(max-width: 1024px) 100vw, 45vw')}
-								alt={$t(guestCardVisual.altKey)}
-								class="absolute inset-0 h-full w-full object-cover transition duration-700 ease-out group-hover/guestcard:scale-[1.025] group-focus-within/guestcard:scale-[1.025] motion-reduce:transform-none motion-reduce:transition-none"
-								loading="lazy"
-								decoding="async"
-							/>
-						</picture>
+						<img
+							{...imageAttrs(guestCardVisual.src, '(max-width: 1024px) 100vw, 45vw')}
+							alt={$t(guestCardVisual.altKey)}
+							class="absolute inset-0 h-full w-full object-cover transition duration-700 ease-out group-hover/guestcard:scale-[1.025] group-focus-within/guestcard:scale-[1.025] motion-reduce:transform-none motion-reduce:transition-none"
+							loading="lazy"
+							decoding="async"
+						/>
 						<div
 							class="absolute inset-0 bg-[linear-gradient(135deg,rgba(15,23,42,0.56)_0%,rgba(15,23,42,0.34)_28%,rgba(15,23,42,0.12)_58%,rgba(15,23,42,0.04)_100%)] transition duration-500 group-hover/guestcard:opacity-90 lg:bg-gradient-to-r lg:from-slate-950/20 lg:via-transparent lg:to-transparent lg:group-hover/guestcard:from-slate-950/12"
 						></div>
+						<div
+							class="guestcard-desktop-card pointer-events-none absolute left-1/2 top-1/2 z-10 hidden h-[24.5rem] w-[15.55rem] overflow-hidden rounded-[1.7rem] bg-[#fff8ee] shadow-[0_30px_58px_-26px_rgba(28,24,18,0.72)] ring-1 ring-black/5 lg:block"
+							aria-hidden="true"
+						>
+							<img
+								src={withAsset(guestCardCardVisual.src)}
+								alt=""
+								class="absolute inset-0 z-10 h-full w-full object-contain"
+								decoding="async"
+							/>
+						</div>
 						<div class="absolute inset-x-0 top-0 z-10 p-5 pt-6 text-white sm:p-8 lg:hidden">
 							<p class="sr-only">
 								{$t('guestcard.landing.kicker')}
@@ -1326,13 +1330,13 @@ import { localizePath } from '$lib/routing';
 							aria-hidden="true"
 						></div>
 						<div
-							class="guestcard-mobile-card pointer-events-none absolute left-1/2 top-0 z-10 h-[14.6rem] w-[8.7rem] -translate-x-1/2 -translate-y-[33%] rotate-[8deg] overflow-hidden rounded-[1.25rem] bg-[#fff8ee] shadow-[0_22px_34px_-18px_rgba(48,34,19,0.72)] ring-1 ring-black/5 lg:hidden"
+							class="guestcard-mobile-card pointer-events-none absolute left-1/2 top-0 z-10 h-[14.6rem] w-[9.25rem] -translate-x-1/2 -translate-y-[33%] rotate-[8deg] overflow-hidden rounded-[1.25rem] bg-[#fff8ee] shadow-[0_22px_34px_-18px_rgba(48,34,19,0.72)] ring-1 ring-black/5 lg:hidden"
 							aria-hidden="true"
 						>
 							<img
-								src={withAsset(guestCardDesktopVisual.src)}
+								src={withAsset(guestCardCardVisual.src)}
 								alt=""
-								class="absolute z-10 h-auto max-w-none"
+								class="absolute inset-0 z-10 h-full w-full object-contain"
 								decoding="async"
 							/>
 						</div>
@@ -1889,12 +1893,6 @@ import { localizePath } from '$lib/routing';
 </div>
 
 <style>
-	.guestcard-mobile-card img {
-		left: -142.5%;
-		top: -37.2%;
-		width: 385%;
-	}
-
 	@media (max-width: 1023px) {
 		.guestcard-mobile-hero {
 			overflow: hidden;
@@ -1955,6 +1953,49 @@ import { localizePath } from '$lib/routing';
 		.guestcard-section:focus-within .guestcard-mobile-orbit {
 			box-shadow: 0 20px 38px -28px rgba(245, 146, 0, 0.72);
 			transform: translate(-50%, -8%) scale(1.045);
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.guestcard-desktop-card {
+			transform: translate(-50%, -50%) rotate(0deg) scale(1);
+			transform-origin: 52% 88%;
+			transition:
+				box-shadow 620ms cubic-bezier(0.22, 1, 0.36, 1),
+				transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+		}
+
+		.guestcard-desktop-card::after {
+			background: linear-gradient(
+				115deg,
+				transparent 0%,
+				rgba(255, 255, 255, 0) 35%,
+				rgba(255, 255, 255, 0.58) 47%,
+				rgba(255, 255, 255, 0.14) 58%,
+				transparent 70%
+			);
+			content: '';
+			inset: -18% -90%;
+			opacity: 0;
+			pointer-events: none;
+			position: absolute;
+			transform: translateX(-44%) skewX(-16deg);
+			transition:
+				opacity 220ms ease,
+				transform 760ms cubic-bezier(0.22, 1, 0.36, 1);
+			z-index: 30;
+		}
+
+		.guestcard-section:hover .guestcard-desktop-card,
+		.guestcard-section:focus-within .guestcard-desktop-card {
+			box-shadow: 0 38px 68px -28px rgba(28, 24, 18, 0.82);
+			transform: translate(-50%, -52%) rotate(-2deg) scale(1.035);
+		}
+
+		.guestcard-section:hover .guestcard-desktop-card::after,
+		.guestcard-section:focus-within .guestcard-desktop-card::after {
+			opacity: 1;
+			transform: translateX(42%) skewX(-16deg);
 		}
 	}
 
