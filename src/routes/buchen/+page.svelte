@@ -1,25 +1,16 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { lang, t } from '$lib/i18n';
-	import { cleanupDeskline, mountDeskline } from '$lib/deskline';
+	import { mountDeskline } from '$lib/deskline';
 	import { Ticket } from 'lucide-svelte';
 	import SeoHead from '$lib/components/SeoHead.svelte';
-	import BookingAgentPanel from '$lib/components/BookingAgentPanel.svelte';
 
 	let containerEl: HTMLDivElement;
 
-	onMount(() => {
-		mountDeskline(containerEl, $lang ?? 'de');
-
-		return () => {
-			cleanupDeskline(containerEl);
-		};
-	});
+	onMount(() => mountDeskline(containerEl, $lang ?? 'de'));
 </script>
 
 <SeoHead titleKey="booking.seo.title" descriptionKey="booking.seo.description" />
-
-<BookingAgentPanel lang={$lang} />
 
 <div class="mx-auto w-full max-w-4xl px-4 pt-8 sm:px-6">
 	<div class="rounded-2xl border border-brand/20 bg-brand/5 p-4 sm:p-5">
