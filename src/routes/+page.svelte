@@ -995,206 +995,6 @@ import { localizePath } from '$lib/routing';
 				</div>
 			</section>
 
-			<!-- TRUST -->
-			<section use:reveal class="opacity-0 translate-y-8 transition-all duration-700 ease-out py-2 sm:py-4">
-				<!-- Header row -->
-				<div class="flex flex-wrap items-start justify-between gap-3 sm:gap-6">
-					<div class="max-w-2xl">
-						<p class="text-[11px] font-semibold uppercase tracking-[0.35em] text-brand">
-							{$t('trust.kicker')}
-						</p>
-						<h2 class="mt-3 text-4xl font-serif font-medium leading-[0.95] text-slate-900">
-							{$t('trust.title')}
-						</h2>
-						<div class="mt-4 h-[3px] w-16 rounded-full bg-brand"></div>
-					</div>
-
-					<div class="mt-2 flex items-center gap-2 text-sm font-medium text-slate-500 sm:mt-10">
-						<BadgeCheck class="h-4 w-4 text-brand" aria-hidden="true" strokeWidth={1.25} />
-						{$t('trust.verified')}
-					</div>
-				</div>
-
-				<!-- Cards row (4 columns like screenshot) -->
-				<div
-					class={`mt-6 -mx-4 flex snap-x snap-mandatory items-stretch gap-6 overflow-x-auto px-4 pb-2 scroll-pl-4 scroll-pr-4 [scrollbar-width:thin] [scrollbar-color:theme(colors.slate.300)_transparent] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-200 hover:[&::-webkit-scrollbar-thumb]:bg-slate-300 sm:mt-10 lg:mx-0 lg:grid lg:overflow-visible lg:px-0 lg:pb-0 ${
-						displayedTrustReviews.length > 3 ? 'lg:grid-cols-5' : 'lg:grid-cols-4'
-					}`}
-				>
-					<!-- Rating card (Google) -->
-					<a
-						href={googleProfileUrl}
-						target="_blank"
-						rel="noreferrer"
-						class="group relative flex h-full w-[280px] min-h-[330px] shrink-0 snap-start flex-col rounded-3xl border border-slate-200/70 bg-white p-6 shadow-sm transition-all duration-300 hover:border-brand/30 hover:shadow-lg sm:hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:ring-offset-2 motion-reduce:transform-none motion-reduce:transition-none lg:min-h-0 lg:w-auto lg:shrink"
-					>
-						<span
-							class="pointer-events-none absolute right-5 top-5 grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-500 opacity-100 transition sm:opacity-0 sm:group-hover:opacity-100 group-hover:bg-brand/10 group-hover:text-brand"
-							aria-hidden="true"
-						>
-							↗
-						</span>
-						<div
-							class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-slate-400"
-						>
-							<span class="transition group-hover:text-slate-500 group-hover:underline">Google</span>
-						</div>
-
-						<div class="mt-5 inline-flex items-end gap-2">
-							<span class="text-5xl font-semibold leading-none text-slate-900 group-hover:underline">
-								{$t('trust.ratingValue')}
-							</span>
-							<span class="pb-1 text-sm font-semibold text-slate-400 group-hover:underline">/ 5</span>
-						</div>
-
-						<div class="mt-3 flex items-center gap-1 text-amber-500">
-							{#each trustStars as _}
-								<Star class="h-4 w-4 fill-current" aria-hidden="true" strokeWidth={1.25} />
-							{/each}
-						</div>
-
-						<p class="mt-6 text-xs font-medium text-slate-400">
-							{$t('trust.ratingMeta')}
-						</p>
-
-						<!-- Small “platform score” tile (bottom) -->
-						<div class="mt-6 rounded-2xl border border-slate-200/70 bg-white px-4 py-3">
-							<div class="flex items-center gap-3">
-								<span
-									class="grid h-10 w-10 place-items-center rounded-full bg-slate-900 text-sm font-semibold text-white"
-								>
-									{$t('trust.booking.scoreCompact')}
-								</span>
-								<div class="leading-tight">
-									<p class="text-xs font-semibold text-slate-900">
-										{$t('trust.booking.label')}
-									</p>
-									<p class="text-[11px] text-slate-400">
-										{$t('trust.booking.meta')}
-									</p>
-								</div>
-							</div>
-						</div>
-						<div
-							class="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-transparent transition group-hover:ring-brand/20"
-						></div>
-					</a>
-
-					<!-- Review cards -->
-					{#each displayedTrustReviews as review}
-						<a
-							href={review.url}
-							target="_blank"
-							rel="noreferrer"
-							class="group relative flex h-full w-[280px] min-h-[330px] shrink-0 snap-start flex-col rounded-3xl border border-slate-200/70 bg-white p-6 text-left shadow-sm transition-all duration-300 hover:border-brand/30 hover:shadow-lg sm:hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:ring-offset-2 motion-reduce:transform-none motion-reduce:transition-none lg:min-h-0 lg:w-auto lg:shrink"
-							onclick={() => trackEvent('Trust: Review Click', { source: 'home', index: review.id })}
-						>
-							<span
-								class="pointer-events-none absolute right-5 top-5 grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-500 opacity-100 transition sm:opacity-0 sm:group-hover:opacity-100 group-hover:bg-brand/10 group-hover:text-brand"
-								aria-hidden="true"
-							>
-								↗
-							</span>
-
-							<div class="flex items-center gap-1 text-amber-500">
-								{#each trustStars as _}
-									<Star class="h-4 w-4 fill-current" aria-hidden="true" strokeWidth={1.25} />
-								{/each}
-							</div>
-
-							<p
-								class="mt-5 text-sm italic leading-relaxed text-slate-600 transition group-hover:text-slate-700"
-							>
-								"{review.quote[$lang]}"
-							</p>
-
-							<div class="mt-auto border-t border-slate-200/70 pt-4">
-								<div class="flex items-center gap-3">
-									<!-- Avatar -->
-									<div
-										class="grid h-10 w-10 place-items-center overflow-hidden rounded-full bg-slate-100 text-xs font-semibold text-slate-700"
-									>
-										{review.initials}
-									</div>
-
-									<div class="leading-tight">
-										<p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-900">
-											{review.name}
-										</p>
-										<p class="text-[11px] text-slate-400">
-											{review.date ? formatReviewAge(review.date, $lang) : review.meta[$lang]}
-										</p>
-									</div>
-								</div>
-							</div>
-
-							<div
-								class="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-transparent transition group-hover:ring-brand/20"
-							></div>
-						</a>
-					{/each}
-				</div>
-
-				<!-- Bottom platform row (like screenshot) -->
-				<div
-					class="mt-8 flex flex-wrap items-center justify-center gap-4 text-sm text-slate-400 sm:mt-10 sm:gap-8"
-				>
-					<a
-						href="https://www.airbnb.at/users/profile/1470215552721931790"
-						target="_blank"
-						rel="noreferrer"
-						class="group inline-flex items-center gap-2 rounded-full border border-transparent px-2.5 py-1.5 transition-all duration-200 hover:-translate-y-[1px] hover:border-slate-200 hover:bg-white hover:shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:ring-offset-2"
-					>
-						<Home
-							class="h-4 w-4 text-slate-500 transition-colors group-hover:text-slate-800"
-							aria-hidden="true" strokeWidth={1.25}
-						/>
-						<span
-							class="text-slate-500 transition-colors group-hover:text-slate-800 group-hover:underline"
-							>Airbnb</span
-						>
-						<span
-							class="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600 transition-all duration-200 group-hover:bg-brand/10 group-hover:text-brand group-hover:ring-1 group-hover:ring-brand/20"
-						>
-							{$t('trust.airbnb.score')}
-						</span>
-						<span
-							class="ml-0.5 text-slate-400 opacity-100 transition sm:opacity-0 sm:group-hover:opacity-100 group-hover:text-slate-600"
-							aria-hidden="true"
-						>
-							↗
-						</span>
-					</a>
-					<span class="h-4 w-px bg-slate-200"></span>
-					<a
-						href="https://www.booking.com/Share-deqca7p"
-						target="_blank"
-						rel="noreferrer"
-						class="group inline-flex items-center gap-2 rounded-full border border-transparent px-2.5 py-1.5 transition-all duration-200 hover:-translate-y-[1px] hover:border-slate-200 hover:bg-white hover:shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:ring-offset-2"
-					>
-						<Building2
-							class="h-4 w-4 text-slate-500 transition-colors group-hover:text-slate-800"
-							aria-hidden="true" strokeWidth={1.25}
-						/>
-						<span
-							class="text-slate-500 transition-colors group-hover:text-slate-800 group-hover:underline"
-							>Booking.com</span
-						>
-						<span
-							class="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600 transition-all duration-200 group-hover:bg-brand/10 group-hover:text-brand group-hover:ring-1 group-hover:ring-brand/20"
-						>
-							{$t('trust.booking.score')}
-						</span>
-						<span
-							class="ml-0.5 text-slate-400 opacity-100 transition sm:opacity-0 sm:group-hover:opacity-100 group-hover:text-slate-600"
-							aria-hidden="true"
-						>
-							↗
-						</span>
-					</a>
-				</div>
-			</section>
-
 			<!-- Gallery -->
 			<section class="py-2 lg:py-8">
 				<div class="flex items-start gap-4">
@@ -1543,6 +1343,207 @@ import { localizePath } from '$lib/routing';
 							</div>
 						</div>
 					</section>
+
+			<!-- TRUST -->
+			<section use:reveal class="opacity-0 translate-y-8 transition-all duration-700 ease-out py-2 sm:py-4">
+				<!-- Header row -->
+				<div class="flex flex-wrap items-start justify-between gap-3 sm:gap-6">
+					<div class="max-w-2xl">
+						<p class="text-[11px] font-semibold uppercase tracking-[0.35em] text-brand">
+							{$t('trust.kicker')}
+						</p>
+						<h2 class="mt-3 text-4xl font-serif font-medium leading-[0.95] text-slate-900">
+							{$t('trust.title')}
+						</h2>
+						<div class="mt-4 h-[3px] w-16 rounded-full bg-brand"></div>
+					</div>
+
+					<div class="mt-2 flex items-center gap-2 text-sm font-medium text-slate-500 sm:mt-10">
+						<BadgeCheck class="h-4 w-4 text-brand" aria-hidden="true" strokeWidth={1.25} />
+						{$t('trust.verified')}
+					</div>
+				</div>
+
+				<!-- Cards row (4 columns like screenshot) -->
+				<div
+					class={`mt-6 -mx-4 flex snap-x snap-mandatory items-stretch gap-6 overflow-x-auto px-4 pb-2 scroll-pl-4 scroll-pr-4 [scrollbar-width:thin] [scrollbar-color:theme(colors.slate.300)_transparent] [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-slate-200 hover:[&::-webkit-scrollbar-thumb]:bg-slate-300 sm:mt-10 lg:mx-0 lg:grid lg:overflow-visible lg:px-0 lg:pb-0 ${
+						displayedTrustReviews.length > 3 ? 'lg:grid-cols-5' : 'lg:grid-cols-4'
+					}`}
+				>
+					<!-- Rating card (Google) -->
+					<a
+						href={googleProfileUrl}
+						target="_blank"
+						rel="noreferrer"
+						class="group relative flex h-full w-[280px] min-h-[330px] shrink-0 snap-start flex-col rounded-3xl border border-slate-200/70 bg-white p-6 shadow-sm transition-all duration-300 hover:border-brand/30 hover:shadow-lg sm:hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:ring-offset-2 motion-reduce:transform-none motion-reduce:transition-none lg:min-h-0 lg:w-auto lg:shrink"
+					>
+						<span
+							class="pointer-events-none absolute right-5 top-5 grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-500 opacity-100 transition sm:opacity-0 sm:group-hover:opacity-100 group-hover:bg-brand/10 group-hover:text-brand"
+							aria-hidden="true"
+						>
+							↗
+						</span>
+						<div
+							class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-slate-400"
+						>
+							<span class="transition group-hover:text-slate-500 group-hover:underline">Google</span>
+						</div>
+
+						<div class="mt-5 inline-flex items-end gap-2">
+							<span class="text-5xl font-semibold leading-none text-slate-900 group-hover:underline">
+								{$t('trust.ratingValue')}
+							</span>
+							<span class="pb-1 text-sm font-semibold text-slate-400 group-hover:underline">/ 5</span>
+						</div>
+
+						<div class="mt-3 flex items-center gap-1 text-amber-500">
+							{#each trustStars as _}
+								<Star class="h-4 w-4 fill-current" aria-hidden="true" strokeWidth={1.25} />
+							{/each}
+						</div>
+
+						<p class="mt-6 text-xs font-medium text-slate-400">
+							{$t('trust.ratingMeta')}
+						</p>
+
+						<!-- Small “platform score” tile (bottom) -->
+						<div class="mt-6 rounded-2xl border border-slate-200/70 bg-white px-4 py-3">
+							<div class="flex items-center gap-3">
+								<span
+									class="grid h-10 w-10 place-items-center rounded-full bg-slate-900 text-sm font-semibold text-white"
+								>
+									{$t('trust.booking.scoreCompact')}
+								</span>
+								<div class="leading-tight">
+									<p class="text-xs font-semibold text-slate-900">
+										{$t('trust.booking.label')}
+									</p>
+									<p class="text-[11px] text-slate-400">
+										{$t('trust.booking.meta')}
+									</p>
+								</div>
+							</div>
+						</div>
+						<div
+							class="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-transparent transition group-hover:ring-brand/20"
+						></div>
+					</a>
+
+					<!-- Review cards -->
+					{#each displayedTrustReviews as review}
+						<a
+							href={review.url}
+							target="_blank"
+							rel="noreferrer"
+							class="group relative flex h-full w-[280px] min-h-[330px] shrink-0 snap-start flex-col rounded-3xl border border-slate-200/70 bg-white p-6 text-left shadow-sm transition-all duration-300 hover:border-brand/30 hover:shadow-lg sm:hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:ring-offset-2 motion-reduce:transform-none motion-reduce:transition-none lg:min-h-0 lg:w-auto lg:shrink"
+							onclick={() => trackEvent('Trust: Review Click', { source: 'home', index: review.id })}
+						>
+							<span
+								class="pointer-events-none absolute right-5 top-5 grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-500 opacity-100 transition sm:opacity-0 sm:group-hover:opacity-100 group-hover:bg-brand/10 group-hover:text-brand"
+								aria-hidden="true"
+							>
+								↗
+							</span>
+
+							<div class="flex items-center gap-1 text-amber-500">
+								{#each trustStars as _}
+									<Star class="h-4 w-4 fill-current" aria-hidden="true" strokeWidth={1.25} />
+								{/each}
+							</div>
+
+							<p
+								class="mt-5 text-sm italic leading-relaxed text-slate-600 transition group-hover:text-slate-700"
+							>
+								"{review.quote[$lang]}"
+							</p>
+
+							<div class="mt-auto border-t border-slate-200/70 pt-4">
+								<div class="flex items-center gap-3">
+									<!-- Avatar -->
+									<div
+										class="grid h-10 w-10 place-items-center overflow-hidden rounded-full bg-slate-100 text-xs font-semibold text-slate-700"
+									>
+										{review.initials}
+									</div>
+
+									<div class="leading-tight">
+										<p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-900">
+											{review.name}
+										</p>
+										<p class="text-[11px] text-slate-400">
+											{review.date ? formatReviewAge(review.date, $lang) : review.meta[$lang]}
+										</p>
+									</div>
+								</div>
+							</div>
+
+							<div
+								class="pointer-events-none absolute inset-0 rounded-3xl ring-1 ring-transparent transition group-hover:ring-brand/20"
+							></div>
+						</a>
+					{/each}
+				</div>
+
+				<!-- Bottom platform row (like screenshot) -->
+				<div
+					class="mt-8 flex flex-wrap items-center justify-center gap-4 text-sm text-slate-400 sm:mt-10 sm:gap-8"
+				>
+					<a
+						href="https://www.airbnb.at/users/profile/1470215552721931790"
+						target="_blank"
+						rel="noreferrer"
+						class="group inline-flex items-center gap-2 rounded-full border border-transparent px-2.5 py-1.5 transition-all duration-200 hover:-translate-y-[1px] hover:border-slate-200 hover:bg-white hover:shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:ring-offset-2"
+					>
+						<Home
+							class="h-4 w-4 text-slate-500 transition-colors group-hover:text-slate-800"
+							aria-hidden="true" strokeWidth={1.25}
+						/>
+						<span
+							class="text-slate-500 transition-colors group-hover:text-slate-800 group-hover:underline"
+							>Airbnb</span
+						>
+						<span
+							class="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600 transition-all duration-200 group-hover:bg-brand/10 group-hover:text-brand group-hover:ring-1 group-hover:ring-brand/20"
+						>
+							{$t('trust.airbnb.score')}
+						</span>
+						<span
+							class="ml-0.5 text-slate-400 opacity-100 transition sm:opacity-0 sm:group-hover:opacity-100 group-hover:text-slate-600"
+							aria-hidden="true"
+						>
+							↗
+						</span>
+					</a>
+					<span class="h-4 w-px bg-slate-200"></span>
+					<a
+						href="https://www.booking.com/Share-deqca7p"
+						target="_blank"
+						rel="noreferrer"
+						class="group inline-flex items-center gap-2 rounded-full border border-transparent px-2.5 py-1.5 transition-all duration-200 hover:-translate-y-[1px] hover:border-slate-200 hover:bg-white hover:shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:ring-offset-2"
+					>
+						<Building2
+							class="h-4 w-4 text-slate-500 transition-colors group-hover:text-slate-800"
+							aria-hidden="true" strokeWidth={1.25}
+						/>
+						<span
+							class="text-slate-500 transition-colors group-hover:text-slate-800 group-hover:underline"
+							>Booking.com</span
+						>
+						<span
+							class="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600 transition-all duration-200 group-hover:bg-brand/10 group-hover:text-brand group-hover:ring-1 group-hover:ring-brand/20"
+						>
+							{$t('trust.booking.score')}
+						</span>
+						<span
+							class="ml-0.5 text-slate-400 opacity-100 transition sm:opacity-0 sm:group-hover:opacity-100 group-hover:text-slate-600"
+							aria-hidden="true"
+						>
+							↗
+						</span>
+					</a>
+				</div>
+			</section>
+
 
 			<!-- SEASONS -->
 			<section id="jahreszeiten" class="relative -mx-4 w-auto max-w-[1380px] px-2 py-10 sm:mx-0 sm:w-full sm:px-6 sm:py-12 lg:left-1/2 lg:w-screen lg:-translate-x-1/2">

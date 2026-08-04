@@ -6,6 +6,7 @@ import { page } from '$app/state';
 	import { cleanupDeskline, mountDeskline } from '$lib/deskline';
 	import { imageAttrs } from '$lib/images';
 	import SeoHead from '$lib/components/SeoHead.svelte';
+	import BookingAgentPanel from '$lib/components/BookingAgentPanel.svelte';
 import { localizePath } from '$lib/routing';
 	import { SITE_ORIGIN } from '$lib/seo';
 	import { buildBreadcrumbListSchema, buildJsonLdGraph } from '$lib/structured-data';
@@ -49,6 +50,8 @@ const localizedHref = (path: string) => localizePath(path, page.url.pathname);
 </svelte:head>
 
 <main class="bg-[#fbfaf7]">
+	<BookingAgentPanel lang={$lang} selectedSlug={accommodation.slug} />
+
 	<div class="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
 		<div class="grid gap-10 lg:grid-cols-[1.1fr,0.9fr] lg:items-start">
 			<div class="space-y-10">

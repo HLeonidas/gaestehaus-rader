@@ -20,17 +20,22 @@ import { localizePath } from '$lib/routing';
 		type SeasonKey,
 		type SectionLink,
 	} from '$lib/data/experience';
-	import { onDestroy, onMount } from 'svelte';
+	import { onDestroy, onMount, tick } from 'svelte';
 	import { tweened } from 'svelte/motion';
 	import {
 		ArrowRight,
 		BusFront,
+		CalendarDays,
+		CarFront,
+		Clock3,
 		ExternalLink,
+		Gauge,
 		List,
 		MapPinned,
 		Menu,
 		Mountain,
 		PartyPopper,
+		Pin,
 		Route,
 		Snowflake,
 		Sparkles,
@@ -41,12 +46,17 @@ import { localizePath } from '$lib/routing';
 		X,
 	} from 'lucide-svelte';
 
-	import { fly } from 'svelte/transition';
+	import { fade, fly } from 'svelte/transition';
 	import { cubicOut } from 'svelte/easing';
 
-	type NavMode = 'compact' | 'peek';
 	type LocalizedText = { de: string; en: string };
 	type LinkMeta = { label: LocalizedText; icon: ComponentType };
+	type ExperienceFact = { label: string; value: string; icon: ComponentType };
+	type ViewTransitionDocument = Document & {
+		startViewTransition?: (
+			update: () => void | Promise<void>
+		) => { updateCallbackDone: Promise<void> };
+	};
 
 	const localizedHref = (path: string) => localizePath(path, page.url.pathname);
 const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
@@ -55,19 +65,74 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 		medium: { de: 'Mittel', en: 'Moderate' },
 		hard: { de: 'Schwer', en: 'Hard' },
 	};
-	const formatDistance = (km: number) => ($lang === 'de' ? `${km.toString().replace('.', ',')} km` : `${km} km`);
-	const buildMetaChips = (event: ExperienceEvent) => {
-		const chips: string[] = [];
-		if (event.driveMinutes != null) chips.push(`${event.driveMinutes} min`);
-		if (event.distanceKm != null) chips.push(formatDistance(event.distanceKm));
-		if (event.durationHours) chips.push(`${event.durationHours} h`);
-		if (event.difficulty) chips.push(localize(difficultyLabels[event.difficulty]));
-		if (event.elevationGainM != null) chips.push($lang === 'de' ? `+${event.elevationGainM} hm` : `+${event.elevationGainM} m`);
-		if (event.location) chips.push(localize(event.location));
-		if (event.seasonMonths) chips.push($lang === 'de' ? `Saison ${event.seasonMonths}` : `Season ${event.seasonMonths}`);
-		if (event.indoor != null) chips.push(event.indoor ? ($lang === 'de' ? 'Indoor' : 'Indoor') : ($lang === 'de' ? 'Outdoor' : 'Outdoor'));
-		if (event.meta?.length) chips.push(...event.meta.map((item) => localize(item)));
-		return chips.slice(0, 6);
+	const formatDistance = (km: number) =>
+		$lang === 'de' ? `${km.toString().replace('.', ',')} km` : `${km} km`;
+	const formatElevation = (meters: number) =>
+		$lang === 'de' ? `+${meters.toLocaleString('de-DE')} hm` : `+${meters.toLocaleString('en-US')} m`;
+	const buildSummaryFacts = (event: ExperienceEvent): ExperienceFact[] => {
+		const facts: ExperienceFact[] = [];
+		if (event.driveMinutes != null) {
+			facts.push({
+				label: $lang === 'de' ? 'Anfahrt' : 'Drive',
+				value: $lang === 'de' ? `${event.driveMinutes} min ab Haus` : `${event.driveMinutes} min from the house`,
+				icon: CarFront,
+			});
+		}
+		if (event.durationHours) {
+			facts.push({
+				label: $lang === 'de' ? 'Dauer' : 'Duration',
+				value: `${event.durationHours} h`,
+				icon: Clock3,
+			});
+		}
+		if (event.difficulty) {
+			facts.push({
+				label: $lang === 'de' ? 'Schwierigkeit' : 'Difficulty',
+				value: localize(difficultyLabels[event.difficulty]),
+				icon: Gauge,
+			});
+		}
+		return facts.slice(0, 3);
+	};
+	const buildPlanningFacts = (event: ExperienceEvent): ExperienceFact[] =>
+		buildSummaryFacts(event).map((fact) => ({
+			...fact,
+			value:
+				fact.icon === CarFront && event.driveMinutes != null
+					? `${event.driveMinutes} min`
+					: fact.value,
+		}));
+	const buildDetailFacts = (event: ExperienceEvent): ExperienceFact[] => {
+		const facts: ExperienceFact[] = [];
+		if (event.distanceKm != null) {
+			facts.push({
+				label: $lang === 'de' ? 'Strecke' : 'Distance',
+				value: formatDistance(event.distanceKm),
+				icon: Route,
+			});
+		}
+		if (event.elevationGainM != null) {
+			facts.push({
+				label: $lang === 'de' ? 'Höhenmeter' : 'Elevation gain',
+				value: formatElevation(event.elevationGainM),
+				icon: Mountain,
+			});
+		}
+		if (event.location) {
+			facts.push({
+				label: $lang === 'de' ? 'Ort' : 'Location',
+				value: localize(event.location),
+				icon: MapPinned,
+			});
+		}
+		if (event.seasonMonths) {
+			facts.push({
+				label: $lang === 'de' ? 'Saison' : 'Season',
+				value: event.seasonMonths,
+				icon: CalendarDays,
+			});
+		}
+		return facts;
 	};
 	const experienceLinkMeta: Record<ExperienceLinkType, LinkMeta> = {
 		google: { label: { de: 'Google Maps', en: 'Google Maps' }, icon: MapPinned },
@@ -99,29 +164,38 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 	let activeHighlightsSeason = $state<SeasonKey>('summer');
 	let selectedActivity = $state<ActivityFilterKey | null>(null);
 	let activeExperience = $state<ExperienceEvent | null>(null);
+	let modalCloseButton = $state<HTMLButtonElement | null>(null);
+	let lastExperienceTrigger: HTMLElement | null = null;
+	let reduceMotion = $state(false);
+	let supportsViewTransitions = $state(false);
 	let showAllSeasons = $state(true);
 	let activeSectionId = $state('aktivitaeten');
 	let isMobileFilterOpen = $state(false);
 	let isMobileNavOpen = $state(false);
-	let navMode = $state<NavMode>('compact');
+	let isNavPinned = $state(false);
+	let isNavPointerInside = $state(false);
+	let isNavFocusWithin = $state(false);
+	let isNavDismissed = $state(false);
 	let navListEl = $state<HTMLDivElement | null>(null);
 	const btnEls = new Map<string, HTMLButtonElement>();
 	const indicatorTop = tweened(0, { duration: 420, easing: cubicOut });
 	const indicatorHeight = tweened(40, { duration: 420, easing: cubicOut });
 	let indicatorVisible = $state(false);
-	let scrollCollapseTimer: number | null = null;
 	let highlightObserver: IntersectionObserver | null = null;
 	let seasonScrollTimers: number[] = [];
 	let lastMobileNavPointerAt = 0;
 	let manualTabUntil = 0;
 	const ICON_SLOT = 'h-11 w-11 rounded-2xl grid place-items-center shrink-0';
 	const ICON_SIZE = 'h-5 w-5';
-	const ROW_BASE = 'w-full rounded-2xl transition duration-200';
+	const ROW_BASE =
+		'w-full rounded-2xl transition duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/60 focus-visible:ring-offset-1 active:scale-[0.98]';
 	const ROW_PEEK = 'min-h-[48px] px-3 py-2 flex items-center gap-3';
 	const ROW_COMPACT = 'mt-3 h-12 w-12 grid place-items-center';
 
-	const isPeek = $derived(navMode === 'peek');
-	const isCompact = $derived(navMode === 'compact');
+	const isPeek = $derived(
+		isNavPinned || (!isNavDismissed && (isNavPointerInside || isNavFocusWithin))
+	);
+	const isCompact = $derived(!isPeek);
 
 	$effect(() => {
 		if (activeTab !== seasonFromUrl) {
@@ -204,20 +278,51 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 
 	function onWindowKeydown(event: KeyboardEvent) {
 		if (event.key === 'Escape') {
-			if (activeExperience) activeExperience = null;
+			if (activeExperience) void closeExperienceModal();
 			if (isMobileFilterOpen) isMobileFilterOpen = false;
 			if (isMobileNavOpen) isMobileNavOpen = false;
 		}
 	}
 
-	function openExperienceModal(event: ExperienceEvent) {
-		activeExperience = event;
-		isMobileFilterOpen = false;
-		isMobileNavOpen = false;
+	async function updateWithViewTransition(update: () => void) {
+		if (typeof document === 'undefined' || reduceMotion) {
+			update();
+			await tick();
+			return;
+		}
+		const transitionDocument = document as ViewTransitionDocument;
+		if (!transitionDocument.startViewTransition) {
+			update();
+			await tick();
+			return;
+		}
+		const transition = transitionDocument.startViewTransition(async () => {
+			update();
+			await tick();
+		});
+		await transition.updateCallbackDone.catch(() => undefined);
 	}
 
-	function closeExperienceModal() {
+	function experienceImageTransitionName(event: ExperienceEvent) {
+		return activeExperience?.id === event.id ? 'none' : `experience-image-${event.id}`;
+	}
+
+	async function openExperienceModal(event: ExperienceEvent, trigger: EventTarget | null = null) {
+		if (trigger instanceof HTMLElement) lastExperienceTrigger = trigger;
+		await updateWithViewTransition(() => {
+			activeExperience = event;
+			isMobileFilterOpen = false;
+			isMobileNavOpen = false;
+		});
+		modalCloseButton?.focus({ preventScroll: true });
+	}
+
+	async function closeExperienceModal() {
+		const trigger = lastExperienceTrigger;
 		activeExperience = null;
+		await tick();
+		trigger?.focus({ preventScroll: true });
+		lastExperienceTrigger = null;
 	}
 
 	function scrollToSection(id: string, behavior: ScrollBehavior = 'smooth') {
@@ -234,6 +339,21 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 			scrollNow();
 		}, 120);
 		return false;
+	}
+
+	function setDesktopNavTarget(id: string) {
+		if (id === 'highlights-summer' || id === 'highlights-winter') {
+			activeSectionId = 'highlights';
+			activeHighlightsSeason = id === 'highlights-winter' ? 'winter' : 'summer';
+		} else {
+			activeSectionId = id;
+		}
+		queueMicrotask(updateIndicator);
+	}
+
+	function onDesktopNavSelect(id: string) {
+		setDesktopNavTarget(id);
+		scrollToSection(id);
 	}
 
 	function openMobileNav() {
@@ -294,29 +414,41 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 		manualTabUntil = Date.now() + 1500;
 	}
 
-	function setNavMode(next: NavMode) {
-		navMode = next;
-	}
-
 	function onNavEnter() {
-		setNavMode('peek');
+		isNavPointerInside = true;
 	}
 
 	function onNavLeave() {
-		setNavMode('compact');
+		isNavPointerInside = false;
+		isNavDismissed = false;
 	}
 
 	function onNavFocusIn() {
-		setNavMode('peek');
+		isNavFocusWithin = true;
 	}
 
-	function onNavFocusOut() {
-		setNavMode('compact');
+	function onNavFocusOut(event: FocusEvent) {
+		const panel = event.currentTarget as HTMLElement;
+		const nextTarget = event.relatedTarget;
+		if (nextTarget instanceof Node && panel.contains(nextTarget)) return;
+		isNavFocusWithin = false;
+		if (!isNavPointerInside) isNavDismissed = false;
+	}
+
+	function toggleDesktopNav(event: MouseEvent) {
+		if (isNavPinned) {
+			isNavPinned = false;
+			isNavDismissed = true;
+			(event.currentTarget as HTMLButtonElement).blur();
+			isNavFocusWithin = false;
+			return;
+		}
+		isNavDismissed = false;
+		isNavPinned = true;
 	}
 
 	function onWindowScroll() {
 		updateActiveSectionFromViewport();
-		setNavMode('compact');
 	}
 
 	$effect(() => {
@@ -454,6 +586,17 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 	});
 
 	onMount(() => {
+		const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+		const updateMotionPreference = () => {
+			reduceMotion = motionQuery.matches;
+			supportsViewTransitions = 'startViewTransition' in document && !motionQuery.matches;
+		};
+		updateMotionPreference();
+		motionQuery.addEventListener('change', updateMotionPreference);
+		return () => motionQuery.removeEventListener('change', updateMotionPreference);
+	});
+
+	onMount(() => {
 		updateActiveSectionFromViewport();
 		window.addEventListener('scroll', onWindowScroll, { passive: true });
 		window.addEventListener('resize', updateActiveSectionFromViewport);
@@ -475,7 +618,6 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 
 	onDestroy(() => {
 		highlightObserver?.disconnect();
-		if (scrollCollapseTimer) window.clearTimeout(scrollCollapseTimer);
 		clearSeasonScrollTimers();
 	});
 </script>
@@ -488,17 +630,17 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 	<div class="pointer-events-none fixed left-6 top-36 z-40">
 		<div
 			class={`pointer-events-auto origin-top-left transition-all duration-300 ease-out ${
-				isPeek ? 'w-[240px]' : 'w-[60px]'
+				isPeek ? 'w-[272px]' : 'w-[60px]'
 			}`}
 			role="group"
 			aria-label={$t('experiences.nav.title')}
-			onmouseenter={onNavEnter}
-			onmouseleave={onNavLeave}
+			onpointerenter={onNavEnter}
+			onpointerleave={onNavLeave}
 			onfocusin={onNavFocusIn}
 			onfocusout={onNavFocusOut}
 		>
 			<div
-				class="relative rounded-2xl bg-white/70 backdrop-blur-md ring-1 ring-slate-200/70 shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-shadow duration-300 hover:shadow-[0_16px_38px_rgba(15,23,42,0.14)]"
+				class="experience-nav-scroll relative max-h-[calc(100vh-10rem)] overflow-x-hidden overflow-y-auto overscroll-contain rounded-2xl bg-white/70 backdrop-blur-md ring-1 ring-slate-200/70 shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-shadow duration-300 hover:shadow-[0_16px_38px_rgba(15,23,42,0.14)]"
 			>
 				<div class={`flex items-center ${isPeek ? 'gap-2 px-3 py-3' : 'justify-center px-3 py-3'}`}>
 					<button
@@ -508,15 +650,28 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 								? 'bg-white text-slate-900 ring-1 ring-brand/20 shadow-sm hover:shadow-md'
 								: 'bg-white/80 text-slate-800 ring-1 ring-slate-200/80 hover:bg-white hover:shadow-sm'
 						}`}
-						aria-label={isPeek ? 'Navigation schließen' : 'Navigation öffnen'}
+						aria-label={isNavPinned
+							? $lang === 'de'
+								? 'Navigation schließen'
+								: 'Close navigation'
+							: isPeek
+								? $lang === 'de'
+									? 'Navigation offen halten'
+									: 'Keep navigation open'
+								: $lang === 'de'
+									? 'Navigation öffnen'
+									: 'Open navigation'}
 						aria-expanded={isPeek}
-						onclick={() => setNavMode(isPeek ? 'compact' : 'peek')}
+						aria-pressed={isNavPinned}
+						onclick={toggleDesktopNav}
 					>
 						{#if isPeek}
 							<span class="pointer-events-none absolute inset-0 rounded-2xl bg-brand/10"></span>
 						{/if}
-						{#if isPeek}
+						{#if isNavPinned}
 							<X class="relative h-5 w-5" aria-hidden="true" />
+						{:else if isPeek}
+							<Pin class="relative h-5 w-5" aria-hidden="true" />
 						{:else}
 							<Menu class="relative h-5 w-5" aria-hidden="true" />
 						{/if}
@@ -561,7 +716,7 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 												? 'bg-white text-slate-900 ring-1 ring-brand/20 shadow-sm'
 												: 'bg-transparent text-slate-700 hover:bg-white/60'
 									}`}
-									onclick={() => scrollToSection(section.id)}
+									onclick={() => onDesktopNavSelect(section.id)}
 									aria-label={$t(section.labelKey)}
 									aria-current={navActiveSectionId === section.id ? 'page' : undefined}
 									title={$t(section.labelKey)}
@@ -596,8 +751,12 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 														? 'bg-white text-slate-900 ring-1 ring-brand/20 shadow-sm'
 														: 'bg-transparent text-slate-700 hover:bg-white/60'
 											}`}
-											onclick={() => scrollToSection('highlights-summer')}
+											onclick={() => onDesktopNavSelect('highlights-summer')}
 											aria-label={$t('experiences.nav.summer')}
+											aria-current={activeSectionId === 'highlights' &&
+											activeHighlightsSeason === 'summer'
+												? 'location'
+												: undefined}
 											title={$t('experiences.nav.summer')}
 										>
 											<span
@@ -624,8 +783,12 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 														? 'bg-white text-slate-900 ring-1 ring-brand/20 shadow-sm'
 														: 'bg-transparent text-slate-700 hover:bg-white/60'
 											}`}
-											onclick={() => scrollToSection('highlights-winter')}
+											onclick={() => onDesktopNavSelect('highlights-winter')}
 											aria-label={$t('experiences.nav.winter')}
+											aria-current={activeSectionId === 'highlights' &&
+											activeHighlightsSeason === 'winter'
+												? 'location'
+												: undefined}
 											title={$t('experiences.nav.winter')}
 										>
 											<span
@@ -743,11 +906,14 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 								<div class="mx-auto w-full max-w-6xl px-0 sm:px-0 lg:px-0">
 									<button
 										type="button"
-										onclick={() => openExperienceModal(summerFeaturedEvent)}
+									onclick={(clickEvent) => openExperienceModal(summerFeaturedEvent, clickEvent.currentTarget)}
 										data-season={summerFeaturedEvent.season}
 										class="group block w-full cursor-pointer overflow-hidden rounded-3xl border border-slate-200 bg-white text-left shadow-sm"
 									>
-										<div class="relative aspect-[16/10] overflow-hidden rounded-3xl sm:min-h-[420px] lg:h-[min(65dvh,650px)]">
+									<div
+										class="relative aspect-[16/10] overflow-hidden rounded-3xl sm:min-h-[420px] lg:h-[min(65dvh,650px)]"
+										style={`view-transition-name: ${experienceImageTransitionName(summerFeaturedEvent)};`}
+									>
 											<img
 												{...imageAttrs(summerFeaturedEvent.image, '(max-width: 1024px) 100vw, 1200px')}
 												alt={`${localize(summerFeaturedEvent.title)} – ${localize(summerFeaturedEvent.kicker)}`}
@@ -792,13 +958,12 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 																{localize(summerFeaturedEvent.description)}
 															</p>
 														{/if}
-														{#if buildMetaChips(summerFeaturedEvent).length}
-															<div class="mt-3 flex flex-wrap gap-2">
-																{#each buildMetaChips(summerFeaturedEvent) as chip}
-																	<span
-																		class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white sm:px-3 sm:text-xs"
-																	>
-																		{chip}
+														{#if buildSummaryFacts(summerFeaturedEvent).length}
+															<div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-semibold text-white/90">
+																{#each buildSummaryFacts(summerFeaturedEvent) as fact}
+																	<span class="inline-flex items-center gap-1.5" title={fact.label}>
+																		<fact.icon class="h-3.5 w-3.5 text-brand" aria-hidden="true" />
+																		{fact.value}
 																	</span>
 																{/each}
 															</div>
@@ -824,17 +989,16 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 													{localize(summerFeaturedEvent.description)}
 												</p>
 											{/if}
-											{#if buildMetaChips(summerFeaturedEvent).length}
-												<div class="mt-3 flex flex-wrap gap-2">
-													{#each buildMetaChips(summerFeaturedEvent) as chip}
-														<span
-															class="rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-700"
-														>
-															{chip}
-														</span>
-													{/each}
-												</div>
-											{/if}
+										{#if buildSummaryFacts(summerFeaturedEvent).length}
+											<div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-semibold text-slate-600">
+												{#each buildSummaryFacts(summerFeaturedEvent) as fact}
+													<span class="inline-flex items-center gap-1.5" title={fact.label}>
+														<fact.icon class="h-3.5 w-3.5 text-brand" aria-hidden="true" />
+														{fact.value}
+													</span>
+												{/each}
+											</div>
+										{/if}
 										</div>
 									</button>
 								</div>
@@ -844,7 +1008,7 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 									{#each summerSecondaryEvents as event, i (event.id)}
 										<button
 											type="button"
-											onclick={() => openExperienceModal(event)}
+											onclick={(clickEvent) => openExperienceModal(event, clickEvent.currentTarget)}
 											use:reveal
 											data-season={event.season}
 											class="reveal group grid w-full cursor-pointer gap-6 py-8 text-left transition duration-300 hover:-translate-y-0.5 hover:drop-shadow-[0_18px_30px_rgba(15,23,42,0.10)] sm:grid-cols-[240px,1fr] lg:grid-cols-[320px,1fr] lg:items-center"
@@ -854,6 +1018,7 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 												class={`relative w-full overflow-hidden rounded-2xl bg-slate-100 aspect-[16/10] sm:aspect-[4/3] lg:aspect-[16/10] ${
 													i % 2 === 1 ? 'sm:order-2' : ''
 												}`}
+												style={`view-transition-name: ${experienceImageTransitionName(event)};`}
 											>
 												<img
 													{...imageAttrs(event.image, '(max-width: 640px) 100vw, 320px')}
@@ -894,13 +1059,12 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 													</p>
 												{/if}
 
-												{#if buildMetaChips(event).length}
-													<div class="mt-3 flex flex-wrap gap-2">
-														{#each buildMetaChips(event) as chip}
-															<span
-																class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600"
-															>
-																{chip}
+												{#if buildSummaryFacts(event).length}
+													<div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-semibold text-slate-600">
+														{#each buildSummaryFacts(event) as fact}
+															<span class="inline-flex items-center gap-1.5" title={fact.label}>
+																<fact.icon class="h-3.5 w-3.5 text-brand" aria-hidden="true" />
+																{fact.value}
 															</span>
 														{/each}
 													</div>
@@ -938,11 +1102,14 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 								<div class="mx-auto w-full max-w-6xl px-0 sm:px-0 lg:px-0">
 									<button
 										type="button"
-										onclick={() => openExperienceModal(winterFeaturedEvent)}
+									onclick={(clickEvent) => openExperienceModal(winterFeaturedEvent, clickEvent.currentTarget)}
 										data-season={winterFeaturedEvent.season}
 										class="group block w-full cursor-pointer overflow-hidden rounded-3xl border border-slate-200 bg-white text-left shadow-sm"
 									>
-										<div class="relative aspect-[16/10] overflow-hidden rounded-3xl sm:min-h-[420px] lg:h-[min(72dvh,720px)]">
+									<div
+										class="relative aspect-[16/10] overflow-hidden rounded-3xl sm:min-h-[420px] lg:h-[min(72dvh,720px)]"
+										style={`view-transition-name: ${experienceImageTransitionName(winterFeaturedEvent)};`}
+									>
 											<img
 												{...imageAttrs(winterFeaturedEvent.image, '(max-width: 1024px) 100vw, 1200px')}
 												alt={`${localize(winterFeaturedEvent.title)} – ${localize(winterFeaturedEvent.kicker)}`}
@@ -983,13 +1150,12 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 																{localize(winterFeaturedEvent.description)}
 															</p>
 														{/if}
-														{#if buildMetaChips(winterFeaturedEvent).length}
-															<div class="mt-3 flex flex-wrap gap-2">
-																{#each buildMetaChips(winterFeaturedEvent) as chip}
-																	<span
-																		class="rounded-full border border-white/20 bg-white/15 px-2.5 py-1 text-[11px] font-semibold text-white sm:px-3 sm:text-xs"
-																	>
-																		{chip}
+														{#if buildSummaryFacts(winterFeaturedEvent).length}
+															<div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-semibold text-white/90">
+																{#each buildSummaryFacts(winterFeaturedEvent) as fact}
+																	<span class="inline-flex items-center gap-1.5" title={fact.label}>
+																		<fact.icon class="h-3.5 w-3.5 text-brand" aria-hidden="true" />
+																		{fact.value}
 																	</span>
 																{/each}
 															</div>
@@ -1015,17 +1181,16 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 													{localize(winterFeaturedEvent.description)}
 												</p>
 											{/if}
-											{#if buildMetaChips(winterFeaturedEvent).length}
-												<div class="mt-3 flex flex-wrap gap-2">
-													{#each buildMetaChips(winterFeaturedEvent) as chip}
-														<span
-															class="rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-700"
-														>
-															{chip}
-														</span>
-													{/each}
-												</div>
-											{/if}
+										{#if buildSummaryFacts(winterFeaturedEvent).length}
+											<div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-semibold text-slate-600">
+												{#each buildSummaryFacts(winterFeaturedEvent) as fact}
+													<span class="inline-flex items-center gap-1.5" title={fact.label}>
+														<fact.icon class="h-3.5 w-3.5 text-brand" aria-hidden="true" />
+														{fact.value}
+													</span>
+												{/each}
+											</div>
+										{/if}
 										</div>
 									</button>
 								</div>
@@ -1035,7 +1200,7 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 									{#each winterSecondaryEvents as event, i (event.id)}
 										<button
 											type="button"
-											onclick={() => openExperienceModal(event)}
+											onclick={(clickEvent) => openExperienceModal(event, clickEvent.currentTarget)}
 											use:reveal
 											data-season={event.season}
 											class="reveal group grid w-full cursor-pointer gap-6 py-8 text-left transition duration-300 hover:-translate-y-0.5 hover:drop-shadow-[0_18px_30px_rgba(15,23,42,0.10)] sm:grid-cols-[240px,1fr] lg:grid-cols-[320px,1fr] lg:items-center"
@@ -1045,6 +1210,7 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 												class={`relative w-full overflow-hidden rounded-2xl bg-slate-100 aspect-[16/10] sm:aspect-[4/3] lg:aspect-[16/10] ${
 													i % 2 === 1 ? 'sm:order-2' : ''
 												}`}
+												style={`view-transition-name: ${experienceImageTransitionName(event)};`}
 											>
 												<img
 													{...imageAttrs(event.image, '(max-width: 640px) 100vw, 320px')}
@@ -1088,13 +1254,12 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 													</p>
 												{/if}
 
-												{#if buildMetaChips(event).length}
-													<div class="mt-3 flex flex-wrap gap-2">
-														{#each buildMetaChips(event) as chip}
-															<span
-																class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600"
-															>
-																{chip}
+												{#if buildSummaryFacts(event).length}
+													<div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-semibold text-slate-600">
+														{#each buildSummaryFacts(event) as fact}
+															<span class="inline-flex items-center gap-1.5" title={fact.label}>
+																<fact.icon class="h-3.5 w-3.5 text-brand" aria-hidden="true" />
+																{fact.value}
 															</span>
 														{/each}
 													</div>
@@ -1521,27 +1686,34 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 		<div class="fixed inset-0 z-[130] p-3 sm:p-6">
 			<button
 				type="button"
-				class="absolute inset-0 bg-slate-950/60 backdrop-blur-[2px]"
+				class="absolute inset-0 bg-slate-950/55 backdrop-blur-[3px]"
 				onclick={closeExperienceModal}
 				aria-label="Details schließen"
+				transition:fade={{ duration: reduceMotion ? 0 : 180 }}
 			></button>
-			<div class="pointer-events-none relative mx-auto flex h-full max-w-5xl items-end sm:items-center">
+			<div class="pointer-events-none relative mx-auto flex h-full max-w-6xl items-end sm:items-center">
 				<div
 					role="dialog"
 					aria-modal="true"
 					aria-label={localize(activeExperience.title)}
-					class="pointer-events-auto relative w-full overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl"
+					class="pointer-events-auto relative w-full overflow-hidden rounded-3xl border border-white/60 bg-white shadow-[0_30px_90px_rgba(15,23,42,0.28)]"
+					in:fly={{ y: 24, duration: supportsViewTransitions || reduceMotion ? 0 : 320, easing: cubicOut }}
+					out:fly={{ y: 16, duration: reduceMotion ? 0 : 220, easing: cubicOut }}
 				>
 					<button
 						type="button"
-						class="absolute right-3 top-3 z-20 grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white/90 text-slate-600 shadow-sm transition hover:text-slate-900"
+						bind:this={modalCloseButton}
+						class="absolute right-3 top-3 z-20 grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white/92 text-slate-600 shadow-sm backdrop-blur transition duration-200 hover:scale-105 hover:border-slate-300 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
 						onclick={closeExperienceModal}
 						aria-label="Details schließen"
 					>
 						<X class="h-5 w-5" aria-hidden="true" />
 					</button>
-					<div class="grid max-h-[90vh] overflow-y-auto lg:grid-cols-[0.62fr,0.38fr]">
-						<div class="relative min-h-[300px] sm:min-h-[360px] lg:min-h-[520px]">
+					<div class="grid max-h-[92vh] overflow-y-auto lg:grid-cols-[0.58fr,0.42fr]">
+						<div
+							class="relative min-h-[280px] sm:min-h-[360px] lg:min-h-[600px]"
+							style={`view-transition-name: experience-image-${activeExperience.id};`}
+						>
 							<img
 								src={largestImageUrl(activeExperience.image)}
 								alt={`${localize(activeExperience.title)} – ${localize(activeExperience.kicker)}`}
@@ -1549,7 +1721,10 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 							/>
 							<div class="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent lg:hidden"></div>
 						</div>
-						<div class="p-5 sm:p-7">
+						<div
+							class="p-5 sm:p-8 lg:p-9"
+							in:fly={{ x: reduceMotion ? 0 : 14, duration: reduceMotion ? 0 : 320, delay: reduceMotion ? 0 : 70, easing: cubicOut }}
+						>
 							<p class="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-brand">
 								<activeExperience.icon class="h-4 w-4 text-brand" aria-hidden="true" />
 								{localize(activeExperience.kicker)}
@@ -1563,37 +1738,63 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 								</p>
 							{/if}
 
-							{#if buildMetaChips(activeExperience).length}
-								<div class="mt-4 flex flex-wrap gap-2">
-									{#each buildMetaChips(activeExperience) as chip}
-										<span
-											class="rounded-full border border-slate-200 bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-700"
-										>
-											{chip}
-										</span>
-									{/each}
+							{#if buildPlanningFacts(activeExperience).length}
+								<div class="mt-6">
+									<p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-500">
+										{$lang === 'de' ? 'Planung' : 'Planning'}
+									</p>
+									<dl class="mt-2 divide-y divide-slate-200 border-y border-slate-200">
+										{#each buildPlanningFacts(activeExperience) as fact}
+											<div class="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 py-3">
+												<dt class="inline-flex min-w-0 items-center gap-2 text-sm text-slate-600">
+													<fact.icon class="h-4 w-4 shrink-0 text-slate-500" aria-hidden="true" />
+													<span>{fact.label}</span>
+												</dt>
+												<dd class="text-right text-sm font-semibold text-slate-900">{fact.value}</dd>
+											</div>
+										{/each}
+									</dl>
+								</div>
+							{/if}
+
+							{#if buildDetailFacts(activeExperience).length}
+								<div class="mt-6">
+									<p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-500">
+										{$lang === 'de' ? 'Details' : 'Details'}
+									</p>
+									<dl class="mt-2 divide-y divide-slate-200 border-y border-slate-200">
+										{#each buildDetailFacts(activeExperience) as fact}
+											<div class="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 py-3">
+												<dt class="inline-flex min-w-0 items-center gap-2 text-sm text-slate-600">
+													<fact.icon class="h-4 w-4 shrink-0 text-slate-500" aria-hidden="true" />
+													<span>{fact.label}</span>
+												</dt>
+												<dd class="max-w-[12rem] text-right text-sm font-semibold text-slate-900">{fact.value}</dd>
+											</div>
+										{/each}
+									</dl>
 								</div>
 							{/if}
 
 							{#if getEventLinks(activeExperience).length}
-								<div class="mt-6">
-									<p class="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
+								<div class="mt-7">
+									<p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-500">
 										{$lang === 'de' ? 'Verfügbare Links' : 'Available links'}
 									</p>
-									<div class="mt-3 grid gap-2 sm:grid-cols-2">
+									<div class="mt-2 divide-y divide-slate-200 border-y border-slate-200">
 										{#each getEventLinks(activeExperience) as link}
 											{@const linkMeta = experienceLinkMeta[link.urlType]}
 											<a
 												href={link.url}
 												target="_blank"
 												rel="noreferrer"
-												class="inline-flex items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-800 transition hover:border-brand/30 hover:text-brand"
+												class="group/link flex items-center justify-between gap-3 py-3 text-sm font-semibold text-slate-800 transition hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
 											>
 												<span class="inline-flex items-center gap-2">
 													<linkMeta.icon class="h-4 w-4 text-brand" aria-hidden="true" />
 													{localize(link.label ?? linkMeta.label)}
 												</span>
-												<ExternalLink class="h-4 w-4 text-slate-500" aria-hidden="true" />
+												<ExternalLink class="h-4 w-4 text-slate-400 transition group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 group-hover/link:text-brand" aria-hidden="true" />
 											</a>
 										{/each}
 									</div>
@@ -1771,6 +1972,24 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 </main>
 
 <style>
+	.experience-nav-scroll {
+		scrollbar-width: thin;
+		scrollbar-color: rgba(100, 116, 139, 0.45) transparent;
+	}
+
+	.experience-nav-scroll::-webkit-scrollbar {
+		width: 6px;
+	}
+
+	.experience-nav-scroll::-webkit-scrollbar-thumb {
+		border-radius: 999px;
+		background: rgba(100, 116, 139, 0.38);
+	}
+
+	.experience-nav-scroll::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
 	.nav-indicator {
 		position: absolute;
 		left: 10px;

@@ -14,6 +14,8 @@ Thumbs.db
 
 # Local agent notes
 memory/
+.codex-audit/
+.codex-dev-server*.log
 
 # Env
 .env
