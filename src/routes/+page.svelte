@@ -1665,12 +1665,11 @@ import { localizePath } from '$lib/routing';
 		</div>
 	</div>
 
-	<!-- SUSTAINABILITY -->
+	<!-- SUSTAINABILITY hidden for now
 	<div class="w-full bg-[#f1eee7]">
 		<section class="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
 			<div class="rounded-3xl bg-white/35 p-8 ring-1 ring-black/5 sm:p-10">
 				<div class="grid items-center gap-10 lg:grid-cols-2">
-					<!-- Left: image card -->
 					<div class="relative">
 						<div class="relative overflow-hidden rounded-3xl">
 							<img
@@ -1685,7 +1684,6 @@ import { localizePath } from '$lib/routing';
 							></div>
 						</div>
 
-						<!-- Floating icon tile (top-left) -->
 						<div class="absolute left-5 top-5">
 							<div
 								class="grid h-14 w-14 place-items-center rounded-2xl bg-emerald-600 text-white shadow-md ring-1 ring-black/5"
@@ -1695,7 +1693,6 @@ import { localizePath } from '$lib/routing';
 						</div>
 					</div>
 
-					<!-- Right: content -->
 					<div class="space-y-5">
 						<div
 							class="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-700"
@@ -1723,7 +1720,6 @@ import { localizePath } from '$lib/routing';
 						</ul>
 
 						<div class="mt-6 grid gap-4 sm:grid-cols-2">
-							<!-- Solar / Photovoltaik -->
 							<div class="rounded-2xl bg-white/60 p-4 ring-1 ring-black/5">
 								<div class="flex items-start gap-3">
 									<div
@@ -1742,7 +1738,6 @@ import { localizePath } from '$lib/routing';
 								</div>
 							</div>
 
-							<!-- Fernwärme -->
 							<div class="rounded-2xl bg-white/60 p-4 ring-1 ring-black/5">
 								<div class="flex items-start gap-3">
 									<div
@@ -1766,6 +1761,7 @@ import { localizePath } from '$lib/routing';
 			</div>
 		</section>
 	</div>
+	-->
 
 	<!-- WORKATION hidden for now -->
 	<!-- <div class="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 sm:py-12">

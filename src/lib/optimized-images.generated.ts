@@ -1055,27 +1055,6 @@ export const responsiveImages = {
       }
     ]
   },
-  "/images/Drohne/solar.png": {
-    "width": 1184,
-    "height": 864,
-    "variants": [
-      {
-        "width": 480,
-        "height": 350,
-        "src": "/images/optimized/Drohne/solar-480.webp"
-      },
-      {
-        "width": 768,
-        "height": 560,
-        "src": "/images/optimized/Drohne/solar-768.webp"
-      },
-      {
-        "width": 1184,
-        "height": 864,
-        "src": "/images/optimized/Drohne/solar-1184.webp"
-      }
-    ]
-  },
   "/images/Logo/logo-rader-gitschtal.jpg": {
     "width": 312,
     "height": 154,
