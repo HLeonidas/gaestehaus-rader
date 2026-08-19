@@ -3,7 +3,13 @@ import type { Lang } from '$lib/i18n';
 import {
 	Bike,
 	CableCar,
+	Church,
+	Clover,
+	Drama,
 	Footprints,
+	Ham,
+	Hexagon,
+	LeafyGreen,
 	Mountain,
 	MountainSnow,
 	PersonStanding,
@@ -72,27 +78,51 @@ export type SectionLink = {
 	labelKey: string;
 };
 
-export type FestivalCard = {
+export type FestivalFeature = {
 	id: string;
-	icon: string;
-	image: string;
-	accentClass: string;
+	icon: ComponentType;
+	image: {
+		src: string;
+		alt: LocalizedText;
+	};
 	kicker: LocalizedText;
 	title: LocalizedText;
 	body: LocalizedText;
-	highlights: LocalizedText[];
-	tipLabel: LocalizedText;
 	seasonBadge: LocalizedText;
+};
+
+export type FestivalItem = {
+	id: string;
+	icon: ComponentType;
+	title: LocalizedText;
+	body: LocalizedText;
+	seasonBadge: LocalizedText;
+	image: {
+		src: string;
+		alt: LocalizedText;
+	};
+	url?: string;
+};
+
+export type RegionalFestival = {
+	id: string;
+	icon: ComponentType;
+	title: LocalizedText;
+	location: LocalizedText;
+	seasonBadge: LocalizedText;
+	url: string;
 };
 
 export type FestivalSection = {
 	kicker: LocalizedText;
 	title: LocalizedText;
 	intro: LocalizedText;
+	regionalTitle: LocalizedText;
 	note: LocalizedText;
-	eventInfo: LocalizedText;
 	eventInfoUrl: string;
-	cards: FestivalCard[];
+	feature: FestivalFeature;
+	localEvents: FestivalItem[];
+	regionalEvents: RegionalFestival[];
 };
 
 export const experienceEvents: ExperienceEvent[] = [
@@ -660,78 +690,117 @@ export const experienceSectionTrackingLinks: SectionLink[] = [
 ];
 
 export const experienceFestivalSection: FestivalSection = {
-	kicker: { de: 'Lokale Empfehlung', en: 'A local tip' },
+	kicker: { de: 'Echt Gitschtal', en: 'Authentic Gitschtal' },
 	title: {
-		de: 'Traditionelle Feste im Gitschtal',
-		en: 'Traditional festivals in the Gitschtal',
+		de: 'Feste & Tradition im Gitschtal',
+		en: 'Festivals & traditions in the Gitschtal',
 	},
 	intro: {
-		de: 'Kleine Dorffeste, regionale Spezialitäten und gelebtes Brauchtum - passend zur Jahreszeit.',
-		en: 'Small village festivals, regional food, and living traditions - depending on the season.',
+		de: 'Kirchtage, Dorfkultur und Genussfeste – echt, regional und nah.',
+		en: 'Church fairs, village culture, and food festivals – authentic, regional, and close by.',
 	},
+	regionalTitle: { de: 'In der Umgebung', en: 'Nearby in the region' },
 	note: {
-		de: 'Viele Termine sind saisonabhängig. Wir sagen Ihnen gerne, was während Ihres Aufenthalts gerade passt.',
-		en: 'Many dates depend on the season. We are happy to tell you what fits during your stay.',
-	},
-	eventInfo: {
-		de: 'Nähere Informationen zu den einzelnen Veranstaltungen findet ihr unter:',
-		en: 'You can find more information about individual events at:',
+		de: 'Termine und Programme ändern sich von Jahr zu Jahr. Wir sagen Ihnen gerne, was während Ihres Aufenthalts stattfindet.',
+		en: 'Dates and programmes change from year to year. We are happy to tell you what is happening during your stay.',
 	},
 	eventInfoUrl: 'https://www.nassfeld.at/de/Service/Events',
-	cards: [
-		{
-			id: 'village-festivals',
-			icon: '🎉',
-			image: '/images/Haus/weissbriach-kirche.jpg',
-			accentClass: 'bg-amber-200/30',
-			kicker: { de: 'Dorffeste', en: 'Village festivals' },
-			title: { de: 'Dorffeste & Kirchtage', en: 'Village festivals & church fairs' },
-			body: {
-				de: 'Musik, Begegnungen und echtes Dorfleben rund um Weißbriach.',
-				en: 'Music, local encounters, and real village life around Weissbriach.',
+	feature: {
+		id: 'church-fairs',
+		icon: Church,
+		image: {
+			src: '/images/Haus/weissbriach-kirche.jpg',
+			alt: {
+				de: 'Kirche und Dorfstraße in Weißbriach im Sommer',
+				en: 'Church and village street in Weissbriach in summer',
 			},
-			highlights: [
-				{ de: 'Kirchtage, Frühschoppen und kleine Dorffeste', en: 'Church fairs, morning gatherings, and small village festivals' },
-				{ de: 'Musik, Gespräche und regionale Kleinigkeiten', en: 'Music, conversation, and simple regional bites' },
-			],
-			tipLabel: { de: 'Besonders schön im Sommer', en: 'Especially lovely in summer' },
-			seasonBadge: { de: 'Juni bis August', en: 'June to August' },
+		},
+		kicker: { de: 'Sommer', en: 'Summer' },
+		title: { de: 'Kirchtage & Zechfest’l', en: 'Church fairs & Zechfest’l' },
+		body: {
+			de: 'Tracht, Musik, Kirchtagssuppe und geselliges Dorfleben machen die Kirchtage in Weißbriach und St. Lorenzen zu einem echten Sommerhöhepunkt.',
+			en: 'Traditional dress, music, church-fair soup, and village life make the fairs in Weissbriach and St. Lorenzen a true summer highlight.',
+		},
+		seasonBadge: { de: 'Im Sommer', en: 'In summer' },
+	},
+	localEvents: [
+		{
+			id: 'cow-pat-lottery',
+			icon: Clover,
+			title: { de: 'Kuhfladentombola', en: 'Cow-pat lottery' },
+			body: {
+				de: 'Ein Weißbriacher Original mit Trachtenkapelle, Spannung und einem ziemlich ungewöhnlichen Glücksmoment.',
+				en: 'A Weissbriach original with brass music, suspense, and a rather unusual moment of luck.',
+			},
+			seasonBadge: { de: 'Juli', en: 'July' },
+			image: {
+				src: '/images/Umgebung/radfahren.jpg',
+				alt: {
+					de: 'Sommerliche Wiesen und Dorfkulisse bei Weißbriach',
+					en: 'Summer meadows and village scenery near Weissbriach',
+				},
+			},
 		},
 		{
-			id: 'culinary-festivals',
-			icon: '🥬',
-			image: '/images/Umgebung/napal-alm.jpg',
-			accentClass: 'bg-emerald-200/30',
-			kicker: { de: 'Kulinarik', en: 'Food culture' },
-			title: { de: 'Gailtaler Geschmack', en: 'A taste of the Gailtal' },
+			id: 'summer-theatre',
+			icon: Drama,
+			title: { de: 'Theaterabende', en: 'Summer theatre evenings' },
 			body: {
-				de: 'Speck, Almkäse, Kasnudeln und Reindling dort probieren, wo sie zuhause sind.',
-				en: 'Taste bacon, alpine cheese, Kasnudeln, and Reindling where they belong.',
+				de: 'Die Theatergruppe Weißbriach bringt seit Jahrzehnten humorvolle Dreiakter auf die Bühne.',
+				en: 'For decades, the Weissbriach theatre group has brought humorous three-act plays to the stage.',
 			},
-			highlights: [
-				{ de: 'Krautfest und saisonale Genussfeste', en: 'Cabbage festival and seasonal food events' },
-				{ de: 'Bauernstände mit regionalen Produkten', en: 'Farm stalls with regional products' },
-			],
-			tipLabel: { de: 'Ideal für den Herbsturlaub', en: 'Ideal for an autumn stay' },
-			seasonBadge: { de: 'September bis Oktober', en: 'September to October' },
+			seasonBadge: { de: 'Sommer', en: 'Summer' },
+			image: {
+				src: '/images/Haus/familie-hueber.jpg',
+				alt: {
+					de: 'Familie Hueber gemeinsam im Garten des Gästehauses',
+					en: 'The Hueber family together in the guesthouse garden',
+				},
+			},
+			url: 'https://gitschtal.eu/leben/vereine/theatergruppe-weissbriach',
 		},
 		{
-			id: 'tradition-customs',
-			icon: '🎺',
-			image: '/images/Haus/familie-hueber.jpg',
-			accentClass: 'bg-indigo-200/25',
-			kicker: { de: 'Tradition & Brauchtum', en: 'Tradition & customs' },
-			title: { de: 'Brauchtum im Tal', en: 'Traditions in the valley' },
+			id: 'cabbage-festival',
+			icon: LeafyGreen,
+			title: { de: 'Gitschtaler Krautfest', en: 'Gitschtal cabbage festival' },
 			body: {
-				de: 'Tracht, Musik, gemeinsames Essen und kleine Veranstaltungen mit viel Charakter.',
-				en: 'Traditional dress, music, shared meals, and small events with real character.',
+				de: 'Krautspezialitäten, Frühschoppen, Marktstände und ein ganzer Tag regionaler Herbstgenuss.',
+				en: 'Cabbage specialities, brass music, market stalls, and a full day of regional autumn flavours.',
 			},
-			highlights: [
-				{ de: 'Tracht, Tanz und traditionelle Kirchtagssuppe', en: 'Traditional dress, dancing, and church-fair soup' },
-				{ de: 'Advent im Tal mit Reindling und warmen Getränken', en: 'Advent in the valley with Reindling and warm drinks' },
-			],
-			tipLabel: { de: 'Je nach Saison verschieden', en: 'Different depending on the season' },
-			seasonBadge: { de: 'Über das Jahr verteilt', en: 'Throughout the year' },
+			seasonBadge: { de: 'Oktober', en: 'October' },
+			image: {
+				src: '/images/Haus/gaestehaus-pavillon.jpg',
+				alt: {
+					de: 'Gartenpavillon mit Sitzplatz beim Gästehaus Rader',
+					en: 'Garden pavilion with seating at Gästehaus Rader',
+				},
+			},
+		},
+	],
+	regionalEvents: [
+		{
+			id: 'bacon-festival',
+			icon: Ham,
+			title: { de: 'Gailtaler Speckfest', en: 'Gailtal bacon festival' },
+			location: { de: 'Hermagor', en: 'Hermagor' },
+			seasonBadge: { de: 'Juni', en: 'June' },
+			url: 'https://speckfest.at/',
+		},
+		{
+			id: 'honey-festival',
+			icon: Hexagon,
+			title: { de: 'Honigfest', en: 'Honey festival' },
+			location: { de: 'Hermagor', en: 'Hermagor' },
+			seasonBadge: { de: 'August', en: 'August' },
+			url: 'https://www.honigfest.at/',
+		},
+		{
+			id: 'regional-church-fairs',
+			icon: Church,
+			title: { de: 'Kirchtage im Gailtal', en: 'Church fairs in the Gailtal' },
+			location: { de: 'Rund um Hermagor', en: 'Around Hermagor' },
+			seasonBadge: { de: 'Sommer', en: 'Summer' },
+			url: 'https://www.nassfeld.at/de/Service/Events',
 		},
 	],
 };

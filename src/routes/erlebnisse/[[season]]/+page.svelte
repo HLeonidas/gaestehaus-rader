@@ -1285,87 +1285,163 @@ const localize = (value?: LocalizedText) => (value ? value[$lang] : '');
 					{/if}
 				</div>
 
-				<section class="anchor-target bg-[#fbfaf7] py-14 sm:py-16" id="traditionelle-feste">
+				<section class="scroll-mt-28 py-16 sm:py-20" id="traditionelle-feste">
 					<div class="mx-auto w-full max-w-6xl px-4 sm:px-6">
-						<div class="mx-auto max-w-2xl text-center">
+						<div class="mx-auto max-w-3xl text-center">
 							<p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand">
 								{localize(festivalSection.kicker)}
 							</p>
-							<h2 class="mt-3 font-serif text-4xl leading-[0.95] text-slate-900 sm:text-5xl">
+							<h2 class="mt-3 font-serif text-4xl leading-[0.98] text-slate-900 sm:text-5xl">
 								{localize(festivalSection.title)}
 							</h2>
-							<div class="mx-auto mt-3 h-[3px] w-14 rounded-full bg-brand"></div>
-							<p class="mt-4 text-sm leading-relaxed text-slate-600 sm:text-base">
+							<div class="mx-auto mt-4 h-[3px] w-14 rounded-full bg-brand"></div>
+							<p class="mt-5 text-sm leading-relaxed text-slate-600 sm:text-base">
 								{localize(festivalSection.intro)}
 							</p>
 						</div>
 
-						<div class="mt-9 grid gap-5 md:grid-cols-3">
-							{#each festivalSection.cards as card, index}
-								<article
-									use:reveal
-									class="reveal group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/25 hover:shadow-md"
-									style={`--reveal-delay: ${index * 90}ms;`}
-								>
-									<div class="relative aspect-[16/10] overflow-hidden bg-slate-100">
+						<div class="mt-12 grid gap-7 lg:grid-cols-[1.28fr,0.72fr] lg:items-center lg:gap-12">
+							<figure use:reveal class="reveal group h-[340px] overflow-hidden rounded-3xl bg-slate-100 sm:h-[430px] lg:h-[500px]">
+								<img
+									{...imageAttrs(festivalSection.feature.image.src, '(max-width: 1024px) 100vw, 700px')}
+									alt={localize(festivalSection.feature.image.alt)}
+									class="h-full w-full object-cover object-left transition duration-700 group-hover:scale-[1.025] motion-reduce:transition-none"
+									loading="lazy"
+									decoding="async"
+								/>
+							</figure>
+
+							<article use:reveal class="reveal py-1 lg:pl-1" style="--reveal-delay: 80ms;">
+								<div class="grid h-11 w-11 place-items-center rounded-2xl bg-brand/10 text-brand">
+									<festivalSection.feature.icon class="h-5 w-5" aria-hidden="true" />
+								</div>
+								<p class="mt-5 text-[11px] font-semibold uppercase tracking-[0.26em] text-brand">
+									{localize(festivalSection.feature.kicker)}
+								</p>
+								<h3 class="mt-2 font-serif text-3xl leading-tight text-slate-900 sm:text-4xl">
+									{localize(festivalSection.feature.title)}
+								</h3>
+								<p class="mt-4 max-w-md text-sm leading-relaxed text-slate-600 sm:text-base">
+									{localize(festivalSection.feature.body)}
+								</p>
+								<span class="mt-5 inline-flex items-center gap-2 text-xs font-semibold text-slate-600">
+									<CalendarDays class="h-4 w-4 text-brand" aria-hidden="true" />
+									{localize(festivalSection.feature.seasonBadge)}
+								</span>
+							</article>
+						</div>
+
+						{#each festivalSection.localEvents.slice(0, 1) as event}
+							<div class="mt-16 grid gap-7 border-t border-slate-200 pt-12 lg:grid-cols-[0.72fr,1.28fr] lg:items-center lg:gap-12">
+								<article use:reveal class="reveal order-2 py-1 lg:order-1 lg:pr-1">
+									<div class="grid h-11 w-11 place-items-center rounded-2xl bg-brand/10 text-brand">
+										<event.icon class="h-5 w-5" aria-hidden="true" />
+									</div>
+									<p class="mt-5 text-[11px] font-semibold uppercase tracking-[0.24em] text-brand">
+										{localize(event.seasonBadge)}
+									</p>
+									<h3 class="mt-2 font-serif text-3xl leading-tight text-slate-900 sm:text-4xl">
+										{localize(event.title)}
+									</h3>
+									<p class="mt-4 max-w-md text-sm leading-relaxed text-slate-600 sm:text-base">
+										{localize(event.body)}
+									</p>
+									<span class="mt-5 inline-flex items-center gap-2 text-xs font-semibold text-slate-600">
+										<CalendarDays class="h-4 w-4 text-brand" aria-hidden="true" />
+										{localize(event.seasonBadge)}
+									</span>
+								</article>
+
+								<figure use:reveal class="reveal group order-1 h-[320px] overflow-hidden rounded-3xl bg-slate-100 sm:h-[400px] lg:order-2 lg:h-[440px]" style="--reveal-delay: 80ms;">
+									<img
+										{...imageAttrs(event.image.src, '(max-width: 1024px) 100vw, 700px')}
+										alt={localize(event.image.alt)}
+										class="h-full w-full object-cover transition duration-700 group-hover:scale-[1.025] motion-reduce:transition-none"
+										loading="lazy"
+										decoding="async"
+									/>
+								</figure>
+							</div>
+						{/each}
+
+						<div class="mt-16 grid gap-10 border-t border-slate-200 pt-12 md:grid-cols-2 md:gap-6 lg:gap-8">
+							{#each festivalSection.localEvents.slice(1) as event, index}
+								<article use:reveal class="reveal" style={`--reveal-delay: ${index * 90}ms;`}>
+									<figure class="group h-[300px] overflow-hidden rounded-3xl bg-slate-100 sm:h-[360px]">
 										<img
-											{...imageAttrs(card.image, '(max-width: 768px) 100vw, 360px')}
-											alt={localize(card.title)}
-											class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.035]"
+											{...imageAttrs(event.image.src, '(max-width: 768px) 100vw, 560px')}
+											alt={localize(event.image.alt)}
+											class={`h-full w-full object-cover transition duration-700 group-hover:scale-[1.025] motion-reduce:transition-none ${event.id === 'summer-theatre' ? 'object-[center_35%]' : 'object-center'}`}
 											loading="lazy"
 											decoding="async"
 										/>
-										<div class="absolute inset-0 bg-gradient-to-t from-slate-950/55 via-transparent to-transparent"></div>
-										<div class="absolute bottom-4 left-4 right-4">
-											<p class="text-[11px] font-semibold uppercase tracking-[0.28em] text-white/80">
-												{localize(card.kicker)}
+									</figure>
+									<div class="pt-5 sm:px-2">
+										<div class="flex items-center justify-between gap-4">
+											<p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-brand">
+												{localize(event.seasonBadge)}
 											</p>
-											<h3 class="mt-1 text-xl font-semibold leading-tight text-white">
-												{localize(card.title)}
-											</h3>
+											{#if event.url}
+												<a
+													href={event.url}
+													target="_blank"
+													rel="noreferrer"
+													class="grid h-9 w-9 place-items-center rounded-full text-slate-400 transition hover:bg-brand/10 hover:text-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
+													aria-label={`${localize(event.title)} – ${$lang === 'de' ? 'mehr erfahren' : 'learn more'}`}
+												>
+													<ExternalLink class="h-4 w-4" aria-hidden="true" />
+												</a>
+											{/if}
 										</div>
-									</div>
-
-									<div class="p-5">
-										<div class="flex items-start gap-3">
-											<div class="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-brand/10 text-brand">
-											<span class="text-lg" aria-hidden="true">{card.icon}</span>
-											</div>
-											<div class="min-w-0">
-												<p class="text-sm leading-relaxed text-slate-600">
-													{localize(card.body)}
-												</p>
-											</div>
-										</div>
-
-										<ul class="mt-5 space-y-2 text-sm text-slate-700">
-											{#each card.highlights as highlight}
-												<li class="flex items-start gap-2">
-													<span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand"></span>
-													<span>{localize(highlight)}</span>
-												</li>
-											{/each}
-										</ul>
-
-										<div class="mt-5 flex flex-wrap items-center gap-2 text-sm font-semibold text-slate-800">
-											<span>{localize(card.tipLabel)}</span>
-											<span class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600">
-												{localize(card.seasonBadge)}
-											</span>
-										</div>
+										<h3 class="mt-2 font-serif text-2xl leading-tight text-slate-900 sm:text-3xl">
+											{localize(event.title)}
+										</h3>
+										<p class="mt-3 max-w-xl text-sm leading-relaxed text-slate-600">
+											{localize(event.body)}
+										</p>
 									</div>
 								</article>
 							{/each}
 						</div>
-						<div class="mx-auto mt-8 flex max-w-3xl flex-col items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white/70 px-4 py-4 text-center text-sm font-medium leading-relaxed text-slate-600 sm:flex-row sm:text-left">
-							<p>{localize(festivalSection.note)}</p>
+
+						<div class="mt-16">
+							<h3 class="font-serif text-2xl text-slate-900 sm:text-3xl">
+								{localize(festivalSection.regionalTitle)}
+							</h3>
+							<div class="mt-5 grid border-y border-slate-200 md:grid-cols-3">
+								{#each festivalSection.regionalEvents as event}
+									<a
+										href={event.url}
+										target="_blank"
+										rel="noreferrer"
+										class="group flex items-center gap-4 border-b border-slate-200 py-5 transition hover:bg-white/60 focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand md:border-b-0 md:border-r md:px-5 md:first:pl-0 md:last:border-r-0 md:last:pr-0"
+									>
+										<div class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-brand/10 text-brand">
+											<event.icon class="h-[18px] w-[18px]" aria-hidden="true" />
+										</div>
+										<div class="min-w-0 flex-1">
+											<h4 class="font-serif text-lg leading-tight text-slate-900">
+												{localize(event.title)}
+											</h4>
+											<p class="mt-1 text-xs font-medium text-slate-500">
+												{localize(event.location)} · {localize(event.seasonBadge)}
+											</p>
+										</div>
+										<ArrowRight class="h-4 w-4 shrink-0 text-brand transition-transform group-hover:translate-x-1 motion-reduce:transition-none" aria-hidden="true" />
+									</a>
+								{/each}
+							</div>
+						</div>
+
+						<div class="mt-6 flex flex-col items-start justify-between gap-4 text-sm font-medium leading-relaxed text-slate-600 sm:flex-row sm:items-center">
+							<p class="max-w-3xl">{localize(festivalSection.note)}</p>
 							<a
 								href={festivalSection.eventInfoUrl}
 								target="_blank"
 								rel="noreferrer"
-								class="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 motion-reduce:transition-none"
+								class="inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-brand px-5 py-2.5 text-sm font-semibold text-brand transition hover:bg-brand hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 motion-reduce:transition-none"
 							>
-								{$lang === 'de' ? 'Nassfeld Eventkalender' : 'Nassfeld event calendar'}
+								{$lang === 'de' ? 'Aktuelle Termine ansehen' : 'View current dates'}
 								<ExternalLink class="h-4 w-4" aria-hidden="true" />
 							</a>
 						</div>
